@@ -1,0 +1,811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3CBCFE6-2C37-4930-9703-5AEEBB3E9599}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICRL</RootNamespace>
+    <AssemblyName>ICRL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\Users\Wilmer\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.0.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.10.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Acceso\Login.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Estilo\estilo.css" />
+    <Content Include="Estilo\Formatos.css" />
+    <Content Include="Estilo\tab-active - Copy.gif" />
+    <Content Include="Estilo\tab-active-left.gif" />
+    <Content Include="Estilo\tab-active-right.gif" />
+    <Content Include="Estilo\tab-active.gif" />
+    <Content Include="Estilo\tab-hover-left.gif" />
+    <Content Include="Estilo\tab-hover-right.gif" />
+    <Content Include="Estilo\tab-hover.gif" />
+    <Content Include="Estilo\tab-left.gif" />
+    <Content Include="Estilo\tab-line.gif" />
+    <Content Include="Estilo\tab-right.gif" />
+    <Content Include="Estilo\tab.gif" />
+    <Content Include="Estilo\TabsStyleSheet.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\collapse.jpg" />
+    <Content Include="img\expand.jpg" />
+    <Content Include="img\ico_excel.jpg" />
+    <Content Include="img\ico_pdf.jpg" />
+    <Content Include="img\imagen_demo.jpg" />
+    <Content Include="img\lbc_ico.png" />
+    <Content Include="img\minus.gif" />
+    <Content Include="img\plus.gif" />
+    <Content Include="DS\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="LBCDesaDataSet.xsc">
+      <DependentUpon>LBCDesaDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\Inspecciones.xsc">
+      <DependentUpon>Inspecciones.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionDaniosPropios.xsc">
+      <DependentUpon>InspeccionDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionDaniosPropios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionDaniosPropios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionDaniosPropios.xss">
+      <DependentUpon>InspeccionDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\Inspecciones.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Inspecciones.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\Inspecciones.xss">
+      <DependentUpon>Inspecciones.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionFlujo.xsc">
+      <DependentUpon>InspeccionFlujo.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionFlujo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionFlujo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionFlujo.xss">
+      <DependentUpon>InspeccionFlujo.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionRCPersona.xsc">
+      <DependentUpon>InspeccionRCPersona.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionRCObjeto.xsc">
+      <DependentUpon>InspeccionRCObjeto.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionPTotalDaniosPropios.xsc">
+      <DependentUpon>InspeccionPTotalDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionPTotalDaniosPropios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionPTotalDaniosPropios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionPTotalDaniosPropios.xss">
+      <DependentUpon>InspeccionPTotalDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionPTotalRobo.xsc">
+      <DependentUpon>InspeccionPTotalRobo.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionPTotalRobo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionPTotalRobo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionPTotalRobo.xss">
+      <DependentUpon>InspeccionPTotalRobo.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionRCObjeto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionRCObjeto.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionRCObjeto.xss">
+      <DependentUpon>InspeccionRCObjeto.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionRCPersona.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionRCPersona.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionRCPersona.xss">
+      <DependentUpon>InspeccionRCPersona.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionRCVehicular.xsc">
+      <DependentUpon>InspeccionRCVehicular.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionRCVehicular.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionRCVehicular.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionRCVehicular.xss">
+      <DependentUpon>InspeccionRCVehicular.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\InspeccionRoboParcial.xsc">
+      <DependentUpon>InspeccionRoboParcial.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\InspeccionRoboParcial.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InspeccionRoboParcial.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\InspeccionRoboParcial.xss">
+      <DependentUpon>InspeccionRoboParcial.xsd</DependentUpon>
+    </Content>
+    <None Include="LBCDesaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LBCDesaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="LBCDesaDataSet.xss">
+      <DependentUpon>LBCDesaDataSet.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="ModeloDB\ModeloDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModeloDB\ModeloDB.edmx.diagram">
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="ModeloDB\ModeloDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+      <LastGenOutput>ModeloDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModeloDB\ModeloDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+      <LastGenOutput>ModeloDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Presentacion\Cotizacion.aspx" />
+    <Content Include="Presentacion\CotizacionDPRP.aspx" />
+    <Content Include="Presentacion\GestionCotizacion.aspx" />
+    <Content Include="Presentacion\GestionInspeccion.aspx" />
+    <Content Include="Presentacion\GestionLiquidacion.aspx" />
+    <Content Include="Presentacion\Inicio.aspx" />
+    <Content Include="Presentacion\Inspeccion.aspx" />
+    <Content Include="Presentacion\Liquidacion.aspx" />
+    <Content Include="Presentacion\RCVehicularPopup.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ICRL.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Site.Master" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+    <Content Include="Site.Mobile.Master" />
+    <Content Include="SitioICRL.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Acceso\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acceso\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BD\AccesoDatos.cs" />
+    <Compile Include="BD\CotizacionDaniosPropios.cs" />
+    <Compile Include="BD\CotizacionICRL.cs" />
+    <Compile Include="BD\FlujoICRL.cs" />
+    <Compile Include="BD\InspeccionDaniosPropios.cs" />
+    <Compile Include="BD\InspeccionICRL.cs" />
+    <Compile Include="BD\InspeccionPTDaniosPropios.cs" />
+    <Compile Include="BD\InspeccionPTRobo.cs" />
+    <Compile Include="BD\InspeccionRCObjeto.cs" />
+    <Compile Include="BD\InspeccionRCObjetoDet.cs" />
+    <Compile Include="BD\InspeccionRCPersona.cs" />
+    <Compile Include="BD\InspeccionRCPersonaDet.cs" />
+    <Compile Include="BD\InspeccionRCVehicular.cs" />
+    <Compile Include="BD\InspeccionRCVehicularDet.cs" />
+    <Compile Include="BD\InspeccionRoboParcial.cs" />
+    <Compile Include="BD\ListaNomenclador.cs" />
+    <Compile Include="BD\UsuarioICRL.cs" />
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DS\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionDaniosPropios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionDaniosPropios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\Inspecciones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Inspecciones.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionFlujo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionFlujo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionPTotalDaniosPropios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionPTotalDaniosPropios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionPTotalRobo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionPTotalRobo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionRCObjeto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionRCObjeto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionRCPersona.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionRCPersona.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionRCVehicular.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionRCVehicular.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\InspeccionRoboParcial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspeccionRoboParcial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LBCDesaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LBCDesaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Asegurado.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Contador.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiDaniosPropios.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiPerdidaTotal.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiPerdidaTotalDuenio.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiPerdidaTotalReferencia.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiRCObjeto.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiRCObjetoDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiRCPersona.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiRCPersonaDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiReparacion.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiReparacionRepuesto.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotiRepuesto.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Cotizacion.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\CotizacionFlujo.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\EstadoSesion.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Flujo.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspDaniosPropios.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Inspeccion.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspPerdidaTotalDanios.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspPerdidaTotalRobo.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCObjeto.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCObjetoDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCPersona.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCPersonaDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCVehicular.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRCVehicularDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspRoboParcial.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\ItemTaller.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Liquidacion.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\LiquidacionDetalle.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\LiquidacionFacturas.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\ModeloDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\ModeloDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\ModeloDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Nomenclador.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Proveedor.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Rol.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\Usuario.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\UsuarioRol.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Cotizacion.aspx.cs">
+      <DependentUpon>Cotizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Cotizacion.aspx.designer.cs">
+      <DependentUpon>Cotizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionDPRP.aspx.cs">
+      <DependentUpon>CotizacionDPRP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionDPRP.aspx.designer.cs">
+      <DependentUpon>CotizacionDPRP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\GestionCotizacion.aspx.cs">
+      <DependentUpon>GestionCotizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\GestionCotizacion.aspx.designer.cs">
+      <DependentUpon>GestionCotizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\GestionInspeccion.aspx.cs">
+      <DependentUpon>GestionInspeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\GestionInspeccion.aspx.designer.cs">
+      <DependentUpon>GestionInspeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\GestionLiquidacion.aspx.cs">
+      <DependentUpon>GestionLiquidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\GestionLiquidacion.aspx.designer.cs">
+      <DependentUpon>GestionLiquidacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Inspeccion.aspx.cs">
+      <DependentUpon>Inspeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Inspeccion.aspx.designer.cs">
+      <DependentUpon>Inspeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Liquidacion.aspx.cs">
+      <DependentUpon>Liquidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Liquidacion.aspx.designer.cs">
+      <DependentUpon>Liquidacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\RCVehicularPopup.aspx.cs">
+      <DependentUpon>RCVehicularPopup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\RCVehicularPopup.aspx.designer.cs">
+      <DependentUpon>RCVehicularPopup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SitioICRL.Master.cs">
+      <DependentUpon>SitioICRL.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SitioICRL.Master.designer.cs">
+      <DependentUpon>SitioICRL.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\RepFormularioInsp.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspPTDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspPTRobo.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspRCObjetos.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspRCPersonas.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspRCVehicular.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioInspRoboParcial.rdlc" />
+    <EmbeddedResource Include="Reportes\Report1.rdlc" />
+    <EmbeddedResource Include="Reportes\Report2.rdlc" />
+    <EmbeddedResource Include="Reportes\Report3.rdlc" />
+    <EmbeddedResource Include="Reportes\ReporteInspecciones.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArgosProxy\ArgosProxy.csproj">
+      <Project>{1c1bca47-5864-4a73-a48f-e726dbc277c2}</Project>
+      <Name>ArgosProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnBaseProxy\OnBaseProxy.csproj">
+      <Project>{2b4256e7-260c-4268-a6bf-f756f0bcee6e}</Project>
+      <Name>OnBaseProxy</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>29423</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:29423/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

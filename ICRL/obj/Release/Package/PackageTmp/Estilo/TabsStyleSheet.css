@@ -1,0 +1,71 @@
+﻿/*
+Example CSS to use Ajax Tab control
+Developed by http://www.appetere.com
+April 2009
+*/
+.ajax__tab_container
+{
+    color:Black;
+}
+.property_tab .ajax__tab_outer .ajax__tab_inner .ajax__tab_tab {
+    margin-right: 0;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_header 
+{
+    font-family:verdana,tahoma,helvetica;
+    font-size:17px;
+    background:url(~/Estilo/tab-line.gif) repeat-x bottom;
+}
+.property_tab .ajax__tab_outer {
+    padding-right: 4px;
+    font-size: 17px;
+    background: url(~/Estilo/tab-right.gif) no-repeat right;
+    height: 21px;
+}
+.property_tab .ajax__tab_inner {
+    padding-left: 3px;
+    font-size: 17px;
+    background: url(~/Estilo/tab-left.gif) no-repeat;
+}
+.property_tab .ajax__tab_tab 
+{
+    font-size:17px;
+    height:25px;
+    padding:4px;
+    margin:0 !important;
+    background:url(~/Estilo/tab.gif) repeat-x;
+}
+.property_tab .ajax__tab_hover .ajax__tab_outer {
+    background: url(~/Estilo/tab-hover-right.gif) no-repeat right;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_hover .ajax__tab_inner {
+    background: url(~/Estilo/tab-hover-left.gif) no-repeat;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_hover .ajax__tab_tab {
+    background: url(~/Estilo/tab-hover.gif) repeat-x;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_active .ajax__tab_outer {
+    background: url(~/Estilo/tab-active-right.gif) no-repeat right;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_active .ajax__tab_inner {
+    background: url(~/Estilo/tab-active-left.gif) no-repeat;
+    font-size: 17px;
+}
+.property_tab .ajax__tab_active .ajax__tab_tab 
+{
+    background:url(~/Estilo/tab-active.gif) repeat-x;
+    font-size:17px;
+}
+.property_tab .ajax__tab_body {
+    font-family: verdana,tahoma,helvetica;
+    font-size: 17px;
+    border: 1px solid #999999;
+    border-top: 0;
+    padding: 8px;
+    background-color: #ffffff;
+}

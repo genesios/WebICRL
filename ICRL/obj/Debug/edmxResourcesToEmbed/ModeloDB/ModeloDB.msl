@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LBCDesaModeloStoreContainer" CdmEntityContainer="LBCDesaEntities">
+    <EntitySetMapping Name="Asegurado">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Asegurado">
+        <MappingFragment StoreEntitySet="Asegurado">
+          <ScalarProperty Name="idAsegurado" ColumnName="idAsegurado" />
+          <ScalarProperty Name="nombreAsegurado" ColumnName="nombreAsegurado" />
+          <ScalarProperty Name="telefonoAsegurado" ColumnName="telefonoAsegurado" />
+          <ScalarProperty Name="docIdAsegurado" ColumnName="docIdAsegurado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contador">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Contador">
+        <MappingFragment StoreEntitySet="Contador">
+          <ScalarProperty Name="tipoContador" ColumnName="tipoContador" />
+          <ScalarProperty Name="valorContador" ColumnName="valorContador" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiDaniosPropios">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiDaniosPropios">
+        <MappingFragment StoreEntitySet="CotiDaniosPropios">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiPerdidaTotal">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotal">
+        <MappingFragment StoreEntitySet="CotiPerdidaTotal">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="caja" ColumnName="caja" />
+          <ScalarProperty Name="combustible" ColumnName="combustible" />
+          <ScalarProperty Name="cilindrada" ColumnName="cilindrada" />
+          <ScalarProperty Name="techoSolar" ColumnName="techoSolar" />
+          <ScalarProperty Name="asientosCuero" ColumnName="asientosCuero" />
+          <ScalarProperty Name="arosMagnesio" ColumnName="arosMagnesio" />
+          <ScalarProperty Name="convertidoGNV" ColumnName="convertidoGNV" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="noCompletamentePagado" ColumnName="noCompletamentePagado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiPerdidaTotalDuenio">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotalDuenio">
+        <MappingFragment StoreEntitySet="CotiPerdidaTotalDuenio">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="nombresDuenio" ColumnName="nombresDuenio" />
+          <ScalarProperty Name="docIdDuenio" ColumnName="docIdDuenio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="tipoOrden" ColumnName="tipoOrden" />
+          <ScalarProperty Name="monedaOrden" ColumnName="monedaOrden" />
+          <ScalarProperty Name="montoOrden" ColumnName="montoOrden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiPerdidaTotalReferencia">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotalReferencia">
+        <MappingFragment StoreEntitySet="CotiPerdidaTotalReferencia">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
+          <ScalarProperty Name="medioCotizado" ColumnName="medioCotizado" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="monedaCotizado" ColumnName="monedaCotizado" />
+          <ScalarProperty Name="montoCotizado" ColumnName="montoCotizado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRCObjeto">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCObjeto">
+        <MappingFragment StoreEntitySet="CotiRCObjeto">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="nombreObjeto" ColumnName="nombreObjeto" />
+          <ScalarProperty Name="docIdentidadObjeto" ColumnName="docIdentidadObjeto" />
+          <ScalarProperty Name="telefonoObjeto" ColumnName="telefonoObjeto" />
+          <ScalarProperty Name="observacionesObjeto" ColumnName="observacionesObjeto" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="tipoOrden" ColumnName="tipoOrden" />
+          <ScalarProperty Name="monedaOrden" ColumnName="monedaOrden" />
+          <ScalarProperty Name="montoOrden" ColumnName="montoOrden" />
+          <ScalarProperty Name="reembolso" ColumnName="reembolso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRCObjetoDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCObjetoDetalle">
+        <MappingFragment StoreEntitySet="CotiRCObjetoDetalle">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="monedaReferencial" ColumnName="monedaReferencial" />
+          <ScalarProperty Name="costoReferencial" ColumnName="costoReferencial" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRCPersona">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCPersona">
+        <MappingFragment StoreEntitySet="CotiRCPersona">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="nombrePersona" ColumnName="nombrePersona" />
+          <ScalarProperty Name="docIdentidadPersona" ColumnName="docIdentidadPersona" />
+          <ScalarProperty Name="telefonoPersona" ColumnName="telefonoPersona" />
+          <ScalarProperty Name="reembolso" ColumnName="reembolso" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="tipoOrden" ColumnName="tipoOrden" />
+          <ScalarProperty Name="monedaOrden" ColumnName="monedaOrden" />
+          <ScalarProperty Name="montoOrden" ColumnName="montoOrden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRCPersonaDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCPersonaDetalle">
+        <MappingFragment StoreEntitySet="CotiRCPersonaDetalle">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="monedaGasto" ColumnName="monedaGasto" />
+          <ScalarProperty Name="montoGasto" ColumnName="montoGasto" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiReparacion">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacion">
+        <MappingFragment StoreEntitySet="CotiReparacion">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="chaperio" ColumnName="chaperio" />
+          <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
+          <ScalarProperty Name="mecanico" ColumnName="mecanico" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="precioCotizado" ColumnName="precioCotizado" />
+          <ScalarProperty Name="descFijoPorcentaje" ColumnName="descFijoPorcentaje" />
+          <ScalarProperty Name="montoDescuento" ColumnName="montoDescuento" />
+          <ScalarProperty Name="precioFinal" ColumnName="precioFinal" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiReparacionRepuesto">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacionRepuesto">
+        <MappingFragment StoreEntitySet="CotiReparacionRepuesto">
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="tipoOrden" ColumnName="tipoOrden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="montoOrden" ColumnName="montoOrden" />
+          <ScalarProperty Name="monedaOrden" ColumnName="monedaOrden" />
+          <ScalarProperty Name="estadoOrden" ColumnName="estadoOrden" />
+          <ScalarProperty Name="descFijoPorcentaje" ColumnName="descFijoPorcentaje" />
+          <ScalarProperty Name="montoDescuento" ColumnName="montoDescuento" />
+          <ScalarProperty Name="montoDeducibleFraCoa" ColumnName="montoDeducibleFraCoa" />
+          <ScalarProperty Name="montoFinal" ColumnName="montoFinal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRepuesto">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRepuesto">
+        <MappingFragment StoreEntitySet="CotiRepuesto">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="pintura" ColumnName="pintura" />
+          <ScalarProperty Name="instalacion" ColumnName="instalacion" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="precioCotizado" ColumnName="precioCotizado" />
+          <ScalarProperty Name="descFijoPorcentaje" ColumnName="descFijoPorcentaje" />
+          <ScalarProperty Name="montoDescuento" ColumnName="montoDescuento" />
+          <ScalarProperty Name="precioFinal" ColumnName="precioFinal" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="diasEntrega" ColumnName="diasEntrega" />
+          <ScalarProperty Name="recepcion" ColumnName="recepcion" />
+          <ScalarProperty Name="fechaRecepcion" ColumnName="fechaRecepcion" />
+          <ScalarProperty Name="fechaEfectiva" ColumnName="fechaEfectiva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cotizacion">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Cotizacion">
+        <MappingFragment StoreEntitySet="Cotizacion">
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="inspector" ColumnName="inspector" />
+          <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
+          <ScalarProperty Name="correlativo" ColumnName="correlativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotizacionFlujo">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotizacionFlujo">
+        <MappingFragment StoreEntitySet="CotizacionFlujo">
+          <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="observacionesSiniestro" ColumnName="observacionesSiniestro" />
+          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+          <ScalarProperty Name="nombreContacto" ColumnName="nombreContacto" />
+          <ScalarProperty Name="telefonoContacto" ColumnName="telefonoContacto" />
+          <ScalarProperty Name="correosDeEnvio" ColumnName="correosDeEnvio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha_siniestro" ColumnName="fecha_siniestro" />
+          <ScalarProperty Name="correlativo" ColumnName="correlativo" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoSesion">
+      <EntityTypeMapping TypeName="LBCDesaModelo.EstadoSesion">
+        <MappingFragment StoreEntitySet="EstadoSesion">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaAcceso" ColumnName="fechaAcceso" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fechaHoraInicio" ColumnName="fechaHoraInicio" />
+          <ScalarProperty Name="fechaHoraFin" ColumnName="fechaHoraFin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flujo">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Flujo">
+        <MappingFragment StoreEntitySet="Flujo">
+          <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
+          <ScalarProperty Name="flujoOnBase" ColumnName="flujoOnBase" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="numeroReclamo" ColumnName="numeroReclamo" />
+          <ScalarProperty Name="numeroPoliza" ColumnName="numeroPoliza" />
+          <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
+          <ScalarProperty Name="modeloVehiculo" ColumnName="modeloVehiculo" />
+          <ScalarProperty Name="anioVehiculo" ColumnName="anioVehiculo" />
+          <ScalarProperty Name="colorVehiculo" ColumnName="colorVehiculo" />
+          <ScalarProperty Name="placaVehiculo" ColumnName="placaVehiculo" />
+          <ScalarProperty Name="chasisVehiculo" ColumnName="chasisVehiculo" />
+          <ScalarProperty Name="valorAsegurado" ColumnName="valorAsegurado" />
+          <ScalarProperty Name="importacionDirecta" ColumnName="importacionDirecta" />
+          <ScalarProperty Name="nombreAsegurado" ColumnName="nombreAsegurado" />
+          <ScalarProperty Name="docIdAsegurado" ColumnName="docIdAsegurado" />
+          <ScalarProperty Name="telefonocelAsegurado" ColumnName="telefonocelAsegurado" />
+          <ScalarProperty Name="causaSiniestro" ColumnName="causaSiniestro" />
+          <ScalarProperty Name="contador" ColumnName="contador" />
+          <ScalarProperty Name="descripcionSiniestro" ColumnName="descripcionSiniestro" />
+          <ScalarProperty Name="direccionInspeccion" ColumnName="direccionInspeccion" />
+          <ScalarProperty Name="agenciaAtencion" ColumnName="agenciaAtencion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspDaniosPropios">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropios">
+        <MappingFragment StoreEntitySet="InspDaniosPropios">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="compra" ColumnName="compra" />
+          <ScalarProperty Name="instalacion" ColumnName="instalacion" />
+          <ScalarProperty Name="pintura" ColumnName="pintura" />
+          <ScalarProperty Name="mecanico" ColumnName="mecanico" />
+          <ScalarProperty Name="chaperio" ColumnName="chaperio" />
+          <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inspeccion">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Inspeccion">
+        <MappingFragment StoreEntitySet="Inspeccion">
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="sucursalAtencion" ColumnName="sucursalAtencion" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="zona" ColumnName="zona" />
+          <ScalarProperty Name="causaSiniestro" ColumnName="causaSiniestro" />
+          <ScalarProperty Name="descripcionSiniestro" ColumnName="descripcionSiniestro" />
+          <ScalarProperty Name="observacionesSiniestro" ColumnName="observacionesSiniestro" />
+          <ScalarProperty Name="idInspector" ColumnName="idInspector" />
+          <ScalarProperty Name="nombreContacto" ColumnName="nombreContacto" />
+          <ScalarProperty Name="telefonoContacto" ColumnName="telefonoContacto" />
+          <ScalarProperty Name="correosDeEnvio" ColumnName="correosDeEnvio" />
+          <ScalarProperty Name="recomendacionPerdidaTotal" ColumnName="recomendacionPerdidaTotal" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha_siniestro" ColumnName="fecha_siniestro" />
+          <ScalarProperty Name="tipoInpeccion" ColumnName="tipoInpeccion" />
+          <ScalarProperty Name="correlativo" ColumnName="correlativo" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspPerdidaTotalDanios">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspPerdidaTotalDanios">
+        <MappingFragment StoreEntitySet="InspPerdidaTotalDanios">
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="caja" ColumnName="caja" />
+          <ScalarProperty Name="combustible" ColumnName="combustible" />
+          <ScalarProperty Name="cilindrada" ColumnName="cilindrada" />
+          <ScalarProperty Name="techoSolar" ColumnName="techoSolar" />
+          <ScalarProperty Name="asientosCuero" ColumnName="asientosCuero" />
+          <ScalarProperty Name="arosMagnesio" ColumnName="arosMagnesio" />
+          <ScalarProperty Name="convertidoGNV" ColumnName="convertidoGNV" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspPerdidaTotalRobo">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspPerdidaTotalRobo">
+        <MappingFragment StoreEntitySet="InspPerdidaTotalRobo">
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="caja" ColumnName="caja" />
+          <ScalarProperty Name="combustible" ColumnName="combustible" />
+          <ScalarProperty Name="cilindrada" ColumnName="cilindrada" />
+          <ScalarProperty Name="techoSolar" ColumnName="techoSolar" />
+          <ScalarProperty Name="asientosCuero" ColumnName="asientosCuero" />
+          <ScalarProperty Name="arosMagnesio" ColumnName="arosMagnesio" />
+          <ScalarProperty Name="convertidoGNV" ColumnName="convertidoGNV" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCObjeto">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCObjeto">
+        <MappingFragment StoreEntitySet="InspRCObjeto">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="nombreObjeto" ColumnName="nombreObjeto" />
+          <ScalarProperty Name="docIdentidadObjeto" ColumnName="docIdentidadObjeto" />
+          <ScalarProperty Name="telefonoObjeto" ColumnName="telefonoObjeto" />
+          <ScalarProperty Name="observacionesObjeto" ColumnName="observacionesObjeto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCObjetoDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCObjetoDetalle">
+        <MappingFragment StoreEntitySet="InspRCObjetoDetalle">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="costoReferencial" ColumnName="costoReferencial" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCPersona">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCPersona">
+        <MappingFragment StoreEntitySet="InspRCPersona">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="nombrePersona" ColumnName="nombrePersona" />
+          <ScalarProperty Name="docIdentidadPersona" ColumnName="docIdentidadPersona" />
+          <ScalarProperty Name="telefonoPersona" ColumnName="telefonoPersona" />
+          <ScalarProperty Name="observacionesPersona" ColumnName="observacionesPersona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCPersonaDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCPersonaDetalle">
+        <MappingFragment StoreEntitySet="InspRCPersonaDetalle">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="montoGasto" ColumnName="montoGasto" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCVehicular">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCVehicular">
+        <MappingFragment StoreEntitySet="InspRCVehicular">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="nombreTercero" ColumnName="nombreTercero" />
+          <ScalarProperty Name="docIdentidadTercero" ColumnName="docIdentidadTercero" />
+          <ScalarProperty Name="telefonoTercero" ColumnName="telefonoTercero" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="chasis" ColumnName="chasis" />
+          <ScalarProperty Name="kilometraje" ColumnName="kilometraje" />
+          <ScalarProperty Name="importacionDirecta" ColumnName="importacionDirecta" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRCVehicularDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCVehicularDetalle">
+        <MappingFragment StoreEntitySet="InspRCVehicularDetalle">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="compra" ColumnName="compra" />
+          <ScalarProperty Name="instalacion" ColumnName="instalacion" />
+          <ScalarProperty Name="pintura" ColumnName="pintura" />
+          <ScalarProperty Name="mecanico" ColumnName="mecanico" />
+          <ScalarProperty Name="chaperio" ColumnName="chaperio" />
+          <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspRoboParcial">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspRoboParcial">
+        <MappingFragment StoreEntitySet="InspRoboParcial">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="compra" ColumnName="compra" />
+          <ScalarProperty Name="instalacion" ColumnName="instalacion" />
+          <ScalarProperty Name="pintura" ColumnName="pintura" />
+          <ScalarProperty Name="mecanico" ColumnName="mecanico" />
+          <ScalarProperty Name="chaperio" ColumnName="chaperio" />
+          <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemTaller">
+      <EntityTypeMapping TypeName="LBCDesaModelo.ItemTaller">
+        <MappingFragment StoreEntitySet="ItemTaller">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="taller" ColumnName="taller" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="gradoReparacion" ColumnName="gradoReparacion" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="costo" ColumnName="costo" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Liquidacion">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Liquidacion">
+        <MappingFragment StoreEntitySet="Liquidacion">
+          <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
+          <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
+          <ScalarProperty Name="idAsegurado" ColumnName="idAsegurado" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiquidacionDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionDetalle">
+        <MappingFragment StoreEntitySet="LiquidacionDetalle">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="precioCotizadoBs" ColumnName="precioCotizadoBs" />
+          <ScalarProperty Name="precioCotizadoUs" ColumnName="precioCotizadoUs" />
+          <ScalarProperty Name="fechaRecepcionInspector" ColumnName="fechaRecepcionInspector" />
+          <ScalarProperty Name="inspeccionado" ColumnName="inspeccionado" />
+          <ScalarProperty Name="liquidado" ColumnName="liquidado" />
+          <ScalarProperty Name="facturaLiquidacion" ColumnName="facturaLiquidacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiquidacionFacturas">
+      <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionFacturas">
+        <MappingFragment StoreEntitySet="LiquidacionFacturas">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="precioLiquidadoBs" ColumnName="precioLiquidadoBs" />
+          <ScalarProperty Name="precioLiquidadoUs" ColumnName="precioLiquidadoUs" />
+          <ScalarProperty Name="numeroFactura" ColumnName="numeroFactura" />
+          <ScalarProperty Name="fechaRecepcionFactura" ColumnName="fechaRecepcionFactura" />
+          <ScalarProperty Name="fechaLiquidacion" ColumnName="fechaLiquidacion" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nomenclador">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Nomenclador">
+        <MappingFragment StoreEntitySet="Nomenclador">
+          <ScalarProperty Name="lista" ColumnName="lista" />
+          <ScalarProperty Name="categoriaNomenclador" ColumnName="categoriaNomenclador" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proveedor">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Proveedor">
+        <MappingFragment StoreEntitySet="Proveedor">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="nombreProveedor" ColumnName="nombreProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
+          <ScalarProperty Name="tipoAcceso" ColumnName="tipoAcceso" />
+          <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="LBCDesaModelo.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="nombreVisible" ColumnName="nombreVisible" />
+          <ScalarProperty Name="codSucursal" ColumnName="codSucursal" />
+          <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuarioCreacion" ColumnName="usuarioCreacion" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioRol">
+      <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioRol">
+        <MappingFragment StoreEntitySet="UsuarioRol">
+          <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
+    <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
+  </EntityContainerMapping>
+</Mapping>

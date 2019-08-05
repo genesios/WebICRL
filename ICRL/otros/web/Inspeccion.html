@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="LBC" /> 
+    <title>LBC Form</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="PanelDatosGen">
+      
+      <table>
+        <tr><th>Datos Generales</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxSucAtencion">Sucursal de Atención</label><br/>
+            <input id="TextBoxSucAtencion" type="text">
+          </div>
+          <div class="fifty">
+            <label for="TextBoxDirecInspeccion">Dirección de Inspección</label><br/>
+            <input id="TextBoxDirecInspeccion" type="text">
+          </div>
+        </td></tr>
+      </table>
+      
+      <table>
+        <tr><th>Datos Siniestro</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxCausaSiniestro">Causa Siniestro</label><br/>
+            <input id="TextBoxCausaSiniestro" type="text">
+            <label for="TextBoxDescripSiniestro">Descripción del Siniestro</label><br/>
+            <input id="TextBoxDescripSiniestro" type="text">
+          </div>
+          <div class="fifty">
+            <label for="TextBoxObservacionesInspec">Observaciones Inspección</label><br/>
+            <input id="TextBoxObservacionesInspec" type="text">
+          </div>
+        </td></tr>
+      </table>
+      
+      <table>
+        <tr><th>Datos Cliente</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxNombreAsegurado">Nombre Asegurado</label><br/>
+            <input id="TextBoxNombreAsegurado" type="text">
+          </div>
+          <div class="fifty">
+            <label for="TextBoxTelefonoAsegurado">Teléfono Asegurado</label><br/>
+            <input id="TextBoxTelefonoAsegurado" type="text">
+          </div>
+        </td></tr>
+      </table>
+      
+      <table>
+        <tr><th>Datos Contacto Inspección</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxNombreInspector">Nombre del Inspector</label><br/>
+            <input id="TextBoxNombreInspector" type="text">
+            <label for="TextBoxCorreoInspector">Correo Electrónico</label><br/>
+            <input id="TextBoxCorreoInspector" type="text">
+            <label for="TextBoxNombreContacto">Nombre del Contacto</label><br/>
+            <input id="TextBoxNombreContacto" type="text">
+          </div>
+          <div class="fifty">
+            <label for="TextBoxTelefContacto">Teléfono Contacto</label><br/>
+            <input id="TextBoxTelefContacto" type="text">
+            <label for="TextBoxEmailsEnvio">Emails de envío</label><br/>
+            <input id="TextBoxEmailsEnvio" type="text">
+            <p class="errormessage">* Verifique el formato de los correos electrónicos</p>
+          </div>
+        </td></tr>
+      </table>
+      
+      <table>
+        <tr><th>Datos Vehículo Asegurado</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxMarca">Marca</label><br/>
+            <input id="TextBoxMarca" type="text">
+            <label for="TextBoxModelo">Modelo</label><br/>
+            <input id="TextBoxModelo" type="text">
+            <label for="TextBoxAnio">Año</label><br/>
+            <input id="TextBoxAnio" type="text">
+            <label for="TextBoxPlaca">Placa</label><br/>
+            <input id="TextBoxPlaca" type="text">
+          </div>
+          <div class="fifty">
+            <label for="TextBoxColor">Color</label><br/>
+            <input id="TextBoxColor" type="text">
+            <label for="TextBoxValorAsegurado">Valor</label><br/>
+            <input id="TextBoxValorAsegurado" type="text" disabled>
+            <label for="TextBoxNroChasis">Número Chasis</label><br/>
+            <input id="TextBoxNroChasis" type="text">
+            <input id="TextBoxKilometraje" type="text" style="display:none">
+          </div>
+        </td></tr>
+      </table>
+      
+      <table>
+        <tr><th>Datos Taller</th></tr>
+        <tr><td>
+          <div class="fifty">
+            <label for="TextBoxTipoTaller">Tipo Taller</label><br/>
+            <input id="TextBoxTipoTaller" type="text" disabled>
+          </div>
+        </td></tr>
+      </table>
+      
+      <div><input id="ButtonGrabarDatosInspeccion" type="button" value="Grabar Datos"></div>
+      <div><span id="LabelMensaje">(Mensaje de respuesta)</span></div>
+    </div>
+  </body>
+</html>

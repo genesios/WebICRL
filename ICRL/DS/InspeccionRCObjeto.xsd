@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="InspeccionRCObjeto" targetNamespace="http://tempuri.org/InspeccionRCObjeto.xsd" xmlns:mstns="http://tempuri.org/InspeccionRCObjeto.xsd" xmlns="http://tempuri.org/InspeccionRCObjeto.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LBCDesaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="LBCDesaConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LBCDesaConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LBCDesaConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        irco.idInspeccion, ircodet.secuencial, irco.nombreObjeto, irco.docIdentidadObjeto, irco.observacionesObjeto, ircodet.idItem, ircodet.costoReferencial, 
+                         ircodet.descripcion
+FROM            Inspeccion AS i INNER JOIN
+                         InspRCObjeto AS irco ON i.idInspeccion = irco.idInspeccion INNER JOIN
+                         InspRCObjetoDetalle AS ircodet ON irco.secuencial = ircodet.secuencial
+ORDER BY i.idInspeccion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idInspeccion" DataSetColumn="idInspeccion" />
+              <Mapping SourceColumn="secuencial" DataSetColumn="secuencial" />
+              <Mapping SourceColumn="nombreObjeto" DataSetColumn="nombreObjeto" />
+              <Mapping SourceColumn="docIdentidadObjeto" DataSetColumn="docIdentidadObjeto" />
+              <Mapping SourceColumn="observacionesObjeto" DataSetColumn="observacionesObjeto" />
+              <Mapping SourceColumn="idItem" DataSetColumn="idItem" />
+              <Mapping SourceColumn="costoReferencial" DataSetColumn="costoReferencial" />
+              <Mapping SourceColumn="descripcion" DataSetColumn="descripcion" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="InspeccionRCObjeto" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="InspeccionRCObjeto" msprop:Generator_UserDSName="InspeccionRCObjeto">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idInspeccion" msprop:Generator_ColumnVarNameInTable="columnidInspeccion" msprop:Generator_ColumnPropNameInRow="idInspeccion" msprop:Generator_ColumnPropNameInTable="idInspeccionColumn" msprop:Generator_UserColumnName="idInspeccion" type="xs:int" />
+              <xs:element name="secuencial" msprop:Generator_ColumnVarNameInTable="columnsecuencial" msprop:Generator_ColumnPropNameInRow="secuencial" msprop:Generator_ColumnPropNameInTable="secuencialColumn" msprop:Generator_UserColumnName="secuencial" type="xs:int" />
+              <xs:element name="nombreObjeto" msprop:Generator_ColumnVarNameInTable="columnnombreObjeto" msprop:Generator_ColumnPropNameInRow="nombreObjeto" msprop:Generator_ColumnPropNameInTable="nombreObjetoColumn" msprop:Generator_UserColumnName="nombreObjeto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="docIdentidadObjeto" msprop:Generator_ColumnVarNameInTable="columndocIdentidadObjeto" msprop:Generator_ColumnPropNameInRow="docIdentidadObjeto" msprop:Generator_ColumnPropNameInTable="docIdentidadObjetoColumn" msprop:Generator_UserColumnName="docIdentidadObjeto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="observacionesObjeto" msprop:Generator_ColumnVarNameInTable="columnobservacionesObjeto" msprop:Generator_ColumnPropNameInRow="observacionesObjeto" msprop:Generator_ColumnPropNameInTable="observacionesObjetoColumn" msprop:Generator_UserColumnName="observacionesObjeto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="idItem" msprop:Generator_ColumnVarNameInTable="columnidItem" msprop:Generator_ColumnPropNameInRow="idItem" msprop:Generator_ColumnPropNameInTable="idItemColumn" msprop:Generator_UserColumnName="idItem">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="costoReferencial" msprop:Generator_ColumnVarNameInTable="columncostoReferencial" msprop:Generator_ColumnPropNameInRow="costoReferencial" msprop:Generator_ColumnPropNameInTable="costoReferencialColumn" msprop:Generator_UserColumnName="costoReferencial" type="xs:decimal" minOccurs="0" />
+              <xs:element name="descripcion" msprop:Generator_ColumnVarNameInTable="columndescripcion" msprop:Generator_ColumnPropNameInRow="descripcion" msprop:Generator_ColumnPropNameInTable="descripcionColumn" msprop:Generator_UserColumnName="descripcion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:secuencial" />
+      <xs:field xpath="mstns:idItem" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

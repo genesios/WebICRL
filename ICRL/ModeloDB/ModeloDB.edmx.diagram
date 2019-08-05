@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3a8cd4be2074f6f8c822a3f4842d85f" Name="Diagram1">
+        <EntityTypeShape EntityType="LBCDesaModelo.Asegurado" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Contador" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiDaniosPropios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiPerdidaTotal" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiPerdidaTotalDuenio" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiPerdidaTotalReferencia" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiRCObjeto" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiRCObjetoDetalle" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiRCPersona" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiRCPersonaDetalle" Width="1.5" PointX="7.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiReparacion" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiReparacionRepuesto" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotiRepuesto" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Cotizacion" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotizacionFlujo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.EstadoSesion" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Flujo" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspDaniosPropios" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Inspeccion" Width="1.5" PointX="3" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalDanios" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalRobo" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjeto" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjetoDetalle" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersona" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersonaDetalle" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicular" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicularDetalle" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRoboParcial" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.ItemTaller" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Liquidacion" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionDetalle" Width="1.5" PointX="5.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionFacturas" Width="1.5" PointX="5.25" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Nomenclador" Width="1.5" PointX="13.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Proveedor" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Rol" Width="1.5" PointX="5.75" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Usuario" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.UsuarioRol" Width="1.5" PointX="8" PointY="22.5" IsExpanded="true" />
+        <AssociationConnector Association="LBCDesaModelo.FK_LIQUIDAC_ASSOCIATI_ASEGURAD" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIPERD_ASSOCIATI_COTIPERD" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIPERD_PTDUENIOT_COTIPERD" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIPERD_PTOTALTIE_COTIZACI" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIRCOB_ASSOCIATI_COTIRCOB" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIRCOB_RCOBJETOT_COTIZACI" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIRCPE_ASSOCIATI_COTIRCPE" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIRCPE_RCPERSONA_COTIZACI" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIREPA_REPARACIO_COTIZACI" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_COTIZACI_ASSOCIATI_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_ESTADOSE_ASSOCIATI_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_INSPECCI_ASSOCIATI_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_LIQUIDAC_ASSOCIATI_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_LIQUIDAC_DETALLETI_LIQUIDAC" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_LIQUIDAC_FACTURATI_LIQUIDAC" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_USUARIOR_ASSOCIATI_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="LBCDesaModelo.FK_USUARIOR_ASSOCIATI_USUARIO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+body {
+  font-family: "Arial";
+  font-size: 11pt;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 15px;
+  border: 2px solid #00a861;
+  border-spacing: 0;
+  border-collapse: inherit;
+  border-radius: 5px;
+}
+table tr th {
+  background-color: #00a861;
+  color: #fff;
+  text-align: left;
+  font-size: 1.1em;
+  padding: 5px;
+}
+table tr td {
+  padding: 5px;
+}
+
+table div input[type="text"] {
+  width: 97%;
+  padding: 5px;
+  margin: 2px 0 10px 0;
+  border: 1px solid #d8d8d8;
+  text-transform: uppercase;
+  font-weight: 600;
+  /*color: #00a861;*/
+}
+table div:last-child input[type="text"] {
+  margin-bottom: 5px;
+}
+input[type="button"],
+input[type="submit"] {
+  border-style: none;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #00a861;
+  font-weight: 900;
+  cursor: pointer;
+  position: relative;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+input[type="button"]:active,
+input[type="submit"]:active {
+  top: 2px;
+}
+
+div.fifty {
+  float: left;
+  width: 100%;
+}
+
+#LabelMensaje {
+  display: block;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  color: #ff0000;
+  font-size: .9em;
+}
+.errormessage {
+  margin: 0;
+  color: #ff0000;
+  font-size: .9em;
+}
+
+
+@media only screen and (min-width: 1024px)
+{
+  table div input[type="text"] {
+    margin: 2px 0 5px 0;
+  }
+  div.fifty {
+    width: 50%;
+  }
+}

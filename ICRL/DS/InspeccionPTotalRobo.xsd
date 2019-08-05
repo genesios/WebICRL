@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="InspeccionPTotalRobo" targetNamespace="http://tempuri.org/InspeccionPTotalRobo.xsd" xmlns:mstns="http://tempuri.org/InspeccionPTotalRobo.xsd" xmlns="http://tempuri.org/InspeccionPTotalRobo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LBCDesaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="LBCDesaConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LBCDesaConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InspPerdidaTotalRoboTableAdapter" GeneratorDataComponentClassName="InspPerdidaTotalRoboTableAdapter" Name="InspPerdidaTotalRobo" UserDataComponentName="InspPerdidaTotalRoboTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LBCDesaConnectionString (Web.config)" DbObjectName="LBCDesa.dbo.InspPerdidaTotalRobo" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        iptrobo.idInspeccion, iptrobo.version, iptrobo.serie, iptrobo.caja, iptrobo.combustible, iptrobo.cilindrada, iptrobo.techoSolar, iptrobo.asientosCuero, 
+                         iptrobo.arosMagnesio, iptrobo.convertidoGNV, iptrobo.observaciones
+FROM            Inspeccion AS i INNER JOIN
+                         InspPerdidaTotalRobo AS iptrobo ON i.idInspeccion = iptrobo.idInspeccion
+ORDER BY iptrobo.idInspeccion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idInspeccion" DataSetColumn="idInspeccion" />
+              <Mapping SourceColumn="version" DataSetColumn="version" />
+              <Mapping SourceColumn="serie" DataSetColumn="serie" />
+              <Mapping SourceColumn="caja" DataSetColumn="caja" />
+              <Mapping SourceColumn="combustible" DataSetColumn="combustible" />
+              <Mapping SourceColumn="cilindrada" DataSetColumn="cilindrada" />
+              <Mapping SourceColumn="techoSolar" DataSetColumn="techoSolar" />
+              <Mapping SourceColumn="asientosCuero" DataSetColumn="asientosCuero" />
+              <Mapping SourceColumn="arosMagnesio" DataSetColumn="arosMagnesio" />
+              <Mapping SourceColumn="convertidoGNV" DataSetColumn="convertidoGNV" />
+              <Mapping SourceColumn="observaciones" DataSetColumn="observaciones" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="InspeccionPTotalRobo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="InspeccionPTotalRobo" msprop:Generator_UserDSName="InspeccionPTotalRobo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="InspPerdidaTotalRobo" msprop:Generator_TableClassName="InspPerdidaTotalRoboDataTable" msprop:Generator_TableVarName="tableInspPerdidaTotalRobo" msprop:Generator_TablePropName="InspPerdidaTotalRobo" msprop:Generator_RowDeletingName="InspPerdidaTotalRoboRowDeleting" msprop:Generator_RowChangingName="InspPerdidaTotalRoboRowChanging" msprop:Generator_RowEvHandlerName="InspPerdidaTotalRoboRowChangeEventHandler" msprop:Generator_RowDeletedName="InspPerdidaTotalRoboRowDeleted" msprop:Generator_UserTableName="InspPerdidaTotalRobo" msprop:Generator_RowChangedName="InspPerdidaTotalRoboRowChanged" msprop:Generator_RowEvArgName="InspPerdidaTotalRoboRowChangeEvent" msprop:Generator_RowClassName="InspPerdidaTotalRoboRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idInspeccion" msprop:Generator_ColumnVarNameInTable="columnidInspeccion" msprop:Generator_ColumnPropNameInRow="idInspeccion" msprop:Generator_ColumnPropNameInTable="idInspeccionColumn" msprop:Generator_UserColumnName="idInspeccion" type="xs:int" />
+              <xs:element name="version" msprop:Generator_ColumnVarNameInTable="columnversion" msprop:Generator_ColumnPropNameInRow="version" msprop:Generator_ColumnPropNameInTable="versionColumn" msprop:Generator_UserColumnName="version" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="serie" msprop:Generator_ColumnVarNameInTable="columnserie" msprop:Generator_ColumnPropNameInRow="serie" msprop:Generator_ColumnPropNameInTable="serieColumn" msprop:Generator_UserColumnName="serie" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="caja" msprop:Generator_ColumnVarNameInTable="columncaja" msprop:Generator_ColumnPropNameInRow="caja" msprop:Generator_ColumnPropNameInTable="cajaColumn" msprop:Generator_UserColumnName="caja" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="combustible" msprop:Generator_ColumnVarNameInTable="columncombustible" msprop:Generator_ColumnPropNameInRow="combustible" msprop:Generator_ColumnPropNameInTable="combustibleColumn" msprop:Generator_UserColumnName="combustible" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cilindrada" msprop:Generator_ColumnVarNameInTable="columncilindrada" msprop:Generator_ColumnPropNameInRow="cilindrada" msprop:Generator_ColumnPropNameInTable="cilindradaColumn" msprop:Generator_UserColumnName="cilindrada" type="xs:int" minOccurs="0" />
+              <xs:element name="techoSolar" msprop:Generator_ColumnVarNameInTable="columntechoSolar" msprop:Generator_ColumnPropNameInRow="techoSolar" msprop:Generator_ColumnPropNameInTable="techoSolarColumn" msprop:Generator_UserColumnName="techoSolar" type="xs:boolean" minOccurs="0" />
+              <xs:element name="asientosCuero" msprop:Generator_ColumnVarNameInTable="columnasientosCuero" msprop:Generator_ColumnPropNameInRow="asientosCuero" msprop:Generator_ColumnPropNameInTable="asientosCueroColumn" msprop:Generator_UserColumnName="asientosCuero" type="xs:boolean" minOccurs="0" />
+              <xs:element name="arosMagnesio" msprop:Generator_ColumnVarNameInTable="columnarosMagnesio" msprop:Generator_ColumnPropNameInRow="arosMagnesio" msprop:Generator_ColumnPropNameInTable="arosMagnesioColumn" msprop:Generator_UserColumnName="arosMagnesio" type="xs:boolean" minOccurs="0" />
+              <xs:element name="convertidoGNV" msprop:Generator_ColumnVarNameInTable="columnconvertidoGNV" msprop:Generator_ColumnPropNameInRow="convertidoGNV" msprop:Generator_ColumnPropNameInTable="convertidoGNVColumn" msprop:Generator_UserColumnName="convertidoGNV" type="xs:boolean" minOccurs="0" />
+              <xs:element name="observaciones" msprop:Generator_ColumnVarNameInTable="columnobservaciones" msprop:Generator_ColumnPropNameInRow="observaciones" msprop:Generator_ColumnPropNameInTable="observacionesColumn" msprop:Generator_UserColumnName="observaciones" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:InspPerdidaTotalRobo" />
+      <xs:field xpath="mstns:idInspeccion" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

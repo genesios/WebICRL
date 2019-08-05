@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LBCDesaModelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asegurado">
+    <Key>
+      <PropertyRef Name="idAsegurado" />
+    </Key>
+    <Property Name="idAsegurado" Type="Int32" Nullable="false" />
+    <Property Name="nombreAsegurado" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
+    <Property Name="telefonoAsegurado" Type="Int32" />
+    <Property Name="docIdAsegurado" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD" FromRole="Asegurado" ToRole="Liquidacion" />
+  </EntityType>
+  <EntityType Name="Contador">
+    <Key>
+      <PropertyRef Name="tipoContador" />
+    </Key>
+    <Property Name="tipoContador" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="valorContador" Type="Int64" />
+    <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CotiDaniosPropios">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CotiPerdidaTotal">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="Int32" />
+    <Property Name="version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="serie" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="caja" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="combustible" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cilindrada" Type="Int32" />
+    <Property Name="techoSolar" Type="Boolean" />
+    <Property Name="asientosCuero" Type="Boolean" />
+    <Property Name="arosMagnesio" Type="Boolean" />
+    <Property Name="convertidoGNV" Type="Boolean" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="noCompletamentePagado" Type="Boolean" />
+    <NavigationProperty Name="CotiPerdidaTotalReferencia" Relationship="Self.FK_COTIPERD_ASSOCIATI_COTIPERD" FromRole="CotiPerdidaTotal" ToRole="CotiPerdidaTotalReferencia" />
+    <NavigationProperty Name="CotiPerdidaTotalDuenio" Relationship="Self.FK_COTIPERD_PTDUENIOT_COTIPERD" FromRole="CotiPerdidaTotal" ToRole="CotiPerdidaTotalDuenio" />
+    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="CotiPerdidaTotal" ToRole="Cotizacion" />
+  </EntityType>
+  <EntityType Name="CotiPerdidaTotalDuenio">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idOrden" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="nombresDuenio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdDuenio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="monedaOrden" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="montoOrden" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTDUENIOT_COTIPERD" FromRole="CotiPerdidaTotalDuenio" ToRole="CotiPerdidaTotal" />
+  </EntityType>
+  <EntityType Name="CotiPerdidaTotalReferencia">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="medioCotizado" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="seleccionado" Type="Boolean" />
+    <Property Name="medioCotizado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="monedaCotizado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="montoCotizado" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_ASSOCIATI_COTIPERD" FromRole="CotiPerdidaTotalReferencia" ToRole="CotiPerdidaTotal" />
+  </EntityType>
+  <EntityType Name="CotiRCObjeto">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="nombreObjeto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdentidadObjeto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoObjeto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="observacionesObjeto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="monedaOrden" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="montoOrden" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="reembolso" Type="Boolean" />
+    <NavigationProperty Name="CotiRCObjetoDetalle" Relationship="Self.FK_COTIRCOB_ASSOCIATI_COTIRCOB" FromRole="CotiRCObjeto" ToRole="CotiRCObjetoDetalle" />
+    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="CotiRCObjeto" ToRole="Cotizacion" />
+  </EntityType>
+  <EntityType Name="CotiRCObjetoDetalle">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idItem" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="monedaReferencial" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="costoReferencial" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_ASSOCIATI_COTIRCOB" FromRole="CotiRCObjetoDetalle" ToRole="CotiRCObjeto" />
+  </EntityType>
+  <EntityType Name="CotiRCPersona">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="nombrePersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdentidadPersona" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="reembolso" Type="Boolean" />
+    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="monedaOrden" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="montoOrden" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="CotiRCPersonaDetalle" Relationship="Self.FK_COTIRCPE_ASSOCIATI_COTIRCPE" FromRole="CotiRCPersona" ToRole="CotiRCPersonaDetalle" />
+    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="CotiRCPersona" ToRole="Cotizacion" />
+  </EntityType>
+  <EntityType Name="CotiRCPersonaDetalle">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="tipo" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="monedaGasto" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="montoGasto" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_ASSOCIATI_COTIRCPE" FromRole="CotiRCPersonaDetalle" ToRole="CotiRCPersona" />
+  </EntityType>
+  <EntityType Name="CotiReparacion">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="moneda" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="precioCotizado" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descFijoPorcentaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="precioFinal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CotiReparacionRepuesto">
+    <Key>
+      <PropertyRef Name="idCotizacion" />
+      <PropertyRef Name="tipoOrden" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="idOrden" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="montoOrden" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="monedaOrden" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="estadoOrden" Type="Int32" />
+    <Property Name="descFijoPorcentaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="montoDeducibleFraCoa" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="montoFinal" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIREPA_REPARACIO_COTIZACI" FromRole="CotiReparacionRepuesto" ToRole="Cotizacion" />
+  </EntityType>
+  <EntityType Name="CotiRepuesto">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="moneda" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="precioCotizado" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descFijoPorcentaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="precioFinal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
+    <Property Name="diasEntrega" Type="Int32" />
+    <Property Name="recepcion" Type="Boolean" />
+    <Property Name="fechaRecepcion" Type="DateTime" Precision="3" />
+    <Property Name="fechaEfectiva" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Cotizacion">
+    <Key>
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idFlujo" Type="Int32" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="inspector" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
+    <Property Name="sucursal" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="idInspeccion" Type="Int32" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="tipoCobertura" Type="Int32" />
+    <Property Name="correlativo" Type="Int32" />
+    <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
+    <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
+    <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
+    <NavigationProperty Name="CotiReparacionRepuesto" Relationship="Self.FK_COTIREPA_REPARACIO_COTIZACI" FromRole="Cotizacion" ToRole="CotiReparacionRepuesto" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_COTIZACI_ASSOCIATI_USUARIO" FromRole="Cotizacion" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="CotizacionFlujo">
+    <Key>
+      <PropertyRef Name="idFlujo" />
+    </Key>
+    <Property Name="idFlujo" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="observacionesSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Inspector" Type="String" MaxLength="75" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="nombreContacto" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoContacto" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="correosDeEnvio" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="fecha_siniestro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="correlativo" Type="Int32" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="Int32" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="EstadoSesion">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="fechaAcceso" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="fechaHoraInicio" Type="DateTime" Precision="3" />
+    <Property Name="fechaHoraFin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_ESTADOSE_ASSOCIATI_USUARIO" FromRole="EstadoSesion" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Flujo">
+    <Key>
+      <PropertyRef Name="idFlujo" />
+    </Key>
+    <Property Name="idFlujo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="flujoOnBase" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="numeroReclamo" Type="Int32" />
+    <Property Name="numeroPoliza" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="marcaVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="modeloVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="anioVehiculo" Type="Int32" />
+    <Property Name="colorVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="placaVehiculo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="chasisVehiculo" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="valorAsegurado" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="importacionDirecta" Type="Boolean" />
+    <Property Name="nombreAsegurado" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
+    <Property Name="docIdAsegurado" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="telefonocelAsegurado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="causaSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="contador" Type="Int32" />
+    <Property Name="descripcionSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="direccionInspeccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="agenciaAtencion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspDaniosPropios">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Inspeccion">
+    <Key>
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idFlujo" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="sucursalAtencion" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+    <Property Name="zona" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+    <Property Name="causaSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descripcionSiniestro" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="observacionesSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="idInspector" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
+    <Property Name="nombreContacto" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoContacto" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="correosDeEnvio" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="recomendacionPerdidaTotal" Type="Boolean" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="fecha_siniestro" Type="DateTime" Precision="3" />
+    <Property Name="tipoInpeccion" Type="Int32" Nullable="false" />
+    <Property Name="correlativo" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_INSPECCI_ASSOCIATI_USUARIO" FromRole="Inspeccion" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="InspPerdidaTotalDanios">
+    <Key>
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="serie" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="caja" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="combustible" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cilindrada" Type="Int32" />
+    <Property Name="techoSolar" Type="Boolean" />
+    <Property Name="asientosCuero" Type="Boolean" />
+    <Property Name="arosMagnesio" Type="Boolean" />
+    <Property Name="convertidoGNV" Type="Boolean" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspPerdidaTotalRobo">
+    <Key>
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="serie" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="caja" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="combustible" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cilindrada" Type="Int32" />
+    <Property Name="techoSolar" Type="Boolean" />
+    <Property Name="asientosCuero" Type="Boolean" />
+    <Property Name="arosMagnesio" Type="Boolean" />
+    <Property Name="convertidoGNV" Type="Boolean" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCObjeto">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="nombreObjeto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdentidadObjeto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoObjeto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="observacionesObjeto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCObjetoDetalle">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="costoReferencial" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCPersona">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="nombrePersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdentidadPersona" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="observacionesPersona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCPersonaDetalle">
+    <Key>
+      <PropertyRef Name="tipo" />
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="tipo" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="montoGasto" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCVehicular">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="nombreTercero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docIdentidadTercero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="telefonoTercero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="marca" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="modelo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="anio" Type="Int32" />
+    <Property Name="placa" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="chasis" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="kilometraje" Type="Int32" />
+    <Property Name="importacionDirecta" Type="Boolean" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRCVehicularDetalle">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspRoboParcial">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ItemTaller">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="ciudad" />
+      <PropertyRef Name="taller" />
+      <PropertyRef Name="gradoReparacion" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="taller" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="categoria" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="gradoReparacion" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" />
+    <Property Name="costo" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="moneda" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Liquidacion">
+    <Key>
+      <PropertyRef Name="idLiquidacion" />
+    </Key>
+    <Property Name="idLiquidacion" Type="Int32" Nullable="false" />
+    <Property Name="idFlujo" Type="Int32" Nullable="false" />
+    <Property Name="idAsegurado" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="Asegurado" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD" FromRole="Liquidacion" ToRole="Asegurado" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_USUARIO" FromRole="Liquidacion" ToRole="Usuario" />
+    <NavigationProperty Name="LiquidacionDetalle" Relationship="Self.FK_LIQUIDAC_DETALLETI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionDetalle" />
+    <NavigationProperty Name="LiquidacionFacturas" Relationship="Self.FK_LIQUIDAC_FACTURATI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionFacturas" />
+  </EntityType>
+  <EntityType Name="LiquidacionDetalle">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idLiquidacion" Type="Int32" Nullable="false" />
+    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="precioCotizadoBs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="precioCotizadoUs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="fechaRecepcionInspector" Type="DateTime" Precision="3" />
+    <Property Name="inspeccionado" Type="Boolean" />
+    <Property Name="liquidado" Type="Boolean" />
+    <Property Name="facturaLiquidacion" Type="Int64" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_DETALLETI_LIQUIDAC" FromRole="LiquidacionDetalle" ToRole="Liquidacion" />
+  </EntityType>
+  <EntityType Name="LiquidacionFacturas">
+    <Key>
+      <PropertyRef Name="secuencial" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idLiquidacion" Type="Int32" Nullable="false" />
+    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="precioLiquidadoBs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="precioLiquidadoUs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="numeroFactura" Type="Int64" />
+    <Property Name="fechaRecepcionFactura" Type="DateTime" Precision="3" />
+    <Property Name="fechaLiquidacion" Type="DateTime" Precision="3" />
+    <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_FACTURATI_LIQUIDAC" FromRole="LiquidacionFacturas" ToRole="Liquidacion" />
+  </EntityType>
+  <EntityType Name="Nomenclador">
+    <Key>
+      <PropertyRef Name="categoriaNomenclador" />
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="lista" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+    <Property Name="categoriaNomenclador" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="nombreProveedor" />
+    </Key>
+    <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" />
+    <Property Name="nombreProveedor" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="codigoRol" />
+    </Key>
+    <Property Name="codigoRol" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipoAcceso" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="Rol" ToRole="UsuarioRol" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codUsuario" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="nombreVisible" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
+    <Property Name="codSucursal" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="correoElectronico" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="usuarioCreacion" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIZACI_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="Cotizacion" />
+    <NavigationProperty Name="EstadoSesion" Relationship="Self.FK_ESTADOSE_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="EstadoSesion" />
+    <NavigationProperty Name="Inspeccion" Relationship="Self.FK_INSPECCI_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="Inspeccion" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="Liquidacion" />
+    <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="UsuarioRol" />
+  </EntityType>
+  <EntityType Name="UsuarioRol">
+    <Key>
+      <PropertyRef Name="codigoRol" />
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="codigoRol" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="fechaAsignacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="UsuarioRol" ToRole="Rol" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="UsuarioRol" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
+    <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asegurado">
+        <PropertyRef Name="idAsegurado" />
+      </Principal>
+      <Dependent Role="Liquidacion">
+        <PropertyRef Name="idAsegurado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIPERD_ASSOCIATI_COTIPERD">
+    <End Role="CotiPerdidaTotal" Type="Self.CotiPerdidaTotal" Multiplicity="1" />
+    <End Role="CotiPerdidaTotalReferencia" Type="Self.CotiPerdidaTotalReferencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CotiPerdidaTotal">
+        <PropertyRef Name="secuencial" />
+      </Principal>
+      <Dependent Role="CotiPerdidaTotalReferencia">
+        <PropertyRef Name="secuencial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIPERD_PTDUENIOT_COTIPERD">
+    <End Role="CotiPerdidaTotal" Type="Self.CotiPerdidaTotal" Multiplicity="1" />
+    <End Role="CotiPerdidaTotalDuenio" Type="Self.CotiPerdidaTotalDuenio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CotiPerdidaTotal">
+        <PropertyRef Name="secuencial" />
+      </Principal>
+      <Dependent Role="CotiPerdidaTotalDuenio">
+        <PropertyRef Name="secuencial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIPERD_PTOTALTIE_COTIZACI">
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
+    <End Role="CotiPerdidaTotal" Type="Self.CotiPerdidaTotal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="idCotizacion" />
+      </Principal>
+      <Dependent Role="CotiPerdidaTotal">
+        <PropertyRef Name="idCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIRCOB_ASSOCIATI_COTIRCOB">
+    <End Role="CotiRCObjeto" Type="Self.CotiRCObjeto" Multiplicity="1" />
+    <End Role="CotiRCObjetoDetalle" Type="Self.CotiRCObjetoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CotiRCObjeto">
+        <PropertyRef Name="secuencial" />
+      </Principal>
+      <Dependent Role="CotiRCObjetoDetalle">
+        <PropertyRef Name="secuencial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIRCOB_RCOBJETOT_COTIZACI">
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
+    <End Role="CotiRCObjeto" Type="Self.CotiRCObjeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="idCotizacion" />
+      </Principal>
+      <Dependent Role="CotiRCObjeto">
+        <PropertyRef Name="idCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIRCPE_ASSOCIATI_COTIRCPE">
+    <End Role="CotiRCPersona" Type="Self.CotiRCPersona" Multiplicity="1" />
+    <End Role="CotiRCPersonaDetalle" Type="Self.CotiRCPersonaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CotiRCPersona">
+        <PropertyRef Name="secuencial" />
+      </Principal>
+      <Dependent Role="CotiRCPersonaDetalle">
+        <PropertyRef Name="secuencial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIRCPE_RCPERSONA_COTIZACI">
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
+    <End Role="CotiRCPersona" Type="Self.CotiRCPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="idCotizacion" />
+      </Principal>
+      <Dependent Role="CotiRCPersona">
+        <PropertyRef Name="idCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIREPA_REPARACIO_COTIZACI">
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
+    <End Role="CotiReparacionRepuesto" Type="Self.CotiReparacionRepuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cotizacion">
+        <PropertyRef Name="idCotizacion" />
+      </Principal>
+      <Dependent Role="CotiReparacionRepuesto">
+        <PropertyRef Name="idCotizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COTIZACI_ASSOCIATI_USUARIO">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Cotizacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTADOSE_ASSOCIATI_USUARIO">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="EstadoSesion" Type="Self.EstadoSesion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="EstadoSesion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSPECCI_ASSOCIATI_USUARIO">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Inspeccion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LIQUIDAC_ASSOCIATI_USUARIO">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Liquidacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LIQUIDAC_DETALLETI_LIQUIDAC">
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="1" />
+    <End Role="LiquidacionDetalle" Type="Self.LiquidacionDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liquidacion">
+        <PropertyRef Name="idLiquidacion" />
+      </Principal>
+      <Dependent Role="LiquidacionDetalle">
+        <PropertyRef Name="idLiquidacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LIQUIDAC_FACTURATI_LIQUIDAC">
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="1" />
+    <End Role="LiquidacionFacturas" Type="Self.LiquidacionFacturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liquidacion">
+        <PropertyRef Name="idLiquidacion" />
+      </Principal>
+      <Dependent Role="LiquidacionFacturas">
+        <PropertyRef Name="idLiquidacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOR_ASSOCIATI_ROL">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="codigoRol" />
+      </Principal>
+      <Dependent Role="UsuarioRol">
+        <PropertyRef Name="codigoRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOR_ASSOCIATI_USUARIO">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="UsuarioRol">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LBCDesaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Asegurado" EntityType="Self.Asegurado" />
+    <EntitySet Name="Contador" EntityType="Self.Contador" />
+    <EntitySet Name="CotiDaniosPropios" EntityType="Self.CotiDaniosPropios" />
+    <EntitySet Name="CotiPerdidaTotal" EntityType="Self.CotiPerdidaTotal" />
+    <EntitySet Name="CotiPerdidaTotalDuenio" EntityType="Self.CotiPerdidaTotalDuenio" />
+    <EntitySet Name="CotiPerdidaTotalReferencia" EntityType="Self.CotiPerdidaTotalReferencia" />
+    <EntitySet Name="CotiRCObjeto" EntityType="Self.CotiRCObjeto" />
+    <EntitySet Name="CotiRCObjetoDetalle" EntityType="Self.CotiRCObjetoDetalle" />
+    <EntitySet Name="CotiRCPersona" EntityType="Self.CotiRCPersona" />
+    <EntitySet Name="CotiRCPersonaDetalle" EntityType="Self.CotiRCPersonaDetalle" />
+    <EntitySet Name="CotiReparacion" EntityType="Self.CotiReparacion" />
+    <EntitySet Name="CotiReparacionRepuesto" EntityType="Self.CotiReparacionRepuesto" />
+    <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" />
+    <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
+    <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" />
+    <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
+    <EntitySet Name="Flujo" EntityType="Self.Flujo" />
+    <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" />
+    <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" />
+    <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" />
+    <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" />
+    <EntitySet Name="InspRCObjeto" EntityType="Self.InspRCObjeto" />
+    <EntitySet Name="InspRCObjetoDetalle" EntityType="Self.InspRCObjetoDetalle" />
+    <EntitySet Name="InspRCPersona" EntityType="Self.InspRCPersona" />
+    <EntitySet Name="InspRCPersonaDetalle" EntityType="Self.InspRCPersonaDetalle" />
+    <EntitySet Name="InspRCVehicular" EntityType="Self.InspRCVehicular" />
+    <EntitySet Name="InspRCVehicularDetalle" EntityType="Self.InspRCVehicularDetalle" />
+    <EntitySet Name="InspRoboParcial" EntityType="Self.InspRoboParcial" />
+    <EntitySet Name="ItemTaller" EntityType="Self.ItemTaller" />
+    <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" />
+    <EntitySet Name="LiquidacionDetalle" EntityType="Self.LiquidacionDetalle" />
+    <EntitySet Name="LiquidacionFacturas" EntityType="Self.LiquidacionFacturas" />
+    <EntitySet Name="Nomenclador" EntityType="Self.Nomenclador" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+    <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
+      <End Role="Asegurado" EntitySet="Asegurado" />
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
+      <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
+      <End Role="CotiPerdidaTotalReferencia" EntitySet="CotiPerdidaTotalReferencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIPERD_PTDUENIOT_COTIPERD" Association="Self.FK_COTIPERD_PTDUENIOT_COTIPERD">
+      <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
+      <End Role="CotiPerdidaTotalDuenio" EntitySet="CotiPerdidaTotalDuenio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIPERD_PTOTALTIE_COTIZACI" Association="Self.FK_COTIPERD_PTOTALTIE_COTIZACI">
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+      <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIRCOB_ASSOCIATI_COTIRCOB" Association="Self.FK_COTIRCOB_ASSOCIATI_COTIRCOB">
+      <End Role="CotiRCObjeto" EntitySet="CotiRCObjeto" />
+      <End Role="CotiRCObjetoDetalle" EntitySet="CotiRCObjetoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIRCOB_RCOBJETOT_COTIZACI" Association="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI">
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+      <End Role="CotiRCObjeto" EntitySet="CotiRCObjeto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIRCPE_ASSOCIATI_COTIRCPE" Association="Self.FK_COTIRCPE_ASSOCIATI_COTIRCPE">
+      <End Role="CotiRCPersona" EntitySet="CotiRCPersona" />
+      <End Role="CotiRCPersonaDetalle" EntitySet="CotiRCPersonaDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIRCPE_RCPERSONA_COTIZACI" Association="Self.FK_COTIRCPE_RCPERSONA_COTIZACI">
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+      <End Role="CotiRCPersona" EntitySet="CotiRCPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIREPA_REPARACIO_COTIZACI" Association="Self.FK_COTIREPA_REPARACIO_COTIZACI">
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+      <End Role="CotiReparacionRepuesto" EntitySet="CotiReparacionRepuesto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COTIZACI_ASSOCIATI_USUARIO" Association="Self.FK_COTIZACI_ASSOCIATI_USUARIO">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cotizacion" EntitySet="Cotizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTADOSE_ASSOCIATI_USUARIO" Association="Self.FK_ESTADOSE_ASSOCIATI_USUARIO">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="EstadoSesion" EntitySet="EstadoSesion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSPECCI_ASSOCIATI_USUARIO" Association="Self.FK_INSPECCI_ASSOCIATI_USUARIO">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Inspeccion" EntitySet="Inspeccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_USUARIO" Association="Self.FK_LIQUIDAC_ASSOCIATI_USUARIO">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIQUIDAC_DETALLETI_LIQUIDAC" Association="Self.FK_LIQUIDAC_DETALLETI_LIQUIDAC">
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+      <End Role="LiquidacionDetalle" EntitySet="LiquidacionDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIQUIDAC_FACTURATI_LIQUIDAC" Association="Self.FK_LIQUIDAC_FACTURATI_LIQUIDAC">
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+      <End Role="LiquidacionFacturas" EntitySet="LiquidacionFacturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOR_ASSOCIATI_ROL" Association="Self.FK_USUARIOR_ASSOCIATI_ROL">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOR_ASSOCIATI_USUARIO" Association="Self.FK_USUARIOR_ASSOCIATI_USUARIO">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+    </AssociationSet>
+    <FunctionImport Name="paIncFlujoContadorInsp">
+      <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paIncrementaContador">
+      <Parameter Name="cTipo" Mode="In" Type="String" />
+      <Parameter Name="biValorContador" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

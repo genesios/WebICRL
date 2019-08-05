@@ -1,0 +1,6 @@
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\bin\Release\ArgosProxy.dll
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\bin\Release\ArgosProxy.pdb
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\obj\Release\ArgosProxy.csproj.CoreCompileInputs.cache
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\obj\Release\ArgosProxy.dll
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\obj\Release\ArgosProxy.pdb
+C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\obj\Release\ArgosProxy.csprojResolveAssemblyReference.cache

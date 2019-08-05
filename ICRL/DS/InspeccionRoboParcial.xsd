@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="InspeccionRoboParcial" targetNamespace="http://tempuri.org/InspeccionRoboParcial.xsd" xmlns:mstns="http://tempuri.org/InspeccionRoboParcial.xsd" xmlns="http://tempuri.org/InspeccionRoboParcial.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LBCDesaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="LBCDesaConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LBCDesaConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LBCDesaConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        irp.idInspeccion, irp.idItem, n.descripcion, irp.compra, irp.instalacion, irp.pintura, irp.mecanico, irp.chaperio, irp.reparacionPrevia, irp.observaciones
+FROM            Inspeccion AS i INNER JOIN
+                         InspRoboParcial AS irp ON i.idInspeccion = irp.idInspeccion INNER JOIN
+                         Nomenclador AS n ON irp.idItem = n.codigo
+WHERE        (n.categoriaNomenclador = 'Item')
+ORDER BY irp.idInspeccion, n.descripcion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="idInspeccion" DataSetColumn="idInspeccion" />
+              <Mapping SourceColumn="idItem" DataSetColumn="idItem" />
+              <Mapping SourceColumn="descripcion" DataSetColumn="descripcion" />
+              <Mapping SourceColumn="compra" DataSetColumn="compra" />
+              <Mapping SourceColumn="instalacion" DataSetColumn="instalacion" />
+              <Mapping SourceColumn="pintura" DataSetColumn="pintura" />
+              <Mapping SourceColumn="mecanico" DataSetColumn="mecanico" />
+              <Mapping SourceColumn="chaperio" DataSetColumn="chaperio" />
+              <Mapping SourceColumn="reparacionPrevia" DataSetColumn="reparacionPrevia" />
+              <Mapping SourceColumn="observaciones" DataSetColumn="observaciones" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="InspeccionRoboParcial" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="InspeccionRoboParcial" msprop:Generator_UserDSName="InspeccionRoboParcial">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="idInspeccion" msprop:Generator_ColumnVarNameInTable="columnidInspeccion" msprop:Generator_ColumnPropNameInRow="idInspeccion" msprop:Generator_ColumnPropNameInTable="idInspeccionColumn" msprop:Generator_UserColumnName="idInspeccion" type="xs:int" />
+              <xs:element name="idItem" msprop:Generator_ColumnVarNameInTable="columnidItem" msprop:Generator_ColumnPropNameInRow="idItem" msprop:Generator_ColumnPropNameInTable="idItemColumn" msprop:Generator_UserColumnName="idItem">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="descripcion" msprop:Generator_ColumnVarNameInTable="columndescripcion" msprop:Generator_ColumnPropNameInRow="descripcion" msprop:Generator_ColumnPropNameInTable="descripcionColumn" msprop:Generator_UserColumnName="descripcion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="compra" msprop:Generator_ColumnVarNameInTable="columncompra" msprop:Generator_ColumnPropNameInRow="compra" msprop:Generator_ColumnPropNameInTable="compraColumn" msprop:Generator_UserColumnName="compra" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="instalacion" msprop:Generator_ColumnVarNameInTable="columninstalacion" msprop:Generator_ColumnPropNameInRow="instalacion" msprop:Generator_ColumnPropNameInTable="instalacionColumn" msprop:Generator_UserColumnName="instalacion" type="xs:boolean" minOccurs="0" />
+              <xs:element name="pintura" msprop:Generator_ColumnVarNameInTable="columnpintura" msprop:Generator_ColumnPropNameInRow="pintura" msprop:Generator_ColumnPropNameInTable="pinturaColumn" msprop:Generator_UserColumnName="pintura" type="xs:boolean" minOccurs="0" />
+              <xs:element name="mecanico" msprop:Generator_ColumnVarNameInTable="columnmecanico" msprop:Generator_ColumnPropNameInRow="mecanico" msprop:Generator_ColumnPropNameInTable="mecanicoColumn" msprop:Generator_UserColumnName="mecanico" type="xs:boolean" minOccurs="0" />
+              <xs:element name="chaperio" msprop:Generator_ColumnVarNameInTable="columnchaperio" msprop:Generator_ColumnPropNameInRow="chaperio" msprop:Generator_ColumnPropNameInTable="chaperioColumn" msprop:Generator_UserColumnName="chaperio" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="reparacionPrevia" msprop:Generator_ColumnVarNameInTable="columnreparacionPrevia" msprop:Generator_ColumnPropNameInRow="reparacionPrevia" msprop:Generator_ColumnPropNameInTable="reparacionPreviaColumn" msprop:Generator_UserColumnName="reparacionPrevia" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="observaciones" msprop:Generator_ColumnVarNameInTable="columnobservaciones" msprop:Generator_ColumnPropNameInRow="observaciones" msprop:Generator_ColumnPropNameInTable="observacionesColumn" msprop:Generator_UserColumnName="observaciones" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:idInspeccion" />
+      <xs:field xpath="mstns:idItem" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
