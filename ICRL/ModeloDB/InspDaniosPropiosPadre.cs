@@ -12,16 +12,11 @@ namespace ICRL.ModeloDB
     using System;
     using System.Collections.Generic;
     
-    public partial class InspDaniosPropios
+    public partial class InspDaniosPropiosPadre
     {
-        public string idItem { get; set; }
         public int secuencial { get; set; }
-        public string compra { get; set; }
-        public Nullable<bool> instalacion { get; set; }
-        public Nullable<bool> pintura { get; set; }
-        public Nullable<bool> mecanico { get; set; }
-        public string chaperio { get; set; }
-        public string reparacionPrevia { get; set; }
-        public string observaciones { get; set; }
+        public int idInspeccion { get; set; }
+        public string tipoTaller { get; set; }
+        public bool cambioAPerdidaTotal { get; set; }
     }
 }

@@ -272,10 +272,10 @@
   <EntityType Name="InspDaniosPropios">
     <Key>
       <PropertyRef Name="idItem" />
-      <PropertyRef Name="idInspeccion" />
+      <PropertyRef Name="secuencial" />
     </Key>
     <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
     <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="instalacion" Type="Boolean" />
     <Property Name="pintura" Type="Boolean" />
@@ -283,6 +283,16 @@
     <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspDaniosPropiosPadre">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cambioAPerdidaTotal" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Inspeccion">
     <Key>
@@ -305,7 +315,7 @@
     <Property Name="recomendacionPerdidaTotal" Type="Boolean" />
     <Property Name="estado" Type="Int32" />
     <Property Name="fecha_siniestro" Type="DateTime" Precision="3" />
-    <Property Name="tipoInpeccion" Type="Int32" Nullable="false" />
+    <Property Name="tipoCobertura" Type="Int32" Nullable="false" />
     <Property Name="correlativo" Type="Int32" Nullable="false" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_INSPECCI_ASSOCIATI_USUARIO" FromRole="Inspeccion" ToRole="Usuario" />
@@ -783,6 +793,7 @@
     <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
     <EntitySet Name="Flujo" EntityType="Self.Flujo" />
     <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" />
+    <EntitySet Name="InspDaniosPropiosPadre" EntityType="Self.InspDaniosPropiosPadre" />
     <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" />
     <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" />
     <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" />

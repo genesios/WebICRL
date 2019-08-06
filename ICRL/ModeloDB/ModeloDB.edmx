@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LBCDesaModelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LBCDesaModelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asegurado">
           <Key>
             <PropertyRef Name="idAsegurado" />
@@ -258,10 +258,10 @@
         <EntityType Name="InspDaniosPropios">
           <Key>
             <PropertyRef Name="idItem" />
-            <PropertyRef Name="idInspeccion" />
+            <PropertyRef Name="secuencial" />
           </Key>
           <Property Name="idItem" Type="char" MaxLength="20" Nullable="false" />
-          <Property Name="idInspeccion" Type="int" Nullable="false" />
+          <Property Name="secuencial" Type="int" Nullable="false" />
           <Property Name="compra" Type="char" MaxLength="15" />
           <Property Name="instalacion" Type="bit" />
           <Property Name="pintura" Type="bit" />
@@ -269,6 +269,16 @@
           <Property Name="chaperio" Type="char" MaxLength="5" />
           <Property Name="reparacionPrevia" Type="char" MaxLength="5" />
           <Property Name="observaciones" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="InspDaniosPropiosPadre">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idInspeccion" />
+          </Key>
+          <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idInspeccion" Type="int" Nullable="false" />
+          <Property Name="tipoTaller" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="cambioAPerdidaTotal" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspeccion">
           <Key>
@@ -291,7 +301,7 @@
           <Property Name="recomendacionPerdidaTotal" Type="bit" />
           <Property Name="estado" Type="int" />
           <Property Name="fecha_siniestro" Type="datetime" />
-          <Property Name="tipoInpeccion" Type="int" Nullable="false" />
+          <Property Name="tipoCobertura" Type="int" Nullable="false" />
           <Property Name="correlativo" Type="int" Nullable="false" />
           <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
         </EntityType>
@@ -762,6 +772,7 @@
           <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flujo" EntityType="Self.Flujo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InspDaniosPropiosPadre" EntityType="Self.InspDaniosPropiosPadre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" Schema="dbo" store:Type="Tables" />
@@ -850,8 +861,7 @@
             <End Role="UsuarioRol" EntitySet="UsuarioRol" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LBCDesaModelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1127,10 +1137,10 @@
         <EntityType Name="InspDaniosPropios">
           <Key>
             <PropertyRef Name="idItem" />
-            <PropertyRef Name="idInspeccion" />
+            <PropertyRef Name="secuencial" />
           </Key>
           <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+          <Property Name="secuencial" Type="Int32" Nullable="false" />
           <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="instalacion" Type="Boolean" />
           <Property Name="pintura" Type="Boolean" />
@@ -1138,6 +1148,16 @@
           <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="InspDaniosPropiosPadre">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idInspeccion" />
+          </Key>
+          <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+          <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cambioAPerdidaTotal" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspeccion">
           <Key>
@@ -1160,7 +1180,7 @@
           <Property Name="recomendacionPerdidaTotal" Type="Boolean" />
           <Property Name="estado" Type="Int32" />
           <Property Name="fecha_siniestro" Type="DateTime" Precision="3" />
-          <Property Name="tipoInpeccion" Type="Int32" Nullable="false" />
+          <Property Name="tipoCobertura" Type="Int32" Nullable="false" />
           <Property Name="correlativo" Type="Int32" Nullable="false" />
           <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_INSPECCI_ASSOCIATI_USUARIO" FromRole="Inspeccion" ToRole="Usuario" />
@@ -1638,6 +1658,7 @@
           <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
           <EntitySet Name="Flujo" EntityType="Self.Flujo" />
           <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" />
+          <EntitySet Name="InspDaniosPropiosPadre" EntityType="Self.InspDaniosPropiosPadre" />
           <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" />
           <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" />
           <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" />
@@ -2002,7 +2023,7 @@
             <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropios">
               <MappingFragment StoreEntitySet="InspDaniosPropios">
                 <ScalarProperty Name="idItem" ColumnName="idItem" />
-                <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
                 <ScalarProperty Name="compra" ColumnName="compra" />
                 <ScalarProperty Name="instalacion" ColumnName="instalacion" />
                 <ScalarProperty Name="pintura" ColumnName="pintura" />
@@ -2010,6 +2031,16 @@
                 <ScalarProperty Name="chaperio" ColumnName="chaperio" />
                 <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InspDaniosPropiosPadre">
+            <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropiosPadre">
+              <MappingFragment StoreEntitySet="InspDaniosPropiosPadre">
+                <ScalarProperty Name="cambioAPerdidaTotal" ColumnName="cambioAPerdidaTotal" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+                <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2033,7 +2064,7 @@
                 <ScalarProperty Name="recomendacionPerdidaTotal" ColumnName="recomendacionPerdidaTotal" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="fecha_siniestro" ColumnName="fecha_siniestro" />
-                <ScalarProperty Name="tipoInpeccion" ColumnName="tipoInpeccion" />
+                <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
                 <ScalarProperty Name="correlativo" ColumnName="correlativo" />
                 <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
               </MappingFragment>

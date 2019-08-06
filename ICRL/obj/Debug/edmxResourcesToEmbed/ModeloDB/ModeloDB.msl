@@ -263,7 +263,7 @@
       <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropios">
         <MappingFragment StoreEntitySet="InspDaniosPropios">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
-          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="compra" ColumnName="compra" />
           <ScalarProperty Name="instalacion" ColumnName="instalacion" />
           <ScalarProperty Name="pintura" ColumnName="pintura" />
@@ -271,6 +271,16 @@
           <ScalarProperty Name="chaperio" ColumnName="chaperio" />
           <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspDaniosPropiosPadre">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropiosPadre">
+        <MappingFragment StoreEntitySet="InspDaniosPropiosPadre">
+          <ScalarProperty Name="cambioAPerdidaTotal" ColumnName="cambioAPerdidaTotal" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -294,7 +304,7 @@
           <ScalarProperty Name="recomendacionPerdidaTotal" ColumnName="recomendacionPerdidaTotal" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="fecha_siniestro" ColumnName="fecha_siniestro" />
-          <ScalarProperty Name="tipoInpeccion" ColumnName="tipoInpeccion" />
+          <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
           <ScalarProperty Name="correlativo" ColumnName="correlativo" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
         </MappingFragment>

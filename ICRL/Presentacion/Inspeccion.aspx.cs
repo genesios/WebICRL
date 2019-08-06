@@ -68,7 +68,7 @@ namespace ICRL.Presentacion
                     AccesoDatos vAccesoDatos = new AccesoDatos();
                     ICRL.ModeloDB.Inspeccion vFilaInspeccion = new ICRL.ModeloDB.Inspeccion();
                     vFilaInspeccion = vAccesoDatos.FTraeDatosBasicosInspeccion(vIdInspeccion);
-                    TabContainerCoberturas.ActiveTabIndex = (vFilaInspeccion.tipoInpeccion) - 1;
+                    TabContainerCoberturas.ActiveTabIndex = (vFilaInspeccion.tipoCobertura) - 1;
                 }
                 
                 if (Session["PopupHabilitado"] != null)
@@ -405,9 +405,11 @@ namespace ICRL.Presentacion
             using (LBCDesaEntities db = new LBCDesaEntities())
             {
                 var vLst = from i in db.Inspeccion
-                           join idp in db.InspDaniosPropios on i.idInspeccion equals idp.idInspeccion
+                           join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
+                           join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
                            join n in db.Nomenclador on idp.idItem equals n.codigo
-                           where i.idInspeccion == pIdInspeccion && n.categoriaNomenclador == "Item"
+                           where (i.idInspeccion == pIdInspeccion) 
+                              && (n.categoriaNomenclador == "Item")
                            select new
                            {
                                idp.idItem,
@@ -805,9 +807,9 @@ namespace ICRL.Presentacion
         protected void ButtonNuevoDP_Click(object sender, EventArgs e)
         {
             AccesoDatos vAccesodatos = new AccesoDatos();
-            InspDaniosPropios vInspDaniosPropios = new InspDaniosPropios();
+            InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
             vInspDaniosPropios.idItem = DropDownListItem.SelectedValue;
             vInspDaniosPropios.compra = TextBoxCompra.Text;
             vInspDaniosPropios.instalacion = CheckBoxInstalacion.Checked;
@@ -829,9 +831,9 @@ namespace ICRL.Presentacion
         protected void ButtonGrabarDP_Click(object sender, EventArgs e)
         {
             AccesoDatos vAccesodatos = new AccesoDatos();
-            InspDaniosPropios vInspDaniosPropios = new InspDaniosPropios();
+            InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
             vInspDaniosPropios.idItem = TextBoxIdItem.Text;
             vInspDaniosPropios.compra = TextBoxCompra.Text;
             vInspDaniosPropios.instalacion = CheckBoxInstalacion.Checked;
@@ -853,9 +855,9 @@ namespace ICRL.Presentacion
         protected void ButtonBorrarDP_Click(object sender, EventArgs e)
         {
             AccesoDatos vAccesodatos = new AccesoDatos();
-            InspDaniosPropios vInspDaniosPropios = new InspDaniosPropios();
+            InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
             vInspDaniosPropios.idItem = TextBoxIdItem.Text;
 
             int vResultado = vAccesodatos.FBorrarInspDaniosPropiosICRL(vInspDaniosPropios);
@@ -3273,7 +3275,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3299,7 +3301,7 @@ namespace ICRL.Presentacion
                                   join n in db.Nomenclador on ircvdet.idItem equals n.codigo
                                   where (n.categoriaNomenclador == "Item")
                                      && (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
                                      && (ircv.secuencial == pIdSecuencial)
                                   orderby i.idInspeccion, ircv.secuencial
                                   select new
@@ -3368,7 +3370,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3392,7 +3394,7 @@ namespace ICRL.Presentacion
                                   join irco in db.InspRCObjeto on i.idInspeccion equals irco.idInspeccion
                                   join ircodet in db.InspRCObjetoDetalle on irco.secuencial equals ircodet.secuencial
                                   where (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCObjetos)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCObjetos)
                                      && (irco.secuencial == pIdSecuencial)
                                   orderby i.idInspeccion, irco.secuencial
                                   select new
@@ -3449,7 +3451,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3473,7 +3475,7 @@ namespace ICRL.Presentacion
                                   join ircp in db.InspRCPersona on i.idInspeccion equals ircp.idInspeccion
                                   join ircpdet in db.InspRCPersonaDetalle on ircp.secuencial equals ircpdet.secuencial
                                   where (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCPersonas)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCPersonas)
                                      && (ircp.secuencial == pIdSecuencial)
                                   orderby i.idInspeccion, ircp.secuencial
                                   select new
@@ -3530,7 +3532,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3551,15 +3553,16 @@ namespace ICRL.Presentacion
 
             var vListaInspDaniosPropios = from i in db.Inspeccion
                                           join f in db.Flujo on i.idFlujo equals f.idFlujo
-                                          join idp in db.InspDaniosPropios on i.idInspeccion equals idp.idInspeccion
+                                          join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion 
+                                          join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
                                           join n in db.Nomenclador on idp.idItem equals n.codigo
                                           where (n.categoriaNomenclador == "Item")
                                           && (i.idFlujo == vIdFlujo)
-                                          && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                          && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                                           orderby i.idInspeccion, n.descripcion
                                           select new
                                           {
-                                              idp.idInspeccion,
+                                              idInspeccion = idpp.secuencial,
                                               idp.idItem,
                                               n.descripcion,
                                               idp.compra,
@@ -3576,7 +3579,7 @@ namespace ICRL.Presentacion
                                   join ircp in db.InspRCPersona on i.idInspeccion equals ircp.idInspeccion
                                   join ircpdet in db.InspRCPersonaDetalle on ircp.secuencial equals ircpdet.secuencial
                                   where (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCPersonas)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCPersonas)
                                   orderby i.idInspeccion, ircp.secuencial
                                   select new
                                   {
@@ -3595,7 +3598,7 @@ namespace ICRL.Presentacion
                                   join irco in db.InspRCObjeto on i.idInspeccion equals irco.idInspeccion
                                   join ircodet in db.InspRCObjetoDetalle on irco.secuencial equals ircodet.secuencial
                                   where (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCObjetos)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCObjetos)
                                   orderby i.idInspeccion, irco.secuencial
                                   select new
                                   {
@@ -3616,7 +3619,7 @@ namespace ICRL.Presentacion
                                   join n in db.Nomenclador on ircvdet.idItem equals n.codigo
                                   where (n.categoriaNomenclador == "Item")
                                      && (i.idFlujo == vIdFlujo)
-                                     && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
                                   orderby i.idInspeccion, ircv.secuencial
                                   select new
                                   {
@@ -3646,7 +3649,7 @@ namespace ICRL.Presentacion
                                         join n in db.Nomenclador on irp.idItem equals n.codigo
                                         where (n.categoriaNomenclador == "Item")
                                            && (i.idFlujo == vIdFlujo)
-                                           && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RoboParcial)
+                                           && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RoboParcial)
                                         orderby i.idInspeccion
                                         select new
                                         {
@@ -3666,7 +3669,7 @@ namespace ICRL.Presentacion
                                       join f in db.Flujo on i.idFlujo equals f.idFlujo
                                       join iptdp in db.InspPerdidaTotalDanios on i.idInspeccion equals iptdp.idInspeccion
                                       where (i.idFlujo == vIdFlujo)
-                                         && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios)
+                                         && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios)
                                       orderby iptdp.idInspeccion
                                       select new
                                       {
@@ -3687,7 +3690,7 @@ namespace ICRL.Presentacion
                                    join f in db.Flujo on i.idFlujo equals f.idFlujo
                                    join iptrobo in db.InspPerdidaTotalRobo on i.idInspeccion equals iptrobo.idInspeccion
                                    where (i.idFlujo == vIdFlujo)
-                                      && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalRobo)
+                                      && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalRobo)
                                    orderby iptrobo.idInspeccion
                                    select new
                                    {
@@ -3759,7 +3762,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3782,7 +3785,7 @@ namespace ICRL.Presentacion
                                    join f in db.Flujo on i.idFlujo equals f.idFlujo
                                    join iptrobo in db.InspPerdidaTotalRobo on i.idInspeccion equals iptrobo.idInspeccion
                                    where (i.idFlujo == vIdFlujo)
-                                      && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalRobo)
+                                      && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalRobo)
                                    orderby iptrobo.idInspeccion
                                    select new
                                    {
@@ -3842,7 +3845,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3867,7 +3870,7 @@ namespace ICRL.Presentacion
                                       join f in db.Flujo on i.idFlujo equals f.idFlujo
                                       join iptdp in db.InspPerdidaTotalDanios on i.idInspeccion equals iptdp.idInspeccion
                                       where (i.idFlujo == vIdFlujo)
-                                         && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios)
+                                         && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios)
                                       orderby iptdp.idInspeccion
                                       select new
                                       {
@@ -3925,7 +3928,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -3950,7 +3953,7 @@ namespace ICRL.Presentacion
                                         join n in db.Nomenclador on irp.idItem equals n.codigo
                                         where (n.categoriaNomenclador == "Item")
                                            && (i.idFlujo == vIdFlujo)
-                                           && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RoboParcial)
+                                           && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RoboParcial)
                                         orderby i.idInspeccion
                                         select new
                                         {
@@ -4010,7 +4013,7 @@ namespace ICRL.Presentacion
             var vListaFlujo = from i in db.Inspeccion
                               join f in db.Flujo on i.idFlujo equals f.idFlujo
                               where (i.idFlujo == vIdFlujo)
-                                 && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                               orderby f.flujoOnBase, i.idInspeccion
                               select new
                               {
@@ -4031,15 +4034,16 @@ namespace ICRL.Presentacion
 
             var vListaInspDaniosPropios = from i in db.Inspeccion
                                           join f in db.Flujo on i.idFlujo equals f.idFlujo
-                                          join idp in db.InspDaniosPropios on i.idInspeccion equals idp.idInspeccion
+                                          join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
+                                          join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
                                           join n in db.Nomenclador on idp.idItem equals n.codigo
                                           where (n.categoriaNomenclador == "Item")
                                           && (i.idFlujo == vIdFlujo)
-                                          && (i.tipoInpeccion == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                          && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
                                           orderby i.idInspeccion, n.descripcion
                                           select new
                                           {
-                                              idp.idInspeccion,
+                                              idInspeccion = idp.secuencial,
                                               idp.idItem,
                                               n.descripcion,
                                               idp.compra,

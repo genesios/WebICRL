@@ -507,7 +507,7 @@ namespace ICRL.BD
                     vTablaInspeccion.correosDeEnvio = pInspeccion.correosDeEnvio;
                     vTablaInspeccion.recomendacionPerdidaTotal = pInspeccion.recomendacionPerdidaTotal;
                     vTablaInspeccion.estado = pInspeccion.estado;
-                    vTablaInspeccion.tipoInpeccion = pInspeccion.tipoInspeccion;
+                    vTablaInspeccion.tipoCobertura = pInspeccion.tipoInspeccion;
                     vTablaInspeccion.correlativo = pInspeccion.correlativo;
                     vTablaInspeccion.tipoTaller = pInspeccion.tipoTaller;
 
@@ -561,7 +561,7 @@ namespace ICRL.BD
         #endregion
 
         #region Inspeccion Daños Propios
-        public int FGrabaInspDaniosPropiosICRL(InspDaniosPropios pInspDaniosPropios)
+        public int FGrabaInspDaniosPropiosICRL(InspeccionDaniosPropios pInspeccionDaniosPropios)
         {
             int vRespuesta = 0;
             try
@@ -570,15 +570,15 @@ namespace ICRL.BD
                 {
                     InspDaniosPropios vInspDaniosPropios = new InspDaniosPropios();
 
-                    vInspDaniosPropios.idInspeccion = pInspDaniosPropios.idInspeccion;
-                    vInspDaniosPropios.idItem = pInspDaniosPropios.idItem;
-                    vInspDaniosPropios.compra = pInspDaniosPropios.compra;
-                    vInspDaniosPropios.instalacion = pInspDaniosPropios.instalacion;
-                    vInspDaniosPropios.pintura = pInspDaniosPropios.pintura;
-                    vInspDaniosPropios.mecanico = pInspDaniosPropios.mecanico;
-                    vInspDaniosPropios.chaperio = pInspDaniosPropios.chaperio;
-                    vInspDaniosPropios.reparacionPrevia = pInspDaniosPropios.reparacionPrevia;
-                    vInspDaniosPropios.observaciones = pInspDaniosPropios.observaciones;
+                    vInspDaniosPropios.secuencial = pInspeccionDaniosPropios.secuencial;
+                    vInspDaniosPropios.idItem = pInspeccionDaniosPropios.idItem;
+                    vInspDaniosPropios.compra = pInspeccionDaniosPropios.compra;
+                    vInspDaniosPropios.instalacion = pInspeccionDaniosPropios.instalacion;
+                    vInspDaniosPropios.pintura = pInspeccionDaniosPropios.pintura;
+                    vInspDaniosPropios.mecanico = pInspeccionDaniosPropios.mecanico;
+                    vInspDaniosPropios.chaperio = pInspeccionDaniosPropios.chaperio;
+                    vInspDaniosPropios.reparacionPrevia = pInspeccionDaniosPropios.reparacionPrevia;
+                    vInspDaniosPropios.observaciones = pInspeccionDaniosPropios.observaciones;
 
                     db.InspDaniosPropios.Add(vInspDaniosPropios);
                     db.SaveChanges();
@@ -593,7 +593,7 @@ namespace ICRL.BD
             return vRespuesta;
         }
 
-        public int FActualizaInspDaniosPropiosICRL(InspDaniosPropios pInspDaniosPropios)
+        public int FActualizaInspDaniosPropiosICRL(InspeccionDaniosPropios pInspeccionDaniosPropios)
         {
             int vResultado = 0;
 
@@ -601,15 +601,15 @@ namespace ICRL.BD
             {
                 InspDaniosPropios vTablaInspDaniosPropios = new InspDaniosPropios();
 
-                vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspDaniosPropios.idItem, pInspDaniosPropios.idInspeccion);
+                vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial);
 
-                vTablaInspDaniosPropios.compra = pInspDaniosPropios.compra;
-                vTablaInspDaniosPropios.instalacion = pInspDaniosPropios.instalacion;
-                vTablaInspDaniosPropios.pintura = pInspDaniosPropios.pintura;
-                vTablaInspDaniosPropios.mecanico = pInspDaniosPropios.mecanico;
-                vTablaInspDaniosPropios.chaperio = pInspDaniosPropios.chaperio;
-                vTablaInspDaniosPropios.reparacionPrevia = pInspDaniosPropios.reparacionPrevia;
-                vTablaInspDaniosPropios.observaciones = pInspDaniosPropios.observaciones;
+                vTablaInspDaniosPropios.compra = pInspeccionDaniosPropios.compra;
+                vTablaInspDaniosPropios.instalacion = pInspeccionDaniosPropios.instalacion;
+                vTablaInspDaniosPropios.pintura = pInspeccionDaniosPropios.pintura;
+                vTablaInspDaniosPropios.mecanico = pInspeccionDaniosPropios.mecanico;
+                vTablaInspDaniosPropios.chaperio = pInspeccionDaniosPropios.chaperio;
+                vTablaInspDaniosPropios.reparacionPrevia = pInspeccionDaniosPropios.reparacionPrevia;
+                vTablaInspDaniosPropios.observaciones = pInspeccionDaniosPropios.observaciones;
 
                 db.Entry(vTablaInspDaniosPropios).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -619,7 +619,7 @@ namespace ICRL.BD
             return vResultado;
         }
 
-        public int FBorrarInspDaniosPropiosICRL(InspDaniosPropios pInspDaniosPropios)
+        public int FBorrarInspDaniosPropiosICRL(InspeccionDaniosPropios pInspeccionDaniosPropios)
         {
             int vResultado = 0;
 
@@ -627,7 +627,7 @@ namespace ICRL.BD
             {
                 InspDaniosPropios vTablaInspDaniosPropios = new InspDaniosPropios();
 
-                vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspDaniosPropios.idItem, pInspDaniosPropios.idInspeccion);
+                vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial);
 
                 db.InspDaniosPropios.Remove(vTablaInspDaniosPropios);
                 db.SaveChanges();
@@ -677,7 +677,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.DaniosPropios)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.DaniosPropios)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -699,7 +699,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.RCObjetos)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.RCObjetos)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -721,7 +721,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.RCPersonas)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.RCPersonas)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -743,7 +743,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.RCVEhicular)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.RCVEhicular)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -765,7 +765,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.RoboParcial)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.RoboParcial)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -787,7 +787,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.PerdidaTotalDaniosPropios)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.PerdidaTotalDaniosPropios)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -809,7 +809,7 @@ namespace ICRL.BD
             {
                 var vTablaInspecciones = from insp in db.Inspeccion
                                          where (insp.idFlujo == pIdFlujo)
-                                            && (insp.tipoInpeccion == (int)TipoInspeccion.PerdidaTotalRobo)
+                                            && (insp.tipoCobertura == (int)TipoInspeccion.PerdidaTotalRobo)
                                          select insp;
 
                 var vFilaTablaInspeccion = vTablaInspecciones.FirstOrDefault<Inspeccion>();
@@ -823,17 +823,18 @@ namespace ICRL.BD
             return vIdInspeccion;
         }
 
-        public bool FInspeccionTieneDPICRL(int pIdInspeccion)
+        public bool FInspeccionTieneDPICRL(int pIdFlujo)
         {
             bool vRespuesta = false;
 
             using (LBCDesaEntities db = new LBCDesaEntities())
             {
-                var vTablaInspDaniosPropios = from dp in db.InspDaniosPropios
-                                              where dp.idInspeccion == pIdInspeccion
-                                              select dp;
+                var vTablaInspDaniosPropios = from insp in db.Inspeccion
+                                              where (insp.idFlujo == pIdFlujo)
+                                              && (insp.tipoCobertura == (int)TipoInspeccion.DaniosPropios)
+                                              select insp;
 
-                var vFilaTablaInspDP = vTablaInspDaniosPropios.FirstOrDefault<InspDaniosPropios>();
+                var vFilaTablaInspDP = vTablaInspDaniosPropios.FirstOrDefault<Inspeccion>();
 
                 if (null != vFilaTablaInspDP)
                 {

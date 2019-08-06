@@ -45,6 +45,7 @@ namespace ICRL.ModeloDB
         public virtual DbSet<EstadoSesion> EstadoSesion { get; set; }
         public virtual DbSet<Flujo> Flujo { get; set; }
         public virtual DbSet<InspDaniosPropios> InspDaniosPropios { get; set; }
+        public virtual DbSet<InspDaniosPropiosPadre> InspDaniosPropiosPadre { get; set; }
         public virtual DbSet<Inspeccion> Inspeccion { get; set; }
         public virtual DbSet<InspPerdidaTotalDanios> InspPerdidaTotalDanios { get; set; }
         public virtual DbSet<InspPerdidaTotalRobo> InspPerdidaTotalRobo { get; set; }

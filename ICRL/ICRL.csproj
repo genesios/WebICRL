@@ -425,6 +425,7 @@
     <Compile Include="BD\CotizacionICRL.cs" />
     <Compile Include="BD\FlujoICRL.cs" />
     <Compile Include="BD\InspeccionDaniosPropios.cs" />
+    <Compile Include="BD\InspeccionDaniosPropiosPadre.cs" />
     <Compile Include="BD\InspeccionICRL.cs" />
     <Compile Include="BD\InspeccionPTDaniosPropios.cs" />
     <Compile Include="BD\InspeccionPTRobo.cs" />
@@ -561,6 +562,9 @@
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDB\InspDaniosPropios.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\InspDaniosPropiosPadre.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDB\Inspeccion.cs">

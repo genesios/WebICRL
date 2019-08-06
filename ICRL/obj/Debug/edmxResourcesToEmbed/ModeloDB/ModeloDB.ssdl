@@ -253,10 +253,10 @@
   <EntityType Name="InspDaniosPropios">
     <Key>
       <PropertyRef Name="idItem" />
-      <PropertyRef Name="idInspeccion" />
+      <PropertyRef Name="secuencial" />
     </Key>
     <Property Name="idItem" Type="char" MaxLength="20" Nullable="false" />
-    <Property Name="idInspeccion" Type="int" Nullable="false" />
+    <Property Name="secuencial" Type="int" Nullable="false" />
     <Property Name="compra" Type="char" MaxLength="15" />
     <Property Name="instalacion" Type="bit" />
     <Property Name="pintura" Type="bit" />
@@ -264,6 +264,16 @@
     <Property Name="chaperio" Type="char" MaxLength="5" />
     <Property Name="reparacionPrevia" Type="char" MaxLength="5" />
     <Property Name="observaciones" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="InspDaniosPropiosPadre">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idInspeccion" Type="int" Nullable="false" />
+    <Property Name="tipoTaller" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="cambioAPerdidaTotal" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Inspeccion">
     <Key>
@@ -286,7 +296,7 @@
     <Property Name="recomendacionPerdidaTotal" Type="bit" />
     <Property Name="estado" Type="int" />
     <Property Name="fecha_siniestro" Type="datetime" />
-    <Property Name="tipoInpeccion" Type="int" Nullable="false" />
+    <Property Name="tipoCobertura" Type="int" Nullable="false" />
     <Property Name="correlativo" Type="int" Nullable="false" />
     <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
   </EntityType>
@@ -757,6 +767,7 @@
     <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Flujo" EntityType="Self.Flujo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InspDaniosPropiosPadre" EntityType="Self.InspDaniosPropiosPadre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" Schema="dbo" store:Type="Tables" />

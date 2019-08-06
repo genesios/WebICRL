@@ -474,7 +474,7 @@ namespace ICRL.Presentacion
                     //           };
 
                     var vLst = (from i in db.Inspeccion
-                                join idp in db.InspDaniosPropios on i.idInspeccion equals idp.idInspeccion
+                                join idp in db.InspDaniosPropiosPadre on i.idInspeccion equals idp.idInspeccion
                                 where (i.idFlujo == vIdInspeccion)
                                 && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
                                 orderby i.idInspeccion

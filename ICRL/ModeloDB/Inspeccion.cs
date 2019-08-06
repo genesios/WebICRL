@@ -31,7 +31,7 @@ namespace ICRL.ModeloDB
         public Nullable<bool> recomendacionPerdidaTotal { get; set; }
         public Nullable<int> estado { get; set; }
         public Nullable<System.DateTime> fecha_siniestro { get; set; }
-        public int tipoInpeccion { get; set; }
+        public int tipoCobertura { get; set; }
         public int correlativo { get; set; }
         public string tipoTaller { get; set; }
     

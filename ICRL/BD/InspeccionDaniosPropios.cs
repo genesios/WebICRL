@@ -7,8 +7,8 @@ namespace ICRL.BD
 {
     public class InspeccionDaniosPropios
     {
-        public int idInspeccion { get; set; }
-        public int idItem { get; set; }
+        public int secuencial { get; set; }
+        public string idItem { get; set; }
         public string item { get; set; }
         public string compra { get; set; }
         public bool instalacion { get; set; }
