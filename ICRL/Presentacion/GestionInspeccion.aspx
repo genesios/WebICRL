@@ -14,21 +14,7 @@
             margin: 0px;
         }
     </style>
-    <script type="text/javascript">
-        function ToggleGridPanel(btn, row) {
-            var current = $('#' + row).css('display');
-            if (current == 'none') {
-                $('#' + row).show();
-                $(btn).removeClass('glyphicon-plus')
-                $(btn).addClass('glyphicon-minus')
-            } else {
-                $('#' + row).hide();
-                $(btn).removeClass('glyphicon-minus')
-                $(btn).addClass('glyphicon-plus')
-            }
-            return false;
-        }
-    </script>
+    <script src="../Scripts/ICRL.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
 

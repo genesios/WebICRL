@@ -760,6 +760,150 @@ namespace ICRL.Presentacion {
         protected global::AjaxControlToolkit.TabPanel TabPanelDaniosPropios;
         
         /// <summary>
+        /// LabelRegistroDaniosPropios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRegistroDaniosPropios;
+        
+        /// <summary>
+        /// LabelDPPTipoTaller control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDPPTipoTaller;
+        
+        /// <summary>
+        /// DropDownListDPPTipoTaller control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListDPPTipoTaller;
+        
+        /// <summary>
+        /// CheckBoxDPPCambioPerdidaTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxDPPCambioPerdidaTotal;
+        
+        /// <summary>
+        /// LabelDPPCambioPerdidaTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDPPCambioPerdidaTotal;
+        
+        /// <summary>
+        /// LabelDPPSecuencial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDPPSecuencial;
+        
+        /// <summary>
+        /// TextBoxDPPSecuencial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDPPSecuencial;
+        
+        /// <summary>
+        /// ButtonNuevoDPPadre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonNuevoDPPadre;
+        
+        /// <summary>
+        /// ButtonGrabarDPPadre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonGrabarDPPadre;
+        
+        /// <summary>
+        /// ButtonBorrarDPPadre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarDPPadre;
+        
+        /// <summary>
+        /// ButtonDetalleDPPadre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonDetalleDPPadre;
+        
+        /// <summary>
+        /// GridViewDaniosPropiosPadre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewDaniosPropiosPadre;
+        
+        /// <summary>
+        /// ButtonOcultoParaPopupDaniosPropios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonOcultoParaPopupDaniosPropios;
+        
+        /// <summary>
+        /// ModalPopupDaniosPropios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupDaniosPropios;
+        
+        /// <summary>
+        /// PanelModalPopupDaniosPropios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelModalPopupDaniosPropios;
+        
+        /// <summary>
+        /// ModalPopupDragHandleDaniosPropios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ModalPopupDragHandleDaniosPropios;
+        
+        /// <summary>
         /// LabelRegistroItems control.
         /// </summary>
         /// <remarks>
@@ -796,13 +940,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelCompra;
         
         /// <summary>
-        /// TextBoxCompra control.
+        /// DropDownListCompra control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCompra;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCompra;
         
         /// <summary>
         /// CheckBoxInstalacion control.
@@ -868,13 +1012,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelChaperio;
         
         /// <summary>
-        /// TextBoxChaperio control.
+        /// DropDownListChaperio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxChaperio;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListChaperio;
         
         /// <summary>
         /// LabelReparacionPrevia control.
@@ -886,13 +1030,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelReparacionPrevia;
         
         /// <summary>
-        /// TextBoxRepPrevia control.
+        /// DropDownListRepPrevia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRepPrevia;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRepPrevia;
         
         /// <summary>
         /// LabelObservaciones control.
@@ -965,6 +1109,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewDaniosPropios;
+        
+        /// <summary>
+        /// ButtonCancelPopDP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCancelPopDP;
         
         /// <summary>
         /// ImgButtonExportPdfDaniosP control.

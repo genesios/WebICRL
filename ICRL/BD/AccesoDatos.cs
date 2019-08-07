@@ -560,7 +560,127 @@ namespace ICRL.BD
         }
         #endregion
 
+        #region Inspeccion Daños Propios Padre
+
+        public InspeccionDaniosPropiosPadre FTraeInspDPPadreICRL(int pSecuencial, int pIdInspeccion)
+        {
+            InspeccionDaniosPropiosPadre vInspeccionDPPadre = new InspeccionDaniosPropiosPadre();
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                InspDaniosPropiosPadre vTablaInspDPadre = new InspDaniosPropiosPadre();
+
+                vTablaInspDPadre = db.InspDaniosPropiosPadre.Find(pSecuencial, pIdInspeccion);
+                if (null != vTablaInspDPadre)
+                {
+                    vInspeccionDPPadre.secuencial = vTablaInspDPadre.secuencial;
+                    vInspeccionDPPadre.idInspeccion = vTablaInspDPadre.idInspeccion;
+                    vInspeccionDPPadre.tipoTaller = vTablaInspDPadre.tipoTaller;
+                    vInspeccionDPPadre.cambioAPerdidaTotal = vTablaInspDPadre.cambioAPerdidaTotal;
+                }
+                else
+                    vInspeccionDPPadre = null;
+            }
+            return vInspeccionDPPadre;
+        }
+
+        public int FGrabaInspDaniosPropiosPadreICRL(InspeccionDaniosPropiosPadre pInspeccionDaniosPropiosPadre)
+        {
+            int vRespuesta = 0;
+            try
+            {
+                using (LBCDesaEntities db = new LBCDesaEntities())
+                {
+                    InspDaniosPropiosPadre vInspDaniosPropiosPadre = new InspDaniosPropiosPadre ();
+
+                    vInspDaniosPropiosPadre.idInspeccion = pInspeccionDaniosPropiosPadre.idInspeccion;
+                    vInspDaniosPropiosPadre.tipoTaller = pInspeccionDaniosPropiosPadre.tipoTaller;
+                    vInspDaniosPropiosPadre.cambioAPerdidaTotal = pInspeccionDaniosPropiosPadre.cambioAPerdidaTotal;
+
+                    db.InspDaniosPropiosPadre.Add(vInspDaniosPropiosPadre);
+                    db.SaveChanges();
+
+                    vRespuesta = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                vRespuesta = 0;
+            }
+            return vRespuesta;
+        }
+
+        public int FActualizaInspDaniosPropiosPadreICRL(InspeccionDaniosPropiosPadre pInspeccionDaniosPropiosPadre)
+        {
+            int vResultado = 0;
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                InspDaniosPropiosPadre vTablaInspDaniosPropiosPadre = new InspDaniosPropiosPadre();
+
+                vTablaInspDaniosPropiosPadre = db.InspDaniosPropiosPadre.Find(pInspeccionDaniosPropiosPadre.secuencial, pInspeccionDaniosPropiosPadre.idInspeccion);
+
+                vTablaInspDaniosPropiosPadre.tipoTaller = pInspeccionDaniosPropiosPadre.tipoTaller;
+                vTablaInspDaniosPropiosPadre.cambioAPerdidaTotal = pInspeccionDaniosPropiosPadre.cambioAPerdidaTotal;
+
+                db.Entry(vTablaInspDaniosPropiosPadre).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                vResultado = 1;
+            }
+            return vResultado;
+        }
+
+        public int FBorrarInspDaniosPropiosPadreICRL(InspeccionDaniosPropiosPadre pInspeccionDaniosPropiosPadre)
+        {
+            int vResultado = 0;
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                InspDaniosPropiosPadre vTablaInspDaniosPropiosPadre = new InspDaniosPropiosPadre();
+
+                vTablaInspDaniosPropiosPadre = db.InspDaniosPropiosPadre.Find(pInspeccionDaniosPropiosPadre.secuencial, pInspeccionDaniosPropiosPadre.idInspeccion);
+
+                db.InspDaniosPropiosPadre.Remove(vTablaInspDaniosPropiosPadre);
+                db.SaveChanges();
+
+                vResultado = 1;
+            }
+            return vResultado;
+        }
+
+        #endregion
+
         #region Inspeccion Daños Propios
+
+        public InspeccionDaniosPropios FTraeInspDPICRL(string pIdItem, int pSecuencial)
+        {
+            InspeccionDaniosPropios vInspeccionDP = new InspeccionDaniosPropios();
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                InspDaniosPropios vTablaInspDP = new InspDaniosPropios();
+
+                vTablaInspDP = db.InspDaniosPropios.Find(pIdItem, pSecuencial);
+                if (null != vTablaInspDP)
+                {
+                    vInspeccionDP.idItem = vTablaInspDP.idItem;
+                    vInspeccionDP.secuencial = vTablaInspDP.secuencial;
+                    vInspeccionDP.compra = vTablaInspDP.compra;
+                    vInspeccionDP.instalacion = (bool)vTablaInspDP.instalacion;
+                    vInspeccionDP.pintura = (bool)vTablaInspDP.pintura;
+                    vInspeccionDP.mecanico = (bool)vTablaInspDP.mecanico;
+                    vInspeccionDP.chaperio = vTablaInspDP.chaperio;
+                    vInspeccionDP.reparacionPrevia = vTablaInspDP.reparacionPrevia;
+                    vInspeccionDP.observaciones = vTablaInspDP.observaciones;
+
+                }
+                else
+                    vInspeccionDP = null;
+            }
+            return vInspeccionDP;
+        }
+
         public int FGrabaInspDaniosPropiosICRL(InspeccionDaniosPropios pInspeccionDaniosPropios)
         {
             int vRespuesta = 0;
@@ -823,18 +943,17 @@ namespace ICRL.BD
             return vIdInspeccion;
         }
 
-        public bool FInspeccionTieneDPICRL(int pIdFlujo)
+        public bool FInspeccionTieneDPICRL(int pIdInspeccion)
         {
             bool vRespuesta = false;
 
             using (LBCDesaEntities db = new LBCDesaEntities())
             {
-                var vTablaInspDaniosPropios = from insp in db.Inspeccion
-                                              where (insp.idFlujo == pIdFlujo)
-                                              && (insp.tipoCobertura == (int)TipoInspeccion.DaniosPropios)
-                                              select insp;
+                var vTablaInspDaniosPropios = from idpp in db.InspDaniosPropiosPadre
+                                              where (idpp.idInspeccion == pIdInspeccion)
+                                              select idpp;
 
-                var vFilaTablaInspDP = vTablaInspDaniosPropios.FirstOrDefault<Inspeccion>();
+                var vFilaTablaInspDP = vTablaInspDaniosPropios.FirstOrDefault<InspDaniosPropiosPadre>();
 
                 if (null != vFilaTablaInspDP)
                 {
@@ -844,6 +963,7 @@ namespace ICRL.BD
 
             return vRespuesta;
         }
+
         #endregion
 
         #region Inspeccion RC Objetos

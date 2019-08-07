@@ -152,3 +152,8 @@
 .CalendarPersonalizado .ajax__calendar_body {
     width: 250px;
 }
+
+/* Para ocultar un campo*/
+.CampoOculto {
+    display:none;
+}

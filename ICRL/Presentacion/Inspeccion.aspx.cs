@@ -35,8 +35,12 @@ namespace ICRL.Presentacion
                 {
                     FlTraeNomenTipoTallerInsp();
                     FlTraeNomenTipoTallerRCVeh();
-                    int vResul = FlTraeItemsNomenclador();
-                    vResul = FlTraeItemsNomencladorRP();
+                    FlTraeNomenTipoTallerDPPadre();
+                    FlTraeNomenCompraDet();
+                    FlTraeNomenChaperioDet();
+                    FlTraeNomenRepPreviaDet();
+                    FlTraeItemsNomenclador();
+                    FlTraeItemsNomencladorRP();
                     FlTraeItemsNomencladorCajaPTDP();
                     FlTraeItemsNomencladorCombustiblePTDP();
                     FlTraeItemsNomencladorCajaPTRO();
@@ -70,15 +74,15 @@ namespace ICRL.Presentacion
                     vFilaInspeccion = vAccesoDatos.FTraeDatosBasicosInspeccion(vIdInspeccion);
                     TabContainerCoberturas.ActiveTabIndex = (vFilaInspeccion.tipoCobertura) - 1;
                 }
-                
-                if (Session["PopupHabilitado"] != null)
+
+                if (Session["PopupDPHabilitado"] != null)
                 {
                     int vPopup = -1;
-                    vPopup = int.Parse(Session["PopupHabilitado"].ToString());
+                    vPopup = int.Parse(Session["PopupDPHabilitado"].ToString());
                     if (1 == vPopup)
-                        this.ModalPopupRCV01.Show();
+                        this.ModalPopupDaniosPropios.Show();
                     else
-                        this.ModalPopupRCV01.Hide();
+                        this.ModalPopupDaniosPropios.Hide();
                 }
 
                 if (Session["PopupRCObjHabilitado"] != null)
@@ -101,6 +105,16 @@ namespace ICRL.Presentacion
                         this.ModalPopupRCPersonas.Hide();
                 }
 
+                if (Session["PopupHabilitado"] != null)
+                {
+                    int vPopup = -1;
+                    vPopup = int.Parse(Session["PopupHabilitado"].ToString());
+                    if (1 == vPopup)
+                        this.ModalPopupRCV01.Show();
+                    else
+                        this.ModalPopupRCV01.Hide();
+                }
+
                 //ValidaDaniosPropios(vIdInspeccion);
                 //ValidaRCObjetos(vIdInspeccion);
                 //ValidaRCPersonas(vIdInspeccion);
@@ -114,6 +128,34 @@ namespace ICRL.Presentacion
                     Session["MsjEstado"] = string.Empty;
                 }
                 Session["MsjEstado"] = ex.Message;
+            }
+        }
+
+        #region ValidaCoberturasFlujo
+
+
+
+        private void ValidaRCObjetosFlujo(int pIdFlujo)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+
+            bool vSeleccionado = false;
+            int vResul = 0;
+            int vIdInspeccion = 0;
+
+            vIdInspeccion = vAccesodatos.FFlujoTieneRCObjetos(pIdFlujo);
+
+            if (vIdInspeccion > 0)
+            {
+                vSeleccionado = vAccesodatos.FInspeccionTieneObjCRL(vIdInspeccion);
+                if (vSeleccionado)
+                {
+                    TabPanelRCObjetos.Enabled = true;
+                    TabPanelRCObjetos.Visible = true;
+                    CheckBoxRCObjetos.Checked = vSeleccionado;
+                    vResul = FlTraeDatosRCObjetos(vIdInspeccion);
+                    //TabContainerCoberturas.ActiveTabIndex = 0;
+                }
             }
         }
 
@@ -141,19 +183,25 @@ namespace ICRL.Presentacion
             }
         }
 
-        private void ValidaRCPersonas(int pIdInspeccion)
+        
+
+        #endregion
+
+        #region ValidaInspecciones - Obsoleto
+
+        private void ValidaDaniosPropios(int pIdInspeccion)
         {
             AccesoDatos vAccesodatos = new AccesoDatos();
 
             bool vSeleccionado = false;
             int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTienePerCRL(pIdInspeccion);
+            vSeleccionado = vAccesodatos.FInspeccionTieneDPICRL(pIdInspeccion);
             if (vSeleccionado)
             {
-                TabPanelRCPersonas.Enabled = true;
-                TabPanelRCPersonas.Visible = true;
-                CheckBoxRCPersonas.Checked = vSeleccionado;
-                vResul = FlTraeDatosRCPersonas(pIdInspeccion);
+                TabPanelDaniosPropios.Enabled = true;
+                TabPanelDaniosPropios.Visible = true;
+                CheckBoxDaniosPropios.Checked = vSeleccionado;
+                vResul = FlTraeDatosDaniosPropios(pIdInspeccion);
             }
         }
 
@@ -173,29 +221,92 @@ namespace ICRL.Presentacion
             }
         }
 
-        private void ValidaRCObjetosFlujo(int pIdFlujo)
+        private void ValidaRCPersonas(int pIdInspeccion)
         {
             AccesoDatos vAccesodatos = new AccesoDatos();
 
             bool vSeleccionado = false;
             int vResul = 0;
-            int vIdInspeccion = 0;
-
-            vIdInspeccion = vAccesodatos.FFlujoTieneRCObjetos(pIdFlujo);
-
-            if (vIdInspeccion > 0)
+            vSeleccionado = vAccesodatos.FInspeccionTienePerCRL(pIdInspeccion);
+            if (vSeleccionado)
             {
-                vSeleccionado = vAccesodatos.FInspeccionTieneObjCRL(vIdInspeccion);
-                if (vSeleccionado)
-                {
-                    TabPanelRCObjetos.Enabled = true;
-                    TabPanelRCObjetos.Visible = true;
-                    CheckBoxRCObjetos.Checked = vSeleccionado;
-                    vResul = FlTraeDatosRCObjetos(vIdInspeccion);
-                    //TabContainerCoberturas.ActiveTabIndex = 0;
-                }
+                TabPanelRCPersonas.Enabled = true;
+                TabPanelRCPersonas.Visible = true;
+                CheckBoxRCPersonas.Checked = vSeleccionado;
+                vResul = FlTraeDatosRCPersonas(pIdInspeccion);
             }
         }
+
+        private void ValidaRoboParcial(int pIdInspeccion)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+
+            bool vSeleccionado = false;
+            int vResul = 0;
+            vSeleccionado = vAccesodatos.FInspeccionTieneRPICRL(pIdInspeccion);
+
+            if (vSeleccionado)
+            {
+                TabPanelRoboParcial.Enabled = true;
+                TabPanelRoboParcial.Visible = true;
+                CheckBoxRoboParcial.Checked = vSeleccionado;
+                vResul = FlTraeDatosRoboParcial(pIdInspeccion);
+            }
+        }
+
+        private void ValidaPerdidaTotalDP(int pIdInspeccion)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+
+            bool vSeleccionado = false;
+            int vResul = 0;
+            vSeleccionado = vAccesodatos.FInspeccionTienePTDPICRL(pIdInspeccion);
+            if (vSeleccionado)
+            {
+                TabPanelPerdidaTotalDaniosPropios.Enabled = true;
+                TabPanelPerdidaTotalDaniosPropios.Visible = true;
+                CheckBoxPerdidaTotDanios.Checked = vSeleccionado;
+                vResul = FlTraeDatosPerdidaTotalDP(pIdInspeccion);
+            }
+        }
+
+        private void ValidaPerdidaTotalRO(int pIdInspeccion)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+
+            bool vSeleccionado = false;
+            int vResul = 0;
+            vSeleccionado = vAccesodatos.FInspeccionTienePTROICRL(pIdInspeccion);
+            if (vSeleccionado)
+            {
+                TabPanelPerdidaTotalRobo.Enabled = true;
+                TabPanelPerdidaTotalRobo.Visible = true;
+                CheckBoxPerdidaTotRobo.Checked = vSeleccionado;
+                vResul = FlTraeDatosPerdidaTotalRO(pIdInspeccion);
+            }
+        }
+
+        private void ValidaRCVehicular01(int pIdInspeccion)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+
+            bool vSeleccionado = false;
+            int vResul = 0;
+            vSeleccionado = vAccesodatos.FInspeccionTieneRCVehicularICRL(pIdInspeccion);
+
+            if (vSeleccionado)
+            {
+                TabPanelRCV01.Enabled = true;
+                TabPanelRCV01.Visible = true;
+                CheckBoxRCVehicular01.Checked = vSeleccionado;
+                vResul = FlTraeDatosRCV01(pIdInspeccion);
+                PBloqueoRCVehicular01(true);
+            }
+        }
+
+        #endregion
+
+        #region CreaCoberturasFlujo
 
         private int CreaInspRCObjetosFlujo(int pIdFlujo)
         {
@@ -241,6 +352,7 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
+        #endregion
 
 
         private void FlTraeDatosInspeccion(int pIdInspeccion, string pNumFlujo)
@@ -395,20 +507,16 @@ namespace ICRL.Presentacion
 
             return vResultado;
         }
-
-
-
-        private int FlTraeDatosDaniosPropios(int pIdInspeccion)
+        
+        private int FlTraeDatosDaniosPropios(int pSecuencial)
         {
             int vResultado = 0;
 
             using (LBCDesaEntities db = new LBCDesaEntities())
             {
-                var vLst = from i in db.Inspeccion
-                           join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
-                           join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
+                var vLst = from idp in db.InspDaniosPropios
                            join n in db.Nomenclador on idp.idItem equals n.codigo
-                           where (i.idInspeccion == pIdInspeccion) 
+                           where (idp.secuencial == pSecuencial)
                               && (n.categoriaNomenclador == "Item")
                            select new
                            {
@@ -425,6 +533,31 @@ namespace ICRL.Presentacion
 
                 GridViewDaniosPropios.DataSource = vLst.ToList();
                 GridViewDaniosPropios.DataBind();
+
+            }
+
+            return vResultado;
+        }
+
+        private int FlTraeDatosDaniosPropiosPadre(int pIdInspeccion)
+        {
+            int vResultado = 0;
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                var vLst = from i in db.Inspeccion
+                           join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
+                           where (i.idInspeccion == pIdInspeccion)
+                           select new
+                           {
+                               idpp.secuencial,
+                               idpp.tipoTaller,
+                               idpp.cambioAPerdidaTotal,
+
+                           };
+
+                GridViewDaniosPropiosPadre.DataSource = vLst.ToList();
+                GridViewDaniosPropiosPadre.DataBind();
 
             }
 
@@ -454,6 +587,13 @@ namespace ICRL.Presentacion
             }
 
             return vResultado;
+        }
+
+        public string MyNewRowDetDP(object pIdSecuencial)
+        {
+            string vTempo = string.Empty;
+            vTempo = String.Format(@"</td></tr><tr id ='trdp{0}' class='collapsed-row'><td></td><td colspan='100' style='padding:0px; margin:0px;'>", pIdSecuencial);
+            return vTempo;
         }
 
         #region 2do Revisar
@@ -505,6 +645,8 @@ namespace ICRL.Presentacion
         //    return (vResultado);
         //}
         #endregion
+
+        #region CheckBox Coberturas
 
         protected void CheckBoxDaniosPropios_CheckedChanged(object sender, EventArgs e)
         {
@@ -615,41 +757,6 @@ namespace ICRL.Presentacion
                 TabPanelRoboParcial.Enabled = false;
         }
 
-        protected void CheckBoxRCVehicular01_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CheckBoxRCVehicular01.Checked)
-            {
-                AccesoDatos vAccesoDatos = new AccesoDatos();
-                int vSeGraboInspeccionRCVehicular = -1;
-                int vIdInspeccion = vAccesoDatos.FFlujoTieneRCVehicular(int.Parse(TextBoxIdFlujo.Text));
-                //Si no existe la inspeccion de RC Vehicular se crea la inspeccion correspondiente
-                if (0 == vIdInspeccion)
-                {
-                    vSeGraboInspeccionRCVehicular = CreaInspRCVehicularFlujo(int.Parse(TextBoxIdFlujo.Text));
-
-                    if (vSeGraboInspeccionRCVehicular > 0)
-                    {
-                        TabPanelRCV01.Enabled = true;
-                        TabPanelRCV01.Visible = true;
-                        int vResul = FGrabaCambiosInspeccion();
-                        vResul = FlTraeDatosRCV01(int.Parse(TextBoxNroInspeccion.Text));
-                        PBloqueoRCVehicular01(true);
-                    }
-                }
-                else
-                {
-                    TabPanelRCV01.Enabled = true;
-                    TabPanelRCV01.Visible = true;
-                    int vResul = FGrabaCambiosInspeccion();
-                    vResul = FlTraeDatosRCV01(int.Parse(TextBoxNroInspeccion.Text));
-                    PBloqueoRCVehicular01(true);
-                }
-
-            }
-            else
-                TabPanelRCV01.Enabled = false;
-        }
-
         protected void CheckBoxPerdidaTotDanios_CheckedChanged(object sender, EventArgs e)
         {
             if (CheckBoxPerdidaTotDanios.Checked)
@@ -714,23 +821,240 @@ namespace ICRL.Presentacion
                 TabPanelPerdidaTotalRobo.Enabled = false;
         }
 
-        #region Danios Propios
-
-        private void ValidaDaniosPropios(int pIdInspeccion)
+        protected void CheckBoxRCVehicular01_CheckedChanged(object sender, EventArgs e)
         {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-
-            bool vSeleccionado = false;
-            int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTieneDPICRL(pIdInspeccion);
-            if (vSeleccionado)
+            if (CheckBoxRCVehicular01.Checked)
             {
-                TabPanelDaniosPropios.Enabled = true;
-                TabPanelDaniosPropios.Visible = true;
-                CheckBoxDaniosPropios.Checked = vSeleccionado;
-                vResul = FlTraeDatosDaniosPropios(pIdInspeccion);
+                AccesoDatos vAccesoDatos = new AccesoDatos();
+                int vSeGraboInspeccionRCVehicular = -1;
+                int vIdInspeccion = vAccesoDatos.FFlujoTieneRCVehicular(int.Parse(TextBoxIdFlujo.Text));
+                //Si no existe la inspeccion de RC Vehicular se crea la inspeccion correspondiente
+                if (0 == vIdInspeccion)
+                {
+                    vSeGraboInspeccionRCVehicular = CreaInspRCVehicularFlujo(int.Parse(TextBoxIdFlujo.Text));
+
+                    if (vSeGraboInspeccionRCVehicular > 0)
+                    {
+                        TabPanelRCV01.Enabled = true;
+                        TabPanelRCV01.Visible = true;
+                        int vResul = FGrabaCambiosInspeccion();
+                        vResul = FlTraeDatosRCV01(int.Parse(TextBoxNroInspeccion.Text));
+                        PBloqueoRCVehicular01(true);
+                    }
+                }
+                else
+                {
+                    TabPanelRCV01.Enabled = true;
+                    TabPanelRCV01.Visible = true;
+                    int vResul = FGrabaCambiosInspeccion();
+                    vResul = FlTraeDatosRCV01(int.Parse(TextBoxNroInspeccion.Text));
+                    PBloqueoRCVehicular01(true);
+                }
+
+            }
+            else
+                TabPanelRCV01.Enabled = false;
+        }
+
+        #endregion
+
+        #region Danios Propios Padre
+
+        protected void GridViewDaniosPropiosPadre_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+                e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+
+                //generamos la consulta para cada fila de la grilla maestra
+                string vTextoSecuencial = string.Empty;
+                int vSecuencial = 0;
+
+                vTextoSecuencial = e.Row.Cells[3].Text;
+                vSecuencial = int.Parse(vTextoSecuencial);
+
+                AccesoDatos vAccesoDatos = new AccesoDatos();
+                var gvDPDet = (GridView)e.Row.FindControl("gvDPDet");
+
+                using (LBCDesaEntities db = new LBCDesaEntities())
+                {
+                    var vLst = from idpp in db.InspDaniosPropiosPadre
+                               join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
+                               join n in db.Nomenclador on idp.idItem equals n.codigo
+                               where (idpp.secuencial == vSecuencial)
+                                  && (n.categoriaNomenclador == "Item")
+                               select new
+                               {
+                                   idp.secuencial,
+                                   n.descripcion,
+                                   idp.compra,
+                                   idp.chaperio,
+                                   idp.reparacionPrevia
+                               };
+
+                    gvDPDet.DataSource = vLst.ToList();
+                    gvDPDet.DataBind();
+                }
+
             }
         }
+
+        protected void GridViewDaniosPropiosPadre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+            InspeccionDaniosPropiosPadre vInspeccionDPPadre = new InspeccionDaniosPropiosPadre();
+
+            int vDPPadreSecuencial = 0;
+            int vDPPadreIdInspeccion = 0;
+
+            vDPPadreSecuencial = int.Parse(GridViewDaniosPropiosPadre.SelectedRow.Cells[3].Text);
+            vDPPadreIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+
+            vInspeccionDPPadre = vAccesoDatos.FTraeInspDPPadreICRL(vDPPadreSecuencial, vDPPadreIdInspeccion);
+
+            if (null != vInspeccionDPPadre)
+            {
+                TextBoxDPPSecuencial.Text = vDPPadreSecuencial.ToString();
+                string vTextoTipoTaller = string.Empty;
+                vTextoTipoTaller = vInspeccionDPPadre.tipoTaller.Trim();
+                DropDownListDPPTipoTaller.ClearSelection();
+                DropDownListDPPTipoTaller.Items.FindByText(vTextoTipoTaller).Selected = true;
+                CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
+            }
+            PBloqueaDPPadreEdicion(true);
+        }
+
+        protected void PBloqueaDPPadreEdicion(bool pEstado)
+        {
+            if (pEstado)
+            {
+                DropDownListDPPTipoTaller.Enabled = true;
+                CheckBoxDPPCambioPerdidaTotal.Enabled = true;
+                ButtonNuevoDPPadre.Enabled = false;
+                ButtonGrabarDPPadre.Enabled = true;
+                ButtonBorrarDPPadre.Enabled = true;
+                ButtonDetalleDPPadre.Enabled = true;
+                GridViewDaniosPropiosPadre.Enabled = false;
+            }
+            else
+            {
+                DropDownListDPPTipoTaller.Enabled = true;
+                CheckBoxDPPCambioPerdidaTotal.Enabled = true;
+                ButtonNuevoDPPadre.Enabled = true;
+                ButtonGrabarDPPadre.Enabled = false;
+                ButtonBorrarDPPadre.Enabled = false;
+                ButtonDetalleDPPadre.Enabled = false;
+                GridViewDaniosPropiosPadre.Enabled = true;
+            }
+        }
+
+        private int FlTraeNomenTipoTallerDPPadre()
+        {
+            int vResultado = 0;
+            string vCategoria = "Tipo Taller";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListDPPTipoTaller.DataValueField = "codigo";
+            DropDownListDPPTipoTaller.DataTextField = "descripcion";
+            DropDownListDPPTipoTaller.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListDPPTipoTaller.DataBind();
+
+            return vResultado;
+        }
+
+        protected void ButtonNuevoDPPadre_Click(object sender, EventArgs e)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+            InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
+
+            vInspeccionDaniosPropiosPadre.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+            vInspeccionDaniosPropiosPadre.tipoTaller = DropDownListDPPTipoTaller.SelectedItem.Text;
+            vInspeccionDaniosPropiosPadre.cambioAPerdidaTotal = CheckBoxDPPCambioPerdidaTotal.Checked;
+
+            int vResultado = vAccesodatos.FGrabaInspDaniosPropiosPadreICRL(vInspeccionDaniosPropiosPadre);
+
+            if (vResultado > 0)
+            {
+                int vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+                PLimpiaSeccionDaniosPropiosPadre();
+                PBloqueaDPPadreEdicion(false);
+            }
+        }
+
+        protected void ButtonGrabarDPPadre_Click(object sender, EventArgs e)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+            InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
+
+            vInspeccionDaniosPropiosPadre.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
+            vInspeccionDaniosPropiosPadre.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+            vInspeccionDaniosPropiosPadre.tipoTaller = DropDownListDPPTipoTaller.SelectedItem.Text;
+            vInspeccionDaniosPropiosPadre.cambioAPerdidaTotal = CheckBoxDPPCambioPerdidaTotal.Checked;
+
+            int vResultado = vAccesodatos.FActualizaInspDaniosPropiosPadreICRL(vInspeccionDaniosPropiosPadre);
+
+            if (vResultado > 0)
+            {
+                int vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+                PLimpiaSeccionDaniosPropiosPadre();
+                PBloqueaDPPadreEdicion(false);
+            }
+        }
+
+        protected void ButtonBorrarDPPadre_Click(object sender, EventArgs e)
+        {
+            AccesoDatos vAccesodatos = new AccesoDatos();
+            InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
+
+            vInspeccionDaniosPropiosPadre.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
+            vInspeccionDaniosPropiosPadre.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+
+            int vResultado = vAccesodatos.FBorrarInspDaniosPropiosPadreICRL(vInspeccionDaniosPropiosPadre);
+
+            if (vResultado > 0)
+            {
+                int vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+                PLimpiaSeccionDaniosPropiosPadre();
+                PBloqueaDPPadreEdicion(false);
+            }
+        }
+
+        protected void ButtonDetalleDPPadre_Click(object sender, EventArgs e)
+        {
+            PBloqueaDPPadreEdicion(false);
+            //PBloqueaPersonaDet(true);
+            int vSecuencial = int.Parse(TextBoxDPPSecuencial.Text);
+            FlTraeDatosDaniosPropios(vSecuencial);
+            Session["PopupDPHabilitado"] = 1;
+            this.ModalPopupDaniosPropios.Show();
+        }
+
+        protected void PLimpiaSeccionDaniosPropiosPadre()
+        {
+            DropDownListDPPTipoTaller.SelectedIndex = 0;
+            CheckBoxDPPCambioPerdidaTotal.Checked = false;
+        }
+
+        protected void ButtonCancelPopDP_Click(object sender, EventArgs e)
+        {
+            int vResul = 0;
+            PLimpiaSeccionDaniosPropiosPadre();
+            PLimpiaSeccionDatosPropios();
+            PBloqueaDPPadreEdicion(false);
+            PBloqueaDPEdicion(false);
+            vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+            Session["PopupDPHabilitado"] = 0;
+            this.ModalPopupDaniosPropios.Hide();
+        }
+
+
+        #endregion
+
+        #region Danios Propios
+
+
 
         private void ValidaDaniosPropiosFlujo(int pIdFlujo)
         {
@@ -750,7 +1074,7 @@ namespace ICRL.Presentacion
                     TabPanelDaniosPropios.Enabled = true;
                     TabPanelDaniosPropios.Visible = true;
                     CheckBoxDaniosPropios.Checked = vSeleccionado;
-                    vResul = FlTraeDatosDaniosPropios(vIdInspeccion);
+                    vResul = FlTraeDatosDaniosPropiosPadre(vIdInspeccion);
                     //TabContainerCoberturas.ActiveTabIndex = 0;
                 }
             }
@@ -770,20 +1094,51 @@ namespace ICRL.Presentacion
         {
             DropDownListItem.SelectedIndex = 0;
             DropDownListItem.Enabled = true;
-            TextBoxCompra.Text = string.Empty;
+            DropDownListCompra.SelectedIndex = 0;
+            DropDownListCompra.Enabled = true;
+            //TextBoxCompra.Text = string.Empty;
             CheckBoxInstalacion.Checked = false;
             CheckBoxPintura.Checked = false;
             CheckBoxMecanico.Checked = false;
-            TextBoxChaperio.Text = string.Empty;
-            TextBoxRepPrevia.Text = string.Empty;
+            DropDownListChaperio.SelectedIndex = 0;
+            DropDownListChaperio.Enabled = true;
+            //TextBoxChaperio.Text = string.Empty;
+            DropDownListRepPrevia.SelectedIndex = 0;
+            DropDownListRepPrevia.Enabled = true;
+            //TextBoxRepPrevia.Text = string.Empty;
             TextBoxObservaciones.Text = string.Empty;
             ButtonGrabarDP.Enabled = false;
             ButtonBorrarDP.Enabled = false;
             ButtonNuevoDP.Enabled = true;
         }
 
+        protected void PBloqueaDPEdicion(bool pEstado)
+        {
+            if (pEstado)
+            {
+                //DropDownListDPPTipoTaller.Enabled = true;
+                //CheckBoxDPPCambioPerdidaTotal.Enabled = true;
+                ButtonNuevoDP.Enabled = false;
+                ButtonGrabarDP.Enabled = true;
+                ButtonBorrarDP.Enabled = true;
+                GridViewDaniosPropios.Enabled = false;
+            }
+            else
+            {
+                //DropDownListDPPTipoTaller.Enabled = true;
+                //CheckBoxDPPCambioPerdidaTotal.Enabled = true;
+                ButtonNuevoDP.Enabled = true;
+                ButtonGrabarDP.Enabled = false;
+                ButtonBorrarDP.Enabled = false;
+                GridViewDaniosPropios.Enabled = true;
+            }
+        }
+
         protected void GridViewDaniosPropios_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int vSecuencial = 0;
+            vSecuencial = int.Parse(TextBoxDPPSecuencial.Text);
+
             DropDownListItem.Enabled = false;
             TextBoxIdItem.Text = string.Empty;
             TextBoxIdItem.Text = GridViewDaniosPropios.SelectedRow.Cells[1].Text.Substring(0, 8);
@@ -792,13 +1147,26 @@ namespace ICRL.Presentacion
             DropDownListItem.ClearSelection();
             DropDownListItem.Items.FindByValue(TextBoxIdItem.Text).Selected = true;
 
-            TextBoxCompra.Text = GridViewDaniosPropios.SelectedRow.Cells[3].Text;
+            string vTextoCompra = string.Empty;
+            vTextoCompra = GridViewDaniosPropios.SelectedRow.Cells[3].Text.Trim();
+            DropDownListCompra.ClearSelection();
+            DropDownListCompra.Items.FindByText(vTextoCompra).Selected = true;
+
             CheckBoxInstalacion.Checked = (GridViewDaniosPropios.SelectedRow.Cells[4].Controls[1] as CheckBox).Checked;
             CheckBoxPintura.Checked = (GridViewDaniosPropios.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
             CheckBoxMecanico.Checked = (GridViewDaniosPropios.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
-            TextBoxChaperio.Text = GridViewDaniosPropios.SelectedRow.Cells[7].Text.Trim();
-            TextBoxRepPrevia.Text = GridViewDaniosPropios.SelectedRow.Cells[8].Text.Trim();
-            TextBoxObservaciones.Text = GridViewDaniosPropios.SelectedRow.Cells[9].Text.Trim();
+
+            string vTextoChaperio = string.Empty;
+            vTextoChaperio = GridViewDaniosPropios.SelectedRow.Cells[7].Text.Trim();
+            DropDownListChaperio.ClearSelection();
+            DropDownListChaperio.Items.FindByText(vTextoChaperio).Selected = true;
+
+            string vTextoRepPrevia = string.Empty;
+            vTextoRepPrevia = GridViewDaniosPropios.SelectedRow.Cells[8].Text.Trim();
+            DropDownListRepPrevia.ClearSelection();
+            DropDownListRepPrevia.Items.FindByText(vTextoRepPrevia).Selected = true;
+
+            TextBoxObservaciones.Text = GridViewDaniosPropios.SelectedRow.Cells[9].Text;
             ButtonNuevoDP.Enabled = false;
             ButtonGrabarDP.Enabled = true;
             ButtonBorrarDP.Enabled = true;
@@ -809,21 +1177,21 @@ namespace ICRL.Presentacion
             AccesoDatos vAccesodatos = new AccesoDatos();
             InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
             vInspDaniosPropios.idItem = DropDownListItem.SelectedValue;
-            vInspDaniosPropios.compra = TextBoxCompra.Text;
+            vInspDaniosPropios.compra = DropDownListCompra.SelectedItem.Text;
             vInspDaniosPropios.instalacion = CheckBoxInstalacion.Checked;
             vInspDaniosPropios.pintura = CheckBoxPintura.Checked;
             vInspDaniosPropios.mecanico = CheckBoxMecanico.Checked;
-            vInspDaniosPropios.chaperio = TextBoxChaperio.Text;
-            vInspDaniosPropios.reparacionPrevia = TextBoxRepPrevia.Text;
-            vInspDaniosPropios.observaciones = TextBoxObservaciones.Text; ;
+            vInspDaniosPropios.chaperio = DropDownListChaperio.SelectedItem.Text;
+            vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
+            vInspDaniosPropios.observaciones = TextBoxObservaciones.Text;
 
             int vResultado = vAccesodatos.FGrabaInspDaniosPropiosICRL(vInspDaniosPropios);
 
             if (vResultado > 0)
             {
-                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
+                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxDPPSecuencial.Text));
                 PLimpiaSeccionDatosPropios();
             }
         }
@@ -833,21 +1201,21 @@ namespace ICRL.Presentacion
             AccesoDatos vAccesodatos = new AccesoDatos();
             InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
-            vInspDaniosPropios.idItem = TextBoxIdItem.Text;
-            vInspDaniosPropios.compra = TextBoxCompra.Text;
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
+            vInspDaniosPropios.idItem = DropDownListItem.SelectedValue;
+            vInspDaniosPropios.compra = DropDownListCompra.SelectedItem.Text;
             vInspDaniosPropios.instalacion = CheckBoxInstalacion.Checked;
             vInspDaniosPropios.pintura = CheckBoxPintura.Checked;
             vInspDaniosPropios.mecanico = CheckBoxMecanico.Checked;
-            vInspDaniosPropios.chaperio = TextBoxChaperio.Text;
-            vInspDaniosPropios.reparacionPrevia = TextBoxRepPrevia.Text;
-            vInspDaniosPropios.observaciones = TextBoxObservaciones.Text; ;
+            vInspDaniosPropios.chaperio = DropDownListChaperio.SelectedItem.Text;
+            vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
+            vInspDaniosPropios.observaciones = TextBoxObservaciones.Text;
 
             int vResultado = vAccesodatos.FActualizaInspDaniosPropiosICRL(vInspDaniosPropios);
 
             if (vResultado > 0)
             {
-                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
+                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxDPPSecuencial.Text));
                 PLimpiaSeccionDatosPropios();
             }
         }
@@ -857,16 +1225,61 @@ namespace ICRL.Presentacion
             AccesoDatos vAccesodatos = new AccesoDatos();
             InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
-            vInspDaniosPropios.secuencial = int.Parse(TextBoxNroInspeccion.Text);
-            vInspDaniosPropios.idItem = TextBoxIdItem.Text;
+            vInspDaniosPropios.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
+            vInspDaniosPropios.idItem = DropDownListItem.SelectedValue; ;
 
             int vResultado = vAccesodatos.FBorrarInspDaniosPropiosICRL(vInspDaniosPropios);
 
             if (vResultado > 0)
             {
-                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
+                int vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxDPPSecuencial.Text));
                 PLimpiaSeccionDatosPropios();
             }
+        }
+
+        private int FlTraeNomenCompraDet()
+        {
+            int vResultado = 0;
+            string vCategoria = "Compra Repuesto";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListCompra.DataValueField = "codigo";
+            DropDownListCompra.DataTextField = "descripcion";
+            DropDownListCompra.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListCompra.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenChaperioDet()
+        {
+            int vResultado = 0;
+            string vCategoria = "Nivel de Daño";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListChaperio.DataValueField = "codigo";
+            DropDownListChaperio.DataTextField = "descripcion";
+            DropDownListChaperio.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListChaperio.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenRepPreviaDet()
+        {
+            int vResultado = 0;
+            string vCategoria = "Nivel de Daño";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepPrevia.DataValueField = "codigo";
+            DropDownListRepPrevia.DataTextField = "descripcion";
+            DropDownListRepPrevia.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepPrevia.DataBind();
+
+            return vResultado;
         }
 
         #endregion
@@ -1268,7 +1681,7 @@ namespace ICRL.Presentacion
             }
         }
 
-        
+
         #endregion
 
         #region RC Personas 
@@ -1572,7 +1985,7 @@ namespace ICRL.Presentacion
             ButtonBorrarPerDet.Enabled = !pEstado;
             ButtonNuevoPerDet.Enabled = pEstado;
             //ButtonCierraPerDet.Enabled = pEstado;
-            
+
         }
 
         protected void PLimpiaSeccionRCPersonaDetalle()
@@ -1580,7 +1993,7 @@ namespace ICRL.Presentacion
             TextBoxPerDetTipo.Text = string.Empty;
             TextBoxPerDetMontoGasto.Text = string.Empty;
             TextBoxPerDetDescripcion.Text = string.Empty;
-            
+
             //ButtonCierraPerDet.Enabled = true;
             PBloqueaPersonaDet(true);
         }
@@ -1857,22 +2270,7 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
-        private void ValidaRoboParcial(int pIdInspeccion)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-
-            bool vSeleccionado = false;
-            int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTieneRPICRL(pIdInspeccion);
-
-            if (vSeleccionado)
-            {
-                TabPanelRoboParcial.Enabled = true;
-                TabPanelRoboParcial.Visible = true;
-                CheckBoxRoboParcial.Checked = vSeleccionado;
-                vResul = FlTraeDatosRoboParcial(pIdInspeccion);
-            }
-        }
+        
 
         private void ValidaRoboParcialFlujo(int pIdFlujo)
         {
@@ -2019,21 +2417,7 @@ namespace ICRL.Presentacion
         }
 
 
-        private void ValidaPerdidaTotalDP(int pIdInspeccion)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-
-            bool vSeleccionado = false;
-            int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTienePTDPICRL(pIdInspeccion);
-            if (vSeleccionado)
-            {
-                TabPanelPerdidaTotalDaniosPropios.Enabled = true;
-                TabPanelPerdidaTotalDaniosPropios.Visible = true;
-                CheckBoxPerdidaTotDanios.Checked = vSeleccionado;
-                vResul = FlTraeDatosPerdidaTotalDP(pIdInspeccion);
-            }
-        }
+        
 
         private void ValidaPerdidaTotalDPFlujo(int pIdFlujo)
         {
@@ -2291,21 +2675,7 @@ namespace ICRL.Presentacion
         }
 
 
-        private void ValidaPerdidaTotalRO(int pIdInspeccion)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-
-            bool vSeleccionado = false;
-            int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTienePTROICRL(pIdInspeccion);
-            if (vSeleccionado)
-            {
-                TabPanelPerdidaTotalRobo.Enabled = true;
-                TabPanelPerdidaTotalRobo.Visible = true;
-                CheckBoxPerdidaTotRobo.Checked = vSeleccionado;
-                vResul = FlTraeDatosPerdidaTotalRO(pIdInspeccion);
-            }
-        }
+        
 
         private void ValidaPerdidaTotalROFlujo(int pIdFlujo)
         {
@@ -2516,23 +2886,7 @@ namespace ICRL.Presentacion
 
         #region RC Vehicular 01
 
-        private void ValidaRCVehicular01(int pIdInspeccion)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-
-            bool vSeleccionado = false;
-            int vResul = 0;
-            vSeleccionado = vAccesodatos.FInspeccionTieneRCVehicularICRL(pIdInspeccion);
-
-            if (vSeleccionado)
-            {
-                TabPanelRCV01.Enabled = true;
-                TabPanelRCV01.Visible = true;
-                CheckBoxRCVehicular01.Checked = vSeleccionado;
-                vResul = FlTraeDatosRCV01(pIdInspeccion);
-                PBloqueoRCVehicular01(true);
-            }
-        }
+        
 
         private void ValidaRCVehicular01Flujo(int pIdFlujo)
         {
@@ -3553,7 +3907,7 @@ namespace ICRL.Presentacion
 
             var vListaInspDaniosPropios = from i in db.Inspeccion
                                           join f in db.Flujo on i.idFlujo equals f.idFlujo
-                                          join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion 
+                                          join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
                                           join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
                                           join n in db.Nomenclador on idp.idItem equals n.codigo
                                           where (n.categoriaNomenclador == "Item")
@@ -4218,7 +4572,7 @@ namespace ICRL.Presentacion
                     break;
             }
 
-            if(vIdInspeccion>0)
+            if (vIdInspeccion > 0)
             {
                 string vIdFlujo = TextBoxIdFlujo.Text;
                 FlTraeDatosInspeccion(vIdInspeccion, vIdFlujo);
@@ -4231,7 +4585,6 @@ namespace ICRL.Presentacion
             vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
         }
 
-
-
+        
     }
 }

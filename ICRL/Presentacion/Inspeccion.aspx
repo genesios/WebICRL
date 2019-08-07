@@ -16,7 +16,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
 
-    <%# Eval("placa") %>
+    <%--    <%# Eval("placa") %>--%>
 
 
     <div>
@@ -252,64 +252,37 @@
                                 <tr>
                                     <td>
                                         <strong>
-                                            <asp:Label ID="LabelRegistroItems" runat="server" Text="Items"></asp:Label></strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="twenty">
-                                            <asp:Label ID="LabelItem" runat="server" Text="Item"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListItem" runat="server"></asp:DropDownList>
-                                        </div>
-                                        <div class="twenty">
-                                            <asp:Label ID="LabelCompra" runat="server" Text="Compra"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxCompra" runat="server"></asp:TextBox>
-                                        </div>
-                                        <div class="twenty">
-                                            <asp:CheckBox ID="CheckBoxInstalacion" runat="server" />
-                                            <asp:Label ID="LabelInstalacion" runat="server" Text="Instalacion"></asp:Label>
-                                        </div>
-                                        <div class="twenty">
-                                            <asp:CheckBox ID="CheckBoxPintura" runat="server" />
-                                            <asp:Label ID="LabelPintura" runat="server" Text="Pintura"></asp:Label>
-                                        </div>
-                                        <div class="twenty">
-                                            <asp:CheckBox ID="CheckBoxMecanico" runat="server" />
-                                            <asp:Label ID="LabelMecanico" runat="server" Text="Mecanico"></asp:Label>
-                                        </div>
+                                            <asp:Label ID="LabelRegistroDaniosPropios" runat="server" Text="Daños Propios"></asp:Label></strong>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="twentyfive">
-                                            <asp:Label ID="LabelChaperio" runat="server" Text="Chaperio"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxChaperio" runat="server"></asp:TextBox>
+                                            <asp:Label ID="LabelDPPTipoTaller" runat="server" Text="Tipo de Taller"></asp:Label><br />
+                                            <asp:DropDownList ID="DropDownListDPPTipoTaller" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="twentyfive">
-                                            <asp:Label ID="LabelReparacionPrevia" runat="server" Text="Reparacion Previa"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxRepPrevia" runat="server"></asp:TextBox>
+                                            <asp:CheckBox ID="CheckBoxDPPCambioPerdidaTotal" runat="server"></asp:CheckBox>
+                                            <asp:Label ID="LabelDPPCambioPerdidaTotal" runat="server" Text="Cambio Pérdida Total"></asp:Label>
                                         </div>
                                         <div class="twentyfive">
-                                            <asp:Label ID="LabelObservaciones" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObservaciones" runat="server"></asp:TextBox>
-                                        </div>
-                                        <div class="twentyfive">
-                                            <asp:Label ID="LabelIditem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxIdItem" runat="server" Visible="False"></asp:TextBox>
+                                            <asp:Label ID="LabelDPPSecuencial" runat="server" Text="DPSecuencial" Visible="False"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxDPPSecuencial" runat="server" Visible="False"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Button ID="ButtonNuevoDP" runat="server" Text="Agregar" Enabled="true" OnClick="ButtonNuevoDP_Click" />
-                                        <asp:Button ID="ButtonGrabarDP" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarDP_Click" />
-                                        <asp:Button ID="ButtonBorrarDP" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarDP_Click" />
+                                        <asp:Button ID="ButtonNuevoDPPadre" runat="server" Text="Agregar" OnClick="ButtonNuevoDPPadre_Click" />
+                                        <asp:Button ID="ButtonGrabarDPPadre" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarDPPadre_Click" />
+                                        <asp:Button ID="ButtonBorrarDPPadre" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarDPPadre_Click" />
+                                        <asp:Button ID="ButtonDetalleDPPadre" runat="server" Text="Detalle" Enabled="False" OnClick="ButtonDetalleDPPadre_Click" />
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div>
-                            <asp:GridView ID="GridViewDaniosPropios" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="GridViewDaniosPropios_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropios_SelectedIndexChanged" Width="100%">
+                            <asp:GridView ID="GridViewDaniosPropiosPadre" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="100%" OnRowDataBound="GridViewDaniosPropiosPadre_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropiosPadre_SelectedIndexChanged">
                                 <AlternatingRowStyle BackColor="White" />
                                 <EditRowStyle BackColor="#7C6F57" />
                                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -322,32 +295,162 @@
                                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                                 <SortedDescendingHeaderStyle BackColor="#15524A" />
                                 <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <button class="btn btn-default glyphicon glyphicon-plus" onclick="return ToggleGridPanel(this, 'trdp<%# Eval("secuencial") %>')" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
-                                    <asp:BoundField DataField="idItem" HeaderText="id" />
-                                    <asp:BoundField DataField="descripcion" HeaderText="Item" />
-                                    <asp:BoundField DataField="compra" HeaderText="Compra" />
-                                    <asp:TemplateField HeaderText="Inst.">
+                                    <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
+                                    <asp:BoundField DataField="Secuencial" HeaderText="Sec"/>
+                                    <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
+                                    <asp:TemplateField HeaderText="Cambio a Pérdida Total">
                                         <ItemTemplate>
-                                            <asp:CheckBox runat="server" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
+                                            <asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>'></asp:CheckBox>
+                                            <%# MyNewRowDetDP ( Eval("secuencial") ) %>
+                                            <asp:GridView ID="gvDPDet" runat="server" CellPadding="4" ForeColor="#333333"
+                                                Width="100%" GridLines="Both"
+                                                AutoGenerateColumns="false">
+                                                <AlternatingRowStyle BackColor="White" />
+                                                <Columns>
+                                                    <asp:BoundField DataField="descripcion" HeaderText="Item" />
+                                                    <asp:BoundField DataField="compra" HeaderText="Compra" />
+                                                    <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
+                                                    <asp:BoundField DataField="reparacionPrevia" HeaderText="Rep.Previa" />
+                                                </Columns>
+                                                <EditRowStyle BackColor="#7C6F57" />
+                                                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                                <RowStyle BackColor="#E3EAEB" />
+                                                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                                            </asp:GridView>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Pint.">
-                                        <ItemTemplate>
-                                            <asp:CheckBox runat="server" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Mec.">
-                                        <ItemTemplate>
-                                            <asp:CheckBox runat="server" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
-                                    <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
-                                    <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
                                 </Columns>
                             </asp:GridView>
+                        </div>
+                        <div>
+                            <asp:Button runat="server" ID="ButtonOcultoParaPopupDaniosPropios" Style="display: none" />
+                            <ajaxToolkit:ModalPopupExtender ID="ModalPopupDaniosPropios" runat="server"
+                                PopupControlID="PanelModalPopupDaniosPropios" TargetControlID="ButtonOcultoParaPopupDaniosPropios" PopupDragHandleControlID="ModalPopupDragHandleDaniosPropios"
+                                RepositionMode="None" X="10" Y="10"
+                                BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupDaniosPropiosBehavior" DynamicServicePath="">
+                            </ajaxToolkit:ModalPopupExtender>
+                            <asp:Panel ID="PanelModalPopupDaniosPropios" runat="server" CssClass="modalPopup">
+                                <asp:Panel runat="server" ID="ModalPopupDragHandleDaniosPropios" CssClass="modalPopupHeader">
+                                    Ventana PopUp para el Detalle de Daños Propios
+                                </asp:Panel>
+                                <div>
+                                    <table class="basetable">
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <asp:Label ID="LabelRegistroItems" runat="server" Text="Items"></asp:Label></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="twenty">
+                                                    <asp:Label ID="LabelItem" runat="server" Text="Item"></asp:Label><br />
+                                                    <asp:DropDownList ID="DropDownListItem" runat="server"></asp:DropDownList>
+                                                </div>
+                                                <div class="twenty">
+                                                    <asp:Label ID="LabelCompra" runat="server" Text="Compra"></asp:Label><br />
+                                                    <asp:DropDownList ID="DropDownListCompra" runat="server"></asp:DropDownList>
+                                                </div>
+                                                <div class="twenty">
+                                                    <asp:CheckBox ID="CheckBoxInstalacion" runat="server" />
+                                                    <asp:Label ID="LabelInstalacion" runat="server" Text="Instalacion"></asp:Label>
+                                                </div>
+                                                <div class="twenty">
+                                                    <asp:CheckBox ID="CheckBoxPintura" runat="server" />
+                                                    <asp:Label ID="LabelPintura" runat="server" Text="Pintura"></asp:Label>
+                                                </div>
+                                                <div class="twenty">
+                                                    <asp:CheckBox ID="CheckBoxMecanico" runat="server" />
+                                                    <asp:Label ID="LabelMecanico" runat="server" Text="Mecanico"></asp:Label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="twentyfive">
+                                                    <asp:Label ID="LabelChaperio" runat="server" Text="Chaperio"></asp:Label><br />
+                                                    <asp:DropDownList ID="DropDownListChaperio" runat="server"></asp:DropDownList>
+                                                </div>
+                                                <div class="twentyfive">
+                                                    <asp:Label ID="LabelReparacionPrevia" runat="server" Text="Reparacion Previa"></asp:Label><br />
+                                                    <asp:DropDownList ID="DropDownListRepPrevia" runat="server"></asp:DropDownList>
+                                                </div>
+                                                <div class="twentyfive">
+                                                    <asp:Label ID="LabelObservaciones" runat="server" Text="Observaciones"></asp:Label><br />
+                                                    <asp:TextBox ID="TextBoxObservaciones" runat="server"></asp:TextBox>
+                                                </div>
+                                                <div class="twentyfive">
+                                                    <asp:Label ID="LabelIditem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
+                                                    <asp:TextBox ID="TextBoxIdItem" runat="server" Visible="False"></asp:TextBox>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Button ID="ButtonNuevoDP" runat="server" Text="Agregar" OnClick="ButtonNuevoDP_Click" />
+                                                <asp:Button ID="ButtonGrabarDP" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarDP_Click" />
+                                                <asp:Button ID="ButtonBorrarDP" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarDP_Click" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <asp:GridView ID="GridViewDaniosPropios" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowDataBound="GridViewDaniosPropios_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropios_SelectedIndexChanged" Width="100%">
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <EditRowStyle BackColor="#7C6F57" />
+                                        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                        <RowStyle BackColor="#E3EAEB" />
+                                        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                        <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                        <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                        <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                        <SortedDescendingHeaderStyle BackColor="#15524A" />
+                                        <Columns>
+                                            <asp:ButtonField Text="Editar" CommandName="Select">
+                                                <ItemStyle Width="60px" />
+                                            </asp:ButtonField>
+                                            <asp:BoundField DataField="idItem" HeaderText="id" />
+                                            <asp:BoundField DataField="descripcion" HeaderText="Item" />
+                                            <asp:BoundField DataField="compra" HeaderText="Compra" />
+                                            <asp:TemplateField HeaderText="Inst.">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox runat="server" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Pint.">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox runat="server" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Mec.">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox runat="server" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
+                                            <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
+                                            <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                                <asp:Button ID="ButtonCancelPopDP" runat="server" Text="Cerrar" OnClick="ButtonCancelPopDP_Click" />
+                            </asp:Panel>
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfDaniosP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfDaniosP_Click" />
