@@ -282,7 +282,7 @@
                             </table>
                         </div>
                         <div>
-                            <asp:GridView ID="GridViewDaniosPropiosPadre" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" Width="100%" OnRowDataBound="GridViewDaniosPropiosPadre_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropiosPadre_SelectedIndexChanged">
+                            <asp:GridView ID="GridViewDaniosPropiosPadre" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="secuencial" OnRowDataBound="GridViewDaniosPropiosPadre_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropiosPadre_SelectedIndexChanged" OnRowCommand="GridViewDaniosPropiosPadre_RowCommand" Width="100%">
                                 <AlternatingRowStyle BackColor="White" />
                                 <EditRowStyle BackColor="#7C6F57" />
                                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -391,7 +391,7 @@
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelObservaciones" runat="server" Text="Observaciones"></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxObservaciones" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBoxObservaciones" runat="server" MaxLength="100"></asp:TextBox>
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelIditem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
@@ -452,9 +452,9 @@
                                 <asp:Button ID="ButtonCancelPopDP" runat="server" Text="Cerrar" OnClick="ButtonCancelPopDP_Click" />
                             </asp:Panel>
                         </div>
-                        <div>
+<%--                        <div>
                             <asp:ImageButton ID="ImgButtonExportPdfDaniosP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfDaniosP_Click" />
-                        </div>
+                        </div>--%>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
                 <ajaxToolkit:TabPanel ID="TabPanelRCObjetos" TabIndex="2" runat="server" HeaderText="RCObjetos" Enabled="False" Visible="false">
@@ -487,7 +487,7 @@
                                     <td>
                                         <div class="twentyfive">
                                             <asp:Label ID="LabelObsObjeto" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObsObjeto" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxObsObjeto" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
                                         <div class="twentyfive">
                                             <asp:Label ID="LabelTelfObjeto" runat="server" Text="Teléfono Contacto"></asp:Label><br />
@@ -657,7 +657,7 @@
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelObsPersona" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObsPersona" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxObsPersona" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelTelfPersona" runat="server" Text="Teléfono Contacto"></asp:Label><br />
@@ -821,7 +821,7 @@
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelObservacionesRP" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObservacionesRP" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxObservacionesRP" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
                                         <div class="twenty">
                                             <asp:CheckBox ID="CheckBoxInstalacionRP" runat="server" />
@@ -920,7 +920,7 @@
                                             <asp:Label ID="LabelCilindraPTDP" runat="server" Text="Cilindrada"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxCilindradaPTDP" runat="server"></asp:TextBox><br />
                                             <asp:Label ID="LabelObservacionesPTDP" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObservacionesPTDP" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxObservacionesPTDP" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
                                         <div class="twenty">
                                             <asp:CheckBox ID="CheckBoxTechoSolarPTDP" runat="server" />
@@ -972,7 +972,7 @@
                                             <asp:Label ID="LabelCilindraPTRO" runat="server" Text="Cilindrada"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server"></asp:TextBox><br />
                                             <asp:Label ID="LabelObservacionesPTRO" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelCajaPTRO" runat="server" Text="Caja"></asp:Label><br />
@@ -1177,7 +1177,7 @@
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:Label ID="LabelObservacionesRCV01" runat="server" Text="Observaciones"></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxObservacionesRCV01" runat="server"></asp:TextBox><br />
+                                                    <asp:TextBox ID="TextBoxObservacionesRCV01" runat="server" MaxLength="100"></asp:TextBox><br />
                                                     <asp:Label ID="LabelIditemRCV01" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxIdItemRCV01" runat="server" Visible="False"></asp:TextBox>
                                                 </div>

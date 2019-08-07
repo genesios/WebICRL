@@ -24,13 +24,14 @@ namespace ICRL.Presentacion
             if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
             {
                 vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+                vFechaIni = vFechaIni.AddMonths(-1);
                 TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
                 TextBoxFechaIni.Text = vFechaIni.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
             if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
             {
-                vFechaFin = vFechaIni.AddDays(30);
+                vFechaFin = vFechaIni.AddDays(60);
                 TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
                 TextBoxFechaFin.Text = vFechaFin.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
@@ -148,7 +149,7 @@ namespace ICRL.Presentacion
             string vCodUsuario = Session["IdUsr"].ToString();
             int vCorrelativo = 0;
 
-            if (string.Empty == TextBoxNroFlujo.Text)
+            if (string.Empty == TextBoxNroFlujo.Text.ToUpper())
             {
                 //No se tiene Flujo OnBase Asociado
                 //Opcion para crear un flujo temporal
@@ -160,48 +161,92 @@ namespace ICRL.Presentacion
                 vInspeccionICRL.idFlujo = vIdFlujoTemporal;
                 Session["NumFlujo"] = vIdFlujoTemporal;
                 vCorrelativo = vAccesoDatos.fObtieneContadorInspeccionFlujo(vIdFlujoTemporal);
+
+                int vIdUsuario = vAccesoDatos.FValidaExisteUsuarioICRL(vCodUsuario);
+                if (vIdUsuario > 0)
+                {
+
+                    vInspeccionICRL.idUsuario = vIdUsuario;
+                    vInspeccionICRL.sucursalAtencion = Session["SucursalUsr"].ToString();
+                    vInspeccionICRL.direccion = string.Empty;
+                    vInspeccionICRL.zona = string.Empty;
+                    vInspeccionICRL.causaSiniestro = string.Empty;
+                    vInspeccionICRL.descripcionSiniestro = string.Empty;
+                    vInspeccionICRL.observacionesInspec = string.Empty;
+                    vInspeccionICRL.idInspector = vCodUsuario;
+                    vInspeccionICRL.nombreContacto = string.Empty;
+                    vInspeccionICRL.telefonoContacto = string.Empty;
+                    vInspeccionICRL.correosDeEnvio = string.Empty;
+                    vInspeccionICRL.recomendacionPerdidaTotal = false;
+                    vInspeccionICRL.estado = 1;
+                    vInspeccionICRL.fechaSiniestro = DateTime.Now;
+                    vInspeccionICRL.tipoInspeccion = (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios;
+                    vInspeccionICRL.correlativo = vCorrelativo;
+
+                    int vRespuesta = vAccesoDatos.FGrabaInspeccionICRL(vInspeccionICRL);
+
+                    Response.Redirect("~/Presentacion/Inspeccion.aspx?nroInsp=" + vRespuesta.ToString());
+                }
             }
             else
             {
+
                 //Se tiene Flujo OnBase Asociado
-                int vIdFlujo = vAccesoDatos.FValidaExisteFlujoICRL(TextBoxNroFlujo.Text);
+                int vIdFlujo = vAccesoDatos.FValidaExisteFlujoICRL(TextBoxNroFlujo.Text.ToUpper());
+                int vIdInspeccion = 0;
                 vInspeccionICRL.idFlujo = vIdFlujo;
                 Session["NumFlujo"] = vIdFlujo;
-                vCorrelativo = vAccesoDatos.fObtieneContadorInspeccionFlujo(vIdFlujo);
+            
+
+                //Validar si el Flujo tiene InspeccionDaniosPropios
+                //Solo si no es asi se debe crear una inspección DaniosPropios
+                vIdInspeccion = vAccesoDatos.FFlujoTieneDaniosPropios(vIdFlujo);
+
+                if (vIdInspeccion > 0)
+                {
+                    Response.Redirect("~/Presentacion/Inspeccion.aspx?nroInsp=" + vIdInspeccion.ToString());
+                }
+                else
+                {
+
+                    vCorrelativo = vAccesoDatos.fObtieneContadorInspeccionFlujo(vIdFlujo);
+
+                    int vIdUsuario = vAccesoDatos.FValidaExisteUsuarioICRL(vCodUsuario);
+                    if (vIdUsuario > 0)
+                    {
+
+                        vInspeccionICRL.idUsuario = vIdUsuario;
+                        vInspeccionICRL.sucursalAtencion = Session["SucursalUsr"].ToString();
+                        vInspeccionICRL.direccion = string.Empty;
+                        vInspeccionICRL.zona = string.Empty;
+                        vInspeccionICRL.causaSiniestro = string.Empty;
+                        vInspeccionICRL.descripcionSiniestro = string.Empty;
+                        vInspeccionICRL.observacionesInspec = string.Empty;
+                        vInspeccionICRL.idInspector = vCodUsuario;
+                        vInspeccionICRL.nombreContacto = string.Empty;
+                        vInspeccionICRL.telefonoContacto = string.Empty;
+                        vInspeccionICRL.correosDeEnvio = string.Empty;
+                        vInspeccionICRL.recomendacionPerdidaTotal = false;
+                        vInspeccionICRL.estado = 1;
+                        vInspeccionICRL.fechaSiniestro = DateTime.Now;
+                        vInspeccionICRL.tipoInspeccion = (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios;
+                        vInspeccionICRL.correlativo = vCorrelativo;
+
+                        int vRespuesta = vAccesoDatos.FGrabaInspeccionICRL(vInspeccionICRL);
+
+                        Response.Redirect("~/Presentacion/Inspeccion.aspx?nroInsp=" + vRespuesta.ToString());
+                    }
+                }
             }
 
 
-            int vIdUsuario = vAccesoDatos.FValidaExisteUsuarioICRL(vCodUsuario);
-            if (vIdUsuario > 0)
-            {
 
-                vInspeccionICRL.idUsuario = vIdUsuario;
-                vInspeccionICRL.sucursalAtencion = Session["SucursalUsr"].ToString();
-                vInspeccionICRL.direccion = string.Empty;
-                vInspeccionICRL.zona = string.Empty;
-                vInspeccionICRL.causaSiniestro = string.Empty;
-                vInspeccionICRL.descripcionSiniestro = string.Empty;
-                vInspeccionICRL.observacionesInspec = string.Empty;
-                vInspeccionICRL.idInspector = vCodUsuario;
-                vInspeccionICRL.nombreContacto = string.Empty;
-                vInspeccionICRL.telefonoContacto = string.Empty;
-                vInspeccionICRL.correosDeEnvio = string.Empty;
-                vInspeccionICRL.recomendacionPerdidaTotal = false;
-                vInspeccionICRL.estado = 1;
-                vInspeccionICRL.fechaSiniestro = DateTime.Now;
-                vInspeccionICRL.tipoInspeccion = (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios;
-                vInspeccionICRL.correlativo = vCorrelativo;
-
-                int vRespuesta = vAccesoDatos.FGrabaInspeccionICRL(vInspeccionICRL);
-
-                Response.Redirect("~/Presentacion/Inspeccion.aspx?nroInsp=" + vRespuesta.ToString());
-            }
         }
         protected void ButtonCreaInspeccion_Click(object sender, EventArgs e)
         {
             Label4.Text = string.Empty;
             TextBoxPlaca.Text = string.Empty;
-            if (string.Empty == TextBoxNroFlujo.Text)
+            if (string.Empty == TextBoxNroFlujo.Text.ToUpper())
             {
                 TextBoxPopupSiNo.Text = "No se tiene Flujo Asociado, se creara un Flujo Temporal";
                 Session["PopupModalSiNo"] = 1;
@@ -210,14 +255,14 @@ namespace ICRL.Presentacion
             else
             {
                 int vResultadoFlujo = 0;
-                vResultadoFlujo = PTraeFlujoOnBase(TextBoxNroFlujo.Text);
+                vResultadoFlujo = PTraeFlujoOnBase(TextBoxNroFlujo.Text.ToUpper());
                 if (1 == vResultadoFlujo)
                 {
                     PCreaInspeccion();
                 }
                 else
                 {
-                    Label4.Text = "NO existe el Flujo " + TextBoxNroFlujo.Text + " en OnBase, verifique";
+                    Label4.Text = "NO existe el Flujo " + TextBoxNroFlujo.Text.ToUpper() + " en OnBase, verifique";
                 }
             }
 
@@ -615,7 +660,7 @@ namespace ICRL.Presentacion
             string vPlaca = null;
 
             if (TextBoxNroFlujo.Text != string.Empty)
-                vNroFlujo = TextBoxNroFlujo.Text;
+                vNroFlujo = TextBoxNroFlujo.Text.ToUpper();
 
             if (TextBoxPlaca.Text != string.Empty)
                 vPlaca = TextBoxPlaca.Text;
@@ -623,6 +668,7 @@ namespace ICRL.Presentacion
             if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
             {
                 vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+                vFechaIni = vFechaIni.AddMonths(-1);
                 TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
             }
             else
@@ -632,7 +678,7 @@ namespace ICRL.Presentacion
 
             if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
             {
-                vFechaFin = vFechaIni.AddDays(30);
+                vFechaFin = vFechaIni.AddDays(60);
                 TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
             }
             else
@@ -650,7 +696,7 @@ namespace ICRL.Presentacion
                            && (vPlaca == null || f.placaVehiculo == vPlaca)
                            && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
                            orderby f.flujoOnBase
-                           select new
+                           select new 
                            {
                                f.idFlujo,
                                f.flujoOnBase,
@@ -660,7 +706,7 @@ namespace ICRL.Presentacion
                                f.docIdAsegurado
                            };
 
-                GridViewMaster.DataSource = vLst.Distinct().ToList();
+                GridViewMaster.DataSource = vLst.Distinct().OrderBy(vlst => vlst.flujoOnBase).ToList();
                 GridViewMaster.DataBind();
             }
 
@@ -764,7 +810,7 @@ namespace ICRL.Presentacion
             DateTime vFechaFin = DateTime.Now;
 
             if (TextBoxNroFlujo.Text != string.Empty)
-                vNroFlujo = TextBoxNroFlujo.Text;
+                vNroFlujo = TextBoxNroFlujo.Text.ToUpper();
 
             if (TextBoxPlaca.Text != string.Empty)
                 vPlaca = TextBoxPlaca.Text;
@@ -830,7 +876,7 @@ namespace ICRL.Presentacion
             string vPlaca = null;
 
             if (TextBoxNroFlujo.Text != string.Empty)
-                vNroFlujo = TextBoxNroFlujo.Text;
+                vNroFlujo = TextBoxNroFlujo.Text.ToUpper();
 
             if (TextBoxPlaca.Text != string.Empty)
                 vPlaca = TextBoxPlaca.Text;
@@ -838,6 +884,7 @@ namespace ICRL.Presentacion
             if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
             {
                 vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+                vFechaIni = vFechaIni.AddMonths(-1);
                 TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
             }
             else
@@ -847,7 +894,7 @@ namespace ICRL.Presentacion
 
             if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
             {
-                vFechaFin = vFechaIni.AddDays(30);
+                vFechaFin = vFechaIni.AddDays(60);
                 TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
             }
             else
@@ -875,7 +922,7 @@ namespace ICRL.Presentacion
                                f.docIdAsegurado
                            };
 
-                GridViewMaster.DataSource = vLst.Distinct().ToList();
+                GridViewMaster.DataSource = vLst.Distinct().OrderBy(vlst => vlst.flujoOnBase).ToList();
                 GridViewMaster.PageIndex = e.NewPageIndex;
                 GridViewMaster.DataBind();
             }

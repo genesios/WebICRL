@@ -1049,6 +1049,19 @@ namespace ICRL.Presentacion
             this.ModalPopupDaniosPropios.Hide();
         }
 
+        protected void GridViewDaniosPropiosPadre_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
+            {
+                string vTextoSecuencial = string.Empty;
+                int vIndex = 0;
+                int vSecuencial = 0;
+
+                vIndex = Convert.ToInt32(e.CommandArgument);
+                vSecuencial = Convert.ToInt32(GridViewDaniosPropiosPadre.DataKeys[vIndex].Value);
+                PImprimeFormularioInspDaniosPropios(vSecuencial);
+            }
+        }
 
         #endregion
 
@@ -3608,7 +3621,7 @@ namespace ICRL.Presentacion
 
         #region Reportes
 
-        protected void PImprimeFormularioInspRCVehicular(int pIdSecuencial)
+        protected void PImprimeFormularioInspDaniosPropios(int pIdSecuencial)
         {
             AccesoDatos vAccesoDatos = new AccesoDatos();
             LBCDesaEntities db = new LBCDesaEntities();
@@ -3621,7 +3634,7 @@ namespace ICRL.Presentacion
             string mimeType = string.Empty;
             string encoding = string.Empty;
             string extension = "pdf";
-            string fileName = "RepFormInspeccionRCVehicular" + pIdSecuencial.ToString();
+            string fileName = "RepFormInspeccionDaniosPropios" + pIdSecuencial.ToString();
 
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
@@ -3648,48 +3661,38 @@ namespace ICRL.Presentacion
                                   i.descripcionSiniestro
                               };
 
-            var vListaInspRCVeh = from i in db.Inspeccion
-                                  join f in db.Flujo on i.idFlujo equals f.idFlujo
-                                  join ircv in db.InspRCVehicular on i.idInspeccion equals ircv.idInspeccion
-                                  join ircvdet in db.InspRCVehicularDetalle on ircv.secuencial equals ircvdet.secuencial
-                                  join n in db.Nomenclador on ircvdet.idItem equals n.codigo
-                                  where (n.categoriaNomenclador == "Item")
-                                     && (i.idFlujo == vIdFlujo)
-                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
-                                     && (ircv.secuencial == pIdSecuencial)
-                                  orderby i.idInspeccion, ircv.secuencial
-                                  select new
-                                  {
-                                      ircv.idInspeccion,
-                                      ircvdet.secuencial,
-                                      ircv.nombreTercero,
-                                      ircv.docIdentidadTercero,
-                                      ircv.marca,
-                                      ircv.modelo,
-                                      ircv.placa,
-                                      ircv.chasis,
-                                      ircv.color,
-                                      ircvdet.idItem,
-                                      n.descripcion,
-                                      ircvdet.compra,
-                                      ircvdet.instalacion,
-                                      ircvdet.pintura,
-                                      ircvdet.chaperio,
-                                      ircvdet.mecanico,
-                                      ircvdet.reparacionPrevia,
-                                      ircvdet.observaciones
-                                  };
-
-
+            var vListaInspDaniosPropios = from i in db.Inspeccion
+                                          join f in db.Flujo on i.idFlujo equals f.idFlujo
+                                          join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
+                                          join idp in db.InspDaniosPropios on idpp.secuencial equals idp.secuencial
+                                          join n in db.Nomenclador on idp.idItem equals n.codigo
+                                          where (n.categoriaNomenclador == "Item")
+                                          && (i.idFlujo == vIdFlujo)
+                                          && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                                          && (idp.secuencial == pIdSecuencial)
+                                          orderby i.idInspeccion, n.descripcion
+                                          select new
+                                          {
+                                              idInspeccion = idp.secuencial,
+                                              idp.idItem,
+                                              n.descripcion,
+                                              idp.compra,
+                                              idp.instalacion,
+                                              idp.pintura,
+                                              idp.mecanico,
+                                              idp.chaperio,
+                                              idp.reparacionPrevia,
+                                              idp.observaciones
+                                          };
 
             ReportViewerInsp.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-            ReportViewerInsp.LocalReport.ReportPath = "Reportes\\RepFormularioInspRCVehicular.rdlc";
+            ReportViewerInsp.LocalReport.ReportPath = "Reportes\\RepFormularioInspDaniosPropios.rdlc";
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
-            ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaInspRCVeh);
+            ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaInspDaniosPropios);
 
             ReportViewerInsp.LocalReport.DataSources.Clear();
             ReportViewerInsp.LocalReport.DataSources.Add(datasource1);
-            ReportViewerInsp.LocalReport.DataSources.Add(datasource5);
+            ReportViewerInsp.LocalReport.DataSources.Add(datasource2);
 
             ReportViewerInsp.LocalReport.Refresh();
             byte[] VArrayBytes = ReportViewerInsp.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
@@ -3852,6 +3855,101 @@ namespace ICRL.Presentacion
             ReportViewerInsp.LocalReport.DataSources.Clear();
             ReportViewerInsp.LocalReport.DataSources.Add(datasource1);
             ReportViewerInsp.LocalReport.DataSources.Add(datasource3);
+
+            ReportViewerInsp.LocalReport.Refresh();
+            byte[] VArrayBytes = ReportViewerInsp.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            //enviar el array de bytes a cliente
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
+            Response.BinaryWrite(VArrayBytes); // se crea el archivo
+            Response.Flush(); // se envia al cliente para su descarga
+        }
+
+        protected void PImprimeFormularioInspRCVehicular(int pIdSecuencial)
+        {
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+            LBCDesaEntities db = new LBCDesaEntities();
+
+            int vIdFlujo = 0;
+            int vIdInspeccion = 0;
+
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = "pdf";
+            string fileName = "RepFormInspeccionRCVehicular" + pIdSecuencial.ToString();
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+
+            var vListaFlujo = from i in db.Inspeccion
+                              join f in db.Flujo on i.idFlujo equals f.idFlujo
+                              where (i.idFlujo == vIdFlujo)
+                                 && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios)
+                              orderby f.flujoOnBase, i.idInspeccion
+                              select new
+                              {
+                                  f.flujoOnBase,
+                                  f.nombreAsegurado,
+                                  f.docIdAsegurado,
+                                  f.telefonocelAsegurado,
+                                  f.numeroPoliza,
+                                  f.placaVehiculo,
+                                  f.marcaVehiculo,
+                                  f.modeloVehiculo,
+                                  f.colorVehiculo,
+                                  f.anioVehiculo,
+                                  i.idInspeccion,
+                                  i.causaSiniestro,
+                                  i.descripcionSiniestro
+                              };
+
+            var vListaInspRCVeh = from i in db.Inspeccion
+                                  join f in db.Flujo on i.idFlujo equals f.idFlujo
+                                  join ircv in db.InspRCVehicular on i.idInspeccion equals ircv.idInspeccion
+                                  join ircvdet in db.InspRCVehicularDetalle on ircv.secuencial equals ircvdet.secuencial
+                                  join n in db.Nomenclador on ircvdet.idItem equals n.codigo
+                                  where (n.categoriaNomenclador == "Item")
+                                     && (i.idFlujo == vIdFlujo)
+                                     && (i.tipoCobertura == (int)ICRL.BD.AccesoDatos.TipoInspeccion.RCVEhicular)
+                                     && (ircv.secuencial == pIdSecuencial)
+                                  orderby i.idInspeccion, ircv.secuencial
+                                  select new
+                                  {
+                                      ircv.idInspeccion,
+                                      ircvdet.secuencial,
+                                      ircv.nombreTercero,
+                                      ircv.docIdentidadTercero,
+                                      ircv.marca,
+                                      ircv.modelo,
+                                      ircv.placa,
+                                      ircv.chasis,
+                                      ircv.color,
+                                      ircvdet.idItem,
+                                      n.descripcion,
+                                      ircvdet.compra,
+                                      ircvdet.instalacion,
+                                      ircvdet.pintura,
+                                      ircvdet.chaperio,
+                                      ircvdet.mecanico,
+                                      ircvdet.reparacionPrevia,
+                                      ircvdet.observaciones
+                                  };
+
+
+
+            ReportViewerInsp.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+            ReportViewerInsp.LocalReport.ReportPath = "Reportes\\RepFormularioInspRCVehicular.rdlc";
+            ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+            ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaInspRCVeh);
+
+            ReportViewerInsp.LocalReport.DataSources.Clear();
+            ReportViewerInsp.LocalReport.DataSources.Add(datasource1);
+            ReportViewerInsp.LocalReport.DataSources.Add(datasource5);
 
             ReportViewerInsp.LocalReport.Refresh();
             byte[] VArrayBytes = ReportViewerInsp.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
