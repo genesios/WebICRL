@@ -35,5 +35,6 @@ namespace ICRL.ModeloDB
         public string descripcionSiniestro { get; set; }
         public string direccionInspeccion { get; set; }
         public string agenciaAtencion { get; set; }
+        public Nullable<System.DateTime> fechaSiniestro { get; set; }
     }
 }

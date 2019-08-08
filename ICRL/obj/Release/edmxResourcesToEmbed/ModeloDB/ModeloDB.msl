@@ -21,6 +21,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CotiDaniosPropios">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiDaniosPropios">
+        <MappingFragment StoreEntitySet="CotiDaniosPropios">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CotiPerdidaTotal">
       <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotal">
         <MappingFragment StoreEntitySet="CotiPerdidaTotal">
@@ -125,7 +134,8 @@
     <EntitySetMapping Name="CotiReparacion">
       <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacion">
         <MappingFragment StoreEntitySet="CotiReparacion">
-          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="chaperio" ColumnName="chaperio" />
           <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
           <ScalarProperty Name="mecanico" ColumnName="mecanico" />
@@ -133,17 +143,18 @@
           <ScalarProperty Name="precioCotizado" ColumnName="precioCotizado" />
           <ScalarProperty Name="descFijoPorcentaje" ColumnName="descFijoPorcentaje" />
           <ScalarProperty Name="montoDescuento" ColumnName="montoDescuento" />
-          <ScalarProperty Name="montoDeducibleFraCoa" ColumnName="montoDeducibleFraCoa" />
+          <ScalarProperty Name="precioFinal" ColumnName="precioFinal" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiReparacionRepuesto">
       <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacionRepuesto">
         <MappingFragment StoreEntitySet="CotiReparacionRepuesto">
-          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="idOrden" ColumnName="idOrden" />
           <ScalarProperty Name="tipoOrden" ColumnName="tipoOrden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
           <ScalarProperty Name="montoOrden" ColumnName="montoOrden" />
           <ScalarProperty Name="monedaOrden" ColumnName="monedaOrden" />
           <ScalarProperty Name="estadoOrden" ColumnName="estadoOrden" />
@@ -154,19 +165,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CotiRepuestos">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRepuestos">
-        <MappingFragment StoreEntitySet="CotiRepuestos">
-          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+    <EntitySetMapping Name="CotiRepuesto">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRepuesto">
+        <MappingFragment StoreEntitySet="CotiRepuesto">
+          <ScalarProperty Name="idItem" ColumnName="idItem" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="pintura" ColumnName="pintura" />
           <ScalarProperty Name="instalacion" ColumnName="instalacion" />
           <ScalarProperty Name="moneda" ColumnName="moneda" />
           <ScalarProperty Name="precioCotizado" ColumnName="precioCotizado" />
           <ScalarProperty Name="descFijoPorcentaje" ColumnName="descFijoPorcentaje" />
           <ScalarProperty Name="montoDescuento" ColumnName="montoDescuento" />
+          <ScalarProperty Name="precioFinal" ColumnName="precioFinal" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
           <ScalarProperty Name="diasEntrega" ColumnName="diasEntrega" />
           <ScalarProperty Name="recepcion" ColumnName="recepcion" />
           <ScalarProperty Name="fechaRecepcion" ColumnName="fechaRecepcion" />
+          <ScalarProperty Name="fechaEfectiva" ColumnName="fechaEfectiva" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -176,12 +191,13 @@
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
-          <ScalarProperty Name="idAsegurado" ColumnName="idAsegurado" />
           <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-          <ScalarProperty Name="idInspector" ColumnName="idInspector" />
+          <ScalarProperty Name="inspector" ColumnName="inspector" />
           <ScalarProperty Name="sucursal" ColumnName="sucursal" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
+          <ScalarProperty Name="correlativo" ColumnName="correlativo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -247,7 +263,7 @@
       <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropios">
         <MappingFragment StoreEntitySet="InspDaniosPropios">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
-          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="compra" ColumnName="compra" />
           <ScalarProperty Name="instalacion" ColumnName="instalacion" />
           <ScalarProperty Name="pintura" ColumnName="pintura" />
@@ -255,6 +271,16 @@
           <ScalarProperty Name="chaperio" ColumnName="chaperio" />
           <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InspDaniosPropiosPadre">
+      <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropiosPadre">
+        <MappingFragment StoreEntitySet="InspDaniosPropiosPadre">
+          <ScalarProperty Name="cambioAPerdidaTotal" ColumnName="cambioAPerdidaTotal" />
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -278,7 +304,7 @@
           <ScalarProperty Name="recomendacionPerdidaTotal" ColumnName="recomendacionPerdidaTotal" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="fecha_siniestro" ColumnName="fecha_siniestro" />
-          <ScalarProperty Name="tipoInpeccion" ColumnName="tipoInpeccion" />
+          <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
           <ScalarProperty Name="correlativo" ColumnName="correlativo" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
         </MappingFragment>

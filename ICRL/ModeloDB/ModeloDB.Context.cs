@@ -41,6 +41,13 @@ namespace ICRL.ModeloDB
         public virtual DbSet<CotiReparacionRepuesto> CotiReparacionRepuesto { get; set; }
         public virtual DbSet<CotiRepuesto> CotiRepuesto { get; set; }
         public virtual DbSet<Cotizacion> Cotizacion { get; set; }
+        public virtual DbSet<cotizacion_danios_propios> cotizacion_danios_propios { get; set; }
+        public virtual DbSet<cotizacion_perdida_total_propio> cotizacion_perdida_total_propio { get; set; }
+        public virtual DbSet<cotizacion_perdida_total_robo> cotizacion_perdida_total_robo { get; set; }
+        public virtual DbSet<cotizacion_rc_objetos> cotizacion_rc_objetos { get; set; }
+        public virtual DbSet<cotizacion_rc_personas> cotizacion_rc_personas { get; set; }
+        public virtual DbSet<cotizacion_rc_vehicular> cotizacion_rc_vehicular { get; set; }
+        public virtual DbSet<cotizacion_robo_parcial> cotizacion_robo_parcial { get; set; }
         public virtual DbSet<CotizacionFlujo> CotizacionFlujo { get; set; }
         public virtual DbSet<EstadoSesion> EstadoSesion { get; set; }
         public virtual DbSet<Flujo> Flujo { get; set; }

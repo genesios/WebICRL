@@ -4,3 +4,9 @@ C:\Repo\Git\vs\gnesios\LBC\OnBaseProxy\obj\Release\OnBaseProxy.csprojResolveAsse
 C:\Repo\Git\vs\gnesios\LBC\OnBaseProxy\obj\Release\OnBaseProxy.csproj.CoreCompileInputs.cache
 C:\Repo\Git\vs\gnesios\LBC\OnBaseProxy\obj\Release\OnBaseProxy.dll
 C:\Repo\Git\vs\gnesios\LBC\OnBaseProxy\obj\Release\OnBaseProxy.pdb
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\bin\Release\OnBaseProxy.dll
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\bin\Release\OnBaseProxy.pdb
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Release\OnBaseProxy.csprojResolveAssemblyReference.cache
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Release\OnBaseProxy.csproj.CoreCompileInputs.cache
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Release\OnBaseProxy.dll
+C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Release\OnBaseProxy.pdb

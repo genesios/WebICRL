@@ -184,37 +184,66 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
+        //Anterior método de llenar la grilla
+        //private int FlTraeDatosDPReparacion(int pIdCotizacion)
+        //{
+        //    int vResultado = 0;
+
+        //    using (LBCDesaEntities db = new LBCDesaEntities())
+        //    {
+        //        var vLst = from c in db.Cotizacion
+        //                   join cotrepa in db.CotiReparacion on c.idCotizacion equals cotrepa.idCotizacion
+        //                   join n in db.Nomenclador on cotrepa.idItem equals n.codigo
+        //                   where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
+        //                   select new
+        //                   {
+        //                       n.descripcion,
+        //                       cotrepa.chaperio,
+        //                       cotrepa.reparacionPrevia,
+        //                       cotrepa.mecanico,
+        //                       cotrepa.moneda,
+        //                       cotrepa.precioCotizado,
+        //                       cotrepa.descFijoPorcentaje,
+        //                       cotrepa.montoDescuento,
+        //                       cotrepa.precioFinal,
+        //                       cotrepa.proveedor
+        //                   };
+
+        //        GridViewReparaciones.DataSource = vLst.ToList();
+        //        GridViewReparaciones.DataBind();
+
+        //    }
+
+        //    return vResultado;
+        //}
         private int FlTraeDatosDPReparacion(int pIdCotizacion)
         {
             int vResultado = 0;
+            int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            using (LBCDesaEntities db = new LBCDesaEntities())
+            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
+            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+
+            GridViewReparaciones.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
             {
-                var vLst = from c in db.Cotizacion
-                           join cotrepa in db.CotiReparacion on c.idCotizacion equals cotrepa.idCotizacion
-                           join n in db.Nomenclador on cotrepa.idItem equals n.codigo
-                           where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
-                           select new
-                           {
-                               n.descripcion,
-                               cotrepa.chaperio,
-                               cotrepa.reparacionPrevia,
-                               cotrepa.mecanico,
-                               cotrepa.moneda,
-                               cotrepa.precioCotizado,
-                               cotrepa.descFijoPorcentaje,
-                               cotrepa.montoDescuento,
-                               cotrepa.precioFinal,
-                               cotrepa.proveedor
-                           };
+                DaniosPropios.item_descripcion,
+                DaniosPropios.chaperio,
+                DaniosPropios.reparacion_previa,
+                DaniosPropios.mecanico,
+                DaniosPropios.id_moneda,
+                DaniosPropios.precio_cotizado,
+                DaniosPropios.id_tipo_descuento,
+                DaniosPropios.descuento,
+                DaniosPropios.precio_final,
+                DaniosPropios.proveedor,
+                DaniosPropios.id_tipo_item
 
-                GridViewReparaciones.DataSource = vLst.ToList();
-                GridViewReparaciones.DataBind();
-
-            }
+            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 1).ToList();
+            GridViewReparaciones.DataBind();
 
             return vResultado;
         }
+
 
         private int FlTraeDatosDPRepuesto(int pIdCotizacion)
         {
@@ -247,5 +276,237 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
+        #region ABMReparaciones
+
+        private int FlTraeNomenItemRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Item";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaItem.DataValueField = "codigo";
+            DropDownListRepaItem.DataTextField = "descripcion";
+            DropDownListRepaItem.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaItem.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenChaperioRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Nivel de Daño";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaChaperio.DataValueField = "codigo";
+            DropDownListRepaChaperio.DataTextField = "descripcion";
+            DropDownListRepaChaperio.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaChaperio.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenRepPreviaRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Nivel de Daño";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaRepPrevia.DataValueField = "codigo";
+            DropDownListRepaRepPrevia.DataTextField = "descripcion";
+            DropDownListRepaRepPrevia.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaRepPrevia.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenMonedaRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Moneda";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaMoneda.DataValueField = "codigo";
+            DropDownListRepaMoneda.DataTextField = "descripcion";
+            DropDownListRepaMoneda.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaMoneda.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenTipoDescRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Tipo Descuento";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaTipoDesc.DataValueField = "codigo";
+            DropDownListRepaTipoDesc.DataTextField = "descripcion";
+            DropDownListRepaTipoDesc.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaTipoDesc.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenProveedorRepa()
+        {
+            int vResultado = 0;
+            string vCategoria = "Proveedor";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListRepaProveedor.DataValueField = "codigo";
+            DropDownListRepaProveedor.DataTextField = "descripcion";
+            DropDownListRepaProveedor.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListRepaProveedor.DataBind();
+
+            return vResultado;
+        }
+
+        protected void PLimpiarCamposRepa()
+        {
+            DropDownListRepaItem.SelectedIndex = 0;
+            DropDownListRepaChaperio.SelectedIndex = 0;
+            DropDownListRepaRepPrevia.SelectedIndex = 0;
+            CheckBoxRepaMecanico.Checked = false;
+            DropDownListRepaMoneda.SelectedIndex = 0;
+            TextBoxRepaPrecioCotizado.Text = string.Empty;
+            DropDownListRepaTipoDesc.SelectedIndex = 0;
+            TextBoxRepaMontoDesc.Text = string.Empty;
+
+        }
+
+        protected void PCargaCombosRepa()
+        {
+            FlTraeNomenItemRepa();
+            FlTraeNomenChaperioRepa();
+            FlTraeNomenRepPreviaRepa();
+            FlTraeNomenMonedaRepa();
+            FlTraeNomenTipoDescRepa();
+            FlTraeNomenProveedorRepa();
+        }
+
+        protected void ButtonRepaAgregarItem_Click(object sender, EventArgs e)
+        {
+            PCargaCombosRepa();
+            TextBoxRepaIdItem.Text = string.Empty;
+            PanelABMReparaciones.Enabled = true;
+            ButtonRepaGrabar.Enabled = true;
+            ButtonRepaCancelar.Enabled = true;
+        }
+
+        protected void PRepaModificarItem()
+        {
+            PCargaCombosRepa();
+            PanelABMReparaciones.Enabled = true;
+            DropDownListRepaItem.Enabled = false;
+            ButtonRepaGrabar.Enabled = true;
+            ButtonRepaCancelar.Enabled = true;
+        }
+
+        protected void ButtonRepaGrabar_Click(object sender, EventArgs e)
+        {
+            LabelRepaRegistroItems.Text = "Items";
+            CotizacionICRL vCotizacionICRL = new CotizacionICRL();
+            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            
+            //Completar los elementos del objeto y grabar el registro.
+            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            if (string.Empty != TextBoxRepaIdItem.Text)
+            {
+                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepaIdItem.Text);
+            }
+            //tipo_item:  1 = Reparacion  2 = Repuesto
+            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+            vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
+            vTipoDaniosPropios.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
+            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
+            switch (vTipoDaniosPropios.id_tipo_descuento)
+            {
+                case "Fijo":
+                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    break;
+                case "Porcentaje":
+                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    break;
+                default:
+                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    break;
+            }
+            vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
+            vTipoDaniosPropios.id_estado = 1;
+
+            bool vResultado = false;
+            vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
+            if (vResultado)
+            {
+                LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
+                PLimpiarCamposRepa();
+                PanelABMReparaciones.Enabled = false;
+                ButtonRepaGrabar.Enabled = false;
+                ButtonRepaCancelar.Enabled = false;
+            }
+            else
+            {
+                LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
+            }
+        }
+
+        protected void ButtonRepaCancelar_Click(object sender, EventArgs e)
+        {
+            PanelABMReparaciones.Enabled = false;
+            ButtonRepaGrabar.Enabled = false;
+            ButtonRepaCancelar.Enabled = false;
+        }
+
+
+
+        #endregion
+
+        protected void GridViewReparaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //vDPPadreSecuencial = int.Parse(GridViewDaniosPropiosPadre.SelectedRow.Cells[3].Text);
+            //CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
+            PRepaModificarItem();
+            //Leer Registro de la grilla y cargar los valores a la ventana.
+            TextBoxRepaIdItem.Text = (GridViewReparaciones.SelectedRow.Cells[3].Text);
+            //////vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            //////vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            //tipo_item:  1 = Reparacion  2 = Repuesto
+            //vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+            //vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+            //vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
+            //vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
+            //vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
+            //vTipoDaniosPropios.id_moneda = short.Parse(DropDownListRepaMoneda.SelectedValue.Trim());
+            //vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
+            //vTipoDaniosPropios.id_tipo_descuento = short.Parse(DropDownListRepaTipoDesc.SelectedValue.Trim());
+            //vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
+            //switch (vTipoDaniosPropios.id_tipo_descuento)
+            //{
+            //    case 1:
+            //        vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+            //        break;
+            //    case 2:
+            //        vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+            //        break;
+            //    default:
+            //        vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+            //        break;
+            //}
+            //vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
+            //vTipoDaniosPropios.id_estado = 1;
+
+        }
     }
-}

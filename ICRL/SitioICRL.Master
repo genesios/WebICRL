@@ -72,6 +72,12 @@
                                         NavigateUrl="~/Presentacion/GestionInspeccion.aspx"
                                         Text="Gestión de Inspecciones" />
                                 </asp:TreeNode>
+                                <asp:TreeNode Value="Cotizaciones"
+                                    Text="Cotizaciones">
+                                    <asp:TreeNode Value="GestionCotizacion"
+                                        NavigateUrl="~/Presentacion/GestionCotizacion.aspx"
+                                        Text="Gestión de Cotizaciones" />
+                                </asp:TreeNode>
                             </asp:TreeNode>
                         </Nodes>
                         <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" HorizontalPadding="1px" NodeSpacing="0px" VerticalPadding="0px" BorderStyle="None"/>

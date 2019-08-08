@@ -8,7 +8,6 @@
     <Property Name="nombreAsegurado" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
     <Property Name="telefonoAsegurado" Type="Int32" />
     <Property Name="docIdAsegurado" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIZACI_ASSOCIATI_ASEGURAD" FromRole="Asegurado" ToRole="Cotizacion" />
     <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD" FromRole="Asegurado" ToRole="Liquidacion" />
   </EntityType>
   <EntityType Name="Contador">
@@ -19,6 +18,15 @@
     <Property Name="valorContador" Type="Int64" />
     <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="estado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CotiDaniosPropios">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CotiPerdidaTotal">
     <Key>
@@ -131,9 +139,11 @@
   </EntityType>
   <EntityType Name="CotiReparacion">
     <Key>
-      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idCotizacion" />
     </Key>
-    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
     <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="mecanico" Type="Boolean" />
@@ -141,18 +151,19 @@
     <Property Name="precioCotizado" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="descFijoPorcentaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="montoDeducibleFraCoa" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="CotiReparacionRepuesto" Relationship="Self.FK_COTIREPA_ASSOCIATI_COTIREPA" FromRole="CotiReparacion" ToRole="CotiReparacionRepuesto" />
-    <NavigationProperty Name="ItemTaller" Relationship="Self.FK_ITEMTALL_ASSOCIATI_COTIREPA" FromRole="CotiReparacion" ToRole="ItemTaller" />
+    <Property Name="precioFinal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="CotiReparacionRepuesto">
     <Key>
-      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+      <PropertyRef Name="tipoOrden" />
+      <PropertyRef Name="proveedor" />
     </Key>
-    <Property Name="secuencial" Type="Int32" Nullable="false" />
     <Property Name="idCotizacion" Type="Int32" Nullable="false" />
-    <Property Name="idOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="idOrden" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipoOrden" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="montoOrden" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="monedaOrden" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
     <Property Name="estadoOrden" Type="Int32" />
@@ -160,41 +171,42 @@
     <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="montoDeducibleFraCoa" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="montoFinal" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="CotiReparacion" Relationship="Self.FK_COTIREPA_ASSOCIATI_COTIREPA" FromRole="CotiReparacionRepuesto" ToRole="CotiReparacion" />
     <NavigationProperty Name="Cotizacion" Relationship="Self.FK_COTIREPA_REPARACIO_COTIZACI" FromRole="CotiReparacionRepuesto" ToRole="Cotizacion" />
-    <NavigationProperty Name="CotiRepuestos" Relationship="Self.FK_COTIREPU_ASSOCIATI_COTIREPA" FromRole="CotiReparacionRepuesto" ToRole="CotiRepuestos" />
   </EntityType>
-  <EntityType Name="CotiRepuestos">
+  <EntityType Name="CotiRepuesto">
     <Key>
-      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idItem" />
+      <PropertyRef Name="idCotizacion" />
     </Key>
-    <Property Name="secuencial" Type="Int32" Nullable="false" />
+    <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
     <Property Name="pintura" Type="Boolean" />
     <Property Name="instalacion" Type="Boolean" />
     <Property Name="moneda" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
     <Property Name="precioCotizado" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="descFijoPorcentaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="montoDescuento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="precioFinal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="proveedor" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
     <Property Name="diasEntrega" Type="Int32" />
     <Property Name="recepcion" Type="Boolean" />
     <Property Name="fechaRecepcion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CotiReparacionRepuesto" Relationship="Self.FK_COTIREPU_ASSOCIATI_COTIREPA" FromRole="CotiRepuestos" ToRole="CotiReparacionRepuesto" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.FK_PROVEEDO_ASSOCIATI_COTIREPU" FromRole="CotiRepuestos" ToRole="Proveedor" />
+    <Property Name="fechaEfectiva" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Cotizacion">
     <Key>
       <PropertyRef Name="idCotizacion" />
     </Key>
-    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
     <Property Name="idFlujo" Type="Int32" />
-    <Property Name="idAsegurado" Type="Int32" />
     <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="idInspector" Type="Int32" />
+    <Property Name="inspector" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
     <Property Name="sucursal" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
     <Property Name="idInspeccion" Type="Int32" />
     <Property Name="estado" Type="Int32" />
-    <NavigationProperty Name="Asegurado" Relationship="Self.FK_COTIZACI_ASSOCIATI_ASEGURAD" FromRole="Cotizacion" ToRole="Asegurado" />
+    <Property Name="tipoCobertura" Type="Int32" />
+    <Property Name="correlativo" Type="Int32" />
     <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
     <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
     <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
@@ -260,10 +272,10 @@
   <EntityType Name="InspDaniosPropios">
     <Key>
       <PropertyRef Name="idItem" />
-      <PropertyRef Name="idInspeccion" />
+      <PropertyRef Name="secuencial" />
     </Key>
     <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="secuencial" Type="Int32" Nullable="false" />
     <Property Name="compra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="instalacion" Type="Boolean" />
     <Property Name="pintura" Type="Boolean" />
@@ -271,6 +283,16 @@
     <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="InspDaniosPropiosPadre">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idInspeccion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idInspeccion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cambioAPerdidaTotal" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Inspeccion">
     <Key>
@@ -293,7 +315,7 @@
     <Property Name="recomendacionPerdidaTotal" Type="Boolean" />
     <Property Name="estado" Type="Int32" />
     <Property Name="fecha_siniestro" Type="DateTime" Precision="3" />
-    <Property Name="tipoInpeccion" Type="Int32" Nullable="false" />
+    <Property Name="tipoCobertura" Type="Int32" Nullable="false" />
     <Property Name="correlativo" Type="Int32" Nullable="false" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_INSPECCI_ASSOCIATI_USUARIO" FromRole="Inspeccion" ToRole="Usuario" />
@@ -439,7 +461,6 @@
     <Property Name="secuencial" Type="Int32" />
     <Property Name="costo" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="moneda" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="CotiReparacion" Relationship="Self.FK_ITEMTALL_ASSOCIATI_COTIREPA" FromRole="ItemTaller" ToRole="CotiReparacion" />
   </EntityType>
   <EntityType Name="Liquidacion">
     <Key>
@@ -507,7 +528,6 @@
     <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="secuencial" Type="Int32" />
     <Property Name="nombreProveedor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CotiRepuestos" Relationship="Self.FK_PROVEEDO_ASSOCIATI_COTIREPU" FromRole="Proveedor" ToRole="CotiRepuestos" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -550,18 +570,6 @@
     <NavigationProperty Name="Rol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="UsuarioRol" ToRole="Rol" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="UsuarioRol" ToRole="Usuario" />
   </EntityType>
-  <Association Name="FK_COTIZACI_ASSOCIATI_ASEGURAD">
-    <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="0..1" />
-    <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Asegurado">
-        <PropertyRef Name="idAsegurado" />
-      </Principal>
-      <Dependent Role="Cotizacion">
-        <PropertyRef Name="idAsegurado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
     <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
     <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
@@ -658,30 +666,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_COTIREPA_ASSOCIATI_COTIREPA">
-    <End Role="CotiReparacionRepuesto" Type="Self.CotiReparacionRepuesto" Multiplicity="1" />
-    <End Role="CotiReparacion" Type="Self.CotiReparacion" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="CotiReparacionRepuesto">
-        <PropertyRef Name="secuencial" />
-      </Principal>
-      <Dependent Role="CotiReparacion">
-        <PropertyRef Name="secuencial" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ITEMTALL_ASSOCIATI_COTIREPA">
-    <End Role="CotiReparacion" Type="Self.CotiReparacion" Multiplicity="0..1" />
-    <End Role="ItemTaller" Type="Self.ItemTaller" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CotiReparacion">
-        <PropertyRef Name="secuencial" />
-      </Principal>
-      <Dependent Role="ItemTaller">
-        <PropertyRef Name="secuencial" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_COTIREPA_REPARACIO_COTIZACI">
     <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="1" />
     <End Role="CotiReparacionRepuesto" Type="Self.CotiReparacionRepuesto" Multiplicity="*" />
@@ -691,30 +675,6 @@
       </Principal>
       <Dependent Role="CotiReparacionRepuesto">
         <PropertyRef Name="idCotizacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_COTIREPU_ASSOCIATI_COTIREPA">
-    <End Role="CotiReparacionRepuesto" Type="Self.CotiReparacionRepuesto" Multiplicity="1" />
-    <End Role="CotiRepuestos" Type="Self.CotiRepuestos" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="CotiReparacionRepuesto">
-        <PropertyRef Name="secuencial" />
-      </Principal>
-      <Dependent Role="CotiRepuestos">
-        <PropertyRef Name="secuencial" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PROVEEDO_ASSOCIATI_COTIREPU">
-    <End Role="CotiRepuestos" Type="Self.CotiRepuestos" Multiplicity="0..1" />
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CotiRepuestos">
-        <PropertyRef Name="secuencial" />
-      </Principal>
-      <Dependent Role="Proveedor">
-        <PropertyRef Name="secuencial" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -817,6 +777,7 @@
   <EntityContainer Name="LBCDesaEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Asegurado" EntityType="Self.Asegurado" />
     <EntitySet Name="Contador" EntityType="Self.Contador" />
+    <EntitySet Name="CotiDaniosPropios" EntityType="Self.CotiDaniosPropios" />
     <EntitySet Name="CotiPerdidaTotal" EntityType="Self.CotiPerdidaTotal" />
     <EntitySet Name="CotiPerdidaTotalDuenio" EntityType="Self.CotiPerdidaTotalDuenio" />
     <EntitySet Name="CotiPerdidaTotalReferencia" EntityType="Self.CotiPerdidaTotalReferencia" />
@@ -826,12 +787,13 @@
     <EntitySet Name="CotiRCPersonaDetalle" EntityType="Self.CotiRCPersonaDetalle" />
     <EntitySet Name="CotiReparacion" EntityType="Self.CotiReparacion" />
     <EntitySet Name="CotiReparacionRepuesto" EntityType="Self.CotiReparacionRepuesto" />
-    <EntitySet Name="CotiRepuestos" EntityType="Self.CotiRepuestos" />
+    <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" />
     <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
     <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" />
     <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
     <EntitySet Name="Flujo" EntityType="Self.Flujo" />
     <EntitySet Name="InspDaniosPropios" EntityType="Self.InspDaniosPropios" />
+    <EntitySet Name="InspDaniosPropiosPadre" EntityType="Self.InspDaniosPropiosPadre" />
     <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" />
     <EntitySet Name="InspPerdidaTotalDanios" EntityType="Self.InspPerdidaTotalDanios" />
     <EntitySet Name="InspPerdidaTotalRobo" EntityType="Self.InspPerdidaTotalRobo" />
@@ -851,10 +813,6 @@
     <EntitySet Name="Rol" EntityType="Self.Rol" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
-    <AssociationSet Name="FK_COTIZACI_ASSOCIATI_ASEGURAD" Association="Self.FK_COTIZACI_ASSOCIATI_ASEGURAD">
-      <End Role="Asegurado" EntitySet="Asegurado" />
-      <End Role="Cotizacion" EntitySet="Cotizacion" />
-    </AssociationSet>
     <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
       <End Role="Asegurado" EntitySet="Asegurado" />
       <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -887,25 +845,9 @@
       <End Role="Cotizacion" EntitySet="Cotizacion" />
       <End Role="CotiRCPersona" EntitySet="CotiRCPersona" />
     </AssociationSet>
-    <AssociationSet Name="FK_COTIREPA_ASSOCIATI_COTIREPA" Association="Self.FK_COTIREPA_ASSOCIATI_COTIREPA">
-      <End Role="CotiReparacionRepuesto" EntitySet="CotiReparacionRepuesto" />
-      <End Role="CotiReparacion" EntitySet="CotiReparacion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ITEMTALL_ASSOCIATI_COTIREPA" Association="Self.FK_ITEMTALL_ASSOCIATI_COTIREPA">
-      <End Role="CotiReparacion" EntitySet="CotiReparacion" />
-      <End Role="ItemTaller" EntitySet="ItemTaller" />
-    </AssociationSet>
     <AssociationSet Name="FK_COTIREPA_REPARACIO_COTIZACI" Association="Self.FK_COTIREPA_REPARACIO_COTIZACI">
       <End Role="Cotizacion" EntitySet="Cotizacion" />
       <End Role="CotiReparacionRepuesto" EntitySet="CotiReparacionRepuesto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_COTIREPU_ASSOCIATI_COTIREPA" Association="Self.FK_COTIREPU_ASSOCIATI_COTIREPA">
-      <End Role="CotiReparacionRepuesto" EntitySet="CotiReparacionRepuesto" />
-      <End Role="CotiRepuestos" EntitySet="CotiRepuestos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PROVEEDO_ASSOCIATI_COTIREPU" Association="Self.FK_PROVEEDO_ASSOCIATI_COTIREPU">
-      <End Role="CotiRepuestos" EntitySet="CotiRepuestos" />
-      <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
     <AssociationSet Name="FK_COTIZACI_ASSOCIATI_USUARIO" Association="Self.FK_COTIZACI_ASSOCIATI_USUARIO">
       <End Role="Usuario" EntitySet="Usuario" />

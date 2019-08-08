@@ -165,8 +165,14 @@ div.twenty {
 }
 
 
+/***Calendar Control***/
+.ajax__calendar_container td {
+  padding: 0 !important;
+}
+
+
 @media only screen and (min-width: 1024px) {
-  table .basetable div input[type="text"] {
+    table .basetable div input[type="text"] {
     margin: 2px 0 5px 0;
   }
   div.fifty {
