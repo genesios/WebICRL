@@ -10,7 +10,7 @@ using ICRL.BD;
 
 namespace ICRL.Presentacion
 {
-    public partial class CotizacionDPRP : System.Web.UI.Page
+    public partial class CotizacionRCVehicular : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,11 +36,9 @@ namespace ICRL.Presentacion
                     FlTraeDatosCotizacion(vIdCotizacion, vlNumFlujo);
 
                     int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-                    short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
 
                     FlTraeDatosDPReparacion(vIdCotizacion);
                     FlTraeDatosDPRepuesto(vIdCotizacion);
-                    FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
                 }
 
                 if (Session["PopupABMReparacionesHabilitado"] != null)
@@ -570,7 +568,7 @@ namespace ICRL.Presentacion
         protected void GridViewReparaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vTextoTemporal = string.Empty;
-            
+
             //Leer Registro de la grilla y cargar los valores a la ventana.
             TextBoxRepaIdItem.Text = GridViewReparaciones.SelectedRow.Cells[1].Text;
             //tipo_item:  1 = Reparacion  2 = Repuesto
@@ -633,7 +631,6 @@ namespace ICRL.Presentacion
         #endregion
 
         #region ABMRepuestos
-
         private int FlTraeNomenItemRepu()
         {
             int vResultado = 0;
@@ -884,208 +881,9 @@ namespace ICRL.Presentacion
             DropDownListRepuProveedor.Items.FindByText(vTextoTemporal).Selected = true;
 
         }
-
         #endregion
-
-
-        #region SumaReparaciones
-
-        private int FlTraeDatosSumatoriaReparaciones(int pIdFlujo, int pIdCotizacion, short pTipoItem)
-        {
-            int vResultado = 0;
-
-            BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-            vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
-
-            GridViewSumaReparaciones.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
-            {
-                DaniosPropiosSumatoria.proveedor,
-                DaniosPropiosSumatoria.monto_orden,
-                DaniosPropiosSumatoria.id_tipo_descuento_orden,
-                DaniosPropiosSumatoria.descuento_proveedor,
-                DaniosPropiosSumatoria.deducible,
-                DaniosPropiosSumatoria.monto_final
-            }).ToList();
-            GridViewSumaReparaciones.DataBind();
-
-            return vResultado;
-        }
-
-        protected void ButtonRepaGenerarResumen_Click(object sender, EventArgs e)
-        {
-            int vIdFlujo = 0;
-            int vIdCotizacion = 0;
-            short vTipoItem = 0;
-            bool vResultado = false;
-
-            //Completar los elementos del objeto y grabar el registro.
-            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-            vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
-
-
-            vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
-            if (vResultado)
-            {
-                LabelRepaRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
-            }
-            else
-            {
-                LabelRepaRegistroItems.Text = "Reparaciones NO sumarizadas exitosamente";
-            }
-        }
-
-        protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
-        {
-            LabelSumaRegistroItems.Text = "Items - Sumatoria";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
-
-            //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
-
-            //tipo_item:  1 = Reparacion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
-            {
-                case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
-                    break;
-                case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
-                    break;
-                default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
-                    break;
-            }
-            vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
-
-            double vTipoCambio = 0;
-            vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
-
-            bool vResultado = false;
-            if (string.Empty != TextBoxRepaIdItem.Text)
-            {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepaIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
-                if (vResultado)
-                {
-                    LabelRepaRegistroItems.Text = "Registro modificado exitosamente";
-                    PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
-                    ButtonRepaGrabar.Enabled = false;
-                    ButtonRepaCancelar.Enabled = false;
-                }
-                else
-                {
-                    LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
-                }
-            }
-            else
-            {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
-                if (vResultado)
-                {
-                    LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
-                    PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
-                    ButtonRepaGrabar.Enabled = false;
-                    ButtonRepaCancelar.Enabled = false;
-                }
-                else
-                {
-                    LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
-                }
-            }
-
-            int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-
-            FlTraeDatosDPReparacion(vIdCotizacion);
-
-        }
-
-        protected void ButtonSumaCancelar_Click(object sender, EventArgs e)
-        {
-            //PanelABMReparaciones.Enabled = false;
-            ButtonSumaGrabar.Enabled = false;
-            ButtonSumaCancelar.Enabled = false;
-            //PLimpiarCamposRepa();
-        }
-
-        protected void ButtonCancelPopSumatorias_Click(object sender, EventArgs e)
-        {
-            int vResul = 0;
-            //PLimpiaSeccionDaniosPropiosPadre();
-            //PLimpiaSeccionDatosPropios();
-            //PBloqueaDPPadreEdicion(false);
-            //PBloqueaDPEdicion(false);
-            //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
-
-            Session["PopupABMSumasHabilitado"] = 0;
-            this.ModalPopupSumatorias.Hide();
-        }
-
-        protected void GridViewSumaReparaciones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string vTextoTemporal = string.Empty;
-
-            //Leer Registro de la grilla y cargar los valores a la ventana.
-            TextBoxRepaIdItem.Text = GridViewReparaciones.SelectedRow.Cells[1].Text;
-            //tipo_item:  1 = Reparacion  2 = Repuesto
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text;
-            DropDownListRepaItem.ClearSelection();
-            DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text;
-            DropDownListRepaChaperio.ClearSelection();
-            DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text;
-            DropDownListRepaRepPrevia.ClearSelection();
-            DropDownListRepaRepPrevia.Items.FindByText(vTextoTemporal).Selected = true;
-
-            CheckBoxRepaMecanico.Checked = (GridViewReparaciones.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text;
-            DropDownListRepaMoneda.ClearSelection();
-            DropDownListRepaMoneda.Items.FindByText(vTextoTemporal).Selected = true;
-
-            TextBoxRepaPrecioCotizado.Text = GridViewReparaciones.SelectedRow.Cells[7].Text;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[8].Text;
-            DropDownListRepaTipoDesc.ClearSelection();
-            DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
-
-            TextBoxRepaMontoDesc.Text = GridViewReparaciones.SelectedRow.Cells[9].Text;
-
-            TextBoxRepaPrecioFinal.Text = GridViewReparaciones.SelectedRow.Cells[10].Text;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[11].Text;
-            DropDownListRepaProveedor.ClearSelection();
-            DropDownListRepaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
-
-            PRepaModificarItem();
-            Session["PopupABMSumasHabilitado"] = 1;
-            this.ModalPopupSumatorias.Show();
-        }
-
-        #endregion
-
     }
+
+
+
 }

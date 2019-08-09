@@ -348,6 +348,7 @@
     </Content>
     <Content Include="Presentacion\Cotizacion.aspx" />
     <Content Include="Presentacion\CotizacionDPRP.aspx" />
+    <Content Include="Presentacion\CotizacionRCVehicular.aspx" />
     <Content Include="Presentacion\GestionCotizacion.aspx" />
     <Content Include="Presentacion\GestionInspeccion.aspx" />
     <Content Include="Presentacion\GestionLiquidacion.aspx" />
@@ -686,6 +687,13 @@
     </Compile>
     <Compile Include="Presentacion\CotizacionDPRP.aspx.designer.cs">
       <DependentUpon>CotizacionDPRP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionRCVehicular.aspx.cs">
+      <DependentUpon>CotizacionRCVehicular.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionRCVehicular.aspx.designer.cs">
+      <DependentUpon>CotizacionRCVehicular.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\GestionCotizacion.aspx.cs">
       <DependentUpon>GestionCotizacion.aspx</DependentUpon>
