@@ -40,5 +40,6 @@ namespace ICRL.ModeloDB
         public Nullable<System.DateTime> fecha_envio_efectivo { get; set; }
         public string numero_orden { get; set; }
         public Nullable<short> id_estado { get; set; }
+        public Nullable<double> tipo_cambio { get; set; }
     }
 }

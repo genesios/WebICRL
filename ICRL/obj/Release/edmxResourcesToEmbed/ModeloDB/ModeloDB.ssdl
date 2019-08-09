@@ -195,6 +195,327 @@
     <Property Name="tipoCobertura" Type="int" />
     <Property Name="correlativo" Type="int" />
   </EntityType>
+  <EntityType Name="cotizacion_danios_propios">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="chaperio" Type="varchar" MaxLength="50" />
+    <Property Name="reparacion_previa" Type="varchar" MaxLength="50" />
+    <Property Name="mecanico" Type="bit" />
+    <Property Name="pintura" Type="bit" />
+    <Property Name="instalacion" Type="bit" />
+    <Property Name="id_moneda" Type="varchar" MaxLength="10" />
+    <Property Name="precio_cotizado" Type="float" />
+    <Property Name="id_tipo_descuento" Type="varchar" MaxLength="10" />
+    <Property Name="descuento" Type="float" />
+    <Property Name="precio_final" Type="float" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+    <Property Name="recepcion" Type="bit" />
+    <Property Name="dias_entrega" Type="int" />
+    <Property Name="fecha_envio_efectivo" Type="datetime" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="tipo_cambio" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_danios_propios_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_perdida_total_propio">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="condiciones_especiales" Type="bit" />
+    <Property Name="version" Type="varchar" MaxLength="20" />
+    <Property Name="serie" Type="varchar" MaxLength="20" />
+    <Property Name="caja" Type="varchar" MaxLength="20" />
+    <Property Name="combustible" Type="varchar" MaxLength="20" />
+    <Property Name="cilindrada" Type="varchar" MaxLength="20" />
+    <Property Name="techo_solar" Type="bit" />
+    <Property Name="asientos_cuero" Type="bit" />
+    <Property Name="aros_magnesio" Type="bit" />
+    <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+    <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_1" Type="float" />
+    <Property Name="duenio_descripcion_1" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_2" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_2" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_2" Type="float" />
+    <Property Name="duenio_descripcion_2" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_3" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_3" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_3" Type="float" />
+    <Property Name="duenio_descripcion_3" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_4" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_4" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_4" Type="float" />
+    <Property Name="duenio_descripcion_4" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_5" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_5" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_5" Type="float" />
+    <Property Name="duenio_descripcion_5" Type="varchar" MaxLength="150" />
+    <Property Name="referencia_usada_1" Type="bit" />
+    <Property Name="referencia_medios_1" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_1" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_1" Type="float" />
+    <Property Name="referencia_usada_2" Type="bit" />
+    <Property Name="referencia_medios_2" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_2" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_2" Type="float" />
+    <Property Name="referencia_usada_3" Type="bit" />
+    <Property Name="referencia_medios_3" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_3" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_3" Type="float" />
+    <Property Name="referencia_usada_4" Type="bit" />
+    <Property Name="referencia_medios_4" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_4" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_4" Type="float" />
+    <Property Name="referencia_usada_5" Type="bit" />
+    <Property Name="referencia_medios_5" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_5" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_5" Type="float" />
+    <Property Name="referencia_usada_6" Type="bit" />
+    <Property Name="referencia_medios_6" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_6" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_6" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_perdida_total_robo">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="condiciones_especiales" Type="bit" />
+    <Property Name="version" Type="varchar" MaxLength="20" />
+    <Property Name="serie" Type="varchar" MaxLength="20" />
+    <Property Name="caja" Type="varchar" MaxLength="20" />
+    <Property Name="combustible" Type="varchar" MaxLength="20" />
+    <Property Name="cilindrada" Type="varchar" MaxLength="20" />
+    <Property Name="techo_solar" Type="bit" />
+    <Property Name="asientos_cuero" Type="bit" />
+    <Property Name="aros_magnesio" Type="bit" />
+    <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+    <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_1" Type="float" />
+    <Property Name="duenio_descripcion_1" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_2" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_2" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_2" Type="float" />
+    <Property Name="duenio_descripcion_2" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_3" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_3" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_3" Type="float" />
+    <Property Name="duenio_descripcion_3" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_4" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_4" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_4" Type="float" />
+    <Property Name="duenio_descripcion_4" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_nombres_5" Type="varchar" MaxLength="150" />
+    <Property Name="duenio_documento_5" Type="varchar" MaxLength="20" />
+    <Property Name="duenio_monto_5" Type="float" />
+    <Property Name="duenio_descripcion_5" Type="varchar" MaxLength="150" />
+    <Property Name="referencia_usada_1" Type="bit" />
+    <Property Name="referencia_medios_1" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_1" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_1" Type="float" />
+    <Property Name="referencia_usada_2" Type="bit" />
+    <Property Name="referencia_medios_2" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_2" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_2" Type="float" />
+    <Property Name="referencia_usada_3" Type="bit" />
+    <Property Name="referencia_medios_3" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_3" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_3" Type="float" />
+    <Property Name="referencia_usada_4" Type="bit" />
+    <Property Name="referencia_medios_4" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_4" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_4" Type="float" />
+    <Property Name="referencia_usada_5" Type="bit" />
+    <Property Name="referencia_medios_5" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_5" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_5" Type="float" />
+    <Property Name="referencia_usada_6" Type="bit" />
+    <Property Name="referencia_medios_6" Type="varchar" MaxLength="100" />
+    <Property Name="referencia_descripcion_6" Type="varchar" MaxLength="200" />
+    <Property Name="referencia_monto_6" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_objetos">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_apellido" Type="varchar" MaxLength="150" />
+    <Property Name="telefono_contacto" Type="varchar" MaxLength="15" />
+    <Property Name="numero_documento" Type="varchar" MaxLength="15" />
+    <Property Name="tipo_item" Type="varchar" MaxLength="50" />
+    <Property Name="monto_item" Type="float" />
+    <Property Name="id_moneda" Type="smallint" />
+    <Property Name="descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="rembolso" Type="bit" />
+    <Property Name="tipo_cambio" Type="float" />
+    <Property Name="id_estado" Type="smallint" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_personas">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_apellido" Type="varchar" MaxLength="150" />
+    <Property Name="telefono_contacto" Type="varchar" MaxLength="15" />
+    <Property Name="numero_documento" Type="varchar" MaxLength="15" />
+    <Property Name="tipo_gasto" Type="varchar" MaxLength="50" />
+    <Property Name="monto_gasto" Type="float" />
+    <Property Name="id_moneda" Type="smallint" />
+    <Property Name="descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="rembolso" Type="bit" />
+    <Property Name="tipo_cambio" Type="float" />
+    <Property Name="id_estado" Type="smallint" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_vehicular">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="chaperio" Type="varchar" MaxLength="50" />
+    <Property Name="reparacion_previa" Type="varchar" MaxLength="50" />
+    <Property Name="mecanico" Type="bit" />
+    <Property Name="pintura" Type="bit" />
+    <Property Name="instalacion" Type="bit" />
+    <Property Name="id_moneda" Type="varchar" MaxLength="10" />
+    <Property Name="precio_cotizado" Type="float" />
+    <Property Name="id_tipo_descuento" Type="varchar" MaxLength="10" />
+    <Property Name="descuento" Type="float" />
+    <Property Name="precio_final" Type="float" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+    <Property Name="recepcion" Type="bit" />
+    <Property Name="dias_entrega" Type="int" />
+    <Property Name="fecha_envio_efectivo" Type="datetime" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="tipo_cambio" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_vehicular_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_robo_parcial">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="chaperio" Type="varchar" MaxLength="50" />
+    <Property Name="reparacion_previa" Type="varchar" MaxLength="50" />
+    <Property Name="mecanico" Type="bit" />
+    <Property Name="pintura" Type="bit" />
+    <Property Name="instalacion" Type="bit" />
+    <Property Name="id_moneda" Type="varchar" MaxLength="10" />
+    <Property Name="precio_cotizado" Type="float" />
+    <Property Name="id_tipo_descuento" Type="varchar" MaxLength="10" />
+    <Property Name="descuento" Type="float" />
+    <Property Name="precio_final" Type="float" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+    <Property Name="recepcion" Type="bit" />
+    <Property Name="dias_entrega" Type="int" />
+    <Property Name="fecha_envio_efectivo" Type="datetime" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="tipo_cambio" Type="float" />
+  </EntityType>
+  <EntityType Name="cotizacion_robo_parcial_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="monto_orden" Type="float" />
+    <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+    <Property Name="descuento_proveedor" Type="float" />
+    <Property Name="deducible" Type="float" />
+    <Property Name="monto_final" Type="float" />
+  </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
       <PropertyRef Name="idFlujo" />
@@ -249,6 +570,7 @@
     <Property Name="descripcionSiniestro" Type="varchar" MaxLength="100" />
     <Property Name="direccionInspeccion" Type="varchar" MaxLength="100" />
     <Property Name="agenciaAtencion" Type="varchar" MaxLength="100" />
+    <Property Name="fechaSiniestro" Type="datetime" />
   </EntityType>
   <EntityType Name="InspDaniosPropios">
     <Key>
@@ -763,6 +1085,16 @@
     <EntitySet Name="CotiReparacionRepuesto" EntityType="Self.CotiReparacionRepuesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_rc_personas" EntityType="Self.cotizacion_rc_personas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_rc_vehicular" EntityType="Self.cotizacion_rc_vehicular" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_rc_vehicular_sumatoria" EntityType="Self.cotizacion_rc_vehicular_sumatoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_robo_parcial" EntityType="Self.cotizacion_robo_parcial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_robo_parcial_sumatoria" EntityType="Self.cotizacion_robo_parcial_sumatoria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Flujo" EntityType="Self.Flujo" Schema="dbo" store:Type="Tables" />

@@ -232,6 +232,24 @@
           <Property Name="fecha_envio_efectivo" Type="datetime" />
           <Property Name="numero_orden" Type="varchar" MaxLength="50" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="tipo_cambio" Type="float" />
+        </EntityType>
+        <EntityType Name="cotizacion_danios_propios_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="monto_orden" Type="float" />
+          <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+          <Property Name="descuento_proveedor" Type="float" />
+          <Property Name="deducible" Type="float" />
+          <Property Name="monto_final" Type="float" />
         </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
@@ -410,21 +428,21 @@
           <Property Name="id_flujo" Type="int" Nullable="false" />
           <Property Name="id_cotizacion" Type="int" Nullable="false" />
           <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_tipo_item" Type="smallint" />
+          <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
           <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
           <Property Name="chaperio" Type="varchar" MaxLength="50" />
           <Property Name="reparacion_previa" Type="varchar" MaxLength="50" />
           <Property Name="mecanico" Type="bit" />
-          <Property Name="pintura" Type="varchar" MaxLength="50" />
+          <Property Name="pintura" Type="bit" />
           <Property Name="instalacion" Type="bit" />
-          <Property Name="id_moneda" Type="smallint" />
+          <Property Name="id_moneda" Type="varchar" MaxLength="10" />
           <Property Name="precio_cotizado" Type="float" />
-          <Property Name="id_tipo_descuento" Type="smallint" />
+          <Property Name="id_tipo_descuento" Type="varchar" MaxLength="10" />
           <Property Name="descuento" Type="float" />
           <Property Name="precio_final" Type="float" />
           <Property Name="proveedor" Type="varchar" MaxLength="150" />
           <Property Name="monto_orden" Type="float" />
-          <Property Name="id_tipo_descuento_orden" Type="smallint" />
+          <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
           <Property Name="descuento_proveedor" Type="float" />
           <Property Name="deducible" Type="float" />
           <Property Name="monto_final" Type="float" />
@@ -433,6 +451,24 @@
           <Property Name="fecha_envio_efectivo" Type="datetime" />
           <Property Name="numero_orden" Type="varchar" MaxLength="50" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="tipo_cambio" Type="float" />
+        </EntityType>
+        <EntityType Name="cotizacion_rc_vehicular_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="monto_orden" Type="float" />
+          <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+          <Property Name="descuento_proveedor" Type="float" />
+          <Property Name="deducible" Type="float" />
+          <Property Name="monto_final" Type="float" />
         </EntityType>
         <EntityType Name="cotizacion_robo_parcial">
           <Key>
@@ -448,16 +484,16 @@
           <Property Name="chaperio" Type="varchar" MaxLength="50" />
           <Property Name="reparacion_previa" Type="varchar" MaxLength="50" />
           <Property Name="mecanico" Type="bit" />
-          <Property Name="pintura" Type="varchar" MaxLength="50" />
+          <Property Name="pintura" Type="bit" />
           <Property Name="instalacion" Type="bit" />
-          <Property Name="id_moneda" Type="smallint" />
+          <Property Name="id_moneda" Type="varchar" MaxLength="10" />
           <Property Name="precio_cotizado" Type="float" />
-          <Property Name="id_tipo_descuento" Type="smallint" />
+          <Property Name="id_tipo_descuento" Type="varchar" MaxLength="10" />
           <Property Name="descuento" Type="float" />
           <Property Name="precio_final" Type="float" />
           <Property Name="proveedor" Type="varchar" MaxLength="150" />
           <Property Name="monto_orden" Type="float" />
-          <Property Name="id_tipo_descuento_orden" Type="smallint" />
+          <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
           <Property Name="descuento_proveedor" Type="float" />
           <Property Name="deducible" Type="float" />
           <Property Name="monto_final" Type="float" />
@@ -466,6 +502,24 @@
           <Property Name="fecha_envio_efectivo" Type="datetime" />
           <Property Name="numero_orden" Type="varchar" MaxLength="50" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="tipo_cambio" Type="float" />
+        </EntityType>
+        <EntityType Name="cotizacion_robo_parcial_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" Nullable="false" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="monto_orden" Type="float" />
+          <Property Name="id_tipo_descuento_orden" Type="varchar" MaxLength="10" />
+          <Property Name="descuento_proveedor" Type="float" />
+          <Property Name="deducible" Type="float" />
+          <Property Name="monto_final" Type="float" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -1037,12 +1091,15 @@
           <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_rc_personas" EntityType="Self.cotizacion_rc_personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_rc_vehicular" EntityType="Self.cotizacion_rc_vehicular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizacion_rc_vehicular_sumatoria" EntityType="Self.cotizacion_rc_vehicular_sumatoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_robo_parcial" EntityType="Self.cotizacion_robo_parcial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizacion_robo_parcial_sumatoria" EntityType="Self.cotizacion_robo_parcial_sumatoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flujo" EntityType="Self.Flujo" Schema="dbo" store:Type="Tables" />
@@ -1386,6 +1443,24 @@
           <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
           <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="tipo_cambio" Type="Double" />
+        </EntityType>
+        <EntityType Name="cotizacion_danios_propios_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto_orden" Type="Double" />
+          <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descuento_proveedor" Type="Double" />
+          <Property Name="deducible" Type="Double" />
+          <Property Name="monto_final" Type="Double" />
         </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
@@ -1564,21 +1639,21 @@
           <Property Name="id_flujo" Type="Int32" Nullable="false" />
           <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
           <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_tipo_item" Type="Int16" />
+          <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
           <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="chaperio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="reparacion_previa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mecanico" Type="Boolean" />
-          <Property Name="pintura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pintura" Type="Boolean" />
           <Property Name="instalacion" Type="Boolean" />
-          <Property Name="id_moneda" Type="Int16" />
+          <Property Name="id_moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="precio_cotizado" Type="Double" />
-          <Property Name="id_tipo_descuento" Type="Int16" />
+          <Property Name="id_tipo_descuento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="descuento" Type="Double" />
           <Property Name="precio_final" Type="Double" />
           <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="monto_orden" Type="Double" />
-          <Property Name="id_tipo_descuento_orden" Type="Int16" />
+          <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="descuento_proveedor" Type="Double" />
           <Property Name="deducible" Type="Double" />
           <Property Name="monto_final" Type="Double" />
@@ -1587,6 +1662,24 @@
           <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
           <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="tipo_cambio" Type="Double" />
+        </EntityType>
+        <EntityType Name="cotizacion_rc_vehicular_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto_orden" Type="Double" />
+          <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descuento_proveedor" Type="Double" />
+          <Property Name="deducible" Type="Double" />
+          <Property Name="monto_final" Type="Double" />
         </EntityType>
         <EntityType Name="cotizacion_robo_parcial">
           <Key>
@@ -1602,16 +1695,16 @@
           <Property Name="chaperio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="reparacion_previa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mecanico" Type="Boolean" />
-          <Property Name="pintura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pintura" Type="Boolean" />
           <Property Name="instalacion" Type="Boolean" />
-          <Property Name="id_moneda" Type="Int16" />
+          <Property Name="id_moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="precio_cotizado" Type="Double" />
-          <Property Name="id_tipo_descuento" Type="Int16" />
+          <Property Name="id_tipo_descuento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="descuento" Type="Double" />
           <Property Name="precio_final" Type="Double" />
           <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="monto_orden" Type="Double" />
-          <Property Name="id_tipo_descuento_orden" Type="Int16" />
+          <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="descuento_proveedor" Type="Double" />
           <Property Name="deducible" Type="Double" />
           <Property Name="monto_final" Type="Double" />
@@ -1620,6 +1713,24 @@
           <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
           <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="tipo_cambio" Type="Double" />
+        </EntityType>
+        <EntityType Name="cotizacion_robo_parcial_sumatoria">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_tipo_item" />
+            <PropertyRef Name="proveedor" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto_orden" Type="Double" />
+          <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descuento_proveedor" Type="Double" />
+          <Property Name="deducible" Type="Double" />
+          <Property Name="monto_final" Type="Double" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -2199,12 +2310,15 @@
           <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" />
           <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
           <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" />
+          <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" />
           <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" />
           <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" />
           <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" />
           <EntitySet Name="cotizacion_rc_personas" EntityType="Self.cotizacion_rc_personas" />
           <EntitySet Name="cotizacion_rc_vehicular" EntityType="Self.cotizacion_rc_vehicular" />
+          <EntitySet Name="cotizacion_rc_vehicular_sumatoria" EntityType="Self.cotizacion_rc_vehicular_sumatoria" />
           <EntitySet Name="cotizacion_robo_parcial" EntityType="Self.cotizacion_robo_parcial" />
+          <EntitySet Name="cotizacion_robo_parcial_sumatoria" EntityType="Self.cotizacion_robo_parcial_sumatoria" />
           <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" />
           <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
           <EntitySet Name="Flujo" EntityType="Self.Flujo" />
@@ -2541,6 +2655,22 @@
                 <ScalarProperty Name="fecha_envio_efectivo" ColumnName="fecha_envio_efectivo" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cotizacion_danios_propios_sumatoria">
+            <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_danios_propios_sumatoria">
+              <MappingFragment StoreEntitySet="cotizacion_danios_propios_sumatoria">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="monto_orden" ColumnName="monto_orden" />
+                <ScalarProperty Name="id_tipo_descuento_orden" ColumnName="id_tipo_descuento_orden" />
+                <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
+                <ScalarProperty Name="deducible" ColumnName="deducible" />
+                <ScalarProperty Name="monto_final" ColumnName="monto_final" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2737,6 +2867,22 @@
                 <ScalarProperty Name="fecha_envio_efectivo" ColumnName="fecha_envio_efectivo" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cotizacion_rc_vehicular_sumatoria">
+            <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_sumatoria">
+              <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_sumatoria">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="monto_orden" ColumnName="monto_orden" />
+                <ScalarProperty Name="id_tipo_descuento_orden" ColumnName="id_tipo_descuento_orden" />
+                <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
+                <ScalarProperty Name="deducible" ColumnName="deducible" />
+                <ScalarProperty Name="monto_final" ColumnName="monto_final" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2769,6 +2915,22 @@
                 <ScalarProperty Name="fecha_envio_efectivo" ColumnName="fecha_envio_efectivo" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cotizacion_robo_parcial_sumatoria">
+            <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_robo_parcial_sumatoria">
+              <MappingFragment StoreEntitySet="cotizacion_robo_parcial_sumatoria">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="monto_orden" ColumnName="monto_orden" />
+                <ScalarProperty Name="id_tipo_descuento_orden" ColumnName="id_tipo_descuento_orden" />
+                <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
+                <ScalarProperty Name="deducible" ColumnName="deducible" />
+                <ScalarProperty Name="monto_final" ColumnName="monto_final" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

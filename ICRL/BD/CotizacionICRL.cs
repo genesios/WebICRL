@@ -101,6 +101,7 @@ namespace ICRL.BD
             public DateTime fecha_envio_efectivo;
             public string numero_orden;
             public short id_estado;
+            public double tipo_cambio;
             public TipoDaniosPropios()
             {
                 this.id_flujo = 0;
@@ -129,6 +130,7 @@ namespace ICRL.BD
                 this.fecha_envio_efectivo = new DateTime(2000, 1, 1);
                 this.numero_orden = "";
                 this.id_estado = 0;
+                this.tipo_cambio = 0.0;
             }
             public TipoDaniosPropios CrearCopia()
             {
@@ -159,6 +161,7 @@ namespace ICRL.BD
                 objRespuesta.fecha_envio_efectivo = this.fecha_envio_efectivo;
                 objRespuesta.numero_orden = this.numero_orden;
                 objRespuesta.id_estado = this.id_estado;
+                objRespuesta.tipo_cambio = this.tipo_cambio;
                 return objRespuesta;
             }
         }
@@ -166,14 +169,14 @@ namespace ICRL.BD
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_danios_propios] " +
-              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado])" +
-              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado)";
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio])" +
+              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado,@tipo_cambio)";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = DaniosPropios.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = DaniosPropios.id_cotizacion;
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_tipo_item;
                 sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 150).Value = DaniosPropios.item_descripcion;
                 sqlComando.Parameters.Add("@chaperio", System.Data.SqlDbType.VarChar, 50).Value = DaniosPropios.chaperio;
@@ -197,6 +200,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = DaniosPropios.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = DaniosPropios.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = DaniosPropios.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -223,7 +227,7 @@ namespace ICRL.BD
         {
             TipoDaniosPropiosTraer objRespuesta = new TipoDaniosPropiosTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado] FROM [dbo].[cotizacion_danios_propios] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
+            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio] FROM [dbo].[cotizacion_danios_propios] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
             SqlDataReader sqlDatos;
@@ -263,6 +267,7 @@ namespace ICRL.BD
                     if (sqlDatos["fecha_envio_efectivo"] != DBNull.Value) tdpFila.fecha_envio_efectivo = Convert.ToDateTime(sqlDatos["fecha_envio_efectivo"]);
                     if (sqlDatos["numero_orden"] != DBNull.Value) tdpFila.numero_orden = Convert.ToString(sqlDatos["numero_orden"]);
                     if (sqlDatos["id_estado"] != DBNull.Value) tdpFila.id_estado = Convert.ToInt16(sqlDatos["id_estado"]);
+                    if (sqlDatos["tipo_cambio"] != DBNull.Value) tdpFila.tipo_cambio = Convert.ToDouble(sqlDatos["tipo_cambio"]);
                     objRespuesta.DaniosPropios.Add(tdpFila);
                 }
                 sqlDatos.Close();
@@ -287,14 +292,14 @@ namespace ICRL.BD
         public static bool DaniosPropiosModificar(TipoDaniosPropios DaniosPropios)
         {
             bool blnRespuesta = false;
-            string strComando = "UPDATE [dbo].[cotizacion_danios_propios] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado " +
+            string strComando = "UPDATE [dbo].[cotizacion_danios_propios] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado,[tipo_cambio] = @tipo_cambio " +
               "WHERE [id_flujo] = @id_flujo and [id_cotizacion] = @id_cotizacion and [id_item] = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = DaniosPropios.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = DaniosPropios.id_cotizacion;
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = DaniosPropios.id_item;
 
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_tipo_item;
@@ -320,6 +325,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = DaniosPropios.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = DaniosPropios.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = DaniosPropios.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = DaniosPropios.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -335,41 +341,6 @@ namespace ICRL.BD
             }
             return blnRespuesta;
         }
-        public static List<TipoDaniosPropios> DaniosPropiosAgrupar(List<TipoDaniosPropios> DaniosPropios)
-        {
-            List<TipoDaniosPropios> lstRespuesta = new List<TipoDaniosPropios>();
-            List<TipoDaniosPropios> lstTemporal = new List<TipoDaniosPropios>();
-            bool blnEncontrado = false;
-            for (int i = 0; i <= DaniosPropios.Count - 1; i++)
-            {
-                lstRespuesta.Add(DaniosPropios[i].CrearCopia());
-            }
-
-            for (int i = 0; i <= DaniosPropios.Count - 1; i++)
-            {
-                blnEncontrado = false;
-                for (int j = 0; j <= lstTemporal.Count - 1; j++)
-                {
-                    if (DaniosPropios[i].proveedor == lstTemporal[j].proveedor)
-                    {
-                        blnEncontrado = true;
-                        lstTemporal[j].monto_orden += DaniosPropios[i].precio_final;
-                    }
-                }
-                if (!blnEncontrado)
-                {
-                    lstTemporal.Add(DaniosPropios[i].CrearCopia());
-                }
-            }
-            for (int i = 0; i <= lstTemporal.Count - 1; i++)
-            {
-                for (int j = 0; j <= lstRespuesta.Count - 1; j++)
-                {
-                    if (lstRespuesta[j].proveedor == lstTemporal[i].proveedor) lstRespuesta[j].monto_orden = lstTemporal[i].monto_orden;
-                }
-            }
-            return lstRespuesta;
-        }
         public static bool DaniosPropiosBorrar(int Flujo, int Cotizacion, long Item)
         {
             bool blnRespuesta = false;
@@ -381,6 +352,214 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
                 sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        //DANIOS PROPIOS SUMATORIA
+        public class TipoDanioPropioSumatoria
+        {
+            public int id_flujo;
+            public int id_cotizacion;
+            public short id_tipo_item;
+            public string proveedor;
+            public double monto_orden;
+            public string id_tipo_descuento_orden;
+            public double descuento_proveedor;
+            public double deducible;
+            public double monto_final;
+            public TipoDanioPropioSumatoria()
+            {
+                this.id_flujo = 0;
+                this.id_cotizacion = 0;
+                this.id_tipo_item = 0;
+                this.proveedor = "";
+                this.monto_orden = 0.0;
+                this.id_tipo_descuento_orden = "";
+                this.descuento_proveedor = 0;
+                this.deducible = 0;
+                this.monto_final = 0;
+            }
+        }
+        public static bool DaniosPropiosSumatoriaRegistrar(TipoDanioPropioSumatoria DaniosPropiosSumatorias)
+        {
+            bool blnRespuesta = false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_danios_propios_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final])" +
+              " VALUES (@id_flujo,@id_cotizacion,@id_tipo_item,@proveedor,@monto_orden,@id_tipo_descuento_orden,@descuento_proveedor,@deducible,@monto_final)";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatorias.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatorias.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = DaniosPropiosSumatorias.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = DaniosPropiosSumatorias.proveedor;
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatorias.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = DaniosPropiosSumatorias.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatorias.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatorias.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatorias.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public class TipoDaniosPropiosSumatoriaTraer
+        {
+            public bool Correcto;
+            public string Mensaje;
+            public List<TipoDanioPropioSumatoria> DaniosPropiosSumatoria = new List<TipoDanioPropioSumatoria>();
+            public System.Data.DataSet dsDaniosPropiosSumatoria = new System.Data.DataSet();
+        }
+        public static TipoDaniosPropiosSumatoriaTraer DaniosPropiosSumatoriaTraer(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            TipoDaniosPropiosSumatoriaTraer objRespuesta = new TipoDaniosPropiosSumatoriaTraer();
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final] FROM [dbo].[cotizacion_danios_propios_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
+            SqlDataReader sqlDatos;
+            TipoDanioPropioSumatoria tdpFila;
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlDatos = sqlComando.ExecuteReader();
+                while (sqlDatos.Read())
+                {
+                    tdpFila = new TipoDanioPropioSumatoria();
+                    tdpFila.id_flujo = Flujo;
+                    tdpFila.id_cotizacion = Cotizacion;
+                    tdpFila.id_tipo_item = Tipo_Item;
+                    //[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]
+                    if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
+                    if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
+                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
+                    if (sqlDatos["descuento_proveedor"] != DBNull.Value) tdpFila.descuento_proveedor = Convert.ToDouble(sqlDatos["descuento_proveedor"]);
+                    if (sqlDatos["deducible"] != DBNull.Value) tdpFila.deducible = Convert.ToDouble(sqlDatos["deducible"]);
+                    if (sqlDatos["monto_final"] != DBNull.Value) tdpFila.monto_final = Convert.ToDouble(sqlDatos["monto_final"]);
+                    objRespuesta.DaniosPropiosSumatoria.Add(tdpFila);
+                }
+                sqlDatos.Close();
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlAdaptador.Fill(objRespuesta.dsDaniosPropiosSumatoria);
+                objRespuesta.Correcto = true;
+            }
+            catch (Exception ex)
+            {
+                objRespuesta.Correcto = false;
+                objRespuesta.Mensaje = "No se pudo traer los daños propios de la cotizacion debido a: " + ex.Message;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+
+            return objRespuesta;
+        }
+        public static bool DaniosPropiosSumatoriaModificar(TipoDanioPropioSumatoria DaniosPropiosSumatoria)
+        {
+            bool blnRespuesta = false;
+            string strComando = "UPDATE [dbo].[cotizacion_danios_propios_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final " +
+              "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatoria.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatoria.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = DaniosPropiosSumatoria.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = DaniosPropiosSumatoria.proveedor;
+
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = DaniosPropiosSumatoria.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool DaniosPropiosSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            string strComando = "DELETE FROM [dbo].[cotizacion_danios_propios_sumatoria] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool DaniosPropiosSumatoriaGenerar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            blnRespuesta = DaniosPropiosSumatoriaBorrar(Flujo, Cotizacion, Tipo_Item);
+            if (!blnRespuesta) return false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_danios_propios_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]) " +
+              "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'',0.0,0.0,0.0 FROM [dbo].[cotizacion_danios_propios] " +
+              "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -787,16 +966,16 @@ namespace ICRL.BD
             public string chaperio;
             public string reparacion_previa;
             public bool mecanico;
-            public string pintura;
+            public bool pintura;
             public bool instalacion;
-            public short id_moneda;
+            public string id_moneda;
             public double precio_cotizado;
-            public short id_tipo_descuento;
+            public string id_tipo_descuento;
             public double descuento;
             public double precio_final;
             public string proveedor;
             public double monto_orden;
-            public short id_tipo_descuento_orden;
+            public string id_tipo_descuento_orden;
             public double descuento_proveedor;
             public double deducible;
             public double monto_final;
@@ -805,6 +984,7 @@ namespace ICRL.BD
             public DateTime fecha_envio_efectivo;
             public string numero_orden;
             public short id_estado;
+            public double tipo_cambio;
             public TipoRCVehicular()
             {
                 this.id_flujo = 0;
@@ -815,16 +995,16 @@ namespace ICRL.BD
                 this.chaperio = "";
                 this.reparacion_previa = "";
                 this.mecanico = false;
-                this.pintura = "";
+                this.pintura = false;
                 this.instalacion = false;
-                this.id_moneda = 0;
+                this.id_moneda = "";
                 this.precio_cotizado = 0.0;
-                this.id_tipo_descuento = 0;
+                this.id_tipo_descuento = "";
                 this.descuento = 0.0;
                 this.precio_final = 0.0;
                 this.proveedor = "";
                 this.monto_orden = 0.0;
-                this.id_tipo_descuento_orden = 0;
+                this.id_tipo_descuento_orden = "";
                 this.descuento_proveedor = 0.0;
                 this.deducible = 0.0;
                 this.monto_final = 0.0;
@@ -833,36 +1013,68 @@ namespace ICRL.BD
                 this.fecha_envio_efectivo = new DateTime(2000, 1, 1);
                 this.numero_orden = "";
                 this.id_estado = 0;
+                this.tipo_cambio = 0.0;
             }
-
+            public TipoRCVehicular CrearCopia()
+            {
+                TipoRCVehicular objRespuesta = new TipoRCVehicular();
+                objRespuesta.id_flujo = this.id_flujo;
+                objRespuesta.id_cotizacion = this.id_cotizacion;
+                objRespuesta.id_item = this.id_item;
+                objRespuesta.id_tipo_item = this.id_tipo_item;
+                objRespuesta.item_descripcion = this.item_descripcion;
+                objRespuesta.chaperio = this.chaperio;
+                objRespuesta.reparacion_previa = this.reparacion_previa;
+                objRespuesta.mecanico = this.mecanico;
+                objRespuesta.pintura = this.pintura;
+                objRespuesta.instalacion = this.instalacion;
+                objRespuesta.id_moneda = this.id_moneda;
+                objRespuesta.precio_cotizado = this.precio_cotizado;
+                objRespuesta.id_tipo_descuento = this.id_tipo_descuento;
+                objRespuesta.descuento = this.descuento;
+                objRespuesta.precio_final = this.precio_final;
+                objRespuesta.proveedor = this.proveedor;
+                objRespuesta.monto_orden = this.monto_orden;
+                objRespuesta.id_tipo_descuento_orden = this.id_tipo_descuento_orden;
+                objRespuesta.descuento_proveedor = this.descuento_proveedor;
+                objRespuesta.deducible = this.deducible;
+                objRespuesta.monto_final = this.monto_final;
+                objRespuesta.recepcion = this.recepcion;
+                objRespuesta.dias_entrega = this.dias_entrega;
+                objRespuesta.fecha_envio_efectivo = this.fecha_envio_efectivo;
+                objRespuesta.numero_orden = this.numero_orden;
+                objRespuesta.id_estado = this.id_estado;
+                objRespuesta.tipo_cambio = this.tipo_cambio;
+                return objRespuesta;
+            }
         }
         public static bool RCVehicularRegistrar(TipoRCVehicular RCVehicular)
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_rc_vehicular] " +
-              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado])" +
-              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado)";
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio])" +
+              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado,@tipo_cambio)";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RCVehicular.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RCVehicular.id_cotizacion;
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_item;
                 sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 150).Value = RCVehicular.item_descripcion;
                 sqlComando.Parameters.Add("@chaperio", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.chaperio;
                 sqlComando.Parameters.Add("@reparacion_previa", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.reparacion_previa;
                 sqlComando.Parameters.Add("@mecanico", System.Data.SqlDbType.Bit).Value = RCVehicular.mecanico;
-                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.pintura;
+                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.Bit).Value = RCVehicular.pintura;
                 sqlComando.Parameters.Add("@instalacion", System.Data.SqlDbType.Bit).Value = RCVehicular.instalacion;
-                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_moneda;
+                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_moneda;
                 sqlComando.Parameters.Add("@precio_cotizado", System.Data.SqlDbType.Float).Value = RCVehicular.precio_cotizado;
-                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_descuento;
+                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_tipo_descuento;
                 sqlComando.Parameters.Add("@descuento", System.Data.SqlDbType.Float).Value = RCVehicular.descuento;
                 sqlComando.Parameters.Add("@precio_final", System.Data.SqlDbType.Float).Value = RCVehicular.precio_final;
                 sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RCVehicular.proveedor;
                 sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RCVehicular.monto_orden;
-                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_tipo_descuento_orden;
                 sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RCVehicular.descuento_proveedor;
                 sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RCVehicular.deducible;
                 sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RCVehicular.monto_final;
@@ -871,6 +1083,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = RCVehicular.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = RCVehicular.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -897,7 +1110,7 @@ namespace ICRL.BD
         {
             TipoRCVehicularTraer objRespuesta = new TipoRCVehicularTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado] FROM [dbo].[cotizacion_rc_vehicular] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
+            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio] FROM [dbo].[cotizacion_rc_vehicular] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
             SqlDataReader sqlDatos;
@@ -919,16 +1132,16 @@ namespace ICRL.BD
                     if (sqlDatos["chaperio"] != DBNull.Value) tdpFila.chaperio = Convert.ToString(sqlDatos["chaperio"]);
                     if (sqlDatos["reparacion_previa"] != DBNull.Value) tdpFila.reparacion_previa = Convert.ToString(sqlDatos["reparacion_previa"]);
                     if (sqlDatos["mecanico"] != DBNull.Value) tdpFila.mecanico = Convert.ToBoolean(sqlDatos["mecanico"]);
-                    if (sqlDatos["pintura"] != DBNull.Value) tdpFila.pintura = Convert.ToString(sqlDatos["pintura"]);
+                    if (sqlDatos["pintura"] != DBNull.Value) tdpFila.pintura = Convert.ToBoolean(sqlDatos["pintura"]);
                     if (sqlDatos["instalacion"] != DBNull.Value) tdpFila.instalacion = Convert.ToBoolean(sqlDatos["instalacion"]);
-                    if (sqlDatos["id_moneda"] != DBNull.Value) tdpFila.id_moneda = Convert.ToInt16(sqlDatos["id_moneda"]);
+                    if (sqlDatos["id_moneda"] != DBNull.Value) tdpFila.id_moneda = Convert.ToString(sqlDatos["id_moneda"]);
                     if (sqlDatos["precio_cotizado"] != DBNull.Value) tdpFila.precio_cotizado = Convert.ToDouble(sqlDatos["precio_cotizado"]);
-                    if (sqlDatos["id_tipo_descuento"] != DBNull.Value) tdpFila.id_tipo_descuento = Convert.ToInt16(sqlDatos["id_tipo_descuento"]);
+                    if (sqlDatos["id_tipo_descuento"] != DBNull.Value) tdpFila.id_tipo_descuento = Convert.ToString(sqlDatos["id_tipo_descuento"]);
                     if (sqlDatos["descuento"] != DBNull.Value) tdpFila.descuento = Convert.ToDouble(sqlDatos["descuento"]);
                     if (sqlDatos["precio_final"] != DBNull.Value) tdpFila.precio_final = Convert.ToDouble(sqlDatos["precio_final"]);
                     if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
                     if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
-                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToInt16(sqlDatos["id_tipo_descuento_orden"]);
+                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
                     if (sqlDatos["descuento_proveedor"] != DBNull.Value) tdpFila.descuento_proveedor = Convert.ToDouble(sqlDatos["descuento_proveedor"]);
                     if (sqlDatos["deducible"] != DBNull.Value) tdpFila.deducible = Convert.ToDouble(sqlDatos["deducible"]);
                     if (sqlDatos["monto_final"] != DBNull.Value) tdpFila.monto_final = Convert.ToDouble(sqlDatos["monto_final"]);
@@ -937,6 +1150,7 @@ namespace ICRL.BD
                     if (sqlDatos["fecha_envio_efectivo"] != DBNull.Value) tdpFila.fecha_envio_efectivo = Convert.ToDateTime(sqlDatos["fecha_envio_efectivo"]);
                     if (sqlDatos["numero_orden"] != DBNull.Value) tdpFila.numero_orden = Convert.ToString(sqlDatos["numero_orden"]);
                     if (sqlDatos["id_estado"] != DBNull.Value) tdpFila.id_estado = Convert.ToInt16(sqlDatos["id_estado"]);
+                    if (sqlDatos["tipo_cambio"] != DBNull.Value) tdpFila.tipo_cambio = Convert.ToDouble(sqlDatos["tipo_cambio"]);
                     objRespuesta.RCVehiculares.Add(tdpFila);
                 }
                 sqlDatos.Close();
@@ -948,7 +1162,7 @@ namespace ICRL.BD
             catch (Exception ex)
             {
                 objRespuesta.Correcto = false;
-                objRespuesta.Mensaje = "No se pudo traer las responsabilidades civiles vehiculares de la cotizacion debido a: " + ex.Message;
+                objRespuesta.Mensaje = "No se pudo traer los RC Vehiculares de la cotizacion debido a: " + ex.Message;
             }
             finally
             {
@@ -961,14 +1175,14 @@ namespace ICRL.BD
         public static bool RCVehicularesModificar(TipoRCVehicular RCVehicular)
         {
             bool blnRespuesta = false;
-            string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado " +
+            string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado,[tipo_cambio] = @tipo_cambio " +
               "WHERE [id_flujo] = @id_flujo and [id_cotizacion] = @id_cotizacion and [id_item] = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RCVehicular.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RCVehicular.id_cotizacion;
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = RCVehicular.id_item;
 
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_item;
@@ -976,16 +1190,16 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@chaperio", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.chaperio;
                 sqlComando.Parameters.Add("@reparacion_previa", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.reparacion_previa;
                 sqlComando.Parameters.Add("@mecanico", System.Data.SqlDbType.Bit).Value = RCVehicular.mecanico;
-                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.pintura;
+                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.Bit).Value = RCVehicular.pintura;
                 sqlComando.Parameters.Add("@instalacion", System.Data.SqlDbType.Bit).Value = RCVehicular.instalacion;
-                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_moneda;
+                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_moneda;
                 sqlComando.Parameters.Add("@precio_cotizado", System.Data.SqlDbType.Float).Value = RCVehicular.precio_cotizado;
-                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_descuento;
+                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_tipo_descuento;
                 sqlComando.Parameters.Add("@descuento", System.Data.SqlDbType.Float).Value = RCVehicular.descuento;
                 sqlComando.Parameters.Add("@precio_final", System.Data.SqlDbType.Float).Value = RCVehicular.precio_final;
                 sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RCVehicular.proveedor;
                 sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RCVehicular.monto_orden;
-                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RCVehicular.id_tipo_descuento_orden;
                 sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RCVehicular.descuento_proveedor;
                 sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RCVehicular.deducible;
                 sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RCVehicular.monto_final;
@@ -994,6 +1208,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = RCVehicular.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = RCVehicular.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RCVehicular.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = RCVehicular.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -1014,7 +1229,7 @@ namespace ICRL.BD
             bool blnRespuesta = false;
             string strComando = "DELETE FROM [dbo].[cotizacion_rc_vehicular] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_item = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            SqlCommand sqlComando = new SqlCommand(strComando);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
@@ -1022,6 +1237,214 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        //RESPONSABILIDAD SOCIAL VEHICULAR SUMATORIA
+        public class TipoRCVehicularSumatoria
+        {
+            public int id_flujo;
+            public int id_cotizacion;
+            public short id_tipo_item;
+            public string proveedor;
+            public double monto_orden;
+            public string id_tipo_descuento_orden;
+            public double descuento_proveedor;
+            public double deducible;
+            public double monto_final;
+            public TipoRCVehicularSumatoria()
+            {
+                this.id_flujo = 0;
+                this.id_cotizacion = 0;
+                this.id_tipo_item = 0;
+                this.proveedor = "";
+                this.monto_orden = 0.0;
+                this.id_tipo_descuento_orden = "";
+                this.descuento_proveedor = 0;
+                this.deducible = 0;
+                this.monto_final = 0;
+            }
+        }
+        public static bool RCVehicularSumatoriaRegistrar(TipoRCVehicularSumatoria RCVehicularSumatoria)
+        {
+            bool blnRespuesta = false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_rc_vehicular_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final])" +
+              " VALUES (@id_flujo,@id_cotizacion,@id_tipo_item,@proveedor,@monto_orden,@id_tipo_descuento_orden,@descuento_proveedor,@deducible,@monto_final)";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RCVehicularSumatoria.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RCVehicularSumatoria.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RCVehicularSumatoria.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RCVehicularSumatoria.proveedor;
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RCVehicularSumatoria.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RCVehicularSumatoria.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RCVehicularSumatoria.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RCVehicularSumatoria.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RCVehicularSumatoria.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public class TipoRCVehicularSumatoriaTraer
+        {
+            public bool Correcto;
+            public string Mensaje;
+            public List<TipoRCVehicularSumatoria> RCVehicularesSumatoria = new List<TipoRCVehicularSumatoria>();
+            public System.Data.DataSet dsRCVehicularSumatoria = new System.Data.DataSet();
+        }
+        public static TipoRCVehicularSumatoriaTraer RCVehicularSumatoriaTraer(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            TipoRCVehicularSumatoriaTraer objRespuesta = new TipoRCVehicularSumatoriaTraer();
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final] FROM [dbo].[cotizacion_rc_vehicular_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
+            SqlDataReader sqlDatos;
+            TipoRCVehicularSumatoria tdpFila;
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlDatos = sqlComando.ExecuteReader();
+                while (sqlDatos.Read())
+                {
+                    tdpFila = new TipoRCVehicularSumatoria();
+                    tdpFila.id_flujo = Flujo;
+                    tdpFila.id_cotizacion = Cotizacion;
+                    tdpFila.id_tipo_item = Tipo_Item;
+                    //[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]
+                    if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
+                    if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
+                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
+                    if (sqlDatos["descuento_proveedor"] != DBNull.Value) tdpFila.descuento_proveedor = Convert.ToDouble(sqlDatos["descuento_proveedor"]);
+                    if (sqlDatos["deducible"] != DBNull.Value) tdpFila.deducible = Convert.ToDouble(sqlDatos["deducible"]);
+                    if (sqlDatos["monto_final"] != DBNull.Value) tdpFila.monto_final = Convert.ToDouble(sqlDatos["monto_final"]);
+                    objRespuesta.RCVehicularesSumatoria.Add(tdpFila);
+                }
+                sqlDatos.Close();
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlAdaptador.Fill(objRespuesta.dsRCVehicularSumatoria);
+                objRespuesta.Correcto = true;
+            }
+            catch (Exception ex)
+            {
+                objRespuesta.Correcto = false;
+                objRespuesta.Mensaje = "No se pudo traer los RC Vehiculares sumados de la cotizacion debido a: " + ex.Message;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return objRespuesta;
+        }
+        public static bool RCVehicularSumatoriaModificar(TipoRCVehicularSumatoria RCvehicularSumatoria)
+        {
+            bool blnRespuesta = false;
+            string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final " +
+              "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RCvehicularSumatoria.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RCvehicularSumatoria.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RCvehicularSumatoria.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RCvehicularSumatoria.proveedor;
+
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RCvehicularSumatoria.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool RCVehicularSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            string strComando = "DELETE FROM [dbo].[cotizacion_rc_vehicular_sumatoria] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool RCVehicularSumatoriaGenerar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            blnRespuesta = RCVehicularSumatoriaBorrar(Flujo, Cotizacion, Tipo_Item);
+            if (!blnRespuesta) return false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_rc_vehicular_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]) " +
+              "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'',0.0,0.0,0.0 FROM [dbo].[cotizacion_rc_vehicular] " +
+              "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
             }
             catch (Exception)
             {
@@ -1045,16 +1468,16 @@ namespace ICRL.BD
             public string chaperio;
             public string reparacion_previa;
             public bool mecanico;
-            public string pintura;
+            public bool pintura;
             public bool instalacion;
-            public short id_moneda;
+            public string id_moneda;
             public double precio_cotizado;
-            public short id_tipo_descuento;
+            public string id_tipo_descuento;
             public double descuento;
             public double precio_final;
             public string proveedor;
             public double monto_orden;
-            public short id_tipo_descuento_orden;
+            public string id_tipo_descuento_orden;
             public double descuento_proveedor;
             public double deducible;
             public double monto_final;
@@ -1063,6 +1486,7 @@ namespace ICRL.BD
             public DateTime fecha_envio_efectivo;
             public string numero_orden;
             public short id_estado;
+            public double tipo_cambio;
             public TipoRoboParcial()
             {
                 this.id_flujo = 0;
@@ -1073,16 +1497,16 @@ namespace ICRL.BD
                 this.chaperio = "";
                 this.reparacion_previa = "";
                 this.mecanico = false;
-                this.pintura = "";
+                this.pintura = false;
                 this.instalacion = false;
-                this.id_moneda = 0;
+                this.id_moneda = "";
                 this.precio_cotizado = 0.0;
-                this.id_tipo_descuento = 0;
+                this.id_tipo_descuento = "";
                 this.descuento = 0.0;
                 this.precio_final = 0.0;
                 this.proveedor = "";
                 this.monto_orden = 0.0;
-                this.id_tipo_descuento_orden = 0;
+                this.id_tipo_descuento_orden = "";
                 this.descuento_proveedor = 0.0;
                 this.deducible = 0.0;
                 this.monto_final = 0.0;
@@ -1091,36 +1515,68 @@ namespace ICRL.BD
                 this.fecha_envio_efectivo = new DateTime(2000, 1, 1);
                 this.numero_orden = "";
                 this.id_estado = 0;
+                this.tipo_cambio = 0.0;
             }
-
+            public TipoRoboParcial CrearCopia()
+            {
+                TipoRoboParcial objRespuesta = new TipoRoboParcial();
+                objRespuesta.id_flujo = this.id_flujo;
+                objRespuesta.id_cotizacion = this.id_cotizacion;
+                objRespuesta.id_item = this.id_item;
+                objRespuesta.id_tipo_item = this.id_tipo_item;
+                objRespuesta.item_descripcion = this.item_descripcion;
+                objRespuesta.chaperio = this.chaperio;
+                objRespuesta.reparacion_previa = this.reparacion_previa;
+                objRespuesta.mecanico = this.mecanico;
+                objRespuesta.pintura = this.pintura;
+                objRespuesta.instalacion = this.instalacion;
+                objRespuesta.id_moneda = this.id_moneda;
+                objRespuesta.precio_cotizado = this.precio_cotizado;
+                objRespuesta.id_tipo_descuento = this.id_tipo_descuento;
+                objRespuesta.descuento = this.descuento;
+                objRespuesta.precio_final = this.precio_final;
+                objRespuesta.proveedor = this.proveedor;
+                objRespuesta.monto_orden = this.monto_orden;
+                objRespuesta.id_tipo_descuento_orden = this.id_tipo_descuento_orden;
+                objRespuesta.descuento_proveedor = this.descuento_proveedor;
+                objRespuesta.deducible = this.deducible;
+                objRespuesta.monto_final = this.monto_final;
+                objRespuesta.recepcion = this.recepcion;
+                objRespuesta.dias_entrega = this.dias_entrega;
+                objRespuesta.fecha_envio_efectivo = this.fecha_envio_efectivo;
+                objRespuesta.numero_orden = this.numero_orden;
+                objRespuesta.id_estado = this.id_estado;
+                objRespuesta.tipo_cambio = this.tipo_cambio;
+                return objRespuesta;
+            }
         }
         public static bool RoboParcialRegistrar(TipoRoboParcial RoboParcial)
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_robo_parcial] " +
-              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado])" +
-              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado)";
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio])" +
+              " VALUES (@id_flujo, @id_cotizacion, @id_tipo_item, @item_descripcion, @chaperio,@reparacion_previa, @mecanico, @pintura, @instalacion, @id_moneda, @precio_cotizado, @id_tipo_descuento,@descuento,@precio_final,@proveedor,@monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @recepcion, @dias_entrega, @fecha_envio_efectivo, @numero_orden, @id_estado,@tipo_cambio)";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RoboParcial.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RoboParcial.id_cotizacion;
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_item;
                 sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 150).Value = RoboParcial.item_descripcion;
                 sqlComando.Parameters.Add("@chaperio", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.chaperio;
                 sqlComando.Parameters.Add("@reparacion_previa", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.reparacion_previa;
                 sqlComando.Parameters.Add("@mecanico", System.Data.SqlDbType.Bit).Value = RoboParcial.mecanico;
-                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.pintura;
+                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.Bit).Value = RoboParcial.pintura;
                 sqlComando.Parameters.Add("@instalacion", System.Data.SqlDbType.Bit).Value = RoboParcial.instalacion;
-                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_moneda;
+                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_moneda;
                 sqlComando.Parameters.Add("@precio_cotizado", System.Data.SqlDbType.Float).Value = RoboParcial.precio_cotizado;
-                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_descuento;
+                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_tipo_descuento;
                 sqlComando.Parameters.Add("@descuento", System.Data.SqlDbType.Float).Value = RoboParcial.descuento;
                 sqlComando.Parameters.Add("@precio_final", System.Data.SqlDbType.Float).Value = RoboParcial.precio_final;
                 sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RoboParcial.proveedor;
                 sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RoboParcial.monto_orden;
-                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_tipo_descuento_orden;
                 sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RoboParcial.descuento_proveedor;
                 sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RoboParcial.deducible;
                 sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RoboParcial.monto_final;
@@ -1129,6 +1585,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = RoboParcial.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = RoboParcial.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -1155,7 +1612,7 @@ namespace ICRL.BD
         {
             TipoRoboParcialTraer objRespuesta = new TipoRoboParcialTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado] FROM [dbo].[cotizacion_robo_parcial] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
+            string strComando = "SELECT [id_flujo],[id_cotizacion],[id_item],[id_tipo_item],[item_descripcion],[chaperio],[reparacion_previa],[mecanico],[pintura],[instalacion],[id_moneda],[precio_cotizado],[id_tipo_descuento],[descuento],[precio_final],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[recepcion],[dias_entrega],[fecha_envio_efectivo],[numero_orden],[id_estado],[tipo_cambio] FROM [dbo].[cotizacion_robo_parcial] WHERE [id_flujo]=@id_flujo and [id_cotizacion]=@id_cotizacion";
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
             SqlDataReader sqlDatos;
@@ -1177,16 +1634,16 @@ namespace ICRL.BD
                     if (sqlDatos["chaperio"] != DBNull.Value) tdpFila.chaperio = Convert.ToString(sqlDatos["chaperio"]);
                     if (sqlDatos["reparacion_previa"] != DBNull.Value) tdpFila.reparacion_previa = Convert.ToString(sqlDatos["reparacion_previa"]);
                     if (sqlDatos["mecanico"] != DBNull.Value) tdpFila.mecanico = Convert.ToBoolean(sqlDatos["mecanico"]);
-                    if (sqlDatos["pintura"] != DBNull.Value) tdpFila.pintura = Convert.ToString(sqlDatos["pintura"]);
+                    if (sqlDatos["pintura"] != DBNull.Value) tdpFila.pintura = Convert.ToBoolean(sqlDatos["pintura"]);
                     if (sqlDatos["instalacion"] != DBNull.Value) tdpFila.instalacion = Convert.ToBoolean(sqlDatos["instalacion"]);
-                    if (sqlDatos["id_moneda"] != DBNull.Value) tdpFila.id_moneda = Convert.ToInt16(sqlDatos["id_moneda"]);
+                    if (sqlDatos["id_moneda"] != DBNull.Value) tdpFila.id_moneda = Convert.ToString(sqlDatos["id_moneda"]);
                     if (sqlDatos["precio_cotizado"] != DBNull.Value) tdpFila.precio_cotizado = Convert.ToDouble(sqlDatos["precio_cotizado"]);
-                    if (sqlDatos["id_tipo_descuento"] != DBNull.Value) tdpFila.id_tipo_descuento = Convert.ToInt16(sqlDatos["id_tipo_descuento"]);
+                    if (sqlDatos["id_tipo_descuento"] != DBNull.Value) tdpFila.id_tipo_descuento = Convert.ToString(sqlDatos["id_tipo_descuento"]);
                     if (sqlDatos["descuento"] != DBNull.Value) tdpFila.descuento = Convert.ToDouble(sqlDatos["descuento"]);
                     if (sqlDatos["precio_final"] != DBNull.Value) tdpFila.precio_final = Convert.ToDouble(sqlDatos["precio_final"]);
                     if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
                     if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
-                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToInt16(sqlDatos["id_tipo_descuento_orden"]);
+                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
                     if (sqlDatos["descuento_proveedor"] != DBNull.Value) tdpFila.descuento_proveedor = Convert.ToDouble(sqlDatos["descuento_proveedor"]);
                     if (sqlDatos["deducible"] != DBNull.Value) tdpFila.deducible = Convert.ToDouble(sqlDatos["deducible"]);
                     if (sqlDatos["monto_final"] != DBNull.Value) tdpFila.monto_final = Convert.ToDouble(sqlDatos["monto_final"]);
@@ -1195,6 +1652,7 @@ namespace ICRL.BD
                     if (sqlDatos["fecha_envio_efectivo"] != DBNull.Value) tdpFila.fecha_envio_efectivo = Convert.ToDateTime(sqlDatos["fecha_envio_efectivo"]);
                     if (sqlDatos["numero_orden"] != DBNull.Value) tdpFila.numero_orden = Convert.ToString(sqlDatos["numero_orden"]);
                     if (sqlDatos["id_estado"] != DBNull.Value) tdpFila.id_estado = Convert.ToInt16(sqlDatos["id_estado"]);
+                    if (sqlDatos["tipo_cambio"] != DBNull.Value) tdpFila.tipo_cambio = Convert.ToDouble(sqlDatos["tipo_cambio"]);
                     objRespuesta.RobosParciales.Add(tdpFila);
                 }
                 sqlDatos.Close();
@@ -1206,27 +1664,26 @@ namespace ICRL.BD
             catch (Exception ex)
             {
                 objRespuesta.Correcto = false;
-                objRespuesta.Mensaje = "No se pudo traer los robos parciales de la cotizacion debido a: " + ex.Message;
+                objRespuesta.Mensaje = "No se pudo traer los Robos parciales de la cotizacion debido a: " + ex.Message;
             }
             finally
             {
                 sqlConexion.Close();
                 sqlConexion.Dispose();
             }
-
             return objRespuesta;
         }
         public static bool RoboParcialModificar(TipoRoboParcial RoboParcial)
         {
             bool blnRespuesta = false;
-            string strComando = "UPDATE [dbo].[cotizacion_robo_parcial] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado " +
+            string strComando = "UPDATE [dbo].[cotizacion_robo_parcial] SET [id_tipo_item] = @id_tipo_item,[item_descripcion] = @item_descripcion, [chaperio] = @chaperio,[reparacion_previa] = @reparacion_previa,[mecanico] = @mecanico,[pintura] = @pintura,[instalacion] = @instalacion,[id_moneda] = @id_moneda,[precio_cotizado] = @precio_cotizado,[id_tipo_descuento] = @id_tipo_descuento,[descuento] = @descuento,[precio_final] = @precio_final,[proveedor] = @proveedor,[monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible,[monto_final] = @monto_final,[recepcion] = @recepcion,[dias_entrega] = @dias_entrega,[fecha_envio_efectivo] = @fecha_envio_efectivo,[numero_orden] = @numero_orden,[id_estado] = @id_estado,[tipo_cambio] = @tipo_cambio " +
               "WHERE [id_flujo] = @id_flujo and [id_cotizacion] = @id_cotizacion and [id_item] = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RoboParcial.id_flujo;
-                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_cotizacion;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RoboParcial.id_cotizacion;
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = RoboParcial.id_item;
 
                 sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_item;
@@ -1234,16 +1691,16 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@chaperio", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.chaperio;
                 sqlComando.Parameters.Add("@reparacion_previa", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.reparacion_previa;
                 sqlComando.Parameters.Add("@mecanico", System.Data.SqlDbType.Bit).Value = RoboParcial.mecanico;
-                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.pintura;
+                sqlComando.Parameters.Add("@pintura", System.Data.SqlDbType.Bit).Value = RoboParcial.pintura;
                 sqlComando.Parameters.Add("@instalacion", System.Data.SqlDbType.Bit).Value = RoboParcial.instalacion;
-                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_moneda;
+                sqlComando.Parameters.Add("@id_moneda", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_moneda;
                 sqlComando.Parameters.Add("@precio_cotizado", System.Data.SqlDbType.Float).Value = RoboParcial.precio_cotizado;
-                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_descuento;
+                sqlComando.Parameters.Add("@id_tipo_descuento", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_tipo_descuento;
                 sqlComando.Parameters.Add("@descuento", System.Data.SqlDbType.Float).Value = RoboParcial.descuento;
                 sqlComando.Parameters.Add("@precio_final", System.Data.SqlDbType.Float).Value = RoboParcial.precio_final;
                 sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RoboParcial.proveedor;
                 sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RoboParcial.monto_orden;
-                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RoboParcial.id_tipo_descuento_orden;
                 sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RoboParcial.descuento_proveedor;
                 sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RoboParcial.deducible;
                 sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RoboParcial.monto_final;
@@ -1252,6 +1709,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@fecha_envio_efectivo", System.Data.SqlDbType.DateTime).Value = RoboParcial.fecha_envio_efectivo;
                 sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = RoboParcial.numero_orden;
                 sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RoboParcial.id_estado;
+                sqlComando.Parameters.Add("@tipo_cambio", System.Data.SqlDbType.Float).Value = RoboParcial.tipo_cambio;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
@@ -1272,7 +1730,7 @@ namespace ICRL.BD
             bool blnRespuesta = false;
             string strComando = "DELETE FROM [dbo].[cotizacion_robo_parcial] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_item = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            SqlCommand sqlComando = new SqlCommand(strComando);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
@@ -1280,6 +1738,214 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        //ROBO PARCIAL SUMATORIA
+        public class TipoRoboParcialSumatoria
+        {
+            public int id_flujo;
+            public int id_cotizacion;
+            public short id_tipo_item;
+            public string proveedor;
+            public double monto_orden;
+            public string id_tipo_descuento_orden;
+            public double descuento_proveedor;
+            public double deducible;
+            public double monto_final;
+            public TipoRoboParcialSumatoria()
+            {
+                this.id_flujo = 0;
+                this.id_cotizacion = 0;
+                this.id_tipo_item = 0;
+                this.proveedor = "";
+                this.monto_orden = 0.0;
+                this.id_tipo_descuento_orden = "";
+                this.descuento_proveedor = 0;
+                this.deducible = 0;
+                this.monto_final = 0;
+            }
+        }
+        public static bool RoboParcialSumatoriaRegistrar(TipoRoboParcialSumatoria RoboParcialSumatoria)
+        {
+            bool blnRespuesta = false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_robo_parcial_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final])" +
+              " VALUES (@id_flujo,@id_cotizacion,@id_tipo_item,@proveedor,@monto_orden,@id_tipo_descuento_orden,@descuento_proveedor,@deducible,@monto_final)";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RoboParcialSumatoria.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RoboParcialSumatoria.proveedor;
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RoboParcialSumatoria.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public class TipoRoboParcialSumatoriaTraer
+        {
+            public bool Correcto;
+            public string Mensaje;
+            public List<TipoRoboParcialSumatoria> RCVehicularesSumatoria = new List<TipoRoboParcialSumatoria>();
+            public System.Data.DataSet dsRoboParcialSumatoria = new System.Data.DataSet();
+        }
+        public static TipoRoboParcialSumatoriaTraer RoboParcialSumatoriaTraer(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            TipoRoboParcialSumatoriaTraer objRespuesta = new TipoRoboParcialSumatoriaTraer();
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final] FROM [dbo].[cotizacion_robo_parcial_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
+            SqlDataReader sqlDatos;
+            TipoRoboParcialSumatoria tdpFila;
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlDatos = sqlComando.ExecuteReader();
+                while (sqlDatos.Read())
+                {
+                    tdpFila = new TipoRoboParcialSumatoria();
+                    tdpFila.id_flujo = Flujo;
+                    tdpFila.id_cotizacion = Cotizacion;
+                    tdpFila.id_tipo_item = Tipo_Item;
+                    //[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]
+                    if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
+                    if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
+                    if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
+                    if (sqlDatos["descuento_proveedor"] != DBNull.Value) tdpFila.descuento_proveedor = Convert.ToDouble(sqlDatos["descuento_proveedor"]);
+                    if (sqlDatos["deducible"] != DBNull.Value) tdpFila.deducible = Convert.ToDouble(sqlDatos["deducible"]);
+                    if (sqlDatos["monto_final"] != DBNull.Value) tdpFila.monto_final = Convert.ToDouble(sqlDatos["monto_final"]);
+                    objRespuesta.RCVehicularesSumatoria.Add(tdpFila);
+                }
+                sqlDatos.Close();
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlAdaptador.SelectCommand.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlAdaptador.Fill(objRespuesta.dsRoboParcialSumatoria);
+                objRespuesta.Correcto = true;
+            }
+            catch (Exception ex)
+            {
+                objRespuesta.Correcto = false;
+                objRespuesta.Mensaje = "No se pudo traer los Robos Parciales sumados de la cotizacion debido a: " + ex.Message;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return objRespuesta;
+        }
+        public static bool RoboParcialSumatoriaModificar(TipoRoboParcialSumatoria RoboParcialSumatoria)
+        {
+            bool blnRespuesta = false;
+            string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final " +
+              "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RoboParcialSumatoria.id_tipo_item;
+                sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RoboParcialSumatoria.proveedor;
+
+                sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_orden;
+                sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RoboParcialSumatoria.id_tipo_descuento_orden;
+                sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.descuento_proveedor;
+                sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.deducible;
+                sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_final;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool RoboParcialSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            string strComando = "DELETE FROM [dbo].[cotizacion_robo_parcial_sumatoria] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
+            }
+            catch (Exception)
+            {
+                blnRespuesta = false;
+            }
+            finally
+            {
+                sqlConexion.Close();
+                sqlConexion.Dispose();
+            }
+            return blnRespuesta;
+        }
+        public static bool RoboParcialSumatoriaGenerar(int Flujo, int Cotizacion, short Tipo_Item)
+        {
+            bool blnRespuesta = false;
+            blnRespuesta = RoboParcialSumatoriaBorrar(Flujo, Cotizacion, Tipo_Item);
+            if (!blnRespuesta) return false;
+            string strComando = "INSERT INTO [dbo].[cotizacion_robo_parcial_sumatoria] " +
+              "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]) " +
+              "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'',0.0,0.0,0.0 FROM [dbo].[cotizacion_robo_parcial] " +
+              "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
+            SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+            try
+            {
+                sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+                sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+                sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = Tipo_Item;
+                sqlConexion.Open();
+                sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
             }
             catch (Exception)
             {

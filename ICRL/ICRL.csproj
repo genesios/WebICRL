@@ -562,6 +562,9 @@
     <Compile Include="ModeloDB\cotizacion_danios_propios.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\cotizacion_danios_propios_sumatoria.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\cotizacion_perdida_total_propio.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
@@ -577,7 +580,13 @@
     <Compile Include="ModeloDB\cotizacion_rc_vehicular.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\cotizacion_rc_vehicular_sumatoria.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\cotizacion_robo_parcial.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\cotizacion_robo_parcial_sumatoria.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDB\EstadoSesion.cs">

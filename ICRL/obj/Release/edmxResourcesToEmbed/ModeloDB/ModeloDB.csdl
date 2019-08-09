@@ -213,6 +213,327 @@
     <NavigationProperty Name="CotiReparacionRepuesto" Relationship="Self.FK_COTIREPA_REPARACIO_COTIZACI" FromRole="Cotizacion" ToRole="CotiReparacionRepuesto" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_COTIZACI_ASSOCIATI_USUARIO" FromRole="Cotizacion" ToRole="Usuario" />
   </EntityType>
+  <EntityType Name="cotizacion_danios_propios">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="chaperio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reparacion_previa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="id_moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="precio_cotizado" Type="Double" />
+    <Property Name="id_tipo_descuento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento" Type="Double" />
+    <Property Name="precio_final" Type="Double" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+    <Property Name="recepcion" Type="Boolean" />
+    <Property Name="dias_entrega" Type="Int32" />
+    <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="tipo_cambio" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_danios_propios_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_perdida_total_propio">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="condiciones_especiales" Type="Boolean" />
+    <Property Name="version" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="serie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="caja" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="combustible" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cilindrada" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="techo_solar" Type="Boolean" />
+    <Property Name="asientos_cuero" Type="Boolean" />
+    <Property Name="aros_magnesio" Type="Boolean" />
+    <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_1" Type="Double" />
+    <Property Name="duenio_descripcion_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_2" Type="Double" />
+    <Property Name="duenio_descripcion_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_3" Type="Double" />
+    <Property Name="duenio_descripcion_3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_4" Type="Double" />
+    <Property Name="duenio_descripcion_4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_5" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_5" Type="Double" />
+    <Property Name="duenio_descripcion_5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_usada_1" Type="Boolean" />
+    <Property Name="referencia_medios_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_1" Type="Double" />
+    <Property Name="referencia_usada_2" Type="Boolean" />
+    <Property Name="referencia_medios_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_2" Type="Double" />
+    <Property Name="referencia_usada_3" Type="Boolean" />
+    <Property Name="referencia_medios_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_3" Type="Double" />
+    <Property Name="referencia_usada_4" Type="Boolean" />
+    <Property Name="referencia_medios_4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_4" Type="Double" />
+    <Property Name="referencia_usada_5" Type="Boolean" />
+    <Property Name="referencia_medios_5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_5" Type="Double" />
+    <Property Name="referencia_usada_6" Type="Boolean" />
+    <Property Name="referencia_medios_6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_6" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_perdida_total_robo">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="condiciones_especiales" Type="Boolean" />
+    <Property Name="version" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="serie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="caja" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="combustible" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cilindrada" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="techo_solar" Type="Boolean" />
+    <Property Name="asientos_cuero" Type="Boolean" />
+    <Property Name="aros_magnesio" Type="Boolean" />
+    <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_1" Type="Double" />
+    <Property Name="duenio_descripcion_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_2" Type="Double" />
+    <Property Name="duenio_descripcion_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_3" Type="Double" />
+    <Property Name="duenio_descripcion_3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_4" Type="Double" />
+    <Property Name="duenio_descripcion_4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_nombres_5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_documento_5" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duenio_monto_5" Type="Double" />
+    <Property Name="duenio_descripcion_5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_usada_1" Type="Boolean" />
+    <Property Name="referencia_medios_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_1" Type="Double" />
+    <Property Name="referencia_usada_2" Type="Boolean" />
+    <Property Name="referencia_medios_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_2" Type="Double" />
+    <Property Name="referencia_usada_3" Type="Boolean" />
+    <Property Name="referencia_medios_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_3" Type="Double" />
+    <Property Name="referencia_usada_4" Type="Boolean" />
+    <Property Name="referencia_medios_4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_4" Type="Double" />
+    <Property Name="referencia_usada_5" Type="Boolean" />
+    <Property Name="referencia_medios_5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_5" Type="Double" />
+    <Property Name="referencia_usada_6" Type="Boolean" />
+    <Property Name="referencia_medios_6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_descripcion_6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="referencia_monto_6" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_objetos">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_apellido" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="telefono_contacto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="numero_documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_item" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="monto_item" Type="Double" />
+    <Property Name="id_moneda" Type="Int16" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="rembolso" Type="Boolean" />
+    <Property Name="tipo_cambio" Type="Double" />
+    <Property Name="id_estado" Type="Int16" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_personas">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_apellido" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="telefono_contacto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="numero_documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_gasto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="monto_gasto" Type="Double" />
+    <Property Name="id_moneda" Type="Int16" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="rembolso" Type="Boolean" />
+    <Property Name="tipo_cambio" Type="Double" />
+    <Property Name="id_estado" Type="Int16" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_vehicular">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="chaperio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reparacion_previa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="id_moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="precio_cotizado" Type="Double" />
+    <Property Name="id_tipo_descuento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento" Type="Double" />
+    <Property Name="precio_final" Type="Double" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+    <Property Name="recepcion" Type="Boolean" />
+    <Property Name="dias_entrega" Type="Int32" />
+    <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="tipo_cambio" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_vehicular_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_robo_parcial">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="chaperio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reparacion_previa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mecanico" Type="Boolean" />
+    <Property Name="pintura" Type="Boolean" />
+    <Property Name="instalacion" Type="Boolean" />
+    <Property Name="id_moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="precio_cotizado" Type="Double" />
+    <Property Name="id_tipo_descuento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento" Type="Double" />
+    <Property Name="precio_final" Type="Double" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+    <Property Name="recepcion" Type="Boolean" />
+    <Property Name="dias_entrega" Type="Int32" />
+    <Property Name="fecha_envio_efectivo" Type="DateTime" Precision="3" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="tipo_cambio" Type="Double" />
+  </EntityType>
+  <EntityType Name="cotizacion_robo_parcial_sumatoria">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_tipo_item" />
+      <PropertyRef Name="proveedor" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" Nullable="false" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="monto_orden" Type="Double" />
+    <Property Name="id_tipo_descuento_orden" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="descuento_proveedor" Type="Double" />
+    <Property Name="deducible" Type="Double" />
+    <Property Name="monto_final" Type="Double" />
+  </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
       <PropertyRef Name="idFlujo" />
@@ -268,6 +589,7 @@
     <Property Name="descripcionSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="direccionInspeccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="agenciaAtencion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fechaSiniestro" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="InspDaniosPropios">
     <Key>
@@ -789,6 +1111,16 @@
     <EntitySet Name="CotiReparacionRepuesto" EntityType="Self.CotiReparacionRepuesto" />
     <EntitySet Name="CotiRepuesto" EntityType="Self.CotiRepuesto" />
     <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
+    <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" />
+    <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" />
+    <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" />
+    <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" />
+    <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" />
+    <EntitySet Name="cotizacion_rc_personas" EntityType="Self.cotizacion_rc_personas" />
+    <EntitySet Name="cotizacion_rc_vehicular" EntityType="Self.cotizacion_rc_vehicular" />
+    <EntitySet Name="cotizacion_rc_vehicular_sumatoria" EntityType="Self.cotizacion_rc_vehicular_sumatoria" />
+    <EntitySet Name="cotizacion_robo_parcial" EntityType="Self.cotizacion_robo_parcial" />
+    <EntitySet Name="cotizacion_robo_parcial_sumatoria" EntityType="Self.cotizacion_robo_parcial_sumatoria" />
     <EntitySet Name="CotizacionFlujo" EntityType="Self.CotizacionFlujo" />
     <EntitySet Name="EstadoSesion" EntityType="Self.EstadoSesion" />
     <EntitySet Name="Flujo" EntityType="Self.Flujo" />

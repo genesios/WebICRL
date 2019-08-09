@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d6ebb9dabbfa4c83819eb6211d8a00f1" Name="Diagram1">
+      <Diagram DiagramId="5d9068bff7d14121ad579e9aa123b591" Name="Diagram1">
         <EntityTypeShape EntityType="LBCDesaModelo.Asegurado" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Contador" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.CotiDaniosPropios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
@@ -19,27 +19,37 @@
         <EntityTypeShape EntityType="LBCDesaModelo.CotiReparacionRepuesto" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.CotiRepuesto" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Cotizacion" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.CotizacionFlujo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_danios_propios" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_danios_propios_sumatoria" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_perdida_total_propio" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_perdida_total_robo" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_rc_objetos" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_rc_personas" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_rc_vehicular" Width="1.5" PointX="13.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_rc_vehicular_sumatoria" Width="1.5" PointX="9.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_robo_parcial" Width="1.5" PointX="11.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.cotizacion_robo_parcial_sumatoria" Width="1.5" PointX="13.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.CotizacionFlujo" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.EstadoSesion" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.Flujo" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspDaniosPropios" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspDaniosPropiosPadre" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Flujo" Width="1.5" PointX="15.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspDaniosPropios" Width="1.5" PointX="15.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspDaniosPropiosPadre" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Inspeccion" Width="1.5" PointX="3" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalDanios" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalRobo" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjeto" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjetoDetalle" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersona" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersonaDetalle" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicular" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicularDetalle" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.InspRoboParcial" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.ItemTaller" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalDanios" Width="1.5" PointX="15.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspPerdidaTotalRobo" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjeto" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCObjetoDetalle" Width="1.5" PointX="17.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersona" Width="1.5" PointX="17.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCPersonaDetalle" Width="1.5" PointX="17.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicular" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRCVehicularDetalle" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.InspRoboParcial" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.ItemTaller" Width="1.5" PointX="19.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Liquidacion" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionDetalle" Width="1.5" PointX="5.25" PointY="27" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionFacturas" Width="1.5" PointX="5.25" PointY="30.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.Nomenclador" Width="1.5" PointX="13.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.Proveedor" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Nomenclador" Width="1.5" PointX="19.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.Proveedor" Width="1.5" PointX="13.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Rol" Width="1.5" PointX="5.75" PointY="35.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Usuario" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.UsuarioRol" Width="1.5" PointX="8" PointY="22.5" IsExpanded="true" />
