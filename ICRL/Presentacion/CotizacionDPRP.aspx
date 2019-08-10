@@ -253,7 +253,7 @@
             <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
         </div>
         <div>
-            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" >
+            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -269,9 +269,9 @@
                     <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
                     <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}"/>
-                    <asp:BoundField DataField="deducible" HeaderText="Deducible FRA/COA" DataFormatString="{0:N2}"/>
-                    <asp:BoundField DataField="monto_final" HeaderText="Precio Final" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
             </asp:GridView>
@@ -290,76 +290,7 @@
                 </tr>
             </table>
         </div>
-        <div>
-            <asp:Panel ID="PanelABMRepuestos" runat="server" Enabled="false">
-                <table class="basetable">
-                    <tr>
-                        <td>
-                            <strong>
-                                <asp:Label ID="LabelRepuRegistroItems" runat="server" Text="Items"></asp:Label></strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="twentyfive">
-                                <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twentyfive">
-                                <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
-                                <asp:Label ID="LabelRepuPintura" runat="server" Text="Pintura"></asp:Label>
-                            </div>
-                            <div class="twentyfive">
-                                <asp:CheckBox ID="CheckBoxRepuInstalacion" runat="server" />
-                                <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalacion"></asp:Label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuMoneda" runat="server" Text="Moneda"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuMoneda" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuTipoDesc" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="fifty">
-                                <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuProveedor" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="fifty">
-                                <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Button ID="ButtonRepuGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonRepuGrabar_Click" />
-                            <asp:Button ID="ButtonRepuCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonRepuCancelar_Click" />
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </div>
+
         <div>
             <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting">
                 <AlternatingRowStyle BackColor="White" />
@@ -412,6 +343,7 @@
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
         </div>
+
         <div>
             <asp:Button runat="server" ID="ButtonOcultoParaPopupReparaciones" Style="display: none" />
 
@@ -502,6 +434,90 @@
         </div>
 
         <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupRepuestos" Style="display: none" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRepuestos" BehaviorID="ModalPopupRepuestosBehavior"
+                TargetControlID="ButtonOcultoParaPopupRepuestos" PopupControlID="PanelModalPopupABMRepuestos"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleRepuestos"
+                RepositionMode="None" X="10" Y="10">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
+                    Ventana PopUp para ABM Repuestos
+                </asp:Panel>
+                <div>
+                    <table class="basetable">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="LabelRepuRegistroItems" runat="server" Text="Items"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twentyfive">
+                                    <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
+                                    <asp:Label ID="LabelRepuPintura" runat="server" Text="Pintura"></asp:Label>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:CheckBox ID="CheckBoxRepuInstalacion" runat="server" />
+                                    <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalacion"></asp:Label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuMoneda" runat="server" Text="Moneda"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuMoneda" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuTipoDesc" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonRepuGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonRepuGrabar_Click" />
+                                <asp:Button ID="ButtonRepuCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonRepuCancelar_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopRepuestos" runat="server" Text="Cerrar" OnClick="ButtonCancelPopRepuestos_Click" />
+            </asp:Panel>
+        </div>
+
+        <div>
             <asp:Button runat="server" ID="ButtonOcultoParaPopupSumatorias" Style="display: none" />
 
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupSumatorias" BehaviorID="ModalPopupSumatoriasBehavior"
@@ -528,7 +544,7 @@
                                     <asp:DropDownList ID="DropDownListSumaProveedor" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="twenty">
-                                    <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Precio Cotizado"></asp:Label><br />
+                                    <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Monto Orden"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaMontoOrden" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="twenty">
@@ -540,11 +556,11 @@
                                     <asp:TextBox ID="TextBoxSumaMontoDescProv" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="twenty">
-                                    <asp:Label ID="LabelSumaDeducible" runat="server" Text="Precio Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxSumaDeducible" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:Label ID="LabelSumaDeducible" runat="server" Text="FRANQUICIA / COA"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaDeducible" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="twenty">
-                                    <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Precio Final"></asp:Label><br />
+                                    <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Enabled="false"></asp:TextBox>
                                 </div>
                             </td>

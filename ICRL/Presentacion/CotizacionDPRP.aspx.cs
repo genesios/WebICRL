@@ -52,6 +52,17 @@ namespace ICRL.Presentacion
                     else
                         this.ModalPopupReparaciones.Hide();
                 }
+
+                if (Session["PopupABMRepuestosHabilitado"] != null)
+                {
+                    int vPopup = -1;
+                    vPopup = int.Parse(Session["PopupABMRepuestosHabilitado"].ToString());
+                    if (1 == vPopup)
+                        this.ModalPopupRepuestos.Show();
+                    else
+                        this.ModalPopupRepuestos.Hide();
+                }
+
             }
             catch (Exception ex)
             {
@@ -62,6 +73,8 @@ namespace ICRL.Presentacion
                 Session["MsjEstado"] = ex.Message;
             }
         }
+
+        #region Principal formulario
 
         private void FlTraeDatosCotizacion(int pIdCotizacion, string pNumFlujo)
         {
@@ -317,6 +330,8 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
+        #endregion
+
         #region ABMReparaciones
 
         private int FlTraeNomenItemRepa()
@@ -446,7 +461,6 @@ namespace ICRL.Presentacion
 
         protected void PRepaModificarItem()
         {
-            PCargaCombosRepa();
             //PanelABMReparaciones.Enabled = true;
             DropDownListRepaItem.Enabled = false;
             ButtonRepaGrabar.Enabled = true;
@@ -570,7 +584,8 @@ namespace ICRL.Presentacion
         protected void GridViewReparaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vTextoTemporal = string.Empty;
-            
+            PCargaCombosRepa();
+
             //Leer Registro de la grilla y cargar los valores a la ventana.
             TextBoxRepaIdItem.Text = GridViewReparaciones.SelectedRow.Cells[1].Text;
             //tipo_item:  1 = Reparacion  2 = Repuesto
@@ -581,11 +596,13 @@ namespace ICRL.Presentacion
 
             vTextoTemporal = string.Empty;
             vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text;
+            vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
             DropDownListRepaChaperio.ClearSelection();
             DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
 
             vTextoTemporal = string.Empty;
             vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text;
+            vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
             DropDownListRepaRepPrevia.ClearSelection();
             DropDownListRepaRepPrevia.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -719,15 +736,16 @@ namespace ICRL.Presentacion
             PCargaCombosRepu();
             TextBoxRepuIdItem.Text = string.Empty;
             DropDownListRepuItem.Enabled = true;
-            PanelABMRepuestos.Enabled = true;
+            //PanelABMRepuestos.Enabled = true;
             ButtonRepuGrabar.Enabled = true;
             ButtonRepuCancelar.Enabled = true;
+            Session["PopupABMRepuestosHabilitado"] = 1;
+            this.ModalPopupRepuestos.Show();
         }
 
         protected void PRepuModificarItem()
         {
-            PCargaCombosRepu();
-            PanelABMRepuestos.Enabled = true;
+            //PanelABMRepuestos.Enabled = true;
             DropDownListRepuItem.Enabled = false;
             ButtonRepuGrabar.Enabled = true;
             ButtonRepuCancelar.Enabled = true;
@@ -779,7 +797,7 @@ namespace ICRL.Presentacion
                 {
                     LabelRepuRegistroItems.Text = "Registro modificado exitosamente";
                     PLimpiarCamposRepu();
-                    PanelABMRepuestos.Enabled = false;
+                    //PanelABMRepuestos.Enabled = false;
                     ButtonRepuGrabar.Enabled = false;
                     ButtonRepuCancelar.Enabled = false;
                 }
@@ -795,7 +813,7 @@ namespace ICRL.Presentacion
                 {
                     LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
                     PLimpiarCamposRepu();
-                    PanelABMRepuestos.Enabled = false;
+                    //PanelABMRepuestos.Enabled = false;
                     ButtonRepuGrabar.Enabled = false;
                     ButtonRepuCancelar.Enabled = false;
                 }
@@ -813,7 +831,7 @@ namespace ICRL.Presentacion
 
         protected void ButtonRepuCancelar_Click(object sender, EventArgs e)
         {
-            PanelABMRepuestos.Enabled = false;
+            //PanelABMRepuestos.Enabled = false;
             ButtonRepuGrabar.Enabled = false;
             ButtonRepuCancelar.Enabled = false;
             PLimpiarCamposRepu();
@@ -834,7 +852,7 @@ namespace ICRL.Presentacion
             {
                 LabelRepuRegistroItems.Text = "Registro Borrado exitosamente";
                 PLimpiarCamposRepu();
-                PanelABMRepuestos.Enabled = false;
+                //PanelABMRepuestos.Enabled = false;
                 ButtonRepuGrabar.Enabled = false;
                 ButtonRepuCancelar.Enabled = false;
             }
@@ -849,7 +867,8 @@ namespace ICRL.Presentacion
         protected void GridViewRepuestos_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vTextoTemporal = string.Empty;
-            PRepuModificarItem();
+            PCargaCombosRepu();
+
             //Leer Registro de la grilla y cargar los valores a la ventana.
             TextBoxRepuIdItem.Text = GridViewRepuestos.SelectedRow.Cells[1].Text;
             //tipo_item:  1 = Repuracion  2 = Repuesto
@@ -883,12 +902,77 @@ namespace ICRL.Presentacion
             DropDownListRepuProveedor.ClearSelection();
             DropDownListRepuProveedor.Items.FindByText(vTextoTemporal).Selected = true;
 
+            PRepuModificarItem();
+            Session["PopupABMRepuestosHabilitado"] = 1;
+            this.ModalPopupRepuestos.Show();
+        }
+
+        protected void ButtonCancelPopRepuestos_Click(object sender, EventArgs e)
+        {
+            int vResul = 0;
+            //PLimpiaSeccionDaniosPropiosPadre();
+            //PLimpiaSeccionDatosPropios();
+            //PBloqueaDPPadreEdicion(false);
+            //PBloqueaDPEdicion(false);
+            //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+
+            Session["PopupABMRepuestosHabilitado"] = 0;
+            this.ModalPopupRepuestos.Hide();
         }
 
         #endregion
 
-
         #region SumaReparaciones
+
+        private int FlTraeNomenProveedorSuma()
+        {
+            int vResultado = 0;
+            string vCategoria = "Proveedor";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListSumaProveedor.DataValueField = "codigo";
+            DropDownListSumaProveedor.DataTextField = "descripcion";
+            DropDownListSumaProveedor.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListSumaProveedor.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenTipoDescSuma()
+        {
+            int vResultado = 0;
+            string vCategoria = "Tipo Descuento";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListSumaTipoDesc.DataValueField = "codigo";
+            DropDownListSumaTipoDesc.DataTextField = "descripcion";
+            DropDownListSumaTipoDesc.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListSumaTipoDesc.DataBind();
+
+            return vResultado;
+        }
+
+        protected void PCargaCombosSuma()
+        {
+            //Llenar Combos
+            FlTraeNomenProveedorSuma();
+            FlTraeNomenTipoDescSuma();
+        }
+
+        protected void PSumaModificarItem(short pTipoItem)
+        {
+            PCargaCombosSuma();
+            //PanelABMReparaciones.Enabled = true;
+            DropDownListSumaProveedor.Enabled = false;
+            if ((short)CotizacionICRL.TipoItem.Repuesto == pTipoItem)
+            {
+                TextBoxSumaDeducible.Enabled = false;
+            }
+            ButtonSumaGrabar.Enabled = true;
+            ButtonSumaCancelar.Enabled = true;
+        }
 
         private int FlTraeDatosSumatoriaReparaciones(int pIdFlujo, int pIdCotizacion, short pTipoItem)
         {
@@ -933,84 +1017,65 @@ namespace ICRL.Presentacion
             {
                 LabelRepaRegistroItems.Text = "Reparaciones NO sumarizadas exitosamente";
             }
+
+            FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
         }
 
         protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
         {
             LabelSumaRegistroItems.Text = "Items - Sumatoria";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            CotizacionICRL.TipoDanioPropioSumatoria vTipoDanioPropioSumatoria = new CotizacionICRL.TipoDanioPropioSumatoria();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoDanioPropioSumatoria.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoDanioPropioSumatoria.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
-            //tipo_item:  1 = Reparacion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
+            vTipoDanioPropioSumatoria.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+
+            vTipoDanioPropioSumatoria.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
+            vTipoDanioPropioSumatoria.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
+            vTipoDanioPropioSumatoria.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
+            vTipoDanioPropioSumatoria.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
+            vTipoDanioPropioSumatoria.deducible = double.Parse(TextBoxSumaDeducible.Text);
+            switch (vTipoDanioPropioSumatoria.id_tipo_descuento_orden)
             {
                 case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - vTipoDanioPropioSumatoria.descuento_proveedor;
                     break;
                 case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - (vTipoDanioPropioSumatoria.monto_orden * (vTipoDanioPropioSumatoria.descuento_proveedor / 100));
                     break;
                 default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden;
                     break;
             }
-            vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
-
-            double vTipoCambio = 0;
-            vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
 
             bool vResultado = false;
-            if (string.Empty != TextBoxRepaIdItem.Text)
+
+            vResultado = BD.CotizacionICRL.DaniosPropiosSumatoriaModificar(vTipoDanioPropioSumatoria);
+            if (vResultado)
             {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepaIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
-                if (vResultado)
-                {
-                    LabelRepaRegistroItems.Text = "Registro modificado exitosamente";
-                    PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
-                    ButtonRepaGrabar.Enabled = false;
-                    ButtonRepaCancelar.Enabled = false;
-                }
-                else
-                {
-                    LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
-                }
+                LabelSumaRegistroItems.Text = "Registro modificado exitosamente";
+                //PLimpiarCamposRepa();
+                //PanelABMReparaciones.Enabled = false;
+                ButtonSumaGrabar.Enabled = false;
+                ButtonSumaCancelar.Enabled = false;
             }
             else
             {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
-                if (vResultado)
-                {
-                    LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
-                    PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
-                    ButtonRepaGrabar.Enabled = false;
-                    ButtonRepaCancelar.Enabled = false;
-                }
-                else
-                {
-                    LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
-                }
+                LabelSumaRegistroItems.Text = "El Registro no pudo ser añadido";
             }
 
-            int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            short vTipoItem = 0;
 
-            FlTraeDatosDPReparacion(vIdCotizacion);
+            //Completar los elementos del objeto y grabar el registro.
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+            FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
 
         }
 
@@ -1039,48 +1104,34 @@ namespace ICRL.Presentacion
         {
             string vTextoTemporal = string.Empty;
 
+            short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+            PSumaModificarItem(vTipoItem);
+
             //Leer Registro de la grilla y cargar los valores a la ventana.
-            TextBoxRepaIdItem.Text = GridViewReparaciones.SelectedRow.Cells[1].Text;
-            //tipo_item:  1 = Reparacion  2 = Repuesto
+            //Proveedor
             vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text;
-            DropDownListRepaItem.ClearSelection();
-            DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
+            vTextoTemporal = GridViewSumaReparaciones.SelectedRow.Cells[0].Text;
+            DropDownListSumaProveedor.ClearSelection();
+            DropDownListSumaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
 
+            //Monto Orden
+            TextBoxSumaMontoOrden.Text = GridViewSumaReparaciones.SelectedRow.Cells[1].Text;
+
+            //Tipo Descuento
             vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text;
-            DropDownListRepaChaperio.ClearSelection();
-            DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
+            vTextoTemporal = GridViewSumaReparaciones.SelectedRow.Cells[2].Text;
+            DropDownListSumaTipoDesc.ClearSelection();
+            DropDownListSumaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text;
-            DropDownListRepaRepPrevia.ClearSelection();
-            DropDownListRepaRepPrevia.Items.FindByText(vTextoTemporal).Selected = true;
+            //Monto Descuento Orden
+            TextBoxSumaMontoDescProv.Text = GridViewSumaReparaciones.SelectedRow.Cells[3].Text;
 
-            CheckBoxRepaMecanico.Checked = (GridViewReparaciones.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
+            //Monto Deducible Franquicia COA
+            TextBoxSumaDeducible.Text = GridViewSumaReparaciones.SelectedRow.Cells[4].Text;
 
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text;
-            DropDownListRepaMoneda.ClearSelection();
-            DropDownListRepaMoneda.Items.FindByText(vTextoTemporal).Selected = true;
+            TextBoxSumaMontoFinal.Text = GridViewSumaReparaciones.SelectedRow.Cells[5].Text;
 
-            TextBoxRepaPrecioCotizado.Text = GridViewReparaciones.SelectedRow.Cells[7].Text;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[8].Text;
-            DropDownListRepaTipoDesc.ClearSelection();
-            DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
-
-            TextBoxRepaMontoDesc.Text = GridViewReparaciones.SelectedRow.Cells[9].Text;
-
-            TextBoxRepaPrecioFinal.Text = GridViewReparaciones.SelectedRow.Cells[10].Text;
-
-            vTextoTemporal = string.Empty;
-            vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[11].Text;
-            DropDownListRepaProveedor.ClearSelection();
-            DropDownListRepaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
-
-            PRepaModificarItem();
             Session["PopupABMSumasHabilitado"] = 1;
             this.ModalPopupSumatorias.Show();
         }

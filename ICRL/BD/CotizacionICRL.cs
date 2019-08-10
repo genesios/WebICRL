@@ -551,7 +551,7 @@ namespace ICRL.BD
             if (!blnRespuesta) return false;
             string strComando = "INSERT INTO [dbo].[cotizacion_danios_propios_sumatoria] " +
               "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]) " +
-              "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'',0.0,0.0,0.0 FROM [dbo].[cotizacion_danios_propios] " +
+              "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'Fijo',0.0,0.0,0.0 FROM [dbo].[cotizacion_danios_propios] " +
               "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
