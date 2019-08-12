@@ -97,10 +97,10 @@ namespace IRCL.Presentacion
                 {
 
                     var vLst = (from c in db.Cotizacion
-                                join cdp in db.CotiDaniosPropios on c.idCotizacion equals cdp.idCotizacion
                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
                                 where (c.idFlujo == vIdInspeccion)
                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.DaniosPropios)
                                 orderby c.idInspeccion
                                 select new
                                 {
@@ -112,8 +112,42 @@ namespace IRCL.Presentacion
                                     c.fechaCreacion,
                                     sumaCosto = 0,
                                     descEstado = "Coti.Pendiente"
-                                })
-                               ;
+                                }).Union
+                                (from c in db.Cotizacion
+                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                                 where (c.idFlujo == vIdInspeccion)
+                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                 && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.RoboParcial)
+                                 orderby c.idInspeccion
+                                 select new
+                                 {
+                                     c.idCotizacion,
+                                     tipoCobertura = "Robo Parcial",
+                                     secuencialOrden = "RP - Pendiente",
+                                     nombreProveedor = "N/A",
+                                     correlativoInspeccion = c.correlativo,
+                                     c.fechaCreacion,
+                                     sumaCosto = 0,
+                                     descEstado = "Coti.Pendiente"
+                                 }).Union
+                                (from c in db.Cotizacion
+                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                                 where (c.idFlujo == vIdInspeccion)
+                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                 && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.RCVEhicular)
+                                 orderby c.idInspeccion
+                                 select new
+                                 {
+                                     c.idCotizacion,
+                                     tipoCobertura = "RC Vehicular",
+                                     secuencialOrden = "RCV - Pendiente",
+                                     nombreProveedor = "N/A",
+                                     correlativoInspeccion = c.correlativo,
+                                     c.fechaCreacion,
+                                     sumaCosto = 0,
+                                     descEstado = "Coti.Pendiente"
+                                 });
+
                     gvInspecciones.DataSource = vLst.ToList();
                     gvInspecciones.DataBind();
                 }
@@ -193,10 +227,12 @@ namespace IRCL.Presentacion
         protected void GridViewgvInspecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vFilaFlujo = string.Empty;
+            string vCobertura = string.Empty;
             int vIdFlujo = 0;
 
             var gvInspecciones = (GridView)sender;
             vFilaFlujo = gvInspecciones.SelectedRow.Cells[0].Text;
+            vCobertura = gvInspecciones.SelectedRow.Cells[1].Text;
 
 
             int vIdCotizacion = int.Parse(vFilaFlujo);
@@ -205,7 +241,21 @@ namespace IRCL.Presentacion
 
             Session["NumFlujo"] = vIdFlujo;
 
-            Response.Redirect("~/Presentacion/CotizacionDPRP.aspx?nroCoti=" + vIdCotizacion.ToString());
+            switch (vCobertura)
+            {
+                case "Daños Propios":
+                    Response.Redirect("~/Presentacion/CotizacionDPRP.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
+                case "Robo Parcial":
+                    Response.Redirect("~/Presentacion/CotizacionRP.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
+                case "RC Vehicular":
+                    Response.Redirect("~/Presentacion/CotizacionRCVehicular.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         #region Grilla Maestra

@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionDPRP.aspx.cs" Inherits="ICRL.Presentacion.CotizacionDPRP" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRP.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRP" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
-    <style type="text/css">
+        <style type="text/css">
         .collapsed-row {
             display: none;
             padding: 0px;
@@ -14,7 +14,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
-    <div>
+<div>
         <div>
             <ajaxToolkit:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server"
                 Collapsed="True" CollapsedSize="0"

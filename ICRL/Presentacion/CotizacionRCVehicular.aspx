@@ -20,19 +20,13 @@
                 Collapsed="True" CollapsedSize="0"
                 ExpandedText="Ocultar" TargetControlID="PanelDatosGen" TextLabelID="textLabel"
                 ImageControlID="Image1" ExpandedImage="~/img/collapse.jpg" CollapsedImage="~/img/expand.jpg"
-                CollapseControlID="Panel1" ExpandControlID="Panel1" CollapsedText="Mostrar" />
-
-            <ajaxToolkit:CollapsiblePanelExtender ID="CollapsiblePanelExtender2" runat="server"
-                Collapsed="True" CollapsedSize="0"
-                ExpandedText="Ocultar" TargetControlID="PanelRCVehicular" TextLabelID="textLabelVeh"
-                ImageControlID="Image2" ExpandedImage="~/img/collapse.jpg" CollapsedImage="~/img/expand.jpg"
-                CollapseControlID="PanelColapsableVeh" ExpandControlID="PanelColapsableVeh" CollapsedText="Mostrar" />
+                CollapseControlID="PanelColapseDatosGen" ExpandControlID="PanelColapseDatosGen" CollapsedText="Mostrar" />
             <div>
 
                 <table class="basetable">
                     <tr>
                         <th>
-                            <asp:Label ID="LabelTituloInspeccion" runat="server" Text="Inspección"></asp:Label>
+                            <asp:Label ID="LabelTituloCotizacion" runat="server" Text="Cotizacion"></asp:Label>
                         </th>
                     </tr>
                     <tr>
@@ -45,12 +39,12 @@
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox><br />
                                 <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox><br />
-                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox><br />
                             </div>
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxCorrelativo" runat="server"></asp:TextBox>
-                                <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label>
+                                <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False" ></asp:TextBox>
+                                <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
                             </div>
                         </td>
@@ -62,7 +56,7 @@
                     </tr>
                 </table>
 
-                <asp:Panel runat="server" ID="Panel1">
+                <asp:Panel runat="server" ID="PanelColapseDatosGen">
                     <div class="collapseBar">
                         <span><strong style="text-transform: uppercase">
                             <asp:Label runat="server" ID="textLabel" />
@@ -206,45 +200,8 @@
             </div>
         </div>
         <div>
-            <asp:Panel runat="server" ID="PanelColapsableVeh" >
-                <div class="collapseBar">
-                    <span><strong style="text-transform: uppercase">
-                        <asp:Label runat="server" ID="textLabelVeh" />
-                        DATOS VEHICULO TERCERO</strong></span>
-                    <asp:Image ID="Image2" runat="server" ImageUrl="~/img/collapse.jpg" />
-                </div>
-            </asp:Panel>
-            <asp:Panel ID="PanelRCVehicular" runat="server" CssClass="PanelDatosGen">
-                <table class="basetable">
-                    <tr>
-                        <th>
-                            <asp:Label ID="LabelDatosVehicular" runat="server" Text="Datos Vehiculo Tercero"></asp:Label>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="fifty">
-                                <asp:Label ID="LabelVehMarca" runat="server" Text="Marca:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehMarca" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelVehModelo" runat="server" Text="Modelo:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehModelo" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelVehAnio" runat="server" Text="Año:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehAnio" runat="server" Enabled="False"></asp:TextBox><br />
-                                <asp:Label ID="LabelVehPlaca" runat="server" Text="Placa:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehPlaca" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="fifty">
-                                <asp:Label ID="LabelVehColor" runat="server" Text="Color:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehColor" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelVehKilometraje" runat="server" Text="Valor:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehKilometraje" runat="server" Enabled="False"></asp:TextBox><br />
-                                <asp:Label ID="LabelVehNroChasis" runat="server" Text="Número Chasis:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehNroChasis" runat="server"></asp:TextBox>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
+            <table class="basetable">
+            </table>
         </div>
         <div>
             <table class="basetable">
@@ -263,7 +220,7 @@
         </div>
 
         <div>
-            <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting">
+            <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%" >
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -283,7 +240,7 @@
                     <asp:BoundField DataField="reparacion_previa" HeaderText="Reparación Previa" />
                     <asp:TemplateField HeaderText="Mec.">
                         <ItemTemplate>
-                            <asp:CheckBox runat="server" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
+                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
@@ -297,7 +254,10 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
+        </div>
+        <div>
+            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" Width="100%" >
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -309,7 +269,20 @@
                 <SortedAscendingHeaderStyle BackColor="#246B61" />
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
+                </Columns>
             </asp:GridView>
+        </div>
+        <div>
+            <table class="basetable">
+            </table>
         </div>
         <div>
             <table class="basetable">
@@ -325,78 +298,9 @@
                 </tr>
             </table>
         </div>
+
         <div>
-            <asp:Panel ID="PanelABMRepuestos" runat="server" Enabled="false">
-                <table class="basetable">
-                    <tr>
-                        <td>
-                            <strong>
-                                <asp:Label ID="LabelRepuRegistroItems" runat="server" Text="Items"></asp:Label></strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="twentyfive">
-                                <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twentyfive">
-                                <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
-                                <asp:Label ID="LabelRepuPintura" runat="server" Text="Pintura"></asp:Label>
-                            </div>
-                            <div class="twentyfive">
-                                <asp:CheckBox ID="CheckBoxRepuInstalacion" runat="server" />
-                                <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalacion"></asp:Label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuMoneda" runat="server" Text="Moneda"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuMoneda" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuTipoDesc" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="fifty">
-                                <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListRepuProveedor" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="fifty">
-                                <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Button ID="ButtonRepuGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonRepuGrabar_Click" />
-                            <asp:Button ID="ButtonRepuCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonRepuCancelar_Click" />
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </div>
-        <div>
-            <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting">
+            <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%" >
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -414,12 +318,12 @@
                     <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
                     <asp:TemplateField HeaderText="Pint.">
                         <ItemTemplate>
-                            <asp:CheckBox runat="server" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
+                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Inst.">
                         <ItemTemplate>
-                            <asp:CheckBox runat="server" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
+                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
@@ -433,7 +337,10 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" />
+        </div>
+        <div>
+            <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%" >
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -445,8 +352,49 @@
                 <SortedAscendingHeaderStyle BackColor="#246B61" />
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
+                </Columns>
             </asp:GridView>
         </div>
+
+        <div>
+            <asp:Button ID="ButtonRecepcionRepu" runat="server" Text="Recepción Repuestos"  />
+        </div>
+        <div>
+            <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%" >
+                <AlternatingRowStyle BackColor="White" />
+                <EditRowStyle BackColor="#7C6F57" />
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:BoundField DataField="id_item" HeaderText="Id" />
+                    <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
+                    <asp:TemplateField HeaderText="Recibido">
+                        <ItemTemplate>
+                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("recepcion") %>'></asp:CheckBox>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="dias_entrega" HeaderText="Días de Entrega" />
+                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+
         <div>
             <asp:Button runat="server" ID="ButtonOcultoParaPopupReparaciones" Style="display: none" />
 
@@ -535,5 +483,206 @@
                 <asp:Button ID="ButtonCancelPopReparaciones" runat="server" Text="Cerrar" OnClick="ButtonCancelPopReparaciones_Click" />
             </asp:Panel>
         </div>
+
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupRepuestos" Style="display: none" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRepuestos" BehaviorID="ModalPopupRepuestosBehavior"
+                TargetControlID="ButtonOcultoParaPopupRepuestos" PopupControlID="PanelModalPopupABMRepuestos"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleRepuestos"
+                RepositionMode="None" X="10" Y="10">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server" CssClass="modalPopup">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
+                    Ventana PopUp para ABM Repuestos
+                </asp:Panel>
+                <div>
+                    <table class="basetable">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="LabelRepuRegistroItems" runat="server" Text="Items"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twentyfive">
+                                    <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
+                                    <asp:Label ID="LabelRepuPintura" runat="server" Text="Pintura"></asp:Label>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:CheckBox ID="CheckBoxRepuInstalacion" runat="server" />
+                                    <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalacion"></asp:Label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuMoneda" runat="server" Text="Moneda"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuMoneda" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuTipoDesc" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonRepuGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonRepuGrabar_Click" />
+                                <asp:Button ID="ButtonRepuCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonRepuCancelar_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopRepuestos" runat="server" Text="Cerrar" OnClick="ButtonCancelPopRepuestos_Click" />
+            </asp:Panel>
+        </div>
+
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupSumatorias" Style="display: none" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupSumatorias" BehaviorID="ModalPopupSumatoriasBehavior"
+                TargetControlID="ButtonOcultoParaPopupSumatorias" PopupControlID="PanelModalPopupABMSumatorias"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleSumatorias"
+                RepositionMode="None" X="10" Y="10">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupABMSumatorias" runat="server" CssClass="modalPopup">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleSumatorias" CssClass="modalPopupHeader">
+                    Ventana PopUp para Editar Sumatorias
+                </asp:Panel>
+                <div>
+                    <table class="basetable">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="LabelSumaRegistroItems" runat="server" Text="Items - Sumatoria"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaProveedor" runat="server" Text="Proveedores" ></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListSumaProveedor" runat="server" Enabled="False"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Monto Orden" ></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaMontoOrden" runat="server" Enabled="False"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListSumaTipoDesc" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaMontoDescProv" runat="server" Text="Monto Descuento"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaMontoDescProv" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaDeducible" runat="server" Text="FRANQUICIA / COA"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaDeducible" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="twenty">
+                                    <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonSumaGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonSumaGrabar_Click" />
+                                <asp:Button ID="ButtonSumaCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonSumaCancelar_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopSumatorias" runat="server" Text="Cerrar" OnClick="ButtonCancelPopSumatorias_Click" />
+            </asp:Panel>
+        </div>
+
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupRecepRepuestos" Style="display: none" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRecepRepuestos" BehaviorID="ModalPopupRecepRepuestosBehavior"
+                TargetControlID="ButtonOcultoParaPopupRecepRepuestos" PopupControlID="PanelModalPopupRecepRepuestos"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleRecepRepuestos"
+                RepositionMode="None" X="10" Y="10">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupRecepRepuestos" runat="server" CssClass="modalPopup">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleRecepRepuestos" CssClass="modalPopupHeader">
+                    Ventana PopUp para Recepción e Ingreso días Repuestos
+                </asp:Panel>
+                <div>
+                    <table class="basetable">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="LabelRecepRegistroItems" runat="server" Text="Items"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="twentyfive">
+                                    <asp:Label ID="LabelRecepItem" runat="server" Text="Item"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListRecepItem" runat="server" Enabled="false"></asp:DropDownList>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:CheckBox ID="CheckBoxRecepRecibido" runat="server" />
+                                    <asp:Label ID="LabelRecepRecibido" runat="server" Text="Recibido"></asp:Label>
+                                </div>
+                                <div class="twentyfive">
+                                    <asp:Label ID="LabelPrecioRecepDiasEntrega" runat="server" Text="Dias de Entrega"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRecepDiasEntrega" runat="server"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelRecepIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRecepIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonRecepGrabar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonRecepGrabar_Click" />
+                                <asp:Button ID="ButtonRecepCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonRecepCancelar_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopRecepRepuestos" runat="server" Text="Cerrar" OnClick="ButtonCancelPopRecepRepuestos_Click" />
+            </asp:Panel>
+        </div>
+
     </div>
 </asp:Content>

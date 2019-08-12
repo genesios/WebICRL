@@ -245,6 +245,8 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
   </EntityType>
   <EntityType Name="cotizacion_perdida_total_propio">
     <Key>
@@ -464,6 +466,30 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="cotizacion_rc_vehicular_tercero">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="150" />
+    <Property Name="telefono" Type="varchar" MaxLength="20" />
+    <Property Name="documento" Type="varchar" MaxLength="30" />
+    <Property Name="color" Type="varchar" MaxLength="20" />
+    <Property Name="marca" Type="varchar" MaxLength="50" />
+    <Property Name="modelo" Type="varchar" MaxLength="50" />
+    <Property Name="placa" Type="varchar" MaxLength="50" />
+    <Property Name="anio" Type="varchar" MaxLength="10" />
+    <Property Name="chasis" Type="varchar" MaxLength="50" />
+    <Property Name="taller" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="cotizacion_robo_parcial">
     <Key>
@@ -515,6 +541,8 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -1119,6 +1147,23 @@
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [cotizacion_rc_vehicular_tercero].[id_flujo] AS [id_flujo], 
+    [cotizacion_rc_vehicular_tercero].[id_cotizacion] AS [id_cotizacion], 
+    [cotizacion_rc_vehicular_tercero].[id_item] AS [id_item], 
+    [cotizacion_rc_vehicular_tercero].[nombre] AS [nombre], 
+    [cotizacion_rc_vehicular_tercero].[telefono] AS [telefono], 
+    [cotizacion_rc_vehicular_tercero].[documento] AS [documento], 
+    [cotizacion_rc_vehicular_tercero].[color] AS [color], 
+    [cotizacion_rc_vehicular_tercero].[marca] AS [marca], 
+    [cotizacion_rc_vehicular_tercero].[modelo] AS [modelo], 
+    [cotizacion_rc_vehicular_tercero].[placa] AS [placa], 
+    [cotizacion_rc_vehicular_tercero].[anio] AS [anio], 
+    [cotizacion_rc_vehicular_tercero].[chasis] AS [chasis], 
+    [cotizacion_rc_vehicular_tercero].[taller] AS [taller]
+    FROM [dbo].[cotizacion_rc_vehicular_tercero] AS [cotizacion_rc_vehicular_tercero]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
       <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
       <End Role="CotiPerdidaTotalReferencia" EntitySet="CotiPerdidaTotalReferencia" />

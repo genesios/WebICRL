@@ -23,5 +23,7 @@ namespace ICRL.ModeloDB
         public Nullable<double> descuento_proveedor { get; set; }
         public Nullable<double> deducible { get; set; }
         public Nullable<double> monto_final { get; set; }
+        public string numero_orden { get; set; }
+        public Nullable<short> id_estado { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using ICRL.BD;
 
 namespace ICRL.Presentacion
 {
-    public partial class CotizacionDPRP : System.Web.UI.Page
+    public partial class CotizacionRP : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -200,7 +200,7 @@ namespace ICRL.Presentacion
                                    cf.correosDeEnvio,
                                    c.correlativo,
                                    //cdp.tipoTaller,
-                                   tipoTaller = "Tipo B",
+                                   tipoTaller = "Taller Tipo B",
                                    u.nombreVisible,
                                    u.correoElectronico,
                                };
@@ -255,122 +255,58 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
-        //Anterior método de llenar la grilla Reparacion
-        //private int FlTraeDatosDPReparacion(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-
-        //    using (LBCDesaEntities db = new LBCDesaEntities())
-        //    {
-        //        var vLst = from c in db.Cotizacion
-        //                   join cotrepa in db.CotiReparacion on c.idCotizacion equals cotrepa.idCotizacion
-        //                   join n in db.Nomenclador on cotrepa.idItem equals n.codigo
-        //                   where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
-        //                   select new
-        //                   {
-        //                       n.descripcion,
-        //                       cotrepa.chaperio,
-        //                       cotrepa.reparacionPrevia,
-        //                       cotrepa.mecanico,
-        //                       cotrepa.moneda,
-        //                       cotrepa.precioCotizado,
-        //                       cotrepa.descFijoPorcentaje,
-        //                       cotrepa.montoDescuento,
-        //                       cotrepa.precioFinal,
-        //                       cotrepa.proveedor
-        //                   };
-
-        //        GridViewReparaciones.DataSource = vLst.ToList();
-        //        GridViewReparaciones.DataBind();
-
-        //    }
-
-        //    return vResultado;
-        //}
         private int FlTraeDatosDPReparacion(int pIdCotizacion)
         {
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRoboParcialTraer vTipoRoboParcialTraer;
+            vTipoRoboParcialTraer = CotizacionICRL.RoboParcialTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewReparaciones.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewReparaciones.DataSource = vTipoRoboParcialTraer.RobosParciales.Select(RobosParciales => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.chaperio,
-                DaniosPropios.reparacion_previa,
-                DaniosPropios.mecanico,
-                DaniosPropios.id_moneda,
-                DaniosPropios.precio_cotizado,
-                DaniosPropios.id_tipo_descuento,
-                DaniosPropios.descuento,
-                DaniosPropios.precio_final,
-                DaniosPropios.proveedor,
-                DaniosPropios.id_tipo_item
+                RobosParciales.id_item,
+                RobosParciales.item_descripcion,
+                RobosParciales.chaperio,
+                RobosParciales.reparacion_previa,
+                RobosParciales.mecanico,
+                RobosParciales.id_moneda,
+                RobosParciales.precio_cotizado,
+                RobosParciales.id_tipo_descuento,
+                RobosParciales.descuento,
+                RobosParciales.precio_final,
+                RobosParciales.proveedor,
+                RobosParciales.id_tipo_item
 
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 1).ToList();
+            }).Where(RobosParciales => RobosParciales.id_tipo_item == 1).ToList();
             GridViewReparaciones.DataBind();
 
             return vResultado;
         }
-
-        //Anterior método de llenar la grilla Repuesto
-        //private int FlTraeDatosDPRepuesto(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-
-        //    using (LBCDesaEntities db = new LBCDesaEntities())
-        //    {
-        //        var vLst = from c in db.Cotizacion
-        //                   join cotrepu in db.CotiRepuesto on c.idCotizacion equals cotrepu.idCotizacion
-        //                   join n in db.Nomenclador on cotrepu.idItem equals n.codigo
-        //                   where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
-        //                   select new
-        //                   {
-        //                       n.descripcion,
-        //                       cotrepu.pintura,
-        //                       cotrepu.instalacion,
-        //                       cotrepu.moneda,
-        //                       cotrepu.precioCotizado,
-        //                       cotrepu.descFijoPorcentaje,
-        //                       cotrepu.montoDescuento,
-        //                       cotrepu.precioFinal,
-        //                       cotrepu.proveedor
-        //                   };
-
-        //        GridViewRepuestos.DataSource = vLst.ToList();
-        //        GridViewRepuestos.DataBind();
-
-        //    }
-
-        //    return vResultado;
-        //}
 
         private int FlTraeDatosDPRepuesto(int pIdCotizacion)
         {
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRoboParcialTraer vTipoRoboParcialTraer;
+            vTipoRoboParcialTraer = CotizacionICRL.RoboParcialTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewRepuestos.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewRepuestos.DataSource = vTipoRoboParcialTraer.RobosParciales.Select(RobosParciales => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.pintura,
-                DaniosPropios.instalacion,
-                DaniosPropios.id_moneda,
-                DaniosPropios.precio_cotizado,
-                DaniosPropios.id_tipo_descuento,
-                DaniosPropios.descuento,
-                DaniosPropios.precio_final,
-                DaniosPropios.proveedor,
-                DaniosPropios.id_tipo_item
+                RobosParciales.id_item,
+                RobosParciales.item_descripcion,
+                RobosParciales.pintura,
+                RobosParciales.instalacion,
+                RobosParciales.id_moneda,
+                RobosParciales.precio_cotizado,
+                RobosParciales.id_tipo_descuento,
+                RobosParciales.descuento,
+                RobosParciales.precio_final,
+                RobosParciales.proveedor,
+                RobosParciales.id_tipo_item
 
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 2).ToList();
+            }).Where(RobosParciales => RobosParciales.id_tipo_item == 2).ToList();
             GridViewRepuestos.DataBind();
 
             return vResultado;
@@ -506,46 +442,46 @@ namespace ICRL.Presentacion
         protected void ButtonRepaGrabar_Click(object sender, EventArgs e)
         {
             LabelRepaRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRoboParcial vTipoRoboParcial = new CotizacionICRL.TipoRoboParcial();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRoboParcial.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRoboParcial.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
             //tipo_item:  1 = Reparacion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
+            vTipoRoboParcial.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+            vTipoRoboParcial.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+            vTipoRoboParcial.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
+            vTipoRoboParcial.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
+            vTipoRoboParcial.mecanico = CheckBoxRepaMecanico.Checked;
+            vTipoRoboParcial.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
+            vTipoRoboParcial.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
+            vTipoRoboParcial.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
+            vTipoRoboParcial.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
+            switch (vTipoRoboParcial.id_tipo_descuento)
             {
                 case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado - vTipoRoboParcial.descuento;
                     break;
                 case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado - (vTipoRoboParcial.precio_cotizado * (vTipoRoboParcial.descuento / 100));
                     break;
                 default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado;
                     break;
             }
-            vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
+            vTipoRoboParcial.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
+            vTipoRoboParcial.id_estado = 1;
 
             double vTipoCambio = 0;
             vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
+            vTipoRoboParcial.tipo_cambio = vTipoCambio;
 
             bool vResultado = false;
             if (string.Empty != TextBoxRepaIdItem.Text)
             {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepaIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vTipoRoboParcial.id_item = int.Parse(TextBoxRepaIdItem.Text);
+                vResultado = BD.CotizacionICRL.RoboParcialModificar(vTipoRoboParcial);
                 if (vResultado)
                 {
                     LabelRepaRegistroItems.Text = "Registro modificado exitosamente";
@@ -561,7 +497,7 @@ namespace ICRL.Presentacion
             }
             else
             {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RoboParcialRegistrar(vTipoRoboParcial);
                 if (vResultado)
                 {
                     LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
@@ -600,7 +536,7 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(GridViewReparaciones.SelectedRow.Cells[1].Text);
-            vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+            vResultado = BD.CotizacionICRL.RoboParcialBorrar(vIdFlujo, vIdCotizacion, vIdItem);
             if (vResultado)
             {
                 LabelRepaRegistroItems.Text = "Registro Borrado exitosamente";
@@ -781,45 +717,45 @@ namespace ICRL.Presentacion
         protected void ButtonRepuGrabar_Click(object sender, EventArgs e)
         {
             LabelRepuRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRoboParcial vTipoRoboParcial = new CotizacionICRL.TipoRoboParcial();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRoboParcial.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRoboParcial.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
             //tipo_item:  1 = Repuracion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.pintura = CheckBoxRepuPintura.Checked;
-            vTipoDaniosPropios.instalacion = CheckBoxRepuInstalacion.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepuMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepuPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepuTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepuMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
+            vTipoRoboParcial.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
+            vTipoRoboParcial.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+            vTipoRoboParcial.pintura = CheckBoxRepuPintura.Checked;
+            vTipoRoboParcial.instalacion = CheckBoxRepuInstalacion.Checked;
+            vTipoRoboParcial.id_moneda = DropDownListRepuMoneda.SelectedItem.Text.Trim();
+            vTipoRoboParcial.precio_cotizado = double.Parse(TextBoxRepuPrecioCotizado.Text);
+            vTipoRoboParcial.id_tipo_descuento = DropDownListRepuTipoDesc.SelectedItem.Text.Trim();
+            vTipoRoboParcial.descuento = double.Parse(TextBoxRepuMontoDesc.Text);
+            switch (vTipoRoboParcial.id_tipo_descuento)
             {
                 case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado - vTipoRoboParcial.descuento;
                     break;
                 case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado - (vTipoRoboParcial.precio_cotizado * (vTipoRoboParcial.descuento / 100));
                     break;
                 default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    vTipoRoboParcial.precio_final = vTipoRoboParcial.precio_cotizado;
                     break;
             }
-            vTipoDaniosPropios.proveedor = DropDownListRepuProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
+            vTipoRoboParcial.proveedor = DropDownListRepuProveedor.SelectedItem.Text.Trim();
+            vTipoRoboParcial.id_estado = 1;
 
             double vTipoCambio = 0;
             vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
+            vTipoRoboParcial.tipo_cambio = vTipoCambio;
 
             bool vResultado = false;
             if (string.Empty != TextBoxRepuIdItem.Text)
             {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepuIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vTipoRoboParcial.id_item = int.Parse(TextBoxRepuIdItem.Text);
+                vResultado = BD.CotizacionICRL.RoboParcialModificar(vTipoRoboParcial);
                 if (vResultado)
                 {
                     LabelRepuRegistroItems.Text = "Registro modificado exitosamente";
@@ -835,7 +771,7 @@ namespace ICRL.Presentacion
             }
             else
             {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RoboParcialRegistrar(vTipoRoboParcial);
                 if (vResultado)
                 {
                     LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
@@ -874,7 +810,7 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(GridViewRepuestos.SelectedRow.Cells[1].Text);
-            vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+            vResultado = BD.CotizacionICRL.RoboParcialBorrar(vIdFlujo, vIdCotizacion, vIdItem);
             if (vResultado)
             {
                 LabelRepuRegistroItems.Text = "Registro Borrado exitosamente";
@@ -996,17 +932,17 @@ namespace ICRL.Presentacion
         {
             int vResultado = 0;
 
-            BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-            vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
+            BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+            vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
-            GridViewSumaReparaciones.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
+            GridViewSumaReparaciones.DataSource = vTipoRoboParcialSumatoriaTraer.RoboParcialSumatoria.Select(RoboParcialSumatoria => new
             {
-                DaniosPropiosSumatoria.proveedor,
-                DaniosPropiosSumatoria.monto_orden,
-                DaniosPropiosSumatoria.id_tipo_descuento_orden,
-                DaniosPropiosSumatoria.descuento_proveedor,
-                DaniosPropiosSumatoria.deducible,
-                DaniosPropiosSumatoria.monto_final
+                RoboParcialSumatoria.proveedor,
+                RoboParcialSumatoria.monto_orden,
+                RoboParcialSumatoria.id_tipo_descuento_orden,
+                RoboParcialSumatoria.descuento_proveedor,
+                RoboParcialSumatoria.deducible,
+                RoboParcialSumatoria.monto_final
             }).ToList();
             GridViewSumaReparaciones.DataBind();
 
@@ -1026,7 +962,7 @@ namespace ICRL.Presentacion
             vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
 
 
-            vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+            vResultado = CotizacionICRL.RoboParcialSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
             if (vResultado)
             {
                 LabelRepaRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
@@ -1042,37 +978,37 @@ namespace ICRL.Presentacion
         protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
         {
             LabelSumaRegistroItems.Text = "Items - Sumatoria";
-            CotizacionICRL.TipoDanioPropioSumatoria vTipoDanioPropioSumatoria = new CotizacionICRL.TipoDanioPropioSumatoria();
+            CotizacionICRL.TipoRoboParcialSumatoria vTipoRoboParcialSumatoria = new CotizacionICRL.TipoRoboParcialSumatoria();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDanioPropioSumatoria.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDanioPropioSumatoria.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRoboParcialSumatoria.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRoboParcialSumatoria.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
             short vTipoItem = 0;
             vTipoItem = short.Parse(Session["TipoItem"].ToString());
 
-            vTipoDanioPropioSumatoria.id_tipo_item = vTipoItem;
+            vTipoRoboParcialSumatoria.id_tipo_item = vTipoItem;
 
-            vTipoDanioPropioSumatoria.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
-            vTipoDanioPropioSumatoria.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
-            vTipoDanioPropioSumatoria.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDanioPropioSumatoria.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
-            vTipoDanioPropioSumatoria.deducible = double.Parse(TextBoxSumaDeducible.Text);
-            switch (vTipoDanioPropioSumatoria.id_tipo_descuento_orden)
+            vTipoRoboParcialSumatoria.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
+            vTipoRoboParcialSumatoria.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
+            vTipoRoboParcialSumatoria.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
+            vTipoRoboParcialSumatoria.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
+            vTipoRoboParcialSumatoria.deducible = double.Parse(TextBoxSumaDeducible.Text);
+            switch (vTipoRoboParcialSumatoria.id_tipo_descuento_orden)
             {
                 case "Fijo":
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - vTipoDanioPropioSumatoria.descuento_proveedor;
+                    vTipoRoboParcialSumatoria.monto_final = vTipoRoboParcialSumatoria.monto_orden - vTipoRoboParcialSumatoria.descuento_proveedor;
                     break;
                 case "Porcentaje":
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - (vTipoDanioPropioSumatoria.monto_orden * (vTipoDanioPropioSumatoria.descuento_proveedor / 100));
+                    vTipoRoboParcialSumatoria.monto_final = vTipoRoboParcialSumatoria.monto_orden - (vTipoRoboParcialSumatoria.monto_orden * (vTipoRoboParcialSumatoria.descuento_proveedor / 100));
                     break;
                 default:
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden;
+                    vTipoRoboParcialSumatoria.monto_final = vTipoRoboParcialSumatoria.monto_orden;
                     break;
             }
 
             bool vResultado = false;
 
-            vResultado = BD.CotizacionICRL.DaniosPropiosSumatoriaModificar(vTipoDanioPropioSumatoria);
+            vResultado = BD.CotizacionICRL.RoboParcialSumatoriaModificar(vTipoRoboParcialSumatoria);
             if (vResultado)
             {
                 LabelSumaRegistroItems.Text = "Registro modificado exitosamente";
@@ -1167,17 +1103,17 @@ namespace ICRL.Presentacion
         {
             int vResultado = 0;
 
-            BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-            vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
+            BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+            vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
-            GridViewSumaRepuestos.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
+            GridViewSumaRepuestos.DataSource = vTipoRoboParcialSumatoriaTraer.RoboParcialSumatoria.Select(RoboParcialSumatoria => new
             {
-                DaniosPropiosSumatoria.proveedor,
-                DaniosPropiosSumatoria.monto_orden,
-                DaniosPropiosSumatoria.id_tipo_descuento_orden,
-                DaniosPropiosSumatoria.descuento_proveedor,
-                DaniosPropiosSumatoria.deducible,
-                DaniosPropiosSumatoria.monto_final
+                RoboParcialSumatoria.proveedor,
+                RoboParcialSumatoria.monto_orden,
+                RoboParcialSumatoria.id_tipo_descuento_orden,
+                RoboParcialSumatoria.descuento_proveedor,
+                RoboParcialSumatoria.deducible,
+                RoboParcialSumatoria.monto_final
             }).ToList();
             GridViewSumaRepuestos.DataBind();
 
@@ -1197,7 +1133,7 @@ namespace ICRL.Presentacion
             vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
 
 
-            vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+            vResultado = CotizacionICRL.RoboParcialSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
             if (vResultado)
             {
                 LabelRepuRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
@@ -1286,17 +1222,17 @@ namespace ICRL.Presentacion
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRoboParcialTraer vTipoRoboParcialTraer;
+            vTipoRoboParcialTraer = CotizacionICRL.RoboParcialTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewRecepRepuestos.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewRecepRepuestos.DataSource = vTipoRoboParcialTraer.RobosParciales.Select(RobosParciales => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.recepcion,
-                DaniosPropios.dias_entrega,
-                DaniosPropios.id_tipo_item
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 2).ToList();
+                RobosParciales.id_item,
+                RobosParciales.item_descripcion,
+                RobosParciales.recepcion,
+                RobosParciales.dias_entrega,
+                RobosParciales.id_tipo_item
+            }).Where(RobosParciales => RobosParciales.id_tipo_item == 2).ToList();
             GridViewRecepRepuestos.DataBind();
 
             return vResultado;
@@ -1340,28 +1276,28 @@ namespace ICRL.Presentacion
             long vIdItem = 0;
 
             LabelRecepRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRoboParcial vTipoRoboParcial = new CotizacionICRL.TipoRoboParcial();
 
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(TextBoxRecepIdItem.Text);
 
             //Para no perder los datos originales recuperamos el registro afectado primero y luego actualizamos los datos correspondientes
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, vIdCotizacion, vIdItem);
+            BD.CotizacionICRL.TipoRoboParcialTraer vTipoRoboParcialTraer;
+            vTipoRoboParcialTraer = CotizacionICRL.RoboParcialTraer(vIdFlujo, vIdCotizacion, vIdItem);
 
             //Proceder solo si se trajo correctamente la información.
-            if (vTipoDaniosPropiosTraer.Correcto)
+            if (vTipoRoboParcialTraer.Correcto)
             {
-                vTipoDaniosPropios = vTipoDaniosPropiosTraer.DaniosPropios[0];
+                vTipoRoboParcial = vTipoRoboParcialTraer.RobosParciales[0];
 
                 //Solo actualizar los datos que se pudieron modificar
-                vTipoDaniosPropios.recepcion = CheckBoxRecepRecibido.Checked;
-                vTipoDaniosPropios.dias_entrega = int.Parse(TextBoxRecepDiasEntrega.Text);
+                vTipoRoboParcial.recepcion = CheckBoxRecepRecibido.Checked;
+                vTipoRoboParcial.dias_entrega = int.Parse(TextBoxRecepDiasEntrega.Text);
 
                 bool vResultado = false;
 
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RoboParcialModificar(vTipoRoboParcial);
                 if (vResultado)
                 {
                     LabelRecepRegistroItems.Text = "Registro modificado exitosamente";

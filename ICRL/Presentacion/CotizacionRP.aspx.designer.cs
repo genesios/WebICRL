@@ -10,7 +10,7 @@
 namespace ICRL.Presentacion {
     
     
-    public partial class CotizacionDPRP {
+    public partial class CotizacionRP {
         
         /// <summary>
         /// CollapsiblePanelExtender1 control.

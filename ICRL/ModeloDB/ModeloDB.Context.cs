@@ -75,6 +75,7 @@ namespace ICRL.ModeloDB
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioRol> UsuarioRol { get; set; }
+        public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
     
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)
         {

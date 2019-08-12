@@ -250,6 +250,8 @@
           <Property Name="descuento_proveedor" Type="float" />
           <Property Name="deducible" Type="float" />
           <Property Name="monto_final" Type="float" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+          <Property Name="id_estado" Type="smallint" />
         </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
@@ -469,6 +471,30 @@
           <Property Name="descuento_proveedor" Type="float" />
           <Property Name="deducible" Type="float" />
           <Property Name="monto_final" Type="float" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+          <Property Name="id_estado" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="cotizacion_rc_vehicular_tercero">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="documento" Type="varchar" MaxLength="30" />
+          <Property Name="color" Type="varchar" MaxLength="20" />
+          <Property Name="marca" Type="varchar" MaxLength="50" />
+          <Property Name="modelo" Type="varchar" MaxLength="50" />
+          <Property Name="placa" Type="varchar" MaxLength="50" />
+          <Property Name="anio" Type="varchar" MaxLength="10" />
+          <Property Name="chasis" Type="varchar" MaxLength="50" />
+          <Property Name="taller" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="cotizacion_robo_parcial">
           <Key>
@@ -520,6 +546,8 @@
           <Property Name="descuento_proveedor" Type="float" />
           <Property Name="deducible" Type="float" />
           <Property Name="monto_final" Type="float" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+          <Property Name="id_estado" Type="smallint" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -1124,6 +1152,23 @@
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [cotizacion_rc_vehicular_tercero].[id_flujo] AS [id_flujo], 
+    [cotizacion_rc_vehicular_tercero].[id_cotizacion] AS [id_cotizacion], 
+    [cotizacion_rc_vehicular_tercero].[id_item] AS [id_item], 
+    [cotizacion_rc_vehicular_tercero].[nombre] AS [nombre], 
+    [cotizacion_rc_vehicular_tercero].[telefono] AS [telefono], 
+    [cotizacion_rc_vehicular_tercero].[documento] AS [documento], 
+    [cotizacion_rc_vehicular_tercero].[color] AS [color], 
+    [cotizacion_rc_vehicular_tercero].[marca] AS [marca], 
+    [cotizacion_rc_vehicular_tercero].[modelo] AS [modelo], 
+    [cotizacion_rc_vehicular_tercero].[placa] AS [placa], 
+    [cotizacion_rc_vehicular_tercero].[anio] AS [anio], 
+    [cotizacion_rc_vehicular_tercero].[chasis] AS [chasis], 
+    [cotizacion_rc_vehicular_tercero].[taller] AS [taller]
+    FROM [dbo].[cotizacion_rc_vehicular_tercero] AS [cotizacion_rc_vehicular_tercero]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
             <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
             <End Role="CotiPerdidaTotalReferencia" EntitySet="CotiPerdidaTotalReferencia" />
@@ -1461,6 +1506,8 @@
           <Property Name="descuento_proveedor" Type="Double" />
           <Property Name="deducible" Type="Double" />
           <Property Name="monto_final" Type="Double" />
+          <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
         </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
@@ -1680,6 +1727,8 @@
           <Property Name="descuento_proveedor" Type="Double" />
           <Property Name="deducible" Type="Double" />
           <Property Name="monto_final" Type="Double" />
+          <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
         </EntityType>
         <EntityType Name="cotizacion_robo_parcial">
           <Key>
@@ -1731,6 +1780,8 @@
           <Property Name="descuento_proveedor" Type="Double" />
           <Property Name="deducible" Type="Double" />
           <Property Name="monto_final" Type="Double" />
+          <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -2090,6 +2141,26 @@
           <NavigationProperty Name="Rol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="UsuarioRol" ToRole="Rol" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="UsuarioRol" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="cotizacion_rc_vehicular_tercero">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="documento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="placa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="anio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="chasis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taller" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
         <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
           <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
           <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
@@ -2343,6 +2414,7 @@
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+          <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
           <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
             <End Role="Asegurado" EntitySet="Asegurado" />
             <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -2671,6 +2743,8 @@
                 <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
                 <ScalarProperty Name="deducible" ColumnName="deducible" />
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2883,6 +2957,8 @@
                 <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
                 <ScalarProperty Name="deducible" ColumnName="deducible" />
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2931,6 +3007,8 @@
                 <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
                 <ScalarProperty Name="deducible" ColumnName="deducible" />
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3282,6 +3360,25 @@
                 <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cotizacion_rc_vehicular_tercero">
+            <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_tercero">
+              <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_tercero">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="chasis" ColumnName="chasis" />
+                <ScalarProperty Name="taller" ColumnName="taller" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

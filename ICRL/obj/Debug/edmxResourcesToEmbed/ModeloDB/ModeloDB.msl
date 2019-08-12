@@ -246,6 +246,8 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -458,6 +460,8 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -506,6 +510,8 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -857,6 +863,25 @@
           <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotizacion_rc_vehicular_tercero">
+      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_tercero">
+        <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_tercero">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="documento" ColumnName="documento" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="chasis" ColumnName="chasis" />
+          <ScalarProperty Name="taller" ColumnName="taller" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
