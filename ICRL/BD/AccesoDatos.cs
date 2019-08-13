@@ -1956,14 +1956,65 @@ namespace ICRL.BD
 
             using (LBCDesaEntities db = new LBCDesaEntities())
             {
-                vListaNomenclador = (from n in db.Nomenclador
-                                     where n.categoriaNomenclador == pCategoria
-                                     orderby n.descripcion
-                                     select new ListaNomenclador
-                                     {
-                                         codigo = n.codigo,
-                                         descripcion = n.descripcion
-                                     }).ToList();
+                if(1 == pOrdenCodDescripcion)
+                {
+                    vListaNomenclador = (from n in db.Nomenclador
+                                         where n.categoriaNomenclador == pCategoria
+                                         orderby n.codigo
+                                         select new ListaNomenclador
+                                         {
+                                             codigo = n.codigo,
+                                             descripcion = n.descripcion
+                                         }).ToList();
+                }
+                else
+                {
+                    vListaNomenclador = (from n in db.Nomenclador
+                                         where n.categoriaNomenclador == pCategoria
+                                         orderby n.descripcion
+                                         select new ListaNomenclador
+                                         {
+                                             codigo = n.codigo,
+                                             descripcion = n.descripcion
+                                         }).ToList();
+                }
+
+                
+            }
+
+            return vListaNomenclador;
+        }
+
+        public List<ListaNomenclador> FlTraeNomenGenericoDesc(string pCategoria, int pOrdenCodDescripcion)
+        {
+            List<ListaNomenclador> vListaNomenclador = new List<ListaNomenclador>();
+
+            using (LBCDesaEntities db = new LBCDesaEntities())
+            {
+                if (1 == pOrdenCodDescripcion)
+                {
+                    vListaNomenclador = (from n in db.Nomenclador
+                                         where n.categoriaNomenclador == pCategoria
+                                         orderby n.codigo descending
+                                         select new ListaNomenclador
+                                         {
+                                             codigo = n.codigo,
+                                             descripcion = n.descripcion
+                                         }).ToList();
+                }
+                else
+                {
+                    vListaNomenclador = (from n in db.Nomenclador
+                                         where n.categoriaNomenclador == pCategoria
+                                         orderby n.descripcion descending
+                                         select new ListaNomenclador
+                                         {
+                                             codigo = n.codigo,
+                                             descripcion = n.descripcion
+                                         }).ToList();
+                }
+
+
             }
 
             return vListaNomenclador;

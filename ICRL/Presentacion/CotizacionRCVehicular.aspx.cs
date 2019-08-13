@@ -56,6 +56,14 @@ namespace ICRL.Presentacion
                     //Cargar combos de Recepcion Repuestos
                     FlTraeNomenItemRecep();
 
+                    //Cargar combos de Vehicular Tercero
+                    FlTraeNomenVehMarca();
+                    FlTraeNomenVehAnio();
+                    FlTraeNomenVehColor();
+                    FlTraeNomenVehTaller();
+                    PCargaDatosTer();
+                    PModificarVehTer(false);
+
                     int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
                     short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
 
@@ -200,7 +208,7 @@ namespace ICRL.Presentacion
                                    cf.correosDeEnvio,
                                    c.correlativo,
                                    //cdp.tipoTaller,
-                                   tipoTaller = "Tipo B",
+                                   tipoTaller = "Taller Tipo B",
                                    u.nombreVisible,
                                    u.correoElectronico,
                                };
@@ -255,122 +263,58 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
-        //Anterior método de llenar la grilla Reparacion
-        //private int FlTraeDatosDPReparacion(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-
-        //    using (LBCDesaEntities db = new LBCDesaEntities())
-        //    {
-        //        var vLst = from c in db.Cotizacion
-        //                   join cotrepa in db.CotiReparacion on c.idCotizacion equals cotrepa.idCotizacion
-        //                   join n in db.Nomenclador on cotrepa.idItem equals n.codigo
-        //                   where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
-        //                   select new
-        //                   {
-        //                       n.descripcion,
-        //                       cotrepa.chaperio,
-        //                       cotrepa.reparacionPrevia,
-        //                       cotrepa.mecanico,
-        //                       cotrepa.moneda,
-        //                       cotrepa.precioCotizado,
-        //                       cotrepa.descFijoPorcentaje,
-        //                       cotrepa.montoDescuento,
-        //                       cotrepa.precioFinal,
-        //                       cotrepa.proveedor
-        //                   };
-
-        //        GridViewReparaciones.DataSource = vLst.ToList();
-        //        GridViewReparaciones.DataBind();
-
-        //    }
-
-        //    return vResultado;
-        //}
         private int FlTraeDatosDPReparacion(int pIdCotizacion)
         {
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+            vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewReparaciones.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewReparaciones.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.chaperio,
-                DaniosPropios.reparacion_previa,
-                DaniosPropios.mecanico,
-                DaniosPropios.id_moneda,
-                DaniosPropios.precio_cotizado,
-                DaniosPropios.id_tipo_descuento,
-                DaniosPropios.descuento,
-                DaniosPropios.precio_final,
-                DaniosPropios.proveedor,
-                DaniosPropios.id_tipo_item
+                RCVehiculares.id_item,
+                RCVehiculares.item_descripcion,
+                RCVehiculares.chaperio,
+                RCVehiculares.reparacion_previa,
+                RCVehiculares.mecanico,
+                RCVehiculares.id_moneda,
+                RCVehiculares.precio_cotizado,
+                RCVehiculares.id_tipo_descuento,
+                RCVehiculares.descuento,
+                RCVehiculares.precio_final,
+                RCVehiculares.proveedor,
+                RCVehiculares.id_tipo_item
 
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 1).ToList();
+            }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 1).ToList();
             GridViewReparaciones.DataBind();
 
             return vResultado;
         }
-
-        //Anterior método de llenar la grilla Repuesto
-        //private int FlTraeDatosDPRepuesto(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-
-        //    using (LBCDesaEntities db = new LBCDesaEntities())
-        //    {
-        //        var vLst = from c in db.Cotizacion
-        //                   join cotrepu in db.CotiRepuesto on c.idCotizacion equals cotrepu.idCotizacion
-        //                   join n in db.Nomenclador on cotrepu.idItem equals n.codigo
-        //                   where c.idCotizacion == pIdCotizacion && n.categoriaNomenclador == "Item"
-        //                   select new
-        //                   {
-        //                       n.descripcion,
-        //                       cotrepu.pintura,
-        //                       cotrepu.instalacion,
-        //                       cotrepu.moneda,
-        //                       cotrepu.precioCotizado,
-        //                       cotrepu.descFijoPorcentaje,
-        //                       cotrepu.montoDescuento,
-        //                       cotrepu.precioFinal,
-        //                       cotrepu.proveedor
-        //                   };
-
-        //        GridViewRepuestos.DataSource = vLst.ToList();
-        //        GridViewRepuestos.DataBind();
-
-        //    }
-
-        //    return vResultado;
-        //}
 
         private int FlTraeDatosDPRepuesto(int pIdCotizacion)
         {
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+            vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewRepuestos.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewRepuestos.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.pintura,
-                DaniosPropios.instalacion,
-                DaniosPropios.id_moneda,
-                DaniosPropios.precio_cotizado,
-                DaniosPropios.id_tipo_descuento,
-                DaniosPropios.descuento,
-                DaniosPropios.precio_final,
-                DaniosPropios.proveedor,
-                DaniosPropios.id_tipo_item
+                RCVehiculares.id_item,
+                RCVehiculares.item_descripcion,
+                RCVehiculares.pintura,
+                RCVehiculares.instalacion,
+                RCVehiculares.id_moneda,
+                RCVehiculares.precio_cotizado,
+                RCVehiculares.id_tipo_descuento,
+                RCVehiculares.descuento,
+                RCVehiculares.precio_final,
+                RCVehiculares.proveedor,
+                RCVehiculares.id_tipo_item
 
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 2).ToList();
+            }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 2).ToList();
             GridViewRepuestos.DataBind();
 
             return vResultado;
@@ -506,51 +450,50 @@ namespace ICRL.Presentacion
         protected void ButtonRepaGrabar_Click(object sender, EventArgs e)
         {
             LabelRepaRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRCVehicular vTipoRCVehicular = new CotizacionICRL.TipoRCVehicular();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRCVehicular.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRCVehicular.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
             //tipo_item:  1 = Reparacion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
+            vTipoRCVehicular.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+            vTipoRCVehicular.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+            vTipoRCVehicular.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
+            vTipoRCVehicular.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
+            vTipoRCVehicular.mecanico = CheckBoxRepaMecanico.Checked;
+            vTipoRCVehicular.id_moneda = DropDownListRepaMoneda.SelectedItem.Text.Trim();
+            vTipoRCVehicular.precio_cotizado = double.Parse(TextBoxRepaPrecioCotizado.Text);
+            vTipoRCVehicular.id_tipo_descuento = DropDownListRepaTipoDesc.SelectedItem.Text.Trim();
+            vTipoRCVehicular.descuento = double.Parse(TextBoxRepaMontoDesc.Text);
+            switch (vTipoRCVehicular.id_tipo_descuento)
             {
                 case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado - vTipoRCVehicular.descuento;
                     break;
                 case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado - (vTipoRCVehicular.precio_cotizado * (vTipoRCVehicular.descuento / 100));
                     break;
                 default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado;
                     break;
             }
-            vTipoDaniosPropios.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
+            vTipoRCVehicular.proveedor = DropDownListRepaProveedor.SelectedItem.Text.Trim();
+            vTipoRCVehicular.id_estado = 1;
 
             double vTipoCambio = 0;
             vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
+            vTipoRCVehicular.tipo_cambio = vTipoCambio;
 
             bool vResultado = false;
             if (string.Empty != TextBoxRepaIdItem.Text)
             {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepaIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vTipoRCVehicular.id_item = int.Parse(TextBoxRepaIdItem.Text);
+                vResultado = BD.CotizacionICRL.RCVehicularesModificar(vTipoRCVehicular);
                 if (vResultado)
                 {
                     LabelRepaRegistroItems.Text = "Registro modificado exitosamente";
                     PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
                     ButtonRepaGrabar.Enabled = false;
                     ButtonRepaCancelar.Enabled = false;
                 }
@@ -561,12 +504,12 @@ namespace ICRL.Presentacion
             }
             else
             {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RCVehicularRegistrar(vTipoRCVehicular);
                 if (vResultado)
                 {
                     LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
                     PLimpiarCamposRepa();
-                    //PanelABMReparaciones.Enabled = false;
+
                     ButtonRepaGrabar.Enabled = false;
                     ButtonRepaCancelar.Enabled = false;
                 }
@@ -584,7 +527,6 @@ namespace ICRL.Presentacion
 
         protected void ButtonRepaCancelar_Click(object sender, EventArgs e)
         {
-            //PanelABMReparaciones.Enabled = false;
             ButtonRepaGrabar.Enabled = false;
             ButtonRepaCancelar.Enabled = false;
             PLimpiarCamposRepa();
@@ -600,12 +542,11 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(GridViewReparaciones.SelectedRow.Cells[1].Text);
-            vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+            vResultado = BD.CotizacionICRL.RCVehicularBorrar(vIdFlujo, vIdCotizacion, vIdItem);
             if (vResultado)
             {
                 LabelRepaRegistroItems.Text = "Registro Borrado exitosamente";
                 PLimpiarCamposRepa();
-                //PanelABMReparaciones.Enabled = false;
                 ButtonRepaGrabar.Enabled = false;
                 ButtonRepaCancelar.Enabled = false;
             }
@@ -781,45 +722,45 @@ namespace ICRL.Presentacion
         protected void ButtonRepuGrabar_Click(object sender, EventArgs e)
         {
             LabelRepuRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRCVehicular vTipoRCVehicular = new CotizacionICRL.TipoRCVehicular();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDaniosPropios.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDaniosPropios.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRCVehicular.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRCVehicular.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
             //tipo_item:  1 = Repuracion  2 = Repuesto
-            vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
-            vTipoDaniosPropios.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.pintura = CheckBoxRepuPintura.Checked;
-            vTipoDaniosPropios.instalacion = CheckBoxRepuInstalacion.Checked;
-            vTipoDaniosPropios.id_moneda = DropDownListRepuMoneda.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.precio_cotizado = double.Parse(TextBoxRepuPrecioCotizado.Text);
-            vTipoDaniosPropios.id_tipo_descuento = DropDownListRepuTipoDesc.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.descuento = double.Parse(TextBoxRepuMontoDesc.Text);
-            switch (vTipoDaniosPropios.id_tipo_descuento)
+            vTipoRCVehicular.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
+            vTipoRCVehicular.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+            vTipoRCVehicular.pintura = CheckBoxRepuPintura.Checked;
+            vTipoRCVehicular.instalacion = CheckBoxRepuInstalacion.Checked;
+            vTipoRCVehicular.id_moneda = DropDownListRepuMoneda.SelectedItem.Text.Trim();
+            vTipoRCVehicular.precio_cotizado = double.Parse(TextBoxRepuPrecioCotizado.Text);
+            vTipoRCVehicular.id_tipo_descuento = DropDownListRepuTipoDesc.SelectedItem.Text.Trim();
+            vTipoRCVehicular.descuento = double.Parse(TextBoxRepuMontoDesc.Text);
+            switch (vTipoRCVehicular.id_tipo_descuento)
             {
                 case "Fijo":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - vTipoDaniosPropios.descuento;
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado - vTipoRCVehicular.descuento;
                     break;
                 case "Porcentaje":
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado - (vTipoDaniosPropios.precio_cotizado * (vTipoDaniosPropios.descuento / 100));
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado - (vTipoRCVehicular.precio_cotizado * (vTipoRCVehicular.descuento / 100));
                     break;
                 default:
-                    vTipoDaniosPropios.precio_final = vTipoDaniosPropios.precio_cotizado;
+                    vTipoRCVehicular.precio_final = vTipoRCVehicular.precio_cotizado;
                     break;
             }
-            vTipoDaniosPropios.proveedor = DropDownListRepuProveedor.SelectedItem.Text.Trim();
-            vTipoDaniosPropios.id_estado = 1;
+            vTipoRCVehicular.proveedor = DropDownListRepuProveedor.SelectedItem.Text.Trim();
+            vTipoRCVehicular.id_estado = 1;
 
             double vTipoCambio = 0;
             vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoDaniosPropios.tipo_cambio = vTipoCambio;
+            vTipoRCVehicular.tipo_cambio = vTipoCambio;
 
             bool vResultado = false;
             if (string.Empty != TextBoxRepuIdItem.Text)
             {
-                vTipoDaniosPropios.id_item = int.Parse(TextBoxRepuIdItem.Text);
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vTipoRCVehicular.id_item = int.Parse(TextBoxRepuIdItem.Text);
+                vResultado = BD.CotizacionICRL.RCVehicularesModificar(vTipoRCVehicular);
                 if (vResultado)
                 {
                     LabelRepuRegistroItems.Text = "Registro modificado exitosamente";
@@ -835,7 +776,7 @@ namespace ICRL.Presentacion
             }
             else
             {
-                vResultado = BD.CotizacionICRL.DaniosPropiosRegistrar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RCVehicularRegistrar(vTipoRCVehicular);
                 if (vResultado)
                 {
                     LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
@@ -874,7 +815,7 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(GridViewRepuestos.SelectedRow.Cells[1].Text);
-            vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+            vResultado = BD.CotizacionICRL.RCVehicularBorrar(vIdFlujo, vIdCotizacion, vIdItem);
             if (vResultado)
             {
                 LabelRepuRegistroItems.Text = "Registro Borrado exitosamente";
@@ -996,17 +937,17 @@ namespace ICRL.Presentacion
         {
             int vResultado = 0;
 
-            BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-            vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
+            BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoVehicularSumatoriaTraer;
+            vTipoVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
-            GridViewSumaReparaciones.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
+            GridViewSumaReparaciones.DataSource = vTipoVehicularSumatoriaTraer.RCVehicularesSumatoria.Select(RCVehicularesSumatoria => new
             {
-                DaniosPropiosSumatoria.proveedor,
-                DaniosPropiosSumatoria.monto_orden,
-                DaniosPropiosSumatoria.id_tipo_descuento_orden,
-                DaniosPropiosSumatoria.descuento_proveedor,
-                DaniosPropiosSumatoria.deducible,
-                DaniosPropiosSumatoria.monto_final
+                RCVehicularesSumatoria.proveedor,
+                RCVehicularesSumatoria.monto_orden,
+                RCVehicularesSumatoria.id_tipo_descuento_orden,
+                RCVehicularesSumatoria.descuento_proveedor,
+                RCVehicularesSumatoria.deducible,
+                RCVehicularesSumatoria.monto_final
             }).ToList();
             GridViewSumaReparaciones.DataBind();
 
@@ -1026,7 +967,7 @@ namespace ICRL.Presentacion
             vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
 
 
-            vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+            vResultado = CotizacionICRL.RCVehicularSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
             if (vResultado)
             {
                 LabelRepaRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
@@ -1042,37 +983,37 @@ namespace ICRL.Presentacion
         protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
         {
             LabelSumaRegistroItems.Text = "Items - Sumatoria";
-            CotizacionICRL.TipoDanioPropioSumatoria vTipoDanioPropioSumatoria = new CotizacionICRL.TipoDanioPropioSumatoria();
+            CotizacionICRL.TipoRCVehicularSumatoria vTipoRCVehicular = new CotizacionICRL.TipoRCVehicularSumatoria();
 
             //Completar los elementos del objeto y grabar el registro.
-            vTipoDanioPropioSumatoria.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-            vTipoDanioPropioSumatoria.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+            vTipoRCVehicular.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+            vTipoRCVehicular.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
             short vTipoItem = 0;
             vTipoItem = short.Parse(Session["TipoItem"].ToString());
 
-            vTipoDanioPropioSumatoria.id_tipo_item = vTipoItem;
+            vTipoRCVehicular.id_tipo_item = vTipoItem;
 
-            vTipoDanioPropioSumatoria.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
-            vTipoDanioPropioSumatoria.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
-            vTipoDanioPropioSumatoria.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
-            vTipoDanioPropioSumatoria.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
-            vTipoDanioPropioSumatoria.deducible = double.Parse(TextBoxSumaDeducible.Text);
-            switch (vTipoDanioPropioSumatoria.id_tipo_descuento_orden)
+            vTipoRCVehicular.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
+            vTipoRCVehicular.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
+            vTipoRCVehicular.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
+            vTipoRCVehicular.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
+            vTipoRCVehicular.deducible = double.Parse(TextBoxSumaDeducible.Text);
+            switch (vTipoRCVehicular.id_tipo_descuento_orden)
             {
                 case "Fijo":
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - vTipoDanioPropioSumatoria.descuento_proveedor;
+                    vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden - vTipoRCVehicular.descuento_proveedor;
                     break;
                 case "Porcentaje":
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden - (vTipoDanioPropioSumatoria.monto_orden * (vTipoDanioPropioSumatoria.descuento_proveedor / 100));
+                    vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden - (vTipoRCVehicular.monto_orden * (vTipoRCVehicular.descuento_proveedor / 100));
                     break;
                 default:
-                    vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden;
+                    vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden;
                     break;
             }
 
             bool vResultado = false;
 
-            vResultado = BD.CotizacionICRL.DaniosPropiosSumatoriaModificar(vTipoDanioPropioSumatoria);
+            vResultado = BD.CotizacionICRL.RCVehicularSumatoriaModificar(vTipoRCVehicular);
             if (vResultado)
             {
                 LabelSumaRegistroItems.Text = "Registro modificado exitosamente";
@@ -1167,17 +1108,17 @@ namespace ICRL.Presentacion
         {
             int vResultado = 0;
 
-            BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-            vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
+            BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+            vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
-            GridViewSumaRepuestos.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
+            GridViewSumaRepuestos.DataSource = vTipoRCVehicularSumatoriaTraer.RCVehicularesSumatoria.Select(RCVehicularesSumatoria => new
             {
-                DaniosPropiosSumatoria.proveedor,
-                DaniosPropiosSumatoria.monto_orden,
-                DaniosPropiosSumatoria.id_tipo_descuento_orden,
-                DaniosPropiosSumatoria.descuento_proveedor,
-                DaniosPropiosSumatoria.deducible,
-                DaniosPropiosSumatoria.monto_final
+                RCVehicularesSumatoria.proveedor,
+                RCVehicularesSumatoria.monto_orden,
+                RCVehicularesSumatoria.id_tipo_descuento_orden,
+                RCVehicularesSumatoria.descuento_proveedor,
+                RCVehicularesSumatoria.deducible,
+                RCVehicularesSumatoria.monto_final
             }).ToList();
             GridViewSumaRepuestos.DataBind();
 
@@ -1197,7 +1138,7 @@ namespace ICRL.Presentacion
             vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
 
 
-            vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+            vResultado = CotizacionICRL.RCVehicularSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
             if (vResultado)
             {
                 LabelRepuRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
@@ -1286,17 +1227,17 @@ namespace ICRL.Presentacion
             int vResultado = 0;
             int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+            vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
 
-            GridViewRecepRepuestos.DataSource = vTipoDaniosPropiosTraer.DaniosPropios.Select(DaniosPropios => new
+            GridViewRecepRepuestos.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
             {
-                DaniosPropios.id_item,
-                DaniosPropios.item_descripcion,
-                DaniosPropios.recepcion,
-                DaniosPropios.dias_entrega,
-                DaniosPropios.id_tipo_item
-            }).Where(DaniosPropios => DaniosPropios.id_tipo_item == 2).ToList();
+                RCVehiculares.id_item,
+                RCVehiculares.item_descripcion,
+                RCVehiculares.recepcion,
+                RCVehiculares.dias_entrega,
+                RCVehiculares.id_tipo_item
+            }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 2).ToList();
             GridViewRecepRepuestos.DataBind();
 
             return vResultado;
@@ -1340,28 +1281,28 @@ namespace ICRL.Presentacion
             long vIdItem = 0;
 
             LabelRecepRegistroItems.Text = "Items";
-            BD.CotizacionICRL.TipoDaniosPropios vTipoDaniosPropios = new CotizacionICRL.TipoDaniosPropios();
+            BD.CotizacionICRL.TipoRCVehicular vTipoRCVehicular = new CotizacionICRL.TipoRCVehicular();
 
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
             vIdItem = long.Parse(TextBoxRecepIdItem.Text);
 
             //Para no perder los datos originales recuperamos el registro afectado primero y luego actualizamos los datos correspondientes
-            BD.CotizacionICRL.TipoDaniosPropiosTraer vTipoDaniosPropiosTraer;
-            vTipoDaniosPropiosTraer = CotizacionICRL.DaniosPropiosTraer(vIdFlujo, vIdCotizacion, vIdItem);
+            BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+            vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, vIdCotizacion, vIdItem);
 
             //Proceder solo si se trajo correctamente la información.
-            if (vTipoDaniosPropiosTraer.Correcto)
+            if (vTipoRCVehicularTraer.Correcto)
             {
-                vTipoDaniosPropios = vTipoDaniosPropiosTraer.DaniosPropios[0];
+                vTipoRCVehicular = vTipoRCVehicularTraer.RCVehiculares[0];
 
                 //Solo actualizar los datos que se pudieron modificar
-                vTipoDaniosPropios.recepcion = CheckBoxRecepRecibido.Checked;
-                vTipoDaniosPropios.dias_entrega = int.Parse(TextBoxRecepDiasEntrega.Text);
+                vTipoRCVehicular.recepcion = CheckBoxRecepRecibido.Checked;
+                vTipoRCVehicular.dias_entrega = int.Parse(TextBoxRecepDiasEntrega.Text);
 
                 bool vResultado = false;
 
-                vResultado = BD.CotizacionICRL.DaniosPropiosModificar(vTipoDaniosPropios);
+                vResultado = BD.CotizacionICRL.RCVehicularesModificar(vTipoRCVehicular);
                 if (vResultado)
                 {
                     LabelRecepRegistroItems.Text = "Registro modificado exitosamente";
@@ -1387,5 +1328,225 @@ namespace ICRL.Presentacion
         }
 
         #endregion
+
+        #region Vehicular Tercero
+
+        private int FlTraeNomenVehMarca()
+        {
+            int vResultado = 0;
+            string vCategoria = "Marca";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListVehMarca.DataValueField = "codigo";
+            DropDownListVehMarca.DataTextField = "descripcion";
+            DropDownListVehMarca.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListVehMarca.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenVehAnio()
+        {
+            int vResultado = 0;
+            string vCategoria = "Año";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListVehAnio.DataValueField = "codigo";
+            DropDownListVehAnio.DataTextField = "descripcion";
+            DropDownListVehAnio.DataSource = vAccesoDatos.FlTraeNomenGenericoDesc(vCategoria, vOrdenCodigo);
+            DropDownListVehAnio.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenVehColor()
+        {
+            int vResultado = 0;
+            string vCategoria = "Color";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListVehColor.DataValueField = "codigo";
+            DropDownListVehColor.DataTextField = "descripcion";
+            DropDownListVehColor.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListVehColor.DataBind();
+
+            return vResultado;
+        }
+
+        private int FlTraeNomenVehTaller()
+        {
+            int vResultado = 0;
+            string vCategoria = "Tipo Taller";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListVehTipoTaller.DataValueField = "codigo";
+            DropDownListVehTipoTaller.DataTextField = "descripcion";
+            DropDownListVehTipoTaller.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListVehTipoTaller.DataBind();
+
+            return vResultado;
+        }
+
+        protected void PModificarVehTer(bool pEstado)
+        {
+                TextBoxVehNombreTer.Enabled = pEstado;
+                TextBoxVehDocId.Enabled = pEstado;
+                TextBoxVehTelefono.Enabled = pEstado;
+                DropDownListVehMarca.Enabled = pEstado;
+                TextBoxVehModelo.Enabled = pEstado;
+                DropDownListVehAnio.Enabled = pEstado;
+                TextBoxVehPlaca.Enabled = pEstado;
+                DropDownListVehColor.Enabled = pEstado;
+                TextBoxVehNroChasis.Enabled = pEstado;
+                DropDownListVehTipoTaller.Enabled = pEstado;
+        }
+
+        #endregion
+
+        long FValidaTieneVehTercero (int pIdFlujo, int pIdCotizacion)
+        {
+            long vResultado = 0;
+
+            BD.CotizacionICRL.TipoRCVehicularTerceroTraer vTipoRCVehicularTerceroTraer;
+            vTipoRCVehicularTerceroTraer = CotizacionICRL.RCVehicularTerceroTraer(pIdFlujo, pIdCotizacion);
+
+            if (vTipoRCVehicularTerceroTraer.Correcto)
+            {
+                var vFilaTabla = vTipoRCVehicularTerceroTraer.RCVehicularesTerceros.FirstOrDefault();
+                if (vFilaTabla != null)
+                {
+                    vResultado = vFilaTabla.id_item;
+                }
+            }
+
+            return vResultado;
+        }
+
+        protected void PCargaDatosTer()
+        {
+            long vIdItem = 0;
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            string vTextoTemporal = string.Empty;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            vIdItem = FValidaTieneVehTercero(vIdFlujo, vIdCotizacion);
+            if(vIdItem>0)
+            {
+                BD.CotizacionICRL.TipoRCVehicularTerceroTraer vTipoRCVehicularTerceroTraer;
+                vTipoRCVehicularTerceroTraer = CotizacionICRL.RCVehicularTerceroTraer(vIdFlujo, vIdCotizacion);
+                var vFilaTabla = vTipoRCVehicularTerceroTraer.RCVehicularesTerceros.FirstOrDefault();
+                TextBoxVehNombreTer.Text = vFilaTabla.nombre;
+                TextBoxVehDocId.Text = vFilaTabla.documento;
+                TextBoxVehTelefono.Text = vFilaTabla.telefono;
+
+                vTextoTemporal = string.Empty;
+                vTextoTemporal = vFilaTabla.marca.Trim();
+                DropDownListVehMarca.ClearSelection();
+                DropDownListVehMarca.Items.FindByText(vTextoTemporal).Selected = true;
+
+                TextBoxVehModelo.Text = vFilaTabla.modelo;
+
+                vTextoTemporal = string.Empty;
+                vTextoTemporal = vFilaTabla.anio.Trim();
+                DropDownListVehAnio.ClearSelection();
+                DropDownListVehAnio.Items.FindByText(vTextoTemporal).Selected = true;
+
+                TextBoxVehPlaca.Text = vFilaTabla.placa;
+
+                vTextoTemporal = string.Empty;
+                vTextoTemporal = vFilaTabla.color.Trim();
+                DropDownListVehColor.ClearSelection();
+                DropDownListVehColor.Items.FindByText(vTextoTemporal).Selected = true;
+
+                TextBoxVehNroChasis.Text = vFilaTabla.chasis;
+
+                vTextoTemporal = string.Empty;
+                vTextoTemporal = vFilaTabla.taller.Trim();
+                DropDownListVehTipoTaller.ClearSelection();
+                DropDownListVehTipoTaller.Items.FindByText(vTextoTemporal).Selected = true;
+
+                TextBoxVehIdItem.Text = vFilaTabla.id_item.ToString();
+            }
+
+        }
+
+        protected void ButtonVehActualizar_Click(object sender, EventArgs e)
+        {
+            LabelDatosVehicularMsj.Text = string.Empty;
+            PModificarVehTer(true);
+            ButtonVehActualizar.Visible = false;
+            ButtonVehGrabar.Visible = true;
+            ButtonVehCancelar.Visible = true;
+        }
+
+        protected void ButtonVehGrabar_Click(object sender, EventArgs e)
+        {
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+            bool vResultado = false;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            //cargar los datos del panel al objeto correspondiente
+            CotizacionICRL.TipoRCVehicularTercero vTipoRCVehicularTercero = new CotizacionICRL.TipoRCVehicularTercero();
+            vTipoRCVehicularTercero.id_flujo = vIdFlujo;
+            vTipoRCVehicularTercero.id_cotizacion = vIdCotizacion;
+            vTipoRCVehicularTercero.nombre = TextBoxVehNombreTer.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.documento = TextBoxVehDocId.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.telefono = TextBoxVehTelefono.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.marca = DropDownListVehMarca.SelectedItem.Text.Trim();
+            vTipoRCVehicularTercero.modelo = TextBoxVehNombreTer.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.anio = DropDownListVehAnio.SelectedItem.Text.Trim();
+            vTipoRCVehicularTercero.placa = TextBoxVehNombreTer.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.color = DropDownListVehColor.SelectedItem.Text.Trim();
+            vTipoRCVehicularTercero.chasis = TextBoxVehNombreTer.Text.Trim().ToUpper();
+            vTipoRCVehicularTercero.taller = DropDownListVehTipoTaller.SelectedItem.Text.Trim();
+
+            //validar si existe el registro del tercero
+            if (string.Empty != TextBoxVehIdItem.Text)
+            {
+                //Existe el registro del tercero
+                vIdItem = long.Parse(TextBoxVehIdItem.Text);
+                vTipoRCVehicularTercero.id_item = vIdItem;
+                vResultado = CotizacionICRL.RCVehicularTerceroModificar(vTipoRCVehicularTercero);
+            }
+            else
+            {
+                //NO Existe el registro del tercero
+                vResultado = CotizacionICRL.RCVehicularTerceroRegistrar(vTipoRCVehicularTercero);
+            }
+            
+            if(vResultado)
+            {
+                LabelDatosVehicularMsj.Text = "Registro Actualizado Exitosamente";
+                vIdItem = FValidaTieneVehTercero(vIdFlujo, vIdCotizacion);
+                TextBoxVehIdItem.Text = vIdItem.ToString();
+            }
+            else
+            {
+                LabelDatosVehicularMsj.Text = "El Registro no se actualizo correctamente";
+            }
+            PModificarVehTer(false);
+            ButtonVehActualizar.Visible = true;
+            ButtonVehGrabar.Visible = false;
+            ButtonVehCancelar.Visible = false;
+        }
+
+        protected void ButtonVehCancelar_Click(object sender, EventArgs e)
+        {
+            PModificarVehTer(false);
+            ButtonVehActualizar.Visible = true;
+            ButtonVehGrabar.Visible = false;
+            ButtonVehCancelar.Visible = false;
+        }
     }
 }
