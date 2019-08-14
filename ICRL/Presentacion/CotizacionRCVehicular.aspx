@@ -38,17 +38,17 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="twentyfive">
+                            <div class="thirty">
                                 <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroFlujo" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="twentyfive">
+                            <div class="thirty">
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox><br />
                                 <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox><br />
                                 <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox><br />
                             </div>
-                            <div class="twentyfive">
+                            <div class="thirty">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False"></asp:TextBox>
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
@@ -244,7 +244,7 @@
                             </div>
                             <div class="thirty">
                                 <asp:Label ID="LabelVehPlaca" runat="server" Text="Placa:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxVehPlaca" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxVehPlaca" runat="server"></asp:TextBox><br />
                                 <asp:Label ID="LabelVehColor" runat="server" Text="Color:"></asp:Label><br />
                                 <asp:DropDownList ID="DropDownListVehColor" runat="server"></asp:DropDownList><br />
                                 <asp:Label ID="LabelVehNroChasis" runat="server" Text="Número Chasis:"></asp:Label><br />
@@ -252,7 +252,7 @@
                             </div>
                             <div class="thirty">
                                 <asp:Label ID="LabelVehTipoTaller" runat="server" Text="Taller:"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListVehTipoTaller" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListVehTipoTaller" runat="server"></asp:DropDownList><br />
                                 <asp:Label ID="LabelVehIdItem" runat="server" Text="Id Vehicular:" Visible="false"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxVehIdItem" runat="server" Visible="false"></asp:TextBox>
                             </div>

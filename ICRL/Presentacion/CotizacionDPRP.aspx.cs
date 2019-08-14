@@ -200,7 +200,7 @@ namespace ICRL.Presentacion
                                    cf.correosDeEnvio,
                                    c.correlativo,
                                    //cdp.tipoTaller,
-                                   tipoTaller = "Tipo B",
+                                   tipoTaller = "Taller Tipo B",
                                    u.nombreVisible,
                                    u.correoElectronico,
                                };

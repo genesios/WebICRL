@@ -146,6 +146,23 @@ namespace IRCL.Presentacion
                                      c.fechaCreacion,
                                      sumaCosto = 0,
                                      descEstado = "Coti.Pendiente"
+                                 }).Union
+                                (from c in db.Cotizacion
+                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                                 where (c.idFlujo == vIdInspeccion)
+                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                 && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.RCPersonas)
+                                 orderby c.idInspeccion
+                                 select new
+                                 {
+                                     c.idCotizacion,
+                                     tipoCobertura = "RC Personas",
+                                     secuencialOrden = "RCPer - Pendiente",
+                                     nombreProveedor = "N/A",
+                                     correlativoInspeccion = c.correlativo,
+                                     c.fechaCreacion,
+                                     sumaCosto = 0,
+                                     descEstado = "Coti.Pendiente"
                                  });
 
                     gvInspecciones.DataSource = vLst.ToList();
@@ -233,6 +250,7 @@ namespace IRCL.Presentacion
             var gvInspecciones = (GridView)sender;
             vFilaFlujo = gvInspecciones.SelectedRow.Cells[0].Text;
             vCobertura = gvInspecciones.SelectedRow.Cells[1].Text;
+            vCobertura=  vCobertura.Replace("&#241;", "ñ");
 
 
             int vIdCotizacion = int.Parse(vFilaFlujo);
@@ -245,6 +263,9 @@ namespace IRCL.Presentacion
             {
                 case "Daños Propios":
                     Response.Redirect("~/Presentacion/CotizacionDPRP.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
+                case "RC Personas":
+                    Response.Redirect("~/Presentacion/CotizacionRCPer.aspx?nroCoti=" + vIdCotizacion.ToString());
                     break;
                 case "Robo Parcial":
                     Response.Redirect("~/Presentacion/CotizacionRP.aspx?nroCoti=" + vIdCotizacion.ToString());
