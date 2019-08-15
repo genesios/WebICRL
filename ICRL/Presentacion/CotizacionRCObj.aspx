@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRCPer.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRCPer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRCObj.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRCObj" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -185,58 +185,58 @@
             </div>
         </div>
         <div>
-            <asp:Panel ID="PanelRCPersona" runat="server" CssClass="PanelDatosGen">
+            <asp:Panel ID="PanelRCObjeto" runat="server" CssClass="PanelDatosGen">
                 <table class="basetable">
                     <tr>
                         <th>
-                            <asp:Label ID="LabelDatosPersona" runat="server" Text="Datos Básicos Persona"></asp:Label><br />
-                            <asp:Label ID="LabelDatosPersonaMsj" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="LabelDatosObjeto" runat="server" Text="Datos Básicos Persona Responsable Objeto"></asp:Label><br />
+                            <asp:Label ID="LabelDatosObjetoMsj" runat="server" Text=""></asp:Label>
                         </th>
                     </tr>
                     <tr>
                         <td>
                             <div class="thirty">
-                                <asp:Label ID="LabelPerNombreTer" runat="server" Text="Nombre(s) y Apellido(s):"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerNombreTer" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerDocId" runat="server" Text="Documento Id:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerDocId" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObjNombreTer" runat="server" Text="Nombre(s) y Apellido(s):"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjNombreTer" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObjDocId" runat="server" Text="Documento Id:"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjDocId" runat="server"></asp:TextBox><br />
                             </div>
                             <div class="thirty">
-                                <asp:Label ID="LabelPerTelefono" runat="server" Text="Telefono de Contacto:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerTelefono" runat="server"></asp:TextBox><br />
-                                <asp:Checkbox ID="CheckBoxPerReembolso" runat="server"></asp:Checkbox>
-                                <asp:Label ID="LabelPerReembolso" runat="server" Text="Reembolso"></asp:Label><br />
+                                <asp:Label ID="LabelObjTelefono" runat="server" Text="Telefono de Contacto:"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjTelefono" runat="server"></asp:TextBox><br />
+                                <asp:CheckBox ID="CheckBoxObjReembolso" runat="server"></asp:CheckBox>
+                                <asp:Label ID="LabelObjReembolso" runat="server" Text="Reembolso"></asp:Label><br />
                             </div>
                             <div class="thirty">
-                                <asp:Label ID="LabelPerIdItem" runat="server" Text="Id Persona:" Visible="false"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerIdItem" runat="server" Visible="false"></asp:TextBox>
+                                <asp:Label ID="LabelObjIdItem" runat="server" Text="Id Objeto:" Visible="false"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjIdItem" runat="server" Visible="false"></asp:TextBox>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="fifty">
-                                <asp:Label ID="LabelPerTipoGasto" runat="server" Text="Tipo Gasto:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerTipoGasto" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerMontoGasto" runat="server" Text="Monto Gasto Bs.:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerMontoGasto" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerDescripcion" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObjItem" runat="server" Text="Item:"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjItem" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObjMontoItemRef" runat="server" Text="Costo Referencia Bs.:"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjMontoItemRef" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObjDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObjDescripcion" runat="server"></asp:TextBox><br />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="ButtonPerAgregar" runat="server" Text="Agregar" visible="true" OnClick="ButtonPerAgregar_Click" />
-                            <asp:Button ID="ButtonPerGrabar" runat="server" Text="Grabar" visible="false" OnClick="ButtonPerGrabar_Click" />
-                            <asp:Button ID="ButtonPerCancelar" runat="server" Text="Cancelar" visible="false" OnClick="ButtonPerCancelar_Click" />
+                            <asp:Button ID="ButtonObjAgregar" runat="server" Text="Agregar" Visible="true" OnClick="ButtonObjAgregar_Click" />
+                            <asp:Button ID="ButtonObjGrabar" runat="server" Text="Grabar" Visible="false" OnClick="ButtonObjGrabar_Click" />
+                            <asp:Button ID="ButtonObjCancelar" runat="server" Text="Cancelar" Visible="false" OnClick="ButtonObjCancelar_Click" />
                         </td>
                     </tr>
                 </table>
             </asp:Panel>
         </div>
         <div>
-            <asp:GridView ID="GridViewPerDetalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="id_item" OnSelectedIndexChanged="GridViewPerDetalle_SelectedIndexChanged" OnRowDeleting="GridViewPerDetalle_RowDeleting">
+            <asp:GridView ID="GridViewObjDetalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="id_item" OnSelectedIndexChanged="GridViewObjDetalle_SelectedIndexChanged" OnRowDeleting="GridViewObjDetalle_RowDeleting">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -253,9 +253,9 @@
                     <asp:BoundField DataField="id_item" HeaderText="Id" />
                     <asp:BoundField DataField="nombre_apellido" HeaderText="Nombre(s) y Apellido(s)" />
                     <asp:BoundField DataField="numero_documento" HeaderText="Documento Id" />
-                    <asp:BoundField DataField="tipo_gasto" HeaderText="Tipo Gasto" />
-                    <asp:BoundField DataField="monto_gasto" HeaderText="Monto Gasto Bs." DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="descripcion" HeaderText="Descripción"  />
+                    <asp:BoundField DataField="tipo_item" HeaderText="Item" />
+                    <asp:BoundField DataField="monto_item" HeaderText="Costo Ref.Bs." DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
             </asp:GridView>

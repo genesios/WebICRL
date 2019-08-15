@@ -348,6 +348,7 @@
     </Content>
     <Content Include="Presentacion\Cotizacion.aspx" />
     <Content Include="Presentacion\CotizacionDPRP.aspx" />
+    <Content Include="Presentacion\CotizacionRCObj.aspx" />
     <Content Include="Presentacion\CotizacionRCPer.aspx" />
     <Content Include="Presentacion\CotizacionRCVehicular.aspx" />
     <Content Include="Presentacion\CotizacionRP.aspx" />
@@ -443,6 +444,7 @@
     <Compile Include="BD\InspeccionRCVehicular.cs" />
     <Compile Include="BD\InspeccionRCVehicularDet.cs" />
     <Compile Include="BD\InspeccionRoboParcial.cs" />
+    <Compile Include="BD\LiquidacionICRL.cs" />
     <Compile Include="BD\ListaNomenclador.cs" />
     <Compile Include="BD\UsuarioICRL.cs" />
     <Compile Include="Contact.aspx.cs">
@@ -692,6 +694,13 @@
     </Compile>
     <Compile Include="Presentacion\CotizacionDPRP.aspx.designer.cs">
       <DependentUpon>CotizacionDPRP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionRCObj.aspx.cs">
+      <DependentUpon>CotizacionRCObj.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionRCObj.aspx.designer.cs">
+      <DependentUpon>CotizacionRCObj.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\CotizacionRCPer.aspx.cs">
       <DependentUpon>CotizacionRCPer.aspx</DependentUpon>

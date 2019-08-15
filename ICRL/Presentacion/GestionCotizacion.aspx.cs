@@ -163,6 +163,23 @@ namespace IRCL.Presentacion
                                      c.fechaCreacion,
                                      sumaCosto = 0,
                                      descEstado = "Coti.Pendiente"
+                                 }).Union
+                                (from c in db.Cotizacion
+                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                                 where (c.idFlujo == vIdInspeccion)
+                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                 && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.RCObjetos)
+                                 orderby c.idInspeccion
+                                 select new
+                                 {
+                                     c.idCotizacion,
+                                     tipoCobertura = "RC Objetos",
+                                     secuencialOrden = "RCObj - Pendiente",
+                                     nombreProveedor = "N/A",
+                                     correlativoInspeccion = c.correlativo,
+                                     c.fechaCreacion,
+                                     sumaCosto = 0,
+                                     descEstado = "Coti.Pendiente"
                                  });
 
                     gvInspecciones.DataSource = vLst.ToList();
@@ -263,6 +280,9 @@ namespace IRCL.Presentacion
             {
                 case "Daños Propios":
                     Response.Redirect("~/Presentacion/CotizacionDPRP.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
+                case "RC Objetos":
+                    Response.Redirect("~/Presentacion/CotizacionRCObj.aspx?nroCoti=" + vIdCotizacion.ToString());
                     break;
                 case "RC Personas":
                     Response.Redirect("~/Presentacion/CotizacionRCPer.aspx?nroCoti=" + vIdCotizacion.ToString());

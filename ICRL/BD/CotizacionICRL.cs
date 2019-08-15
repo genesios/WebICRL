@@ -12,7 +12,7 @@ namespace ICRL.BD
     {
         //private static string strCadenaConexion = System.Configuration.ConfigurationManager.AppSettings["conexionbasedatos"];
         //private static string strCadenaConexion = "Server=Wilmer-HP;database=LBCDesa;Uid=usuarioLBC;pwd=SQL2019desa";
-        private static string strCadenaConexion = ConfigurationManager.ConnectionStrings["LBCDesaConnectionString"].ConnectionString;
+        public static string strCadenaConexion = ConfigurationManager.ConnectionStrings["LBCDesaConnectionString"].ConnectionString;
         public enum TipoItem
         {
             Reparacion = 1,
@@ -828,7 +828,7 @@ namespace ICRL.BD
             bool blnRespuesta = false;
             string strComando = "DELETE FROM [dbo].[cotizacion_rc_personas] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_item = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            SqlCommand sqlComando = new SqlCommand(strComando);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
@@ -836,8 +836,9 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 blnRespuesta = false;
             }
@@ -1018,7 +1019,7 @@ namespace ICRL.BD
             bool blnRespuesta = false;
             string strComando = "DELETE FROM [dbo].[cotizacion_rc_objetos] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_item = @id_item";
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            SqlCommand sqlComando = new SqlCommand(strComando);
+            SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             try
             {
                 sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
@@ -1026,6 +1027,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
                 sqlConexion.Open();
                 sqlComando.ExecuteNonQuery();
+                blnRespuesta = true;
             }
             catch (Exception)
             {

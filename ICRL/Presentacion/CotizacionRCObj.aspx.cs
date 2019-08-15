@@ -10,7 +10,7 @@ using ICRL.BD;
 
 namespace ICRL.Presentacion
 {
-    public partial class CotizacionRCPer : System.Web.UI.Page
+    public partial class CotizacionRCObj : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,15 +34,15 @@ namespace ICRL.Presentacion
                 if (!IsPostBack)
                 {
                     vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-                    
+
                     FlTraeDatosCotizacion(vIdCotizacion, vlNumFlujo);
 
 
-                    //Cargar Datos Persona
+                    //Cargar Datos Objeto
                     vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-                    PModificarPersona(false);
-                    PCargaDatosPer();
-                    pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+                    PModificarObjeto(false);
+                    PCargaDatosObj();
+                    pCargaGrillaObjetos(vIdFlujo, vIdCotizacion);
                     //PModificarVehTer(false);
 
                     short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
@@ -182,16 +182,16 @@ namespace ICRL.Presentacion
             }
         }
 
-        long FValidaTienePersona(int pIdFlujo, int pIdCotizacion)
+        long FValidaTieneObjeto(int pIdFlujo, int pIdCotizacion)
         {
             long vResultado = 0;
 
-            BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-            vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRCObjetosTraer vTipoRCObjetosTraer;
+            vTipoRCObjetosTraer = CotizacionICRL.RCObjetosTraer(pIdFlujo, pIdCotizacion);
 
-            if (vTipoRCPersonasTraer.Correcto)
+            if (vTipoRCObjetosTraer.Correcto)
             {
-                var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
+                var vFilaTabla = vTipoRCObjetosTraer.RCObjetos.FirstOrDefault();
                 if (vFilaTabla != null)
                 {
                     vResultado = vFilaTabla.id_item;
@@ -201,7 +201,7 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
-        protected void PCargaDatosPer()
+        protected void PCargaDatosObj()
         {
             long vIdItem = 0;
             int vIdFlujo = 0;
@@ -211,19 +211,19 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
-            vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+            vIdItem = FValidaTieneObjeto(vIdFlujo, vIdCotizacion);
             if (vIdItem > 0)
             {
-                BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-                vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(vIdFlujo, vIdCotizacion);
-                var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
+                BD.CotizacionICRL.TipoRCObjetosTraer vTipoRCObjetosTraer;
+                vTipoRCObjetosTraer = CotizacionICRL.RCObjetosTraer(vIdFlujo, vIdCotizacion);
+                var vFilaTabla = vTipoRCObjetosTraer.RCObjetos.FirstOrDefault();
 
-                TextBoxPerNombreTer.Text = vFilaTabla.nombre_apellido;
-                TextBoxPerTelefono.Text = vFilaTabla.telefono_contacto;
-                TextBoxPerDocId.Text = vFilaTabla.numero_documento;
-                CheckBoxPerReembolso.Checked = vFilaTabla.rembolso;
+                TextBoxObjNombreTer.Text = vFilaTabla.nombre_apellido;
+                TextBoxObjTelefono.Text = vFilaTabla.telefono_contacto;
+                TextBoxObjDocId.Text = vFilaTabla.numero_documento;
+                CheckBoxObjReembolso.Checked = vFilaTabla.rembolso;
 
-                TextBoxPerIdItem.Text = vFilaTabla.id_item.ToString();
+                TextBoxObjIdItem.Text = vFilaTabla.id_item.ToString();
             }
 
         }
@@ -240,7 +240,7 @@ namespace ICRL.Presentacion
         //    {
         //        RCVehiculares.id_item,
         //        RCVehiculares.item_descripcion,
-        //        RCVehiculares.chaperio,
+        //        RCVehiculares.chaObjio,
         //        RCVehiculares.reparacion_previa,
         //        RCVehiculares.mecanico,
         //        RCVehiculares.id_moneda,
@@ -287,64 +287,64 @@ namespace ICRL.Presentacion
 
         #endregion
 
-        #region Datos Persona
-        protected void PModificarPersona(bool pEstado)
+        #region Datos Objeto
+        protected void PModificarObjeto(bool pEstado)
         {
-            TextBoxPerNombreTer.Enabled = pEstado;
-            TextBoxPerDocId.Enabled = pEstado;
-            TextBoxPerTelefono.Enabled = pEstado;
-            CheckBoxPerReembolso.Enabled = pEstado;
-            TextBoxPerTipoGasto.Enabled = pEstado;
-            TextBoxPerMontoGasto.Enabled = pEstado;
-            TextBoxPerDescripcion.Enabled = pEstado;
+            TextBoxObjNombreTer.Enabled = pEstado;
+            TextBoxObjDocId.Enabled = pEstado;
+            TextBoxObjTelefono.Enabled = pEstado;
+            CheckBoxObjReembolso.Enabled = pEstado;
+            TextBoxObjItem.Enabled = pEstado;
+            TextBoxObjMontoItemRef.Enabled = pEstado;
+            TextBoxObjDescripcion.Enabled = pEstado;
         }
 
-        protected void PModificarPersonaDet(bool pEstado)
+        protected void PModificarObjetoDet(bool pEstado)
         {
-            TextBoxPerTelefono.Enabled = pEstado;
-            CheckBoxPerReembolso.Enabled = pEstado;
-            TextBoxPerTipoGasto.Enabled = pEstado;
-            TextBoxPerMontoGasto.Enabled = pEstado;
-            TextBoxPerDescripcion.Enabled = pEstado;
+            TextBoxObjTelefono.Enabled = pEstado;
+            CheckBoxObjReembolso.Enabled = pEstado;
+            TextBoxObjItem.Enabled = pEstado;
+            TextBoxObjMontoItemRef.Enabled = pEstado;
+            TextBoxObjDescripcion.Enabled = pEstado;
         }
 
-        protected void PLimpiarPersonaDet()
+        protected void PLimpiarObjetoDet()
         {
-            TextBoxPerTipoGasto.Text = string.Empty;
-            TextBoxPerMontoGasto.Text = string.Empty;
-            TextBoxPerDescripcion.Text = string.Empty;
+            TextBoxObjItem.Text = string.Empty;
+            TextBoxObjMontoItemRef.Text = string.Empty;
+            TextBoxObjDescripcion.Text = string.Empty;
         }
 
-        protected void ButtonPerAgregar_Click(object sender, EventArgs e)
+        protected void ButtonObjAgregar_Click(object sender, EventArgs e)
         {
-            LabelDatosPersonaMsj.Text = string.Empty;
-            //validamos si existe el dato de Persona
+            LabelDatosObjetoMsj.Text = string.Empty;
+            //validamos si existe el dato de Objeto
             int vIdFlujo = 0;
             int vIdCotizacion = 0;
             long vIdItem = 0;
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
-            vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+            vIdItem = FValidaTieneObjeto(vIdFlujo, vIdCotizacion);
             if (vIdItem > 0)
             {
                 //Si existe
-                PModificarPersonaDet(true);
-                ButtonPerAgregar.Visible = false;
-                ButtonPerGrabar.Visible = true;
-                ButtonPerCancelar.Visible = true;
+                PModificarObjetoDet(true);
+                ButtonObjAgregar.Visible = false;
+                ButtonObjGrabar.Visible = true;
+                ButtonObjCancelar.Visible = true;
             }
             else
             {
                 //No existe
-                PModificarPersona(true);
-                ButtonPerAgregar.Visible = false;
-                ButtonPerGrabar.Visible = true;
-                ButtonPerCancelar.Visible = true;
+                PModificarObjeto(true);
+                ButtonObjAgregar.Visible = false;
+                ButtonObjGrabar.Visible = true;
+                ButtonObjCancelar.Visible = true;
             }
         }
 
-        protected void ButtonPerGrabar_Click(object sender, EventArgs e)
+        protected void ButtonObjGrabar_Click(object sender, EventArgs e)
         {
             int vIdFlujo = 0;
             int vIdCotizacion = 0;
@@ -355,102 +355,104 @@ namespace ICRL.Presentacion
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
             //cargar los datos del panel al objeto correspondiente
-            CotizacionICRL.TipoRCPersonas vTipoRCPersonas = new CotizacionICRL.TipoRCPersonas();
-            vTipoRCPersonas.id_flujo = vIdFlujo;
-            vTipoRCPersonas.id_cotizacion = vIdCotizacion;
-            vTipoRCPersonas.nombre_apellido = TextBoxPerNombreTer.Text.ToUpper();
-            vTipoRCPersonas.telefono_contacto = TextBoxPerTelefono.Text.ToUpper();
-            vTipoRCPersonas.numero_documento = TextBoxPerDocId.Text.ToUpper();
-            vTipoRCPersonas.rembolso = CheckBoxPerReembolso.Checked;
-            vTipoRCPersonas.tipo_gasto = TextBoxPerTipoGasto.Text.ToUpper();
-            vTipoRCPersonas.monto_gasto = double.Parse(TextBoxPerMontoGasto.Text);
-            vTipoRCPersonas.id_moneda = 1; //1 corresponde a Bs.
-            vTipoRCPersonas.descripcion = TextBoxPerDescripcion.Text.ToUpper();
-            vTipoRCPersonas.tipo_cambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoRCPersonas.id_estado = 1;
+            CotizacionICRL.TipoRCObjetos vTipoRCObjetos = new CotizacionICRL.TipoRCObjetos();
+            vTipoRCObjetos.id_flujo = vIdFlujo;
+            vTipoRCObjetos.id_cotizacion = vIdCotizacion;
+            vTipoRCObjetos.nombre_apellido = TextBoxObjNombreTer.Text.ToUpper();
+            vTipoRCObjetos.telefono_contacto = TextBoxObjTelefono.Text.ToUpper();
+            vTipoRCObjetos.numero_documento = TextBoxObjDocId.Text.ToUpper();
+            vTipoRCObjetos.rembolso = CheckBoxObjReembolso.Checked;
+            vTipoRCObjetos.tipo_item = TextBoxObjItem.Text.ToUpper();
+            vTipoRCObjetos.monto_item = double.Parse(TextBoxObjMontoItemRef.Text);
+            vTipoRCObjetos.id_moneda = 1; //1 corresponde a Bs.
+            vTipoRCObjetos.descripcion = TextBoxObjDescripcion.Text.ToUpper();
+            vTipoRCObjetos.tipo_cambio = double.Parse(TextBoxTipoCambio.Text);
+            vTipoRCObjetos.id_estado = 1;
 
-            //validar si existe el registro de la persona
-            if (string.Empty != TextBoxPerIdItem.Text)
+            //validar si existe el registro de la Objeto
+            if (string.Empty != TextBoxObjIdItem.Text)
             {
                 //Existe el registro del tercero
-                vIdItem = long.Parse(TextBoxPerIdItem.Text);
-                vTipoRCPersonas.id_item = vIdItem;
-                vResultado = CotizacionICRL.RCPersonaModificar(vTipoRCPersonas);
+                vIdItem = long.Parse(TextBoxObjIdItem.Text);
+                vTipoRCObjetos.id_item = vIdItem;
+                vResultado = CotizacionICRL.RCObjetosModificar(vTipoRCObjetos);
             }
             else
             {
                 //NO Existe el registro del tercero
-                vResultado = CotizacionICRL.RCPersonaRegistrar(vTipoRCPersonas);
+                vResultado = CotizacionICRL.RCObjetosRegistrar(vTipoRCObjetos);
             }
 
             if (vResultado)
             {
-                LabelDatosPersonaMsj.Text = "Registro Actualizado Exitosamente";
-                vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+                LabelDatosObjetoMsj.Text = "Registro Actualizado Exitosamente";
+                vIdItem = FValidaTieneObjeto(vIdFlujo, vIdCotizacion);
+                
             }
             else
             {
-                LabelDatosPersonaMsj.Text = "El Registro no se actualizo correctamente";
+                LabelDatosObjetoMsj.Text = "El Registro no se actualizo correctamente";
             }
 
-            TextBoxPerIdItem.Text = string.Empty;
-            PModificarPersona(false);
-            ButtonPerAgregar.Visible = true;
-            ButtonPerGrabar.Visible = false;
-            ButtonPerCancelar.Visible = false;
-            PLimpiarPersonaDet();
-            pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+            TextBoxObjIdItem.Text = string.Empty;
+            PModificarObjeto(false);
+            ButtonObjAgregar.Visible = true;
+            ButtonObjGrabar.Visible = false;
+            ButtonObjCancelar.Visible = false;
+            PLimpiarObjetoDet();
+            
+            pCargaGrillaObjetos(vIdFlujo, vIdCotizacion);
         }
 
-        protected void ButtonPerCancelar_Click(object sender, EventArgs e)
+        protected void ButtonObjCancelar_Click(object sender, EventArgs e)
         {
-            TextBoxPerIdItem.Text = string.Empty;
-            PModificarPersona(false);
-            ButtonPerAgregar.Visible = true;
-            ButtonPerGrabar.Visible = false;
-            ButtonPerCancelar.Visible = false;
+            TextBoxObjIdItem.Text = string.Empty;
+            PModificarObjeto(false);
+            ButtonObjAgregar.Visible = true;
+            ButtonObjGrabar.Visible = false;
+            ButtonObjCancelar.Visible = false;
         }
         #endregion
 
-        #region Grilla PersonasDet
+        #region Grilla ObjetosDet
 
-        protected void pCargaGrillaPersonas(int pIdFlujo, int pIdCotizacion)
+        protected void pCargaGrillaObjetos(int pIdFlujo, int pIdCotizacion)
         {
-            BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-            vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
+            BD.CotizacionICRL.TipoRCObjetosTraer vTipoRCObjetosTraer;
+            vTipoRCObjetosTraer = CotizacionICRL.RCObjetosTraer(pIdFlujo, pIdCotizacion);
 
-            GridViewPerDetalle.DataSource = vTipoRCPersonasTraer.RCPersonas.Select(RCPersonas => new
+            GridViewObjDetalle.DataSource = vTipoRCObjetosTraer.RCObjetos.Select(RCObjetos => new
             {
-                RCPersonas.id_item,
-                RCPersonas.nombre_apellido,
-                RCPersonas.numero_documento,
-                RCPersonas.tipo_gasto,
-                RCPersonas.monto_gasto,
-                RCPersonas.descripcion,
+                RCObjetos.id_item,
+                RCObjetos.nombre_apellido,
+                RCObjetos.numero_documento,
+                RCObjetos.tipo_item,
+                RCObjetos.monto_item,
+                RCObjetos.descripcion,
             }).ToList();
-            GridViewPerDetalle.DataBind();
+            GridViewObjDetalle.DataBind();
         }
 
-        protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
+        protected void GridViewObjDetalle_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vTextoTemporal = string.Empty;
 
             //Leer Registro de la grilla y cargar los valores a la ventana.
 
-            TextBoxPerTipoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[4].Text;
-            TextBoxPerMontoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[5].Text;
-            TextBoxPerDescripcion.Text = GridViewPerDetalle.SelectedRow.Cells[6].Text;
+            TextBoxObjItem.Text = GridViewObjDetalle.SelectedRow.Cells[4].Text;
+            TextBoxObjMontoItemRef.Text = GridViewObjDetalle.SelectedRow.Cells[5].Text;
+            TextBoxObjDescripcion.Text = GridViewObjDetalle.SelectedRow.Cells[6].Text;
 
-            TextBoxPerIdItem.Text = GridViewPerDetalle.SelectedRow.Cells[1].Text;
+            TextBoxObjIdItem.Text = GridViewObjDetalle.SelectedRow.Cells[1].Text;
 
-            PModificarPersonaDet(true);
-            ButtonPerAgregar.Visible = false;
-            ButtonPerGrabar.Visible = true;
-            ButtonPerCancelar.Visible = true;
+            PModificarObjetoDet(true);
+            ButtonObjAgregar.Visible = false;
+            ButtonObjGrabar.Visible = true;
+            ButtonObjCancelar.Visible = true;
 
         }
 
-        protected void GridViewPerDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void GridViewObjDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             bool vResultado = false;
             int vIdFlujo = 0;
@@ -460,38 +462,36 @@ namespace ICRL.Presentacion
             vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
             vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
-                string vTextoSecuencial = string.Empty;
-                int vIndex = 0;
-                int vSecuencial = 0;
+            string vTextoSecuencial = string.Empty;
+            int vIndex = 0;
+            int vSecuencial = 0;
 
-                vIndex = Convert.ToInt32(e.RowIndex);
-                vSecuencial = Convert.ToInt32(GridViewPerDetalle.DataKeys[vIndex].Value);
+            vIndex = Convert.ToInt32(e.RowIndex);
+            vSecuencial = Convert.ToInt32(GridViewObjDetalle.DataKeys[vIndex].Value);
             vIdItem = Convert.ToInt64(vSecuencial);
 
 
 
-            //vIdItem = long.Parse(GridViewPerDetalle.SelectedRow.Cells[1].Text);
+            //vIdItem = long.Parse(GridViewObjDetalle.SelectedRow.Cells[1].Text);
 
-            //CotizacionICRL.RCPersonaModificar
+            //CotizacionICRL.RCObjetoModificar
 
-            vResultado = BD.CotizacionICRL.RCPersonasBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+            vResultado = BD.CotizacionICRL.RCObjetosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
             if (vResultado)
             {
-                LabelDatosPersonaMsj.Text = "Registro Borrado exitosamente";
-                PModificarPersona(false);
-                ButtonPerAgregar.Visible = true;
-                ButtonPerGrabar.Visible = false;
-                ButtonPerCancelar.Visible = false;
+                LabelDatosObjetoMsj.Text = "Registro Borrado exitosamente";
+                PModificarObjeto(false);
+                ButtonObjAgregar.Visible = true;
+                ButtonObjGrabar.Visible = false;
+                ButtonObjCancelar.Visible = false;
             }
             else
             {
-                LabelDatosPersonaMsj.Text = "El Registro no pudo ser Borrado";
+                LabelDatosObjetoMsj.Text = "El Registro no pudo ser Borrado";
             }
-            TextBoxPerIdItem.Text = string.Empty;
-            pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+            TextBoxObjIdItem.Text = string.Empty;
+            pCargaGrillaObjetos(vIdFlujo, vIdCotizacion);
         }
         #endregion
-
-
     }
 }
