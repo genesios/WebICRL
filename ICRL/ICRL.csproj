@@ -348,6 +348,8 @@
     </Content>
     <Content Include="Presentacion\Cotizacion.aspx" />
     <Content Include="Presentacion\CotizacionDPRP.aspx" />
+    <Content Include="Presentacion\CotizacionPerTotDP.aspx" />
+    <Content Include="Presentacion\CotizacionPerTotRobo.aspx" />
     <Content Include="Presentacion\CotizacionRCObj.aspx" />
     <Content Include="Presentacion\CotizacionRCPer.aspx" />
     <Content Include="Presentacion\CotizacionRCVehicular.aspx" />
@@ -694,6 +696,20 @@
     </Compile>
     <Compile Include="Presentacion\CotizacionDPRP.aspx.designer.cs">
       <DependentUpon>CotizacionDPRP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionPerTotDP.aspx.cs">
+      <DependentUpon>CotizacionPerTotDP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionPerTotDP.aspx.designer.cs">
+      <DependentUpon>CotizacionPerTotDP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionPerTotRobo.aspx.cs">
+      <DependentUpon>CotizacionPerTotRobo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionPerTotRobo.aspx.designer.cs">
+      <DependentUpon>CotizacionPerTotRobo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\CotizacionRCObj.aspx.cs">
       <DependentUpon>CotizacionRCObj.aspx</DependentUpon>

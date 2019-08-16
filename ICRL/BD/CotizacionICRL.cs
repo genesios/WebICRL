@@ -2602,16 +2602,16 @@ namespace ICRL.BD
             }
             return blnRespuesta;
         }
-        public class TipoPeridaTotalPropioTraer
+        public class TipoPerdidaTotalPropioTraer
         {
             public bool Correcto;
             public string Mensaje;
             public List<TipoPerdidaTotalPropio> PerdidasTotalesPropios = new List<TipoPerdidaTotalPropio>();
             public System.Data.DataSet dsPerdidasTotalesPropios = new System.Data.DataSet();
         }
-        public static TipoPeridaTotalPropioTraer PerdidaTotalPropioTraer(int Flujo, int Cotizacion)
+        public static TipoPerdidaTotalPropioTraer PerdidaTotalPropioTraer(int Flujo, int Cotizacion)
         {
-            TipoPeridaTotalPropioTraer objRespuesta = new TipoPeridaTotalPropioTraer();
+            TipoPerdidaTotalPropioTraer objRespuesta = new TipoPerdidaTotalPropioTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
               "FROM [dbo].[cotizacion_perdida_total_propio] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion";
@@ -2951,7 +2951,7 @@ namespace ICRL.BD
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_perdida_total_robo] " +
-              "[id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
+              "([id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
               "[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6]) " +
               " VALUES (@id_flujo,@id_cotizacion,@condiciones_especiales,@version,@serie,@caja,@combustible,@cilindrada,@techo_solar,@asientos_cuero,@aros_magnesio,@observaciones_vehiculo,@duenio_nombres_1,@duenio_documento_1,@duenio_monto_1,@duenio_descripcion_1,@duenio_nombres_2,@duenio_documento_2,@duenio_monto_2,@duenio_descripcion_2,@duenio_nombres_3,@duenio_documento_3,@duenio_monto_3,@duenio_descripcion_3,@duenio_nombres_4,@duenio_documento_4,@duenio_monto_4,@duenio_descripcion_4,@duenio_nombres_5," +
               "@duenio_documento_5,@duenio_monto_5,@duenio_descripcion_5,@referencia_usada_1,@referencia_medios_1,@referencia_descripcion_1,@referencia_monto_1,@referencia_usada_2,@referencia_medios_2,@referencia_descripcion_2,@referencia_monto_2,@referencia_usada_3,@referencia_medios_3,@referencia_descripcion_3,@referencia_monto_3,@referencia_usada_4,@referencia_medios_4,@referencia_descripcion_4,@referencia_monto_4,@referencia_usada_5,@referencia_medios_5,@referencia_descripcion_5,@referencia_monto_5,@referencia_usada_6,@referencia_medios_6,@referencia_descripcion_6,@referencia_monto_6)";
@@ -3020,7 +3020,7 @@ namespace ICRL.BD
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 blnRespuesta = false;
             }
@@ -3032,16 +3032,16 @@ namespace ICRL.BD
             }
             return blnRespuesta;
         }
-        public class TipoPeridaTotalRoboTraer
+        public class TipoPerdidaTotalRoboTraer
         {
             public bool Correcto;
             public string Mensaje;
             public List<TipoPerdidaTotalRobo> PerdidasTotalesRobos = new List<TipoPerdidaTotalRobo>();
             public System.Data.DataSet dsPerdidasTotalesRobos = new System.Data.DataSet();
         }
-        public static TipoPeridaTotalRoboTraer PerdidaTotalRoboTraer(int Flujo, int Cotizacion)
+        public static TipoPerdidaTotalRoboTraer PerdidaTotalRoboTraer(int Flujo, int Cotizacion)
         {
-            TipoPeridaTotalRoboTraer objRespuesta = new TipoPeridaTotalRoboTraer();
+            TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
             string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
               "FROM [dbo].[cotizacion_perdida_total_robo] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion";
@@ -3142,7 +3142,7 @@ namespace ICRL.BD
         {
             bool blnRespuesta = false;
             string strComando = "UPDATE [dbo].[cotizacion_perdida_total_robo] " +
-              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie,[caja],[combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo," +
+              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie, [caja] = @caja, [combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo," +
               "[duenio_nombres_1] = @duenio_nombres_1,[duenio_documento_1] = @duenio_documento_1,[duenio_monto_1] = @duenio_monto_1,[duenio_descripcion_1] = @duenio_descripcion_1," +
               "[duenio_nombres_2] = @duenio_nombres_2,[duenio_documento_2] = @duenio_documento_2,[duenio_monto_2] = @duenio_monto_2,[duenio_descripcion_2] = @duenio_descripcion_2," +
               "[duenio_nombres_3] = @duenio_nombres_3,[duenio_documento_3] = @duenio_documento_3,[duenio_monto_3] = @duenio_monto_3,[duenio_descripcion_3] = @duenio_descripcion_3," +
@@ -3222,7 +3222,7 @@ namespace ICRL.BD
                 sqlComando.ExecuteNonQuery();
                 blnRespuesta = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 blnRespuesta = false;
             }

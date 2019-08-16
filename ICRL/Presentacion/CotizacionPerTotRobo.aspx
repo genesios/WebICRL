@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRCPer.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRCPer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionPerTotRobo.aspx.cs" Inherits="ICRL.Presentacion.CotizacionPerTotRobo" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -182,61 +182,110 @@
                         <asp:Label ID="LabelMensaje" runat="server" Text=""></asp:Label>
                     </div>
                 </asp:Panel>
+
             </div>
+
         </div>
         <div>
-            <asp:Panel ID="PanelRCPersona" runat="server" CssClass="PanelDatosGen">
+            <asp:Panel ID="PanelDatosEspeciales" runat="server" CssClass="PanelDatosGen">
                 <table class="basetable">
                     <tr>
-                        <th>
-                            <asp:Label ID="LabelDatosPersona" runat="server" Text="Datos Básicos Persona"></asp:Label><br />
-                            <asp:Label ID="LabelDatosPersonaMsj" runat="server" Text=""></asp:Label>
-                        </th>
+                        <td>
+                            <strong>
+                                <asp:Label ID="LabelRegistroDatosPTRO" runat="server" Text="Vehículo con Condiciones Especiales de Indemnización"></asp:Label></strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="thirty">
-                                <asp:Label ID="LabelPerNombreTer" runat="server" Text="Nombre(s) y Apellido(s):"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerNombreTer" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerDocId" runat="server" Text="Documento Id:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerDocId" runat="server"></asp:TextBox><br />
+                            <div class="twenty">
+                                <asp:Label ID="LabelVersionPTRO" runat="server" Text="Versión"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxVersionPTRO" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelSeriePTRO" runat="server" Text="Serie"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxSeriePTRO" runat="server"></asp:TextBox>
                             </div>
-                            <div class="thirty">
-                                <asp:Label ID="LabelPerTelefono" runat="server" Text="Telefono de Contacto:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerTelefono" runat="server"></asp:TextBox><br />
-                                <asp:CheckBox ID="CheckBoxPerReembolso" runat="server"></asp:CheckBox>
-                                <asp:Label ID="LabelPerReembolso" runat="server" Text="Reembolso"></asp:Label><br />
+                            <div class="twenty">
+                                <asp:Label ID="LabelCilindraPTRO" runat="server" Text="Cilindrada"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server"></asp:TextBox><br />
+                                <asp:Label ID="LabelObservacionesPTRO" runat="server" Text="Observaciones"></asp:Label><br />
+                                <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server" MaxLength="100"></asp:TextBox>
                             </div>
-                            <div class="thirty">
-                                <asp:Label ID="LabelPerIdItem" runat="server" Text="Id Persona:" Visible="false"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerIdItem" runat="server" Visible="false"></asp:TextBox>
+                            <div class="twenty">
+                                <asp:Label ID="LabelCajaPTRO" runat="server" Text="Caja"></asp:Label><br />
+                                <asp:DropDownList ID="DropDownListCajaPTRO" runat="server"></asp:DropDownList><br />
+                                <asp:Label ID="LabelCombustiblePTRO" runat="server" Text="Combustible"></asp:Label><br />
+                                <asp:DropDownList ID="DropDownListCombustiblePTRO" runat="server"></asp:DropDownList><br />
+                            </div>
+                            <div class="twenty">
+                                <asp:CheckBox ID="CheckBoxTechoSolarPTRO" runat="server" />
+                                <asp:Label ID="LabelTechoSolarPTRO" runat="server" Text="Techo Solar"></asp:Label><br />
+                                <asp:CheckBox ID="CheckBoxAsientosCueroPTRO" runat="server" />
+                                <asp:Label ID="LabelAsientosCueroPTRO" runat="server" Text="Asientos de Cuero"></asp:Label>
+                            </div>
+                            <div class="twenty">
+                                <asp:CheckBox ID="CheckBoxArosMagnesioPTRO" runat="server" />
+                                <asp:Label ID="LabelArosMagnesioPTRO" runat="server" Text="Aros de Magnesio"></asp:Label><br />
+                                <asp:CheckBox ID="CheckBoxConvertidoGnvPTRO" runat="server" />
+                                <asp:Label ID="LabelConvertidoGNVPTRO" runat="server" Text="ConvertidoGNV"></asp:Label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="fifty">
-                                <asp:Label ID="LabelPerTipoGasto" runat="server" Text="Tipo Gasto:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerTipoGasto" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerMontoGasto" runat="server" Text="Monto Gasto Bs.:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerMontoGasto" runat="server"></asp:TextBox><br />
-                                <asp:Label ID="LabelPerDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerDescripcion" runat="server"></asp:TextBox><br />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Button ID="ButtonPerAgregar" runat="server" Text="Agregar" Visible="true" OnClick="ButtonPerAgregar_Click" />
-                            <asp:Button ID="ButtonPerGrabar" runat="server" Text="Grabar" Visible="false" OnClick="ButtonPerGrabar_Click" />
-                            <asp:Button ID="ButtonPerCancelar" runat="server" Text="Cancelar" Visible="false" OnClick="ButtonPerCancelar_Click" />
+                            <asp:Button ID="ButtonActualizarPTRO" runat="server" Text="Actualizar" Enabled="true"  />
+                            <asp:Button ID="ButtonGrabarPTRO" runat="server" Text="Grabar" Enabled="False"  />
+                            <asp:Button ID="ButtonCancelarPTRO" runat="server" Text="Cancelar" Enabled="False"  />
                         </td>
                     </tr>
                 </table>
             </asp:Panel>
         </div>
         <div>
-            <asp:GridView ID="GridViewPerDetalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="id_item" OnSelectedIndexChanged="GridViewPerDetalle_SelectedIndexChanged" OnRowDeleting="GridViewPerDetalle_RowDeleting">
+            <table class="basetable">
+                <tr>
+                    <th>
+                        <asp:Label ID="LabelDatosIndemnizacion" runat="server" Text="Datos Beneficiario(s) de Indemnización"></asp:Label>
+                        <asp:Label ID="LabelDatosDueniosMsj" runat="server" Text=""></asp:Label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <asp:CheckBox ID="CheckBoxPTROTotPagado" runat="server" OnCheckedChanged="CheckBoxPTROTotPagado_CheckedChanged" AutoPostBack="True" />
+                            <asp:Label ID="LabelPTROTotPagado" runat="server" Text="¿No Completamente Pagado?"></asp:Label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fifty">
+                            <asp:Label ID="LabelPTRONombres" runat="server" Text="Nombre(s) y Apellido(s):"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxPTRONombres" runat="server"></asp:TextBox>
+                            <asp:Label ID="LabelPTRODocumentoId" runat="server" Text="Documento Id.:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxPTRODocumentoId" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="fifty">
+                            <asp:Label ID="LabelPTROMontoPago" runat="server" Text="Monto Pago en Bs.:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxPTROMontoPago" runat="server"></asp:TextBox>
+                            <asp:Label ID="LabelPTRODescripcion" runat="server" Text="Descripción:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxPTRODescripcion" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxPTROIndice" runat="server" Text="" Visible="false" ></asp:TextBox>
+                            <asp:TextBox ID="TextBoxPTROIdItem" runat="server" Text="" Visible="false" ></asp:TextBox>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="ButtonPTROAgregar" runat="server" Text="Agregar" Visible="false" OnClick="ButtonPTROAgregar_Click" />
+                        <asp:Button ID="ButtonPTROGrabar" runat="server" Text="Grabar" Visible="false" OnClick="ButtonPTROGrabar_Click" />
+                        <asp:Button ID="ButtonPTROCancelar" runat="server" Text="Cancelar" Visible="false" OnClick="ButtonPTROCancelar_Click" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        </div>
+        <div>
+            <asp:GridView ID="GridViewPTRODueniosaPagar" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="id_fila" OnRowDeleting="GridViewPTRODueniosaPagar_RowDeleting" OnSelectedIndexChanged="GridViewPTRODueniosaPagar_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -250,14 +299,28 @@
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
                 <Columns>
                     <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" ItemStyle-ForeColor="Red" />
-                    <asp:BoundField DataField="id_item" HeaderText="Id" />
-                    <asp:BoundField DataField="nombre_apellido" HeaderText="Nombre(s) y Apellido(s)" />
-                    <asp:BoundField DataField="numero_documento" HeaderText="Documento Id" />
-                    <asp:BoundField DataField="tipo_gasto" HeaderText="Tipo Gasto" />
-                    <asp:BoundField DataField="monto_gasto" HeaderText="Monto Gasto Bs." DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+                    <asp:BoundField DataField="id_fila" HeaderText="Id" />
+                    <asp:BoundField DataField="duenio_nombres" HeaderText="Nombre(s) y Apellido(s)" />
+                    <asp:BoundField DataField="duenio_documento" HeaderText="Doc.Id." />
+                    <asp:BoundField DataField="duenio_monto" HeaderText="Monto Pago Bs." DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="duenio_descripcion" HeaderText="Descripción" />
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
+            </asp:GridView>
+        </div>
+        <div>
+            <asp:GridView ID="GridViewPTROReferencias" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <AlternatingRowStyle BackColor="White" />
+                <EditRowStyle BackColor="#7C6F57" />
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
         </div>
     </div>

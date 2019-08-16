@@ -15,12 +15,12 @@ namespace ICRL.BD
         public enum TipoInspeccion
         {
             DaniosPropios = 1,
-            RCObjetos,
-            RCPersonas,
-            RoboParcial,
-            PerdidaTotalDaniosPropios,
-            PerdidaTotalRobo,
-            RCVEhicular,
+            RCObjetos = 2,
+            RCPersonas = 3,
+            RoboParcial = 4,
+            PerdidaTotalDaniosPropios = 5,
+            PerdidaTotalRobo = 6,
+            RCVEhicular = 7
         };
         public FlujoICRL vFlujoICRL { get; set; }
         public UsuarioICRL vUsuarioICRL { get; set; }

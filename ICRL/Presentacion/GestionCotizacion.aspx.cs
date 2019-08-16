@@ -180,6 +180,23 @@ namespace IRCL.Presentacion
                                      c.fechaCreacion,
                                      sumaCosto = 0,
                                      descEstado = "Coti.Pendiente"
+                                 }).Union
+                                (from c in db.Cotizacion
+                                 join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                                 where (c.idFlujo == vIdInspeccion)
+                                 && (c.fechaCreacion >= vFechaIni && c.fechaCreacion <= vFechaFin)
+                                 && (c.tipoCobertura == (int)AccesoDatos.TipoInspeccion.PerdidaTotalRobo)
+                                 orderby c.idInspeccion
+                                 select new
+                                 {
+                                     c.idCotizacion,
+                                     tipoCobertura = "PT Robo",
+                                     secuencialOrden = "PT Robo - Pendiente",
+                                     nombreProveedor = "N/A",
+                                     correlativoInspeccion = c.correlativo,
+                                     c.fechaCreacion,
+                                     sumaCosto = 0,
+                                     descEstado = "Coti.Pendiente"
                                  });
 
                     gvInspecciones.DataSource = vLst.ToList();
@@ -267,7 +284,7 @@ namespace IRCL.Presentacion
             var gvInspecciones = (GridView)sender;
             vFilaFlujo = gvInspecciones.SelectedRow.Cells[0].Text;
             vCobertura = gvInspecciones.SelectedRow.Cells[1].Text;
-            vCobertura=  vCobertura.Replace("&#241;", "ñ");
+            vCobertura = vCobertura.Replace("&#241;", "ñ");
 
 
             int vIdCotizacion = int.Parse(vFilaFlujo);
@@ -293,10 +310,13 @@ namespace IRCL.Presentacion
                 case "RC Vehicular":
                     Response.Redirect("~/Presentacion/CotizacionRCVehicular.aspx?nroCoti=" + vIdCotizacion.ToString());
                     break;
+                case "PT Robo":
+                    Response.Redirect("~/Presentacion/CotizacionPerTotRobo.aspx?nroCoti=" + vIdCotizacion.ToString());
+                    break;
                 default:
                     break;
             }
-            
+
         }
 
         #region Grilla Maestra

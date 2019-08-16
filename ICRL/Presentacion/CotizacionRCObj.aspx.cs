@@ -369,7 +369,7 @@ namespace ICRL.Presentacion
             vTipoRCObjetos.tipo_cambio = double.Parse(TextBoxTipoCambio.Text);
             vTipoRCObjetos.id_estado = 1;
 
-            //validar si existe el registro de la Objeto
+            //validar si existe el registro del Objeto
             if (string.Empty != TextBoxObjIdItem.Text)
             {
                 //Existe el registro del tercero
