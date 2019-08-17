@@ -14,6 +14,7 @@ namespace ICRL.Presentacion
     public partial class CotizacionPerTotRobo : System.Web.UI.Page
     {
         public DataTable dtBeneficiario = new DataTable();
+        public DataTable dtReferencia;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,6 +54,8 @@ namespace ICRL.Presentacion
                         PCreaBeneficiarioPrincipal();
                     }
                     PCargarGrillaBeneficiarios(vIdFlujo, vIdCotizacion);
+                    vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+                    PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
                 }
             }
             catch (Exception ex)
@@ -670,6 +673,7 @@ namespace ICRL.Presentacion
                     ButtonPTROGrabar.Visible = true;
                     ButtonPTROCancelar.Visible = true;
                     ButtonPTROAgregar.Visible = false;
+
                 }
             }
         }
@@ -734,12 +738,18 @@ namespace ICRL.Presentacion
                 vResultado = CotizacionICRL.PerdidaTotalRoboModificar(vFilaTabla);
                 if (vResultado)
                 {
-                    ButtonPTROGrabar.Visible = false;
-                    ButtonPTROCancelar.Visible = false;
                     if (CheckBoxPTROTotPagado.Checked)
                     {
                         ButtonPTROAgregar.Visible = true;
                     }
+                    else
+                    {
+                        ButtonPTROAgregar.Visible = false;
+                    }
+                    ButtonPTROGrabar.Visible = false;
+                    ButtonPTROCancelar.Visible = false;
+                    PLimpiarBeneficiario();
+                    PHabilitarBeneficiarioOtro(false);
                 }
 
                 PCargarGrillaBeneficiarios(vIdFlujo, vIdCotizacion);
@@ -763,7 +773,228 @@ namespace ICRL.Presentacion
 
             PLimpiarBeneficiario();
             PHabilitarBeneficiarioOtro(false);
+            ButtonPTROGrabar.Visible = false;
+            ButtonPTROCancelar.Visible = false;
             PCargarGrillaBeneficiarios(vIdFlujo, vIdCotizacion);
         }
+
+        #region Perdida Total Robo - Referencias
+
+        protected void PLimpiarReferencias()
+        {
+            CheckboxReferUtilizada.Checked = false;
+            TextBoxReferMedioCoti.Text = string.Empty;
+            TextBoxReferDescripcion.Text = string.Empty;
+            TextBoxReferMontoCoti.Text = string.Empty;
+        }
+
+        protected void PHabilitarReferencias(bool pEstado)
+        {
+            CheckboxReferUtilizada.Enabled = pEstado;
+            TextBoxReferMedioCoti.Enabled = pEstado;
+            TextBoxReferDescripcion.Enabled = pEstado;
+            TextBoxReferMontoCoti.Enabled = pEstado;
+        }
+
+        protected void PCargarGrillaReferencias(int pIdFlujo, int pIdCotizacion, long pIdItem)
+        {
+
+            //DataTable dtReferencia;
+            dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(pIdFlujo, pIdCotizacion, pIdItem);
+
+            GridViewPTROReferencias.DataSource = dtReferencia;
+            GridViewPTROReferencias.DataBind();
+
+        }
+
+        protected void GridViewPTROReferencias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string vTextoTemporal = string.Empty;
+            int vIndice = 0;
+
+            //Leer Registro de la grilla y cargar los valores a la ventana.
+            vIndice = int.Parse(GridViewPTROReferencias.SelectedRow.Cells[1].Text);
+
+            TextBoxReferIndice.Text = GridViewPTROReferencias.SelectedRow.Cells[1].Text;
+            CheckboxReferUtilizada.Checked = (GridViewPTROReferencias.SelectedRow.Cells[2].Controls[1] as CheckBox).Checked;
+            TextBoxReferMedioCoti.Text = GridViewPTROReferencias.SelectedRow.Cells[3].Text;
+            TextBoxReferDescripcion.Text = GridViewPTROReferencias.SelectedRow.Cells[4].Text;
+            TextBoxReferMontoCoti.Text = GridViewPTROReferencias.SelectedRow.Cells[5].Text;
+
+            PHabilitarReferencias(true);
+
+            ButtonReferAgregar.Visible = false;
+            ButtonReferGrabar.Visible = true;
+            ButtonReferCancelar.Visible = true;
+
+
+            ////dtReferencia.Rows[vIndice].ItemArray[2]
+            //dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(37, 6, 1);
+            //dtReferencia.Rows[vIndice-1][1] = "PAGINA SIETE";
+            //bool vResultado = false;
+
+            //vResultado =   CotizacionICRL.PerdidaTotalActualizarReferencias(37, 6, 1, dtReferencia);
+
+
+            //TextBoxPTROIndice.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[1].Text;
+            //TextBoxPTRONombres.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[2].Text;
+            //vTextoTemporal = GridViewPTRODueniosaPagar.SelectedRow.Cells[3].Text;
+            //vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+            //TextBoxPTRODocumentoId.Text = vTextoTemporal;
+            //TextBoxPTROMontoPago.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[4].Text;
+            //TextBoxPTRODescripcion.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[5].Text;
+            //if (1 == vIndice)
+            //{
+            //    PHabilitarBeneficiarioPrincipal(true);
+            //}
+            //else
+            //{
+            //    PHabilitarBeneficiarioOtro(true);
+            //}
+            ////PModificarPersonaDet(true);
+
+
+
+        }
+
+        protected void GridViewPTROReferencias_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            bool vResultado = false;
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+            int vIndice = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            string vTextoSecuencial = string.Empty;
+            int vIndex = 0;
+
+            vIndex = Convert.ToInt32(e.RowIndex);
+            vIndice = Convert.ToInt32(GridViewPTROReferencias.DataKeys[vIndex].Value);
+
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+                //se borra una fila del dataset
+                dtReferencia.Rows[vIndice - 1].Delete();
+                vResultado = CotizacionICRL.PerdidaTotalActualizarReferencias(vIdFlujo, vIdCotizacion, vIdItem, dtReferencia);
+                if (vResultado)
+                {
+                    LabelDatosReferMsj.Text = "Referencia borrada exitosamente";
+                }
+                else
+                {
+                    LabelDatosReferMsj.Text = "El Registro no pudo ser borrado";
+                }
+            }
+            PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+        }
+
+        protected void ButtonReferAgregar_Click(object sender, EventArgs e)
+        {
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+            int vIndice = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+
+                if (dtReferencia.Rows.Count < 6)
+                {
+                    TextBoxReferIndice.Text = vIndice.ToString();
+                    PHabilitarReferencias(true);
+                    PLimpiarReferencias();
+                    ButtonReferAgregar.Visible = false;
+                    ButtonReferGrabar.Visible = true;
+                    ButtonReferCancelar.Visible = true;
+                }
+            }
+
+            PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+        }
+
+        protected void ButtonReferGrabar_Click(object sender, EventArgs e)
+        {
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+            int vIndice = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                vIndice = int.Parse(TextBoxReferIndice.Text);
+                dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+                if (0 == vIndice)
+                {
+                    //se agrega una fila al dataset
+                    DataRow dtFilaRef = dtReferencia.NewRow();
+                    dtFilaRef["usada"] = CheckboxReferUtilizada.Checked;
+                    dtFilaRef["medios"] = TextBoxReferMedioCoti.Text;
+                    dtFilaRef["descripcion"] = TextBoxReferDescripcion.Text;
+                    dtFilaRef["monto"] = double.Parse(TextBoxReferMontoCoti.Text);
+
+                    dtReferencia.Rows.Add(dtFilaRef);
+                }
+                else
+                {
+                    //se modifica una fila del dataset
+                    //Referencia Utilizada
+                    dtReferencia.Rows[vIndice - 1][0] = CheckboxReferUtilizada.Checked;
+                    //Medio Cotizado
+                    dtReferencia.Rows[vIndice - 1][1] = TextBoxReferMedioCoti.Text;
+                    //Descripción
+                    dtReferencia.Rows[vIndice - 1][2] = TextBoxReferDescripcion.Text;
+                    //Monto
+                    dtReferencia.Rows[vIndice - 1][3] = double.Parse(TextBoxReferMontoCoti.Text);
+                }
+
+                bool vResultado = false;
+                vResultado = CotizacionICRL.PerdidaTotalActualizarReferencias(vIdFlujo, vIdCotizacion, vIdItem, dtReferencia);
+                if (vResultado)
+                {
+                    LabelDatosReferMsj.Text = "Registro Procesado exitosamente";
+                }
+                else
+                {
+                    LabelDatosReferMsj.Text = "El Registro no pudo ser actualizado";
+                }
+
+            }
+
+            PHabilitarReferencias(false);
+            PLimpiarReferencias();
+            ButtonReferAgregar.Visible = true;
+            ButtonReferGrabar.Visible = false;
+            ButtonReferCancelar.Visible = false;
+            PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+
+        }
+
+        protected void ButtonReferCancelar_Click(object sender, EventArgs e)
+        {
+            PHabilitarReferencias(false);
+            PLimpiarReferencias();
+            ButtonReferAgregar.Visible = true;
+            ButtonReferGrabar.Visible = false;
+            ButtonReferCancelar.Visible = false;
+        }
+
+        #endregion
+
+
     }
 }

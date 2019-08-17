@@ -231,9 +231,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="ButtonActualizarPTRO" runat="server" Text="Actualizar" Enabled="true"  />
-                            <asp:Button ID="ButtonGrabarPTRO" runat="server" Text="Grabar" Enabled="False"  />
-                            <asp:Button ID="ButtonCancelarPTRO" runat="server" Text="Cancelar" Enabled="False"  />
+                            <asp:Button ID="ButtonActualizarPTRO" runat="server" Text="Actualizar" Enabled="true" />
+                            <asp:Button ID="ButtonGrabarPTRO" runat="server" Text="Grabar" Enabled="False" />
+                            <asp:Button ID="ButtonCancelarPTRO" runat="server" Text="Cancelar" Enabled="False" />
                         </td>
                     </tr>
                 </table>
@@ -268,8 +268,8 @@
                             <asp:TextBox ID="TextBoxPTROMontoPago" runat="server"></asp:TextBox>
                             <asp:Label ID="LabelPTRODescripcion" runat="server" Text="Descripción:"></asp:Label><br />
                             <asp:TextBox ID="TextBoxPTRODescripcion" runat="server"></asp:TextBox>
-                            <asp:TextBox ID="TextBoxPTROIndice" runat="server" Text="" Visible="false" ></asp:TextBox>
-                            <asp:TextBox ID="TextBoxPTROIdItem" runat="server" Text="" Visible="false" ></asp:TextBox>
+                            <asp:TextBox ID="TextBoxPTROIndice" runat="server" Text="" Visible="false"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxPTROIdItem" runat="server" Text="" Visible="false"></asp:TextBox>
                         </div>
                     </td>
                 </tr>
@@ -309,7 +309,43 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:GridView ID="GridViewPTROReferencias" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <table class="basetable">
+                <tr>
+                    <th>
+                        <asp:Label ID="LabelDatosReferencias" runat="server" Text="Lista de Referencias"></asp:Label>
+                        <asp:Label ID="LabelDatosReferMsj" runat="server" Text=""></asp:Label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fifty">
+                            <asp:CheckBox ID="CheckboxReferUtilizada" runat="server"></asp:CheckBox>
+                            <asp:Label ID="LabelReferUtilizada" runat="server" Text="Referencia Utilizada:"></asp:Label><br />
+
+                            <asp:Label ID="LabelReferMedioCoti" runat="server" Text="Medio Cotizado:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxReferMedioCoti" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="fifty">
+                            <asp:Label ID="LabelReferDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxReferDescripcion" runat="server"></asp:TextBox>
+                            <asp:Label ID="LabelReferMontoCoti" runat="server" Text="Monto Cotizado en Bs.:"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxReferMontoCoti" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxReferIndice" runat="server" Text="" Visible="false"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxReferIdItem" runat="server" Text="" Visible="false"></asp:TextBox>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="ButtonReferAgregar" runat="server" Text="Agregar" Visible="true" OnClick="ButtonReferAgregar_Click" />
+                        <asp:Button ID="ButtonReferGrabar" runat="server" Text="Grabar" Visible="false" OnClick="ButtonReferGrabar_Click" />
+                        <asp:Button ID="ButtonReferCancelar" runat="server" Text="Cancelar" Visible="false" OnClick="ButtonReferCancelar_Click" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <asp:GridView ID="GridViewPTROReferencias" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="id" OnRowDeleting="GridViewPTROReferencias_RowDeleting" OnSelectedIndexChanged="GridViewPTROReferencias_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -321,6 +357,19 @@
                 <SortedAscendingHeaderStyle BackColor="#246B61" />
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" ItemStyle-ForeColor="Red" />
+                    <asp:BoundField DataField="id" HeaderText="Id" />
+                    <asp:TemplateField HeaderText="Ref.Utilizada">
+                        <ItemTemplate>
+                            <asp:CheckBox runat="server" Checked='<%# Eval("usada") %>'></asp:CheckBox>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="medios" HeaderText="Medio Ref." />
+                    <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+                    <asp:BoundField DataField="monto" HeaderText="Monto en Bs." DataFormatString="{0:N2}" />
+                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
+                </Columns>
             </asp:GridView>
         </div>
     </div>

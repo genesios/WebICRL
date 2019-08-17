@@ -2413,6 +2413,7 @@ namespace ICRL.BD
             public bool asientos_cuero;
             public bool aros_magnesio;
             public string observaciones_vehiculo;
+            public bool completamente_pagado;
             public string duenio_nombres_1;
             public string duenio_documento_1;
             public double duenio_monto_1;
@@ -2472,6 +2473,7 @@ namespace ICRL.BD
                 this.asientos_cuero = false;
                 this.aros_magnesio = false;
                 this.observaciones_vehiculo = "";
+                this.completamente_pagado = false;
                 this.duenio_nombres_1 = "";
                 this.duenio_documento_1 = "";
                 this.duenio_monto_1 = 0.0;
@@ -2522,9 +2524,9 @@ namespace ICRL.BD
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_perdida_total_propio] " +
-              "[id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
+              "[id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[completamente_pagado],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
               "[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6]) " +
-              " VALUES (@id_flujo,@id_cotizacion,@condiciones_especiales,@version,@serie,@caja,@combustible,@cilindrada,@techo_solar,@asientos_cuero,@aros_magnesio,@observaciones_vehiculo,@duenio_nombres_1,@duenio_documento_1,@duenio_monto_1,@duenio_descripcion_1,@duenio_nombres_2,@duenio_documento_2,@duenio_monto_2,@duenio_descripcion_2,@duenio_nombres_3,@duenio_documento_3,@duenio_monto_3,@duenio_descripcion_3,@duenio_nombres_4,@duenio_documento_4,@duenio_monto_4,@duenio_descripcion_4,@duenio_nombres_5," +
+              " VALUES (@id_flujo,@id_cotizacion,@condiciones_especiales,@version,@serie,@caja,@combustible,@cilindrada,@techo_solar,@asientos_cuero,@aros_magnesio,@observaciones_vehiculo,@completamente_pagado,@duenio_nombres_1,@duenio_documento_1,@duenio_monto_1,@duenio_descripcion_1,@duenio_nombres_2,@duenio_documento_2,@duenio_monto_2,@duenio_descripcion_2,@duenio_nombres_3,@duenio_documento_3,@duenio_monto_3,@duenio_descripcion_3,@duenio_nombres_4,@duenio_documento_4,@duenio_monto_4,@duenio_descripcion_4,@duenio_nombres_5," +
               "@duenio_documento_5,@duenio_monto_5,@duenio_descripcion_5,@referencia_usada_1,@referencia_medios_1,@referencia_descripcion_1,@referencia_monto_1,@referencia_usada_2,@referencia_medios_2,@referencia_descripcion_2,@referencia_monto_2,@referencia_usada_3,@referencia_medios_3,@referencia_descripcion_3,@referencia_monto_3,@referencia_usada_4,@referencia_medios_4,@referencia_descripcion_4,@referencia_monto_4,@referencia_usada_5,@referencia_medios_5,@referencia_descripcion_5,@referencia_monto_5,@referencia_usada_6,@referencia_medios_6,@referencia_descripcion_6,@referencia_monto_6)";
 
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
@@ -2543,6 +2545,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@asientos_cuero", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.asientos_cuero;
                 sqlComando.Parameters.Add("@aros_magnesio", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.aros_magnesio;
                 sqlComando.Parameters.Add("@observaciones_vehiculo", System.Data.SqlDbType.VarChar, 350).Value = PerdidaTotalPropio.observaciones_vehiculo;
+                sqlComando.Parameters.Add("@completamente_pagado", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.completamente_pagado;
                 sqlComando.Parameters.Add("@duenio_nombres_1", System.Data.SqlDbType.VarChar, 150).Value = PerdidaTotalPropio.duenio_nombres_1;
                 sqlComando.Parameters.Add("@duenio_documento_1", System.Data.SqlDbType.VarChar, 20).Value = PerdidaTotalPropio.duenio_documento_1;
                 sqlComando.Parameters.Add("@duenio_monto_1", System.Data.SqlDbType.Float).Value = PerdidaTotalPropio.duenio_monto_1;
@@ -2613,7 +2616,7 @@ namespace ICRL.BD
         {
             TipoPerdidaTotalPropioTraer objRespuesta = new TipoPerdidaTotalPropioTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
+            string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[completamente_pagado],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
               "FROM [dbo].[cotizacion_perdida_total_propio] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion";
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
@@ -2641,6 +2644,7 @@ namespace ICRL.BD
                     if (sqlDatos["asientos_cuero"] != DBNull.Value) tdpFila.asientos_cuero = Convert.ToBoolean(sqlDatos["asientos_cuero"]);
                     if (sqlDatos["aros_magnesio"] != DBNull.Value) tdpFila.aros_magnesio = Convert.ToBoolean(sqlDatos["aros_magnesio"]);
                     if (sqlDatos["observaciones_vehiculo"] != DBNull.Value) tdpFila.observaciones_vehiculo = Convert.ToString(sqlDatos["observaciones_vehiculo"]);
+                    if (sqlDatos["completamente_pagado"] != DBNull.Value) tdpFila.completamente_pagado = Convert.ToBoolean(sqlDatos["completamente_pagado"]);
                     if (sqlDatos["duenio_nombres_1"] != DBNull.Value) tdpFila.duenio_nombres_1 = Convert.ToString(sqlDatos["duenio_nombres_1"]);
                     if (sqlDatos["duenio_documento_1"] != DBNull.Value) tdpFila.duenio_documento_1 = Convert.ToString(sqlDatos["duenio_documento_1"]);
                     if (sqlDatos["duenio_monto_1"] != DBNull.Value) tdpFila.duenio_monto_1 = Convert.ToDouble(sqlDatos["duenio_monto_1"]);
@@ -2706,11 +2710,197 @@ namespace ICRL.BD
 
             return objRespuesta;
         }
+
+        public static System.Data.DataTable PerdidaTotalPropioTraerReferencias(int Flujo, int Cotizacion, long Item)
+        {
+            TipoPerdidaTotalPropioTraer objRespuesta = new TipoPerdidaTotalPropioTraer();
+            System.Data.DataTable dtReferencias = new System.Data.DataTable();
+            System.Data.DataRow drFila;
+            int intIdentificador = 0;
+            dtReferencias.Columns.Add("usada", System.Type.GetType("System.Boolean"));
+            dtReferencias.Columns.Add("medios", System.Type.GetType("System.String"));
+            dtReferencias.Columns.Add("descripcion", System.Type.GetType("System.String"));
+            dtReferencias.Columns.Add("monto", System.Type.GetType("System.Double"));
+            dtReferencias.Columns.Add("id", System.Type.GetType("System.Int32"));
+            objRespuesta = PerdidaTotalPropioTraer(Flujo, Cotizacion);
+            if (objRespuesta.Correcto)
+            {
+                for (int i = 0; i <= objRespuesta.PerdidasTotalesPropios.Count - 1; i++)
+                {
+                    if (objRespuesta.PerdidasTotalesPropios[i].id_item == Item)
+                    {
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_1.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_1;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_1;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_1;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_1;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_2.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_2;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_2;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_2;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_2;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_3.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_3;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_3;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_3;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_3;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_4.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_4;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_4;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_4;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_4;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_5.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_5;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_5;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_5;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_5;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesPropios[i].referencia_medios_6.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesPropios[i].referencia_usada_6;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesPropios[i].referencia_medios_6;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_6;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesPropios[i].referencia_monto_6;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        return dtReferencias;
+                    }
+                }
+            }
+            return dtReferencias;
+        }
+        public static bool PerdidaTotalPropioActualizarReferencias(int Flujo, int Cotizacion, long Item, System.Data.DataTable Referencias)
+        {
+            bool blnRespuesta = false;
+            TipoPerdidaTotalPropioTraer objRespuesta = new TipoPerdidaTotalPropioTraer();
+            int intNumero = 1;
+            objRespuesta = PerdidaTotalPropioTraer(Flujo, Cotizacion);
+            if (objRespuesta.Correcto)
+            {
+                for (int i = 0; i <= objRespuesta.PerdidasTotalesPropios.Count - 1; i++)
+                {
+                    if (objRespuesta.PerdidasTotalesPropios[i].id_item == Item)
+                    {
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_1 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_1 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_1 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_1 = 0.0;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_2 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_2 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_2 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_2 = 0.0;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_3 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_3 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_3 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_3 = 0.0;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_4 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_4 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_4 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_4 = 0.0;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_5 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_5 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_5 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_5 = 0.0;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_6 = false;
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_6 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_6 = "";
+                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_6 = 0.0;
+
+                        for (int j = 0; j <= Referencias.Rows.Count - 1; j++)
+                        {
+                            if (Referencias.Rows[j].ItemArray[1].ToString().Trim() != "")
+                            {
+                                switch (intNumero)
+                                {
+                                    case 1:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_1 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_1 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_1 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_1 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 2:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_2 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_2 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_2 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_2 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 3:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_3 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_3 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_3 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_3 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 4:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_4 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_4 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_4 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_4 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 5:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_5 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_5 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_5 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_5 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    default:
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_usada_6 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_medios_6 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_descripcion_6 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesPropios[i].referencia_monto_6 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                }
+                            }
+                        }
+                        return PerdidaTotalPropioModificar(objRespuesta.PerdidasTotalesPropios[i]);
+                    }
+                }
+            }
+            return blnRespuesta;
+        }
+
         public static bool PerdidaTotalPropioModificar(TipoPerdidaTotalPropio PerdidaTotalPropio)
         {
             bool blnRespuesta = false;
             string strComando = "UPDATE [dbo].[cotizacion_perdida_total_propio] " +
-              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie,[caja],[combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo," +
+              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie,[caja],[combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo, [completamente_pagado] = @completamente_pagado, " +
               "[duenio_nombres_1] = @duenio_nombres_1,[duenio_documento_1] = @duenio_documento_1,[duenio_monto_1] = @duenio_monto_1,[duenio_descripcion_1] = @duenio_descripcion_1," +
               "[duenio_nombres_2] = @duenio_nombres_2,[duenio_documento_2] = @duenio_documento_2,[duenio_monto_2] = @duenio_monto_2,[duenio_descripcion_2] = @duenio_descripcion_2," +
               "[duenio_nombres_3] = @duenio_nombres_3,[duenio_documento_3] = @duenio_documento_3,[duenio_monto_3] = @duenio_monto_3,[duenio_descripcion_3] = @duenio_descripcion_3," +
@@ -2742,6 +2932,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@asientos_cuero", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.asientos_cuero;
                 sqlComando.Parameters.Add("@aros_magnesio", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.aros_magnesio;
                 sqlComando.Parameters.Add("@observaciones_vehiculo", System.Data.SqlDbType.VarChar, 350).Value = PerdidaTotalPropio.observaciones_vehiculo;
+                sqlComando.Parameters.Add("@completamente_pagado", System.Data.SqlDbType.Bit).Value = PerdidaTotalPropio.completamente_pagado;
                 sqlComando.Parameters.Add("@duenio_nombres_1", System.Data.SqlDbType.VarChar, 150).Value = PerdidaTotalPropio.duenio_nombres_1;
                 sqlComando.Parameters.Add("@duenio_documento_1", System.Data.SqlDbType.VarChar, 20).Value = PerdidaTotalPropio.duenio_documento_1;
                 sqlComando.Parameters.Add("@duenio_monto_1", System.Data.SqlDbType.Float).Value = PerdidaTotalPropio.duenio_monto_1;
@@ -2842,6 +3033,7 @@ namespace ICRL.BD
             public bool asientos_cuero;
             public bool aros_magnesio;
             public string observaciones_vehiculo;
+            public bool completamente_pagado;
             public string duenio_nombres_1;
             public string duenio_documento_1;
             public double duenio_monto_1;
@@ -2901,6 +3093,7 @@ namespace ICRL.BD
                 this.asientos_cuero = false;
                 this.aros_magnesio = false;
                 this.observaciones_vehiculo = "";
+                this.completamente_pagado = false;
                 this.duenio_nombres_1 = "";
                 this.duenio_documento_1 = "";
                 this.duenio_monto_1 = 0.0;
@@ -2951,9 +3144,9 @@ namespace ICRL.BD
         {
             bool blnRespuesta = false;
             string strComando = "INSERT INTO [dbo].[cotizacion_perdida_total_robo] " +
-              "([id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
+              "([id_flujo],[id_cotizacion],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[completamente_pagado],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5]," +
               "[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6]) " +
-              " VALUES (@id_flujo,@id_cotizacion,@condiciones_especiales,@version,@serie,@caja,@combustible,@cilindrada,@techo_solar,@asientos_cuero,@aros_magnesio,@observaciones_vehiculo,@duenio_nombres_1,@duenio_documento_1,@duenio_monto_1,@duenio_descripcion_1,@duenio_nombres_2,@duenio_documento_2,@duenio_monto_2,@duenio_descripcion_2,@duenio_nombres_3,@duenio_documento_3,@duenio_monto_3,@duenio_descripcion_3,@duenio_nombres_4,@duenio_documento_4,@duenio_monto_4,@duenio_descripcion_4,@duenio_nombres_5," +
+              " VALUES (@id_flujo,@id_cotizacion,@condiciones_especiales,@version,@serie,@caja,@combustible,@cilindrada,@techo_solar,@asientos_cuero,@aros_magnesio,@observaciones_vehiculo,@completamente_pagado,@duenio_nombres_1,@duenio_documento_1,@duenio_monto_1,@duenio_descripcion_1,@duenio_nombres_2,@duenio_documento_2,@duenio_monto_2,@duenio_descripcion_2,@duenio_nombres_3,@duenio_documento_3,@duenio_monto_3,@duenio_descripcion_3,@duenio_nombres_4,@duenio_documento_4,@duenio_monto_4,@duenio_descripcion_4,@duenio_nombres_5," +
               "@duenio_documento_5,@duenio_monto_5,@duenio_descripcion_5,@referencia_usada_1,@referencia_medios_1,@referencia_descripcion_1,@referencia_monto_1,@referencia_usada_2,@referencia_medios_2,@referencia_descripcion_2,@referencia_monto_2,@referencia_usada_3,@referencia_medios_3,@referencia_descripcion_3,@referencia_monto_3,@referencia_usada_4,@referencia_medios_4,@referencia_descripcion_4,@referencia_monto_4,@referencia_usada_5,@referencia_medios_5,@referencia_descripcion_5,@referencia_monto_5,@referencia_usada_6,@referencia_medios_6,@referencia_descripcion_6,@referencia_monto_6)";
 
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
@@ -2972,6 +3165,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@asientos_cuero", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.asientos_cuero;
                 sqlComando.Parameters.Add("@aros_magnesio", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.aros_magnesio;
                 sqlComando.Parameters.Add("@observaciones_vehiculo", System.Data.SqlDbType.VarChar, 350).Value = PerdidaTotalRobo.observaciones_vehiculo;
+                sqlComando.Parameters.Add("@completamente_pagado", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.completamente_pagado;
                 sqlComando.Parameters.Add("@duenio_nombres_1", System.Data.SqlDbType.VarChar, 150).Value = PerdidaTotalRobo.duenio_nombres_1;
                 sqlComando.Parameters.Add("@duenio_documento_1", System.Data.SqlDbType.VarChar, 20).Value = PerdidaTotalRobo.duenio_documento_1;
                 sqlComando.Parameters.Add("@duenio_monto_1", System.Data.SqlDbType.Float).Value = PerdidaTotalRobo.duenio_monto_1;
@@ -3043,7 +3237,7 @@ namespace ICRL.BD
         {
             TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
             SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-            string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
+            string strComando = "SELECT [id_item],[condiciones_especiales],[version],[serie],[caja],[combustible],[cilindrada],[techo_solar],[asientos_cuero],[aros_magnesio],[observaciones_vehiculo],[completamente_pagado],[duenio_nombres_1],[duenio_documento_1],[duenio_monto_1],[duenio_descripcion_1],[duenio_nombres_2],[duenio_documento_2],[duenio_monto_2],[duenio_descripcion_2],[duenio_nombres_3],[duenio_documento_3],[duenio_monto_3],[duenio_descripcion_3],[duenio_nombres_4],[duenio_documento_4],[duenio_monto_4],[duenio_descripcion_4],[duenio_nombres_5],[duenio_documento_5],[duenio_monto_5],[duenio_descripcion_5],[referencia_usada_1],[referencia_medios_1],[referencia_descripcion_1],[referencia_monto_1],[referencia_usada_2],[referencia_medios_2],[referencia_descripcion_2],[referencia_monto_2],[referencia_usada_3],[referencia_medios_3],[referencia_descripcion_3],[referencia_monto_3],[referencia_usada_4],[referencia_medios_4],[referencia_descripcion_4],[referencia_monto_4],[referencia_usada_5],[referencia_medios_5],[referencia_descripcion_5],[referencia_monto_5],[referencia_usada_6],[referencia_medios_6],[referencia_descripcion_6],[referencia_monto_6] " +
               "FROM [dbo].[cotizacion_perdida_total_robo] WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion";
             SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
             SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
@@ -3071,6 +3265,8 @@ namespace ICRL.BD
                     if (sqlDatos["asientos_cuero"] != DBNull.Value) tdpFila.asientos_cuero = Convert.ToBoolean(sqlDatos["asientos_cuero"]);
                     if (sqlDatos["aros_magnesio"] != DBNull.Value) tdpFila.aros_magnesio = Convert.ToBoolean(sqlDatos["aros_magnesio"]);
                     if (sqlDatos["observaciones_vehiculo"] != DBNull.Value) tdpFila.observaciones_vehiculo = Convert.ToString(sqlDatos["observaciones_vehiculo"]);
+                    if (sqlDatos["completamente_pagado"] != DBNull.Value) tdpFila.completamente_pagado = Convert.ToBoolean(sqlDatos["completamente_pagado"]);
+
                     if (sqlDatos["duenio_nombres_1"] != DBNull.Value) tdpFila.duenio_nombres_1 = Convert.ToString(sqlDatos["duenio_nombres_1"]);
                     if (sqlDatos["duenio_documento_1"] != DBNull.Value) tdpFila.duenio_documento_1 = Convert.ToString(sqlDatos["duenio_documento_1"]);
                     if (sqlDatos["duenio_monto_1"] != DBNull.Value) tdpFila.duenio_monto_1 = Convert.ToDouble(sqlDatos["duenio_monto_1"]);
@@ -3138,11 +3334,197 @@ namespace ICRL.BD
 
             return objRespuesta;
         }
+
+        public static System.Data.DataTable PerdidaTotalTraerReferencias(int Flujo, int Cotizacion, long Item)
+        {
+            TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
+            System.Data.DataTable dtReferencias = new System.Data.DataTable();
+            System.Data.DataRow drFila;
+            int intIdentificador = 0;
+            dtReferencias.Columns.Add("usada", System.Type.GetType("System.Boolean"));
+            dtReferencias.Columns.Add("medios", System.Type.GetType("System.String"));
+            dtReferencias.Columns.Add("descripcion", System.Type.GetType("System.String"));
+            dtReferencias.Columns.Add("monto", System.Type.GetType("System.Double"));
+            dtReferencias.Columns.Add("id", System.Type.GetType("System.Int32"));
+            objRespuesta = PerdidaTotalRoboTraer(Flujo, Cotizacion);
+            if (objRespuesta.Correcto)
+            {
+                for (int i = 0; i <= objRespuesta.PerdidasTotalesRobos.Count - 1; i++)
+                {
+                    if (objRespuesta.PerdidasTotalesRobos[i].id_item == Item)
+                    {
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6.Trim() != "")
+                        {
+                            drFila = dtReferencias.NewRow();
+                            intIdentificador += 1;
+                            drFila["id"] = intIdentificador;
+                            drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6;
+                            drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6;
+                            drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6;
+                            drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6;
+                            dtReferencias.Rows.Add(drFila);
+                        }
+                        return dtReferencias;
+                    }
+                }
+            }
+            return dtReferencias;
+        }
+        public static bool PerdidaTotalActualizarReferencias(int Flujo, int Cotizacion, long Item, System.Data.DataTable Referencias)
+        {
+            bool blnRespuesta = false;
+            TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
+            int intNumero = 1;
+            objRespuesta = PerdidaTotalRoboTraer(Flujo, Cotizacion);
+            if (objRespuesta.Correcto)
+            {
+                for (int i = 0; i <= objRespuesta.PerdidasTotalesRobos.Count - 1; i++)
+                {
+                    if (objRespuesta.PerdidasTotalesRobos[i].id_item == Item)
+                    {
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1 = 0.0;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2 = 0.0;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3 = 0.0;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4 = 0.0;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5 = 0.0;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6 = false;
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6 = "";
+                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6 = 0.0;
+
+                        for (int j = 0; j <= Referencias.Rows.Count - 1; j++)
+                        {
+                            if (Referencias.Rows[j].ItemArray[1].ToString().Trim() != "")
+                            {
+                                switch (intNumero)
+                                {
+                                    case 1:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 2:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 3:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 4:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    case 5:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                    default:
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+                                        objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+                                        intNumero += 1;
+                                        break;
+                                }
+                            }
+                        }
+                        return PerdidaTotalRoboModificar(objRespuesta.PerdidasTotalesRobos[i]);
+                    }
+                }
+            }
+            return blnRespuesta;
+        }
+
         public static bool PerdidaTotalRoboModificar(TipoPerdidaTotalRobo PerdidaTotalRobo)
         {
             bool blnRespuesta = false;
             string strComando = "UPDATE [dbo].[cotizacion_perdida_total_robo] " +
-              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie, [caja] = @caja, [combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo," +
+              "SET [condiciones_especiales] = @condiciones_especiales,[version] = @version,[serie] = @serie, [caja] = @caja, [combustible] = @combustible, [cilindrada] = @cilindrada ,[techo_solar] = @techo_solar,[asientos_cuero] = @asientos_cuero,[aros_magnesio] = @aros_magnesio, [observaciones_vehiculo] = @observaciones_vehiculo,[completamente_pagado] = @completamente_pagado, " +
               "[duenio_nombres_1] = @duenio_nombres_1,[duenio_documento_1] = @duenio_documento_1,[duenio_monto_1] = @duenio_monto_1,[duenio_descripcion_1] = @duenio_descripcion_1," +
               "[duenio_nombres_2] = @duenio_nombres_2,[duenio_documento_2] = @duenio_documento_2,[duenio_monto_2] = @duenio_monto_2,[duenio_descripcion_2] = @duenio_descripcion_2," +
               "[duenio_nombres_3] = @duenio_nombres_3,[duenio_documento_3] = @duenio_documento_3,[duenio_monto_3] = @duenio_monto_3,[duenio_descripcion_3] = @duenio_descripcion_3," +
@@ -3174,6 +3556,7 @@ namespace ICRL.BD
                 sqlComando.Parameters.Add("@asientos_cuero", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.asientos_cuero;
                 sqlComando.Parameters.Add("@aros_magnesio", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.aros_magnesio;
                 sqlComando.Parameters.Add("@observaciones_vehiculo", System.Data.SqlDbType.VarChar, 350).Value = PerdidaTotalRobo.observaciones_vehiculo;
+                sqlComando.Parameters.Add("@completamente_pagado", System.Data.SqlDbType.Bit).Value = PerdidaTotalRobo.completamente_pagado;
                 sqlComando.Parameters.Add("@duenio_nombres_1", System.Data.SqlDbType.VarChar, 150).Value = PerdidaTotalRobo.duenio_nombres_1;
                 sqlComando.Parameters.Add("@duenio_documento_1", System.Data.SqlDbType.VarChar, 20).Value = PerdidaTotalRobo.duenio_documento_1;
                 sqlComando.Parameters.Add("@duenio_monto_1", System.Data.SqlDbType.Float).Value = PerdidaTotalRobo.duenio_monto_1;
@@ -3234,6 +3617,196 @@ namespace ICRL.BD
             }
             return blnRespuesta;
         }
+
+        //#region Ajuste Referencias
+
+        //public static System.Data.DataTable PerdidaTotalTraerReferencias(int Flujo, int Cotizacion, long Item)
+        //{
+        //    TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
+        //    System.Data.DataTable dtReferencias = new System.Data.DataTable();
+        //    System.Data.DataRow drFila;
+        //    int intIdentificador=0;
+        //    dtReferencias.Columns.Add("usada", System.Type.GetType("System.Boolean"));
+        //    dtReferencias.Columns.Add("medios", System.Type.GetType("System.String"));
+        //    dtReferencias.Columns.Add("descripcion", System.Type.GetType("System.String"));
+        //    dtReferencias.Columns.Add("monto", System.Type.GetType("System.Double"));
+        //    dtReferencias.Columns.Add("id", System.Type.GetType("System.Int32"));
+        //    objRespuesta = PerdidaTotalRoboTraer(Flujo, Cotizacion);
+        //    if (objRespuesta.Correcto)
+        //    {
+        //        for (int i = 0; i <= objRespuesta.PerdidasTotalesRobos.Count - 1; i++)
+        //        {
+        //            if (objRespuesta.PerdidasTotalesRobos[i].id_item == Item)
+        //            {
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                if (objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6.Trim() != "")
+        //                {
+        //                    drFila = dtReferencias.NewRow();
+        //                    intIdentificador += 1;
+        //                    drFila["id"] = intIdentificador;
+        //                    drFila["usada"] = objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6;
+        //                    drFila["medios"] = objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6;
+        //                    drFila["descripcion"] = objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6;
+        //                    drFila["monto"] = objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6;
+        //                    dtReferencias.Rows.Add(drFila);
+        //                }
+        //                return dtReferencias;
+        //            }
+        //        }
+        //    }
+        //    return dtReferencias;
+        //}
+
+        //public static bool PerdidaTotalActualizarReferencias(int Flujo, int Cotizacion, long Item, System.Data.DataTable Referencias)
+        //{
+        //    bool blnRespuesta = false;
+        //    TipoPerdidaTotalRoboTraer objRespuesta = new TipoPerdidaTotalRoboTraer();
+        //    int intNumero = 1;
+        //    objRespuesta = PerdidaTotalRoboTraer(Flujo, Cotizacion);
+        //    if (objRespuesta.Correcto)
+        //    {
+        //        for (int i = 0; i <= objRespuesta.PerdidasTotalesRobos.Count - 1; i++)
+        //        {
+        //            if (objRespuesta.PerdidasTotalesRobos[i].id_item == Item)
+        //            {
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1 = 0.0;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2 = 0.0;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3 = 0.0;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4 = 0.0;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5 = 0.0;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6 = false;
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6 = "";
+        //                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6 = 0.0;
+
+        //                for (int j = 0; j <= Referencias.Rows.Count - 1; j++)
+        //                {
+        //                    if (Referencias.Rows[j].ItemArray[1].ToString().Trim() != "")
+        //                    {
+        //                        switch (intNumero)
+        //                        {
+        //                            case 1:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_1 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_1 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_1 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_1 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                            case 2:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_2 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_2 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_2 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_2 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                            case 3:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_3 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_3 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_3 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_3 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                            case 4:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_4 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_4 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_4 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_4 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                            case 5:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_5 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_5 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_5 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_5 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                            default:
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_usada_6 = Convert.ToBoolean(Referencias.Rows[j].ItemArray[0]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_medios_6 = Convert.ToString(Referencias.Rows[j].ItemArray[1]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_descripcion_6 = Convert.ToString(Referencias.Rows[j].ItemArray[2]);
+        //                                objRespuesta.PerdidasTotalesRobos[i].referencia_monto_6 = Convert.ToDouble(Referencias.Rows[j].ItemArray[3]);
+        //                                intNumero += 1;
+        //                                break;
+        //                        }
+        //                    }
+        //                }
+        //                return PerdidaTotalRoboModificar(objRespuesta.PerdidasTotalesRobos[i]);
+        //            }
+        //        }
+        //    }
+        //    return blnRespuesta;
+        //}
+        //#endregion
+
         public static bool PerdidaTotalRoboBorrar(int Flujo, int Cotizacion, long Item)
         {
             bool blnRespuesta = false;
