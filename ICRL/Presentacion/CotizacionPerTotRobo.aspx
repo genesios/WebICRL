@@ -224,16 +224,14 @@
                             <div class="twenty">
                                 <asp:CheckBox ID="CheckBoxArosMagnesioPTRO" runat="server" />
                                 <asp:Label ID="LabelArosMagnesioPTRO" runat="server" Text="Aros de Magnesio"></asp:Label><br />
-                                <asp:CheckBox ID="CheckBoxConvertidoGnvPTRO" runat="server" />
-                                <asp:Label ID="LabelConvertidoGNVPTRO" runat="server" Text="ConvertidoGNV"></asp:Label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="ButtonActualizarPTRO" runat="server" Text="Actualizar" Enabled="true" />
-                            <asp:Button ID="ButtonGrabarPTRO" runat="server" Text="Grabar" Enabled="False" />
-                            <asp:Button ID="ButtonCancelarPTRO" runat="server" Text="Cancelar" Enabled="False" />
+                            <asp:Button ID="ButtonActualizarPTRO" runat="server" Text="Actualizar" Visible="true" OnClick="ButtonActualizarPTRO_Click" />
+                            <asp:Button ID="ButtonGrabarPTRO" runat="server" Text="Grabar" Visible="False" OnClick="ButtonGrabarPTRO_Click" />
+                            <asp:Button ID="ButtonCancelarPTRO" runat="server" Text="Cancelar" Visible="False" OnClick="ButtonCancelarPTRO_Click" />
                         </td>
                     </tr>
                 </table>

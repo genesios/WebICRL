@@ -130,6 +130,17 @@
           <Property Name="montoGasto" Type="decimal" Precision="18" Scale="0" />
           <Property Name="descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.CotiRCVehicular' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CotiRCVehicular">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idCotizacion" />
+          </Key>
+          <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCotizacion" Type="int" Nullable="false" />
+          <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
+        </EntityType>
         <EntityType Name="CotiReparacion">
           <Key>
             <PropertyRef Name="idItem" />
@@ -184,6 +195,17 @@
           <Property Name="recepcion" Type="bit" />
           <Property Name="fechaRecepcion" Type="datetime" />
           <Property Name="fechaEfectiva" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CotiRoboParcial">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idCotizacion" />
+          </Key>
+          <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCotizacion" Type="int" Nullable="false" />
+          <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="Cotizacion">
           <Key>
@@ -253,6 +275,23 @@
           <Property Name="numero_orden" Type="varchar" MaxLength="30" />
           <Property Name="id_estado" Type="smallint" />
         </EntityType>
+        <EntityType Name="cotizacion_ordenes">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_origen" Type="smallint" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_orden" Type="datetime" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="monto_bs" Type="float" />
+          <Property Name="monto_us" Type="float" />
+          <Property Name="id_estado" Type="smallint" />
+        </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
             <PropertyRef Name="id_flujo" />
@@ -272,6 +311,7 @@
           <Property Name="asientos_cuero" Type="bit" />
           <Property Name="aros_magnesio" Type="bit" />
           <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+          <Property Name="completamente_pagado" Type="bit" />
           <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
           <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
           <Property Name="duenio_monto_1" Type="float" />
@@ -336,6 +376,7 @@
           <Property Name="asientos_cuero" Type="bit" />
           <Property Name="aros_magnesio" Type="bit" />
           <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+          <Property Name="completamente_pagado" Type="bit" />
           <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
           <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
           <Property Name="duenio_monto_1" Type="float" />
@@ -809,6 +850,42 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="fechaCreacion" Type="datetime" />
           <Property Name="estado" Type="int" />
         </EntityType>
+        <EntityType Name="liquidacion001">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+          <Property Name="id_item" Type="bigint" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" />
+          <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="preciobs" Type="float" />
+          <Property Name="precious" Type="float" />
+          <Property Name="fecha_recepcion" Type="datetime" />
+          <Property Name="inspeccion" Type="bit" />
+          <Property Name="liquidacion" Type="bit" />
+          <Property Name="num_factura" Type="varchar" MaxLength="20" />
+          <Property Name="id_estado" Type="smallint" />
+        </EntityType>
+        <EntityType Name="liquidacion001_factura">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero_factura" Type="bigint" />
+          <Property Name="fecha_emision" Type="datetime" />
+          <Property Name="fecha_entrega" Type="datetime" />
+          <Property Name="id_moneda" Type="smallint" />
+          <Property Name="monto" Type="float" />
+        </EntityType>
         <EntityType Name="LiquidacionDetalle">
           <Key>
             <PropertyRef Name="secuencial" />
@@ -1120,6 +1197,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizacion_ordenes" EntityType="Self.cotizacion_ordenes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" Schema="dbo" store:Type="Tables" />
@@ -1145,6 +1223,8 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="InspRoboParcial" EntityType="Self.InspRoboParcial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemTaller" EntityType="Self.ItemTaller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="liquidacion001" EntityType="Self.liquidacion001" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="liquidacion001_factura" EntityType="Self.liquidacion001_factura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiquidacionDetalle" EntityType="Self.LiquidacionDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiquidacionFacturas" EntityType="Self.LiquidacionFacturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nomenclador" EntityType="Self.Nomenclador" Schema="dbo" store:Type="Tables" />
@@ -1152,6 +1232,20 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CotiRCVehicular].[secuencial] AS [secuencial], 
+    [CotiRCVehicular].[idCotizacion] AS [idCotizacion], 
+    [CotiRCVehicular].[tipoTaller] AS [tipoTaller]
+    FROM [dbo].[CotiRCVehicular] AS [CotiRCVehicular]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CotiRoboParcial].[secuencial] AS [secuencial], 
+    [CotiRoboParcial].[idCotizacion] AS [idCotizacion], 
+    [CotiRoboParcial].[tipoTaller] AS [tipoTaller]
+    FROM [dbo].[CotiRoboParcial] AS [CotiRoboParcial]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [cotizacion_rc_vehicular_tercero].[id_flujo] AS [id_flujo], 
@@ -1509,6 +1603,23 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
         </EntityType>
+        <EntityType Name="cotizacion_ordenes">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_origen" Type="Int16" />
+          <Property Name="numero_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="monto_bs" Type="Double" />
+          <Property Name="monto_us" Type="Double" />
+          <Property Name="id_estado" Type="Int16" />
+        </EntityType>
         <EntityType Name="cotizacion_perdida_total_propio">
           <Key>
             <PropertyRef Name="id_flujo" />
@@ -1528,6 +1639,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="asientos_cuero" Type="Boolean" />
           <Property Name="aros_magnesio" Type="Boolean" />
           <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="completamente_pagado" Type="Boolean" />
           <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="duenio_monto_1" Type="Double" />
@@ -1592,6 +1704,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="asientos_cuero" Type="Boolean" />
           <Property Name="aros_magnesio" Type="Boolean" />
           <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="completamente_pagado" Type="Boolean" />
           <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="duenio_monto_1" Type="Double" />
@@ -2049,6 +2162,42 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <NavigationProperty Name="LiquidacionDetalle" Relationship="Self.FK_LIQUIDAC_DETALLETI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionDetalle" />
           <NavigationProperty Name="LiquidacionFacturas" Relationship="Self.FK_LIQUIDAC_FACTURATI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionFacturas" />
         </EntityType>
+        <EntityType Name="liquidacion001">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" />
+          <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="preciobs" Type="Double" />
+          <Property Name="precious" Type="Double" />
+          <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+          <Property Name="inspeccion" Type="Boolean" />
+          <Property Name="liquidacion" Type="Boolean" />
+          <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
+        </EntityType>
+        <EntityType Name="liquidacion001_factura">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_factura" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero_factura" Type="Int64" />
+          <Property Name="fecha_emision" Type="DateTime" Precision="3" />
+          <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
+          <Property Name="id_moneda" Type="Int16" />
+          <Property Name="monto" Type="Double" />
+        </EntityType>
         <EntityType Name="LiquidacionDetalle">
           <Key>
             <PropertyRef Name="secuencial" />
@@ -2140,6 +2289,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="fechaAsignacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Rol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="UsuarioRol" ToRole="Rol" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="UsuarioRol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="CotiRCVehicular">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idCotizacion" />
+          </Key>
+          <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CotiRoboParcial">
+          <Key>
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="idCotizacion" />
+          </Key>
+          <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cotizacion_rc_vehicular_tercero">
           <Key>
@@ -2382,6 +2549,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
           <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" />
           <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" />
+          <EntitySet Name="cotizacion_ordenes" EntityType="Self.cotizacion_ordenes" />
           <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" />
           <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" />
           <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" />
@@ -2407,6 +2575,8 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="InspRoboParcial" EntityType="Self.InspRoboParcial" />
           <EntitySet Name="ItemTaller" EntityType="Self.ItemTaller" />
           <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" />
+          <EntitySet Name="liquidacion001" EntityType="Self.liquidacion001" />
+          <EntitySet Name="liquidacion001_factura" EntityType="Self.liquidacion001_factura" />
           <EntitySet Name="LiquidacionDetalle" EntityType="Self.LiquidacionDetalle" />
           <EntitySet Name="LiquidacionFacturas" EntityType="Self.LiquidacionFacturas" />
           <EntitySet Name="Nomenclador" EntityType="Self.Nomenclador" />
@@ -2414,6 +2584,8 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+          <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" />
+          <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" />
           <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
           <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
             <End Role="Asegurado" EntitySet="Asegurado" />
@@ -2748,6 +2920,22 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="cotizacion_ordenes">
+            <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_ordenes">
+              <MappingFragment StoreEntitySet="cotizacion_ordenes">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="monto_bs" ColumnName="monto_bs" />
+                <ScalarProperty Name="monto_us" ColumnName="monto_us" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="cotizacion_perdida_total_propio">
             <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_perdida_total_propio">
               <MappingFragment StoreEntitySet="cotizacion_perdida_total_propio">
@@ -2764,6 +2952,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="asientos_cuero" ColumnName="asientos_cuero" />
                 <ScalarProperty Name="aros_magnesio" ColumnName="aros_magnesio" />
                 <ScalarProperty Name="observaciones_vehiculo" ColumnName="observaciones_vehiculo" />
+                <ScalarProperty Name="completamente_pagado" ColumnName="completamente_pagado" />
                 <ScalarProperty Name="duenio_nombres_1" ColumnName="duenio_nombres_1" />
                 <ScalarProperty Name="duenio_documento_1" ColumnName="duenio_documento_1" />
                 <ScalarProperty Name="duenio_monto_1" ColumnName="duenio_monto_1" />
@@ -2827,6 +3016,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="asientos_cuero" ColumnName="asientos_cuero" />
                 <ScalarProperty Name="aros_magnesio" ColumnName="aros_magnesio" />
                 <ScalarProperty Name="observaciones_vehiculo" ColumnName="observaciones_vehiculo" />
+                <ScalarProperty Name="completamente_pagado" ColumnName="completamente_pagado" />
                 <ScalarProperty Name="duenio_nombres_1" ColumnName="duenio_nombres_1" />
                 <ScalarProperty Name="duenio_documento_1" ColumnName="duenio_documento_1" />
                 <ScalarProperty Name="duenio_monto_1" ColumnName="duenio_monto_1" />
@@ -3277,6 +3467,40 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="liquidacion001">
+            <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001">
+              <MappingFragment StoreEntitySet="liquidacion001">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+                <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+                <ScalarProperty Name="precious" ColumnName="precious" />
+                <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+                <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+                <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="liquidacion001_factura">
+            <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001_factura">
+              <MappingFragment StoreEntitySet="liquidacion001_factura">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="numero_factura" ColumnName="numero_factura" />
+                <ScalarProperty Name="fecha_emision" ColumnName="fecha_emision" />
+                <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
+                <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LiquidacionDetalle">
             <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionDetalle">
               <MappingFragment StoreEntitySet="LiquidacionDetalle">
@@ -3360,6 +3584,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CotiRCVehicular">
+            <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCVehicular">
+              <MappingFragment StoreEntitySet="CotiRCVehicular">
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+                <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CotiRoboParcial">
+            <EntityTypeMapping TypeName="LBCDesaModelo.CotiRoboParcial">
+              <MappingFragment StoreEntitySet="CotiRoboParcial">
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+                <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

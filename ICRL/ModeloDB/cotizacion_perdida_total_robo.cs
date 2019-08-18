@@ -27,6 +27,7 @@ namespace ICRL.ModeloDB
         public Nullable<bool> asientos_cuero { get; set; }
         public Nullable<bool> aros_magnesio { get; set; }
         public string observaciones_vehiculo { get; set; }
+        public Nullable<bool> completamente_pagado { get; set; }
         public string duenio_nombres_1 { get; set; }
         public string duenio_documento_1 { get; set; }
         public Nullable<double> duenio_monto_1 { get; set; }

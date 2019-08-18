@@ -43,6 +43,7 @@ namespace ICRL.ModeloDB
         public virtual DbSet<Cotizacion> Cotizacion { get; set; }
         public virtual DbSet<cotizacion_danios_propios> cotizacion_danios_propios { get; set; }
         public virtual DbSet<cotizacion_danios_propios_sumatoria> cotizacion_danios_propios_sumatoria { get; set; }
+        public virtual DbSet<cotizacion_ordenes> cotizacion_ordenes { get; set; }
         public virtual DbSet<cotizacion_perdida_total_propio> cotizacion_perdida_total_propio { get; set; }
         public virtual DbSet<cotizacion_perdida_total_robo> cotizacion_perdida_total_robo { get; set; }
         public virtual DbSet<cotizacion_rc_objetos> cotizacion_rc_objetos { get; set; }
@@ -68,6 +69,8 @@ namespace ICRL.ModeloDB
         public virtual DbSet<InspRoboParcial> InspRoboParcial { get; set; }
         public virtual DbSet<ItemTaller> ItemTaller { get; set; }
         public virtual DbSet<Liquidacion> Liquidacion { get; set; }
+        public virtual DbSet<liquidacion001> liquidacion001 { get; set; }
+        public virtual DbSet<liquidacion001_factura> liquidacion001_factura { get; set; }
         public virtual DbSet<LiquidacionDetalle> LiquidacionDetalle { get; set; }
         public virtual DbSet<LiquidacionFacturas> LiquidacionFacturas { get; set; }
         public virtual DbSet<Nomenclador> Nomenclador { get; set; }
@@ -75,6 +78,8 @@ namespace ICRL.ModeloDB
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioRol> UsuarioRol { get; set; }
+        public virtual DbSet<CotiRCVehicular> CotiRCVehicular { get; set; }
+        public virtual DbSet<CotiRoboParcial> CotiRoboParcial { get; set; }
         public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
     
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)

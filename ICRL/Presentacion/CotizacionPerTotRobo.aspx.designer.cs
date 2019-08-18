@@ -715,24 +715,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelArosMagnesioPTRO;
         
         /// <summary>
-        /// CheckBoxConvertidoGnvPTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxConvertidoGnvPTRO;
-        
-        /// <summary>
-        /// LabelConvertidoGNVPTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelConvertidoGNVPTRO;
-        
-        /// <summary>
         /// ButtonActualizarPTRO control.
         /// </summary>
         /// <remarks>

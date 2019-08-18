@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionDPRP.aspx.cs" Inherits="ICRL.Presentacion.CotizacionDPRP" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionDP.aspx.cs" Inherits="ICRL.Presentacion.CotizacionDP" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -276,6 +276,7 @@
                     <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="moneda_orden" HeaderText="Moneda " />
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
             </asp:GridView>
@@ -337,7 +338,9 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" />
+            <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" ></asp:Button>
+            <asp:Label ID="LabelRepuEspaciosBlancos" runat="server" Text="----------------------------------------------------------"></asp:Label>
+            <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" ></asp:Button>
         </div>
         <div>
             <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%" >
@@ -359,6 +362,7 @@
                     <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="moneda_orden" HeaderText="Moneda Orden" />
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
             </asp:GridView>
@@ -393,7 +397,36 @@
                 </Columns>
             </asp:GridView>
         </div>
-
+        
+        <div>
+            <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand">
+                <AlternatingRowStyle BackColor="White" />
+                <EditRowStyle BackColor="#7C6F57" />
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
+                    <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                    <asp:BoundField DataField="moneda" HeaderText="Moneda" />
+                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}"/>
+                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                    <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />
+                    <asp:ButtonField CommandName="Ver" ButtonType="Button" HeaderText="Opción" Text="Ver" />
+                    <asp:ButtonField CommandName="SubirOnBase" ButtonType="Button" HeaderText="Opción" Text="On Base" />
+                </Columns>
+            </asp:GridView>
+        </div>
 
         <div>
             <asp:Button runat="server" ID="ButtonOcultoParaPopupReparaciones" Style="display: none" />

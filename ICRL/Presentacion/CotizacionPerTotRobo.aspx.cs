@@ -37,6 +37,9 @@ namespace ICRL.Presentacion
 
                 if (!IsPostBack)
                 {
+                    FlTraeItemsNomencladorCajaPTRO();
+                    FlTraeItemsNomencladorCombustiblePTRO();
+
                     PCreaDataTableBenef();
 
                     vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
@@ -56,6 +59,8 @@ namespace ICRL.Presentacion
                     PCargarGrillaBeneficiarios(vIdFlujo, vIdCotizacion);
                     vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
                     PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
+                    PBloqueaDatosEspeciales(false);
+                    FlCargaDatosPerdidaTotalRO(vIdFlujo, vIdCotizacion, vIdItem);
                 }
             }
             catch (Exception ex)
@@ -203,83 +208,12 @@ namespace ICRL.Presentacion
             return vResultado;
         }
 
-        #region antiguo_codigo
-        //private int FlTraeDatosDPReparacion(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-        //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-
-        //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
-        //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
-
-        //    GridViewReparaciones.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
-        //    {
-        //        RCVehiculares.id_item,
-        //        RCVehiculares.item_descripcion,
-        //        RCVehiculares.chaObjio,
-        //        RCVehiculares.reparacion_previa,
-        //        RCVehiculares.mecanico,
-        //        RCVehiculares.id_moneda,
-        //        RCVehiculares.precio_cotizado,
-        //        RCVehiculares.id_tipo_descuento,
-        //        RCVehiculares.descuento,
-        //        RCVehiculares.precio_final,
-        //        RCVehiculares.proveedor,
-        //        RCVehiculares.id_tipo_item
-
-        //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 1).ToList();
-        //    GridViewReparaciones.DataBind();
-
-        //    return vResultado;
-        //}
-
-        //private int FlTraeDatosDPRepuesto(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-        //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-
-        //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
-        //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
-
-        //    GridViewRepuestos.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
-        //    {
-        //        RCVehiculares.id_item,
-        //        RCVehiculares.item_descripcion,
-        //        RCVehiculares.pintura,
-        //        RCVehiculares.instalacion,
-        //        RCVehiculares.id_moneda,
-        //        RCVehiculares.precio_cotizado,
-        //        RCVehiculares.id_tipo_descuento,
-        //        RCVehiculares.descuento,
-        //        RCVehiculares.precio_final,
-        //        RCVehiculares.proveedor,
-        //        RCVehiculares.id_tipo_item
-
-        //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 2).ToList();
-        //    GridViewRepuestos.DataBind();
-
-        //    return vResultado;
-        //}
-        #endregion
 
         #endregion
 
         #region Datos Especiales
 
-        protected void ButtonNuevoPTRO_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        protected void ButtonGrabarPTRO_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ButtonBorrarPTRO_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
 
         #region Beneficiarios
@@ -826,35 +760,6 @@ namespace ICRL.Presentacion
             ButtonReferAgregar.Visible = false;
             ButtonReferGrabar.Visible = true;
             ButtonReferCancelar.Visible = true;
-
-
-            ////dtReferencia.Rows[vIndice].ItemArray[2]
-            //dtReferencia = CotizacionICRL.PerdidaTotalTraerReferencias(37, 6, 1);
-            //dtReferencia.Rows[vIndice-1][1] = "PAGINA SIETE";
-            //bool vResultado = false;
-
-            //vResultado =   CotizacionICRL.PerdidaTotalActualizarReferencias(37, 6, 1, dtReferencia);
-
-
-            //TextBoxPTROIndice.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[1].Text;
-            //TextBoxPTRONombres.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[2].Text;
-            //vTextoTemporal = GridViewPTRODueniosaPagar.SelectedRow.Cells[3].Text;
-            //vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
-            //TextBoxPTRODocumentoId.Text = vTextoTemporal;
-            //TextBoxPTROMontoPago.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[4].Text;
-            //TextBoxPTRODescripcion.Text = GridViewPTRODueniosaPagar.SelectedRow.Cells[5].Text;
-            //if (1 == vIndice)
-            //{
-            //    PHabilitarBeneficiarioPrincipal(true);
-            //}
-            //else
-            //{
-            //    PHabilitarBeneficiarioOtro(true);
-            //}
-            ////PModificarPersonaDet(true);
-
-
-
         }
 
         protected void GridViewPTROReferencias_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -995,6 +900,197 @@ namespace ICRL.Presentacion
 
         #endregion
 
+        #region DatosEspeciales
 
+        private int FlTraeItemsNomencladorCajaPTRO()
+        {
+            int vResultado = 0;
+            string vCategoria = "Tipo de Caja";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListCajaPTRO.DataValueField = "codigo";
+            DropDownListCajaPTRO.DataTextField = "descripcion";
+            DropDownListCajaPTRO.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListCajaPTRO.DataBind();
+
+            return vResultado;
+
+        }
+
+        private int FlTraeItemsNomencladorCombustiblePTRO()
+        {
+            int vResultado = 0;
+            string vCategoria = "Combustible";
+            int vOrdenCodigo = 2;
+            AccesoDatos vAccesoDatos = new AccesoDatos();
+
+            DropDownListCombustiblePTRO.DataValueField = "codigo";
+            DropDownListCombustiblePTRO.DataTextField = "descripcion";
+            DropDownListCombustiblePTRO.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+            DropDownListCombustiblePTRO.DataBind();
+
+
+            return vResultado;
+        }
+
+        private int FlCargaDatosPerdidaTotalRO(int pIdFlujo, int pIdCotizacion, long pIdItem)
+        {
+            int vResultado = 0;
+
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                CotizacionICRL.TipoPerdidaTotalRoboTraer vTipoPerdidaTotalRoboTraer;
+                vTipoPerdidaTotalRoboTraer = CotizacionICRL.PerdidaTotalRoboTraer(pIdFlujo, pIdCotizacion);
+                if (vTipoPerdidaTotalRoboTraer.Correcto)
+                {
+                    var vFilaTablaCotiPerdidaTotRO = vTipoPerdidaTotalRoboTraer.PerdidasTotalesRobos.FirstOrDefault();
+                    if (vFilaTablaCotiPerdidaTotRO != null)
+                    {
+                        TextBoxVersionPTRO.Text = vFilaTablaCotiPerdidaTotRO.version;
+                        TextBoxSeriePTRO.Text = vFilaTablaCotiPerdidaTotRO.serie;
+
+                        string vTempo = string.Empty;
+                        vTempo = vFilaTablaCotiPerdidaTotRO.caja;
+                        DropDownListCajaPTRO.ClearSelection();
+                        DropDownListCajaPTRO.Items.FindByText(vTempo).Selected = true;
+
+                        vTempo = string.Empty;
+                        vTempo = vFilaTablaCotiPerdidaTotRO.combustible;
+                        DropDownListCombustiblePTRO.ClearSelection();
+                        DropDownListCombustiblePTRO.Items.FindByText(vTempo).Selected = true;
+
+                        TextBoxCilindradaPTRO.Text = vFilaTablaCotiPerdidaTotRO.cilindrada.ToString();
+                        CheckBoxTechoSolarPTRO.Checked = (bool)vFilaTablaCotiPerdidaTotRO.techo_solar;
+                        CheckBoxAsientosCueroPTRO.Checked = (bool)vFilaTablaCotiPerdidaTotRO.asientos_cuero;
+                        CheckBoxArosMagnesioPTRO.Checked = (bool)vFilaTablaCotiPerdidaTotRO.aros_magnesio;
+                        TextBoxObservacionesPTRO.Text = vFilaTablaCotiPerdidaTotRO.observaciones_vehiculo;
+                    }
+                }
+
+            }
+
+            return vResultado;
+        }
+
+        protected void PLimpiaSeccionPerdidaTotalPTRO()
+        {
+            TextBoxVersionPTRO.Text = string.Empty;
+            TextBoxSeriePTRO.Text = string.Empty;
+            TextBoxCilindradaPTRO.Text = string.Empty;
+            CheckBoxTechoSolarPTRO.Checked = false;
+            CheckBoxAsientosCueroPTRO.Checked = false;
+            CheckBoxArosMagnesioPTRO.Checked = false;
+            TextBoxObservacionesPTRO.Text = string.Empty;
+            DropDownListCajaPTRO.SelectedIndex = 0;
+            DropDownListCombustiblePTRO.SelectedIndex = 0;
+        }
+
+        protected void PBotonesDatosEspecialesPTRO(bool pEstado)
+        {
+            ButtonActualizarPTRO.Visible = pEstado;
+            ButtonGrabarPTRO.Visible = !pEstado;
+            ButtonCancelarPTRO.Visible = !pEstado;
+        }
+
+        protected void PBloqueaDatosEspeciales(bool pEstado)
+        {
+            TextBoxVersionPTRO.Enabled = pEstado;
+            TextBoxSeriePTRO.Enabled = pEstado;
+            TextBoxCilindradaPTRO.Enabled = pEstado;
+            CheckBoxTechoSolarPTRO.Enabled = pEstado;
+            CheckBoxAsientosCueroPTRO.Enabled = pEstado;
+            CheckBoxArosMagnesioPTRO.Enabled = pEstado;
+            TextBoxObservacionesPTRO.Enabled = pEstado;
+            DropDownListCajaPTRO.Enabled = pEstado;
+            DropDownListCombustiblePTRO.Enabled = pEstado;
+        }
+
+        #endregion
+
+        protected void ButtonActualizarPTRO_Click(object sender, EventArgs e)
+        {
+            PBloqueaDatosEspeciales(true);
+            PBotonesDatosEspecialesPTRO(false);
+
+        }
+
+        protected void ButtonGrabarPTRO_Click(object sender, EventArgs e)
+        {
+            bool vResultado = false;
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                CotizacionICRL.TipoPerdidaTotalRoboTraer vTipoPerdidaTotalRoboTraer;
+                vTipoPerdidaTotalRoboTraer = CotizacionICRL.PerdidaTotalRoboTraer(vIdFlujo, vIdCotizacion);
+                if (vTipoPerdidaTotalRoboTraer.Correcto)
+                {
+                    var vFilaTablaCotiPerdidaTotRO = vTipoPerdidaTotalRoboTraer.PerdidasTotalesRobos.FirstOrDefault();
+                    if (vFilaTablaCotiPerdidaTotRO != null)
+                    {
+                        vFilaTablaCotiPerdidaTotRO.version = TextBoxVersionPTRO.Text.ToUpper();
+                        vFilaTablaCotiPerdidaTotRO.serie = TextBoxSeriePTRO.Text.ToUpper();
+                        vFilaTablaCotiPerdidaTotRO.caja = DropDownListCajaPTRO.SelectedItem.Text;
+                        vFilaTablaCotiPerdidaTotRO.combustible = DropDownListCombustiblePTRO.SelectedItem.Text;
+                        vFilaTablaCotiPerdidaTotRO.cilindrada = TextBoxCilindradaPTRO.Text.ToUpper();
+                        vFilaTablaCotiPerdidaTotRO.techo_solar = CheckBoxTechoSolarPTRO.Checked;
+                        vFilaTablaCotiPerdidaTotRO.asientos_cuero = CheckBoxAsientosCueroPTRO.Checked;
+                        vFilaTablaCotiPerdidaTotRO.aros_magnesio = CheckBoxTechoSolarPTRO.Checked;
+                        vFilaTablaCotiPerdidaTotRO.observaciones_vehiculo = TextBoxObservacionesPTRO.Text.ToUpper();
+                        vResultado = BD.CotizacionICRL.PerdidaTotalRoboModificar(vFilaTablaCotiPerdidaTotRO);
+                        if (vResultado)
+                        {
+                            LabelDatosReferMsj.Text = "Registro Actualizado exitosamente";
+
+                            ButtonPTROGrabar.Visible = false;
+                            ButtonPTROCancelar.Visible = false;
+                        }
+                        else
+                        {
+                            LabelDatosReferMsj.Text = "El Registro no pudo ser Actualizado";
+                        }
+                    }
+                }
+                FlCargaDatosPerdidaTotalRO(vIdFlujo, vIdCotizacion, vIdItem);
+                PBloqueaDatosEspeciales(false);
+                PBotonesDatosEspecialesPTRO(true);
+            }
+        }
+
+        protected void ButtonCancelarPTRO_Click(object sender, EventArgs e)
+        {
+            int vIdFlujo = 0;
+            int vIdCotizacion = 0;
+            long vIdItem = 0;
+
+            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+            PLimpiaSeccionPerdidaTotalPTRO();
+            
+            vIdItem = FValidaTienePTRobo(vIdFlujo, vIdCotizacion);
+            if (vIdItem > 0)
+            {
+                FlCargaDatosPerdidaTotalRO(vIdFlujo, vIdCotizacion, vIdItem);
+            }
+
+            PBloqueaDatosEspeciales(false);
+            PBotonesDatosEspecialesPTRO(true);
+        }
     }
 }
