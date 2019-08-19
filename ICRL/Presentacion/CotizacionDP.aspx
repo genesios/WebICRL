@@ -43,7 +43,7 @@
                             </div>
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False" ></asp:TextBox>
+                                <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False"></asp:TextBox>
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
                             </div>
@@ -220,7 +220,7 @@
         </div>
 
         <div>
-            <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%" >
+            <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -254,10 +254,19 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
+            <table class="basetable" style="width: 100%">
+                <tr>
+                    <td style="text-align: left">
+                        <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
+                    </td>
+                    <td style="text-align: right">
+                        <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepaGenerarOrdenes_Click"></asp:Button>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div>
-            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" Width="100%" >
+            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" Width="100%">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -301,7 +310,7 @@
         </div>
 
         <div>
-            <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%" >
+            <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -338,12 +347,19 @@
             </asp:GridView>
         </div>
         <div>
-            <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" ></asp:Button>
-            <asp:Label ID="LabelRepuEspaciosBlancos" runat="server" Text="----------------------------------------------------------"></asp:Label>
-            <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" ></asp:Button>
+            <table class="basetable" style="width: 100%">
+                <tr>
+                    <td style="text-align: left">
+                        <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click"></asp:Button>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepuGenerarOrdenes_Click"></asp:Button>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div>
-            <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%" >
+            <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -369,10 +385,10 @@
         </div>
 
         <div>
-            <asp:Button ID="ButtonRecepcionRepu" runat="server" Text="Recepción Repuestos"  />
+            <asp:Button ID="ButtonRecepcionRepu" runat="server" Text="Recepción Repuestos" />
         </div>
         <div>
-            <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%" >
+            <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -397,7 +413,7 @@
                 </Columns>
             </asp:GridView>
         </div>
-        
+
         <div>
             <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand">
                 <AlternatingRowStyle BackColor="White" />
@@ -416,7 +432,7 @@
                     <asp:BoundField DataField="id_estado" HeaderText="Estado" />
                     <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
                     <asp:BoundField DataField="moneda" HeaderText="Moneda" />
-                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}"/>
+                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
                     <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
@@ -624,11 +640,11 @@
                         <tr>
                             <td>
                                 <div class="twenty">
-                                    <asp:Label ID="LabelSumaProveedor" runat="server" Text="Proveedores" ></asp:Label><br />
+                                    <asp:Label ID="LabelSumaProveedor" runat="server" Text="Proveedores"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListSumaProveedor" runat="server" Enabled="False"></asp:DropDownList>
                                 </div>
                                 <div class="twenty">
-                                    <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Monto Orden" ></asp:Label><br />
+                                    <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Monto Orden"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaMontoOrden" runat="server" Enabled="False"></asp:TextBox>
                                 </div>
                                 <div class="twenty">

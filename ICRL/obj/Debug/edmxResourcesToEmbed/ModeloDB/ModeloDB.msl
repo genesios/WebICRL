@@ -248,6 +248,7 @@
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -480,6 +481,7 @@
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -530,6 +532,7 @@
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -955,6 +958,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001" />
     <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
     <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
   </EntityContainerMapping>

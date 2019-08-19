@@ -8,133 +8,29 @@ namespace ICRL.BD
 {
   public class LiquidacionICRL
   {
-    public class TipoFlujo
-    {
-      public int idFlujo;
-      public string flujoOnBase;
-      public string estado;
-      public string numeroReclamo;
-      public string numeroPoliza;
-      public string marcaVehiculo;
-      public string modeloVehiculo;
-      public string anioVehiculo;
-      public string colorVehiculo;
-      public string placaVehiculo;
-      public string chasisVehiculo;
-      public string valorAsegurado;
-      public string importacionDirecta;
-      public string nombreAsegurado;
-      public string docIdAsegurado;
-      public string telefonocelAsegurado;
-      public string causaSiniestro;
-      public string contador;
-      public string descripcionSiniestro;
-      public string direccionInspeccion;
-      public string agenciaAtencion;
-      public string fechaSiniestro;
-      public TipoFlujo()
-      {
-        this.idFlujo = 0;
-        this.flujoOnBase = "";
-        this.estado = "";
-        this.numeroReclamo = "";
-        this.numeroPoliza = "";
-        this.marcaVehiculo = "";
-        this.modeloVehiculo = "";
-        this.anioVehiculo = "";
-        this.colorVehiculo = "";
-        this.placaVehiculo = "";
-        this.chasisVehiculo = "";
-        this.valorAsegurado = "";
-        this.importacionDirecta = "";
-        this.nombreAsegurado = "";
-        this.docIdAsegurado = "";
-        this.telefonocelAsegurado = "";
-        this.causaSiniestro = "";
-        this.contador = "";
-        this.descripcionSiniestro = "";
-        this.direccionInspeccion = "";
-        this.agenciaAtencion = "";
-        this.fechaSiniestro = "";
-      }
-
-    }
-    public static TipoFlujo TipoFlujoTraer(int Flujo)
-    {
-      TipoFlujo objRespuesta = new TipoFlujo();
-      SqlConnection sqlConexion = new SqlConnection(CotizacionICRL.strCadenaConexion);
-      string strComando = "SELECT [idFlujo],[flujoOnBase],[estado],[numeroReclamo],[numeroPoliza],[marcaVehiculo],[modeloVehiculo],[anioVehiculo],[colorVehiculo],[placaVehiculo],[chasisVehiculo],[valorAsegurado],[importacionDirecta],[nombreAsegurado],[docIdAsegurado],[telefonocelAsegurado],[causaSiniestro],[contador],[descripcionSiniestro],[direccionInspeccion],[agenciaAtencion],[fechaSiniestro] FROM [LBCDesa].[dbo].[Flujo] WHERE idFlujo=@idFlujo";
-      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
-      SqlDataReader sqlDatos;
-      try
-      {
-        sqlComando.Parameters.Add("@idFlujo", System.Data.SqlDbType.Int).Value = Flujo;
-        sqlConexion.Open();
-        sqlDatos = sqlComando.ExecuteReader();
-        while (sqlDatos.Read())
-        {
-          objRespuesta.idFlujo = Flujo;
-          if (sqlDatos["flujoOnBase"] != DBNull.Value) objRespuesta.flujoOnBase = Convert.ToString(sqlDatos["flujoOnBase"]);
-          if (sqlDatos["estado"] != DBNull.Value) objRespuesta.estado = Convert.ToString(sqlDatos["estado"]);
-          if (sqlDatos["numeroReclamo"] != DBNull.Value) objRespuesta.numeroReclamo = Convert.ToString(sqlDatos["numeroReclamo"]);
-          if (sqlDatos["numeroPoliza"] != DBNull.Value) objRespuesta.numeroPoliza = Convert.ToString(sqlDatos["numeroPoliza"]);
-          if (sqlDatos["marcaVehiculo"] != DBNull.Value) objRespuesta.marcaVehiculo = Convert.ToString(sqlDatos["marcaVehiculo"]);
-          if (sqlDatos["modeloVehiculo"] != DBNull.Value) objRespuesta.modeloVehiculo = Convert.ToString(sqlDatos["modeloVehiculo"]);
-          if (sqlDatos["anioVehiculo"] != DBNull.Value) objRespuesta.anioVehiculo = Convert.ToString(sqlDatos["anioVehiculo"]);
-          if (sqlDatos["colorVehiculo"] != DBNull.Value) objRespuesta.colorVehiculo = Convert.ToString(sqlDatos["colorVehiculo"]);
-          if (sqlDatos["placaVehiculo"] != DBNull.Value) objRespuesta.placaVehiculo = Convert.ToString(sqlDatos["placaVehiculo"]);
-          if (sqlDatos["chasisVehiculo"] != DBNull.Value) objRespuesta.chasisVehiculo = Convert.ToString(sqlDatos["chasisVehiculo"]);
-          if (sqlDatos["valorAsegurado"] != DBNull.Value) objRespuesta.valorAsegurado = Convert.ToString(sqlDatos["valorAsegurado"]);
-          if (sqlDatos["importacionDirecta"] != DBNull.Value) objRespuesta.importacionDirecta = Convert.ToString(sqlDatos["importacionDirecta"]);
-          if (sqlDatos["nombreAsegurado"] != DBNull.Value) objRespuesta.nombreAsegurado = Convert.ToString(sqlDatos["nombreAsegurado"]);
-          if (sqlDatos["docIdAsegurado"] != DBNull.Value) objRespuesta.docIdAsegurado = Convert.ToString(sqlDatos["docIdAsegurado"]);
-          if (sqlDatos["telefonocelAsegurado"] != DBNull.Value) objRespuesta.telefonocelAsegurado = Convert.ToString(sqlDatos["telefonocelAsegurado"]);
-          if (sqlDatos["causaSiniestro"] != DBNull.Value) objRespuesta.causaSiniestro = Convert.ToString(sqlDatos["causaSiniestro"]);
-          if (sqlDatos["contador"] != DBNull.Value) objRespuesta.contador = Convert.ToString(sqlDatos["contador"]);
-          if (sqlDatos["descripcionSiniestro"] != DBNull.Value) objRespuesta.descripcionSiniestro = Convert.ToString(sqlDatos["descripcionSiniestro"]);
-          if (sqlDatos["direccionInspeccion"] != DBNull.Value) objRespuesta.direccionInspeccion = Convert.ToString(sqlDatos["direccionInspeccion"]);
-          if (sqlDatos["agenciaAtencion"] != DBNull.Value) objRespuesta.agenciaAtencion = Convert.ToString(sqlDatos["agenciaAtencion"]);
-          if (sqlDatos["fechaSiniestro"] != DBNull.Value) objRespuesta.fechaSiniestro = Convert.ToString(sqlDatos["fechaSiniestro"]);
-        }
-        sqlDatos.Close();
-      }
-      catch (Exception)
-      {
-        objRespuesta = new TipoFlujo();
-      }
-      finally
-      {
-        sqlConexion.Close();
-        sqlConexion.Dispose();
-      }
-      return objRespuesta;
-    }
-
     public class TipoRespuestaGrilla
     {
       public bool correcto;
       public string mensaje;
       public System.Data.DataSet dsLiquidacionGrilla = new System.Data.DataSet();
     }
-    public static TipoRespuestaGrilla LiquidacionGrilla(int Estado, string Proveedor, string Sucursal, string FlujoONBase, string Placa, DateTime FechaIncio, DateTime FechaFin)
+    public static TipoRespuestaGrilla LiquidacionGrilla(int Estado, string Proveedor,string Sucursal, string FlujoONBase, string Placa, DateTime FechaIncio, DateTime FechaFin)
     {
       TipoRespuestaGrilla objRespuesta = new TipoRespuestaGrilla();
       string strSelect, strWhere, strGroupby;
-      strSelect = "SELECT l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,sum(l.[precious]) as Total, SUM(CASE liquidacion WHEN 'True' THEN preciobs WHEN 'False' THEN 0 END) as sumabspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN preciobs END) as sumabsnopagado,SUM(CASE liquidacion WHEN 'True' THEN precious WHEN 'False' THEN 0 END) as sumauspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN precious END) as sumausnopagado,f.flujoOnBase,f.nombreAsegurado,f.placaVehiculo,f.idFlujo FROM liquidacion001 as l inner join Flujo as f ON (l.id_flujo=f.idFlujo) ";
+      strSelect = "SELECT l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,sum(l.[precious]) as Total, SUM(CASE liquidacion WHEN 'True' THEN preciobs WHEN 'False' THEN 0 END) as sumabspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN preciobs END) as sumabsnopagado,SUM(CASE liquidacion WHEN 'True' THEN precious WHEN 'False' THEN 0 END) as sumauspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN precious END) as sumausnopagado,f.flujoOnBase,f.nombreAsegurado FROM liquidacion001 as l inner join Flujo as f ON (l.id_flujo=f.idFlujo) ";
       strWhere = "WHERE f.estado=" + Estado.ToString() + " and l.fecha_orden>= @fecha_orden_emp and l.fecha_orden <= @fecha_orden_ter ";
-      strGroupby = "GROUP BY l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,f.flujoOnBase,f.nombreAsegurado,f.placaVehiculo,f.idFlujo";
+      strGroupby = "GROUP BY l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,f.flujoOnBase,f.nombreAsegurado";
 
-      string strComando;
+      string strComando = strSelect + strWhere + strGroupby;
       SqlConnection sqlConexion = new SqlConnection(CotizacionICRL.strCadenaConexion);
-      SqlDataAdapter sqlAdaptador;
+      SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
       try
       {
-        if (Sucursal.Trim().Length > 0) strWhere = strWhere + "AND f.agenciaAtencion = '" + Sucursal.Trim() + "' ";
+        if (Sucursal.Trim().Length > 0) strWhere = strWhere + "AND f.f.agenciaAtencion = '" + Sucursal.Trim() + "' ";
         if (FlujoONBase.Trim().Length > 0) strWhere = strWhere + "AND f.flujoOnBase = '" + FlujoONBase.Trim() + "' ";
-        if (Placa.Trim().Length > 0) strWhere = strWhere + "AND f.placaVehiculo = '" + Placa.Trim() + "' ";
-        if (Proveedor.Trim().Length > 0) strWhere = strWhere + "AND l.proveedor = '" + Proveedor.Trim() + "' ";
-        strComando = strSelect + strWhere + strGroupby;
-        sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
+        if (Placa.Trim().Length>0) strWhere = strWhere + "AND f.placaVehiculo = '" + Placa.Trim() + "' ";
+        if (Proveedor.Trim().Length > 0) strWhere = strWhere + "AND f.placaVehiculo = '" + Proveedor.Trim() + "' ";
         sqlAdaptador.SelectCommand.Parameters.Add("@fecha_orden_emp", System.Data.SqlDbType.DateTime).Value = FechaIncio;
         sqlAdaptador.SelectCommand.Parameters.Add("@fecha_orden_ter", System.Data.SqlDbType.DateTime).Value = FechaFin;
         sqlConexion.Open();

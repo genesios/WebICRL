@@ -274,6 +274,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
           <Property Name="monto_final" Type="float" />
           <Property Name="numero_orden" Type="varchar" MaxLength="30" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="cotizacion_ordenes">
           <Key>
@@ -514,6 +515,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
           <Property Name="monto_final" Type="float" />
           <Property Name="numero_orden" Type="varchar" MaxLength="30" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -589,6 +591,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="monto_final" Type="float" />
           <Property Name="numero_orden" Type="varchar" MaxLength="30" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -1172,6 +1175,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="paActualizaLiquidacion001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
         <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="iIdFlujo" Type="int" Mode="In" />
           <Parameter Name="iValorContador" Type="int" Mode="InOut" />
@@ -1602,6 +1611,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="monto_final" Type="Double" />
           <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cotizacion_ordenes">
           <Key>
@@ -1842,6 +1852,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="monto_final" Type="Double" />
           <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cotizacion_robo_parcial">
           <Key>
@@ -1895,6 +1906,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="monto_final" Type="Double" />
           <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CotizacionFlujo">
           <Key>
@@ -2655,6 +2667,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioRol" EntitySet="UsuarioRol" />
           </AssociationSet>
+          <FunctionImport Name="paActualizaLiquidacion001">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="paIncFlujoContadorInsp">
             <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
             <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />
@@ -2917,6 +2935,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3149,6 +3168,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3199,6 +3219,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="monto_final" ColumnName="monto_final" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3624,6 +3645,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001" />
           <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
           <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
         </EntityContainerMapping>

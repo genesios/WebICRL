@@ -25,5 +25,6 @@ namespace ICRL.ModeloDB
         public Nullable<double> monto_final { get; set; }
         public string numero_orden { get; set; }
         public Nullable<short> id_estado { get; set; }
+        public string moneda_orden { get; set; }
     }
 }

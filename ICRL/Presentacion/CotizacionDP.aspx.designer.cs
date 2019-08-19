@@ -598,6 +598,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonRepaGenerarResumen;
         
         /// <summary>
+        /// ButtonRepaGenerarOrdenes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRepaGenerarOrdenes;
+        
+        /// <summary>
         /// GridViewSumaReparaciones control.
         /// </summary>
         /// <remarks>
@@ -641,15 +650,6 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonRepuGenerarResumen;
-        
-        /// <summary>
-        /// LabelRepuEspaciosBlancos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRepuEspaciosBlancos;
         
         /// <summary>
         /// ButtonRepuGenerarOrdenes control.

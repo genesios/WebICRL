@@ -470,23 +470,6 @@ namespace ICRL.BD
         this.id_estado = 0;
         this.moneda_orden = "";
       }
-      public static TipoDanioPropioSumatoria GenerarDesdeFila(System.Data.DataRow Fila)
-      {
-        TipoDanioPropioSumatoria objRespuesta = new TipoDanioPropioSumatoria();
-        objRespuesta.id_flujo = Convert.ToInt32(Fila.ItemArray[0]);
-        objRespuesta.id_cotizacion = Convert.ToInt32(Fila.ItemArray[1]);
-        objRespuesta.id_tipo_item = Convert.ToInt16(Fila.ItemArray[2]);
-        objRespuesta.proveedor = Convert.ToString(Fila.ItemArray[3]);
-        objRespuesta.monto_orden = Convert.ToDouble(Fila.ItemArray[4]);
-        objRespuesta.id_tipo_descuento_orden = Convert.ToString(Fila.ItemArray[5]);
-        objRespuesta.descuento_proveedor = Convert.ToDouble(Fila.ItemArray[6]);
-        objRespuesta.deducible = Convert.ToDouble(Fila.ItemArray[7]);
-        objRespuesta.monto_final = Convert.ToDouble(Fila.ItemArray[8]);
-        objRespuesta.numero_orden = Convert.ToString(Fila.ItemArray[9]);
-        objRespuesta.id_estado = Convert.ToInt16(Fila.ItemArray[10]);
-        objRespuesta.moneda_orden = Convert.ToString(Fila.ItemArray[11]);
-        return objRespuesta;
-      }
     }
     public static bool DaniosPropiosSumatoriaRegistrar(TipoDanioPropioSumatoria DaniosPropiosSumatorias)
     {
@@ -536,7 +519,7 @@ namespace ICRL.BD
     {
       TipoDaniosPropiosSumatoriaTraer objRespuesta = new TipoDaniosPropiosSumatoriaTraer();
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-      string strComando = "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_danios_propios_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+      string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_danios_propios_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
       SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
       SqlDataReader sqlDatos;
@@ -622,15 +605,6 @@ namespace ICRL.BD
         sqlConexion.Dispose();
       }
       return blnRespuesta;
-    }
-    public static void DaniosPropiosSumatoriaModificarTodos(System.Data.DataSet DaniosPropiosSumatoria)
-    {
-      TipoDanioPropioSumatoria tdpFila;
-      for (int i = 0; i <= DaniosPropiosSumatoria.Tables[0].Rows.Count - 1; i++)
-      {
-        tdpFila = TipoDanioPropioSumatoria.GenerarDesdeFila(DaniosPropiosSumatoria.Tables[0].Rows[i]);
-        DaniosPropiosSumatoriaModificar(tdpFila);
-      }
     }
     public static bool DaniosPropiosSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
     {
@@ -1288,6 +1262,8 @@ namespace ICRL.BD
 
       return objRespuesta;
     }
+
+    //Se añade el método para devolver solo un registro de TipoRCVehicularTraer
     public static TipoRCVehicularTraer RCVehicularesTraer(int Flujo, int Cotizacion, long Item)
     {
       TipoRCVehicularTraer objRespuesta = new TipoRCVehicularTraer();
@@ -1356,6 +1332,7 @@ namespace ICRL.BD
 
       return objRespuesta;
     }
+
     public static bool RCVehicularesModificar(TipoRCVehicular RCVehicular)
     {
       bool blnRespuesta = false;
@@ -1464,23 +1441,6 @@ namespace ICRL.BD
         this.id_estado = 0;
         this.moneda_orden = "";
       }
-      public static TipoRCVehicularSumatoria GenerarDesdeFila(System.Data.DataRow Fila)
-      {
-        TipoRCVehicularSumatoria objRespuesta = new TipoRCVehicularSumatoria();
-        objRespuesta.id_flujo = Convert.ToInt32(Fila.ItemArray[0]);
-        objRespuesta.id_cotizacion = Convert.ToInt32(Fila.ItemArray[1]);
-        objRespuesta.id_tipo_item = Convert.ToInt16(Fila.ItemArray[2]);
-        objRespuesta.proveedor = Convert.ToString(Fila.ItemArray[3]);
-        objRespuesta.monto_orden = Convert.ToDouble(Fila.ItemArray[4]);
-        objRespuesta.id_tipo_descuento_orden = Convert.ToString(Fila.ItemArray[5]);
-        objRespuesta.descuento_proveedor = Convert.ToDouble(Fila.ItemArray[6]);
-        objRespuesta.deducible = Convert.ToDouble(Fila.ItemArray[7]);
-        objRespuesta.monto_final = Convert.ToDouble(Fila.ItemArray[8]);
-        objRespuesta.numero_orden = Convert.ToString(Fila.ItemArray[9]);
-        objRespuesta.id_estado = Convert.ToInt16(Fila.ItemArray[10]);
-        objRespuesta.moneda_orden = Convert.ToString(Fila.ItemArray[11]);
-        return objRespuesta;
-      }
     }
     public static bool RCVehicularSumatoriaRegistrar(TipoRCVehicularSumatoria RCVehicularSumatoria)
     {
@@ -1530,7 +1490,7 @@ namespace ICRL.BD
     {
       TipoRCVehicularSumatoriaTraer objRespuesta = new TipoRCVehicularSumatoriaTraer();
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-      string strComando = "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_rc_vehicular_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+      string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_rc_vehicular_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
       SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
       SqlDataReader sqlDatos;
@@ -1548,6 +1508,7 @@ namespace ICRL.BD
           tdpFila.id_flujo = Flujo;
           tdpFila.id_cotizacion = Cotizacion;
           tdpFila.id_tipo_item = Tipo_Item;
+          //[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final]
           if (sqlDatos["proveedor"] != DBNull.Value) tdpFila.proveedor = Convert.ToString(sqlDatos["proveedor"]);
           if (sqlDatos["monto_orden"] != DBNull.Value) tdpFila.monto_orden = Convert.ToDouble(sqlDatos["monto_orden"]);
           if (sqlDatos["id_tipo_descuento_orden"] != DBNull.Value) tdpFila.id_tipo_descuento_orden = Convert.ToString(sqlDatos["id_tipo_descuento_orden"]);
@@ -1616,15 +1577,6 @@ namespace ICRL.BD
       }
       return blnRespuesta;
     }
-    public static void RCVehicularSumatoriaModificarTodos(System.Data.DataSet RCVehicularSumatoria)
-    {
-      TipoRCVehicularSumatoria tdpFila;
-      for (int i = 0; i <= RCVehicularSumatoria.Tables[0].Rows.Count - 1; i++)
-      {
-        tdpFila = TipoRCVehicularSumatoria.GenerarDesdeFila(RCVehicularSumatoria.Tables[0].Rows[i]);
-        RCVehicularSumatoriaModificar(tdpFila);
-      }
-    }
     public static bool RCVehicularSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
     {
       bool blnRespuesta = false;
@@ -1658,8 +1610,8 @@ namespace ICRL.BD
       if (!blnRespuesta) return false;
       string strComando = "INSERT INTO [dbo].[cotizacion_rc_vehicular_sumatoria] " +
         "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden]) " +
-        "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'Fijo',0.0,0.0,0.0,'',0,[id_moneda] FROM [dbo].[cotizacion_rc_vehicular] " +
-        "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[id_moneda]";
+        "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'Fijo',0.0,0.0,0.0,'',0,'Bs.' FROM [dbo].[cotizacion_rc_vehicular] " +
+        "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
       try
@@ -2089,6 +2041,8 @@ namespace ICRL.BD
       }
       return objRespuesta;
     }
+
+    //Se añade el método para devolver solo un registro de TipoRoboParcialTraer
     public static TipoRoboParcialTraer RoboParcialTraer(int Flujo, int Cotizacion, long Item)
     {
       TipoRoboParcialTraer objRespuesta = new TipoRoboParcialTraer();
@@ -2156,6 +2110,7 @@ namespace ICRL.BD
       }
       return objRespuesta;
     }
+
     public static bool RoboParcialModificar(TipoRoboParcial RoboParcial)
     {
       bool blnRespuesta = false;
@@ -2264,23 +2219,6 @@ namespace ICRL.BD
         this.id_estado = 0;
         this.moneda_orden = "";
       }
-      public static TipoRoboParcialSumatoria GenerarDesdeFila(System.Data.DataRow Fila)
-      {
-        TipoRoboParcialSumatoria objRespuesta = new TipoRoboParcialSumatoria();
-        objRespuesta.id_flujo = Convert.ToInt32(Fila.ItemArray[0]);
-        objRespuesta.id_cotizacion = Convert.ToInt32(Fila.ItemArray[1]);
-        objRespuesta.id_tipo_item = Convert.ToInt16(Fila.ItemArray[2]);
-        objRespuesta.proveedor = Convert.ToString(Fila.ItemArray[3]);
-        objRespuesta.monto_orden = Convert.ToDouble(Fila.ItemArray[4]);
-        objRespuesta.id_tipo_descuento_orden = Convert.ToString(Fila.ItemArray[5]);
-        objRespuesta.descuento_proveedor = Convert.ToDouble(Fila.ItemArray[6]);
-        objRespuesta.deducible = Convert.ToDouble(Fila.ItemArray[7]);
-        objRespuesta.monto_final = Convert.ToDouble(Fila.ItemArray[8]);
-        objRespuesta.numero_orden = Convert.ToString(Fila.ItemArray[9]);
-        objRespuesta.id_estado = Convert.ToInt16(Fila.ItemArray[10]);
-        objRespuesta.moneda_orden = Convert.ToString(Fila.ItemArray[11]);
-        return objRespuesta;
-      }
     }
     public static bool RoboParcialSumatoriaRegistrar(TipoRoboParcialSumatoria RoboParcialSumatoria)
     {
@@ -2331,7 +2269,7 @@ namespace ICRL.BD
     {
       TipoRoboParcialSumatoriaTraer objRespuesta = new TipoRoboParcialSumatoriaTraer();
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
-      string strComando = "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_robo_parcial_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
+      string strComando = "SELECT [proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden] FROM [dbo].[cotizacion_robo_parcial_sumatoria] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_tipo_item = @id_tipo_item";
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
       SqlDataAdapter sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
       SqlDataReader sqlDatos;
@@ -2417,15 +2355,6 @@ namespace ICRL.BD
       }
       return blnRespuesta;
     }
-    public static void RoboParcialSumatoriaModificarTodos(System.Data.DataSet RoboParcialSumatoria)
-    {
-      TipoRoboParcialSumatoria tdpFila;
-      for (int i = 0; i <= RoboParcialSumatoria.Tables[0].Rows.Count - 1; i++)
-      {
-        tdpFila = TipoRoboParcialSumatoria.GenerarDesdeFila(RoboParcialSumatoria.Tables[0].Rows[i]);
-        RoboParcialSumatoriaModificar(tdpFila);
-      }
-    }
     public static bool RoboParcialSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
     {
       bool blnRespuesta = false;
@@ -2459,8 +2388,8 @@ namespace ICRL.BD
       if (!blnRespuesta) return false;
       string strComando = "INSERT INTO [dbo].[cotizacion_robo_parcial_sumatoria] " +
         "([id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[monto_orden],[id_tipo_descuento_orden],[descuento_proveedor],[deducible],[monto_final],[numero_orden],[id_estado],[moneda_orden]) " +
-        "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'Fijo',0.0,0.0,0.0,'',0,[id_moneda] FROM [dbo].[cotizacion_robo_parcial] " +
-        "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],[id_moneda]";
+        "SELECT [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor],SUM(precio_final),'Fijo',0.0,0.0,0.0,'',0,'Bs.' FROM [dbo].[cotizacion_robo_parcial] " +
+        "WHERE [id_flujo] = @id_flujo and [id_cotizacion]= @id_cotizacion and [id_tipo_item] = @id_tipo_item GROUP BY [id_flujo],[id_cotizacion],[id_tipo_item],[proveedor]";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
       try

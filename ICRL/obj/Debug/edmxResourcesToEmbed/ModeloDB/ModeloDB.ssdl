@@ -269,6 +269,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="monto_final" Type="float" />
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="cotizacion_ordenes">
     <Key>
@@ -509,6 +510,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="monto_final" Type="float" />
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -584,6 +586,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="monto_final" Type="float" />
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -1167,6 +1170,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="paActualizaLiquidacion001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
   <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iIdFlujo" Type="int" Mode="In" />
     <Parameter Name="iValorContador" Type="int" Mode="InOut" />

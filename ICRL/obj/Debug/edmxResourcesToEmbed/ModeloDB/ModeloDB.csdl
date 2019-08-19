@@ -265,6 +265,7 @@
     <Property Name="monto_final" Type="Double" />
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="cotizacion_ordenes">
     <Key>
@@ -505,6 +506,7 @@
     <Property Name="monto_final" Type="Double" />
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="cotizacion_robo_parcial">
     <Key>
@@ -558,6 +560,7 @@
     <Property Name="monto_final" Type="Double" />
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -1318,6 +1321,12 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
+    <FunctionImport Name="paActualizaLiquidacion001">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="paIncFlujoContadorInsp">
       <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
       <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />

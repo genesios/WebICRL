@@ -82,6 +82,27 @@ namespace ICRL.ModeloDB
         public virtual DbSet<CotiRoboParcial> CotiRoboParcial { get; set; }
         public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
     
+        public virtual int paActualizaLiquidacion001(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)
         {
             var iIdFlujoParameter = iIdFlujo.HasValue ?
