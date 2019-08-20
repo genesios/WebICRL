@@ -1181,6 +1181,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="Proveedor" Type="char" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
+  <Function Name="paActualizaLiquidacion001_PE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="paActualizaLiquidacion001_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
@@ -1188,6 +1193,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
     <Parameter Name="Proveedor" Type="char" Mode="In" />

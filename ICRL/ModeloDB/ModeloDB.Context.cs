@@ -103,6 +103,23 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_DP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
+        public virtual int paActualizaLiquidacion001_PE(Nullable<int> idFlujo, Nullable<int> idCotizacion, string numeroOrden)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var numeroOrdenParameter = numeroOrden != null ?
+                new ObjectParameter("NumeroOrden", numeroOrden) :
+                new ObjectParameter("NumeroOrden", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_PE", idFlujoParameter, idCotizacionParameter, numeroOrdenParameter);
+        }
+    
         public virtual int paActualizaLiquidacion001_RP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
         {
             var idFlujoParameter = idFlujo.HasValue ?

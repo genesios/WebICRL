@@ -7,491 +7,861 @@ using System.Web.UI.WebControls;
 using LbcOnBaseWS;
 using ICRL.ModeloDB;
 using ICRL.BD;
+using System.Text;
+using System.Data;
+using Microsoft.Reporting.WebForms;
 
 namespace ICRL.Presentacion
 {
-    public partial class CotizacionRCPer : System.Web.UI.Page
+  public partial class CotizacionRCPer : System.Web.UI.Page
+  {
+    protected void Page_Load(object sender, EventArgs e)
     {
-        protected void Page_Load(object sender, EventArgs e)
+      try
+      {
+        int vIdFlujo = 0;
+        int vIdCotizacion = 0;
+        string vlNumFlujo = string.Empty;
+        if (Request.QueryString["nroCoti"] != null)
         {
-            try
-            {
-                int vIdFlujo = 0;
-                int vIdCotizacion = 0;
-                string vlNumFlujo = string.Empty;
-                if (Request.QueryString["nroCoti"] != null)
-                {
-                    vIdCotizacion = int.Parse(Request.QueryString["nroCoti"]);
-                }
-
-
-                if (Session["NumFlujo"] != null)
-                {
-                    vlNumFlujo = Session["NumFlujo"].ToString();
-                    TextBoxIdFlujo.Text = Session["NumFlujo"].ToString();
-                }
-
-                if (!IsPostBack)
-                {
-                    vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-                    
-                    FlTraeDatosCotizacion(vIdCotizacion, vlNumFlujo);
-
-
-                    //Cargar Datos Persona
-                    vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-                    PModificarPersona(false);
-                    PCargaDatosPer();
-                    pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
-                    //PModificarVehTer(false);
-
-                    short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
-
-                    //FlTraeDatosDPReparacion(vIdCotizacion);
-                    //FlTraeDatosDPRepuesto(vIdCotizacion);
-                    //FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
-
-                    vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
-                    //FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
-                    //FlTraeDatosRecepRepu(vIdCotizacion);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (Session["MsjEstado"] != null)
-                {
-                    Session["MsjEstado"] = string.Empty;
-                }
-                Session["MsjEstado"] = ex.Message;
-            }
+          vIdCotizacion = int.Parse(Request.QueryString["nroCoti"]);
         }
 
-        #region Principal formulario
 
-        private void FlTraeDatosCotizacion(int pIdCotizacion, string pNumFlujo)
+        if (Session["NumFlujo"] != null)
         {
-            if (string.Empty == pNumFlujo)
-            {
-                using (LBCDesaEntities db = new LBCDesaEntities())
-                {
-                    var vLst = from c in db.Cotizacion
-                               join u in db.Usuario on c.idUsuario equals u.idUsuario
-                               join f in db.Flujo on c.idFlujo equals f.idFlujo
-                               join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
-                               where c.idCotizacion == pIdCotizacion
-                               select new
-                               {
-                                   c.idInspeccion,
-                                   f.causaSiniestro,
-                                   f.descripcionSiniestro,
-                                   zona = "",
-                                   cf.observacionesSiniestro,
-                                   c.sucursal,
-                                   cf.fecha_siniestro,
-                                   cf.nombreContacto,
-                                   cf.telefonoContacto,
-                                   c.correlativo,
-                                   u.nombreVisible,
-                                   u.correoElectronico
-                               };
-                    var vFilaTabla = vLst.FirstOrDefault();
-
-                    if (null != vFilaTabla)
-                    {
-                        TextBoxNroCotizacion.Text = vFilaTabla.idInspeccion.ToString();
-                        TextBoxCorrelativo.Text = vFilaTabla.correlativo.ToString();
-                        TextBoxSucAtencion.Text = vFilaTabla.sucursal;
-                        TextBoxCausaSiniestro.Text = vFilaTabla.causaSiniestro;
-                        TextBoxDescripSiniestro.Text = vFilaTabla.descripcionSiniestro;
-                        TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro;
-                        TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
-                        TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
-                    }
-
-                }
-            }
-            else
-            {
-                using (LBCDesaEntities db = new LBCDesaEntities())
-                {
-                    var vLst = from c in db.Cotizacion
-                               join u in db.Usuario on c.idUsuario equals u.idUsuario
-                               join f in db.Flujo on c.idFlujo equals f.idFlujo
-                               //join cdp in db.CotiDaniosPropios on c.idCotizacion equals cdp.idCotizacion
-                               join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
-                               where c.idCotizacion == pIdCotizacion
-                               select new
-                               {
-                                   f.flujoOnBase,
-                                   f.nombreAsegurado,
-                                   f.telefonocelAsegurado,
-                                   f.numeroReclamo,
-                                   f.causaSiniestro,
-                                   f.placaVehiculo,
-                                   f.chasisVehiculo,
-                                   f.colorVehiculo,
-                                   f.modeloVehiculo,
-                                   f.marcaVehiculo,
-                                   f.anioVehiculo,
-                                   f.valorAsegurado,
-                                   c.idCotizacion,
-                                   f.descripcionSiniestro,
-                                   f.direccionInspeccion,
-                                   f.agenciaAtencion,
-                                   zona = "",
-                                   cf.observacionesSiniestro,
-                                   c.sucursal,
-                                   cf.fecha_siniestro,
-                                   cf.nombreContacto,
-                                   cf.telefonoContacto,
-                                   cf.correosDeEnvio,
-                                   c.correlativo,
-                                   //cdp.tipoTaller,
-                                   u.nombreVisible,
-                                   u.correoElectronico,
-                               };
-                    var vFilaTabla = vLst.FirstOrDefault();
-
-                    if (null != vFilaTabla)
-                    {
-                        TextBoxNroFlujo.Text = vFilaTabla.flujoOnBase;
-                        TextBoxNroCotizacion.Text = vFilaTabla.idCotizacion.ToString();
-                        TextBoxCorrelativo.Text = vFilaTabla.correlativo.ToString();
-                        TextBoxNroReclamo.Text = vFilaTabla.numeroReclamo.ToString();
-                        TextBoxSucAtencion.Text = vFilaTabla.agenciaAtencion.Trim();
-                        TextBoxDirecInspeccion.Text = vFilaTabla.direccionInspeccion.Trim();
-                        TextBoxCausaSiniestro.Text = vFilaTabla.causaSiniestro.Trim();
-                        TextBoxDescripSiniestro.Text = vFilaTabla.descripcionSiniestro.Trim();
-                        TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro.Trim();
-                        TextBoxNombreAsegurado.Text = vFilaTabla.nombreAsegurado;
-                        TextBoxTelefonoAsegurado.Text = vFilaTabla.telefonocelAsegurado;
-                        TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
-                        TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
-                        TextBoxNombreContacto.Text = vFilaTabla.nombreContacto.Trim();
-                        TextBoxMarca.Text = vFilaTabla.marcaVehiculo;
-                        TextBoxModelo.Text = vFilaTabla.modeloVehiculo;
-                        TextBoxPlaca.Text = vFilaTabla.placaVehiculo;
-                        TextBoxColor.Text = vFilaTabla.colorVehiculo;
-                        TextBoxNroChasis.Text = vFilaTabla.chasisVehiculo;
-                        TextBoxAnio.Text = vFilaTabla.anioVehiculo.ToString();
-                        TextBoxValorAsegurado.Text = vFilaTabla.valorAsegurado.ToString();
-                    }
-
-                }
-            }
+          vlNumFlujo = Session["NumFlujo"].ToString();
+          TextBoxIdFlujo.Text = Session["NumFlujo"].ToString();
         }
 
-        long FValidaTienePersona(int pIdFlujo, int pIdCotizacion)
+        if (!IsPostBack)
         {
-            long vResultado = 0;
+          vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
 
-            BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-            vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
+          FlTraeDatosCotizacion(vIdCotizacion, vlNumFlujo);
 
-            if (vTipoRCPersonasTraer.Correcto)
-            {
-                var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
-                if (vFilaTabla != null)
-                {
-                    vResultado = vFilaTabla.id_item;
-                }
-            }
 
-            return vResultado;
+          //Cargar Datos Persona
+          vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+          PModificarPersona(false);
+          PCargaDatosPer();
+          pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+          pCargaOrdenes(vIdFlujo, vIdCotizacion);
+          //PModificarVehTer(false);
+
+          short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+          //FlTraeDatosDPReparacion(vIdCotizacion);
+          //FlTraeDatosDPRepuesto(vIdCotizacion);
+          //FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+
+          vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+          //FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+          //FlTraeDatosRecepRepu(vIdCotizacion);
         }
 
-        protected void PCargaDatosPer()
+      }
+      catch (Exception ex)
+      {
+        if (Session["MsjEstado"] != null)
         {
-            long vIdItem = 0;
-            int vIdFlujo = 0;
-            int vIdCotizacion = 0;
-            string vTextoTemporal = string.Empty;
+          Session["MsjEstado"] = string.Empty;
+        }
+        Session["MsjEstado"] = ex.Message;
+      }
+    }
 
-            vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+    #region Principal formulario
 
-            vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
-            if (vIdItem > 0)
-            {
-                BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-                vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(vIdFlujo, vIdCotizacion);
-                var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
+    private void FlTraeDatosCotizacion(int pIdCotizacion, string pNumFlujo)
+    {
+      if (string.Empty == pNumFlujo)
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          var vLst = from c in db.Cotizacion
+                     join u in db.Usuario on c.idUsuario equals u.idUsuario
+                     join f in db.Flujo on c.idFlujo equals f.idFlujo
+                     join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                     where c.idCotizacion == pIdCotizacion
+                     select new
+                     {
+                       c.idInspeccion,
+                       f.causaSiniestro,
+                       f.descripcionSiniestro,
+                       zona = "",
+                       cf.observacionesSiniestro,
+                       c.sucursal,
+                       cf.fecha_siniestro,
+                       cf.nombreContacto,
+                       cf.telefonoContacto,
+                       c.correlativo,
+                       u.nombreVisible,
+                       u.correoElectronico
+                     };
+          var vFilaTabla = vLst.FirstOrDefault();
 
-                TextBoxPerNombreTer.Text = vFilaTabla.nombre_apellido;
-                TextBoxPerTelefono.Text = vFilaTabla.telefono_contacto;
-                TextBoxPerDocId.Text = vFilaTabla.numero_documento;
-                CheckBoxPerReembolso.Checked = vFilaTabla.rembolso;
-
-                TextBoxPerIdItem.Text = vFilaTabla.id_item.ToString();
-            }
+          if (null != vFilaTabla)
+          {
+            TextBoxNroCotizacion.Text = vFilaTabla.idInspeccion.ToString();
+            TextBoxCorrelativo.Text = vFilaTabla.correlativo.ToString();
+            TextBoxSucAtencion.Text = vFilaTabla.sucursal;
+            TextBoxCausaSiniestro.Text = vFilaTabla.causaSiniestro;
+            TextBoxDescripSiniestro.Text = vFilaTabla.descripcionSiniestro;
+            TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro;
+            TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
+            TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
+          }
 
         }
-
-        //private int FlTraeDatosDPReparacion(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-        //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-
-        //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
-        //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
-
-        //    GridViewReparaciones.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
-        //    {
-        //        RCVehiculares.id_item,
-        //        RCVehiculares.item_descripcion,
-        //        RCVehiculares.chaperio,
-        //        RCVehiculares.reparacion_previa,
-        //        RCVehiculares.mecanico,
-        //        RCVehiculares.id_moneda,
-        //        RCVehiculares.precio_cotizado,
-        //        RCVehiculares.id_tipo_descuento,
-        //        RCVehiculares.descuento,
-        //        RCVehiculares.precio_final,
-        //        RCVehiculares.proveedor,
-        //        RCVehiculares.id_tipo_item
-
-        //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 1).ToList();
-        //    GridViewReparaciones.DataBind();
-
-        //    return vResultado;
-        //}
-
-        //private int FlTraeDatosDPRepuesto(int pIdCotizacion)
-        //{
-        //    int vResultado = 0;
-        //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-
-        //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
-        //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
-
-        //    GridViewRepuestos.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
-        //    {
-        //        RCVehiculares.id_item,
-        //        RCVehiculares.item_descripcion,
-        //        RCVehiculares.pintura,
-        //        RCVehiculares.instalacion,
-        //        RCVehiculares.id_moneda,
-        //        RCVehiculares.precio_cotizado,
-        //        RCVehiculares.id_tipo_descuento,
-        //        RCVehiculares.descuento,
-        //        RCVehiculares.precio_final,
-        //        RCVehiculares.proveedor,
-        //        RCVehiculares.id_tipo_item
-
-        //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 2).ToList();
-        //    GridViewRepuestos.DataBind();
-
-        //    return vResultado;
-        //}
-
-        #endregion
-
-        #region Datos Persona
-        protected void PModificarPersona(bool pEstado)
+      }
+      else
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
         {
-            TextBoxPerNombreTer.Enabled = pEstado;
-            TextBoxPerDocId.Enabled = pEstado;
-            TextBoxPerTelefono.Enabled = pEstado;
-            CheckBoxPerReembolso.Enabled = pEstado;
-            TextBoxPerTipoGasto.Enabled = pEstado;
-            TextBoxPerMontoGasto.Enabled = pEstado;
-            TextBoxPerDescripcion.Enabled = pEstado;
-        }
+          var vLst = from c in db.Cotizacion
+                     join u in db.Usuario on c.idUsuario equals u.idUsuario
+                     join f in db.Flujo on c.idFlujo equals f.idFlujo
+                     //join cdp in db.CotiDaniosPropios on c.idCotizacion equals cdp.idCotizacion
+                     join cf in db.CotizacionFlujo on c.idFlujo equals cf.idFlujo
+                     where c.idCotizacion == pIdCotizacion
+                     select new
+                     {
+                       f.flujoOnBase,
+                       f.nombreAsegurado,
+                       f.telefonocelAsegurado,
+                       f.numeroReclamo,
+                       f.causaSiniestro,
+                       f.placaVehiculo,
+                       f.chasisVehiculo,
+                       f.colorVehiculo,
+                       f.modeloVehiculo,
+                       f.marcaVehiculo,
+                       f.anioVehiculo,
+                       f.valorAsegurado,
+                       c.idCotizacion,
+                       f.descripcionSiniestro,
+                       f.direccionInspeccion,
+                       f.agenciaAtencion,
+                       zona = "",
+                       cf.observacionesSiniestro,
+                       c.sucursal,
+                       cf.fecha_siniestro,
+                       cf.nombreContacto,
+                       cf.telefonoContacto,
+                       cf.correosDeEnvio,
+                       c.correlativo,
+                       //cdp.tipoTaller,
+                       u.nombreVisible,
+                       u.correoElectronico,
+                     };
+          var vFilaTabla = vLst.FirstOrDefault();
 
-        protected void PModificarPersonaDet(bool pEstado)
-        {
-            TextBoxPerTelefono.Enabled = pEstado;
-            CheckBoxPerReembolso.Enabled = pEstado;
-            TextBoxPerTipoGasto.Enabled = pEstado;
-            TextBoxPerMontoGasto.Enabled = pEstado;
-            TextBoxPerDescripcion.Enabled = pEstado;
-        }
-
-        protected void PLimpiarPersonaDet()
-        {
-            TextBoxPerTipoGasto.Text = string.Empty;
-            TextBoxPerMontoGasto.Text = string.Empty;
-            TextBoxPerDescripcion.Text = string.Empty;
-        }
-
-        protected void ButtonPerAgregar_Click(object sender, EventArgs e)
-        {
-            LabelDatosPersonaMsj.Text = string.Empty;
-            //validamos si existe el dato de Persona
-            int vIdFlujo = 0;
-            int vIdCotizacion = 0;
-            long vIdItem = 0;
-            vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-
-            vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
-            if (vIdItem > 0)
-            {
-                //Si existe
-                PModificarPersonaDet(true);
-                ButtonPerAgregar.Visible = false;
-                ButtonPerGrabar.Visible = true;
-                ButtonPerCancelar.Visible = true;
-            }
-            else
-            {
-                //No existe
-                PModificarPersona(true);
-                ButtonPerAgregar.Visible = false;
-                ButtonPerGrabar.Visible = true;
-                ButtonPerCancelar.Visible = true;
-            }
-        }
-
-        protected void ButtonPerGrabar_Click(object sender, EventArgs e)
-        {
-            int vIdFlujo = 0;
-            int vIdCotizacion = 0;
-            long vIdItem = 0;
-            bool vResultado = false;
-
-            vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-
-            //cargar los datos del panel al objeto correspondiente
-            CotizacionICRL.TipoRCPersonas vTipoRCPersonas = new CotizacionICRL.TipoRCPersonas();
-            vTipoRCPersonas.id_flujo = vIdFlujo;
-            vTipoRCPersonas.id_cotizacion = vIdCotizacion;
-            vTipoRCPersonas.nombre_apellido = TextBoxPerNombreTer.Text.ToUpper();
-            vTipoRCPersonas.telefono_contacto = TextBoxPerTelefono.Text.ToUpper();
-            vTipoRCPersonas.numero_documento = TextBoxPerDocId.Text.ToUpper();
-            vTipoRCPersonas.rembolso = CheckBoxPerReembolso.Checked;
-            vTipoRCPersonas.tipo_gasto = TextBoxPerTipoGasto.Text.ToUpper();
-            vTipoRCPersonas.monto_gasto = double.Parse(TextBoxPerMontoGasto.Text);
-            vTipoRCPersonas.id_moneda = 1; //1 corresponde a Bs.
-            vTipoRCPersonas.descripcion = TextBoxPerDescripcion.Text.ToUpper();
-            vTipoRCPersonas.tipo_cambio = double.Parse(TextBoxTipoCambio.Text);
-            vTipoRCPersonas.id_estado = 1;
-
-            //validar si existe el registro de la persona
-            if (string.Empty != TextBoxPerIdItem.Text)
-            {
-                //Existe el registro del tercero
-                vIdItem = long.Parse(TextBoxPerIdItem.Text);
-                vTipoRCPersonas.id_item = vIdItem;
-                vResultado = CotizacionICRL.RCPersonaModificar(vTipoRCPersonas);
-            }
-            else
-            {
-                //NO Existe el registro del tercero
-                vResultado = CotizacionICRL.RCPersonaRegistrar(vTipoRCPersonas);
-            }
-
-            if (vResultado)
-            {
-                LabelDatosPersonaMsj.Text = "Registro Actualizado Exitosamente";
-                vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
-            }
-            else
-            {
-                LabelDatosPersonaMsj.Text = "El Registro no se actualizo correctamente";
-            }
-
-            TextBoxPerIdItem.Text = string.Empty;
-            PModificarPersona(false);
-            ButtonPerAgregar.Visible = true;
-            ButtonPerGrabar.Visible = false;
-            ButtonPerCancelar.Visible = false;
-            PLimpiarPersonaDet();
-            pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
-        }
-
-        protected void ButtonPerCancelar_Click(object sender, EventArgs e)
-        {
-            TextBoxPerIdItem.Text = string.Empty;
-            PModificarPersona(false);
-            ButtonPerAgregar.Visible = true;
-            ButtonPerGrabar.Visible = false;
-            ButtonPerCancelar.Visible = false;
-        }
-        #endregion
-
-        #region Grilla PersonasDet
-
-        protected void pCargaGrillaPersonas(int pIdFlujo, int pIdCotizacion)
-        {
-            BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
-            vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
-
-            GridViewPerDetalle.DataSource = vTipoRCPersonasTraer.RCPersonas.Select(RCPersonas => new
-            {
-                RCPersonas.id_item,
-                RCPersonas.nombre_apellido,
-                RCPersonas.numero_documento,
-                RCPersonas.tipo_gasto,
-                RCPersonas.monto_gasto,
-                RCPersonas.descripcion,
-            }).ToList();
-            GridViewPerDetalle.DataBind();
-        }
-
-        protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string vTextoTemporal = string.Empty;
-
-            //Leer Registro de la grilla y cargar los valores a la ventana.
-
-            TextBoxPerTipoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[4].Text;
-            TextBoxPerMontoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[5].Text;
-            TextBoxPerDescripcion.Text = GridViewPerDetalle.SelectedRow.Cells[6].Text;
-
-            TextBoxPerIdItem.Text = GridViewPerDetalle.SelectedRow.Cells[1].Text;
-
-            PModificarPersonaDet(true);
-            ButtonPerAgregar.Visible = false;
-            ButtonPerGrabar.Visible = true;
-            ButtonPerCancelar.Visible = true;
+          if (null != vFilaTabla)
+          {
+            TextBoxNroFlujo.Text = vFilaTabla.flujoOnBase;
+            TextBoxNroCotizacion.Text = vFilaTabla.idCotizacion.ToString();
+            TextBoxCorrelativo.Text = vFilaTabla.correlativo.ToString();
+            TextBoxNroReclamo.Text = vFilaTabla.numeroReclamo.ToString();
+            TextBoxSucAtencion.Text = vFilaTabla.agenciaAtencion.Trim();
+            TextBoxDirecInspeccion.Text = vFilaTabla.direccionInspeccion.Trim();
+            TextBoxCausaSiniestro.Text = vFilaTabla.causaSiniestro.Trim();
+            TextBoxDescripSiniestro.Text = vFilaTabla.descripcionSiniestro.Trim();
+            TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro.Trim();
+            TextBoxNombreAsegurado.Text = vFilaTabla.nombreAsegurado;
+            TextBoxTelefonoAsegurado.Text = vFilaTabla.telefonocelAsegurado;
+            TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
+            TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
+            TextBoxNombreContacto.Text = vFilaTabla.nombreContacto.Trim();
+            TextBoxMarca.Text = vFilaTabla.marcaVehiculo;
+            TextBoxModelo.Text = vFilaTabla.modeloVehiculo;
+            TextBoxPlaca.Text = vFilaTabla.placaVehiculo;
+            TextBoxColor.Text = vFilaTabla.colorVehiculo;
+            TextBoxNroChasis.Text = vFilaTabla.chasisVehiculo;
+            TextBoxAnio.Text = vFilaTabla.anioVehiculo.ToString();
+            TextBoxValorAsegurado.Text = vFilaTabla.valorAsegurado.ToString();
+          }
 
         }
+      }
+    }
 
-        protected void GridViewPerDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    long FValidaTienePersona(int pIdFlujo, int pIdCotizacion)
+    {
+      long vResultado = 0;
+
+      BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
+      vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
+
+      if (vTipoRCPersonasTraer.Correcto)
+      {
+        var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
+        if (vFilaTabla != null)
         {
-            bool vResultado = false;
-            int vIdFlujo = 0;
-            int vIdCotizacion = 0;
-            long vIdItem = 0;
-
-            vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-            vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-
-                string vTextoSecuencial = string.Empty;
-                int vIndex = 0;
-                int vSecuencial = 0;
-
-                vIndex = Convert.ToInt32(e.RowIndex);
-                vSecuencial = Convert.ToInt32(GridViewPerDetalle.DataKeys[vIndex].Value);
-            vIdItem = Convert.ToInt64(vSecuencial);
-
-
-
-            //vIdItem = long.Parse(GridViewPerDetalle.SelectedRow.Cells[1].Text);
-
-            //CotizacionICRL.RCPersonaModificar
-
-            vResultado = BD.CotizacionICRL.RCPersonasBorrar(vIdFlujo, vIdCotizacion, vIdItem);
-            if (vResultado)
-            {
-                LabelDatosPersonaMsj.Text = "Registro Borrado exitosamente";
-                PModificarPersona(false);
-                ButtonPerAgregar.Visible = true;
-                ButtonPerGrabar.Visible = false;
-                ButtonPerCancelar.Visible = false;
-            }
-            else
-            {
-                LabelDatosPersonaMsj.Text = "El Registro no pudo ser Borrado";
-            }
-            TextBoxPerIdItem.Text = string.Empty;
-            pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+          vResultado = vFilaTabla.id_item;
         }
-        #endregion
+      }
 
+      return vResultado;
+    }
+
+    protected void PCargaDatosPer()
+    {
+      long vIdItem = 0;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      string vTextoTemporal = string.Empty;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+      if (vIdItem > 0)
+      {
+        BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
+        vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(vIdFlujo, vIdCotizacion);
+        var vFilaTabla = vTipoRCPersonasTraer.RCPersonas.FirstOrDefault();
+
+        TextBoxPerNombreTer.Text = vFilaTabla.nombre_apellido;
+        TextBoxPerTelefono.Text = vFilaTabla.telefono_contacto;
+        TextBoxPerDocId.Text = vFilaTabla.numero_documento;
+        CheckBoxPerReembolso.Checked = vFilaTabla.rembolso;
+
+        TextBoxPerIdItem.Text = vFilaTabla.id_item.ToString();
+      }
 
     }
+
+    //private int FlTraeDatosDPReparacion(int pIdCotizacion)
+    //{
+    //    int vResultado = 0;
+    //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+
+    //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+    //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
+
+    //    GridViewReparaciones.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
+    //    {
+    //        RCVehiculares.id_item,
+    //        RCVehiculares.item_descripcion,
+    //        RCVehiculares.chaperio,
+    //        RCVehiculares.reparacion_previa,
+    //        RCVehiculares.mecanico,
+    //        RCVehiculares.id_moneda,
+    //        RCVehiculares.precio_cotizado,
+    //        RCVehiculares.id_tipo_descuento,
+    //        RCVehiculares.descuento,
+    //        RCVehiculares.precio_final,
+    //        RCVehiculares.proveedor,
+    //        RCVehiculares.id_tipo_item
+
+    //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 1).ToList();
+    //    GridViewReparaciones.DataBind();
+
+    //    return vResultado;
+    //}
+
+    //private int FlTraeDatosDPRepuesto(int pIdCotizacion)
+    //{
+    //    int vResultado = 0;
+    //    int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+
+    //    BD.CotizacionICRL.TipoRCVehicularTraer vTipoRCVehicularTraer;
+    //    vTipoRCVehicularTraer = CotizacionICRL.RCVehicularesTraer(vIdFlujo, pIdCotizacion);
+
+    //    GridViewRepuestos.DataSource = vTipoRCVehicularTraer.RCVehiculares.Select(RCVehiculares => new
+    //    {
+    //        RCVehiculares.id_item,
+    //        RCVehiculares.item_descripcion,
+    //        RCVehiculares.pintura,
+    //        RCVehiculares.instalacion,
+    //        RCVehiculares.id_moneda,
+    //        RCVehiculares.precio_cotizado,
+    //        RCVehiculares.id_tipo_descuento,
+    //        RCVehiculares.descuento,
+    //        RCVehiculares.precio_final,
+    //        RCVehiculares.proveedor,
+    //        RCVehiculares.id_tipo_item
+
+    //    }).Where(RCVehiculares => RCVehiculares.id_tipo_item == 2).ToList();
+    //    GridViewRepuestos.DataBind();
+
+    //    return vResultado;
+    //}
+
+    #endregion
+
+    #region Datos Persona
+    protected void PModificarPersona(bool pEstado)
+    {
+      TextBoxPerNombreTer.Enabled = pEstado;
+      TextBoxPerDocId.Enabled = pEstado;
+      TextBoxPerTelefono.Enabled = pEstado;
+      CheckBoxPerReembolso.Enabled = pEstado;
+      TextBoxPerTipoGasto.Enabled = pEstado;
+      TextBoxPerMontoGasto.Enabled = pEstado;
+      TextBoxPerDescripcion.Enabled = pEstado;
+    }
+
+    protected void PModificarPersonaDet(bool pEstado)
+    {
+      TextBoxPerTelefono.Enabled = pEstado;
+      CheckBoxPerReembolso.Enabled = pEstado;
+      TextBoxPerTipoGasto.Enabled = pEstado;
+      TextBoxPerMontoGasto.Enabled = pEstado;
+      TextBoxPerDescripcion.Enabled = pEstado;
+    }
+
+    protected void PLimpiarPersonaDet()
+    {
+      TextBoxPerTipoGasto.Text = string.Empty;
+      TextBoxPerMontoGasto.Text = string.Empty;
+      TextBoxPerDescripcion.Text = string.Empty;
+    }
+
+    protected void ButtonPerAgregar_Click(object sender, EventArgs e)
+    {
+      LabelDatosPersonaMsj.Text = string.Empty;
+      //validamos si existe el dato de Persona
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      long vIdItem = 0;
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+      if (vIdItem > 0)
+      {
+        //Si existe
+        PModificarPersonaDet(true);
+        ButtonPerAgregar.Visible = false;
+        ButtonPerGrabar.Visible = true;
+        ButtonPerCancelar.Visible = true;
+      }
+      else
+      {
+        //No existe
+        PModificarPersona(true);
+        ButtonPerAgregar.Visible = false;
+        ButtonPerGrabar.Visible = true;
+        ButtonPerCancelar.Visible = true;
+      }
+    }
+
+    protected void ButtonPerGrabar_Click(object sender, EventArgs e)
+    {
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      long vIdItem = 0;
+      bool vResultado = false;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      //cargar los datos del panel al objeto correspondiente
+      CotizacionICRL.TipoRCPersonas vTipoRCPersonas = new CotizacionICRL.TipoRCPersonas();
+      vTipoRCPersonas.id_flujo = vIdFlujo;
+      vTipoRCPersonas.id_cotizacion = vIdCotizacion;
+      vTipoRCPersonas.nombre_apellido = TextBoxPerNombreTer.Text.ToUpper();
+      vTipoRCPersonas.telefono_contacto = TextBoxPerTelefono.Text.ToUpper();
+      vTipoRCPersonas.numero_documento = TextBoxPerDocId.Text.ToUpper();
+      vTipoRCPersonas.rembolso = CheckBoxPerReembolso.Checked;
+      vTipoRCPersonas.tipo_gasto = TextBoxPerTipoGasto.Text.ToUpper();
+      vTipoRCPersonas.monto_gasto = double.Parse(TextBoxPerMontoGasto.Text);
+      vTipoRCPersonas.id_moneda = 1; //1 corresponde a Bs.
+      vTipoRCPersonas.descripcion = TextBoxPerDescripcion.Text.ToUpper();
+      vTipoRCPersonas.tipo_cambio = double.Parse(TextBoxTipoCambio.Text);
+      vTipoRCPersonas.id_estado = 1;
+
+      //validar si existe el registro de la persona
+      if (string.Empty != TextBoxPerIdItem.Text)
+      {
+        //Existe el registro del tercero
+        vIdItem = long.Parse(TextBoxPerIdItem.Text);
+        vTipoRCPersonas.id_item = vIdItem;
+        vResultado = CotizacionICRL.RCPersonaModificar(vTipoRCPersonas);
+      }
+      else
+      {
+        //NO Existe el registro del tercero
+        vResultado = CotizacionICRL.RCPersonaRegistrar(vTipoRCPersonas);
+      }
+
+      if (vResultado)
+      {
+        LabelDatosPersonaMsj.Text = "Registro Actualizado Exitosamente";
+        vIdItem = FValidaTienePersona(vIdFlujo, vIdCotizacion);
+      }
+      else
+      {
+        LabelDatosPersonaMsj.Text = "El Registro no se actualizo correctamente";
+      }
+
+      TextBoxPerIdItem.Text = string.Empty;
+      PModificarPersona(false);
+      ButtonPerAgregar.Visible = true;
+      ButtonPerGrabar.Visible = false;
+      ButtonPerCancelar.Visible = false;
+      PLimpiarPersonaDet();
+      pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+    }
+
+    protected void ButtonPerCancelar_Click(object sender, EventArgs e)
+    {
+      TextBoxPerIdItem.Text = string.Empty;
+      PModificarPersona(false);
+      ButtonPerAgregar.Visible = true;
+      ButtonPerGrabar.Visible = false;
+      ButtonPerCancelar.Visible = false;
+    }
+    #endregion
+
+    #region Grilla PersonasDet
+
+    protected void pCargaGrillaPersonas(int pIdFlujo, int pIdCotizacion)
+    {
+      BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
+      vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(pIdFlujo, pIdCotizacion);
+
+      GridViewPerDetalle.DataSource = vTipoRCPersonasTraer.RCPersonas.Select(RCPersonas => new
+      {
+        RCPersonas.id_item,
+        RCPersonas.nombre_apellido,
+        RCPersonas.numero_documento,
+        RCPersonas.tipo_gasto,
+        RCPersonas.monto_gasto,
+        RCPersonas.descripcion,
+      }).ToList();
+      GridViewPerDetalle.DataBind();
+    }
+
+    protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      string vTextoTemporal = string.Empty;
+
+      //Leer Registro de la grilla y cargar los valores a la ventana.
+
+      TextBoxPerTipoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[4].Text;
+      TextBoxPerMontoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[5].Text;
+      TextBoxPerDescripcion.Text = GridViewPerDetalle.SelectedRow.Cells[6].Text;
+
+      TextBoxPerIdItem.Text = GridViewPerDetalle.SelectedRow.Cells[1].Text;
+
+      PModificarPersonaDet(true);
+      ButtonPerAgregar.Visible = false;
+      ButtonPerGrabar.Visible = true;
+      ButtonPerCancelar.Visible = true;
+
+    }
+
+    protected void GridViewPerDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+      bool vResultado = false;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      long vIdItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      string vTextoSecuencial = string.Empty;
+      int vIndex = 0;
+      int vSecuencial = 0;
+
+      vIndex = Convert.ToInt32(e.RowIndex);
+      vSecuencial = Convert.ToInt32(GridViewPerDetalle.DataKeys[vIndex].Value);
+      vIdItem = Convert.ToInt64(vSecuencial);
+
+
+
+      //vIdItem = long.Parse(GridViewPerDetalle.SelectedRow.Cells[1].Text);
+
+      //CotizacionICRL.RCPersonaModificar
+
+      vResultado = BD.CotizacionICRL.RCPersonasBorrar(vIdFlujo, vIdCotizacion, vIdItem);
+      if (vResultado)
+      {
+        LabelDatosPersonaMsj.Text = "Registro Borrado exitosamente";
+        PModificarPersona(false);
+        ButtonPerAgregar.Visible = true;
+        ButtonPerGrabar.Visible = false;
+        ButtonPerCancelar.Visible = false;
+      }
+      else
+      {
+        LabelDatosPersonaMsj.Text = "El Registro no pudo ser Borrado";
+      }
+      TextBoxPerIdItem.Text = string.Empty;
+      pCargaGrillaPersonas(vIdFlujo, vIdCotizacion);
+    }
+    #endregion
+
+    #region GenerarOrden
+
+    protected void ButtonGenerarOrden_Click(object sender, EventArgs e)
+    {
+      bool vResultado = false;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      int vContador = 1;
+      StringBuilder vSBNumeroOrden = new StringBuilder();
+      string vNumeroOrden = string.Empty;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      //generar numero de orden
+      vNumeroOrden = string.Empty;
+      vSBNumeroOrden.Clear();
+      vSBNumeroOrden.Append("OP-");
+      vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+      vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+      vSBNumeroOrden.Append(vNumeroOrden);
+      vSBNumeroOrden.Append("-PE-");
+      vNumeroOrden = vContador.ToString();
+      vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+      vNumeroOrden = vSBNumeroOrden.ToString();
+
+      CotizacionICRL.TipoOrden vTipoOrden = new CotizacionICRL.TipoOrden();
+      vTipoOrden.id_flujo = vIdFlujo;
+      vTipoOrden.id_cotizacion = vIdCotizacion;
+      vTipoOrden.tipo_origen = (short)AccesoDatos.TipoInspeccion.RCPersonas;
+      vTipoOrden.numero_orden = vNumeroOrden;
+      vTipoOrden.fecha_orden = DateTime.Today;
+      vTipoOrden.descripcion = TextBoxPerNombreTer.Text.ToUpper();
+      vTipoOrden.monto_us = 0;
+      vTipoOrden.id_estado = 1;
+
+      //Sumar los gastos del detalle
+      BD.CotizacionICRL.TipoRCPersonasTraer vTipoRCPersonasTraer;
+      vTipoRCPersonasTraer = CotizacionICRL.RCPersonasTraer(vIdFlujo, vIdCotizacion);
+
+      double vSumaGastos = 0;
+      DataSet vDataSetPer = vTipoRCPersonasTraer.dsRCPersonas;
+
+      int vIndiceDataTable = vDataSetPer.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        for (int i = 0; i < vDataSetPer.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          double vMontoGasto = 0;
+          string vTextoMontoGasto = string.Empty;
+          vTextoMontoGasto = vDataSetPer.Tables[vIndiceDataTable].Rows[i][5].ToString();
+          try
+          {
+            vMontoGasto = (double)vDataSetPer.Tables[vIndiceDataTable].Rows[i][5];
+          }
+          catch (Exception)
+          {
+            vMontoGasto = 0;
+          }
+
+          vSumaGastos = vSumaGastos + vMontoGasto;
+        }
+      }
+      vTipoOrden.monto_bs = vSumaGastos;
+      vResultado = CotizacionICRL.OrdenRegistrar(vTipoOrden);
+      if (vResultado)
+      {
+        LabelDatosPersonaMsj.Text = "Orden creada exitosamente";
+      }
+      else
+      {
+        LabelDatosPersonaMsj.Text = "la Orden no se pudo crear";
+      }
+      pCargaOrdenes(vIdFlujo, vIdCotizacion);
+    }
+
+    protected void pCargaOrdenes(int pIdFlujo, int pIdCotizacion)
+    {
+      BD.CotizacionICRL.TipoOrdenTraer vTipoOrdenTraer;
+      vTipoOrdenTraer = CotizacionICRL.OrdenTraer(pIdFlujo, pIdCotizacion);
+
+      GridViewOrdenes.DataSource = vTipoOrdenTraer.Ordenes.Select(Ordenes => new
+      {
+        Ordenes.numero_orden,
+        Ordenes.id_estado,
+        Ordenes.descripcion,
+        Ordenes.monto_bs
+      }).ToList();
+      GridViewOrdenes.DataBind();
+    }
+
+    protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+      int vIndex = 0;
+      string vNumeroOrden = string.Empty;
+      string vProveedor = string.Empty;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      if (0 == e.CommandName.CompareTo("Imprimir"))
+      {
+        string vTextoSecuencial = string.Empty;
+        vIndex = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PImprimeFormularioCotiRCPersonas(vNumeroOrden);
+      }
+
+      if (0 == e.CommandName.CompareTo("Ver"))
+      {
+        string vTextoSecuencial = string.Empty;
+        vIndex = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PVerFormularioCotiRCPersonas(vNumeroOrden);
+      }
+
+      if (0 == e.CommandName.CompareTo("SubirOnBase"))
+      {
+        int vResultado = 0;
+        string vTextoSecuencial = string.Empty;
+
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+
+
+        //Grabar en la tabla
+        int vIdFlujo = 0;
+        int vIdCotizacion = 0;
+        int vTipoItem = 0;
+
+        vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+        vResultado = vAccesoDatos.fActualizaLiquidacionPE(vIdFlujo, vIdCotizacion, vNumeroOrden);
+        PSubeFormularioCotiRCPersonas(vNumeroOrden);
+      }
+    }
+
+    protected void PImprimeFormularioCotiRCPersonas(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      int vIdFlujo = 0;
+      int vIdInspeccion = 0;
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiRCPersonas" + pNroOrden;
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "RC PERSONAS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiRCPersonas = from c in db.cotizacion_rc_personas
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   c.nombre_apellido,
+                                   c.numero_documento,
+                                   c.telefono_contacto,
+                                   c.tipo_gasto,
+                                   c.descripcion,
+                                   c.monto_gasto,
+                                   c.rembolso
+                                 };
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCPersonas.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCPersonas);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] VArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a cliente
+      Response.Buffer = true;
+      Response.Clear();
+      Response.ContentType = mimeType;
+      Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
+      Response.BinaryWrite(VArrayBytes); // se crea el archivo
+      Response.Flush(); // se envia al cliente para su descarga
+    }
+
+    protected void PVerFormularioCotiRCPersonas(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "RC PERSONAS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiRCPersonas = from c in db.cotizacion_rc_personas
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   c.nombre_apellido,
+                                   c.numero_documento,
+                                   c.telefono_contacto,
+                                   c.tipo_gasto,
+                                   c.descripcion,
+                                   c.monto_gasto,
+                                   c.rembolso
+                                 };
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCPersonas.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCPersonas);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      ReportViewerCoti.ShowToolBar = false;
+      ReportViewerCoti.Visible = true;
+
+    }
+
+    protected void PSubeFormularioCotiRCPersonas(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      string vNumFlujo = TextBoxNroFlujo.Text;
+      string vTipoDocumental = string.Empty;
+      string vNombreUsuario = string.Empty;
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiRCPersonas" + pNroOrden;
+
+        vTipoDocumental = "RE - Orden de Indemnizacion";
+
+      vNombreUsuario = Session["IdUsr"].ToString();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "RC PERSONAS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiRCPersonas = from c in db.cotizacion_rc_personas
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   c.nombre_apellido,
+                                   c.numero_documento,
+                                   c.telefono_contacto,
+                                   c.tipo_gasto,
+                                   c.descripcion,
+                                   c.monto_gasto,
+                                   c.rembolso
+                                 };
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCPersonas.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCPersonas);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] vArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a OnBase
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FEnviaArchivoOnBase(vNumFlujo, vTipoDocumental, vNombreUsuario, vArrayBytes);
+      if (vResultado > 0)
+      {
+        LabelMensaje.Text = "Documento subido exitosamente a OnBase";
+      }
+      else
+      {
+        LabelMensaje.Text = "error, El Documento no fue subido a OnBase";
+      }
+    }
+
+    protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
+    {
+      ReportViewerCoti.Visible = false;
+      ButtonCierraVerRep.Visible = false;
+    }
+
+    #endregion
+  }
 }

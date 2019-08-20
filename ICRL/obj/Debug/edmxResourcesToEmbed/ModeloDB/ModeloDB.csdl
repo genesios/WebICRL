@@ -1332,6 +1332,11 @@
       <Parameter Name="Proveedor" Mode="In" Type="String" />
       <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="paActualizaLiquidacion001_PE">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="NumeroOrden" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="paActualizaLiquidacion001_RP">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
@@ -1339,6 +1344,24 @@
       <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="paActualizaLiquidacion001_VE">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_DP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_RP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_VE">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
       <Parameter Name="Proveedor" Mode="In" Type="String" />
