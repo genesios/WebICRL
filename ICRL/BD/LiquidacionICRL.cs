@@ -121,7 +121,10 @@ namespace ICRL.BD
       TipoRespuestaGrilla objRespuesta = new TipoRespuestaGrilla();
       string strSelect, strWhere, strGroupby;
       strSelect = "SELECT l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,sum(l.[precious]) as Total, SUM(CASE liquidacion WHEN 'True' THEN preciobs WHEN 'False' THEN 0 END) as sumabspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN preciobs END) as sumabsnopagado,SUM(CASE liquidacion WHEN 'True' THEN precious WHEN 'False' THEN 0 END) as sumauspagado, SUM(CASE liquidacion WHEN 'True' THEN 0 WHEN 'False' THEN precious END) as sumausnopagado,f.flujoOnBase,f.nombreAsegurado,f.placaVehiculo,f.idFlujo FROM liquidacion001 as l inner join Flujo as f ON (l.id_flujo=f.idFlujo) ";
-      strWhere = "WHERE f.estado=" + Estado.ToString() + " and l.fecha_orden>= @fecha_orden_emp and l.fecha_orden <= @fecha_orden_ter ";
+      if (Estado > 0)
+        strWhere = "WHERE f.estado=" + Estado.ToString() + " and l.fecha_orden>= @fecha_orden_emp and l.fecha_orden <= @fecha_orden_ter ";
+      else
+        strWhere = "WHERE l.fecha_orden>= @fecha_orden_emp and l.fecha_orden <= @fecha_orden_ter ";
       strGroupby = "GROUP BY l.[numero_orden],l.[fecha_orden],l.[proveedor],l.id_estado,f.flujoOnBase,f.nombreAsegurado,f.placaVehiculo,f.idFlujo";
 
       string strComando;

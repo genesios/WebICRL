@@ -558,6 +558,17 @@ namespace ICRL.BD
       return vResultado;
     }
 
+    public int fActualizaLiquidacionOB(int pIdFlujo, int pIdCotizacion, string pNumeroOrden)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaLiquidacion001_OB(pIdFlujo, pIdCotizacion, pNumeroOrden);
+      }
+
+      return vResultado;
+    }
+
     public int fActualizaOrdenesCotiDP(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
     {
       int vResultado = 0;

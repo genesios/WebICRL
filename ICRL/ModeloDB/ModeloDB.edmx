@@ -1186,6 +1186,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Parameter Name="Proveedor" Type="char" Mode="In" />
           <Parameter Name="idTipoItem" Type="int" Mode="In" />
         </Function>
+        <Function Name="paActualizaLiquidacion001_OB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="paActualizaLiquidacion001_PE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFlujo" Type="int" Mode="In" />
           <Parameter Name="idCotizacion" Type="int" Mode="In" />
@@ -2718,6 +2723,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <Parameter Name="Proveedor" Mode="In" Type="String" />
             <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="paActualizaLiquidacion001_OB">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroOrden" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="paActualizaLiquidacion001_PE">
             <Parameter Name="idFlujo" Mode="In" Type="Int32" />
             <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
@@ -3731,6 +3741,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />

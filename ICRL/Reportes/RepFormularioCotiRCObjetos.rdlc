@@ -9,12 +9,12 @@
       </ConnectionProperties>
       <rd:DataSourceID>5944b412-3f96-4af6-a52f-797a31f955fb</rd:DataSourceID>
     </DataSource>
-    <DataSource Name="CotizacionRCPersonas">
+    <DataSource Name="CotizacionRCObjetos">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>f70be5c4-c660-4c4e-ae0e-ed2612f3963c</rd:DataSourceID>
+      <rd:DataSourceID>8f64cbca-f18f-42d6-828a-13a8aea4d8bc</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -88,7 +88,7 @@
     </DataSet>
     <DataSet Name="DataSet2">
       <Query>
-        <DataSourceName>CotizacionRCPersonas</DataSourceName>
+        <DataSourceName>CotizacionRCObjetos</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -108,16 +108,16 @@
           <DataField>telefono_contacto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="tipo_gasto">
-          <DataField>tipo_gasto</DataField>
+        <Field Name="tipo_item">
+          <DataField>tipo_item</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="descripcion">
           <DataField>descripcion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="monto_gasto">
-          <DataField>monto_gasto</DataField>
+        <Field Name="monto_item">
+          <DataField>monto_item</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
         <Field Name="rembolso">
@@ -126,8 +126,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>CotizacionRCPersonas</rd:DataSetName>
-        <rd:SchemaPath>C:\Repo\Git\vs\gnesios\WebICRL\ICRL\DS\CotizacionRCPersonas.xsd</rd:SchemaPath>
+        <rd:DataSetName>CotizacionRCObjetos</rd:DataSetName>
+        <rd:SchemaPath>C:\Repo\Git\vs\gnesios\WebICRL\ICRL\DS\CotizacionRCObjetos.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -710,7 +710,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Detalle RC Personas</Value>
+                    <Value>Detalle RC Objetos</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1321,19 +1321,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.17621in</Width>
+                  <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78125in</Width>
+                  <Width>0.72041in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.18048in</Width>
+                  <Width>1.41134in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.3325in</Width>
+                  <Width>1.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.79672in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -1352,7 +1352,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Nombre y Apellidos</Value>
+                                  <Value>Nombre y Apellido</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1418,7 +1418,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Gasto</Value>
+                                  <Value>Item</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1614,14 +1614,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="tipo_gasto">
+                        <Textbox Name="tipo_item">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tipo_gasto.Value</Value>
+                                  <Value>=Fields!tipo_item.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1631,7 +1631,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>tipo_gasto</rd:DefaultName>
+                          <rd:DefaultName>tipo_item</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1680,14 +1680,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="monto_gasto">
+                        <Textbox Name="monto_item">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!monto_gasto.Value</Value>
+                                  <Value>=Fields!monto_item.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1697,7 +1697,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>monto_gasto</rd:DefaultName>
+                          <rd:DefaultName>monto_item</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1866,7 +1866,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>4.07167in</Height>
+        <Height>4.155in</Height>
         <Style>
           <Border>
             <Style>Solid</Style>

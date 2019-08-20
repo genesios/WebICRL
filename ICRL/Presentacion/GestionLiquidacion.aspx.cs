@@ -49,14 +49,16 @@ namespace ICRL.Presentacion
     #region Metodos de Soporte
     private void InicializarRangosFechaBusqueda()
     {
+      DateTime hoy = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
       if (string.IsNullOrWhiteSpace(txbFechaDesde.Text))
       {
-        txbFechaDesde.Text = DateTime.Now.ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaDesde.Text = hoy.ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
       }
 
       if (string.IsNullOrWhiteSpace(txbFechaHasta.Text))
       {
-        txbFechaHasta.Text = DateTime.Now.AddMonths(1).ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaHasta.Text = hoy.AddMonths(1).ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
       }
     }
     private void RecuperarDatosOrdenesPago()
@@ -111,6 +113,8 @@ namespace ICRL.Presentacion
         ddlEstado.DataValueField = "codigo";
         ddlEstado.DataTextField = "descripcion";
         ddlEstado.DataBind();
+
+        ddlEstado.Items.Insert(0, new ListItem("TODOS", "0"));
 
         LabelMensaje.Visible = false;
       }

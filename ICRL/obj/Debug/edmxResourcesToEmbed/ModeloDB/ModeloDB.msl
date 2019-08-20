@@ -964,6 +964,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />

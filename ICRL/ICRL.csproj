@@ -244,6 +244,17 @@
     <Content Include="DS\CotizacionRCPersonas.xsc">
       <DependentUpon>CotizacionRCPersonas.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\CotizacionRCObjetos.xsc">
+      <DependentUpon>CotizacionRCObjetos.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionRCObjetos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionRCObjetos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionRCObjetos.xss">
+      <DependentUpon>CotizacionRCObjetos.xsd</DependentUpon>
+    </Content>
     <None Include="DS\CotizacionRCPersonas.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -532,6 +543,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CotizacionFlujo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionRCObjetos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionRCObjetos.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS\CotizacionRCPersonas.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -937,6 +953,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\RepFormularioCotiDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCObjetos.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCPersonas.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehicular.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRoboParcial.rdlc" />
