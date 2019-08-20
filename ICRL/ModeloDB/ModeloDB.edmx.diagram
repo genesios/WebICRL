@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34683ca7e6934bf881f98589a9e30c31" Name="Diagram1">
+      <Diagram DiagramId="d5a6261d996640edbc0eebe23070a68d" Name="Diagram1">
         <EntityTypeShape EntityType="LBCDesaModelo.Asegurado" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Contador" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.CotiDaniosPropios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
@@ -48,7 +48,7 @@
         <EntityTypeShape EntityType="LBCDesaModelo.ItemTaller" Width="1.5" PointX="11.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Liquidacion" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.liquidacion001" Width="1.5" PointX="19.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LBCDesaModelo.liquidacion001_factura" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LBCDesaModelo.liquidacion001_factura" Width="1.5" PointX="19.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionDetalle" Width="1.5" PointX="5.25" PointY="27" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.LiquidacionFacturas" Width="1.5" PointX="5.25" PointY="30.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Nomenclador" Width="1.5" PointX="13.75" PointY="20.75" IsExpanded="true" />

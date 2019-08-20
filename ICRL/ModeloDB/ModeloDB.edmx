@@ -866,6 +866,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="id_item" Type="bigint" Nullable="false" />
           <Property Name="id_tipo_item" Type="smallint" />
           <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_orden" Type="datetime" />
           <Property Name="proveedor" Type="varchar" MaxLength="150" />
           <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
           <Property Name="preciobs" Type="float" />
@@ -875,6 +876,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="liquidacion" Type="bit" />
           <Property Name="num_factura" Type="varchar" MaxLength="20" />
           <Property Name="id_estado" Type="smallint" />
+          <Property Name="fecha_liquidacion" Type="datetime" />
         </EntityType>
         <EntityType Name="liquidacion001_factura">
           <Key>
@@ -888,6 +890,9 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="fecha_entrega" Type="datetime" />
           <Property Name="id_moneda" Type="smallint" />
           <Property Name="monto" Type="float" />
+          <Property Name="observaciones" Type="varchar" MaxLength="200" />
+          <Property Name="asociada" Type="bit" />
+          <Property Name="tipo_cambio" Type="float" />
         </EntityType>
         <EntityType Name="LiquidacionDetalle">
           <Key>
@@ -1175,7 +1180,37 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="paActualizaLiquidacion001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="paActualizaLiquidacion001_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paActualizaLiquidacion001_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paActualizaOrdenesCotizacion_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paActualizaOrdenesCotizacion_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="Proveedor" Type="char" Mode="In" />
+          <Parameter Name="idTipoItem" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paActualizaOrdenesCotizacion_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFlujo" Type="int" Mode="In" />
           <Parameter Name="idCotizacion" Type="int" Mode="In" />
           <Parameter Name="Proveedor" Type="char" Mode="In" />
@@ -2187,6 +2222,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="id_item" Type="Int64" Nullable="false" />
           <Property Name="id_tipo_item" Type="Int16" />
           <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_orden" Type="DateTime" Precision="3" />
           <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="preciobs" Type="Double" />
@@ -2196,6 +2232,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="liquidacion" Type="Boolean" />
           <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int16" />
+          <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="liquidacion001_factura">
           <Key>
@@ -2209,6 +2246,9 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
           <Property Name="id_moneda" Type="Int16" />
           <Property Name="monto" Type="Double" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="asociada" Type="Boolean" />
+          <Property Name="tipo_cambio" Type="Double" />
         </EntityType>
         <EntityType Name="LiquidacionDetalle">
           <Key>
@@ -2667,7 +2707,37 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioRol" EntitySet="UsuarioRol" />
           </AssociationSet>
-          <FunctionImport Name="paActualizaLiquidacion001">
+          <FunctionImport Name="paActualizaLiquidacion001_DP">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaLiquidacion001_RP">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaLiquidacion001_VE">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaOrdenesCotizacion_DP">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaOrdenesCotizacion_RP">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Proveedor" Mode="In" Type="String" />
+            <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaOrdenesCotizacion_VE">
             <Parameter Name="idFlujo" Mode="In" Type="Int32" />
             <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
             <Parameter Name="Proveedor" Mode="In" Type="String" />
@@ -3497,6 +3567,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="id_item" ColumnName="id_item" />
                 <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
                 <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
                 <ScalarProperty Name="proveedor" ColumnName="proveedor" />
                 <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
                 <ScalarProperty Name="preciobs" ColumnName="preciobs" />
@@ -3506,6 +3577,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
                 <ScalarProperty Name="num_factura" ColumnName="num_factura" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3519,6 +3591,9 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
                 <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="asociada" ColumnName="asociada" />
+                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3645,7 +3720,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
+          <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
+          <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
+          <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
           <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
           <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
         </EntityContainerMapping>

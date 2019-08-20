@@ -9,6 +9,7 @@ using ICRL.ModeloDB;
 using ICRL.BD;
 using System.Data;
 using System.Text;
+using Microsoft.Reporting.WebForms;
 
 namespace ICRL.Presentacion
 {
@@ -1426,36 +1427,38 @@ namespace ICRL.Presentacion
 
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      int vIndex = 0;
+      string vNumeroOrden = string.Empty;
+      string vProveedor = string.Empty;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
       if (0 == e.CommandName.CompareTo("Imprimir"))
       {
         string vTextoSecuencial = string.Empty;
-        int vIndex = 0;
-        int vSecuencial = 0;
+        vIndex = 0;
 
         vIndex = Convert.ToInt32(e.CommandArgument);
-        vSecuencial = Convert.ToInt32(GridViewOrdenes.DataKeys[vIndex].Value);
-        //PImprimeOrden(vSecuencial, vTipoCotizacion);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PImprimeFormularioCotiDaniosPropios(vNumeroOrden);
       }
 
       if (0 == e.CommandName.CompareTo("Ver"))
       {
         string vTextoSecuencial = string.Empty;
-        int vIndex = 0;
-        int vSecuencial = 0;
+        vIndex = 0;
 
         vIndex = Convert.ToInt32(e.CommandArgument);
-        vSecuencial = Convert.ToInt32(GridViewOrdenes.DataKeys[vIndex].Value);
-        //PVerOrden(vSecuencial, vTipoCotizacion);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PVerFormularioCotiDaniosPropios(vNumeroOrden);
       }
 
       if (0 == e.CommandName.CompareTo("SubirOnBase"))
       {
         int vResultado = 0;
         string vTextoSecuencial = string.Empty;
-        int vIndex = 0;
-        string vNumeroOrden = string.Empty;
-        string vProveedor = string.Empty;
-        AccesoDatos vAccesoDatos = new AccesoDatos();
+        
 
         vIndex = Convert.ToInt32(e.CommandArgument);
         vNumeroOrden = (string) GridViewOrdenes.DataKeys[vIndex].Value;
@@ -1478,11 +1481,8 @@ namespace ICRL.Presentacion
           vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
         }
 
-        vResultado = vAccesoDatos.fActualizaLiquidacion(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
-
-
-        
-        
+        vResultado = vAccesoDatos.fActualizaLiquidacionDP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+        PSubeFormularioCotiDaniosPropios(vNumeroOrden);
       }
     }
 
@@ -1515,7 +1515,7 @@ namespace ICRL.Presentacion
           vNumeroOrden = TextBoxNroFlujo.Text.Trim();
           vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
           vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-");
+          vSBNumeroOrden.Append("-DP-");
           vNumeroOrden = vContador.ToString();
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
@@ -1525,7 +1525,25 @@ namespace ICRL.Presentacion
       }
 
       BD.CotizacionICRL.DaniosPropiosSumatoriaModificarTodos(vDatasetOrdenes);
-      FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+
+      //actualizamos el detalle de las ordenes generadas
+      vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+      vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = string.Empty;
+          vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          vAccesoDatos.fActualizaOrdenesCotiDP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+          vContador++;
+        }
+      }
+
+      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
 
     }
 
@@ -1558,7 +1576,7 @@ namespace ICRL.Presentacion
           vNumeroOrden = TextBoxNroFlujo.Text.Trim();
           vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
           vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-");
+          vSBNumeroOrden.Append("-DP-");
           vNumeroOrden = vContador.ToString();
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
@@ -1568,8 +1586,323 @@ namespace ICRL.Presentacion
       }
 
       BD.CotizacionICRL.DaniosPropiosSumatoriaModificarTodos(vDatasetOrdenes);
-      FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
 
+      //actualizamos el detalle de las ordenes generadas
+      vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+      vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = string.Empty;
+          vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          vAccesoDatos.fActualizaOrdenesCotiDP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+          vContador++;
+        }
+      }
+
+      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+    }
+
+    protected void PImprimeFormularioCotiDaniosPropios(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      int vIdFlujo = 0;
+      int vIdInspeccion = 0;
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiDaniosPropios" + pNroOrden;
+
+      var vListaFlujo = from f in db.Flujo 
+                        join s in db.cotizacion_danios_propios_sumatoria on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "DAÑOS PROPIOS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
+                                    join f in db.Flujo on c.id_flujo equals f.idFlujo
+                                    where (c.numero_orden == pNroOrden)
+                                    orderby c.item_descripcion
+                                    select new
+                                    {
+                                      f.nombreAsegurado,
+                                      f.telefonocelAsegurado,
+                                      cobertura = "DAÑOS PROPIOS",
+                                      f.fechaSiniestro,
+                                      f.flujoOnBase,
+                                      f.numeroReclamo,
+                                      f.numeroPoliza,
+                                      f.marcaVehiculo,
+                                      f.modeloVehiculo,
+                                      f.anioVehiculo,
+                                      f.placaVehiculo,
+                                      f.chasisVehiculo,
+                                      c.numero_orden,
+                                      c.proveedor,
+                                      c.item_descripcion,
+                                      c.id_moneda,
+                                      c.precio_final,
+                                      c.tipo_cambio
+                                    };
+
+      var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
+                                        where (c.numero_orden == pNroOrden)
+                                        select new
+                                        {
+                                          c.numero_orden,
+                                          c.proveedor,
+                                          c.moneda_orden,
+                                          c.monto_orden,
+                                          c.id_tipo_descuento_orden,
+                                          c.descuento_proveedor,
+                                          c.deducible,
+                                          c.monto_final
+                                        };
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
+      ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] VArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a cliente
+      Response.Buffer = true;
+      Response.Clear();
+      Response.ContentType = mimeType;
+      Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
+      Response.BinaryWrite(VArrayBytes); // se crea el archivo
+      Response.Flush(); // se envia al cliente para su descarga
+    }
+
+    protected void PVerFormularioCotiDaniosPropios(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_danios_propios_sumatoria on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "DAÑOS PROPIOS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
+                                    join f in db.Flujo on c.id_flujo equals f.idFlujo
+                                    where (c.numero_orden == pNroOrden)
+                                    orderby c.item_descripcion
+                                    select new
+                                    {
+                                      f.nombreAsegurado,
+                                      f.telefonocelAsegurado,
+                                      cobertura = "DAÑOS PROPIOS",
+                                      f.fechaSiniestro,
+                                      f.flujoOnBase,
+                                      f.numeroReclamo,
+                                      f.numeroPoliza,
+                                      f.marcaVehiculo,
+                                      f.modeloVehiculo,
+                                      f.anioVehiculo,
+                                      f.placaVehiculo,
+                                      f.chasisVehiculo,
+                                      c.numero_orden,
+                                      c.proveedor,
+                                      c.item_descripcion,
+                                      c.id_moneda,
+                                      c.precio_final,
+                                      c.tipo_cambio
+                                    };
+
+      var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
+                                        where (c.numero_orden == pNroOrden)
+                                        select new
+                                        {
+                                          c.numero_orden,
+                                          c.proveedor,
+                                          c.moneda_orden,
+                                          c.monto_orden,
+                                          c.id_tipo_descuento_orden,
+                                          c.descuento_proveedor,
+                                          c.deducible,
+                                          c.monto_final
+                                        };
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
+      ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      ReportViewerCoti.ShowToolBar = false;
+      ReportViewerCoti.Visible = true;
+
+    }
+
+    protected void PSubeFormularioCotiDaniosPropios(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      string vNumFlujo = TextBoxNroFlujo.Text;
+      string vTipoDocumental = string.Empty;
+      string vNombreUsuario = string.Empty;
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiDaniosPropios" + pNroOrden;
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        vTipoDocumental = "RE - Orden de Trabajo";
+      }
+      else
+      {
+        vTipoDocumental = "RE - Orden de Compra";
+      }
+
+      vNombreUsuario = Session["IdUsr"].ToString();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_danios_propios_sumatoria on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "DAÑOS PROPIOS",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
+                                    join f in db.Flujo on c.id_flujo equals f.idFlujo
+                                    where (c.numero_orden == pNroOrden)
+                                    orderby c.item_descripcion
+                                    select new
+                                    {
+                                      f.nombreAsegurado,
+                                      f.telefonocelAsegurado,
+                                      cobertura = "DAÑOS PROPIOS",
+                                      f.fechaSiniestro,
+                                      f.flujoOnBase,
+                                      f.numeroReclamo,
+                                      f.numeroPoliza,
+                                      f.marcaVehiculo,
+                                      f.modeloVehiculo,
+                                      f.anioVehiculo,
+                                      f.placaVehiculo,
+                                      f.chasisVehiculo,
+                                      c.numero_orden,
+                                      c.proveedor,
+                                      c.item_descripcion,
+                                      c.id_moneda,
+                                      c.precio_final,
+                                      c.tipo_cambio
+                                    };
+
+      var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
+                                        where (c.numero_orden == pNroOrden)
+                                        select new
+                                        {
+                                          c.numero_orden,
+                                          c.proveedor,
+                                          c.moneda_orden,
+                                          c.monto_orden,
+                                          c.id_tipo_descuento_orden,
+                                          c.descuento_proveedor,
+                                          c.deducible,
+                                          c.monto_final
+                                        };
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
+      ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] vArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a OnBase
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FEnviaArchivoOnBase(vNumFlujo, vTipoDocumental, vNombreUsuario, vArrayBytes);
+      if(vResultado > 0)
+      {
+        LabelMensaje.Text = "Documento subido exitosamente a OnBase";
+      }
+      else
+      {
+        LabelMensaje.Text = "error, El Documento no fue subido a OnBase";
+      }
+    }
+
+    protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
+    {
+      ReportViewerCoti.Visible = false;
+      ButtonCierraVerRep.Visible = false;
     }
   }
 }

@@ -82,7 +82,7 @@ namespace ICRL.ModeloDB
         public virtual DbSet<CotiRoboParcial> CotiRoboParcial { get; set; }
         public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
     
-        public virtual int paActualizaLiquidacion001(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        public virtual int paActualizaLiquidacion001_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
         {
             var idFlujoParameter = idFlujo.HasValue ?
                 new ObjectParameter("idFlujo", idFlujo) :
@@ -100,7 +100,112 @@ namespace ICRL.ModeloDB
                 new ObjectParameter("idTipoItem", idTipoItem) :
                 new ObjectParameter("idTipoItem", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_DP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
+        public virtual int paActualizaLiquidacion001_RP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_RP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
+        public virtual int paActualizaLiquidacion001_VE(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_VE", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
+        public virtual int paActualizaOrdenesCotizacion_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaOrdenesCotizacion_DP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
+        public virtual int paActualizaOrdenesCotizacion_RP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaOrdenesCotizacion_RP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+        }
+    
+        public virtual int paActualizaOrdenesCotizacion_VE(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var proveedorParameter = proveedor != null ?
+                new ObjectParameter("Proveedor", proveedor) :
+                new ObjectParameter("Proveedor", typeof(string));
+    
+            var idTipoItemParameter = idTipoItem.HasValue ?
+                new ObjectParameter("idTipoItem", idTipoItem) :
+                new ObjectParameter("idTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaOrdenesCotizacion_VE", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)

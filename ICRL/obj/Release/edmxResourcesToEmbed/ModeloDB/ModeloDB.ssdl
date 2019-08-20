@@ -125,6 +125,17 @@
     <Property Name="montoGasto" Type="decimal" Precision="18" Scale="0" />
     <Property Name="descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.CotiRCVehicular' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CotiRCVehicular">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCotizacion" Type="int" Nullable="false" />
+    <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
+  </EntityType>
   <EntityType Name="CotiReparacion">
     <Key>
       <PropertyRef Name="idItem" />
@@ -179,6 +190,17 @@
     <Property Name="recepcion" Type="bit" />
     <Property Name="fechaRecepcion" Type="datetime" />
     <Property Name="fechaEfectiva" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CotiRoboParcial">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCotizacion" Type="int" Nullable="false" />
+    <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
   </EntityType>
   <EntityType Name="Cotizacion">
     <Key>
@@ -245,6 +267,26 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="cotizacion_ordenes">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipo_origen" Type="smallint" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="20" />
+    <Property Name="fecha_orden" Type="datetime" />
+    <Property Name="descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="monto_bs" Type="float" />
+    <Property Name="monto_us" Type="float" />
+    <Property Name="id_estado" Type="smallint" />
   </EntityType>
   <EntityType Name="cotizacion_perdida_total_propio">
     <Key>
@@ -265,6 +307,7 @@
     <Property Name="asientos_cuero" Type="bit" />
     <Property Name="aros_magnesio" Type="bit" />
     <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+    <Property Name="completamente_pagado" Type="bit" />
     <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
     <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
     <Property Name="duenio_monto_1" Type="float" />
@@ -329,6 +372,7 @@
     <Property Name="asientos_cuero" Type="bit" />
     <Property Name="aros_magnesio" Type="bit" />
     <Property Name="observaciones_vehiculo" Type="varchar" MaxLength="350" />
+    <Property Name="completamente_pagado" Type="bit" />
     <Property Name="duenio_nombres_1" Type="varchar" MaxLength="150" />
     <Property Name="duenio_documento_1" Type="varchar" MaxLength="20" />
     <Property Name="duenio_monto_1" Type="float" />
@@ -464,6 +508,31 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="cotizacion_rc_vehicular_tercero">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="150" />
+    <Property Name="telefono" Type="varchar" MaxLength="20" />
+    <Property Name="documento" Type="varchar" MaxLength="30" />
+    <Property Name="color" Type="varchar" MaxLength="20" />
+    <Property Name="marca" Type="varchar" MaxLength="50" />
+    <Property Name="modelo" Type="varchar" MaxLength="50" />
+    <Property Name="placa" Type="varchar" MaxLength="50" />
+    <Property Name="anio" Type="varchar" MaxLength="10" />
+    <Property Name="chasis" Type="varchar" MaxLength="50" />
+    <Property Name="taller" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="cotizacion_robo_parcial">
     <Key>
@@ -515,6 +584,9 @@
     <Property Name="descuento_proveedor" Type="float" />
     <Property Name="deducible" Type="float" />
     <Property Name="monto_final" Type="float" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -775,6 +847,47 @@
     <Property Name="idCotizacion" Type="int" />
     <Property Name="fechaCreacion" Type="datetime" />
     <Property Name="estado" Type="int" />
+  </EntityType>
+  <EntityType Name="liquidacion001">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+    <Property Name="id_item" Type="bigint" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_orden" Type="datetime" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="preciobs" Type="float" />
+    <Property Name="precious" Type="float" />
+    <Property Name="fecha_recepcion" Type="datetime" />
+    <Property Name="inspeccion" Type="bit" />
+    <Property Name="liquidacion" Type="bit" />
+    <Property Name="num_factura" Type="varchar" MaxLength="20" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="fecha_liquidacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="liquidacion001_factura">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_factura" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numero_factura" Type="bigint" />
+    <Property Name="fecha_emision" Type="datetime" />
+    <Property Name="fecha_entrega" Type="datetime" />
+    <Property Name="id_moneda" Type="smallint" />
+    <Property Name="monto" Type="float" />
+    <Property Name="observaciones" Type="varchar" MaxLength="200" />
+    <Property Name="asociada" Type="bit" />
+    <Property Name="tipo_cambio" Type="float" />
   </EntityType>
   <EntityType Name="LiquidacionDetalle">
     <Key>
@@ -1062,6 +1175,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="paActualizaLiquidacion001_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaLiquidacion001_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaOrdenesCotizacion_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
   <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iIdFlujo" Type="int" Mode="In" />
     <Parameter Name="iValorContador" Type="int" Mode="InOut" />
@@ -1087,6 +1236,7 @@
     <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cotizacion_ordenes" EntityType="Self.cotizacion_ordenes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" Schema="dbo" store:Type="Tables" />
@@ -1112,6 +1262,8 @@
     <EntitySet Name="InspRoboParcial" EntityType="Self.InspRoboParcial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemTaller" EntityType="Self.ItemTaller" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="liquidacion001" EntityType="Self.liquidacion001" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="liquidacion001_factura" EntityType="Self.liquidacion001_factura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LiquidacionDetalle" EntityType="Self.LiquidacionDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LiquidacionFacturas" EntityType="Self.LiquidacionFacturas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nomenclador" EntityType="Self.Nomenclador" Schema="dbo" store:Type="Tables" />
@@ -1119,6 +1271,37 @@
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CotiRCVehicular].[secuencial] AS [secuencial], 
+    [CotiRCVehicular].[idCotizacion] AS [idCotizacion], 
+    [CotiRCVehicular].[tipoTaller] AS [tipoTaller]
+    FROM [dbo].[CotiRCVehicular] AS [CotiRCVehicular]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CotiRoboParcial].[secuencial] AS [secuencial], 
+    [CotiRoboParcial].[idCotizacion] AS [idCotizacion], 
+    [CotiRoboParcial].[tipoTaller] AS [tipoTaller]
+    FROM [dbo].[CotiRoboParcial] AS [CotiRoboParcial]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [cotizacion_rc_vehicular_tercero].[id_flujo] AS [id_flujo], 
+    [cotizacion_rc_vehicular_tercero].[id_cotizacion] AS [id_cotizacion], 
+    [cotizacion_rc_vehicular_tercero].[id_item] AS [id_item], 
+    [cotizacion_rc_vehicular_tercero].[nombre] AS [nombre], 
+    [cotizacion_rc_vehicular_tercero].[telefono] AS [telefono], 
+    [cotizacion_rc_vehicular_tercero].[documento] AS [documento], 
+    [cotizacion_rc_vehicular_tercero].[color] AS [color], 
+    [cotizacion_rc_vehicular_tercero].[marca] AS [marca], 
+    [cotizacion_rc_vehicular_tercero].[modelo] AS [modelo], 
+    [cotizacion_rc_vehicular_tercero].[placa] AS [placa], 
+    [cotizacion_rc_vehicular_tercero].[anio] AS [anio], 
+    [cotizacion_rc_vehicular_tercero].[chasis] AS [chasis], 
+    [cotizacion_rc_vehicular_tercero].[taller] AS [taller]
+    FROM [dbo].[cotizacion_rc_vehicular_tercero] AS [cotizacion_rc_vehicular_tercero]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
       <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
       <End Role="CotiPerdidaTotalReferencia" EntitySet="CotiPerdidaTotalReferencia" />

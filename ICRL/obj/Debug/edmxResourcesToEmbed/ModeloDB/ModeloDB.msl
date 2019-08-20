@@ -810,6 +810,7 @@
           <ScalarProperty Name="id_item" ColumnName="id_item" />
           <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
           <ScalarProperty Name="proveedor" ColumnName="proveedor" />
           <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
           <ScalarProperty Name="preciobs" ColumnName="preciobs" />
@@ -819,6 +820,7 @@
           <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
           <ScalarProperty Name="num_factura" ColumnName="num_factura" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -832,6 +834,9 @@
           <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
           <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
           <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="asociada" ColumnName="asociada" />
+          <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -958,7 +963,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
     <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
     <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
   </EntityContainerMapping>

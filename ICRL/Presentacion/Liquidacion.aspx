@@ -215,7 +215,7 @@
           Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionTipoCambio"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="covTipoCambio" runat="server" ControlToValidate="txbTipoCambio" ValidationGroup="ValidacionTipoCambio"
           Type="Double" Operator="DataTypeCheck" Text="* Valor inválido" Display="Dynamic" CssClass="errormessage"></asp:CompareValidator><br />
-        <asp:TextBox ID="txbTipoCambio" runat="server" MaxLength="5" Enabled="false"></asp:TextBox>
+        <asp:TextBox ID="txbTipoCambio" runat="server" MaxLength="5"></asp:TextBox>
       </div>
     </td></tr>
     <tr><td>
@@ -278,6 +278,7 @@
               <asp:Label ID="tipo_origen" runat="server" Text='<%# Eval("tipo_origen") %>'></asp:Label>
               <asp:Label ID="id_item" runat="server" Text='<%# Eval("id_item") %>'></asp:Label>
               <asp:Label ID="id_tipo_item" runat="server" Text='<%# Eval("id_tipo_item") %>'></asp:Label>
+              <asp:Label ID="fecha_orden" runat="server" Text='<%# Eval("fecha_orden") %>'></asp:Label>
             </ItemTemplate>
           </asp:TemplateField>
           <asp:TemplateField Visible="false">

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using LbcOnBaseWS;
 using ICRL.ModeloDB;
 using ICRL.BD;
+using System.Data;
+using System.Text;
 
 namespace ICRL.Presentacion
 {
@@ -1548,5 +1550,179 @@ namespace ICRL.Presentacion
             ButtonVehGrabar.Visible = false;
             ButtonVehCancelar.Visible = false;
         }
+
+    private int FLlenarGrillaOrdenes(int pIdFlujo, int pIdCotizacion, short pTipoItem)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        var vLst = from cvhs in db.cotizacion_rc_vehicular_sumatoria
+                   where (cvhs.id_flujo == pIdFlujo)
+                      && (cvhs.id_cotizacion == pIdCotizacion)
+                   select new
+                   {
+                     cvhs.numero_orden,
+                     cvhs.id_estado,
+                     cvhs.proveedor,
+                     moneda = "Bs.",
+                     cvhs.monto_orden,
+                     cvhs.id_tipo_descuento_orden,
+                     cvhs.descuento_proveedor,
+                     cvhs.deducible,
+                     cvhs.monto_final,
+                   };
+
+        GridViewOrdenes.DataSource = vLst.ToList();
+        GridViewOrdenes.DataBind();
+
+      }
+
+      return vResultado;
     }
+
+    protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+      if (0 == e.CommandName.CompareTo("Imprimir"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewOrdenes.DataKeys[vIndex].Value);
+        //PImprimeOrden(vSecuencial, vTipoCotizacion);
+      }
+
+      if (0 == e.CommandName.CompareTo("Ver"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewOrdenes.DataKeys[vIndex].Value);
+        //PVerOrden(vSecuencial, vTipoCotizacion);
+      }
+
+      if (0 == e.CommandName.CompareTo("SubirOnBase"))
+      {
+        int vResultado = 0;
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        string vNumeroOrden = string.Empty;
+        string vProveedor = string.Empty;
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+
+
+        //Grabar en la tabla
+        int vIdFlujo = 0;
+        int vIdCotizacion = 0;
+        int vTipoItem = 0;
+
+        vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+        if ("OT" == vNumeroOrden.Substring(0, 2))
+        {
+          vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+        }
+        else
+        {
+          vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+        }
+
+        vResultado = vAccesoDatos.fActualizaLiquidacionVE(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+      }
+    }
+
+    protected void ButtonRepuGenerarOrdenes_Click(object sender, EventArgs e)
+    {
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+      int vContador = 1;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+
+      BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+      vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        StringBuilder vSBNumeroOrden = new StringBuilder();
+        string vNumeroOrden = string.Empty;
+        //Completar el campo numero_orden por cada registro del dataset.
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          vNumeroOrden = string.Empty;
+          vSBNumeroOrden.Clear();
+          vSBNumeroOrden.Append("OC-");
+          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+          vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-VE-");
+          vNumeroOrden = vContador.ToString();
+          vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+          vNumeroOrden = vSBNumeroOrden.ToString();
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          vContador++;
+        }
+      }
+
+      BD.CotizacionICRL.RCVehicularSumatoriaModificarTodos(vDatasetOrdenes);
+      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+    }
+
+    protected void ButtonRepaGenerarOrdenes_Click(object sender, EventArgs e)
+    {
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+      int vContador = 1;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+      BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+      vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        StringBuilder vSBNumeroOrden = new StringBuilder();
+        string vNumeroOrden = string.Empty;
+        //Completar el campo numero_orden por cada registro del dataset.
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          vNumeroOrden = string.Empty;
+          vSBNumeroOrden.Clear();
+          vSBNumeroOrden.Append("OT-");
+          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+          vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-VE-");
+          vNumeroOrden = vContador.ToString();
+          vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+          vNumeroOrden = vSBNumeroOrden.ToString();
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          vContador++;
+        }
+      }
+
+      BD.CotizacionICRL.RCVehicularSumatoriaModificarTodos(vDatasetOrdenes);
+      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+    }
+  }
 }

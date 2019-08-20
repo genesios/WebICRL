@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="LBCDesaConnectionString-Web.config Connection String" description="LBCDesaConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=WILMER-HP;Initial Catalog=LBCDesa;user id=usuarioLBC;password=SQL2019desa;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Repo\\Git\\vs\\gnesios\\WebICRL\\ICRL\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LBCDesaConnectionString']/@connectionString" />
-  </parameter>
-  <parameter name="LBCDesaEntities-Web.config Connection String" description="LBCDesaEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/ModeloDB.ModeloDB.csdl|res://*/ModeloDB.ModeloDB.ssdl|res://*/ModeloDB.ModeloDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=WILMER-HP;initial catalog=LBCDesa;user id=usuarioLBC;password=SQL2019desa;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Repo\\Git\\vs\\gnesios\\WebICRL\\ICRL\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LBCDesaEntities']/@connectionString" />
-  </parameter>
-</parameters>

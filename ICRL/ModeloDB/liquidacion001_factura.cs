@@ -21,5 +21,8 @@ namespace ICRL.ModeloDB
         public Nullable<System.DateTime> fecha_entrega { get; set; }
         public Nullable<short> id_moneda { get; set; }
         public Nullable<double> monto { get; set; }
+        public string observaciones { get; set; }
+        public Nullable<bool> asociada { get; set; }
+        public Nullable<double> tipo_cambio { get; set; }
     }
 }

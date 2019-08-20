@@ -841,6 +841,7 @@
     <Property Name="id_item" Type="Int64" Nullable="false" />
     <Property Name="id_tipo_item" Type="Int16" />
     <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_orden" Type="DateTime" Precision="3" />
     <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="preciobs" Type="Double" />
@@ -850,6 +851,7 @@
     <Property Name="liquidacion" Type="Boolean" />
     <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
+    <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="liquidacion001_factura">
     <Key>
@@ -863,6 +865,9 @@
     <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
     <Property Name="id_moneda" Type="Int16" />
     <Property Name="monto" Type="Double" />
+    <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="asociada" Type="Boolean" />
+    <Property Name="tipo_cambio" Type="Double" />
   </EntityType>
   <EntityType Name="LiquidacionDetalle">
     <Key>
@@ -1321,7 +1326,19 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
-    <FunctionImport Name="paActualizaLiquidacion001">
+    <FunctionImport Name="paActualizaLiquidacion001_DP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaLiquidacion001_RP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaLiquidacion001_VE">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
       <Parameter Name="Proveedor" Mode="In" Type="String" />

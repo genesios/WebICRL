@@ -20,6 +20,7 @@ namespace ICRL.ModeloDB
         public long id_item { get; set; }
         public Nullable<short> id_tipo_item { get; set; }
         public string numero_orden { get; set; }
+        public Nullable<System.DateTime> fecha_orden { get; set; }
         public string proveedor { get; set; }
         public string item_descripcion { get; set; }
         public Nullable<double> preciobs { get; set; }
@@ -29,5 +30,6 @@ namespace ICRL.ModeloDB
         public Nullable<bool> liquidacion { get; set; }
         public string num_factura { get; set; }
         public Nullable<short> id_estado { get; set; }
+        public Nullable<System.DateTime> fecha_liquidacion { get; set; }
     }
 }

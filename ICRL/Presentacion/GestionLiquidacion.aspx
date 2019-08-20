@@ -62,28 +62,34 @@
     <table class="basetable">
       <tr><th>Órdenes de Pago</th></tr>
       <tr><td>
-        <asp:GridView ID="GridViewOrdenesPago" runat="server" AutoGenerateColumns="False" ShowFooter="True" Width="100%" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="GridViewOrdenesPago" runat="server" AutoGenerateColumns="False" Width="100%" CellPadding="4"
+          ForeColor="#333333" GridLines="None" AllowPaging="true" PageSize="25" OnPageIndexChanging="GridViewOrdenesPago_PageIndexChanging">
           <AlternatingRowStyle BackColor="White" />
           <Columns>
             <asp:BoundField DataField="numero_orden" HeaderText="Orden" />
             <asp:BoundField DataField="flujoOnBase" HeaderText="Flujo OnBase" />
             <asp:BoundField DataField="nombreAsegurado" HeaderText="Cliente" />
             <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
-            <asp:BoundField DataField="proveedor" HeaderText="Proveedor/Beneficiario" />
+            <asp:BoundField DataField="proveedor" HeaderText="Proveedor / Beneficiario" />
             <asp:BoundField DataField="fecha_orden" HeaderText="Fecha Orden" DataFormatString="{0:dd-MM-yyyy}" />
             <asp:BoundField DataField="Total" HeaderText="Total Orden" DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumabspagado" HeaderText="Pagado Bs." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumabsnopagado" HeaderText="No Pagado Bs." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumauspagado" HeaderText="Pagado Us." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumausnopagado" HeaderText="No Pagado Us." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
-            <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+            <%--<asp:BoundField DataField="id_estado" HeaderText="Estado" />--%>
+            <asp:TemplateField HeaderText="Estado">
+              <ItemTemplate>
+                <asp:Label ID="lblEstado" runat="server" Text='<%# VerTextoEstado(Eval("id_estado")) %>'></asp:Label>
+              </ItemTemplate>
+            </asp:TemplateField>
             <asp:HyperLinkField DataTextField="idFlujo" DataNavigateUrlFields="idFlujo"
               DataNavigateUrlFormatString="~\Presentacion\Liquidacion.aspx?idflujo={0}" />
           </Columns>
           <EditRowStyle BackColor="#7C6F57" />
           <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
           <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-          <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+          <PagerStyle CssClass="gridpager" HorizontalAlign="Center" />
           <RowStyle BackColor="#E3EAEB" />
           <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
           <SortedAscendingCellStyle BackColor="#F8FAFA" />

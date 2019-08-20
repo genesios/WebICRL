@@ -28,7 +28,6 @@ namespace ICRL.Presentacion
         RecuperarDatosOrdenesPago();
       }
     }
-
     protected void cuvFechaHasta_ServerValidate(object source, ServerValidateEventArgs args)
     {
       DateTime desde = Convert.ToDateTime(txbFechaDesde.Text);
@@ -39,6 +38,12 @@ namespace ICRL.Presentacion
       else
         args.IsValid = true;
     }
+    protected void GridViewOrdenesPago_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+      GridViewOrdenesPago.PageIndex = e.NewPageIndex;
+
+      RecuperarDatosOrdenesPago();
+    }
     #endregion
 
     #region Metodos de Soporte
@@ -46,15 +51,14 @@ namespace ICRL.Presentacion
     {
       if (string.IsNullOrWhiteSpace(txbFechaDesde.Text))
       {
-        txbFechaDesde.Text = DateTime.Now.Date.ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaDesde.Text = DateTime.Now.ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
       }
 
       if (string.IsNullOrWhiteSpace(txbFechaHasta.Text))
       {
-        txbFechaHasta.Text = DateTime.Now.Date.AddMonths(1).ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaHasta.Text = DateTime.Now.AddMonths(1).ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
       }
     }
-
     private void RecuperarDatosOrdenesPago()
     {
       int estado = 1;
@@ -96,7 +100,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error en la recuperacion de los datos de pago!";
       }
     }
-
     protected void InicializarEstados()
     {
       try
@@ -116,6 +119,21 @@ namespace ICRL.Presentacion
         LabelMensaje.Visible = true;
         LabelMensaje.Text = "Error al recuperar los Estados!";
       }
+    }
+    protected string VerTextoEstado(object codigoEstado)
+    {
+      string valor = codigoEstado.ToString();
+
+      AccesoDatos adatos = new AccesoDatos();
+      List<ListaNomenclador> estados = adatos.FlTraeNomenGenerico("Estados", 0);
+
+      foreach (ListaNomenclador estado in estados)
+      {
+        if (estado.codigo.Trim() == valor)
+          return estado.descripcion;
+      }
+
+      return "";
     }
     #endregion
   }

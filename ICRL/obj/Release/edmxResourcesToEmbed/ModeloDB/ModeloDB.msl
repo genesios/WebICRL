@@ -246,6 +246,25 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotizacion_ordenes">
+      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_ordenes">
+        <MappingFragment StoreEntitySet="cotizacion_ordenes">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="monto_bs" ColumnName="monto_bs" />
+          <ScalarProperty Name="monto_us" ColumnName="monto_us" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -265,6 +284,7 @@
           <ScalarProperty Name="asientos_cuero" ColumnName="asientos_cuero" />
           <ScalarProperty Name="aros_magnesio" ColumnName="aros_magnesio" />
           <ScalarProperty Name="observaciones_vehiculo" ColumnName="observaciones_vehiculo" />
+          <ScalarProperty Name="completamente_pagado" ColumnName="completamente_pagado" />
           <ScalarProperty Name="duenio_nombres_1" ColumnName="duenio_nombres_1" />
           <ScalarProperty Name="duenio_documento_1" ColumnName="duenio_documento_1" />
           <ScalarProperty Name="duenio_monto_1" ColumnName="duenio_monto_1" />
@@ -328,6 +348,7 @@
           <ScalarProperty Name="asientos_cuero" ColumnName="asientos_cuero" />
           <ScalarProperty Name="aros_magnesio" ColumnName="aros_magnesio" />
           <ScalarProperty Name="observaciones_vehiculo" ColumnName="observaciones_vehiculo" />
+          <ScalarProperty Name="completamente_pagado" ColumnName="completamente_pagado" />
           <ScalarProperty Name="duenio_nombres_1" ColumnName="duenio_nombres_1" />
           <ScalarProperty Name="duenio_documento_1" ColumnName="duenio_documento_1" />
           <ScalarProperty Name="duenio_monto_1" ColumnName="duenio_monto_1" />
@@ -458,6 +479,9 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -506,6 +530,9 @@
           <ScalarProperty Name="descuento_proveedor" ColumnName="descuento_proveedor" />
           <ScalarProperty Name="deducible" ColumnName="deducible" />
           <ScalarProperty Name="monto_final" ColumnName="monto_final" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -774,6 +801,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="liquidacion001">
+      <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001">
+        <MappingFragment StoreEntitySet="liquidacion001">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+          <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+          <ScalarProperty Name="precious" ColumnName="precious" />
+          <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+          <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+          <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+          <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="liquidacion001_factura">
+      <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001_factura">
+        <MappingFragment StoreEntitySet="liquidacion001_factura">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+          <ScalarProperty Name="numero_factura" ColumnName="numero_factura" />
+          <ScalarProperty Name="fecha_emision" ColumnName="fecha_emision" />
+          <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="asociada" ColumnName="asociada" />
+          <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="LiquidacionDetalle">
       <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionDetalle">
         <MappingFragment StoreEntitySet="LiquidacionDetalle">
@@ -860,6 +926,49 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CotiRCVehicular">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCVehicular">
+        <MappingFragment StoreEntitySet="CotiRCVehicular">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CotiRoboParcial">
+      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRoboParcial">
+        <MappingFragment StoreEntitySet="CotiRoboParcial">
+          <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotizacion_rc_vehicular_tercero">
+      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_tercero">
+        <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_tercero">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="documento" ColumnName="documento" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="chasis" ColumnName="chasis" />
+          <ScalarProperty Name="taller" ColumnName="taller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
     <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
     <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
   </EntityContainerMapping>

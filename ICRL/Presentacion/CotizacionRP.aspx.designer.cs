@@ -598,6 +598,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonRepaGenerarResumen;
         
         /// <summary>
+        /// ButtonRepaGenerarOrdenes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRepaGenerarOrdenes;
+        
+        /// <summary>
         /// GridViewSumaReparaciones control.
         /// </summary>
         /// <remarks>
@@ -643,6 +652,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonRepuGenerarResumen;
         
         /// <summary>
+        /// ButtonRepuGenerarOrdenes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRepuGenerarOrdenes;
+        
+        /// <summary>
         /// GridViewSumaRepuestos control.
         /// </summary>
         /// <remarks>
@@ -668,6 +686,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewRecepRepuestos;
+        
+        /// <summary>
+        /// GridViewOrdenes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewOrdenes;
         
         /// <summary>
         /// ButtonOcultoParaPopupReparaciones control.

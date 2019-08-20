@@ -861,6 +861,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="id_item" Type="bigint" Nullable="false" />
     <Property Name="id_tipo_item" Type="smallint" />
     <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_orden" Type="datetime" />
     <Property Name="proveedor" Type="varchar" MaxLength="150" />
     <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
     <Property Name="preciobs" Type="float" />
@@ -870,6 +871,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="liquidacion" Type="bit" />
     <Property Name="num_factura" Type="varchar" MaxLength="20" />
     <Property Name="id_estado" Type="smallint" />
+    <Property Name="fecha_liquidacion" Type="datetime" />
   </EntityType>
   <EntityType Name="liquidacion001_factura">
     <Key>
@@ -883,6 +885,9 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="fecha_entrega" Type="datetime" />
     <Property Name="id_moneda" Type="smallint" />
     <Property Name="monto" Type="float" />
+    <Property Name="observaciones" Type="varchar" MaxLength="200" />
+    <Property Name="asociada" Type="bit" />
+    <Property Name="tipo_cambio" Type="float" />
   </EntityType>
   <EntityType Name="LiquidacionDetalle">
     <Key>
@@ -1170,7 +1175,19 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="paActualizaLiquidacion001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="paActualizaLiquidacion001_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaLiquidacion001_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
     <Parameter Name="Proveedor" Type="char" Mode="In" />

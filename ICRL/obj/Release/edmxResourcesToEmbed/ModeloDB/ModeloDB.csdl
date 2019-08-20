@@ -263,6 +263,26 @@
     <Property Name="descuento_proveedor" Type="Double" />
     <Property Name="deducible" Type="Double" />
     <Property Name="monto_final" Type="Double" />
+    <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cotizacion_ordenes">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo_origen" Type="Int16" />
+    <Property Name="numero_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="monto_bs" Type="Double" />
+    <Property Name="monto_us" Type="Double" />
+    <Property Name="id_estado" Type="Int16" />
   </EntityType>
   <EntityType Name="cotizacion_perdida_total_propio">
     <Key>
@@ -283,6 +303,7 @@
     <Property Name="asientos_cuero" Type="Boolean" />
     <Property Name="aros_magnesio" Type="Boolean" />
     <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="completamente_pagado" Type="Boolean" />
     <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="duenio_monto_1" Type="Double" />
@@ -347,6 +368,7 @@
     <Property Name="asientos_cuero" Type="Boolean" />
     <Property Name="aros_magnesio" Type="Boolean" />
     <Property Name="observaciones_vehiculo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="completamente_pagado" Type="Boolean" />
     <Property Name="duenio_nombres_1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="duenio_documento_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="duenio_monto_1" Type="Double" />
@@ -482,6 +504,9 @@
     <Property Name="descuento_proveedor" Type="Double" />
     <Property Name="deducible" Type="Double" />
     <Property Name="monto_final" Type="Double" />
+    <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="cotizacion_robo_parcial">
     <Key>
@@ -533,6 +558,9 @@
     <Property Name="descuento_proveedor" Type="Double" />
     <Property Name="deducible" Type="Double" />
     <Property Name="monto_final" Type="Double" />
+    <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -800,6 +828,47 @@
     <NavigationProperty Name="LiquidacionDetalle" Relationship="Self.FK_LIQUIDAC_DETALLETI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionDetalle" />
     <NavigationProperty Name="LiquidacionFacturas" Relationship="Self.FK_LIQUIDAC_FACTURATI_LIQUIDAC" FromRole="Liquidacion" ToRole="LiquidacionFacturas" />
   </EntityType>
+  <EntityType Name="liquidacion001">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="preciobs" Type="Double" />
+    <Property Name="precious" Type="Double" />
+    <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+    <Property Name="inspeccion" Type="Boolean" />
+    <Property Name="liquidacion" Type="Boolean" />
+    <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="liquidacion001_factura">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_factura" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_factura" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numero_factura" Type="Int64" />
+    <Property Name="fecha_emision" Type="DateTime" Precision="3" />
+    <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
+    <Property Name="id_moneda" Type="Int16" />
+    <Property Name="monto" Type="Double" />
+    <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="asociada" Type="Boolean" />
+    <Property Name="tipo_cambio" Type="Double" />
+  </EntityType>
   <EntityType Name="LiquidacionDetalle">
     <Key>
       <PropertyRef Name="secuencial" />
@@ -891,6 +960,44 @@
     <Property Name="fechaAsignacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Rol" Relationship="Self.FK_USUARIOR_ASSOCIATI_ROL" FromRole="UsuarioRol" ToRole="Rol" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="UsuarioRol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="CotiRCVehicular">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CotiRoboParcial">
+    <Key>
+      <PropertyRef Name="secuencial" />
+      <PropertyRef Name="idCotizacion" />
+    </Key>
+    <Property Name="secuencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cotizacion_rc_vehicular_tercero">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="documento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="placa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="anio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="chasis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="taller" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
     <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
@@ -1113,6 +1220,7 @@
     <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" />
     <EntitySet Name="cotizacion_danios_propios" EntityType="Self.cotizacion_danios_propios" />
     <EntitySet Name="cotizacion_danios_propios_sumatoria" EntityType="Self.cotizacion_danios_propios_sumatoria" />
+    <EntitySet Name="cotizacion_ordenes" EntityType="Self.cotizacion_ordenes" />
     <EntitySet Name="cotizacion_perdida_total_propio" EntityType="Self.cotizacion_perdida_total_propio" />
     <EntitySet Name="cotizacion_perdida_total_robo" EntityType="Self.cotizacion_perdida_total_robo" />
     <EntitySet Name="cotizacion_rc_objetos" EntityType="Self.cotizacion_rc_objetos" />
@@ -1138,6 +1246,8 @@
     <EntitySet Name="InspRoboParcial" EntityType="Self.InspRoboParcial" />
     <EntitySet Name="ItemTaller" EntityType="Self.ItemTaller" />
     <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" />
+    <EntitySet Name="liquidacion001" EntityType="Self.liquidacion001" />
+    <EntitySet Name="liquidacion001_factura" EntityType="Self.liquidacion001_factura" />
     <EntitySet Name="LiquidacionDetalle" EntityType="Self.LiquidacionDetalle" />
     <EntitySet Name="LiquidacionFacturas" EntityType="Self.LiquidacionFacturas" />
     <EntitySet Name="Nomenclador" EntityType="Self.Nomenclador" />
@@ -1145,6 +1255,9 @@
     <EntitySet Name="Rol" EntityType="Self.Rol" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+    <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" />
+    <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" />
+    <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
     <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
       <End Role="Asegurado" EntitySet="Asegurado" />
       <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -1213,6 +1326,42 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
+    <FunctionImport Name="paActualizaLiquidacion001_DP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaLiquidacion001_RP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaLiquidacion001_VE">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_DP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_RP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaOrdenesCotizacion_VE">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="Proveedor" Mode="In" Type="String" />
+      <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="paIncFlujoContadorInsp">
       <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
       <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />

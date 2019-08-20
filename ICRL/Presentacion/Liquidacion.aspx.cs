@@ -31,14 +31,12 @@ namespace ICRL.Presentacion
         ValidarFlujoCorrecto();
       }
     }
-
     protected void GridViewDatosFactura_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
       GridViewDatosFactura.EditIndex = -1;
       RecuperarDatosFacturas();
       LlenarMenuFacturas();
     }
-
     protected void GridViewDatosFactura_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
@@ -60,7 +58,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error al eliminar la factura!";
       }
     }
-
     protected void GridViewDatosFactura_RowEditing(object sender, GridViewEditEventArgs e)
     {
       GridViewDatosFactura.EditIndex = e.NewEditIndex;
@@ -68,7 +65,6 @@ namespace ICRL.Presentacion
       RecuperarDatosFacturas();
       LlenarMenuFacturas();
     }
-
     protected void GridViewDatosFactura_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
@@ -114,7 +110,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error al guardar la factura!";
       }
     }
-
     protected void GridViewDatosFactura_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (e.CommandName.Equals("AddNew"))
@@ -147,7 +142,7 @@ namespace ICRL.Presentacion
           LlenarMenuFacturas();
 
           LabelMensaje.Visible = false;
-          txbTipoCambio.Enabled = true;
+          //txbTipoCambio.Enabled = true;
         }
         else
         {
@@ -156,7 +151,6 @@ namespace ICRL.Presentacion
         }
       }
     }
-
     protected void GridViewDatosFactura_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
@@ -170,7 +164,6 @@ namespace ICRL.Presentacion
         }
       }
     }
-
     protected void GridViewDatosOrden_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.Footer)
@@ -191,7 +184,6 @@ namespace ICRL.Presentacion
         TotalCotizacionUs += double.Parse(lblCotizacionUs.Text);
       }
     }
-
     protected void GridViewDatosLiquidacion_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.Footer)
@@ -217,7 +209,6 @@ namespace ICRL.Presentacion
         TotalLiquidacionUs += double.Parse(lblLiquidacionUs.Text);
       }
     }
-
     protected void btnGenerarLiquidacion_Click(object sender, EventArgs e)
     {
       bool operacionExitosa = true;
@@ -230,6 +221,7 @@ namespace ICRL.Presentacion
         if (row.RowType == DataControlRowType.DataRow)
         {
           string fechaRecepcion = row.Cells[5].Text;
+          //string fechaOrden = row.Cells[5].Text;
           DateTime fechaLiquidacion = DateTime.Now;
 
           Label lblFechaLiquidacion = row.FindControl("lblFechaLiquidacion") as Label;
@@ -255,6 +247,7 @@ namespace ICRL.Presentacion
           liquidacion.tipo_origen = Convert.ToInt16(((Label)row.Cells[9].FindControl("tipo_origen")).Text);
           liquidacion.id_item = Convert.ToInt64(((Label)row.Cells[9].FindControl("id_item")).Text);
           liquidacion.id_tipo_item = Convert.ToInt16(((Label)row.Cells[9].FindControl("id_tipo_item")).Text);
+          liquidacion.fecha_orden = Convert.ToDateTime(((Label)row.Cells[9].FindControl("fecha_orden")).Text);
 
           DateTime fecha;
           if (!DateTime.TryParse(lblFechaLiquidacion.Text, out fecha))
@@ -284,7 +277,7 @@ namespace ICRL.Presentacion
         GenerarDatosLiquidacion(ordenesLiquidadas);
 
         btnGuardarLiquidacion.Enabled = true;
-        txbTipoCambio.Enabled = false;
+        //txbTipoCambio.Enabled = false;
       }
       else
       {
@@ -293,7 +286,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error al guardar la generar la liquidación!";
       }
     }
-
     protected void btnAjusteMenor_Click(object sender, EventArgs e)
     {
       TipoCambio = double.Parse(txbTipoCambio.Text);
@@ -352,7 +344,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = string.Format("El 'AJUSTE MENOR' aplica solamente en caso que exista una diferencia de {0} (dos) bolivianos entre el TOTAL COTIZADO y TOTAL PAGADO.", AjusteMas);
       }
     }
-
     protected void btnGuardarLiquidacion_Click(object sender, EventArgs e)
     {
       bool operacionExitosa = true;
@@ -444,7 +435,6 @@ namespace ICRL.Presentacion
         #endregion
       }
     }
-
     protected string VerTextoMoneda(object valorMoneda)
     {
       string valor = valorMoneda.ToString();
@@ -460,7 +450,6 @@ namespace ICRL.Presentacion
 
       return "";
     }
-
     private void LlenarMenuFacturas()
     {
       List<string> listaFacturas = new List<string>();
@@ -502,7 +491,6 @@ namespace ICRL.Presentacion
 
       //return listaFacturas;
     }
-
     protected void RecuperarDatosFacturas()
     {
       int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
@@ -538,7 +526,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error en la recuperacion de los datos facturas!";
       }
     }
-
     protected void RecuperarDatosOrdenes()
     {
       int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
@@ -559,7 +546,6 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error en la recuperacion de los datos ordenes!";
       }
     }
-
     protected void GenerarDatosLiquidacion(List<LiquidacionICRL.TipoLiquidacion001> ordenesLiquidadas)
     {
       TipoCambio = double.Parse(txbTipoCambio.Text);

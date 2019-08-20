@@ -191,13 +191,63 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public int FEnviaArchivoOnBase(string pFlujoOnBase, string pTipoDocumental, string pNomUsuario, byte[] pArrayBytesArchivo)
+    {
+      int vResultado = 0;
+      //solo se enviara un archivo a la vez
+      string[] vArchivoBase64 = new string[1];
+
+      vArchivoBase64[0] = Convert.ToBase64String(pArrayBytesArchivo);
+
+      /*** CONECTAR A WS ***/
+      OnBaseWS vServicioOnBase = new OnBaseWS();
+      /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
+      SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+      /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
+      ResultadoEntity vResultadoEntity = new ResultadoEntity();
+      /*** INSTANCIAR EL OBJETO DE ENVÍO COMO DocumentoOnBaseEntity ***/
+      var vDocumento = new DocumentoOnBaseEntity();
+      /*** LLENAR LAS PROPIEDADES SEGÚN EL TIPO DE DOCUMENTO A IMPORTAR ***/
+      vDocumento.nroSolicitud = pFlujoOnBase;  //número de solicitud
+      vDocumento.tipoDocumento = pTipoDocumental;   //nombre del tipo de documento
+      vDocumento.extensionArchivo = "pdf"; //Extensión del archivo. Ej:jpg - Ej2:pdf
+      /*** CREAR OBJETO KeywordOnBaseEntity DE NOMBRE DE USUARIO PARA AÑADIR AL DOCUMENTO ***/
+      var keyUsuarioWS = new KeywordOnBaseEntity() { nombre = "LBC UserName WS", valor = pNomUsuario };
+      /*** CREAR OBJETO KeywordOnBaseEntity DE 'No. de RC' SOLO PARA AÑADIR AL DOCUMENTO DE TIPO RE - RC Atencion ***/
+      //No aplica a los tipos documentales enviamos siempre 1
+      //RE - Orden de Trabajo  ;
+      //RE - Orden de Compra  ;
+      //RE - Orden de Indemnizacion  ;
+      //var keyRC = new KeywordOnBaseEntity() { nombre = "No. de RC", valor = "1" };
+      /*** ASIGNAR LOS keywords ANTERIORES AL DOCUMENTO ***/
+      vDocumento.keywords = new KeywordOnBaseEntity[] { keyUsuarioWS };
+
+      /*** LLAMAR A LA FUNCIÓN DE IMPORTACIÓN ***/
+      vResultadoEntity = vServicioOnBase.ImportarDocumento(vDocumento, vArchivoBase64, vOrigen);
+      string vTextoResultado = string.Empty;
+
+      vTextoResultado = vResultadoEntity.Mensaje;
+      try
+      {
+        long vTemporal = 0;
+        vTemporal = long.Parse(vTextoResultado);
+        vResultado = 1;
+      }
+      catch (Exception)
+      {
+        vResultado = 0;
+      }
+
+      return vResultado;
+    }
+
     public FlujoICRL FTraeDatosFlujoOnBase(string pNumFlujo)
     {
       vFlujoICRL = null;
 
       /*** CONECTAR A WS ***/
       OnBaseWS vServicioOnBase = new OnBaseWS();
-      /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO PARA GESPRO ***/
+      /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
@@ -464,15 +514,67 @@ namespace ICRL.BD
       return vIdInspeccion;
     }
 
-    public int fActualizaLiquidacion(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    public int fActualizaLiquidacionDP(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
     {
       int vResultado = 0;
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
+        db.paActualizaLiquidacion001_DP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      }
 
-        //System.Data.Entity.Core.Objects.ObjectParameter vIdContador = new System.Data.Entity.Core.Objects.ObjectParameter("iValorContador", typeof(int));
-        db.paActualizaLiquidacion001(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      return vResultado;
+    }
 
+    public int fActualizaLiquidacionRP(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaLiquidacion001_RP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaLiquidacionVE(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaLiquidacion001_VE(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaOrdenesCotiDP(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaOrdenesCotizacion_DP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaOrdenesCotiRP(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaOrdenesCotizacion_RP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaOrdenesCotiVE(int pIdFlujo, int pIdCotizacion, string pProveedor, int pIdTipoItem)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaOrdenesCotizacion_VE(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
       }
 
       return vResultado;

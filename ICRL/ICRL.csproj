@@ -205,6 +205,39 @@
     <Content Include="DS\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\CotizacionDaniosPropios.xsc">
+      <DependentUpon>CotizacionDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionDaniosPropios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionDaniosPropios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionDaniosPropios.xss">
+      <DependentUpon>CotizacionDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\CotizacionFlujo.xsc">
+      <DependentUpon>CotizacionFlujo.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\CotizacionDaniosPropiosSuma.xsc">
+      <DependentUpon>CotizacionDaniosPropiosSuma.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionDaniosPropiosSuma.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionDaniosPropiosSuma.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionDaniosPropiosSuma.xss">
+      <DependentUpon>CotizacionDaniosPropiosSuma.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionFlujo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionFlujo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionFlujo.xss">
+      <DependentUpon>CotizacionFlujo.xsd</DependentUpon>
+    </Content>
     <None Include="DS\DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -462,6 +495,21 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionDaniosPropios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionDaniosPropios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionDaniosPropiosSuma.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionDaniosPropiosSuma.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionFlujo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionFlujo.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -856,6 +904,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\RepFormularioCotiDaniosPropios.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInsp.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInspDaniosPropios.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInspPTDaniosPropios.rdlc" />
