@@ -158,6 +158,48 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_RP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
+        public virtual int paActualizaLiquidacion001_TP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string numeroOrden, Nullable<double> tipoCambio)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var numeroOrdenParameter = numeroOrden != null ?
+                new ObjectParameter("NumeroOrden", numeroOrden) :
+                new ObjectParameter("NumeroOrden", typeof(string));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_TP", idFlujoParameter, idCotizacionParameter, numeroOrdenParameter, tipoCambioParameter);
+        }
+    
+        public virtual int paActualizaLiquidacion001_TR(Nullable<int> idFlujo, Nullable<int> idCotizacion, string numeroOrden, Nullable<double> tipoCambio)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var numeroOrdenParameter = numeroOrden != null ?
+                new ObjectParameter("NumeroOrden", numeroOrden) :
+                new ObjectParameter("NumeroOrden", typeof(string));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_TR", idFlujoParameter, idCotizacionParameter, numeroOrdenParameter, tipoCambioParameter);
+        }
+    
         public virtual int paActualizaLiquidacion001_VE(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
         {
             var idFlujoParameter = idFlujo.HasValue ?

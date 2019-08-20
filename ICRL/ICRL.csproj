@@ -247,6 +247,28 @@
     <Content Include="DS\CotizacionRCObjetos.xsc">
       <DependentUpon>CotizacionRCObjetos.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\CotizacionPTRobo.xsc">
+      <DependentUpon>CotizacionPTRobo.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS\CotizacionPTDaniosPropios.xsc">
+      <DependentUpon>CotizacionPTDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionPTDaniosPropios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionPTDaniosPropios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionPTDaniosPropios.xss">
+      <DependentUpon>CotizacionPTDaniosPropios.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionPTRobo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionPTRobo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionPTRobo.xss">
+      <DependentUpon>CotizacionPTRobo.xsd</DependentUpon>
+    </Content>
     <None Include="DS\CotizacionRCObjetos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -543,6 +565,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CotizacionFlujo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionPTDaniosPropios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionPTDaniosPropios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionPTRobo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionPTRobo.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS\CotizacionRCObjetos.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -953,6 +985,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\RepFormularioCotiDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiPTDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiPTRobo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCObjetos.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCPersonas.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehicular.rdlc" />

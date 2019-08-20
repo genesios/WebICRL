@@ -1401,7 +1401,7 @@ namespace ICRL.Presentacion
 
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
-        var vLst = from cdps in db.cotizacion_robo_parcial_sumatoria
+        var vLst = from cdps in db.cotizacion_danios_propios_sumatoria
                    where (cdps.id_flujo == pIdFlujo)
                       && (cdps.id_cotizacion == pIdCotizacion)
                    select new

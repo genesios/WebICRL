@@ -520,6 +520,7 @@ namespace ICRL.BD
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         db.paActualizaLiquidacion001_DP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+        vResultado = 1;
       }
 
       return vResultado;
@@ -531,6 +532,7 @@ namespace ICRL.BD
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         db.paActualizaLiquidacion001_RP(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+        vResultado = 1;
       }
 
       return vResultado;
@@ -542,6 +544,7 @@ namespace ICRL.BD
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         db.paActualizaLiquidacion001_VE(pIdFlujo, pIdCotizacion, pProveedor, pIdTipoItem);
+        vResultado = 1;
       }
 
       return vResultado;
@@ -553,6 +556,7 @@ namespace ICRL.BD
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         db.paActualizaLiquidacion001_PE(pIdFlujo, pIdCotizacion, pNumeroOrden);
+        vResultado = 1;
       }
 
       return vResultado;
@@ -564,6 +568,31 @@ namespace ICRL.BD
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         db.paActualizaLiquidacion001_OB(pIdFlujo, pIdCotizacion, pNumeroOrden);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaLiquidacionTP(int pIdFlujo, int pIdCotizacion, string pNumeroOrden, double pTipoCambio)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaLiquidacion001_TP(pIdFlujo, pIdCotizacion, pNumeroOrden, pTipoCambio);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaLiquidacionTR(int pIdFlujo, int pIdCotizacion, string pNumeroOrden, double pTipoCambio)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaLiquidacion001_TR(pIdFlujo, pIdCotizacion, pNumeroOrden, pTipoCambio);
+        vResultado = 1;
       }
 
       return vResultado;

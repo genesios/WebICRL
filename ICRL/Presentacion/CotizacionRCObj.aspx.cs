@@ -527,7 +527,7 @@ namespace ICRL.Presentacion
       CotizacionICRL.TipoOrden vTipoOrden = new CotizacionICRL.TipoOrden();
       vTipoOrden.id_flujo = vIdFlujo;
       vTipoOrden.id_cotizacion = vIdCotizacion;
-      vTipoOrden.tipo_origen = (short)AccesoDatos.TipoInspeccion.RCPersonas;
+      vTipoOrden.tipo_origen = (short)AccesoDatos.TipoInspeccion.RCObjetos;
       vTipoOrden.numero_orden = vNumeroOrden;
       vTipoOrden.fecha_orden = DateTime.Today;
       vTipoOrden.descripcion = TextBoxObjNombreTer.Text.ToUpper();

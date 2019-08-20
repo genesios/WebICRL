@@ -1197,6 +1197,18 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="Proveedor" Type="char" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
+  <Function Name="paActualizaLiquidacion001_TP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
+  </Function>
+  <Function Name="paActualizaLiquidacion001_TR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
+  </Function>
   <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />

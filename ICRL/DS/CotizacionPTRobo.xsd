@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CotizacionPTRobo" targetNamespace="http://tempuri.org/CotizacionPTRobo.xsd" xmlns:mstns="http://tempuri.org/CotizacionPTRobo.xsd" xmlns="http://tempuri.org/CotizacionPTRobo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LBCDesaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="LBCDesaConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LBCDesaConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LBCDesaConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        d.numero_orden, c.duenio_nombres_1 AS duenio_nombres, c.duenio_documento_1 AS duenio_documento, c.duenio_descripcion_1 AS duenio_descripcion, 
+                         c.duenio_monto_1 AS duenio_monto
+FROM            cotizacion_perdida_total_robo AS c INNER JOIN
+                         cotizacion_ordenes AS d ON c.id_flujo = d.id_flujo AND c.id_cotizacion = d.id_cotizacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="numero_orden" DataSetColumn="numero_orden" />
+              <Mapping SourceColumn="duenio_nombres" DataSetColumn="duenio_nombres" />
+              <Mapping SourceColumn="duenio_documento" DataSetColumn="duenio_documento" />
+              <Mapping SourceColumn="duenio_descripcion" DataSetColumn="duenio_descripcion" />
+              <Mapping SourceColumn="duenio_monto" DataSetColumn="duenio_monto" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CotizacionPTRobo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CotizacionPTRobo" msprop:Generator_UserDSName="CotizacionPTRobo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="numero_orden" msprop:Generator_ColumnVarNameInTable="columnnumero_orden" msprop:Generator_ColumnPropNameInRow="numero_orden" msprop:Generator_ColumnPropNameInTable="numero_ordenColumn" msprop:Generator_UserColumnName="numero_orden" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="duenio_nombres" msprop:Generator_ColumnVarNameInTable="columnduenio_nombres" msprop:Generator_ColumnPropNameInRow="duenio_nombres" msprop:Generator_ColumnPropNameInTable="duenio_nombresColumn" msprop:Generator_UserColumnName="duenio_nombres" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="duenio_documento" msprop:Generator_ColumnVarNameInTable="columnduenio_documento" msprop:Generator_ColumnPropNameInRow="duenio_documento" msprop:Generator_ColumnPropNameInTable="duenio_documentoColumn" msprop:Generator_UserColumnName="duenio_documento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="duenio_descripcion" msprop:Generator_ColumnVarNameInTable="columnduenio_descripcion" msprop:Generator_ColumnPropNameInRow="duenio_descripcion" msprop:Generator_ColumnPropNameInTable="duenio_descripcionColumn" msprop:Generator_UserColumnName="duenio_descripcion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="duenio_monto" msprop:Generator_ColumnVarNameInTable="columnduenio_monto" msprop:Generator_ColumnPropNameInRow="duenio_monto" msprop:Generator_ColumnPropNameInTable="duenio_montoColumn" msprop:Generator_UserColumnName="duenio_monto" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1202,6 +1202,18 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Parameter Name="Proveedor" Type="char" Mode="In" />
           <Parameter Name="idTipoItem" Type="int" Mode="In" />
         </Function>
+        <Function Name="paActualizaLiquidacion001_TP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+          <Parameter Name="TipoCambio" Type="float" Mode="In" />
+        </Function>
+        <Function Name="paActualizaLiquidacion001_TR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idCotizacion" Type="int" Mode="In" />
+          <Parameter Name="NumeroOrden" Type="varchar" Mode="In" />
+          <Parameter Name="TipoCambio" Type="float" Mode="In" />
+        </Function>
         <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFlujo" Type="int" Mode="In" />
           <Parameter Name="idCotizacion" Type="int" Mode="In" />
@@ -2739,6 +2751,18 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <Parameter Name="Proveedor" Mode="In" Type="String" />
             <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="paActualizaLiquidacion001_TP">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroOrden" Mode="In" Type="String" />
+            <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="paActualizaLiquidacion001_TR">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroOrden" Mode="In" Type="String" />
+            <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+          </FunctionImport>
           <FunctionImport Name="paActualizaLiquidacion001_VE">
             <Parameter Name="idFlujo" Mode="In" Type="Int32" />
             <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
@@ -3744,6 +3768,8 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TP" />
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TR" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TR" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />

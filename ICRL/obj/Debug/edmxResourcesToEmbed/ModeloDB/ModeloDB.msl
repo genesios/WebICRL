@@ -967,6 +967,8 @@
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TR" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TR" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />

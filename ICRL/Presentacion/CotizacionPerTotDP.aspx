@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionPerTotDP.aspx.cs" Inherits="ICRL.Presentacion.CotizacionPerTotDP" %>
 
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
@@ -369,6 +371,46 @@
                     <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                 </Columns>
             </asp:GridView>
+        </div>
+        <div>
+            <table class="basetable" style="width: 100%">
+                <tr>
+                    <td style="text-align: right">
+                        <asp:Button ID="ButtonGenerarOrden" runat="server" Text="Generar Orden" OnClick="ButtonGenerarOrden_Click"></asp:Button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand">
+                <AlternatingRowStyle BackColor="White" />
+                <EditRowStyle BackColor="#7C6F57" />
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                <Columns>
+                    <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
+                    <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+                    <asp:BoundField DataField="descripcion" HeaderText="Proveedor" />
+                    <asp:BoundField DataField="monto_bs" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                    <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />
+                    <asp:ButtonField CommandName="Ver" ButtonType="Button" HeaderText="Opción" Text="Ver" />
+                    <asp:ButtonField CommandName="SubirOnBase" ButtonType="Button" HeaderText="Opción" Text="On Base" />
+                </Columns>
+            </asp:GridView>
+        </div>
+        <div>
+            <rsweb:ReportViewer ID="ReportViewerCoti" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="923px" Visible="false">
+                <LocalReport ReportPath="Reportes\RepFormularioCotiPTDaniosPropios.rdlc">
+                </LocalReport>
+            </rsweb:ReportViewer>
+            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" OnClick="ButtonCierraVerRep_Click" />
         </div>
     </div>
 </asp:Content>

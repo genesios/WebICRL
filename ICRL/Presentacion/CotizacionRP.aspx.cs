@@ -69,6 +69,7 @@ namespace ICRL.Presentacion
           vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
           FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
           FlTraeDatosRecepRepu(vIdCotizacion);
+          FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
         }
 
         if (Session["PopupABMReparacionesHabilitado"] != null)

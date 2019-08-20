@@ -8,6 +8,8 @@ using LbcOnBaseWS;
 using ICRL.ModeloDB;
 using ICRL.BD;
 using System.Data;
+using System.Text;
+using Microsoft.Reporting.WebForms;
 
 namespace ICRL.Presentacion
 {
@@ -61,6 +63,7 @@ namespace ICRL.Presentacion
                     PCargarGrillaReferencias(vIdFlujo, vIdCotizacion, vIdItem);
                     PBloqueaDatosEspeciales(false);
                     FlCargaDatosPerdidaTotalRO(vIdFlujo, vIdCotizacion, vIdItem);
+                    pCargaOrdenes(vIdFlujo, vIdCotizacion);
                 }
             }
             catch (Exception ex)
@@ -1092,5 +1095,518 @@ namespace ICRL.Presentacion
             PBloqueaDatosEspeciales(false);
             PBotonesDatosEspecialesPTRO(true);
         }
+
+
+    #region Generar Orden
+
+    protected void ButtonGenerarOrden_Click(object sender, EventArgs e)
+    {
+      bool vResultado = false;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      int vContador = 1;
+      StringBuilder vSBNumeroOrden = new StringBuilder();
+      string vNumeroOrden = string.Empty;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+
+      //generar numero de orden
+      vNumeroOrden = string.Empty;
+      vSBNumeroOrden.Clear();
+      vSBNumeroOrden.Append("OP-");
+      vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+      vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+      vSBNumeroOrden.Append(vNumeroOrden);
+      vSBNumeroOrden.Append("-TR-");
+      vNumeroOrden = vContador.ToString();
+      vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+      vNumeroOrden = vSBNumeroOrden.ToString();
+
+      CotizacionICRL.TipoOrden vTipoOrden = new CotizacionICRL.TipoOrden();
+      vTipoOrden.id_flujo = vIdFlujo;
+      vTipoOrden.id_cotizacion = vIdCotizacion;
+      vTipoOrden.tipo_origen = (short)AccesoDatos.TipoInspeccion.PerdidaTotalRobo;
+      vTipoOrden.numero_orden = vNumeroOrden;
+      vTipoOrden.fecha_orden = DateTime.Today;
+      vTipoOrden.descripcion = TextBoxNombreAsegurado.Text.ToUpper();
+      vTipoOrden.monto_us = 0;
+      vTipoOrden.id_estado = 1;
+
+      //Sumar los gastos del detalle
+
+
+      CotizacionICRL.TipoPerdidaTotalRoboTraer vTipoPerdidaTotalRoboTraer;
+      vTipoPerdidaTotalRoboTraer = CotizacionICRL.PerdidaTotalRoboTraer(vIdFlujo, vIdCotizacion);
+
+      double vSumaGastos = 0;
+
+      if (vTipoPerdidaTotalRoboTraer.Correcto)
+      {
+        var vFilaTabla = vTipoPerdidaTotalRoboTraer.PerdidasTotalesRobos.FirstOrDefault();
+
+        if (string.Empty != vFilaTabla.duenio_nombres_1)
+        {
+          vSumaGastos = vSumaGastos + vFilaTabla.duenio_monto_1;
+        }
+
+        if (string.Empty != vFilaTabla.duenio_nombres_2)
+        {
+          vSumaGastos = vSumaGastos + vFilaTabla.duenio_monto_2;
+        }
+
+        if (string.Empty != vFilaTabla.duenio_nombres_3)
+        {
+          vSumaGastos = vSumaGastos + vFilaTabla.duenio_monto_3;
+        }
+
+        if (string.Empty != vFilaTabla.duenio_nombres_4)
+        {
+          vSumaGastos = vSumaGastos + vFilaTabla.duenio_monto_4;
+        }
+
+        if (string.Empty != vFilaTabla.duenio_nombres_5)
+        {
+          vSumaGastos = vSumaGastos + vFilaTabla.duenio_monto_5;
+        }
+      }
+
+      vTipoOrden.monto_bs = vSumaGastos;
+      vResultado = CotizacionICRL.OrdenRegistrar(vTipoOrden);
+      if (vResultado)
+      {
+        LabelDatosDueniosMsj.Text = "Orden creada exitosamente";
+      }
+      else
+      {
+        LabelDatosDueniosMsj.Text = "la Orden no se pudo crear";
+      }
+      pCargaOrdenes(vIdFlujo, vIdCotizacion);
     }
+
+    protected void pCargaOrdenes(int pIdFlujo, int pIdCotizacion)
+    {
+      BD.CotizacionICRL.TipoOrdenTraer vTipoOrdenTraer;
+      vTipoOrdenTraer = CotizacionICRL.OrdenTraer(pIdFlujo, pIdCotizacion);
+
+      GridViewOrdenes.DataSource = vTipoOrdenTraer.Ordenes.Select(Ordenes => new
+      {
+        Ordenes.numero_orden,
+        Ordenes.id_estado,
+        Ordenes.descripcion,
+        Ordenes.monto_bs
+      }).ToList();
+      GridViewOrdenes.DataBind();
+    }
+    protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+      int vIndex = 0;
+      string vNumeroOrden = string.Empty;
+      string vProveedor = string.Empty;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      if (0 == e.CommandName.CompareTo("Imprimir"))
+      {
+        string vTextoSecuencial = string.Empty;
+        vIndex = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PImprimeFormularioCotiPTRobo(vNumeroOrden);
+      }
+
+      if (0 == e.CommandName.CompareTo("Ver"))
+      {
+        string vTextoSecuencial = string.Empty;
+        vIndex = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        PVerFormularioCotiPTRobo(vNumeroOrden);
+      }
+
+      if (0 == e.CommandName.CompareTo("SubirOnBase"))
+      {
+        int vResultado = 0;
+        string vTextoSecuencial = string.Empty;
+
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
+        vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+
+
+        //Grabar en la tabla
+        int vIdFlujo = 0;
+        int vIdCotizacion = 0;
+        double vTipoCambio = 0;
+
+        vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+        vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
+
+        vResultado = vAccesoDatos.fActualizaLiquidacionTR(vIdFlujo, vIdCotizacion, vNumeroOrden, vTipoCambio);
+        PSubeFormularioCotiPTRobo(vNumeroOrden);
+      }
+    }
+
+    protected void PImprimeFormularioCotiPTRobo(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiPTRobo" + pNroOrden;
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "PT ROBO",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiPTRobo = (from c in db.cotizacion_perdida_total_robo
+                                join d in db.cotizacion_ordenes
+                                on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_1)
+                                select new
+                                {
+                                  d.numero_orden,
+                                  duenio_nombres = c.duenio_nombres_1 ,
+                                  duenio_documento = c.duenio_documento_1,
+                                  duenio_descripcion = c.duenio_descripcion_1,
+                                  duenio_monto = c.duenio_monto_1
+                                }).Union
+                                (from c in db.cotizacion_perdida_total_robo
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_2)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   duenio_nombres = c.duenio_nombres_2,
+                                   duenio_documento = c.duenio_documento_2,
+                                   duenio_descripcion = c.duenio_descripcion_2,
+                                   duenio_monto = c.duenio_monto_2
+                                 }).Union
+                                (from c in db.cotizacion_perdida_total_robo
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_3)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   duenio_nombres = c.duenio_nombres_3,
+                                   duenio_documento = c.duenio_documento_3,
+                                   duenio_descripcion = c.duenio_descripcion_3,
+                                   duenio_monto = c.duenio_monto_3
+                                 }).Union
+                                (from c in db.cotizacion_perdida_total_robo
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_4)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   duenio_nombres = c.duenio_nombres_4,
+                                   duenio_documento = c.duenio_documento_4,
+                                   duenio_descripcion = c.duenio_descripcion_4,
+                                   duenio_monto = c.duenio_monto_4
+                                 }).Union
+                                (from c in db.cotizacion_perdida_total_robo
+                                 join d in db.cotizacion_ordenes
+                                 on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                 where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_5)
+                                 select new
+                                 {
+                                   d.numero_orden,
+                                   duenio_nombres = c.duenio_nombres_5,
+                                   duenio_documento = c.duenio_documento_5,
+                                   duenio_descripcion = c.duenio_descripcion_5,
+                                   duenio_monto = c.duenio_monto_5
+                                 });
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiPTRobo.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiPTRobo);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] VArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a cliente
+      Response.Buffer = true;
+      Response.Clear();
+      Response.ContentType = mimeType;
+      Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
+      Response.BinaryWrite(VArrayBytes); // se crea el archivo
+      Response.Flush(); // se envia al cliente para su descarga
+    }
+
+    protected void PVerFormularioCotiPTRobo(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "PT ROBO",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiPTRobo = (from c in db.cotizacion_perdida_total_robo
+                              join d in db.cotizacion_ordenes
+                              on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                              where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_1)
+                              select new
+                              {
+                                d.numero_orden,
+                                duenio_nombres = c.duenio_nombres_1,
+                                duenio_documento = c.duenio_documento_1,
+                                duenio_descripcion = c.duenio_descripcion_1,
+                                duenio_monto = c.duenio_monto_1
+                              }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_2)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_2,
+                                    duenio_documento = c.duenio_documento_2,
+                                    duenio_descripcion = c.duenio_descripcion_2,
+                                    duenio_monto = c.duenio_monto_2
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_3)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_3,
+                                    duenio_documento = c.duenio_documento_3,
+                                    duenio_descripcion = c.duenio_descripcion_3,
+                                    duenio_monto = c.duenio_monto_3
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_4)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_4,
+                                    duenio_documento = c.duenio_documento_4,
+                                    duenio_descripcion = c.duenio_descripcion_4,
+                                    duenio_monto = c.duenio_monto_4
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_5)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_5,
+                                    duenio_documento = c.duenio_documento_5,
+                                    duenio_descripcion = c.duenio_descripcion_5,
+                                    duenio_monto = c.duenio_monto_5
+                                  });
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiPTRobo.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiPTRobo);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      ReportViewerCoti.ShowToolBar = false;
+      ReportViewerCoti.Visible = true;
+
+    }
+
+    protected void PSubeFormularioCotiPTRobo(string pNroOrden)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      LBCDesaEntities db = new LBCDesaEntities();
+
+      string vNumFlujo = TextBoxNroFlujo.Text;
+      string vTipoDocumental = string.Empty;
+      string vNombreUsuario = string.Empty;
+
+      Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string extension = "pdf";
+      string fileName = "RepFormCotiPTRobo" + pNroOrden;
+
+      vTipoDocumental = "RE - Orden de Indemnizacion";
+
+      vNombreUsuario = Session["IdUsr"].ToString();
+
+      var vListaFlujo = from f in db.Flujo
+                        join s in db.cotizacion_ordenes on f.idFlujo equals s.id_flujo
+                        where (s.numero_orden == pNroOrden)
+                        select new
+                        {
+                          f.nombreAsegurado,
+                          f.telefonocelAsegurado,
+                          cobertura = "PT ROBO",
+                          f.fechaSiniestro,
+                          f.flujoOnBase,
+                          f.numeroReclamo,
+                          f.numeroPoliza,
+                          f.marcaVehiculo,
+                          f.modeloVehiculo,
+                          f.anioVehiculo,
+                          f.placaVehiculo,
+                          f.chasisVehiculo
+                        };
+
+      var vListaCotiPTRobo = (from c in db.cotizacion_perdida_total_robo
+                              join d in db.cotizacion_ordenes
+                              on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                              where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_1)
+                              select new
+                              {
+                                d.numero_orden,
+                                duenio_nombres = c.duenio_nombres_1,
+                                duenio_documento = c.duenio_documento_1,
+                                duenio_descripcion = c.duenio_descripcion_1,
+                                duenio_monto = c.duenio_monto_1
+                              }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_2)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_2,
+                                    duenio_documento = c.duenio_documento_2,
+                                    duenio_descripcion = c.duenio_descripcion_2,
+                                    duenio_monto = c.duenio_monto_2
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_3)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_3,
+                                    duenio_documento = c.duenio_documento_3,
+                                    duenio_descripcion = c.duenio_descripcion_3,
+                                    duenio_monto = c.duenio_monto_3
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_4)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_4,
+                                    duenio_documento = c.duenio_documento_4,
+                                    duenio_descripcion = c.duenio_descripcion_4,
+                                    duenio_monto = c.duenio_monto_4
+                                  }).Union
+                                 (from c in db.cotizacion_perdida_total_robo
+                                  join d in db.cotizacion_ordenes
+                                  on new { c.id_flujo, c.id_cotizacion } equals new { d.id_flujo, d.id_cotizacion }
+                                  where (d.numero_orden == pNroOrden) && (string.Empty != c.duenio_nombres_5)
+                                  select new
+                                  {
+                                    d.numero_orden,
+                                    duenio_nombres = c.duenio_nombres_5,
+                                    duenio_documento = c.duenio_documento_5,
+                                    duenio_descripcion = c.duenio_descripcion_5,
+                                    duenio_monto = c.duenio_monto_5
+                                  });
+
+
+
+      ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiPTRobo.rdlc";
+      ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
+      ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiPTRobo);
+
+
+      ReportViewerCoti.LocalReport.DataSources.Clear();
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
+
+      ReportViewerCoti.LocalReport.Refresh();
+      byte[] vArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      //enviar el array de bytes a OnBase
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FEnviaArchivoOnBase(vNumFlujo, vTipoDocumental, vNombreUsuario, vArrayBytes);
+      if (vResultado > 0)
+      {
+        LabelMensaje.Text = "Documento subido exitosamente a OnBase";
+      }
+      else
+      {
+        LabelMensaje.Text = "error, El Documento no fue subido a OnBase";
+      }
+    }
+
+
+    protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
+    {
+      ReportViewerCoti.Visible = false;
+      ButtonCierraVerRep.Visible = false;
+    }
+
+    #endregion
+  }
 }
