@@ -1384,6 +1384,11 @@
       <Parameter Name="Proveedor" Mode="In" Type="String" />
       <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="paCopiaDaniosPropiosInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+      <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="paIncFlujoContadorInsp">
       <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
       <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />

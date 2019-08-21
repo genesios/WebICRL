@@ -859,6 +859,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonDetalleDPPadre;
         
         /// <summary>
+        /// ButtonFinalizarInspDP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinalizarInspDP;
+        
+        /// <summary>
         /// GridViewDaniosPropiosPadre control.
         /// </summary>
         /// <remarks>

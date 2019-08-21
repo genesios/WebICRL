@@ -284,6 +284,23 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaOrdenesCotizacion_VE", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
+        public virtual int paCopiaDaniosPropiosInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            var idSecuencialParameter = idSecuencial.HasValue ?
+                new ObjectParameter("idSecuencial", idSecuencial) :
+                new ObjectParameter("idSecuencial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaDaniosPropiosInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+        }
+    
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)
         {
             var iIdFlujoParameter = iIdFlujo.HasValue ?

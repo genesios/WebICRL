@@ -631,6 +631,18 @@ namespace ICRL.BD
       return vResultado;
     }
 
+    public int fCopiaDaniosPropiosInspecACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaDaniosPropiosInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public string fObtieneFlujoTemp()
     {
       string vFlujoTemp = string.Empty;
@@ -2214,6 +2226,74 @@ namespace ICRL.BD
         vIdFlujo = (int)vTablaCotizacion.idFlujo;
       }
       return vIdFlujo;
+    }
+
+    public int FGrabaCotiICRL(Coti pCoti)
+    {
+      int vRespuesta = 0;
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          Cotizacion vCotizacion = new Cotizacion();
+          vCotizacion.idUsuario = pCoti.idUsuario;
+          vCotizacion.idFlujo = pCoti.idFlujo;
+          vCotizacion.fechaCreacion = pCoti.fechaCreacion;
+          vCotizacion.inspector = pCoti.inspector;
+          vCotizacion.sucursal = pCoti.sucursal;
+          vCotizacion.idInspeccion = pCoti.idInspeccion;
+          vCotizacion.estado = pCoti.estado;
+          vCotizacion.tipoCobertura = pCoti.tipoCobertura;
+          vCotizacion.correlativo = pCoti.correlativo;
+          
+
+          db.Cotizacion.Add(vCotizacion);
+          db.SaveChanges();
+
+          vRespuesta = 1;
+        }
+      }
+      catch (Exception ex)
+      {
+        vRespuesta = 0;
+      }
+      return vRespuesta;
+    }
+
+    public int FGrabaCotiFlujoICRL(CotiFlujo pCotiFlujo)
+    {
+      int vRespuesta = 0;
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          CotizacionFlujo vCotizacionFlujo = new CotizacionFlujo();
+
+          vCotizacionFlujo.idFlujo = pCotiFlujo.idFlujo;
+          vCotizacionFlujo.idUsuario = pCotiFlujo.idUsuario;
+          vCotizacionFlujo.fechaCreacion = pCotiFlujo.fechaCreacion;
+          vCotizacionFlujo.observacionesSiniestro = pCotiFlujo.observacionesSiniestro;
+          vCotizacionFlujo.Inspector = pCotiFlujo.inspector;
+          vCotizacionFlujo.nombreContacto = pCotiFlujo.nombreContacto;
+          vCotizacionFlujo.telefonoContacto = pCotiFlujo.telefonoContacto;
+          vCotizacionFlujo.correosDeEnvio = pCotiFlujo.correosDeEnvio;
+          vCotizacionFlujo.estado = pCotiFlujo.estado;
+          vCotizacionFlujo.fecha_siniestro = pCotiFlujo.fechaSiniestro;
+          vCotizacionFlujo.correlativo = pCotiFlujo.correlativo;
+          vCotizacionFlujo.usuario_modificacion = pCotiFlujo.usuario_modificacion;
+          vCotizacionFlujo.fecha_modificacion = pCotiFlujo.fechaModificacion;
+
+          db.CotizacionFlujo.Add(vCotizacionFlujo);
+          db.SaveChanges();
+
+          vRespuesta = 1;
+        }
+      }
+      catch (Exception ex)
+      {
+        vRespuesta = 0;
+      }
+      return vRespuesta;
     }
     #endregion
 

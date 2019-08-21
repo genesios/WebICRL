@@ -1238,6 +1238,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Parameter Name="Proveedor" Type="char" Mode="In" />
           <Parameter Name="idTipoItem" Type="int" Mode="In" />
         </Function>
+        <Function Name="paCopiaDaniosPropiosInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+          <Parameter Name="idSecuencial" Type="int" Mode="In" />
+        </Function>
         <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="iIdFlujo" Type="int" Mode="In" />
           <Parameter Name="iValorContador" Type="int" Mode="InOut" />
@@ -2787,6 +2792,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <Parameter Name="Proveedor" Mode="In" Type="String" />
             <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="paCopiaDaniosPropiosInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+            <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="paIncFlujoContadorInsp">
             <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
             <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />
@@ -3774,6 +3784,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
+          <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaDaniosPropiosInspACoti" />
           <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
           <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
         </EntityContainerMapping>

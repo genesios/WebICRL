@@ -1233,6 +1233,11 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="Proveedor" Type="char" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
+  <Function Name="paCopiaDaniosPropiosInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idInspeccion" Type="int" Mode="In" />
+    <Parameter Name="idSecuencial" Type="int" Mode="In" />
+  </Function>
   <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iIdFlujo" Type="int" Mode="In" />
     <Parameter Name="iValorContador" Type="int" Mode="InOut" />

@@ -310,6 +310,17 @@
     <Content Include="DS\InspeccionDaniosPropios.xsc">
       <DependentUpon>InspeccionDaniosPropios.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\ejemplo.xsc">
+      <DependentUpon>ejemplo.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\ejemplo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ejemplo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\ejemplo.xss">
+      <DependentUpon>ejemplo.xsd</DependentUpon>
+    </Content>
     <None Include="DS\InspeccionDaniosPropios.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -519,6 +530,8 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BD\AccesoDatos.cs" />
+    <Compile Include="BD\Coti.cs" />
+    <Compile Include="BD\CotiFlujo.cs" />
     <Compile Include="BD\CotizacionDaniosPropios.cs" />
     <Compile Include="BD\CotizacionICRL.cs" />
     <Compile Include="BD\FlujoICRL.cs" />
@@ -595,6 +608,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\ejemplo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ejemplo.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS\InspeccionDaniosPropios.Designer.cs">
       <AutoGen>True</AutoGen>

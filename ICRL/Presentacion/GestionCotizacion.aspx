@@ -137,4 +137,39 @@
                 HorizontalAlign="Center" Font-Size="Large" ForeColor="DarkBlue" />
         </asp:GridView>
     </div>
+    <div>
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupCoberturas" Style="display: none" />
+            <ajaxToolkit:ModalPopupExtender ID="ModalPopupCoberturas" runat="server"
+                PopupControlID="PanelModalPopupCoberturas" TargetControlID="ButtonOcultoParaPopupCoberturas" PopupDragHandleControlID="ModalPopupDragHandleCoberturas"
+                RepositionMode="None" X="10" Y="10"
+                BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupCoberturasBehavior" DynamicServicePath="">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupCoberturas" runat="server" CssClass="modalPopup">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleCoberturas" CssClass="modalPopupHeader">
+                    Creación Cotizaciones
+                </asp:Panel>
+                <div>
+                    <table class="basetable">
+                        <tr>
+                            <td>
+                                <div class="thirty">
+                                    <asp:Label ID="LabelCoberturas" runat="server" Text="Coberturas"></asp:Label><br />
+                                    <asp:DropDownList ID="DropDownListCoberturas" runat="server"></asp:DropDownList><br />
+                                </div>
+                                <div class="thirty">
+
+                                </div>
+                                <div class="thirty">
+                                    <asp:Button ID="ButtonCoberturaCrear" runat="server" Text="Crear" OnClick="ButtonCoberturaCrear_Click" />
+                                    <asp:Button ID="ButtonCoberturaCancelar" runat="server" Text="Cancelar" OnClick="ButtonCoberturaCancelar_Click" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <%--<asp:Button ID="ButtonCancelPopCobertura" runat="server" Text="Cerrar" />--%>
+            </asp:Panel>
+        </div>
+    </div>
 </asp:Content>

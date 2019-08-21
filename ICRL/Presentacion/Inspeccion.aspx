@@ -282,6 +282,17 @@
                             </table>
                         </div>
                         <div>
+                            <table class="basetable" style="width: 100%">
+                                <tr>
+                                    <td style="text-align: left">
+                                    </td>
+                                    <td style="text-align: right">
+                                        <asp:Button ID="ButtonFinalizarInspDP" runat="server" Text="Finalizar" Visible="False" OnClick="ButtonFinalizarInspDP_Click" ></asp:Button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
                             <asp:GridView ID="GridViewDaniosPropiosPadre" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="secuencial" OnRowDataBound="GridViewDaniosPropiosPadre_RowDataBound" OnSelectedIndexChanged="GridViewDaniosPropiosPadre_SelectedIndexChanged" OnRowCommand="GridViewDaniosPropiosPadre_RowCommand" Width="100%">
                                 <AlternatingRowStyle BackColor="White" />
                                 <EditRowStyle BackColor="#7C6F57" />
@@ -304,7 +315,7 @@
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
-                                    <asp:BoundField DataField="Secuencial" HeaderText="Sec"/>
+                                    <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
                                     <asp:TemplateField HeaderText="Cambio a Pérdida Total">
                                         <ItemTemplate>
@@ -452,9 +463,6 @@
                                 <asp:Button ID="ButtonCancelPopDP" runat="server" Text="Cerrar" OnClick="ButtonCancelPopDP_Click" />
                             </asp:Panel>
                         </div>
-<%--                        <div>
-                            <asp:ImageButton ID="ImgButtonExportPdfDaniosP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfDaniosP_Click" />
-                        </div>--%>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
                 <ajaxToolkit:TabPanel ID="TabPanelRCObjetos" TabIndex="2" runat="server" HeaderText="RCObjetos" Enabled="False" Visible="false">
