@@ -5,13 +5,26 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
   <script type="text/javascript">
-    function deleteConfirm(pubid) {
-      var result = confirm('Desea eliminar la factura ' + pubid + ' ?');
-      if (result) {
+    function ConfirmarEliminar(idf) {
+      var resultado = confirm('Desea eliminar la factura ' + idf + ' ?');
+      if (resultado) {
         return true;
       }
       else {
         return false;
+      }
+    }
+
+    function ValidarFecha(sender, args) {
+      var cadenaFecha = document.getElementById(sender.controltovalidate).value;
+      var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+      if (regex.test(cadenaFecha)) {
+        var parts = cadenaFecha.split("/");
+        var dt = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+        args.IsValid = (dt.getDate() == parts[0] && dt.getMonth() + 1 == parts[1] && dt.getFullYear() == parts[2]);
+      }
+      else {
+        args.IsValid = false;
       }
     }
   </script>
@@ -91,44 +104,44 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Fecha Emisión Factura">
           <ItemTemplate>
-            <asp:Label ID="lblEmisionFactura" runat="server" Text='<%# Eval("fecha_emision", "{0:dd-MM-yyyy}") %>'></asp:Label>
+            <asp:Label ID="lblEmisionFactura" runat="server"
+              Text='<%# Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
-            <asp:TextBox ID="txbEmisionFacturaEditar" runat="server" Text='<%# Eval("fecha_emision", "{0:dd-MM-yyyy}") %>' ValidationGroup="ValidacionEditarFactura" MaxLength="10"></asp:TextBox><br />
+            <asp:TextBox ID="txbEmisionFacturaEditar" runat="server" ValidationGroup="ValidacionEditarFactura" MaxLength="10" placeholder="dd/mm/aaaa"
+              Text='<%# Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="covEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar"
-              Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" CssClass="errormessage"
-              ValidationGroup="ValidacionEditarFactura"></asp:CompareValidator>
+            <asp:CustomValidator ID="cuvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar" Text="* Fecha no válida"
+              ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionEditarFactura"></asp:CustomValidator>
           </EditItemTemplate>
           <FooterTemplate>
-            <asp:TextBox ID="txbEmisionFacturaNuevo" runat="server"></asp:TextBox><br />
+            <asp:TextBox ID="txbEmisionFacturaNuevo" runat="server" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEmisionFacturaNuevo" runat="server" ControlToValidate="txbEmisionFacturaNuevo"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionNuevaFactura"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="covEmisionFacturaNuevo" runat="server" ControlToValidate="txbEmisionFacturaNuevo"
-              Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"
-              CssClass="errormessage"></asp:CompareValidator>
+            <asp:CustomValidator ID="cuvEmisionFacturaNuevo" runat="server" ControlToValidate="txbEmisionFacturaNuevo" Text="* Fecha no válida"
+              ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"></asp:CustomValidator>
           </FooterTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Fecha Recepción Factura">
           <ItemTemplate>
-            <asp:Label ID="lblEntregaFactura" runat="server" Text='<%# Eval("fecha_entrega", "{0:dd-MM-yyyy}") %>'></asp:Label>
+            <asp:Label ID="lblEntregaFactura" runat="server"
+              Text='<%# Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
-            <asp:TextBox ID="txbEntregaFacturaEditar" runat="server" Text='<%# Eval("fecha_entrega", "{0:dd-MM-yyyy}") %>' MaxLength="10" ValidationGroup="ValidacionEditarFactura"></asp:TextBox><br />
+            <asp:TextBox ID="txbEntregaFacturaEditar" runat="server" MaxLength="10" ValidationGroup="ValidacionEditarFactura" placeholder="dd/mm/aaaa"
+              Text='<%# Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="covEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar"
-              Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" CssClass="errormessage"
-              ValidationGroup="ValidacionEditarFactura"></asp:CompareValidator>
+            <asp:CustomValidator ID="cuvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar" Text="* Fecha no válida"
+              ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionEditarFactura"></asp:CustomValidator>
           </EditItemTemplate>
           <FooterTemplate>
-            <asp:TextBox ID="txbEntregaFacturaNuevo" runat="server"></asp:TextBox><br />
+            <asp:TextBox ID="txbEntregaFacturaNuevo" runat="server" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEntregaFacturaNuevo" runat="server" ControlToValidate="txbEntregaFacturaNuevo"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionNuevaFactura"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="covEntregaFacturaNuevo" runat="server" ControlToValidate="txbEntregaFacturaNuevo"
-              Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"
-              CssClass="errormessage"></asp:CompareValidator>
+            <asp:CustomValidator ID="cuvEntregaFacturaNuevo" runat="server" ControlToValidate="txbEntregaFacturaNuevo" Text="* Fecha no válida"
+              ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"></asp:CustomValidator>
           </FooterTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Monto Factura" ItemStyle-CssClass="price" HeaderStyle-CssClass="price">
@@ -142,8 +155,6 @@
             <asp:CompareValidator ID="covMontoFacturaEditar" runat="server" ControlToValidate="txbMontoFacturaEditar"
               Type="Double" Operator="DataTypeCheck" Text="* Monto inválido" Display="Dynamic" CssClass="errormessage"
               ValidationGroup="ValidacionEditarFactura"></asp:CompareValidator>
-            <%--<asp:RegularExpressionValidator ID="revNumeroFacturaEditar" runat="server" ControlToValidate="txbNumeroFacturaEditar"
-              ValidationExpression="^[0-9]*$" Text="* Solo números" Display="Dynamic"></asp:RegularExpressionValidator>--%>
           </EditItemTemplate>
           <FooterTemplate>
             <asp:TextBox ID="txbMontoFacturaNuevo" runat="server"></asp:TextBox><br />
@@ -177,7 +188,6 @@
             <asp:Label ID="lblObservaciones" runat="server" Text='<%# Eval("observaciones") %>'></asp:Label>
           </ItemTemplate>
         </asp:TemplateField>
-        <%--<asp:BoundField DataField="observaciones" Visible="false" />--%>
         <asp:TemplateField>
           <ItemTemplate>
             <asp:LinkButton ID="btnEditar" runat="server" CommandName="Edit" Text="Editar" />
@@ -225,7 +235,6 @@
         <Columns>
           <asp:BoundField DataField="numero_orden" HeaderText="Orden" />
           <asp:BoundField DataField="proveedor" HeaderText="T/P/B" />
-          <%--<asp:BoundField DataField="item_descripcion" HeaderText="Item" />--%>
           <asp:TemplateField HeaderText="Item">
             <ItemTemplate>
               <asp:Label ID="lblDescripcion" runat="server" Text='<%# Eval("item_descripcion") %>'></asp:Label>
@@ -250,7 +259,15 @@
               <asp:Label ID="lblTotalCotizacionUs" runat="server"></asp:Label>
             </FooterTemplate>
           </asp:TemplateField>
-          <asp:BoundField DataField="fecha_recepcion" HeaderText="Fecha Insp." DataFormatString="{0:dd-MM-yyyy}" />
+          <%--<asp:BoundField DataField="fecha_recepcion" HeaderText="Fecha Insp." DataFormatString="{0:dd-MM-yyyy}" />--%>
+          <asp:TemplateField HeaderText="Fecha Insp.">
+            <ItemTemplate>
+              <asp:Label ID="lblFechaOrden" runat="server"
+                Text='<%# (Eval("fecha_recepcion") != null && !string.IsNullOrWhiteSpace(Eval("fecha_recepcion").ToString())) ?
+                  Convert.ToDateTime(Eval("fecha_recepcion").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) :
+                  string.Empty %>'></asp:Label>
+            </ItemTemplate>
+          </asp:TemplateField>
           <asp:TemplateField HeaderText="Insp.">
             <ItemTemplate>
               <asp:CheckBox ID="cbxInspeccion" runat="server" Checked='<%# Eval("inspeccion") %>'></asp:CheckBox>
@@ -268,7 +285,10 @@
           </asp:TemplateField>
           <asp:TemplateField HeaderText="Fecha Liq.">
             <ItemTemplate>
-              <asp:Label ID="lblFechaLiquidacion" runat="server" Text='<%# Eval("fecha_liquidacion", "{0:dd-MM-yyyy}") %>'></asp:Label>
+              <asp:Label ID="lblFechaLiquidacion" runat="server"
+                Text='<%# (Eval("fecha_liquidacion") != null && !string.IsNullOrWhiteSpace(Eval("fecha_liquidacion").ToString())) ?
+                  Convert.ToDateTime(Eval("fecha_liquidacion").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) :
+                  string.Empty %>'></asp:Label>
             </ItemTemplate>
           </asp:TemplateField>
           <asp:TemplateField Visible="false">
@@ -312,7 +332,6 @@
         OnRowDataBound="GridViewDatosLiquidacion_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
       <AlternatingRowStyle BackColor="White" />
       <Columns>
-        <%--<asp:BoundField DataField="orden" HeaderText="Orden" />--%>
         <asp:TemplateField HeaderText="Orden">
           <ItemTemplate>
             <asp:Label ID="lblOrden" runat="server" Text='<%# Eval("orden") %>'></asp:Label>
@@ -339,13 +358,11 @@
             <asp:Label ID="lblSaldoLiquidacionUs" runat="server"></asp:Label>
           </FooterTemplate>
         </asp:TemplateField>
-        <%--<asp:BoundField DataField="fecharec" HeaderText="Fecha Recep. Fact." />--%>
         <asp:TemplateField HeaderText="Fecha Recep. Fact.">
           <ItemTemplate>
             <asp:Label ID="lblFechaRecepcion" runat="server" Text='<%# Eval("fecharec") %>'></asp:Label>
           </ItemTemplate>
         </asp:TemplateField>
-        <%--<asp:BoundField DataField="numero" HeaderText="Núm. Factura" />--%>
         <asp:TemplateField HeaderText="Núm. Factura">
           <ItemTemplate>
             <asp:Label ID="lblNumero" runat="server" Text='<%# Eval("numero") %>'></asp:Label>

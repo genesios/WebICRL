@@ -359,7 +359,7 @@ namespace ICRL.BD
 
         vFlujoICRL.estado = 1;
         vFlujoICRL.importacionDirecta = false;
-        vFlujoICRL.contador = 0;
+        
       }
 
       return vFlujoICRL;
@@ -382,6 +382,27 @@ namespace ICRL.BD
         if (null != vFilaTablaFlujo)
         {
           vRespuesta = vFilaTablaFlujo.idFlujo;
+        }
+      }
+
+      return vRespuesta;
+    }
+
+    public int FTraeContadorFlujoICRL(string pNumFlujo)
+    {
+      int vRespuesta = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        var vTablaFlujo = from d in db.Flujo
+                          where d.flujoOnBase == pNumFlujo
+                          select d;
+
+        var vFilaTablaFlujo = vTablaFlujo.FirstOrDefault<Flujo>();
+
+        if (null != vFilaTablaFlujo)
+        {
+          vRespuesta = (int)vFilaTablaFlujo.contador;
         }
       }
 

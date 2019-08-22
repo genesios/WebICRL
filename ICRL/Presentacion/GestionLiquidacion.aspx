@@ -6,6 +6,21 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
+  <script type="text/javascript">
+    function ValidarFecha(sender, args) {
+      var cadenaFecha = document.getElementById(sender.controltovalidate).value;
+      var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+      if (regex.test(cadenaFecha)) {
+        var parts = cadenaFecha.split("/");
+        var dt = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+        args.IsValid = (dt.getDate() == parts[0] && dt.getMonth() + 1 == parts[1] && dt.getFullYear() == parts[2]);
+      }
+      else {
+        args.IsValid = false;
+      }
+    }
+  </script>
+
   <table class="basetable">
       <tr><th>Búsqueda Liquidación</th></tr>
       <tr><td>
@@ -35,9 +50,9 @@
           Fecha Liq. Desde
           <asp:RequiredFieldValidator ID="rfvFechaDesde" runat="server" ControlToValidate="txbFechaDesde"
             Text="* Requerido" Display="Dynamic" CssClass="errormessage"></asp:RequiredFieldValidator>
-          <asp:CompareValidator ID="covFechaDesde" runat="server" ControlToValidate="txbFechaDesde"
-            Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" CssClass="errormessage"></asp:CompareValidator><br />
-          <asp:TextBox ID="txbFechaDesde" runat="server" AutoComplete="off" MaxLength="10"></asp:TextBox>
+          <asp:CustomValidator ID="cuvFechaDesde" runat="server" ControlToValidate="txbFechaDesde" Text="* Fecha no válida"
+            ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic"></asp:CustomValidator><br />
+          <asp:TextBox ID="txbFechaDesde" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox>
           <ajaxToolkit:CalendarExtender ID="calFechaDesde" runat="server" BehaviorID="calFechaDesde" TargetControlID="txbFechaDesde"
             DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
         </div>
@@ -45,11 +60,11 @@
           Fecha Liq. Hasta
           <asp:RequiredFieldValidator ID="rfvFechaHasta" runat="server" ControlToValidate="txbFechaHasta"
             Text="* Requerido" Display="Dynamic" CssClass="errormessage"></asp:RequiredFieldValidator>
-          <asp:CompareValidator ID="covFechaHasta" runat="server" ControlToValidate="txbFechaHasta"
-            Type="Date" Operator="DataTypeCheck" Text="* Fecha no válida" Display="Dynamic" CssClass="errormessage"></asp:CompareValidator>
+          <asp:CustomValidator ID="cuvFechaHasta0" runat="server" ControlToValidate="txbFechaHasta" Text="* Fecha no válida"
+            Display="Dynamic" ClientValidationFunction="ValidarFecha" CssClass="errormessage"></asp:CustomValidator>
           <asp:CustomValidator ID="cuvFechaHasta" runat="server" ControlToValidate="txbFechaHasta" Display="Dynamic"
-            CssClass="errormessage" Text="* Fecha debe ser mayor a 'Desde'" OnServerValidate="cuvFechaHasta_ServerValidate"></asp:CustomValidator><br />
-          <asp:TextBox ID="txbFechaHasta" runat="server" AutoComplete="off" MaxLength="10"></asp:TextBox>
+            CssClass="errormessage" Text="* Rango de fechas inválido" OnServerValidate="cuvFechaHasta_ServerValidate"></asp:CustomValidator><br />
+          <asp:TextBox ID="txbFechaHasta" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox>
           <ajaxToolkit:CalendarExtender ID="calFechaHasta" runat="server" BehaviorID="calFechaHasta" TargetControlID="txbFechaHasta"
             DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
         </div>
@@ -71,20 +86,24 @@
             <asp:BoundField DataField="nombreAsegurado" HeaderText="Cliente" />
             <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
             <asp:BoundField DataField="proveedor" HeaderText="Proveedor / Beneficiario" />
-            <asp:BoundField DataField="fecha_orden" HeaderText="Fecha Orden" DataFormatString="{0:dd-MM-yyyy}" />
+            <%--<asp:BoundField DataField="fecha_orden" HeaderText="Fecha Orden" DataFormatString="{0:dd/MM/yyyy}"/>--%>
+            <asp:TemplateField HeaderText="Fecha Orden">
+              <ItemTemplate>
+                <asp:Label ID="lblFechaOrden" runat="server"
+                  Text='<%# Convert.ToDateTime(Eval("fecha_orden").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
+              </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="Total" HeaderText="Total Orden" DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumabspagado" HeaderText="Pagado Bs." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumabsnopagado" HeaderText="No Pagado Bs." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumauspagado" HeaderText="Pagado Us." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
             <asp:BoundField DataField="sumausnopagado" HeaderText="No Pagado Us." DataFormatString="{0:N}" ItemStyle-CssClass="price" HeaderStyle-CssClass="price" />
-            <%--<asp:BoundField DataField="id_estado" HeaderText="Estado" />--%>
             <asp:TemplateField HeaderText="Estado">
               <ItemTemplate>
                 <asp:Label ID="lblEstado" runat="server" Text='<%# VerTextoEstado(Eval("id_estado")) %>'></asp:Label>
               </ItemTemplate>
             </asp:TemplateField>
-            <asp:HyperLinkField DataTextField="idFlujo" DataNavigateUrlFields="idFlujo"
-              DataNavigateUrlFormatString="~\Presentacion\Liquidacion.aspx?idflujo={0}" />
+            <asp:HyperLinkField DataNavigateUrlFields="idFlujo" DataNavigateUrlFormatString="~\Presentacion\Liquidacion.aspx?idflujo={0}" Text="Ver" />
           </Columns>
           <EditRowStyle BackColor="#7C6F57" />
           <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -100,6 +119,8 @@
         <asp:Label ID="lblMensajeOrdenesPago" runat="server"></asp:Label>
       </td></tr>
     </table>
+
+    <asp:Button ID="btnExportarResultados" runat="server" Text="Exportar Resultados" Enabled="false" OnClick="btnExportarResultados_Click" />
 
     <asp:Label ID="LabelMensaje" CssClass="LabelMensaje" runat="server" Text="" Visible="false"></asp:Label>
 </asp:Content>

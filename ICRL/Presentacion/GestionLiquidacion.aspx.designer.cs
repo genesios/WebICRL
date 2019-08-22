@@ -67,13 +67,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaDesde;
         
         /// <summary>
-        /// covFechaDesde control.
+        /// cuvFechaDesde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator covFechaDesde;
+        protected global::System.Web.UI.WebControls.CustomValidator cuvFechaDesde;
         
         /// <summary>
         /// txbFechaDesde control.
@@ -103,13 +103,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaHasta;
         
         /// <summary>
-        /// covFechaHasta control.
+        /// cuvFechaHasta0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator covFechaHasta;
+        protected global::System.Web.UI.WebControls.CustomValidator cuvFechaHasta0;
         
         /// <summary>
         /// cuvFechaHasta control.
@@ -164,6 +164,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensajeOrdenesPago;
+        
+        /// <summary>
+        /// btnExportarResultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExportarResultados;
         
         /// <summary>
         /// LabelMensaje control.

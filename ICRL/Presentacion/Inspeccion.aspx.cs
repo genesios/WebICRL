@@ -1059,11 +1059,6 @@ namespace ICRL.Presentacion
 
         vIndex = Convert.ToInt32(e.CommandArgument);
         vSecuencial = Convert.ToInt32(GridViewDaniosPropiosPadre.DataKeys[vIndex].Value);
-        //proceso que copia los datos de Inps a Coti
-        AccesoDatos vAccesoDatos = new AccesoDatos();
-        int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
-        int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
-        vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
         PImprimeFormularioInspDaniosPropios(vSecuencial);
       }
 
@@ -1079,8 +1074,8 @@ namespace ICRL.Presentacion
         AccesoDatos vAccesoDatos = new AccesoDatos();
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
-        //vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
-        //PImprimeFormularioInspDaniosPropios(vSecuencial);
+        vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+
       }
     }
 
@@ -4578,6 +4573,11 @@ namespace ICRL.Presentacion
         else
         {
           vFlujoICRL.idFlujo = vRespuesta;
+          //ajuste para no perder el contador
+          int vContador = 0;
+          vContador = vAccesoDatos.FTraeContadorFlujoICRL(TextBoxNroFlujo.Text);
+          vFlujoICRL.contador = vContador;
+          //fin ajuste
           int vActualizacion = vAccesoDatos.FActualizaFlujoICRL(vFlujoICRL);
           if (0 == vActualizacion)
           {

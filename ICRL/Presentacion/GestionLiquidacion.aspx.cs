@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,8 +31,8 @@ namespace ICRL.Presentacion
     }
     protected void cuvFechaHasta_ServerValidate(object source, ServerValidateEventArgs args)
     {
-      DateTime desde = Convert.ToDateTime(txbFechaDesde.Text);
-      DateTime hasta = DateTime.Parse(args.Value);
+      DateTime desde = DateTime.ParseExact(txbFechaDesde.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+      DateTime hasta = DateTime.ParseExact(args.Value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
       if (hasta <= desde)
         args.IsValid = false;
@@ -44,6 +45,109 @@ namespace ICRL.Presentacion
 
       RecuperarDatosOrdenesPago();
     }
+    protected void btnExportarResultados_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        #region Recuperar datos
+        int estado = 1;
+        int.TryParse(ddlEstado.SelectedItem.Value, out estado);
+        string proveedor = txbProveedor.Text.Trim().Replace('\'', ' ');
+        string sucursal = txbSucursal.Text.Trim().Replace('\'', ' ');
+        string flujoon = txbFlujoOnbase.Text.Trim().Replace('\'', ' ');
+        string placa = txbPlaca.Text.Trim().Replace('\'', ' ');
+        DateTime fechaInicio = DateTime.ParseExact(txbFechaDesde.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime fechaFin = DateTime.ParseExact(txbFechaHasta.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+        LiquidacionICRL.TipoRespuestaGrilla respuestaGrilla = LiquidacionICRL.LiquidacionGrilla(
+          estado, proveedor, sucursal, flujoon, placa, fechaInicio, fechaFin);
+        bool operacionExitosa = respuestaGrilla.correcto;
+        DataSet respuestaGrillaDataset = new DataSet();
+        respuestaGrillaDataset = respuestaGrilla.dsLiquidacionGrilla;
+        #endregion
+
+        #region Descripcion estados
+        AccesoDatos adatos = new AccesoDatos();
+        List<ListaNomenclador> estadosnom = adatos.FlTraeNomenGenerico("Estados", 0);
+        #endregion
+
+        #region Creacion del archivo CSV
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition", "attachment;filename=LBCCotizaciones.csv");
+        Response.Charset = "";
+        Response.ContentType = "text/csv";
+
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.Append("ORDEN;");
+        sb.Append("FECHA ORDEN;");
+        sb.Append("PROVEEDOR/BENEFICIARIO;");
+        sb.Append("ESTADO;");
+        sb.Append("TOTAL ORDEN;");
+        sb.Append("PAGADO BS;");
+        sb.Append("NO PAGADO BS;");
+        sb.Append("PAGADO US;");
+        sb.Append("NO PAGADO US;");
+        sb.Append("FLUJO ONBASE;");
+        sb.Append("CLIENTE;");
+        sb.Append("PLACA;");
+        sb.Append("ID FLUJO");
+        sb.Append("\r\n");
+
+        for (int i = 0; i < respuestaGrillaDataset.Tables[0].Rows.Count; i++)
+        {
+          for (int j = 0; j < respuestaGrillaDataset.Tables[0].Rows[i].ItemArray.Count(); j++)
+          {
+            string valorCelda = respuestaGrillaDataset.Tables[0].Rows[i][j].ToString().Trim();
+            valorCelda = valorCelda.Replace(";", ",");
+
+            if (j == 3)
+            {
+              foreach (ListaNomenclador estadonom in estadosnom)
+              {
+                if (estadonom.codigo.Trim() == valorCelda)
+                {
+                  valorCelda = estadonom.descripcion;
+                  break;
+                }
+              }
+            }
+
+            if (valorCelda.Contains("span"))
+            {
+              string subs = valorCelda.Substring(valorCelda.IndexOf('>') + 1);
+              valorCelda = subs.Remove(subs.LastIndexOf('<'));
+            }
+
+            byte[] bytes = System.Text.Encoding.Default.GetBytes(valorCelda);
+            valorCelda = System.Text.Encoding.Default.GetString(bytes);
+
+            if (j == respuestaGrillaDataset.Tables[0].Rows[i].ItemArray.Count() - 1)
+              sb.Append(valorCelda);
+            else
+              sb.Append(valorCelda + ';');
+          }
+
+          sb.Append("\r\n");
+        }
+
+        Response.Output.Write(sb.ToString());
+        #endregion
+
+        LabelMensaje.Visible = false;
+      }
+      catch (Exception ex)
+      {
+        LabelMensaje.Visible = true;
+        LabelMensaje.Text = "Error al exportar los resultados!";
+      }
+      finally
+      {
+        Response.Flush();
+        Response.Close();
+        Response.End();
+      }
+    }
     #endregion
 
     #region Metodos de Soporte
@@ -53,12 +157,12 @@ namespace ICRL.Presentacion
 
       if (string.IsNullOrWhiteSpace(txbFechaDesde.Text))
       {
-        txbFechaDesde.Text = hoy.ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaDesde.Text = hoy.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
       }
 
       if (string.IsNullOrWhiteSpace(txbFechaHasta.Text))
       {
-        txbFechaHasta.Text = hoy.AddMonths(1).ToShortDateString().ToString(System.Globalization.CultureInfo.CurrentCulture);
+        txbFechaHasta.Text = hoy.AddMonths(1).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
       }
     }
     private void RecuperarDatosOrdenesPago()
@@ -69,8 +173,8 @@ namespace ICRL.Presentacion
       string sucursal = txbSucursal.Text.Trim().Replace('\'', ' ');
       string flujoon = txbFlujoOnbase.Text.Trim().Replace('\'', ' ');
       string placa = txbPlaca.Text.Trim().Replace('\'', ' ');
-      DateTime fechaInicio = Convert.ToDateTime(txbFechaDesde.Text.Trim());
-      DateTime fechaFin = Convert.ToDateTime(txbFechaHasta.Text.Trim());
+      DateTime fechaInicio = DateTime.ParseExact(txbFechaDesde.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+      DateTime fechaFin = DateTime.ParseExact(txbFechaHasta.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
       LiquidacionICRL.TipoRespuestaGrilla respuestaGrilla = LiquidacionICRL.LiquidacionGrilla(
         estado, proveedor, sucursal, flujoon, placa, fechaInicio, fechaFin);
@@ -87,17 +191,23 @@ namespace ICRL.Presentacion
 
           GridViewOrdenesPago.Visible = true;
           lblMensajeOrdenesPago.Text = "";
+
+          btnExportarResultados.Enabled = true;
         }
         else
         {
           GridViewOrdenesPago.Visible = false;
           lblMensajeOrdenesPago.Text = "<p>No existen datos.</p><p>Introduzca otros valores en su consulta.</p>";
+
+          btnExportarResultados.Enabled = false;
         }
 
         LabelMensaje.Visible = false;
       }
       else
       {
+        btnExportarResultados.Enabled = false;
+
         LabelMensaje.Visible = true;
         LabelMensaje.Text = "Error en la recuperacion de los datos de pago!";
       }

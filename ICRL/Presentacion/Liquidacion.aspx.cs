@@ -76,8 +76,8 @@ namespace ICRL.Presentacion
 
       long idFactura_ = Convert.ToInt64(idFactura);
       long numero_ = Convert.ToInt64(numero);
-      DateTime fechaEmision_ = Convert.ToDateTime(fechaEmision);
-      DateTime fechaEntrega_ = Convert.ToDateTime(fechaEntrega);
+      DateTime fechaEmision_ = DateTime.ParseExact(fechaEmision, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+      DateTime fechaEntrega_ = DateTime.ParseExact(fechaEntrega, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
       double monto_ = Convert.ToDouble(monto);
       Int16 moneda_ = Convert.ToInt16(moneda);
 
@@ -121,8 +121,8 @@ namespace ICRL.Presentacion
         string moneda = ((DropDownList)GridViewDatosFactura.FooterRow.FindControl("ddlMonedaFacturaNuevo")).SelectedItem.Value;
 
         long numero_ = Convert.ToInt64(numero);
-        DateTime fechaEmision_ = Convert.ToDateTime(fechaEmision);
-        DateTime fechaEntrega_ = Convert.ToDateTime(fechaEntrega);
+        DateTime fechaEmision_ = DateTime.ParseExact(fechaEmision, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime fechaEntrega_ = DateTime.ParseExact(fechaEntrega, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
         double monto_ = Convert.ToDouble(monto);
         Int16 moneda_ = Convert.ToInt16(moneda);
 
@@ -160,7 +160,7 @@ namespace ICRL.Presentacion
 
         if (lnkbtnresult != null)
         {
-          lnkbtnresult.Attributes.Add("onclick", "javascript:return deleteConfirm('" + idFactura + "')");
+          lnkbtnresult.Attributes.Add("onclick", "javascript:return ConfirmarEliminar('" + idFactura + "')");
         }
       }
     }
@@ -234,7 +234,7 @@ namespace ICRL.Presentacion
           liquidacion.preciobs = Convert.ToDouble(((Label)row.Cells[3].FindControl("lblCotizacionBs")).Text);
           liquidacion.precious = Convert.ToDouble(((Label)row.Cells[4].FindControl("lblCotizacionUs")).Text);
           if (!string.IsNullOrEmpty(fechaRecepcion) && fechaRecepcion != "&nbsp;")
-            liquidacion.fecha_recepcion = Convert.ToDateTime(fechaRecepcion);
+            liquidacion.fecha_recepcion = DateTime.ParseExact(fechaRecepcion, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
           liquidacion.inspeccion = ((CheckBox)row.Cells[6].FindControl("cbxInspeccion")).Checked;
           liquidacion.liquidacion = esLiquidada;
           liquidacion.num_factura = ((DropDownList)row.Cells[8].FindControl("ddlFacturasLiquidadas")).SelectedItem.Value;
@@ -250,10 +250,11 @@ namespace ICRL.Presentacion
           liquidacion.fecha_orden = Convert.ToDateTime(((Label)row.Cells[9].FindControl("fecha_orden")).Text);
 
           DateTime fecha;
-          if (!DateTime.TryParse(lblFechaLiquidacion.Text, out fecha))
-            liquidacion.fecha_liquidacion = esLiquidada ? fechaLiquidacion : new DateTime(2000, 1, 1);
-          else
+          //if (DateTime.TryParse(lblFechaLiquidacion.Text, out fecha))
+          if (DateTime.TryParseExact(lblFechaLiquidacion.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fecha))
             liquidacion.fecha_liquidacion = esLiquidada ? fecha : new DateTime(2000, 1, 1);
+          else
+            liquidacion.fecha_liquidacion = esLiquidada ? fechaLiquidacion : new DateTime(2000, 1, 1);
 
           #region Generacion reporte liquidacion
           if (liquidacion.liquidacion)
@@ -368,8 +369,8 @@ namespace ICRL.Presentacion
 
             long idFactura_ = Convert.ToInt64(idFactura);
             long numero_ = Convert.ToInt64(numero);
-            DateTime fechaEmision_ = Convert.ToDateTime(fechaEmision);
-            DateTime fechaEntrega_ = Convert.ToDateTime(fechaEntrega);
+            DateTime fechaEmision_ = DateTime.ParseExact(fechaEmision, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime fechaEntrega_ = DateTime.ParseExact(fechaEntrega, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             double monto_ = Convert.ToDouble(monto);
             Int16 moneda_ = Convert.ToInt16(moneda);
 
