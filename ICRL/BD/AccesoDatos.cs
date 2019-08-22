@@ -5,6 +5,7 @@ using System.Web;
 using ICRL.ModeloDB;
 using LbcOnBaseWS;
 using LbcConsultaUsuarioSistema;
+using System.Globalization;
 
 namespace ICRL.BD
 {
@@ -340,12 +341,25 @@ namespace ICRL.BD
             case "Agencia Atencion":
               vFlujoICRL.agenciaAtencion = vKeyword.valor;
               break;
+            case "Fecha Incidente":
+              try
+              {
+                vFlujoICRL.fechaSiniestro = DateTime.ParseExact(vKeyword.valor.Substring(0,10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+              }
+              catch (Exception)
+              {
+                vFlujoICRL.fechaSiniestro = new DateTime(2000,1, 1, 0, 0, 0);
+              }
+              break;
             default:
               break;
           }
 
         }
 
+        vFlujoICRL.estado = 1;
+        vFlujoICRL.importacionDirecta = false;
+        vFlujoICRL.contador = 0;
       }
 
       return vFlujoICRL;
@@ -385,10 +399,9 @@ namespace ICRL.BD
           Flujo vTablaFlujo = new Flujo();
 
           vTablaFlujo.flujoOnBase = pFlujo.flujoOnBase;
-          vTablaFlujo.estado = 0;
+          vTablaFlujo.estado = pFlujo.estado;
           vTablaFlujo.numeroReclamo = pFlujo.numeroReclamo;
           vTablaFlujo.numeroPoliza = pFlujo.numeroPoliza;
-          vTablaFlujo.causaSiniestro = pFlujo.causaSiniestro;
           vTablaFlujo.marcaVehiculo = pFlujo.marcaVehiculo;
           vTablaFlujo.modeloVehiculo = pFlujo.modeloVehiculo;
           vTablaFlujo.anioVehiculo = pFlujo.anioVehiculo;
@@ -400,10 +413,12 @@ namespace ICRL.BD
           vTablaFlujo.nombreAsegurado = pFlujo.nombreAsegurado;
           vTablaFlujo.docIdAsegurado = pFlujo.docIdAsegurado;
           vTablaFlujo.telefonocelAsegurado = pFlujo.telefonoCelAsegurado;
+          vTablaFlujo.causaSiniestro = pFlujo.causaSiniestro;
+          vTablaFlujo.contador = pFlujo.contador;
           vTablaFlujo.descripcionSiniestro = pFlujo.descripcionSiniestro;
           vTablaFlujo.direccionInspeccion = pFlujo.direccionInspeccion;
           vTablaFlujo.agenciaAtencion = pFlujo.agenciaAtencion;
-          vTablaFlujo.contador = 0;
+          vTablaFlujo.fechaSiniestro = pFlujo.fechaSiniestro;
 
           db.Flujo.Add(vTablaFlujo);
           db.SaveChanges();
@@ -428,7 +443,7 @@ namespace ICRL.BD
         vTablaFlujo = db.Flujo.Find(pFlujo.idFlujo);
 
         vTablaFlujo.flujoOnBase = pFlujo.flujoOnBase;
-        vTablaFlujo.estado = 0;
+        vTablaFlujo.estado = pFlujo.estado;
         vTablaFlujo.numeroReclamo = pFlujo.numeroReclamo;
         vTablaFlujo.numeroPoliza = pFlujo.numeroPoliza;
         vTablaFlujo.causaSiniestro = pFlujo.causaSiniestro;
@@ -439,13 +454,15 @@ namespace ICRL.BD
         vTablaFlujo.placaVehiculo = pFlujo.placaVehiculo;
         vTablaFlujo.chasisVehiculo = pFlujo.chasisVehiculo;
         vTablaFlujo.valorAsegurado = pFlujo.valorAsegurado;
-        vTablaFlujo.importacionDirecta = false;
+        vTablaFlujo.importacionDirecta = pFlujo.importacionDirecta;
         vTablaFlujo.nombreAsegurado = pFlujo.nombreAsegurado;
         vTablaFlujo.docIdAsegurado = pFlujo.docIdAsegurado;
         vTablaFlujo.telefonocelAsegurado = pFlujo.telefonoCelAsegurado;
         vTablaFlujo.descripcionSiniestro = pFlujo.descripcionSiniestro;
         vTablaFlujo.direccionInspeccion = pFlujo.direccionInspeccion;
         vTablaFlujo.agenciaAtencion = pFlujo.agenciaAtencion;
+        vTablaFlujo.fechaSiniestro = pFlujo.fechaSiniestro;
+        vTablaFlujo.contador = pFlujo.contador;
 
         db.Entry(vTablaFlujo).State = System.Data.Entity.EntityState.Modified;
         db.SaveChanges();

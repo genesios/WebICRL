@@ -317,6 +317,7 @@
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
                                     <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Cambio a Pérdida Total">
                                         <ItemTemplate>
                                             <asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>'></asp:CheckBox>

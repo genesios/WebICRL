@@ -920,7 +920,7 @@ namespace ICRL.Presentacion
         vTextoTipoTaller = vInspeccionDPPadre.tipoTaller.Trim();
         DropDownListDPPTipoTaller.ClearSelection();
         DropDownListDPPTipoTaller.Items.FindByText(vTextoTipoTaller).Selected = true;
-        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
+        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
       }
       PBloqueaDPPadreEdicion(true);
     }
@@ -1065,6 +1065,22 @@ namespace ICRL.Presentacion
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
         PImprimeFormularioInspDaniosPropios(vSecuencial);
+      }
+
+      if (0 == e.CommandName.CompareTo("FinalizarInsp"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewDaniosPropiosPadre.DataKeys[vIndex].Value);
+        //proceso que copia los datos de Inps a Coti
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
+        //vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+        //PImprimeFormularioInspDaniosPropios(vSecuencial);
       }
     }
 
