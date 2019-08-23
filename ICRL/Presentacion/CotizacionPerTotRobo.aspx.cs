@@ -316,7 +316,7 @@ namespace ICRL.Presentacion
           }
 
           //Beneficiario Principal, es el asegurado
-          if (string.Empty != vFilaTabla.duenio_descripcion_1)
+          if (string.Empty != vFilaTabla.duenio_nombres_1)
           {
             DataRow vFila = null;
             vFila = dtBeneficiario.NewRow();
@@ -330,7 +330,7 @@ namespace ICRL.Presentacion
           }
 
           //Segundo Beneficario si aplica
-          if (string.Empty != vFilaTabla.duenio_descripcion_2)
+          if (string.Empty != vFilaTabla.duenio_nombres_2)
           {
             DataRow vFila = null;
             vFila = dtBeneficiario.NewRow();
@@ -344,7 +344,7 @@ namespace ICRL.Presentacion
           }
 
           //Tercer Beneficario si aplica
-          if (string.Empty != vFilaTabla.duenio_descripcion_3)
+          if (string.Empty != vFilaTabla.duenio_nombres_3)
           {
             DataRow vFila = null;
             vFila = dtBeneficiario.NewRow();
@@ -358,7 +358,7 @@ namespace ICRL.Presentacion
           }
 
           //Cuarto Beneficario si aplica
-          if (string.Empty != vFilaTabla.duenio_descripcion_4)
+          if (string.Empty != vFilaTabla.duenio_nombres_4)
           {
             DataRow vFila = null;
             vFila = dtBeneficiario.NewRow();
@@ -372,7 +372,7 @@ namespace ICRL.Presentacion
           }
 
           //Quinto Beneficario si aplica
-          if (string.Empty != vFilaTabla.duenio_descripcion_5)
+          if (string.Empty != vFilaTabla.duenio_nombres_5)
           {
             DataRow vFila = null;
             vFila = dtBeneficiario.NewRow();

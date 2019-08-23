@@ -974,6 +974,12 @@
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
     <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaDaniosPropiosInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaPTDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTDaniosPropiosInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaPTRoboInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTRoboInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCObjetoInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCObjetoInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCPersonaInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCPersonaInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCVehicularInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCVehicularInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRoboParcialInspACoti" />
     <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
     <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
   </EntityContainerMapping>

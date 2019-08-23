@@ -244,7 +244,7 @@
         </div>
 
         <div>
-            <ajaxToolkit:TabContainer ID="TabContainerCoberturas" runat="server" ActiveTabIndex="0" OnActiveTabChanged="TabContainerCoberturas_ActiveTabChanged" AutoPostBack="True">
+            <ajaxToolkit:TabContainer ID="TabContainerCoberturas" runat="server" ActiveTabIndex="4" OnActiveTabChanged="TabContainerCoberturas_ActiveTabChanged" AutoPostBack="True">
                 <ajaxToolkit:TabPanel runat="server" HeaderText="Daños Propios" ID="TabPanelDaniosPropios" TabIndex="1" Enabled="False" Visible="false">
                     <ContentTemplate>
                         <div>
@@ -277,17 +277,6 @@
                                         <asp:Button ID="ButtonGrabarDPPadre" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarDPPadre_Click" />
                                         <asp:Button ID="ButtonBorrarDPPadre" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarDPPadre_Click" />
                                         <asp:Button ID="ButtonDetalleDPPadre" runat="server" Text="Detalle" Enabled="False" OnClick="ButtonDetalleDPPadre_Click" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div>
-                            <table class="basetable" style="width: 100%">
-                                <tr>
-                                    <td style="text-align: left">
-                                    </td>
-                                    <td style="text-align: right">
-                                        <asp:Button ID="ButtonFinalizarInspDP" runat="server" Text="Finalizar" Visible="False" OnClick="ButtonFinalizarInspDP_Click" ></asp:Button>
                                     </td>
                                 </tr>
                             </table>
@@ -531,6 +520,7 @@
                                     <asp:BoundField DataField="nombreObjeto" HeaderText="Responsable Objeto" />
                                     <asp:BoundField DataField="docIdentidadObjeto" HeaderText="Doc.Id. Resp." />
                                     <asp:BoundField DataField="telefonoObjeto" HeaderText="Teléfono Resp." />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
                                             <%# Eval("observacionesObjeto") %>
@@ -701,6 +691,7 @@
                                     <asp:BoundField DataField="nombrePersona" HeaderText="Persona Afectada" />
                                     <asp:BoundField DataField="docIdentidadPersona" HeaderText="Doc.Id." />
                                     <asp:BoundField DataField="telefonoPersona" HeaderText="Teléfono" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
                                             <%# Eval("observacionesPersona") %>
@@ -848,7 +839,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Button ID="ButtonNuevoRP" runat="server" Text="Agregar" Enabled="true" OnClick="ButtonNuevoRP_Click" />
+                                        <asp:Button ID="ButtonNuevoRP" runat="server" Text="Agregar" OnClick="ButtonNuevoRP_Click" />
                                         <asp:Button ID="ButtonGrabarRP" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarRP_Click" />
                                         <asp:Button ID="ButtonBorrarRP" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarRP_Click" />
                                     </td>
@@ -856,7 +847,7 @@
                             </table>
                         </div>
                         <div>
-                            <asp:GridView ID="GridViewRoboParcial" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="GridViewRoboParcial_RowDataBound" OnSelectedIndexChanged="GridViewRoboParcial_SelectedIndexChanged" Width="100%">
+                            <asp:GridView ID="GridViewRoboParcial" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowDataBound="GridViewRoboParcial_RowDataBound" OnSelectedIndexChanged="GridViewRoboParcial_SelectedIndexChanged" Width="100%">
                                 <AlternatingRowStyle BackColor="White" />
                                 <EditRowStyle BackColor="#7C6F57" />
                                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -898,6 +889,7 @@
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfRoboP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfRoboP_Click" />
+                            <asp:Button ID="ButtonFinRoboP" runat="server" Text="Finalizar" OnClick="ButtonFinRoboP_Click" />
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
@@ -947,7 +939,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Button ID="ButtonNuevoPTDP" runat="server" Text="Agregar" Enabled="true" OnClick="ButtonNuevoPTDP_Click" />
+                                        <asp:Button ID="ButtonNuevoPTDP" runat="server" Text="Agregar" OnClick="ButtonNuevoPTDP_Click" />
                                         <asp:Button ID="ButtonGrabarPTDP" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonGrabarPTDP_Click" />
                                         <asp:Button ID="ButtonBorrarPTDP" runat="server" Text="Borrar" Enabled="False" OnClick="ButtonBorrarPTDP_Click" />
                                     </td>
@@ -956,6 +948,7 @@
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfPTDP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTDP_Click" />
+                            <asp:Button ID="ButtonFinPTDaniosP" runat="server" Text="Finalizar" OnClick="ButtonFinPTDaniosP_Click" />
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
@@ -1013,6 +1006,7 @@
                             </table>
                             <div>
                                 <asp:ImageButton ID="ImgButtonExportPdfPTRO" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTRO_Click" />
+                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click"/>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -1094,6 +1088,7 @@
                                     <asp:BoundField DataField="color" HeaderText="Color" />
                                     <asp:BoundField DataField="anio" HeaderText="Año" />
                                     <asp:BoundField DataField="chasis" HeaderText="Chasis" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Placa">
                                         <ItemTemplate>
                                             <%# Eval("placa") %>

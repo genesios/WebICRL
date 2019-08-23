@@ -85,7 +85,7 @@
                 <asp:BoundField DataField="nombreAsegurado" HeaderText="Asegurado" />
                 <asp:BoundField DataField="numeroPoliza" HeaderText="Poliza" />
                 <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
-                <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Siniestro" />
+                <asp:BoundField DataField="fechaSiniestro" HeaderText="Fecha Siniestro" />
                 <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate>
                         <%# Eval("descEstado") %>

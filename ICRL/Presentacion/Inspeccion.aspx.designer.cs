@@ -859,15 +859,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonDetalleDPPadre;
         
         /// <summary>
-        /// ButtonFinalizarInspDP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFinalizarInspDP;
-        
-        /// <summary>
         /// GridViewDaniosPropiosPadre control.
         /// </summary>
         /// <remarks>
@@ -1948,6 +1939,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.ImageButton ImgButtonExportPdfRoboP;
         
         /// <summary>
+        /// ButtonFinRoboP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinRoboP;
+        
+        /// <summary>
         /// TabPanelPerdidaTotalDaniosPropios control.
         /// </summary>
         /// <remarks>
@@ -2182,6 +2182,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.ImageButton ImgButtonExportPdfPTDP;
         
         /// <summary>
+        /// ButtonFinPTDaniosP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinPTDaniosP;
+        
+        /// <summary>
         /// TabPanelPerdidaTotalRobo control.
         /// </summary>
         /// <remarks>
@@ -2414,6 +2423,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImgButtonExportPdfPTRO;
+        
+        /// <summary>
+        /// ButtonFinPTRobo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinPTRobo;
         
         /// <summary>
         /// TabPanelRCV01 control.

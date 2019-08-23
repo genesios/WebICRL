@@ -1075,7 +1075,6 @@ namespace ICRL.Presentacion
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
-
       }
     }
 
@@ -1425,6 +1424,21 @@ namespace ICRL.Presentacion
         vSecuencial = Convert.ToInt32(GridViewObjetos.DataKeys[vIndex].Value);
         PImprimeFormularioInspRCObjeto(vSecuencial);
       }
+
+      if (0 == e.CommandName.CompareTo("FinalizarInsp"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewObjetos.DataKeys[vIndex].Value);
+        //proceso que copia los datos de Inps a Coti
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
+        vAccesoDatos.fCopiaRCObjetoInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+      }
     }
 
     protected void GridViewObjetos_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -1759,6 +1773,21 @@ namespace ICRL.Presentacion
         vIndex = Convert.ToInt32(e.CommandArgument);
         vSecuencial = Convert.ToInt32(GridViewPersonas.DataKeys[vIndex].Value);
         PImprimeFormularioInspRCPersona(vSecuencial);
+      }
+
+      if (0 == e.CommandName.CompareTo("FinalizarInsp"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewPersonas.DataKeys[vIndex].Value);
+        //proceso que copia los datos de Inps a Coti
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
+        vAccesoDatos.fCopiaRCPersonaInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
       }
     }
 
@@ -3035,6 +3064,21 @@ namespace ICRL.Presentacion
         vSecuencial = Convert.ToInt32(GridViewRCV01.DataKeys[vIndex].Value);
         PImprimeFormularioInspRCVehicular(vSecuencial);
       }
+
+      if (0 == e.CommandName.CompareTo("FinalizarInsp"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewRCV01.DataKeys[vIndex].Value);
+        //proceso que copia los datos de Inps a Coti
+        AccesoDatos vAccesoDatos = new AccesoDatos();
+        int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+        int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
+        vAccesoDatos.fCopiaRCVehicularInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+      }
     }
 
     protected void GridViewRCV01_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -4293,6 +4337,18 @@ namespace ICRL.Presentacion
       Response.Flush(); // send it to the client to download
     }
 
+    protected void ButtonFinPTRobo_Click(object sender, EventArgs e)
+    {
+      int vIdInspeccion = 0;
+      int vIdFlujo = 0;
+      vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+
+      //proceso que copia los datos de Inps a Coti
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      vAccesoDatos.fCopiaPTRoboInspACotizacion (vIdFlujo, vIdInspeccion);
+    }
+
     protected void ImgButtonExportPdfPTDP_Click(object sender, ImageClickEventArgs e)
     {
       AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -4374,6 +4430,18 @@ namespace ICRL.Presentacion
       Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
       Response.BinaryWrite(VArrayBytes); // create the file
       Response.Flush(); // send it to the client to download
+    }
+
+    protected void ButtonFinPTDaniosP_Click(object sender, EventArgs e)
+    {
+      int vIdInspeccion = 0;
+      int vIdFlujo = 0;
+      vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+
+      //proceso que copia los datos de Inps a Coti
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      vAccesoDatos.fCopiaPTDaniosPropiosInspACotizacion(vIdFlujo, vIdInspeccion);
     }
 
     protected void ImgButtonExportPdfRoboP_Click(object sender, ImageClickEventArgs e)
@@ -4458,6 +4526,18 @@ namespace ICRL.Presentacion
       Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
       Response.BinaryWrite(VArrayBytes); // create the file
       Response.Flush(); // send it to the client to download
+    }
+
+    protected void ButtonFinRoboP_Click(object sender, EventArgs e)
+    {
+      int vIdInspeccion = 0;
+      int vIdFlujo = 0;
+      vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+
+      //proceso que copia los datos de Inps a Coti
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      vAccesoDatos.fCopiaRoboParcialInspACotizacion(vIdFlujo, vIdInspeccion);
     }
 
     protected void ImgButtonExportPdfDaniosP_Click(object sender, ImageClickEventArgs e)
@@ -4704,9 +4784,6 @@ namespace ICRL.Presentacion
       vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
     }
 
-    protected void ButtonFinalizarInspDP_Click(object sender, EventArgs e)
-    {
-
-    }
+    
   }
 }

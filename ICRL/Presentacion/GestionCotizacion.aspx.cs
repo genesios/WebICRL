@@ -270,7 +270,7 @@ namespace IRCL.Presentacion
                      f.nombreAsegurado,
                      f.numeroPoliza,
                      f.placaVehiculo,
-                     c.fechaCreacion,
+                     f.fechaSiniestro,
                      descEstado = "Pendiente"
                    };
 
@@ -390,7 +390,7 @@ namespace IRCL.Presentacion
                      f.nombreAsegurado,
                      f.numeroPoliza,
                      f.placaVehiculo,
-                     c.fechaCreacion,
+                     f.fechaSiniestro,
                      descEstado = "Pendiente"
                    };
 

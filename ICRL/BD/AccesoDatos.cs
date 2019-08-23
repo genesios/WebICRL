@@ -681,6 +681,78 @@ namespace ICRL.BD
       return vResultado;
     }
 
+    public int fCopiaRoboParcialInspACotizacion(int pIdFlujo, int pIdCotizacion)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaRoboParcialInspACoti(pIdFlujo, pIdCotizacion);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fCopiaRCVehicularInspACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaRCVehicularInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fCopiaRCObjetoInspACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaRCObjetoInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fCopiaRCPersonaInspACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaRCPersonaInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fCopiaPTDaniosPropiosInspACotizacion(int pIdFlujo, int pIdCotizacion)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaPTDaniosPropiosInspACoti(pIdFlujo, pIdCotizacion);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fCopiaPTRoboInspACotizacion(int pIdFlujo, int pIdCotizacion)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paCopiaPTRoboInspACoti(pIdFlujo, pIdCotizacion);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public string fObtieneFlujoTemp()
     {
       string vFlujoTemp = string.Empty;

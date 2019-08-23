@@ -1389,6 +1389,33 @@
       <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
       <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="paCopiaPTDaniosPropiosInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paCopiaPTRoboInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paCopiaRCObjetoInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+      <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paCopiaRCPersonaInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+      <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paCopiaRCVehicularInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+      <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="paCopiaRoboParcialInspACoti">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="paIncFlujoContadorInsp">
       <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
       <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />
