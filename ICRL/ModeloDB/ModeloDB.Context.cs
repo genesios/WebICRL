@@ -301,6 +301,96 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaDaniosPropiosInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
         }
     
+        public virtual int paCopiaPTDaniosPropiosInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaPTDaniosPropiosInspACoti", idFlujoParameter, idInspeccionParameter);
+        }
+    
+        public virtual int paCopiaPTRoboInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaPTRoboInspACoti", idFlujoParameter, idInspeccionParameter);
+        }
+    
+        public virtual int paCopiaRCObjetoInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            var idSecuencialParameter = idSecuencial.HasValue ?
+                new ObjectParameter("idSecuencial", idSecuencial) :
+                new ObjectParameter("idSecuencial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCObjetoInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+        }
+    
+        public virtual int paCopiaRCPersonaInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            var idSecuencialParameter = idSecuencial.HasValue ?
+                new ObjectParameter("idSecuencial", idSecuencial) :
+                new ObjectParameter("idSecuencial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCPersonaInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+        }
+    
+        public virtual int paCopiaRCVehicularInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            var idSecuencialParameter = idSecuencial.HasValue ?
+                new ObjectParameter("idSecuencial", idSecuencial) :
+                new ObjectParameter("idSecuencial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCVehicularInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+        }
+    
+        public virtual int paCopiaRoboParcialInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idInspeccionParameter = idInspeccion.HasValue ?
+                new ObjectParameter("idInspeccion", idInspeccion) :
+                new ObjectParameter("idInspeccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRoboParcialInspACoti", idFlujoParameter, idInspeccionParameter);
+        }
+    
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)
         {
             var iIdFlujoParameter = iIdFlujo.HasValue ?

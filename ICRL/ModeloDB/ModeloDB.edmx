@@ -1243,6 +1243,33 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Parameter Name="idInspeccion" Type="int" Mode="In" />
           <Parameter Name="idSecuencial" Type="int" Mode="In" />
         </Function>
+        <Function Name="paCopiaPTDaniosPropiosInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paCopiaPTRoboInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paCopiaRCObjetoInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+          <Parameter Name="idSecuencial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paCopiaRCPersonaInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+          <Parameter Name="idSecuencial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paCopiaRCVehicularInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+          <Parameter Name="idSecuencial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="paCopiaRoboParcialInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFlujo" Type="int" Mode="In" />
+          <Parameter Name="idInspeccion" Type="int" Mode="In" />
+        </Function>
         <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="iIdFlujo" Type="int" Mode="In" />
           <Parameter Name="iValorContador" Type="int" Mode="InOut" />
@@ -2797,6 +2824,33 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
             <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="paCopiaPTDaniosPropiosInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paCopiaPTRoboInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paCopiaRCObjetoInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+            <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paCopiaRCPersonaInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+            <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paCopiaRCVehicularInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+            <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="paCopiaRoboParcialInspACoti">
+            <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="paIncFlujoContadorInsp">
             <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
             <Parameter Name="iValorContador" Mode="InOut" Type="Int32" />
@@ -3785,6 +3839,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
           <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
           <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaDaniosPropiosInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaPTDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTDaniosPropiosInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaPTRoboInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTRoboInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaRCObjetoInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCObjetoInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaRCPersonaInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCPersonaInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaRCVehicularInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCVehicularInspACoti" />
+          <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRoboParcialInspACoti" />
           <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
           <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
         </EntityContainerMapping>
