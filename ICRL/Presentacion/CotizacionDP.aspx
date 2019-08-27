@@ -456,7 +456,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMReparaciones" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleReparaciones" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Reparaciones
+                    ABM Reparaciones
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -471,6 +471,7 @@
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaItem" runat="server"></asp:DropDownList>
+                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />
@@ -520,6 +521,7 @@
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaFlagEd" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -545,7 +547,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Repuestos
+                    ABM Repuestos
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -560,6 +562,7 @@
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
+                                    <asp:TextBox ID="TextBoxRepuItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
                                     <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
@@ -604,6 +607,7 @@
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepuFlagEd" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>

@@ -533,6 +533,7 @@ namespace ICRL.Presentacion
                      idp.chaperio,
                      idp.reparacionPrevia,
                      idp.observaciones,
+                     idp.nro_item
                    };
 
         GridViewDaniosPropios.DataSource = vLst.ToList();
@@ -1199,6 +1200,7 @@ namespace ICRL.Presentacion
       DropDownListRepPrevia.Items.FindByText(vTextoRepPrevia).Selected = true;
 
       TextBoxObservaciones.Text = GridViewDaniosPropios.SelectedRow.Cells[9].Text;
+      TextBoxNroItem.Text = GridViewDaniosPropios.SelectedRow.Cells[10].Text;
       ButtonNuevoDP.Enabled = false;
       ButtonGrabarDP.Enabled = true;
       ButtonBorrarDP.Enabled = true;
@@ -1242,6 +1244,7 @@ namespace ICRL.Presentacion
       vInspDaniosPropios.chaperio = DropDownListChaperio.SelectedItem.Text;
       vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
       vInspDaniosPropios.observaciones = TextBoxObservaciones.Text;
+      vInspDaniosPropios.nro_item = long.Parse(TextBoxNroItem.Text);
 
       int vResultado = vAccesodatos.FActualizaInspDaniosPropiosICRL(vInspDaniosPropios);
 
@@ -1258,7 +1261,8 @@ namespace ICRL.Presentacion
       InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
       vInspDaniosPropios.secuencial = int.Parse(TextBoxDPPSecuencial.Text);
-      vInspDaniosPropios.idItem = DropDownListItem.SelectedValue; ;
+      vInspDaniosPropios.idItem = DropDownListItem.SelectedValue;
+      vInspDaniosPropios.nro_item = long.Parse(TextBoxNroItem.Text);
 
       int vResultado = vAccesodatos.FBorrarInspDaniosPropiosICRL(vInspDaniosPropios);
 

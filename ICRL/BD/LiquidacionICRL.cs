@@ -110,11 +110,28 @@ namespace ICRL.BD
       return objRespuesta;
     }
 
+    public class TipoGrilla
+    {
+      public string numero_orden { get; set; }
+      public string fecha_orden { get; set; }
+      public string proveedor { get; set; }
+      public string id_estado { get; set; }
+      public string total { get; set; }
+      public string pagadobs { get; set; }
+      public string nopagadobs { get; set; }
+      public string pagadous { get; set; }
+      public string nopagadous { get; set; }
+      public string flujo_onbase { get; set; }
+      public string nombre_asegurado { get; set; }
+      public string placa { get; set; }
+      public string id_flujo { get; set; }
+    }
     public class TipoRespuestaGrilla
     {
       public bool correcto;
       public string mensaje;
       public System.Data.DataSet dsLiquidacionGrilla = new System.Data.DataSet();
+      public List<TipoGrilla> listaLiquidacionGrilla = new List<TipoGrilla>();
     }
     public static TipoRespuestaGrilla LiquidacionGrilla(int Estado, string Proveedor, string Sucursal, string FlujoONBase, string Placa, DateTime FechaIncio, DateTime FechaFin)
     {
@@ -136,11 +153,60 @@ namespace ICRL.BD
         if (FlujoONBase.Trim().Length > 0) strWhere = strWhere + "AND f.flujoOnBase = '" + FlujoONBase.Trim() + "' ";
         if (Placa.Trim().Length > 0) strWhere = strWhere + "AND f.placaVehiculo = '" + Placa.Trim() + "' ";
         if (Proveedor.Trim().Length > 0) strWhere = strWhere + "AND l.proveedor = '" + Proveedor.Trim() + "' ";
+
         strComando = strSelect + strWhere + strGroupby;
+        SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+        SqlDataReader sqlDatos;
         sqlAdaptador = new SqlDataAdapter(strComando, sqlConexion);
         sqlAdaptador.SelectCommand.Parameters.Add("@fecha_orden_emp", System.Data.SqlDbType.DateTime).Value = FechaIncio;
         sqlAdaptador.SelectCommand.Parameters.Add("@fecha_orden_ter", System.Data.SqlDbType.DateTime).Value = FechaFin;
+        TipoGrilla tdpFila;
+
+        sqlComando.Parameters.Add("@fecha_orden_emp", System.Data.SqlDbType.DateTime).Value = FechaIncio;
+        sqlComando.Parameters.Add("@fecha_orden_ter", System.Data.SqlDbType.DateTime).Value = FechaFin;
         sqlConexion.Open();
+        sqlDatos = sqlComando.ExecuteReader();
+
+        //Estado codigo a descripcion (A)
+        AccesoDatos adatos = new AccesoDatos();
+        List<ListaNomenclador> estadosnom = adatos.FlTraeNomenGenerico("Estados", 0);
+
+        while (sqlDatos.Read())
+        {
+          tdpFila = new TipoGrilla();
+          tdpFila.numero_orden = sqlDatos["numero_orden"] != DBNull.Value ? sqlDatos["numero_orden"].ToString() : string.Empty;
+          tdpFila.fecha_orden = sqlDatos["fecha_orden"] != DBNull.Value ? sqlDatos["fecha_orden"].ToString() : string.Empty;
+          tdpFila.proveedor = sqlDatos["proveedor"] != DBNull.Value ? sqlDatos["proveedor"].ToString() : string.Empty;
+          tdpFila.id_estado = sqlDatos["id_estado"] != DBNull.Value ? sqlDatos["id_estado"].ToString() : string.Empty;
+          tdpFila.total = sqlDatos["Total"] != DBNull.Value ? sqlDatos["Total"].ToString() : string.Empty;
+          tdpFila.pagadobs = sqlDatos["sumabspagado"] != DBNull.Value ? sqlDatos["sumabspagado"].ToString() : string.Empty;
+          tdpFila.nopagadobs = sqlDatos["sumabsnopagado"] != DBNull.Value ? sqlDatos["sumabsnopagado"].ToString() : string.Empty;
+          tdpFila.pagadous = sqlDatos["sumauspagado"] != DBNull.Value ? sqlDatos["sumauspagado"].ToString() : string.Empty;
+          tdpFila.nopagadous = sqlDatos["sumausnopagado"] != DBNull.Value ? sqlDatos["sumausnopagado"].ToString() : string.Empty;
+          tdpFila.flujo_onbase = sqlDatos["flujoOnBase"] != DBNull.Value ? sqlDatos["flujoOnBase"].ToString() : string.Empty;
+          tdpFila.nombre_asegurado = sqlDatos["nombreAsegurado"] != null ? sqlDatos["nombreAsegurado"].ToString() : string.Empty;
+          tdpFila.placa = sqlDatos["placaVehiculo"] != DBNull.Value ? sqlDatos["placaVehiculo"].ToString() : string.Empty;
+          tdpFila.id_flujo = sqlDatos["idFlujo"] != DBNull.Value ? sqlDatos["idFlujo"].ToString() : string.Empty;
+
+          //Formatear fecha
+          if (!string.IsNullOrWhiteSpace(tdpFila.fecha_orden))
+            tdpFila.fecha_orden = Convert.ToDateTime(tdpFila.fecha_orden).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+          //Estado codigo a descripcion (B)
+          foreach (ListaNomenclador estadonom in estadosnom)
+          {
+            if (estadonom.codigo.Trim() == tdpFila.id_estado.Trim())
+            {
+              tdpFila.id_estado = estadonom.descripcion;
+              break;
+            }
+          }
+
+          objRespuesta.listaLiquidacionGrilla.Add(tdpFila);
+        }
+
+        sqlDatos.Close();
+        sqlComando.Dispose();
         sqlAdaptador.Fill(objRespuesta.dsLiquidacionGrilla);
         sqlAdaptador.Dispose();
         objRespuesta.correcto = true;

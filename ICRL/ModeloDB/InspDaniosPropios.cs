@@ -23,5 +23,6 @@ namespace ICRL.ModeloDB
         public string chaperio { get; set; }
         public string reparacionPrevia { get; set; }
         public string observaciones { get; set; }
+        public long nro_item { get; set; }
     }
 }

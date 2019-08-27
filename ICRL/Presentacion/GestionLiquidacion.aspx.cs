@@ -1,4 +1,5 @@
 ﻿using ICRL.BD;
+using ICRL.DS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -148,6 +149,14 @@ namespace ICRL.Presentacion
         Response.End();
       }
     }
+    protected void btnGenerarReporteExcel_Click(object sender, EventArgs e)
+    {
+      ObtenerReporte("xls");
+    }
+    protected void btnGenerarReportePdf_Click(object sender, EventArgs e)
+    {
+      ObtenerReporte("pdf");
+    }
     #endregion
 
     #region Metodos de Soporte
@@ -191,23 +200,23 @@ namespace ICRL.Presentacion
 
           GridViewOrdenesPago.Visible = true;
           lblMensajeOrdenesPago.Text = "";
-
-          btnExportarResultados.Enabled = true;
+          btnGenerarReporteExcel.Enabled = true;
+          btnGenerarReportePdf.Enabled = true;
         }
         else
         {
           GridViewOrdenesPago.Visible = false;
           lblMensajeOrdenesPago.Text = "<p>No existen datos.</p><p>Introduzca otros valores en su consulta.</p>";
-
-          btnExportarResultados.Enabled = false;
+          btnGenerarReporteExcel.Enabled = false;
+          btnGenerarReportePdf.Enabled = false;
         }
 
         LabelMensaje.Visible = false;
       }
       else
       {
-        btnExportarResultados.Enabled = false;
-
+        btnGenerarReporteExcel.Enabled = false;
+        btnGenerarReportePdf.Enabled = false;
         LabelMensaje.Visible = true;
         LabelMensaje.Text = "Error en la recuperacion de los datos de pago!";
       }
@@ -248,6 +257,55 @@ namespace ICRL.Presentacion
       }
 
       return "";
+    }
+    private void ObtenerReporte(string tipo)
+    {
+      int estado = 1;
+      int.TryParse(ddlEstado.SelectedItem.Value, out estado);
+      string proveedor = txbProveedor.Text.Trim().Replace('\'', ' ');
+      string sucursal = txbSucursal.Text.Trim().Replace('\'', ' ');
+      string flujoon = txbFlujoOnbase.Text.Trim().Replace('\'', ' ');
+      string placa = txbPlaca.Text.Trim().Replace('\'', ' ');
+      DateTime fechai = DateTime.ParseExact(txbFechaDesde.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+      DateTime fechaf = DateTime.ParseExact(txbFechaHasta.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+      ReportViewerLiquidacion.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+      ReportViewerLiquidacion.LocalReport.ReportPath = "Reportes/RepFormularioGestionLiquidacion.rdlc";
+      DatosReportes reportes = new DatosReportes();
+      Microsoft.Reporting.WebForms.ReportDataSource datasource =
+        new Microsoft.Reporting.WebForms.ReportDataSource("GestionLiquidacionDS", reportes.ObtenerDatosGrilla(
+          estado, proveedor, sucursal, flujoon, placa, fechai, fechaf));
+      ReportViewerLiquidacion.LocalReport.DataSources.Clear();
+      ReportViewerLiquidacion.LocalReport.DataSources.Add(datasource);
+
+      //Configuracion de pagina
+      /*System.Drawing.Printing.PageSettings pagina = new System.Drawing.Printing.PageSettings();
+      pagina.Landscape = true;
+      pagina.PaperSize = new System.Drawing.Printing.PaperSize("Carta", 1100, 850);
+      pagina.PaperSize.RawKind = (int)System.Drawing.Printing.PaperKind.Letter;
+      pagina.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+      ReportViewerLiquidacion.SetPageSettings(pagina);*/
+
+      //Exportar reporte
+      Microsoft.Reporting.WebForms.Warning[] warnings;
+      string[] streamIds;
+      string mimeType = string.Empty;
+      string encoding = string.Empty;
+      string nombre = "LBCGestionLiquidacion";
+      string extension = (tipo == "xls") ? "xls" : "pdf";
+      string deviceinfo = string.Format("<DeviceInfo><PageHeight>{0}</PageHeight><PageWidth>{1}</PageWidth><MarginBottom>{2}</MarginBottom><MarginLeft>{3}</MarginLeft><MarginRight>{3}</MarginRight><MarginTop>{2}</MarginTop></DeviceInfo>",
+        "8.5in", "13in", "0in", "0.1in");
+
+      byte[] bytes = (tipo == "xls") ?
+        ReportViewerLiquidacion.LocalReport.Render("Excel", deviceinfo, out mimeType, out encoding, out extension, out streamIds, out warnings) :
+        ReportViewerLiquidacion.LocalReport.Render("PDF", deviceinfo, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+      Response.Buffer = true;
+      Response.Clear();
+      Response.ContentType = mimeType;
+      Response.AddHeader("content-disposition", "attachment; filename=" + nombre + "." + extension);
+      Response.BinaryWrite(bytes);
+      Response.Flush();
     }
     #endregion
   }

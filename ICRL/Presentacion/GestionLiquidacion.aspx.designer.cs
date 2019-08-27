@@ -166,13 +166,31 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label lblMensajeOrdenesPago;
         
         /// <summary>
-        /// btnExportarResultados control.
+        /// btnGenerarReporteExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExportarResultados;
+        protected global::System.Web.UI.WebControls.Button btnGenerarReporteExcel;
+        
+        /// <summary>
+        /// btnGenerarReportePdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGenerarReportePdf;
+        
+        /// <summary>
+        /// ReportViewerLiquidacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.Reporting.WebForms.ReportViewer ReportViewerLiquidacion;
         
         /// <summary>
         /// LabelMensaje control.

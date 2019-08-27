@@ -406,6 +406,7 @@
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelIditem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxIdItem" runat="server" Visible="False"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBoxNroItem" runat="server" Visible="False"></asp:TextBox>
                                                 </div>
                                             </td>
                                         </tr>
@@ -456,6 +457,7 @@
                                             <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                             <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
                                             <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
+                                            <asp:BoundField DataField="nro_item" HeaderText="Item" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>

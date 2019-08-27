@@ -607,6 +607,7 @@
           <ScalarProperty Name="chaperio" ColumnName="chaperio" />
           <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="nro_item" ColumnName="nro_item" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

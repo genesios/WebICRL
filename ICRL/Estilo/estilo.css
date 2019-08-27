@@ -13,6 +13,9 @@ table.basetable {
   border-collapse: inherit;
   border-radius: 5px;
 }
+table.basetable.alt1 { border: 2px solid #962B00; }
+table.basetable.alt2 { border: 2px solid #3258AE; }
+table.basetable.alt3 { border: 2px solid #3E0A82; }
 table.basetable table {
   font-size: .85em;
 }
@@ -23,6 +26,9 @@ table.basetable > tbody > tr > th {
   font-size: 1.1em;
   padding: 5px;
 }
+table.basetable.alt1 > tbody > tr > th { background-color: #962B00; }
+table.basetable.alt2 > tbody > tr > th { background-color: #3258AE; }
+table.basetable.alt3 > tbody > tr > th { background-color: #3E0A82; }
 table.basetable > tbody > tr > td {
   padding: 5px;
 }
@@ -36,7 +42,6 @@ table.basetable div select {
   border: 1px solid #d8d8d8;
   text-transform: uppercase;
   font-weight: 600;
-  /*color: #00a861;*/
 }
 table.basetable div input[type="password"] {
   text-transform: none;
@@ -56,6 +61,9 @@ input[type="submit"] {
   border-radius: 5px;
   text-transform: uppercase;
 }
+input[type="button"].alt1, input[type="submit"].alt1 { background-color: #962B00; }
+input[type="button"].alt2, input[type="submit"].alt2 { background-color: #3258AE; }
+input[type="button"].alt3, input[type="submit"].alt3 { background-color: #3E0A82; }
 input[type="button"]:active,
 input[type="submit"]:active {
   top: 2px;
@@ -63,6 +71,16 @@ input[type="submit"]:active {
 input[type="button"]:disabled,
 input[type="submit"]:disabled {
   background-color: #dddddd;
+}
+input[type="submit"].xls, input[type="submit"].pdf {
+  padding-left: 40px;
+  background-image: url(../img/ico_excel.png);
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+  background-size: 26px;
+}
+input[type="submit"].pdf {
+  background-image: url(../img/ico_pdf.png);
 }
 
 div.fifty {
@@ -128,6 +146,9 @@ div.twenty {
 #TreeViewMenu {
   background-color: #00a861;
 }
+#TreeViewMenu.alt1 { background-color: #962B00; }
+#TreeViewMenu.alt2 { background-color: #3258AE; }
+#TreeViewMenu.alt3 { background-color: #3E0A82; }
 #TreeViewMenu a {
   color: #fff;
   font-weight: 600;
@@ -151,11 +172,14 @@ div.twenty {
 
 
 /***Collapsible Panel***/
-  .collapseBar {
-    width: 100%;
-    background-color: #00a861;
-    color: #fff;
-  }
+.collapseBar {
+  width: 100%;
+  background-color: #00a861;
+  color: #fff;
+}
+.collapseBar.alt1 { background-color: #962B00; }
+.collapseBar.alt2 { background-color: #3258AE; }
+.collapseBar.alt3 { background-color: #3E0A82; }
 .collapseBar span,
 .collapseBar img {
   display: inline-block;
@@ -181,6 +205,9 @@ div.twenty {
   border: 2px solid #00a861;
   padding: 5px;
 }
+.PanelDatosGen.alt1 { border: 2px solid #962B00; }
+.PanelDatosGen.alt2 { border: 2px solid #3258AE; }
+.PanelDatosGen.alt3 { border: 2px solid #3E0A82; }
 
 
 /***Tab container***/

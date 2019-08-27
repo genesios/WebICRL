@@ -496,6 +496,9 @@ namespace ICRL.Presentacion
       //PanelABMReparaciones.Enabled = true;
       ButtonRepaGrabar.Enabled = true;
       ButtonRepaCancelar.Enabled = true;
+      TextBoxRepaFlagEd.Text = "A";
+      DropDownListRepaItem.Visible = true;
+      TextBoxRepaItem.Visible = false;
       Session["PopupABMReparacionesHabilitado"] = 1;
       this.ModalPopupReparaciones.Show();
     }
@@ -504,6 +507,8 @@ namespace ICRL.Presentacion
     {
       //PanelABMReparaciones.Enabled = true;
       DropDownListRepaItem.Enabled = false;
+      DropDownListRepaItem.Visible = false;
+      TextBoxRepaItem.Visible = true;
       ButtonRepaGrabar.Enabled = true;
       ButtonRepaCancelar.Enabled = true;
     }
@@ -519,7 +524,14 @@ namespace ICRL.Presentacion
 
       //tipo_item:  1 = Reparacion  2 = Repuesto
       vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-      vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+      if ("A" == TextBoxRepuFlagEd.Text)
+      {
+        vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+      }
+      else
+      {
+        vTipoDaniosPropios.item_descripcion = TextBoxRepaItem.Text;
+      }
       vTipoDaniosPropios.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
       vTipoDaniosPropios.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
       vTipoDaniosPropios.mecanico = CheckBoxRepaMecanico.Checked;
@@ -558,6 +570,8 @@ namespace ICRL.Presentacion
           //PanelABMReparaciones.Enabled = false;
           ButtonRepaGrabar.Enabled = false;
           ButtonRepaCancelar.Enabled = false;
+          DropDownListRepaItem.Visible = true;
+          TextBoxRepaItem.Visible = false;
         }
         else
         {
@@ -574,6 +588,8 @@ namespace ICRL.Presentacion
           //PanelABMReparaciones.Enabled = false;
           ButtonRepaGrabar.Enabled = false;
           ButtonRepaCancelar.Enabled = false;
+          DropDownListRepaItem.Visible = true;
+          TextBoxRepaItem.Visible = false;
         }
         else
         {
@@ -633,8 +649,10 @@ namespace ICRL.Presentacion
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text.Trim();
       vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
-      DropDownListRepaItem.ClearSelection();
-      DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
+      //cuando se modifica ya no se utiliza el combo
+      //DropDownListRepaItem.ClearSelection();
+      //DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepaItem.Text = vTextoTemporal;
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text.Trim();
@@ -676,6 +694,7 @@ namespace ICRL.Presentacion
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaProveedor.ClearSelection();
       DropDownListRepaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepaFlagEd.Text = "M";
 
       PRepaModificarItem();
       Session["PopupABMReparacionesHabilitado"] = 1;
@@ -779,6 +798,9 @@ namespace ICRL.Presentacion
       //PanelABMRepuestos.Enabled = true;
       ButtonRepuGrabar.Enabled = true;
       ButtonRepuCancelar.Enabled = true;
+      TextBoxRepuFlagEd.Text = "A";
+      DropDownListRepuItem.Visible = true;
+      TextBoxRepuItem.Visible = false;
       Session["PopupABMRepuestosHabilitado"] = 1;
       this.ModalPopupRepuestos.Show();
     }
@@ -787,6 +809,8 @@ namespace ICRL.Presentacion
     {
       //PanelABMRepuestos.Enabled = true;
       DropDownListRepuItem.Enabled = false;
+      DropDownListRepuItem.Visible = false;
+      TextBoxRepuItem.Visible = true;
       ButtonRepuGrabar.Enabled = true;
       ButtonRepuCancelar.Enabled = true;
     }
@@ -802,7 +826,14 @@ namespace ICRL.Presentacion
 
       //tipo_item:  1 = Repuracion  2 = Repuesto
       vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
-      vTipoDaniosPropios.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+      if ("A" == TextBoxRepuFlagEd.Text)
+      {
+        vTipoDaniosPropios.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+      }
+      else
+      {
+        vTipoDaniosPropios.item_descripcion = TextBoxRepuItem.Text;
+      }
       vTipoDaniosPropios.pintura = CheckBoxRepuPintura.Checked;
       vTipoDaniosPropios.instalacion = CheckBoxRepuInstalacion.Checked;
       vTipoDaniosPropios.id_moneda = DropDownListRepuMoneda.SelectedItem.Text.Trim();
@@ -840,6 +871,8 @@ namespace ICRL.Presentacion
           //PanelABMRepuestos.Enabled = false;
           ButtonRepuGrabar.Enabled = false;
           ButtonRepuCancelar.Enabled = false;
+          DropDownListRepuItem.Visible = true;
+          TextBoxRepuItem.Visible = false;
         }
         else
         {
@@ -856,6 +889,8 @@ namespace ICRL.Presentacion
           //PanelABMRepuestos.Enabled = false;
           ButtonRepuGrabar.Enabled = false;
           ButtonRepuCancelar.Enabled = false;
+          DropDownListRepuItem.Visible = true;
+          TextBoxRepuItem.Visible = false;
         }
         else
         {
@@ -915,8 +950,10 @@ namespace ICRL.Presentacion
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[2].Text;
       vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
-      DropDownListRepuItem.ClearSelection();
-      DropDownListRepuItem.Items.FindByText(vTextoTemporal).Selected = true;
+      //Cuando se modifica ya no se utiliza el combo
+      //DropDownListRepuItem.ClearSelection();
+      //DropDownListRepuItem.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepuItem.Text = vTextoTemporal;
 
       CheckBoxRepuPintura.Checked = (GridViewRepuestos.SelectedRow.Cells[3].Controls[1] as CheckBox).Checked;
 
@@ -948,6 +985,7 @@ namespace ICRL.Presentacion
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuProveedor.ClearSelection();
       DropDownListRepuProveedor.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepuFlagEd.Text = "M";
 
       PRepuModificarItem();
       Session["PopupABMRepuestosHabilitado"] = 1;

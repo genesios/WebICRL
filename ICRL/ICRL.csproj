@@ -534,6 +534,7 @@
     <Compile Include="BD\CotiFlujo.cs" />
     <Compile Include="BD\CotizacionDaniosPropios.cs" />
     <Compile Include="BD\CotizacionICRL.cs" />
+    <Compile Include="BD\DatosReportes.cs" />
     <Compile Include="BD\FlujoICRL.cs" />
     <Compile Include="BD\InspeccionDaniosPropios.cs" />
     <Compile Include="BD\InspeccionDaniosPropiosPadre.cs" />

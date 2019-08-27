@@ -1010,7 +1010,7 @@ namespace ICRL.BD
       {
         InspDaniosPropios vTablaInspDaniosPropios = new InspDaniosPropios();
 
-        vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial);
+        vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial, pInspeccionDaniosPropios.nro_item);
 
         vTablaInspDaniosPropios.compra = pInspeccionDaniosPropios.compra;
         vTablaInspDaniosPropios.instalacion = pInspeccionDaniosPropios.instalacion;
@@ -1036,7 +1036,7 @@ namespace ICRL.BD
       {
         InspDaniosPropios vTablaInspDaniosPropios = new InspDaniosPropios();
 
-        vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial);
+        vTablaInspDaniosPropios = db.InspDaniosPropios.Find(pInspeccionDaniosPropios.idItem, pInspeccionDaniosPropios.secuencial, pInspeccionDaniosPropios.nro_item);
 
         db.InspDaniosPropios.Remove(vTablaInspDaniosPropios);
         db.SaveChanges();
