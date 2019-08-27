@@ -627,7 +627,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="numeroReclamo" Type="int" />
     <Property Name="numeroPoliza" Type="char" MaxLength="10" />
     <Property Name="marcaVehiculo" Type="char" MaxLength="15" />
-    <Property Name="modeloVehiculo" Type="char" MaxLength="15" />
+    <Property Name="modeloVehiculo" Type="varchar" MaxLength="50" />
     <Property Name="anioVehiculo" Type="int" />
     <Property Name="colorVehiculo" Type="char" MaxLength="15" />
     <Property Name="placaVehiculo" Type="char" MaxLength="8" Nullable="false" />

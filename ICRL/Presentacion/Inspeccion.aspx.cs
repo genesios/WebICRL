@@ -41,6 +41,9 @@ namespace ICRL.Presentacion
           FlTraeNomenRepPreviaDet();
           FlTraeItemsNomenclador();
           FlTraeItemsNomencladorRP();
+          FlTraeNomenCompraRP();
+          FlTraeNomenChaperioRP();
+          FlTraeNomenRepPreviaRP();
           FlTraeItemsNomencladorCajaPTDP();
           FlTraeItemsNomencladorCombustiblePTDP();
           FlTraeItemsNomencladorCajaPTRO();
@@ -50,6 +53,7 @@ namespace ICRL.Presentacion
           FlTraeItemsColorRCV01();
           FlTraeNomenChaperio();
           FlTraeNomenRepPrevia();
+          FlTraeNomenCompraDetRCV01();
           FlTraeNomenItemRCV01();
           FlTraeDatosInspeccion(vIdInspeccion, vlNumFlujo);
 
@@ -2189,12 +2193,20 @@ namespace ICRL.Presentacion
     {
       DropDownListItemRP.SelectedIndex = 0;
       DropDownListItemRP.Enabled = true;
-      TextBoxCompraRP.Text = string.Empty;
+      DropDownListCompraRP.SelectedIndex = 0;
+      DropDownListCompraRP.Enabled = true;
+      //TextBoxCompraRP.Text = string.Empty;
       CheckBoxInstalacionRP.Checked = false;
       CheckBoxPinturaRP.Checked = false;
       CheckBoxMecanicoRP.Checked = false;
-      TextBoxChaperioRP.Text = string.Empty;
-      TextBoxRepPreviaRP.Text = string.Empty;
+      DropDownListChaperioRP.SelectedIndex = 0;
+      DropDownListChaperioRP.Enabled = true;
+      //TextBoxChaperio.Text = string.Empty;
+      DropDownListRepPreviaRP.SelectedIndex = 0;
+      DropDownListRepPreviaRP.Enabled = true;
+      //TextBoxRepPrevia.Text = string.Empty;
+      //TextBoxChaperioRP.Text = string.Empty;
+      //TextBoxRepPreviaRP.Text = string.Empty;
       TextBoxObservacionesRP.Text = string.Empty;
       ButtonGrabarRP.Enabled = false;
       ButtonBorrarRP.Enabled = false;
@@ -2211,12 +2223,28 @@ namespace ICRL.Presentacion
       DropDownListItemRP.ClearSelection();
       DropDownListItemRP.Items.FindByValue(TextBoxIdItemRP.Text).Selected = true;
 
-      TextBoxCompraRP.Text = GridViewRoboParcial.SelectedRow.Cells[3].Text;
+      string vTextoCompra = string.Empty;
+      vTextoCompra = GridViewRoboParcial.SelectedRow.Cells[3].Text.Trim();
+      DropDownListCompra.ClearSelection();
+      DropDownListCompra.Items.FindByText(vTextoCompra).Selected = true;
+
+      //TextBoxCompraRP.Text = GridViewRoboParcial.SelectedRow.Cells[3].Text;
       CheckBoxInstalacionRP.Checked = (GridViewRoboParcial.SelectedRow.Cells[4].Controls[1] as CheckBox).Checked;
       CheckBoxPinturaRP.Checked = (GridViewRoboParcial.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
       CheckBoxMecanicoRP.Checked = (GridViewRoboParcial.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
-      TextBoxChaperioRP.Text = GridViewRoboParcial.SelectedRow.Cells[7].Text.Trim();
-      TextBoxRepPreviaRP.Text = GridViewRoboParcial.SelectedRow.Cells[8].Text.Trim();
+
+      string vTextoChaperio = string.Empty;
+      vTextoChaperio = GridViewDaniosPropios.SelectedRow.Cells[7].Text.Trim();
+      DropDownListChaperioRP.ClearSelection();
+      DropDownListChaperioRP.Items.FindByText(vTextoChaperio).Selected = true;
+
+      string vTextoRepPrevia = string.Empty;
+      vTextoRepPrevia = GridViewDaniosPropios.SelectedRow.Cells[8].Text.Trim();
+      DropDownListRepPreviaRP.ClearSelection();
+      DropDownListRepPreviaRP.Items.FindByText(vTextoRepPrevia).Selected = true;
+
+      //TextBoxChaperioRP.Text = GridViewRoboParcial.SelectedRow.Cells[7].Text.Trim();
+      //TextBoxRepPreviaRP.Text = GridViewRoboParcial.SelectedRow.Cells[8].Text.Trim();
       TextBoxObservacionesRP.Text = GridViewRoboParcial.SelectedRow.Cells[9].Text.Trim();
       ButtonNuevoRP.Enabled = false;
       ButtonGrabarRP.Enabled = true;
@@ -2240,12 +2268,15 @@ namespace ICRL.Presentacion
 
       vInspRoboParcial.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspRoboParcial.item = DropDownListItemRP.SelectedValue;
-      vInspRoboParcial.compra = TextBoxCompraRP.Text;
+      vInspRoboParcial.compra = DropDownListCompraRP.SelectedItem.Text;
+      //vInspRoboParcial.compra = TextBoxCompraRP.Text;
       vInspRoboParcial.instalacion = CheckBoxInstalacionRP.Checked;
       vInspRoboParcial.pintura = CheckBoxPinturaRP.Checked;
       vInspRoboParcial.mecanico = CheckBoxMecanicoRP.Checked;
-      vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
-      vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
+      vInspRoboParcial.chaperio = DropDownListChaperioRP.SelectedItem.Text;
+      vInspRoboParcial.reparacionPrevia = DropDownListRepPreviaRP.SelectedItem.Text;
+      //vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
+      //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
       vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text; ;
 
       int vResultado = vAccesodatos.FGrabaInspRoboParcialICRL(vInspRoboParcial);
@@ -2264,12 +2295,15 @@ namespace ICRL.Presentacion
 
       vInspRoboParcial.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspRoboParcial.item = TextBoxIdItemRP.Text;
-      vInspRoboParcial.compra = TextBoxCompraRP.Text;
+      vInspRoboParcial.compra = DropDownListCompraRP.SelectedItem.Text;
+      //vInspRoboParcial.compra = TextBoxCompraRP.Text;
       vInspRoboParcial.instalacion = CheckBoxInstalacionRP.Checked;
       vInspRoboParcial.pintura = CheckBoxPinturaRP.Checked;
       vInspRoboParcial.mecanico = CheckBoxMecanicoRP.Checked;
-      vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
-      vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
+      vInspRoboParcial.chaperio = DropDownListChaperioRP.SelectedItem.Text;
+      vInspRoboParcial.reparacionPrevia = DropDownListRepPreviaRP.SelectedItem.Text;
+      //vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
+      //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
       vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text; ;
 
       int vResultado = vAccesodatos.FActualizaInspRoboParcialICRL(vInspRoboParcial);
@@ -2375,6 +2409,51 @@ namespace ICRL.Presentacion
         DropDownListItemRP.DataBind();
 
       }
+      return vResultado;
+    }
+
+    private int FlTraeNomenCompraRP()
+    {
+      int vResultado = 0;
+      string vCategoria = "Compra Repuesto";
+      int vOrdenCodigo = 2;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      DropDownListCompraRP.DataValueField = "codigo";
+      DropDownListCompraRP.DataTextField = "descripcion";
+      DropDownListCompraRP.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+      DropDownListCompraRP.DataBind();
+
+      return vResultado;
+    }
+
+    private int FlTraeNomenChaperioRP()
+    {
+      int vResultado = 0;
+      string vCategoria = "Nivel de Daño";
+      int vOrdenCodigo = 2;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      DropDownListChaperioRP.DataValueField = "codigo";
+      DropDownListChaperioRP.DataTextField = "descripcion";
+      DropDownListChaperioRP.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+      DropDownListChaperioRP.DataBind();
+
+      return vResultado;
+    }
+
+    private int FlTraeNomenRepPreviaRP()
+    {
+      int vResultado = 0;
+      string vCategoria = "Nivel de Daño";
+      int vOrdenCodigo = 2;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      DropDownListRepPreviaRP.DataValueField = "codigo";
+      DropDownListRepPreviaRP.DataTextField = "descripcion";
+      DropDownListRepPreviaRP.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+      DropDownListRepPreviaRP.DataBind();
+
       return vResultado;
     }
 
@@ -3384,7 +3463,9 @@ namespace ICRL.Presentacion
     {
       DropDownListItemRCV01.SelectedIndex = 0;
       DropDownListItemRCV01.Enabled = true;
-      TextBoxCompraRCV01.Text = string.Empty;
+      DropDownListCompraRCV01.SelectedIndex = 0;
+      DropDownListCompraRCV01.Enabled = true;
+      //TextBoxCompraRCV01.Text = string.Empty;
       CheckBoxInstalacionRCV01.Checked = false;
       CheckBoxPinturaRCV01.Checked = false;
       CheckBoxMecanicoRCV01.Checked = false;
@@ -3404,7 +3485,12 @@ namespace ICRL.Presentacion
       DropDownListItemRCV01.ClearSelection();
       DropDownListItemRCV01.Items.FindByValue(TextBoxIdItemRCV01.Text).Selected = true;
 
-      TextBoxCompraRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[3].Text;
+      string vTextoCompra = string.Empty;
+      vTextoCompra = GridViewRCV01Det.SelectedRow.Cells[3].Text.Trim();
+      DropDownListCompraRCV01.ClearSelection();
+      DropDownListCompraRCV01.Items.FindByText(vTextoCompra).Selected = true;
+
+      //TextBoxCompraRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[3].Text;
       CheckBoxInstalacionRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[4].Controls[1] as CheckBox).Checked;
       CheckBoxPinturaRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
       CheckBoxMecanicoRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
@@ -3542,6 +3628,21 @@ namespace ICRL.Presentacion
       return vResultado;
     }
 
+    private int FlTraeNomenCompraDetRCV01()
+    {
+      int vResultado = 0;
+      string vCategoria = "Compra Repuesto";
+      int vOrdenCodigo = 2;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      DropDownListCompraRCV01.DataValueField = "codigo";
+      DropDownListCompraRCV01.DataTextField = "descripcion";
+      DropDownListCompraRCV01.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+      DropDownListCompraRCV01.DataBind();
+
+      return vResultado;
+    }
+
     private int FlTraeNomenTipoTallerInsp()
     {
       int vResultado = 0;
@@ -3607,7 +3708,8 @@ namespace ICRL.Presentacion
 
       vInspRCVDet.idItem = DropDownListItemRCV01.SelectedValue;
       vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialRCV01.Text);
-      vInspRCVDet.compra = TextBoxCompraRCV01.Text;
+      vInspRCVDet.compra = DropDownListCompraRCV01.SelectedItem.Text;
+      //vInspRCVDet.compra = TextBoxCompraRCV01.Text;
       vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
       vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
       vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
@@ -3631,7 +3733,8 @@ namespace ICRL.Presentacion
 
       vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
       vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialRCV01.Text);
-      vInspRCVDet.compra = TextBoxCompraRCV01.Text;
+      vInspRCVDet.compra = DropDownListCompraRCV01.SelectedItem.Text;
+      //vInspRCVDet.compra = TextBoxCompraRCV01.Text;
       vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
       vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
       vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;

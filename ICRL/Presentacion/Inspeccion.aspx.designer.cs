@@ -1759,13 +1759,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelChaperioRP;
         
         /// <summary>
-        /// TextBoxChaperioRP control.
+        /// DropDownListChaperioRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxChaperioRP;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListChaperioRP;
         
         /// <summary>
         /// LabelCompraRP control.
@@ -1777,13 +1777,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelCompraRP;
         
         /// <summary>
-        /// TextBoxCompraRP control.
+        /// DropDownListCompraRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCompraRP;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCompraRP;
         
         /// <summary>
         /// LabelReparacionPreviaRP control.
@@ -1795,13 +1795,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelReparacionPreviaRP;
         
         /// <summary>
-        /// TextBoxRepPreviaRP control.
+        /// DropDownListRepPreviaRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRepPreviaRP;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRepPreviaRP;
         
         /// <summary>
         /// LabelObservacionesRP control.
@@ -2803,13 +2803,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelCompraRCV01;
         
         /// <summary>
-        /// TextBoxCompraRCV01 control.
+        /// DropDownListCompraRCV01 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCompraRCV01;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCompraRCV01;
         
         /// <summary>
         /// CheckBoxInstalacionRCV01 control.

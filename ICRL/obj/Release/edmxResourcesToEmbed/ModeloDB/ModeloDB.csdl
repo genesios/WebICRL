@@ -602,7 +602,7 @@
     <Property Name="numeroReclamo" Type="Int32" />
     <Property Name="numeroPoliza" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="marcaVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="modeloVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="modeloVehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="anioVehiculo" Type="Int32" />
     <Property Name="colorVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="placaVehiculo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />

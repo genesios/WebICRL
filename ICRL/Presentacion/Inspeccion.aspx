@@ -13,6 +13,15 @@
         }
     </style>
     <script src="../Scripts/ICRL.js"></script>
+
+    <%--scripts adicionales para el combo box de items--%>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+    <%--scripts adicionales para el combo box de items--%>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
 
@@ -346,7 +355,7 @@
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupDaniosPropios" runat="server" CssClass="modalPopup">
                                 <asp:Panel runat="server" ID="ModalPopupDragHandleDaniosPropios" CssClass="modalPopupHeader">
-                                    Ventana PopUp para el Detalle de Daños Propios
+                                    Detalle de Daños Propios
                                 </asp:Panel>
                                 <div>
                                     <table class="basetable">
@@ -360,7 +369,7 @@
                                             <td>
                                                 <div class="twenty">
                                                     <asp:Label ID="LabelItem" runat="server" Text="Item"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListItem" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="DropDownListItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:Label ID="LabelCompra" runat="server" Text="Compra"></asp:Label><br />
@@ -570,7 +579,7 @@
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupRCObjetos" runat="server" CssClass="modalPopup">
                                 <asp:Panel runat="server" ID="ModalPopupDragHandleRCObjetos" CssClass="modalPopupHeader">
-                                    Ventana PopUp para el Detalle de RC Objetos
+                                    Detalle de RC Objetos
                                 </asp:Panel>
                                 <div>
                                     <asp:TextBox ID="TextBoxSecuencialPopRCObj" runat="server" Visible="False"></asp:TextBox>
@@ -586,7 +595,7 @@
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelObjDetCostoRef" runat="server" Text="Costo Ref.Bs."></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxObjDetCostoRef" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBoxObjDetCostoRef" runat="server" Text="0.0"></asp:TextBox>
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelObjDetDescrip" runat="server" Text="Descripción"></asp:Label><br />
@@ -741,7 +750,7 @@
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupRCPersonas" runat="server" CssClass="modalPopup">
                                 <asp:Panel runat="server" ID="ModalPopupDragHandleRCPersonas" CssClass="modalPopupHeader">
-                                    Ventana PopUp para el Detalle de RC Personas
+                                    Detalle de RC Personas
                                 </asp:Panel>
                                 <div>
                                     <table class="basetable">
@@ -753,7 +762,7 @@
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelPerDetMontoGasto" runat="server" Text="Gasto en Bs."></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxPerDetMontoGasto" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBoxPerDetMontoGasto" runat="server" Text="0.0"></asp:TextBox>
                                                 </div>
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelPerDetDescrip" runat="server" Text="Descripción"></asp:Label><br />
@@ -809,15 +818,15 @@
                                     <td>
                                         <div class="twenty">
                                             <asp:Label ID="LabelItemRP" runat="server" Text="Item"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListItemRP" runat="server"></asp:DropDownList><br />
+                                            <asp:DropDownList ID="DropDownListItemRP" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
                                             <asp:Label ID="LabelChaperioRP" runat="server" Text="Chaperio"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxChaperioRP" runat="server"></asp:TextBox>
+                                            <asp:DropDownList ID="DropDownListChaperioRP" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelCompraRP" runat="server" Text="Compra"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxCompraRP" runat="server"></asp:TextBox><br />
+                                            <asp:DropDownList ID="DropDownListCompraRP" runat="server" ></asp:DropDownList><br />
                                             <asp:Label ID="LabelReparacionPreviaRP" runat="server" Text="Reparacion Previa"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxRepPreviaRP" runat="server"></asp:TextBox>
+                                            <asp:DropDownList ID="DropDownListRepPreviaRP" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelObservacionesRP" runat="server" Text="Observaciones"></asp:Label><br />
@@ -1139,7 +1148,7 @@
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopup" runat="server" CssClass="modalPopup">
                                 <asp:Panel runat="server" ID="ModalPopupDragHandle" CssClass="modalPopupHeader">
-                                    Ventana PopUp para el Detalle de RC Vehicular
+                                    Detalle de RC Vehicular
                                 </asp:Panel>
                                 <div>
                                     <asp:TextBox ID="TextBoxSecuencialPop" runat="server" Visible="False"></asp:TextBox>
@@ -1157,9 +1166,9 @@
                                             <td>
                                                 <div class="twenty">
                                                     <asp:Label ID="LabelItemRCV01" runat="server" Text="Item"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListItemRCV01" runat="server"></asp:DropDownList><br />
+                                                    <asp:DropDownList ID="DropDownListItemRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
                                                     <asp:Label ID="LabelCompraRCV01" runat="server" Text="Compra"></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxCompraRCV01" runat="server"></asp:TextBox>
+                                                    <asp:DropDownList ID="DropDownListCompraRCV01" runat="server" ></asp:DropDownList><br />
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:CheckBox ID="CheckBoxInstalacionRCV01" runat="server" />

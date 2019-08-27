@@ -632,7 +632,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="numeroReclamo" Type="int" />
           <Property Name="numeroPoliza" Type="char" MaxLength="10" />
           <Property Name="marcaVehiculo" Type="char" MaxLength="15" />
-          <Property Name="modeloVehiculo" Type="char" MaxLength="15" />
+          <Property Name="modeloVehiculo" Type="varchar" MaxLength="50" />
           <Property Name="anioVehiculo" Type="int" />
           <Property Name="colorVehiculo" Type="char" MaxLength="15" />
           <Property Name="placaVehiculo" Type="char" MaxLength="8" Nullable="false" />
@@ -2037,7 +2037,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="numeroReclamo" Type="Int32" />
           <Property Name="numeroPoliza" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="marcaVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="modeloVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="modeloVehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="anioVehiculo" Type="Int32" />
           <Property Name="colorVehiculo" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="placaVehiculo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />

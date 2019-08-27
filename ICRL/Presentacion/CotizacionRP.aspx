@@ -13,6 +13,8 @@
         }
     </style>
     <script src="../Scripts/ICRL.js"></script>
+
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
@@ -469,6 +471,7 @@
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaItem" runat="server"></asp:DropDownList>
+
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />

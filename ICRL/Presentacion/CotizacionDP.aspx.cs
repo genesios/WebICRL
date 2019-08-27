@@ -630,18 +630,22 @@ namespace ICRL.Presentacion
       TextBoxRepaIdItem.Text = GridViewReparaciones.SelectedRow.Cells[1].Text;
       //tipo_item:  1 = Reparacion  2 = Repuesto
       vTextoTemporal = string.Empty;
-      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text;
+      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text.Trim();
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaItem.ClearSelection();
       DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
 
       vTextoTemporal = string.Empty;
-      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text;
+      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text.Trim();
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", string.Empty);
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaChaperio.ClearSelection();
       DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
 
       vTextoTemporal = string.Empty;
-      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text;
+      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text.Trim();
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaRepPrevia.ClearSelection();
       DropDownListRepaRepPrevia.Items.FindByText(vTextoTemporal).Selected = true;
@@ -649,7 +653,7 @@ namespace ICRL.Presentacion
       CheckBoxRepaMecanico.Checked = (GridViewReparaciones.SelectedRow.Cells[5].Controls[1] as CheckBox).Checked;
 
       vTextoTemporal = string.Empty;
-      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text;
+      vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text.Trim();
       DropDownListRepaMoneda.ClearSelection();
       DropDownListRepaMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -657,6 +661,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[8].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaTipoDesc.ClearSelection();
       DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -666,6 +672,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[11].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaProveedor.ClearSelection();
       DropDownListRepaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -905,6 +913,8 @@ namespace ICRL.Presentacion
       //tipo_item:  1 = Repuracion  2 = Repuesto
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[2].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuItem.ClearSelection();
       DropDownListRepuItem.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -914,6 +924,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[5].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuMoneda.ClearSelection();
       DropDownListRepuMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -921,6 +933,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[7].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuTipoDesc.ClearSelection();
       DropDownListRepuTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -930,6 +944,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[10].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuProveedor.ClearSelection();
       DropDownListRepuProveedor.Items.FindByText(vTextoTemporal).Selected = true;
 
