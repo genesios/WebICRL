@@ -486,7 +486,7 @@ namespace ICRL.Presentacion
       DropDownListRepaTipoDesc.SelectedIndex = 0;
       TextBoxRepaMontoDesc.Text = string.Empty;
       TextBoxRepuPrecioFinal.Text = string.Empty;
-      DropDownListRepuProveedor.SelectedIndex = 0;
+      DropDownListRepaProveedor.SelectedIndex = 0;
     }
 
     protected void ButtonRepaAgregarItem_Click(object sender, EventArgs e)
@@ -524,7 +524,7 @@ namespace ICRL.Presentacion
 
       //tipo_item:  1 = Reparacion  2 = Repuesto
       vTipoDaniosPropios.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
-      if ("A" == TextBoxRepuFlagEd.Text)
+      if ("A" == TextBoxRepaFlagEd.Text)
       {
         vTipoDaniosPropios.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
       }
@@ -572,6 +572,9 @@ namespace ICRL.Presentacion
           ButtonRepaCancelar.Enabled = false;
           DropDownListRepaItem.Visible = true;
           TextBoxRepaItem.Visible = false;
+          //Cerrar el popup cuando se ejcute una modificacion exitosa
+          Session["PopupABMReparacionesHabilitado"] = 0;
+          this.ModalPopupReparaciones.Hide();
         }
         else
         {
@@ -586,8 +589,8 @@ namespace ICRL.Presentacion
           LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
           PLimpiarCamposRepa();
           //PanelABMReparaciones.Enabled = false;
-          ButtonRepaGrabar.Enabled = false;
-          ButtonRepaCancelar.Enabled = false;
+          ButtonRepaGrabar.Enabled = true;
+          ButtonRepaCancelar.Enabled = true;
           DropDownListRepaItem.Visible = true;
           TextBoxRepaItem.Visible = false;
         }
@@ -605,10 +608,12 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaCancelar_Click(object sender, EventArgs e)
     {
-      //PanelABMReparaciones.Enabled = false;
       ButtonRepaGrabar.Enabled = false;
       ButtonRepaCancelar.Enabled = false;
       PLimpiarCamposRepa();
+      //Cerrar el popup cuando se ejcute una cancelación de alta o Modificacion
+      Session["PopupABMReparacionesHabilitado"] = 0;
+      this.ModalPopupReparaciones.Hide();
     }
 
     protected void GridViewReparaciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -703,12 +708,9 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopReparaciones_Click(object sender, EventArgs e)
     {
-      int vResul = 0;
-      //PLimpiaSeccionDaniosPropiosPadre();
-      //PLimpiaSeccionDatosPropios();
-      //PBloqueaDPPadreEdicion(false);
-      //PBloqueaDPEdicion(false);
-      //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+      ButtonRepaGrabar.Enabled = false;
+      ButtonRepaCancelar.Enabled = false;
+      PLimpiarCamposRepa();
 
       Session["PopupABMReparacionesHabilitado"] = 0;
       this.ModalPopupReparaciones.Hide();
@@ -859,6 +861,7 @@ namespace ICRL.Presentacion
       vTipoCambio = double.Parse(TextBoxTipoCambio.Text);
       vTipoDaniosPropios.tipo_cambio = vTipoCambio;
 
+
       bool vResultado = false;
       if (string.Empty != TextBoxRepuIdItem.Text)
       {
@@ -873,10 +876,13 @@ namespace ICRL.Presentacion
           ButtonRepuCancelar.Enabled = false;
           DropDownListRepuItem.Visible = true;
           TextBoxRepuItem.Visible = false;
+          //Cerrar el popup cuando se ejcute una modificacion exitosa
+          Session["PopupABMRepuestosHabilitado"] = 0;
+          this.ModalPopupRepuestos.Hide();
         }
         else
         {
-          LabelRepuRegistroItems.Text = "El Registro no pudo ser añadido";
+          LabelRepuRegistroItems.Text = "El Registro no pudo ser modificado";
         }
       }
       else
@@ -887,14 +893,14 @@ namespace ICRL.Presentacion
           LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
           PLimpiarCamposRepu();
           //PanelABMRepuestos.Enabled = false;
-          ButtonRepuGrabar.Enabled = false;
-          ButtonRepuCancelar.Enabled = false;
+          ButtonRepuGrabar.Enabled = true;
+          ButtonRepuCancelar.Enabled = true;
           DropDownListRepuItem.Visible = true;
           TextBoxRepuItem.Visible = false;
         }
         else
         {
-          LabelRepuRegistroItems.Text = "El Registro no pudo ser modificado";
+          LabelRepuRegistroItems.Text = "El Registro no pudo ser añadido";
         }
       }
 
@@ -910,6 +916,9 @@ namespace ICRL.Presentacion
       ButtonRepuGrabar.Enabled = false;
       ButtonRepuCancelar.Enabled = false;
       PLimpiarCamposRepu();
+      //Cerrar el popup cuando se ejecute una cancelación de alta o Modificacion
+      Session["PopupABMRepuestosHabilitado"] = 0;
+      this.ModalPopupRepuestos.Hide();
     }
 
     protected void GridViewRepuestos_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -994,12 +1003,9 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRepuestos_Click(object sender, EventArgs e)
     {
-      int vResul = 0;
-      //PLimpiaSeccionDaniosPropiosPadre();
-      //PLimpiaSeccionDatosPropios();
-      //PBloqueaDPPadreEdicion(false);
-      //PBloqueaDPEdicion(false);
-      //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+      ButtonRepuGrabar.Enabled = false;
+      ButtonRepuCancelar.Enabled = false;
+      PLimpiarCamposRepu();
 
       Session["PopupABMRepuestosHabilitado"] = 0;
       this.ModalPopupRepuestos.Hide();
