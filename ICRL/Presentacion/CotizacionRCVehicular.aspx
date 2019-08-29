@@ -524,7 +524,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMReparaciones" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleReparaciones" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Reparaciones
+                    ABM Reparaciones
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -539,6 +539,7 @@
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaItem" runat="server"></asp:DropDownList>
+                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />
@@ -562,7 +563,7 @@
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelPrecioCotizadoRepa" runat="server" Text="Precio Cotizado"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepaPrecioCotizado" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaPrecioCotizado" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
@@ -570,11 +571,11 @@
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepaMontoDesc" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaMontoDesc" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Text="0"  Enabled="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -588,6 +589,7 @@
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaFlagEd" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -613,7 +615,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Repuestos
+                    ABM Repuestos
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -628,6 +630,7 @@
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
+                                    <asp:TextBox ID="TextBoxRepuItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
                                     <asp:CheckBox ID="CheckBoxRepuPintura" runat="server" />
@@ -647,7 +650,7 @@
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
@@ -655,11 +658,11 @@
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepuPrecioFinal" runat="server" Text="0"  Enabled="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -672,6 +675,7 @@
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepuIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepuFlagEd" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -697,7 +701,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMSumatorias" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleSumatorias" CssClass="modalPopupHeader">
-                    Ventana PopUp para Editar Sumatorias
+                    Editar Sumatorias
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -723,15 +727,15 @@
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaMontoDescProv" runat="server" Text="Monto Descuento"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxSumaMontoDescProv" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxSumaMontoDescProv" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaDeducible" runat="server" Text="FRANQUICIA / COA"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxSumaDeducible" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxSumaDeducible" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Text="0"  Enabled="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -757,7 +761,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupRecepRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRecepRepuestos" CssClass="modalPopupHeader">
-                    Ventana PopUp para Recepción e Ingreso días Repuestos
+                    Recepción e Ingreso días Repuestos
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -779,7 +783,7 @@
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelPrecioRecepDiasEntrega" runat="server" Text="Dias de Entrega"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRecepDiasEntrega" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRecepDiasEntrega" runat="server" Text="0" ></asp:TextBox>
                                 </div>
                             </td>
                         </tr>

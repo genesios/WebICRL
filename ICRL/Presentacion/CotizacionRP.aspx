@@ -456,7 +456,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMReparaciones" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleReparaciones" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Reparaciones
+                    ABM Reparaciones
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -547,7 +547,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
-                    Ventana PopUp para ABM Repuestos
+                    ABM Repuestos
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -633,7 +633,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMSumatorias" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleSumatorias" CssClass="modalPopupHeader">
-                    Ventana PopUp para Editar Sumatorias
+                    Editar Sumatorias
                 </asp:Panel>
                 <div>
                     <table class="basetable">
@@ -693,7 +693,7 @@
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupRecepRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRecepRepuestos" CssClass="modalPopupHeader">
-                    Ventana PopUp para Recepción e Ingreso días Repuestos
+                    Recepción e Ingreso días Repuestos
                 </asp:Panel>
                 <div>
                     <table class="basetable">
