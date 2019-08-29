@@ -772,6 +772,7 @@
     <Key>
       <PropertyRef Name="idItem" />
       <PropertyRef Name="secuencial" />
+      <PropertyRef Name="nro_item" />
     </Key>
     <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="secuencial" Type="Int32" Nullable="false" />
@@ -782,11 +783,13 @@
     <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nro_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="InspRoboParcial">
     <Key>
       <PropertyRef Name="idItem" />
       <PropertyRef Name="idInspeccion" />
+      <PropertyRef Name="nro_item" />
     </Key>
     <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="idInspeccion" Type="Int32" Nullable="false" />
@@ -797,6 +800,7 @@
     <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nro_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ItemTaller">
     <Key>

@@ -2238,18 +2238,19 @@ namespace ICRL.Presentacion
       CheckBoxMecanicoRP.Checked = (GridViewRoboParcial.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
 
       string vTextoChaperio = string.Empty;
-      vTextoChaperio = GridViewDaniosPropios.SelectedRow.Cells[7].Text.Trim();
+      vTextoChaperio = GridViewRoboParcial.SelectedRow.Cells[7].Text.Trim();
       DropDownListChaperioRP.ClearSelection();
       DropDownListChaperioRP.Items.FindByText(vTextoChaperio).Selected = true;
 
       string vTextoRepPrevia = string.Empty;
-      vTextoRepPrevia = GridViewDaniosPropios.SelectedRow.Cells[8].Text.Trim();
+      vTextoRepPrevia = GridViewRoboParcial.SelectedRow.Cells[8].Text.Trim();
       DropDownListRepPreviaRP.ClearSelection();
       DropDownListRepPreviaRP.Items.FindByText(vTextoRepPrevia).Selected = true;
 
       //TextBoxChaperioRP.Text = GridViewRoboParcial.SelectedRow.Cells[7].Text.Trim();
       //TextBoxRepPreviaRP.Text = GridViewRoboParcial.SelectedRow.Cells[8].Text.Trim();
       TextBoxObservacionesRP.Text = GridViewRoboParcial.SelectedRow.Cells[9].Text.Trim();
+      TextBoxNroItemRP.Text = GridViewRoboParcial.SelectedRow.Cells[10].Text;
       ButtonNuevoRP.Enabled = false;
       ButtonGrabarRP.Enabled = true;
       ButtonBorrarRP.Enabled = true;
@@ -2308,7 +2309,8 @@ namespace ICRL.Presentacion
       vInspRoboParcial.reparacionPrevia = DropDownListRepPreviaRP.SelectedItem.Text;
       //vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
       //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
-      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text; ;
+      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text;
+      vInspRoboParcial.nro_item = long.Parse(TextBoxNroItemRP.Text);
 
       int vResultado = vAccesodatos.FActualizaInspRoboParcialICRL(vInspRoboParcial);
 
@@ -2326,6 +2328,7 @@ namespace ICRL.Presentacion
 
       vInspRoboParcial.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspRoboParcial.item = TextBoxIdItemRP.Text;
+      vInspRoboParcial.nro_item = long.Parse(TextBoxNroItemRP.Text);
 
       int vResultado = vAccesodatos.FBorrarInspRoboParcialICRL(vInspRoboParcial);
 
@@ -2357,6 +2360,7 @@ namespace ICRL.Presentacion
                      irp.chaperio,
                      irp.reparacionPrevia,
                      irp.observaciones,
+                     irp.nro_item
                    };
 
         GridViewRoboParcial.DataSource = vLst.ToList();
@@ -3510,6 +3514,7 @@ namespace ICRL.Presentacion
       DropDownListRepPreviaRCV01.Items.FindByText(vTempoCadena).Selected = true;
 
       TextBoxObservacionesRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[9].Text;
+      TextBoxNroItemRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[10].Text;
       PBloqueoRCVehicularDet01(false);
     }
 
@@ -3572,6 +3577,7 @@ namespace ICRL.Presentacion
                      ircvdet.chaperio,
                      ircvdet.reparacionPrevia,
                      ircvdet.observaciones,
+                     ircvdet.nro_item
                    };
 
         GridViewRCV01Det.DataSource = vLst.ToList();
@@ -3744,7 +3750,8 @@ namespace ICRL.Presentacion
       vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
       vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedItem.Text.Trim();
       vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedItem.Text.Trim();
-      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text; ;
+      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text;
+      vInspRCVDet.nro_item = long.Parse(TextBoxNroItemRCV01.Text);
 
       int vResultado = vAccesodatos.FActualizaInspRCV01DetICRL(vInspRCVDet);
 
@@ -3762,6 +3769,7 @@ namespace ICRL.Presentacion
 
       vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
       vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialRCV01.Text);
+      vInspRCVDet.nro_item = long.Parse(TextBoxNroItemRCV01.Text);
 
       int vResultado = vAccesodatos.FBorrarInspRCV01DetICRL(vInspRCVDet);
 

@@ -801,6 +801,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Key>
             <PropertyRef Name="idItem" />
             <PropertyRef Name="secuencial" />
+            <PropertyRef Name="nro_item" />
           </Key>
           <Property Name="idItem" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="secuencial" Type="int" Nullable="false" />
@@ -811,11 +812,13 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="chaperio" Type="char" MaxLength="5" />
           <Property Name="reparacionPrevia" Type="char" MaxLength="5" />
           <Property Name="observaciones" Type="varchar" MaxLength="100" />
+          <Property Name="nro_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="InspRoboParcial">
           <Key>
             <PropertyRef Name="idItem" />
             <PropertyRef Name="idInspeccion" />
+            <PropertyRef Name="nro_item" />
           </Key>
           <Property Name="idItem" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="idInspeccion" Type="int" Nullable="false" />
@@ -826,6 +829,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="chaperio" Type="char" MaxLength="5" />
           <Property Name="reparacionPrevia" Type="char" MaxLength="5" />
           <Property Name="observaciones" Type="varchar" MaxLength="100" />
+          <Property Name="nro_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="ItemTaller">
           <Key>
@@ -2209,6 +2213,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Key>
             <PropertyRef Name="idItem" />
             <PropertyRef Name="secuencial" />
+            <PropertyRef Name="nro_item" />
           </Key>
           <Property Name="idItem" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="secuencial" Type="Int32" Nullable="false" />
@@ -2219,11 +2224,13 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nro_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="InspRoboParcial">
           <Key>
             <PropertyRef Name="idItem" />
             <PropertyRef Name="idInspeccion" />
+            <PropertyRef Name="nro_item" />
           </Key>
           <Property Name="idItem" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="idInspeccion" Type="Int32" Nullable="false" />
@@ -2234,6 +2241,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="chaperio" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="reparacionPrevia" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nro_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ItemTaller">
           <Key>
@@ -3626,6 +3634,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="chaperio" ColumnName="chaperio" />
                 <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="nro_item" ColumnName="nro_item" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3641,6 +3650,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="chaperio" ColumnName="chaperio" />
                 <ScalarProperty Name="reparacionPrevia" ColumnName="reparacionPrevia" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="nro_item" ColumnName="nro_item" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

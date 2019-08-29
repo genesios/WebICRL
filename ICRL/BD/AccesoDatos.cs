@@ -1708,7 +1708,7 @@ namespace ICRL.BD
       {
         InspRoboParcial vTablaInspRoboParcial = new InspRoboParcial();
 
-        vTablaInspRoboParcial = db.InspRoboParcial.Find(pInspRoboParcial.item, pInspRoboParcial.idInspeccion);
+        vTablaInspRoboParcial = db.InspRoboParcial.Find(pInspRoboParcial.item, pInspRoboParcial.idInspeccion, pInspRoboParcial.nro_item);
 
         vTablaInspRoboParcial.compra = pInspRoboParcial.compra;
         vTablaInspRoboParcial.instalacion = pInspRoboParcial.instalacion;
@@ -1734,7 +1734,7 @@ namespace ICRL.BD
       {
         InspRoboParcial vTablaInspRoboParcial = new InspRoboParcial();
 
-        vTablaInspRoboParcial = db.InspRoboParcial.Find(pInspRoboParcial.item, pInspRoboParcial.idInspeccion);
+        vTablaInspRoboParcial = db.InspRoboParcial.Find(pInspRoboParcial.item, pInspRoboParcial.idInspeccion, pInspRoboParcial.nro_item);
 
         db.InspRoboParcial.Remove(vTablaInspRoboParcial);
         db.SaveChanges();
@@ -2165,7 +2165,7 @@ namespace ICRL.BD
       {
         InspRCVehicularDetalle vTablaInspRCVDet = new InspRCVehicularDetalle();
 
-        vTablaInspRCVDet = db.InspRCVehicularDetalle.Find(pInspeccionRCVDet.idItem, pInspeccionRCVDet.secuencial);
+        vTablaInspRCVDet = db.InspRCVehicularDetalle.Find(pInspeccionRCVDet.idItem, pInspeccionRCVDet.secuencial, pInspeccionRCVDet.nro_item);
 
         vTablaInspRCVDet.compra = pInspeccionRCVDet.compra;
         vTablaInspRCVDet.instalacion = pInspeccionRCVDet.instalacion;
@@ -2191,7 +2191,7 @@ namespace ICRL.BD
       {
         InspRCVehicularDetalle vTablaInspRCVDet = new InspRCVehicularDetalle();
 
-        vTablaInspRCVDet = db.InspRCVehicularDetalle.Find(pInspeccionRCVDet.idItem, pInspeccionRCVDet.secuencial);
+        vTablaInspRCVDet = db.InspRCVehicularDetalle.Find(pInspeccionRCVDet.idItem, pInspeccionRCVDet.secuencial, pInspeccionRCVDet.nro_item);
 
         db.InspRCVehicularDetalle.Remove(vTablaInspRCVDet);
         db.SaveChanges();

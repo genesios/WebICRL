@@ -845,6 +845,7 @@
                                         <div class="twenty">
                                             <asp:Label ID="LabelIditemRP" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxIdItemRP" runat="server" Visible="False"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxNroItemRP" runat="server" Visible="False"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
@@ -895,6 +896,7 @@
                                     <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                     <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
                                     <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
+                                    <asp:BoundField DataField="nro_item" HeaderText="Item" />
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -1195,6 +1197,7 @@
                                                     <asp:TextBox ID="TextBoxObservacionesRCV01" runat="server" MaxLength="100"></asp:TextBox><br />
                                                     <asp:Label ID="LabelIditemRCV01" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxIdItemRCV01" runat="server" Visible="False"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBoxNroItemRCV01" runat="server" Visible="False"></asp:TextBox>
                                                 </div>
                                             </td>
                                         </tr>
@@ -1245,6 +1248,7 @@
                                             <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                             <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
                                             <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
+                                            <asp:BoundField DataField="nro_item" HeaderText="Item" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>

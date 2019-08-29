@@ -105,11 +105,11 @@
         <asp:TemplateField HeaderText="Fecha Emisión Factura">
           <ItemTemplate>
             <asp:Label ID="lblEmisionFactura" runat="server"
-              Text='<%# Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
+              Text='<%# string.IsNullOrEmpty(Eval("fecha_emision").ToString()) ? Eval("fecha_emision") : Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
             <asp:TextBox ID="txbEmisionFacturaEditar" runat="server" ValidationGroup="ValidacionEditarFactura" MaxLength="10" placeholder="dd/mm/aaaa"
-              Text='<%# Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
+              Text='<%# string.IsNullOrEmpty(Eval("fecha_emision").ToString()) ? Eval("fecha_emision") : Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar" Text="* Fecha no válida"
@@ -126,11 +126,11 @@
         <asp:TemplateField HeaderText="Fecha Recepción Factura">
           <ItemTemplate>
             <asp:Label ID="lblEntregaFactura" runat="server"
-              Text='<%# Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
+              Text='<%# string.IsNullOrEmpty(Eval("fecha_entrega").ToString()) ? Eval("fecha_entrega") : Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
             <asp:TextBox ID="txbEntregaFacturaEditar" runat="server" MaxLength="10" ValidationGroup="ValidacionEditarFactura" placeholder="dd/mm/aaaa"
-              Text='<%# Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
+              Text='<%# string.IsNullOrEmpty(Eval("fecha_entrega").ToString()) ? Eval("fecha_entrega") : Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar" Text="* Fecha no válida"
