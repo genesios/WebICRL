@@ -426,10 +426,10 @@ namespace ICRL.Presentacion
       DropDownListRepaRepPrevia.SelectedIndex = 0;
       CheckBoxRepaMecanico.Checked = false;
       DropDownListRepaMoneda.SelectedIndex = 0;
-      TextBoxRepaPrecioCotizado.Text = string.Empty;
+      TextBoxRepaPrecioCotizado.Text = "0";
       DropDownListRepaTipoDesc.SelectedIndex = 0;
-      TextBoxRepaMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
+      TextBoxRepaMontoDesc.Text = "0";
+      TextBoxRepuPrecioFinal.Text = "0";
       DropDownListRepuProveedor.SelectedIndex = 0;
     }
 
@@ -698,10 +698,10 @@ namespace ICRL.Presentacion
       CheckBoxRepuPintura.Checked = false;
       CheckBoxRepuInstalacion.Checked = false;
       DropDownListRepuMoneda.SelectedIndex = 0;
-      TextBoxRepuPrecioCotizado.Text = string.Empty;
+      TextBoxRepuPrecioCotizado.Text = "0";
       DropDownListRepuTipoDesc.SelectedIndex = 0;
-      TextBoxRepuMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
+      TextBoxRepuMontoDesc.Text = "0";
+      TextBoxRepuPrecioFinal.Text = "0";
       DropDownListRepuProveedor.SelectedIndex = 0;
     }
 

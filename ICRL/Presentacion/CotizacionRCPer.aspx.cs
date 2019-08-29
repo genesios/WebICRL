@@ -315,7 +315,7 @@ namespace ICRL.Presentacion
     protected void PLimpiarPersonaDet()
     {
       TextBoxPerTipoGasto.Text = string.Empty;
-      TextBoxPerMontoGasto.Text = string.Empty;
+      TextBoxPerMontoGasto.Text = "0";
       TextBoxPerDescripcion.Text = string.Empty;
     }
 

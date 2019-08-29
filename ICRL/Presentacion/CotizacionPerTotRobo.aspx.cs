@@ -421,7 +421,7 @@ namespace ICRL.Presentacion
     {
       TextBoxPTRONombres.Text = string.Empty;
       TextBoxPTRODocumentoId.Text = string.Empty;
-      TextBoxPTROMontoPago.Text = string.Empty;
+      TextBoxPTROMontoPago.Text = "0";
       TextBoxPTRODescripcion.Text = string.Empty;
     }
 
@@ -722,7 +722,7 @@ namespace ICRL.Presentacion
       CheckboxReferUtilizada.Checked = false;
       TextBoxReferMedioCoti.Text = string.Empty;
       TextBoxReferDescripcion.Text = string.Empty;
-      TextBoxReferMontoCoti.Text = string.Empty;
+      TextBoxReferMontoCoti.Text = "0";
     }
 
     protected void PHabilitarReferencias(bool pEstado)
@@ -988,7 +988,7 @@ namespace ICRL.Presentacion
     {
       TextBoxVersionPTRO.Text = string.Empty;
       TextBoxSeriePTRO.Text = string.Empty;
-      TextBoxCilindradaPTRO.Text = string.Empty;
+      TextBoxCilindradaPTRO.Text = "0";
       CheckBoxTechoSolarPTRO.Checked = false;
       CheckBoxAsientosCueroPTRO.Checked = false;
       CheckBoxArosMagnesioPTRO.Checked = false;

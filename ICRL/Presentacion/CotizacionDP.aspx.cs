@@ -482,10 +482,10 @@ namespace ICRL.Presentacion
       DropDownListRepaRepPrevia.SelectedIndex = 0;
       CheckBoxRepaMecanico.Checked = false;
       DropDownListRepaMoneda.SelectedIndex = 0;
-      TextBoxRepaPrecioCotizado.Text = string.Empty;
+      TextBoxRepaPrecioCotizado.Text = "0";
       DropDownListRepaTipoDesc.SelectedIndex = 0;
-      TextBoxRepaMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
+      TextBoxRepaMontoDesc.Text = "0";
+      TextBoxRepaPrecioFinal.Text = "0";
       DropDownListRepaProveedor.SelectedIndex = 0;
     }
 
@@ -578,7 +578,7 @@ namespace ICRL.Presentacion
         }
         else
         {
-          LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
+          LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
         }
       }
       else
@@ -596,7 +596,7 @@ namespace ICRL.Presentacion
         }
         else
         {
-          LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
+          LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
         }
       }
 
@@ -622,10 +622,12 @@ namespace ICRL.Presentacion
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
+      int vIndex = 0;
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vIdItem = long.Parse(GridViewReparaciones.SelectedRow.Cells[1].Text);
+      vIndex = e.RowIndex;
+      vIdItem = long.Parse(GridViewReparaciones.Rows[vIndex].Cells[1].Text);
       vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
       if (vResultado)
       {
@@ -661,7 +663,7 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text.Trim();
-      vTextoTemporal = vTextoTemporal.Replace("&#209;", string.Empty);
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaChaperio.ClearSelection();
       DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
@@ -786,10 +788,10 @@ namespace ICRL.Presentacion
       CheckBoxRepuPintura.Checked = false;
       CheckBoxRepuInstalacion.Checked = false;
       DropDownListRepuMoneda.SelectedIndex = 0;
-      TextBoxRepuPrecioCotizado.Text = string.Empty;
+      TextBoxRepuPrecioCotizado.Text = "0";
       DropDownListRepuTipoDesc.SelectedIndex = 0;
-      TextBoxRepuMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
+      TextBoxRepuMontoDesc.Text = "0";
+      TextBoxRepuPrecioFinal.Text = "0";
       DropDownListRepuProveedor.SelectedIndex = 0;
     }
 
@@ -927,10 +929,12 @@ namespace ICRL.Presentacion
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
+      int vIndex = 0;
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vIdItem = long.Parse(GridViewRepuestos.SelectedRow.Cells[1].Text);
+      vIndex = e.RowIndex;
+      vIdItem = long.Parse(GridViewRepuestos.Rows[vIndex].Cells[1].Text);
       vResultado = BD.CotizacionICRL.DaniosPropiosBorrar(vIdFlujo, vIdCotizacion, vIdItem);
       if (vResultado)
       {
@@ -1337,7 +1341,7 @@ namespace ICRL.Presentacion
     {
       DropDownListRecepItem.SelectedIndex = 0;
       CheckBoxRecepRecibido.Checked = false;
-      TextBoxRecepDiasEntrega.Text = string.Empty;
+      TextBoxRecepDiasEntrega.Text = "0";
 
     }
 

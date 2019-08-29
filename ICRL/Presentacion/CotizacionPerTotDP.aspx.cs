@@ -419,7 +419,7 @@ namespace ICRL.Presentacion
     {
       TextBoxPTDPNombres.Text = string.Empty;
       TextBoxPTDPDocumentoId.Text = string.Empty;
-      TextBoxPTDPMontoPago.Text = string.Empty;
+      TextBoxPTDPMontoPago.Text = "0";
       TextBoxPTDPDescripcion.Text = string.Empty;
     }
 
@@ -720,7 +720,7 @@ namespace ICRL.Presentacion
       CheckboxReferUtilizada.Checked = false;
       TextBoxReferMedioCoti.Text = string.Empty;
       TextBoxReferDescripcion.Text = string.Empty;
-      TextBoxReferMontoCoti.Text = string.Empty;
+      TextBoxReferMontoCoti.Text = "0";
     }
 
     protected void PHabilitarReferencias(bool pEstado)
@@ -986,7 +986,7 @@ namespace ICRL.Presentacion
     {
       TextBoxVersionPTDP.Text = string.Empty;
       TextBoxSeriePTDP.Text = string.Empty;
-      TextBoxCilindradaPTDP.Text = string.Empty;
+      TextBoxCilindradaPTDP.Text = "0";
       CheckBoxTechoSolarPTDP.Checked = false;
       CheckBoxAsientosCueroPTDP.Checked = false;
       CheckBoxArosMagnesioPTDP.Checked = false;

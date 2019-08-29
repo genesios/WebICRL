@@ -315,7 +315,7 @@ namespace ICRL.Presentacion
     protected void PLimpiarObjetoDet()
     {
       TextBoxObjItem.Text = string.Empty;
-      TextBoxObjMontoItemRef.Text = string.Empty;
+      TextBoxObjMontoItemRef.Text = "0";
       TextBoxObjDescripcion.Text = string.Empty;
     }
 

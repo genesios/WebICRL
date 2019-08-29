@@ -1618,7 +1618,7 @@ namespace ICRL.Presentacion
     protected void PLimpiaSeccionRCObjetoDetalle()
     {
       TextBoxObjDetItem.Text = string.Empty;
-      TextBoxObjDetCostoRef.Text = string.Empty;
+      TextBoxObjDetCostoRef.Text = "0";
       TextBoxObjDetDescripcion.Text = string.Empty;
       //ButtonGrabarObjDet.Enabled = false;
       //ButtonBorrarObjDet.Enabled = false;
@@ -2057,7 +2057,7 @@ namespace ICRL.Presentacion
     protected void PLimpiaSeccionRCPersonaDetalle()
     {
       TextBoxPerDetTipo.Text = string.Empty;
-      TextBoxPerDetMontoGasto.Text = string.Empty;
+      TextBoxPerDetMontoGasto.Text = "0";
       TextBoxPerDetDescripcion.Text = string.Empty;
 
       //ButtonCierraPerDet.Enabled = true;
@@ -2709,7 +2709,7 @@ namespace ICRL.Presentacion
     {
       TextBoxVersionPTDP.Text = string.Empty;
       TextBoxSeriePTDP.Text = string.Empty;
-      TextBoxCilindradaPTDP.Text = string.Empty;
+      TextBoxCilindradaPTDP.Text = "0";
       CheckBoxTechoSolarPTDP.Checked = false;
       CheckBoxAsientosCueroPTDP.Checked = false;
       CheckBoxArosMagnesioPTDP.Checked = false;

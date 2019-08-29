@@ -418,11 +418,11 @@ namespace ICRL.Presentacion
       DropDownListRepaRepPrevia.SelectedIndex = 0;
       CheckBoxRepaMecanico.Checked = false;
       DropDownListRepaMoneda.SelectedIndex = 0;
-      TextBoxRepaPrecioCotizado.Text = string.Empty;
+      TextBoxRepaPrecioCotizado.Text = "0";
       DropDownListRepaTipoDesc.SelectedIndex = 0;
-      TextBoxRepaMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
-      DropDownListRepuProveedor.SelectedIndex = 0;
+      TextBoxRepaMontoDesc.Text = "0";
+      TextBoxRepaPrecioFinal.Text = "0";
+      DropDownListRepaProveedor.SelectedIndex = 0;
     }
 
     protected void ButtonRepaAgregarItem_Click(object sender, EventArgs e)
@@ -432,6 +432,9 @@ namespace ICRL.Presentacion
       //PanelABMReparaciones.Enabled = true;
       ButtonRepaGrabar.Enabled = true;
       ButtonRepaCancelar.Enabled = true;
+      TextBoxRepaFlagEd.Text = "A";
+      DropDownListRepaItem.Visible = true;
+      TextBoxRepaItem.Visible = false;
       Session["PopupABMReparacionesHabilitado"] = 1;
       this.ModalPopupReparaciones.Show();
     }
@@ -440,6 +443,8 @@ namespace ICRL.Presentacion
     {
       //PanelABMReparaciones.Enabled = true;
       DropDownListRepaItem.Enabled = false;
+      DropDownListRepaItem.Visible = false;
+      TextBoxRepaItem.Visible = true;
       ButtonRepaGrabar.Enabled = true;
       ButtonRepaCancelar.Enabled = true;
     }
@@ -455,6 +460,14 @@ namespace ICRL.Presentacion
 
       //tipo_item:  1 = Reparacion  2 = Repuesto
       vTipoRoboParcial.id_tipo_item = (int)CotizacionICRL.TipoItem.Reparacion;
+      if ("A" == TextBoxRepaFlagEd.Text)
+      {
+        vTipoRoboParcial.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+      }
+      else
+      {
+        vTipoRoboParcial.item_descripcion = TextBoxRepaItem.Text;
+      }
       vTipoRoboParcial.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
       vTipoRoboParcial.chaperio = DropDownListRepaChaperio.SelectedItem.Text.Trim();
       vTipoRoboParcial.reparacion_previa = DropDownListRepaRepPrevia.SelectedItem.Text.Trim();
@@ -494,10 +507,15 @@ namespace ICRL.Presentacion
           //PanelABMReparaciones.Enabled = false;
           ButtonRepaGrabar.Enabled = false;
           ButtonRepaCancelar.Enabled = false;
+          DropDownListRepaItem.Visible = true;
+          TextBoxRepaItem.Visible = false;
+          //Cerrar el popup cuando se ejcute una modificacion exitosa
+          Session["PopupABMReparacionesHabilitado"] = 0;
+          this.ModalPopupReparaciones.Hide();
         }
         else
         {
-          LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
+          LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
         }
       }
       else
@@ -508,12 +526,14 @@ namespace ICRL.Presentacion
           LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
           PLimpiarCamposRepa();
           //PanelABMReparaciones.Enabled = false;
-          ButtonRepaGrabar.Enabled = false;
-          ButtonRepaCancelar.Enabled = false;
+          ButtonRepaGrabar.Enabled = true;
+          ButtonRepaCancelar.Enabled = true;
+          DropDownListRepaItem.Visible = true;
+          TextBoxRepaItem.Visible = false;
         }
         else
         {
-          LabelRepaRegistroItems.Text = "El Registro no pudo ser modificado";
+          LabelRepaRegistroItems.Text = "El Registro no pudo ser añadido";
         }
       }
 
@@ -525,10 +545,12 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaCancelar_Click(object sender, EventArgs e)
     {
-      //PanelABMReparaciones.Enabled = false;
       ButtonRepaGrabar.Enabled = false;
       ButtonRepaCancelar.Enabled = false;
       PLimpiarCamposRepa();
+      //Cerrar el popup cuando se ejcute una cancelación de alta o Modificacion
+      Session["PopupABMReparacionesHabilitado"] = 0;
+      this.ModalPopupReparaciones.Hide();
     }
 
     protected void GridViewReparaciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -537,10 +559,12 @@ namespace ICRL.Presentacion
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
+      int vIndex = 0;
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vIdItem = long.Parse(GridViewReparaciones.SelectedRow.Cells[1].Text);
+      vIndex = e.RowIndex;
+      vIdItem = long.Parse(GridViewReparaciones.Rows[vIndex].Cells[1].Text);
       vResultado = BD.CotizacionICRL.RoboParcialBorrar(vIdFlujo, vIdCotizacion, vIdItem);
       if (vResultado)
       {
@@ -567,17 +591,23 @@ namespace ICRL.Presentacion
       //tipo_item:  1 = Reparacion  2 = Repuesto
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[2].Text;
-      DropDownListRepaItem.ClearSelection();
-      DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      //cuando se modifica ya no se utiliza el combo
+      //DropDownListRepaItem.ClearSelection();
+      //DropDownListRepaItem.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepaItem.Text = vTextoTemporal;
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[3].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaChaperio.ClearSelection();
       DropDownListRepaChaperio.Items.FindByText(vTextoTemporal).Selected = true;
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[4].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
       vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaRepPrevia.ClearSelection();
       DropDownListRepaRepPrevia.Items.FindByText(vTextoTemporal).Selected = true;
@@ -593,6 +623,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[8].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaTipoDesc.ClearSelection();
       DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -602,8 +634,11 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[11].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepaProveedor.ClearSelection();
       DropDownListRepaProveedor.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepaFlagEd.Text = "M";
 
       PRepaModificarItem();
       Session["PopupABMReparacionesHabilitado"] = 1;
@@ -612,12 +647,9 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopReparaciones_Click(object sender, EventArgs e)
     {
-      int vResul = 0;
-      //PLimpiaSeccionDaniosPropiosPadre();
-      //PLimpiaSeccionDatosPropios();
-      //PBloqueaDPPadreEdicion(false);
-      //PBloqueaDPEdicion(false);
-      //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+      ButtonRepaGrabar.Enabled = false;
+      ButtonRepaCancelar.Enabled = false;
+      PLimpiarCamposRepa();
 
       Session["PopupABMReparacionesHabilitado"] = 0;
       this.ModalPopupReparaciones.Hide();
@@ -693,10 +725,10 @@ namespace ICRL.Presentacion
       CheckBoxRepuPintura.Checked = false;
       CheckBoxRepuInstalacion.Checked = false;
       DropDownListRepuMoneda.SelectedIndex = 0;
-      TextBoxRepuPrecioCotizado.Text = string.Empty;
+      TextBoxRepuPrecioCotizado.Text = "0";
       DropDownListRepuTipoDesc.SelectedIndex = 0;
-      TextBoxRepuMontoDesc.Text = string.Empty;
-      TextBoxRepuPrecioFinal.Text = string.Empty;
+      TextBoxRepuMontoDesc.Text = "0";
+      TextBoxRepuPrecioFinal.Text = "0";
       DropDownListRepuProveedor.SelectedIndex = 0;
     }
 
@@ -707,6 +739,9 @@ namespace ICRL.Presentacion
       //PanelABMRepuestos.Enabled = true;
       ButtonRepuGrabar.Enabled = true;
       ButtonRepuCancelar.Enabled = true;
+      TextBoxRepuFlagEd.Text = "A";
+      DropDownListRepuItem.Visible = true;
+      TextBoxRepuItem.Visible = false;
       Session["PopupABMRepuestosHabilitado"] = 1;
       this.ModalPopupRepuestos.Show();
     }
@@ -715,6 +750,8 @@ namespace ICRL.Presentacion
     {
       //PanelABMRepuestos.Enabled = true;
       DropDownListRepuItem.Enabled = false;
+      DropDownListRepuItem.Visible = false;
+      TextBoxRepuItem.Visible = true;
       ButtonRepuGrabar.Enabled = true;
       ButtonRepuCancelar.Enabled = true;
     }
@@ -730,6 +767,14 @@ namespace ICRL.Presentacion
 
       //tipo_item:  1 = Repuracion  2 = Repuesto
       vTipoRoboParcial.id_tipo_item = (int)CotizacionICRL.TipoItem.Repuesto;
+      if ("A" == TextBoxRepuFlagEd.Text)
+      {
+        vTipoRoboParcial.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+      }
+      else
+      {
+        vTipoRoboParcial.item_descripcion = TextBoxRepuItem.Text;
+      }
       vTipoRoboParcial.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
       vTipoRoboParcial.pintura = CheckBoxRepuPintura.Checked;
       vTipoRoboParcial.instalacion = CheckBoxRepuInstalacion.Checked;
@@ -768,10 +813,15 @@ namespace ICRL.Presentacion
           //PanelABMRepuestos.Enabled = false;
           ButtonRepuGrabar.Enabled = false;
           ButtonRepuCancelar.Enabled = false;
+          DropDownListRepuItem.Visible = true;
+          TextBoxRepuItem.Visible = false;
+          //Cerrar el popup cuando se ejcute una modificacion exitosa
+          Session["PopupABMRepuestosHabilitado"] = 0;
+          this.ModalPopupRepuestos.Hide();
         }
         else
         {
-          LabelRepuRegistroItems.Text = "El Registro no pudo ser añadido";
+          LabelRepuRegistroItems.Text = "El Registro no pudo ser modificado";
         }
       }
       else
@@ -782,12 +832,14 @@ namespace ICRL.Presentacion
           LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
           PLimpiarCamposRepu();
           //PanelABMRepuestos.Enabled = false;
-          ButtonRepuGrabar.Enabled = false;
-          ButtonRepuCancelar.Enabled = false;
+          ButtonRepuGrabar.Enabled = true;
+          ButtonRepuCancelar.Enabled = true;
+          DropDownListRepuItem.Visible = true;
+          TextBoxRepuItem.Visible = false;
         }
         else
         {
-          LabelRepuRegistroItems.Text = "El Registro no pudo ser modificado";
+          LabelRepuRegistroItems.Text = "El Registro no pudo ser añadido";
         }
       }
 
@@ -803,6 +855,9 @@ namespace ICRL.Presentacion
       ButtonRepuGrabar.Enabled = false;
       ButtonRepuCancelar.Enabled = false;
       PLimpiarCamposRepu();
+      //Cerrar el popup cuando se ejecute una cancelación de alta o Modificacion
+      Session["PopupABMRepuestosHabilitado"] = 0;
+      this.ModalPopupRepuestos.Hide();
     }
 
     protected void GridViewRepuestos_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -811,10 +866,12 @@ namespace ICRL.Presentacion
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
+      int vIndex = 0;
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vIdItem = long.Parse(GridViewRepuestos.SelectedRow.Cells[1].Text);
+      vIndex = e.RowIndex;
+      vIdItem = long.Parse(GridViewRepuestos.Rows[vIndex].Cells[1].Text);
       vResultado = BD.CotizacionICRL.RoboParcialBorrar(vIdFlujo, vIdCotizacion, vIdItem);
       if (vResultado)
       {
@@ -841,8 +898,12 @@ namespace ICRL.Presentacion
       //tipo_item:  1 = Repuracion  2 = Repuesto
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[2].Text;
-      DropDownListRepuItem.ClearSelection();
-      DropDownListRepuItem.Items.FindByText(vTextoTemporal).Selected = true;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      //Cuando se modifica ya no se utiliza el combo
+      //DropDownListRepuItem.ClearSelection();
+      //DropDownListRepuItem.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepuItem.Text = vTextoTemporal;
 
       CheckBoxRepuPintura.Checked = (GridViewRepuestos.SelectedRow.Cells[3].Controls[1] as CheckBox).Checked;
 
@@ -850,6 +911,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[5].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuMoneda.ClearSelection();
       DropDownListRepuMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -857,6 +920,8 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[7].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuTipoDesc.ClearSelection();
       DropDownListRepuTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
@@ -866,8 +931,11 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[10].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
       DropDownListRepuProveedor.ClearSelection();
       DropDownListRepuProveedor.Items.FindByText(vTextoTemporal).Selected = true;
+      TextBoxRepuFlagEd.Text = "M";
 
       PRepuModificarItem();
       Session["PopupABMRepuestosHabilitado"] = 1;
@@ -876,12 +944,9 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRepuestos_Click(object sender, EventArgs e)
     {
-      int vResul = 0;
-      //PLimpiaSeccionDaniosPropiosPadre();
-      //PLimpiaSeccionDatosPropios();
-      //PBloqueaDPPadreEdicion(false);
-      //PBloqueaDPEdicion(false);
-      //vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
+      ButtonRepuGrabar.Enabled = false;
+      ButtonRepuCancelar.Enabled = false;
+      PLimpiarCamposRepu();
 
       Session["PopupABMRepuestosHabilitado"] = 0;
       this.ModalPopupRepuestos.Hide();
@@ -1211,7 +1276,7 @@ namespace ICRL.Presentacion
     {
       DropDownListRecepItem.SelectedIndex = 0;
       CheckBoxRecepRecibido.Checked = false;
-      TextBoxRecepDiasEntrega.Text = string.Empty;
+      TextBoxRecepDiasEntrega.Text = "0";
 
     }
 
