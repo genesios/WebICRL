@@ -225,7 +225,7 @@
           Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionTipoCambio"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="covTipoCambio" runat="server" ControlToValidate="txbTipoCambio" ValidationGroup="ValidacionTipoCambio"
           Type="Double" Operator="DataTypeCheck" Text="* Valor inválido" Display="Dynamic" CssClass="errormessage"></asp:CompareValidator><br />
-        <asp:TextBox ID="txbTipoCambio" runat="server" MaxLength="5"></asp:TextBox>
+        <asp:TextBox ID="txbTipoCambio" runat="server" Text="6.96" MaxLength="5"></asp:TextBox>
       </div>
     </td></tr>
     <tr><td>

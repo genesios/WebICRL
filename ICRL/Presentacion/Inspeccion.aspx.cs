@@ -77,6 +77,11 @@ namespace ICRL.Presentacion
           ICRL.ModeloDB.Inspeccion vFilaInspeccion = new ICRL.ModeloDB.Inspeccion();
           vFilaInspeccion = vAccesoDatos.FTraeDatosBasicosInspeccion(vIdInspeccion);
           TabContainerCoberturas.ActiveTabIndex = (vFilaInspeccion.tipoCobertura) - 1;
+          if ((int)AccesoDatos.TipoInspeccion.RoboParcial == vFilaInspeccion.tipoCobertura)
+          {
+            DropDownListTipoTallerInsp.Enabled = true;
+            PanelDatosTaller.Visible = true;
+          }
         }
 
         if (Session["PopupDPHabilitado"] != null)
@@ -1170,6 +1175,7 @@ namespace ICRL.Presentacion
     protected void GridViewDaniosPropios_SelectedIndexChanged(object sender, EventArgs e)
     {
       int vSecuencial = 0;
+      string vTextoTemporal = string.Empty;
       vSecuencial = int.Parse(TextBoxDPPSecuencial.Text);
 
       DropDownListItem.Enabled = false;
@@ -1199,7 +1205,11 @@ namespace ICRL.Presentacion
       DropDownListRepPrevia.ClearSelection();
       DropDownListRepPrevia.Items.FindByText(vTextoRepPrevia).Selected = true;
 
-      TextBoxObservaciones.Text = GridViewDaniosPropios.SelectedRow.Cells[9].Text;
+      vTextoTemporal = string.Empty;
+      vTextoTemporal = GridViewDaniosPropios.SelectedRow.Cells[9].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      TextBoxObservaciones.Text = vTextoTemporal;
       TextBoxNroItem.Text = GridViewDaniosPropios.SelectedRow.Cells[10].Text;
       ButtonNuevoDP.Enabled = false;
       ButtonGrabarDP.Enabled = true;
@@ -1219,7 +1229,7 @@ namespace ICRL.Presentacion
       vInspDaniosPropios.mecanico = CheckBoxMecanico.Checked;
       vInspDaniosPropios.chaperio = DropDownListChaperio.SelectedItem.Text;
       vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
-      vInspDaniosPropios.observaciones = TextBoxObservaciones.Text;
+      vInspDaniosPropios.observaciones = TextBoxObservaciones.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FGrabaInspDaniosPropiosICRL(vInspDaniosPropios);
 
@@ -1243,7 +1253,7 @@ namespace ICRL.Presentacion
       vInspDaniosPropios.mecanico = CheckBoxMecanico.Checked;
       vInspDaniosPropios.chaperio = DropDownListChaperio.SelectedItem.Text;
       vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
-      vInspDaniosPropios.observaciones = TextBoxObservaciones.Text;
+      vInspDaniosPropios.observaciones = TextBoxObservaciones.Text.ToUpper().Trim();
       vInspDaniosPropios.nro_item = long.Parse(TextBoxNroItem.Text);
 
       int vResultado = vAccesodatos.FActualizaInspDaniosPropiosICRL(vInspDaniosPropios);
@@ -1356,6 +1366,7 @@ namespace ICRL.Presentacion
     {
       AccesoDatos vAccesoDatos = new AccesoDatos();
       InspeccionRCObjeto vInspeccionRCObjeto = new InspeccionRCObjeto();
+      string vTextoTemporal = string.Empty;
 
       int vObjIdSecuencial = 0;
       int vObjIdInspeccion = 0;
@@ -1373,7 +1384,11 @@ namespace ICRL.Presentacion
         TextBoxNombresApObjeto.Text = vInspeccionRCObjeto.nombreObjeto;
         TextBoxDocIdObjeto.Text = vInspeccionRCObjeto.docIdentidadObjeto;
         TextBoxTelfObjeto.Text = vInspeccionRCObjeto.telefonoObjeto;
-        TextBoxObsObjeto.Text = vInspeccionRCObjeto.observacionesObjeto;
+        vTextoTemporal = string.Empty;
+        vTextoTemporal = vInspeccionRCObjeto.observacionesObjeto;
+        vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+        vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+        TextBoxObsObjeto.Text = vTextoTemporal;
       }
       PBloqueaObjetoEdicion(true);
     }
@@ -1495,7 +1510,7 @@ namespace ICRL.Presentacion
       vInspeccionRCObjetos.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspeccionRCObjetos.nombreObjeto = TextBoxNombresApObjeto.Text;
       vInspeccionRCObjetos.docIdentidadObjeto = TextBoxDocIdObjeto.Text;
-      vInspeccionRCObjetos.observacionesObjeto = TextBoxObsObjeto.Text;
+      vInspeccionRCObjetos.observacionesObjeto = TextBoxObsObjeto.Text.ToUpper().Trim();
       vInspeccionRCObjetos.telefonoObjeto = TextBoxTelfObjeto.Text;
 
       int vResultado = vAccesodatos.FGrabaInspRCObjetosICRL(vInspeccionRCObjetos);
@@ -1517,7 +1532,7 @@ namespace ICRL.Presentacion
       vInspeccionRCObjetos.secuencial = int.Parse(TextBoxObjIdSecuencial.Text);
       vInspeccionRCObjetos.nombreObjeto = TextBoxNombresApObjeto.Text;
       vInspeccionRCObjetos.docIdentidadObjeto = TextBoxDocIdObjeto.Text;
-      vInspeccionRCObjetos.observacionesObjeto = TextBoxObsObjeto.Text;
+      vInspeccionRCObjetos.observacionesObjeto = TextBoxObsObjeto.Text.ToUpper().Trim();
       vInspeccionRCObjetos.telefonoObjeto = TextBoxTelfObjeto.Text;
 
       int vResultado = vAccesodatos.FActualizaInspRCObjetosICRL(vInspeccionRCObjetos);
@@ -1710,12 +1725,18 @@ namespace ICRL.Presentacion
     protected void GridViewObjDetalle_SelectedIndexChanged(object sender, EventArgs e)
     {
       int vObjIdSecuencial = 0;
+      string vTextoTemporal = string.Empty;
+
       vObjIdSecuencial = int.Parse(GridViewObjDetalle.SelectedRow.Cells[1].Text);
 
       TextBoxObjDetItem.Text = GridViewObjDetalle.SelectedRow.Cells[2].Text;
       TextBoxObjDetItem.Enabled = false;
       TextBoxObjDetCostoRef.Text = GridViewObjDetalle.SelectedRow.Cells[3].Text;
-      TextBoxObjDetDescripcion.Text = GridViewObjDetalle.SelectedRow.Cells[4].Text;
+      vTextoTemporal = string.Empty;
+      vTextoTemporal = GridViewObjDetalle.SelectedRow.Cells[4].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      TextBoxObjDetDescripcion.Text = vTextoTemporal;
       ButtonNuevoObjDet.Enabled = false;
       ButtonGrabarObjDet.Enabled = true;
       ButtonBorrarObjDet.Enabled = true;
@@ -1747,6 +1768,7 @@ namespace ICRL.Presentacion
     {
       AccesoDatos vAccesoDatos = new AccesoDatos();
       InspeccionRCPersona vInspeccionRCPersona = new InspeccionRCPersona();
+      string vTextoTemporal = string.Empty;
 
       int vPerIdSecuencial = 0;
       int vPerIdInspeccion = 0;
@@ -1765,7 +1787,11 @@ namespace ICRL.Presentacion
         TextBoxNombresApPersona.Text = vInspeccionRCPersona.nombrePersona;
         TextBoxDocIdPersona.Text = vInspeccionRCPersona.docIdentidadPersona;
         TextBoxTelfPersona.Text = vInspeccionRCPersona.telefonoPersona;
-        TextBoxObsPersona.Text = vInspeccionRCPersona.observacionesPersona;
+        vTextoTemporal = string.Empty;
+        vTextoTemporal = vInspeccionRCPersona.observacionesPersona;
+        vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+        vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+        TextBoxObsPersona.Text = vTextoTemporal;
       }
       PBloqueaPersonaEdicion(true);
     }
@@ -1859,7 +1885,7 @@ namespace ICRL.Presentacion
       vInspeccionRCPersonas.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspeccionRCPersonas.nombrePersona = TextBoxNombresApPersona.Text;
       vInspeccionRCPersonas.docIdentidadPersona = TextBoxDocIdPersona.Text;
-      vInspeccionRCPersonas.observacionesPersona = TextBoxObsPersona.Text;
+      vInspeccionRCPersonas.observacionesPersona = TextBoxObsPersona.Text.ToUpper().Trim();
       vInspeccionRCPersonas.telefonoPersona = TextBoxTelfPersona.Text;
 
       int vResultado = vAccesodatos.FGrabaInspRCPersonasICRL(vInspeccionRCPersonas);
@@ -1881,7 +1907,7 @@ namespace ICRL.Presentacion
       vInspeccionRCPersonas.secuencial = int.Parse(TextBoxPersonaIdSecuencial.Text);
       vInspeccionRCPersonas.nombrePersona = TextBoxNombresApPersona.Text;
       vInspeccionRCPersonas.docIdentidadPersona = TextBoxDocIdPersona.Text;
-      vInspeccionRCPersonas.observacionesPersona = TextBoxObsPersona.Text;
+      vInspeccionRCPersonas.observacionesPersona = TextBoxObsPersona.Text.ToUpper().Trim();
       vInspeccionRCPersonas.telefonoPersona = TextBoxTelfPersona.Text;
 
       int vResultado = vAccesodatos.FActualizaInspRCPersonasICRL(vInspeccionRCPersonas);
@@ -2090,12 +2116,17 @@ namespace ICRL.Presentacion
     protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
     {
       int vObjIdSecuencial = 0;
+      string vTextoTemporal = string.Empty;
       vObjIdSecuencial = int.Parse(GridViewPerDetalle.SelectedRow.Cells[1].Text);
 
       TextBoxPerDetTipo.Text = GridViewPerDetalle.SelectedRow.Cells[2].Text;
       TextBoxPerDetTipo.Enabled = false;
       TextBoxPerDetMontoGasto.Text = GridViewPerDetalle.SelectedRow.Cells[3].Text;
-      TextBoxPerDetDescripcion.Text = GridViewPerDetalle.SelectedRow.Cells[4].Text;
+      vTextoTemporal = string.Empty;
+      vTextoTemporal = GridViewPerDetalle.SelectedRow.Cells[4].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      TextBoxPerDetDescripcion.Text = vTextoTemporal;
       ButtonNuevoPerDet.Enabled = false;
       ButtonGrabarPerDet.Enabled = true;
       ButtonBorrarPerDet.Enabled = true;
@@ -2221,6 +2252,7 @@ namespace ICRL.Presentacion
     {
       DropDownListItemRP.Enabled = false;
       TextBoxIdItemRP.Text = string.Empty;
+      string vTextoTemporal = string.Empty;
       TextBoxIdItemRP.Text = GridViewRoboParcial.SelectedRow.Cells[1].Text.Substring(0, 8);
       string vTextoItemRP = GridViewRoboParcial.SelectedRow.Cells[2].Text;
 
@@ -2249,7 +2281,11 @@ namespace ICRL.Presentacion
 
       //TextBoxChaperioRP.Text = GridViewRoboParcial.SelectedRow.Cells[7].Text.Trim();
       //TextBoxRepPreviaRP.Text = GridViewRoboParcial.SelectedRow.Cells[8].Text.Trim();
-      TextBoxObservacionesRP.Text = GridViewRoboParcial.SelectedRow.Cells[9].Text.Trim();
+      vTextoTemporal = string.Empty;
+      vTextoTemporal = GridViewRoboParcial.SelectedRow.Cells[9].Text.Trim();
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      TextBoxObservacionesRP.Text = vTextoTemporal;
       TextBoxNroItemRP.Text = GridViewRoboParcial.SelectedRow.Cells[10].Text;
       ButtonNuevoRP.Enabled = false;
       ButtonGrabarRP.Enabled = true;
@@ -2282,7 +2318,7 @@ namespace ICRL.Presentacion
       vInspRoboParcial.reparacionPrevia = DropDownListRepPreviaRP.SelectedItem.Text;
       //vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
       //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
-      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text; ;
+      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FGrabaInspRoboParcialICRL(vInspRoboParcial);
 
@@ -2309,7 +2345,7 @@ namespace ICRL.Presentacion
       vInspRoboParcial.reparacionPrevia = DropDownListRepPreviaRP.SelectedItem.Text;
       //vInspRoboParcial.chaperio = TextBoxChaperioRP.Text;
       //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
-      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text;
+      vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text.ToUpper().Trim();
       vInspRoboParcial.nro_item = long.Parse(TextBoxNroItemRP.Text);
 
       int vResultado = vAccesodatos.FActualizaInspRoboParcialICRL(vInspRoboParcial);
@@ -2591,6 +2627,7 @@ namespace ICRL.Presentacion
     private int FlTraeDatosPerdidaTotalDP(int pIdInspeccion)
     {
       int vResultado = 0;
+      string vTextoTemporal = string.Empty;
 
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
@@ -2609,7 +2646,11 @@ namespace ICRL.Presentacion
           CheckBoxAsientosCueroPTDP.Checked = (bool)vFilaTablaInspPerdidaTotDP.asientosCuero;
           CheckBoxArosMagnesioPTDP.Checked = (bool)vFilaTablaInspPerdidaTotDP.arosMagnesio;
           CheckBoxConvertidoGnvPTDP.Checked = (bool)vFilaTablaInspPerdidaTotDP.convertidoGNV;
-          TextBoxObservacionesPTDP.Text = vFilaTablaInspPerdidaTotDP.observaciones;
+          vTextoTemporal = string.Empty;
+          vTextoTemporal = vFilaTablaInspPerdidaTotDP.observaciones;
+          vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+          vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+          TextBoxObservacionesPTDP.Text = vTextoTemporal;
 
           string vTempo = string.Empty;
           vTempo = vFilaTablaInspPerdidaTotDP.caja;
@@ -2649,7 +2690,7 @@ namespace ICRL.Presentacion
       vInspPerdidaTotalPTDP.asientosCuero = CheckBoxAsientosCueroPTDP.Checked;
       vInspPerdidaTotalPTDP.arosMagnesio = CheckBoxArosMagnesioPTDP.Checked;
       vInspPerdidaTotalPTDP.convertidoGNV = CheckBoxConvertidoGnvPTDP.Checked;
-      vInspPerdidaTotalPTDP.observaciones = TextBoxObservacionesPTDP.Text;
+      vInspPerdidaTotalPTDP.observaciones = TextBoxObservacionesPTDP.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FGrabaInspPerdidaTotalPTDPICRL(vInspPerdidaTotalPTDP);
 
@@ -2675,7 +2716,7 @@ namespace ICRL.Presentacion
       vInspPerdidaTotalPTDP.asientosCuero = CheckBoxAsientosCueroPTDP.Checked;
       vInspPerdidaTotalPTDP.arosMagnesio = CheckBoxArosMagnesioPTDP.Checked;
       vInspPerdidaTotalPTDP.convertidoGNV = CheckBoxConvertidoGnvPTDP.Checked;
-      vInspPerdidaTotalPTDP.observaciones = TextBoxObservacionesPTDP.Text;
+      vInspPerdidaTotalPTDP.observaciones = TextBoxObservacionesPTDP.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FActualizaInspPerdidaTotalPTDPICRL(vInspPerdidaTotalPTDP);
 
@@ -2849,6 +2890,7 @@ namespace ICRL.Presentacion
     private int FlTraeDatosPerdidaTotalRO(int pIdInspeccion)
     {
       int vResultado = 0;
+      string vTextoTemporal = string.Empty;
 
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
@@ -2867,7 +2909,11 @@ namespace ICRL.Presentacion
           CheckBoxAsientosCueroPTRO.Checked = (bool)vFilaTablaInspPerdidaTotRO.asientosCuero;
           CheckBoxArosMagnesioPTRO.Checked = (bool)vFilaTablaInspPerdidaTotRO.arosMagnesio;
           CheckBoxConvertidoGnvPTRO.Checked = (bool)vFilaTablaInspPerdidaTotRO.convertidoGNV;
-          TextBoxObservacionesPTRO.Text = vFilaTablaInspPerdidaTotRO.observaciones;
+          vTextoTemporal = string.Empty;
+          vTextoTemporal = vFilaTablaInspPerdidaTotRO.observaciones;
+          vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+          vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+          TextBoxObservacionesPTRO.Text = vTextoTemporal;
 
           string vTempo = string.Empty;
           vTempo = vFilaTablaInspPerdidaTotRO.caja;
@@ -2907,7 +2953,7 @@ namespace ICRL.Presentacion
       vInspPerdidaTotalPTRO.asientosCuero = CheckBoxAsientosCueroPTRO.Checked;
       vInspPerdidaTotalPTRO.arosMagnesio = CheckBoxArosMagnesioPTRO.Checked;
       vInspPerdidaTotalPTRO.convertidoGNV = CheckBoxConvertidoGnvPTRO.Checked;
-      vInspPerdidaTotalPTRO.observaciones = TextBoxObservacionesPTRO.Text;
+      vInspPerdidaTotalPTRO.observaciones = TextBoxObservacionesPTRO.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FGrabaInspPerdidaTotalPTROICRL(vInspPerdidaTotalPTRO);
 
@@ -2933,7 +2979,7 @@ namespace ICRL.Presentacion
       vInspPerdidaTotalPTRO.asientosCuero = CheckBoxAsientosCueroPTRO.Checked;
       vInspPerdidaTotalPTRO.arosMagnesio = CheckBoxArosMagnesioPTRO.Checked;
       vInspPerdidaTotalPTRO.convertidoGNV = CheckBoxConvertidoGnvPTRO.Checked;
-      vInspPerdidaTotalPTRO.observaciones = TextBoxObservacionesPTRO.Text;
+      vInspPerdidaTotalPTRO.observaciones = TextBoxObservacionesPTRO.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FActualizaInspPerdidaTotalPTROICRL(vInspPerdidaTotalPTRO);
 
@@ -3487,6 +3533,7 @@ namespace ICRL.Presentacion
     {
       DropDownListItemRCV01.Enabled = false;
       TextBoxIdItemRCV01.Text = string.Empty;
+      string vTextoTemporal = string.Empty;
       TextBoxIdItemRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[1].Text.Substring(0, 8);
       string vTextoItemRCV01 = GridViewRCV01Det.SelectedRow.Cells[2].Text;
 
@@ -3513,7 +3560,12 @@ namespace ICRL.Presentacion
       DropDownListRepPreviaRCV01.ClearSelection();
       DropDownListRepPreviaRCV01.Items.FindByText(vTempoCadena).Selected = true;
 
-      TextBoxObservacionesRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[9].Text;
+      vTextoTemporal = string.Empty;
+      vTextoTemporal = GridViewRCV01Det.SelectedRow.Cells[9].Text;
+      vTextoTemporal = vTextoTemporal.Replace("&#209;", "Ñ");
+      vTextoTemporal = vTextoTemporal.Replace("&nbsp;", string.Empty);
+      TextBoxObservacionesRCV01.Text = vTextoTemporal;
+
       TextBoxNroItemRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[10].Text;
       PBloqueoRCVehicularDet01(false);
     }
@@ -3725,7 +3777,7 @@ namespace ICRL.Presentacion
       vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
       vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedItem.Text.Trim();
       vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedItem.Text.Trim();
-      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text;
+      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text.ToUpper().Trim();
 
       int vResultado = vAccesodatos.FGrabaInspRCV01DetICRL(vInspRCVDet);
 
@@ -3750,7 +3802,7 @@ namespace ICRL.Presentacion
       vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
       vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedItem.Text.Trim();
       vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedItem.Text.Trim();
-      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text;
+      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text.ToUpper().Trim();
       vInspRCVDet.nro_item = long.Parse(TextBoxNroItemRCV01.Text);
 
       int vResultado = vAccesodatos.FActualizaInspRCV01DetICRL(vInspRCVDet);
@@ -4806,7 +4858,8 @@ namespace ICRL.Presentacion
             TextBoxCorrelativo.Text = vFilaInspeccion.correlativo.ToString();
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
-          DropDownListTipoTallerInsp.Enabled = true;
+          DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         case 2:
           //traer datos de la inspeccion RC Objetos y actualizar valores globales
@@ -4819,6 +4872,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         case 3:
           //traer datos de la inspeccion RC Personas y actualizar valores globales
@@ -4831,6 +4885,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         case 4:
           //traer datos de la inspeccion Robo parcial y actualizar valores globales
@@ -4843,6 +4898,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = true;
+          PanelDatosTaller.Visible = true;
           break;
         case 5:
           //traer datos de la inspeccion Perdida Total Danios Propios y actualizar valores globales
@@ -4855,6 +4911,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         case 6:
           //traer datos de la inspeccion Perdida Total por Robo y actualizar valores globales
@@ -4867,6 +4924,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         case 7:
           //traer datos de la inspeccion RC Vehicular y actualizar valores globales
@@ -4879,6 +4937,7 @@ namespace ICRL.Presentacion
             TextBoxNroInspeccion.Text = vFilaInspeccion.idInspeccion.ToString();
           }
           DropDownListTipoTallerInsp.Enabled = false;
+          PanelDatosTaller.Visible = false;
           break;
         default:
           //situacion anomala no deberia generarse en ninguna condicion

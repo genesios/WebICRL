@@ -21,7 +21,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
     <%--scripts adicionales para el combo box de items--%>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
 
@@ -227,22 +226,25 @@
                         </td>
                     </tr>
                 </table>
-
-                <table class="basetable">
-                    <tr>
-                        <th>
-                            <asp:Label ID="LabelDatosTaller" runat="server" Text="Datos Taller"></asp:Label>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="fifty">
-                                <asp:Label ID="LabelTipoTaller" runat="server" Text="Tipo Taller"></asp:Label><br />
-                                <asp:DropDownList ID="DropDownListTipoTallerInsp" runat="server" Enabled="true"></asp:DropDownList>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div>
+                    <asp:Panel ID="PanelDatosTaller" runat="server" Visible="false">
+                        <table class="basetable">
+                            <tr>
+                                <th>
+                                    <asp:Label ID="LabelDatosTaller" runat="server" Text="Datos Taller"></asp:Label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="fifty">
+                                        <asp:Label ID="LabelTipoTaller" runat="server" Text="Tipo Taller"></asp:Label><br />
+                                        <asp:DropDownList ID="DropDownListTipoTallerInsp" runat="server" Enabled="false"></asp:DropDownList>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                </div>
                 <div>
                     <asp:Button ID="ButtonGrabarDatosInspeccion" runat="server" Text="Grabar Datos" OnClick="ButtonGrabarDatosInspeccion_Click" />
                 </div>
@@ -826,7 +828,7 @@
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelCompraRP" runat="server" Text="Compra"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListCompraRP" runat="server" ></asp:DropDownList><br />
+                                            <asp:DropDownList ID="DropDownListCompraRP" runat="server"></asp:DropDownList><br />
                                             <asp:Label ID="LabelReparacionPreviaRP" runat="server" Text="Reparacion Previa"></asp:Label><br />
                                             <asp:DropDownList ID="DropDownListRepPreviaRP" runat="server"></asp:DropDownList>
                                         </div>
@@ -906,7 +908,7 @@
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
-                <ajaxToolkit:TabPanel ID="TabPanelPerdidaTotalDaniosPropios" TabIndex="5" runat="server" HeaderText="PT Danios Propios" Enabled="False" Visible="false">
+                <ajaxToolkit:TabPanel ID="TabPanelPerdidaTotalDaniosPropios" TabIndex="5" runat="server" HeaderText="Pérdida Total por Daños" Enabled="False" Visible="false">
                     <ContentTemplate>
                         <div>
                             <table class="basetable">
@@ -1019,7 +1021,7 @@
                             </table>
                             <div>
                                 <asp:ImageButton ID="ImgButtonExportPdfPTRO" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTRO_Click" />
-                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click"/>
+                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -1172,7 +1174,7 @@
                                                     <asp:Label ID="LabelItemRCV01" runat="server" Text="Item"></asp:Label><br />
                                                     <asp:DropDownList ID="DropDownListItemRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
                                                     <asp:Label ID="LabelCompraRCV01" runat="server" Text="Compra"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListCompraRCV01" runat="server" ></asp:DropDownList><br />
+                                                    <asp:DropDownList ID="DropDownListCompraRCV01" runat="server"></asp:DropDownList><br />
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:CheckBox ID="CheckBoxInstalacionRCV01" runat="server" />
