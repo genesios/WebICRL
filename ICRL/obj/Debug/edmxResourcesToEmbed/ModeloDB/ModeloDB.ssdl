@@ -1279,6 +1279,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="cTipo" Type="char" Mode="In" />
     <Parameter Name="biValorContador" Type="bigint" Mode="InOut" />
   </Function>
+  <Function Name="paValidaMonedasSumatoriaDP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+    <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+    <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+    <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+  </Function>
+  <Function Name="paValidaMonedasSumatoriaRP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+    <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+    <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+    <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+  </Function>
+  <Function Name="paValidaMonedasSumatoriaVE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+    <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+    <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+    <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+  </Function>
   <EntityContainer Name="LBCDesaModeloStoreContainer">
     <EntitySet Name="Asegurado" EntityType="Self.Asegurado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contador" EntityType="Self.Contador" Schema="dbo" store:Type="Tables" />

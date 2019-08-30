@@ -1095,17 +1095,28 @@ namespace ICRL.Presentacion
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
       vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
 
+      //validar si para un proveedor hay dos monedas
+      string vProveedor = string.Empty;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      vProveedor = vAccesoDatos.fValidaMonedasSumatoriaDP(vIdFlujo, vIdCotizacion, vTipoItem);
 
-      vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
-      if (vResultado)
+      if (string.Empty != vProveedor)
       {
-        LabelRepaRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
+        LabelMsjReparaciones.Text = "No se puede procesar, El proveedor " + vProveedor + " tiene registros de ambas monedas, revise por favor";
       }
       else
       {
-        LabelRepaRegistroItems.Text = "Reparaciones NO sumarizadas exitosamente";
+        LabelMsjReparaciones.Text = string.Empty;
+        vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+        if (vResultado)
+        {
+          LabelMsjReparaciones.Text = "Reparaciones sumarizadas exitosamente";
+        }
+        else
+        {
+          LabelMsjReparaciones.Text = "Reparaciones NO sumarizadas exitosamente";
+        }
       }
-
       FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
     }
 
@@ -1267,17 +1278,28 @@ namespace ICRL.Presentacion
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
       vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
 
+      //validar si para un proveedor hay dos monedas
+      string vProveedor = string.Empty;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      vProveedor = vAccesoDatos.fValidaMonedasSumatoriaDP(vIdFlujo, vIdCotizacion, vTipoItem);
 
-      vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
-      if (vResultado)
+      if (string.Empty != vProveedor)
       {
-        LabelRepuRegistroItems.Text = "Reparaciones sumarizadas exitosamente";
+        LabelMsjRepuestos.Text = "No se puede procesar, El proveedor " + vProveedor + " tiene registros de ambas monedas, revise por favor";
       }
       else
       {
-        LabelRepuRegistroItems.Text = "Reparaciones NO sumarizadas exitosamente";
+        LabelMsjRepuestos.Text = string.Empty;
+        vResultado = CotizacionICRL.DaniosPropiosSumatoriaGenerar(vIdFlujo, vIdCotizacion, vTipoItem);
+        if (vResultado)
+        {
+          LabelMsjRepuestos.Text = "Repuestos sumarizados exitosamente";
+        }
+        else
+        {
+          LabelMsjRepuestos.Text = "Repuestos NO sumarizados exitosamente";
+        }
       }
-
       FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
     }
 

@@ -985,5 +985,8 @@
     <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRoboParcialInspACoti" />
     <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
     <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaDP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaDP" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaRP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaRP" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaVE" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaVE" />
   </EntityContainerMapping>
 </Mapping>

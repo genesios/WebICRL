@@ -538,6 +538,48 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public string fValidaMonedasSumatoriaDP(int pIdFlujo, int pIdCotizacion, int pIdTipoItem)
+    {
+      string vResulProveedor = string.Empty;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+
+        System.Data.Entity.Core.Objects.ObjectParameter vResultado = new System.Data.Entity.Core.Objects.ObjectParameter("iValorProveedor", typeof(string));
+        db.paValidaMonedasSumatoriaDP(pIdFlujo, pIdCotizacion, pIdTipoItem, vResultado);
+        vResulProveedor = (string)vResultado.Value;
+      }
+
+      return vResulProveedor;
+    }
+
+    public string fValidaMonedasSumatoriaRP(int pIdFlujo, int pIdCotizacion, int pIdTipoItem)
+    {
+      string vResulProveedor = string.Empty;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+
+        System.Data.Entity.Core.Objects.ObjectParameter vResultado = new System.Data.Entity.Core.Objects.ObjectParameter("iValorProveedor", typeof(string));
+        db.paValidaMonedasSumatoriaRP(pIdFlujo, pIdCotizacion, pIdTipoItem, vResultado);
+        vResulProveedor = (string)vResultado.Value;
+      }
+
+      return vResulProveedor;
+    }
+
+    public string fValidaMonedasSumatoriaVE(int pIdFlujo, int pIdCotizacion, int pIdTipoItem)
+    {
+      string vResulProveedor = string.Empty;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+
+        System.Data.Entity.Core.Objects.ObjectParameter vResultado = new System.Data.Entity.Core.Objects.ObjectParameter("iValorProveedor", typeof(string));
+        db.paValidaMonedasSumatoriaVE(pIdFlujo, pIdCotizacion, pIdTipoItem, vResultado);
+        vResulProveedor = (string)vResultado.Value;
+      }
+
+      return vResulProveedor;
+    }
+
     public int fObtieneContadorInspeccionFlujo(int pIdFlujo)
     {
       int vIdInspeccion = 0;

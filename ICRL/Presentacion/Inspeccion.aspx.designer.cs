@@ -1768,24 +1768,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListItemRP;
         
         /// <summary>
-        /// LabelChaperioRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelChaperioRP;
-        
-        /// <summary>
-        /// DropDownListChaperioRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListChaperioRP;
-        
-        /// <summary>
         /// LabelCompraRP control.
         /// </summary>
         /// <remarks>
@@ -1802,42 +1784,6 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListCompraRP;
-        
-        /// <summary>
-        /// LabelReparacionPreviaRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelReparacionPreviaRP;
-        
-        /// <summary>
-        /// DropDownListRepPreviaRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListRepPreviaRP;
-        
-        /// <summary>
-        /// LabelObservacionesRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelObservacionesRP;
-        
-        /// <summary>
-        /// TextBoxObservacionesRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxObservacionesRP;
         
         /// <summary>
         /// CheckBoxInstalacionRP control.
@@ -1892,6 +1838,60 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelMecanicoRP;
+        
+        /// <summary>
+        /// LabelChaperioRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelChaperioRP;
+        
+        /// <summary>
+        /// DropDownListChaperioRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListChaperioRP;
+        
+        /// <summary>
+        /// LabelReparacionPreviaRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelReparacionPreviaRP;
+        
+        /// <summary>
+        /// DropDownListRepPreviaRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRepPreviaRP;
+        
+        /// <summary>
+        /// LabelObservacionesRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelObservacionesRP;
+        
+        /// <summary>
+        /// TextBoxObservacionesRP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxObservacionesRP;
         
         /// <summary>
         /// LabelIditemRP control.

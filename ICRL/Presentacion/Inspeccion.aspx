@@ -5,13 +5,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
-    <style type="text/css">
-        .collapsed-row {
-            display: none;
-            padding: 0px;
-            margin: 0px;
-        }
-    </style>
     <script src="../Scripts/ICRL.js"></script>
 
     <%--scripts adicionales para el combo box de items--%>
@@ -21,6 +14,22 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
     <%--scripts adicionales para el combo box de items--%>
+
+    <style type="text/css">
+        .collapsed-row {
+            display: none;
+            padding: 0px;
+            margin: 0px;
+        }
+        :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select{ width: 95%; }
+    	.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover { color: inherit; }
+    	.btn-group.open .dropdown-toggle { box-shadow: none; -webkit-box-shadow: none; }
+    	.btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default { background-color: transparent; border-color: #d8d8d8; }
+    	.btn { padding: 5px; font-weight: 600; border-radius: 0; }
+    	.dropdown-menu { border-radius: 0; }
+    	.form-control { border-radius: 0; }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
 
@@ -820,31 +829,48 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="twenty">
+                                        <div class="fifty">
                                             <asp:Label ID="LabelItemRP" runat="server" Text="Item"></asp:Label><br />
                                             <asp:DropDownList ID="DropDownListItemRP" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
-                                            <asp:Label ID="LabelChaperioRP" runat="server" Text="Chaperio"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListChaperioRP" runat="server"></asp:DropDownList>
                                         </div>
-                                        <div class="twenty">
+                                        <div class="fifty">
                                             <asp:Label ID="LabelCompraRP" runat="server" Text="Compra"></asp:Label><br />
                                             <asp:DropDownList ID="DropDownListCompraRP" runat="server"></asp:DropDownList><br />
-                                            <asp:Label ID="LabelReparacionPreviaRP" runat="server" Text="Reparacion Previa"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListRepPreviaRP" runat="server"></asp:DropDownList>
                                         </div>
-                                        <div class="twenty">
-                                            <asp:Label ID="LabelObservacionesRP" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObservacionesRP" runat="server" MaxLength="100"></asp:TextBox>
-                                        </div>
-                                        <div class="twenty">
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="twentyfive">
                                             <asp:CheckBox ID="CheckBoxInstalacionRP" runat="server" />
-                                            <asp:Label ID="LabelInstalacionRP" runat="server" Text="Instalacion"></asp:Label><br />
+                                            <asp:Label ID="LabelInstalacionRP" runat="server" Text="Instalacion"></asp:Label>
+                                        </div>
+                                        <div class="twentyfive">
                                             <asp:CheckBox ID="CheckBoxPinturaRP" runat="server" />
-                                            <asp:Label ID="LabelPinturaRP" runat="server" Text="Pintura"></asp:Label><br />
+                                            <asp:Label ID="LabelPinturaRP" runat="server" Text="Pintura"></asp:Label>
+                                        </div>
+                                        <div class="twentyfive">
                                             <asp:CheckBox ID="CheckBoxMecanicoRP" runat="server" />
                                             <asp:Label ID="LabelMecanicoRP" runat="server" Text="Mecanico"></asp:Label>
                                         </div>
-                                        <div class="twenty">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="twentyfive">
+                                            <asp:Label ID="LabelChaperioRP" runat="server" Text="Chaperio"></asp:Label><br />
+                                            <asp:DropDownList ID="DropDownListChaperioRP" runat="server"></asp:DropDownList>
+                                        </div>
+                                        <div class="twentyfive">
+                                            <asp:Label ID="LabelReparacionPreviaRP" runat="server" Text="Reparacion Previa"></asp:Label><br />
+                                            <asp:DropDownList ID="DropDownListRepPreviaRP" runat="server"></asp:DropDownList>
+                                        </div>
+                                        <div class="twentyfive">
+                                            <asp:Label ID="LabelObservacionesRP" runat="server" Text="Observaciones"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxObservacionesRP" runat="server" MaxLength="100"></asp:TextBox>
+                                        </div>
+                                        <div class="twentyfive">
                                             <asp:Label ID="LabelIditemRP" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxIdItemRP" runat="server" Visible="False"></asp:TextBox>
                                             <asp:TextBox ID="TextBoxNroItemRP" runat="server" Visible="False"></asp:TextBox>

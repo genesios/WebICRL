@@ -83,15 +83,7 @@ input[type="submit"].pdf {
   background-image: url(../img/ico_pdf.png);
 }
 
-div.fifty {
-  float: left;
-  width: 100%;
-}
-div.twentyfive {
-  float: left;
-  width: 100%;
-}
-div.twenty {
+div.fifty, div.twentyfive, div.twenty, div.thirty {
   float: left;
   width: 100%;
 }
@@ -242,8 +234,10 @@ div.twenty {
     width: 25%;
   }
   div.twenty {
-    float: left;
     width: 20%;
+  }
+  div.thirty {
+    width: 33%;
   }
   .innerPanel table.basetable div input[type="text"],
   .innerPanel table.basetable div input[type="password"] {

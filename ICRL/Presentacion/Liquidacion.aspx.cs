@@ -27,6 +27,7 @@ namespace ICRL.Presentacion
         RecuperarDatosFacturas();
         RecuperarDatosOrdenes();
         LlenarMenuFacturas();
+        RecuperarDatosLiquidacion();
 
         ValidarFlujoCorrecto();
       }
@@ -250,7 +251,6 @@ namespace ICRL.Presentacion
           liquidacion.fecha_orden = Convert.ToDateTime(((Label)row.Cells[9].FindControl("fecha_orden")).Text);
 
           DateTime fecha;
-          //if (DateTime.TryParse(lblFechaLiquidacion.Text, out fecha))
           if (DateTime.TryParseExact(lblFechaLiquidacion.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fecha))
             liquidacion.fecha_liquidacion = esLiquidada ? fecha : new DateTime(2000, 1, 1);
           else
@@ -276,15 +276,12 @@ namespace ICRL.Presentacion
         LlenarMenuFacturas();
 
         GenerarDatosLiquidacion(ordenesLiquidadas);
-
-        btnGuardarLiquidacion.Enabled = true;
-        //txbTipoCambio.Enabled = false;
       }
       else
       {
         btnGuardarLiquidacion.Enabled = false;
         LabelMensaje.Visible = true;
-        LabelMensaje.Text = "Error al guardar la generar la liquidación!";
+        LabelMensaje.Text = "Error al guardar generar la liquidación!";
       }
     }
     protected void btnAjusteMenor_Click(object sender, EventArgs e)
@@ -515,6 +512,7 @@ namespace ICRL.Presentacion
         else
         {
           facturasDataset.Tables[0].Rows.Add(facturasDataset.Tables[0].NewRow());
+
           GridViewDatosFactura.DataSource = facturasDataset;
           GridViewDatosFactura.DataBind();
         }
@@ -547,9 +545,39 @@ namespace ICRL.Presentacion
         LabelMensaje.Text = "Error en la recuperacion de los datos ordenes!";
       }
     }
+    private void RecuperarDatosLiquidacion()
+    {
+      List<LiquidacionICRL.TipoLiquidacion001> ordenesLiquidadas = new List<LiquidacionICRL.TipoLiquidacion001>();
+
+      foreach (GridViewRow row in GridViewDatosOrden.Rows)
+      {
+        LiquidacionICRL.TipoLiquidacion001 liquidacion = new LiquidacionICRL.TipoLiquidacion001();
+
+        if (row.RowType == DataControlRowType.DataRow)
+        {
+          string fechaRecepcion = row.Cells[5].Text;
+          DateTime fechaLiquidacion = DateTime.Now;
+
+          Label lblFechaLiquidacion = row.FindControl("lblFechaLiquidacion") as Label;
+          bool esLiquidada = ((CheckBox)row.Cells[7].FindControl("cbxLiquidacion")).Checked;
+
+          liquidacion.numero_orden = row.Cells[0].Text;
+          liquidacion.liquidacion = esLiquidada;
+          liquidacion.num_factura = ((DropDownList)row.Cells[8].FindControl("ddlFacturasLiquidadas")).SelectedItem.Value;
+
+          #region Generacion reporte liquidacion
+          if (liquidacion.liquidacion)
+            ordenesLiquidadas.Add(liquidacion);
+          #endregion
+        }
+      }
+
+      GenerarDatosLiquidacion(ordenesLiquidadas);
+    }
     protected void GenerarDatosLiquidacion(List<LiquidacionICRL.TipoLiquidacion001> ordenesLiquidadas)
     {
-      TipoCambio = double.Parse(txbTipoCambio.Text);
+      if (!string.IsNullOrEmpty(txbTipoCambio.Text))
+        TipoCambio = double.Parse(txbTipoCambio.Text);
 
       DataTable dt = new DataTable();
       dt.Columns.Add("orden");
@@ -605,7 +633,6 @@ namespace ICRL.Presentacion
         }
       }
 
-      /**/
       DataRow drAjuste = dt.NewRow();
       drAjuste["orden"] = "---AJUSTE---";
       drAjuste["preciobs"] = "0";
@@ -617,12 +644,20 @@ namespace ICRL.Presentacion
       drAjuste["fechaemi"] = "";
       drAjuste["moneda"] = "";
       dt.Rows.Add(drAjuste);
-      /**/
 
       GridViewDatosLiquidacion.DataSource = dt;
       GridViewDatosLiquidacion.DataBind();
 
-      btnAjusteMenor.Enabled = true;
+      if (dt.Rows[0]["id"].ToString() != "")
+      {
+        btnAjusteMenor.Enabled = true;
+        btnGuardarLiquidacion.Enabled = true;
+      }
+      else
+      {
+        btnAjusteMenor.Enabled = false;
+        btnGuardarLiquidacion.Enabled = false;
+      }
     }
     #endregion
   }

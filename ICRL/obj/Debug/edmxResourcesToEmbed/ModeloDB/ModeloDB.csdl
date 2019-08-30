@@ -1430,5 +1430,23 @@
       <Parameter Name="cTipo" Mode="In" Type="String" />
       <Parameter Name="biValorContador" Mode="InOut" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="paValidaMonedasSumatoriaDP">
+      <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+      <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="paValidaMonedasSumatoriaRP">
+      <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+      <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="paValidaMonedasSumatoriaVE">
+      <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+      <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

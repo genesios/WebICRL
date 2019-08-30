@@ -859,6 +859,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelReparaciones;
         
         /// <summary>
+        /// LabelMsjReparaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMsjReparaciones;
+        
+        /// <summary>
         /// ButtonRepaAgregarItem control.
         /// </summary>
         /// <remarks>
@@ -911,6 +920,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelRepuestos;
+        
+        /// <summary>
+        /// LabelMsjRepuestos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMsjRepuestos;
         
         /// <summary>
         /// ButtonRepuAgregarItem control.

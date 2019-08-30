@@ -280,6 +280,7 @@
                 <tr>
                     <th>
                         <asp:Label ID="LabelReparaciones" runat="server" Text="Reparaciones"></asp:Label>
+                        <asp:Label ID="LabelMsjReparaciones" runat="server" Text=""></asp:Label>
                     </th>
                 </tr>
                 <tr>
@@ -370,6 +371,7 @@
                 <tr>
                     <th>
                         <asp:Label ID="LabelRepuestos" runat="server" Text="Repuestos"></asp:Label>
+                        <asp:Label ID="LabelMsjRepuestos" runat="server" Text=""></asp:Label>
                     </th>
                 </tr>
                 <tr>

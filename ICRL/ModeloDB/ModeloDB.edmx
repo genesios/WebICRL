@@ -1284,6 +1284,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Parameter Name="cTipo" Type="char" Mode="In" />
           <Parameter Name="biValorContador" Type="bigint" Mode="InOut" />
         </Function>
+        <Function Name="paValidaMonedasSumatoriaDP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+          <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+          <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+          <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+        </Function>
+        <Function Name="paValidaMonedasSumatoriaRP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+          <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+          <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+          <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+        </Function>
+        <Function Name="paValidaMonedasSumatoriaVE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iIdFlujo" Type="int" Mode="In" />
+          <Parameter Name="iIdCotizacion" Type="int" Mode="In" />
+          <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
+          <Parameter Name="iValorProveedor" Type="char" Mode="InOut" />
+        </Function>
         <EntityContainer Name="LBCDesaModeloStoreContainer">
           <EntitySet Name="Asegurado" EntityType="Self.Asegurado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contador" EntityType="Self.Contador" Schema="dbo" store:Type="Tables" />
@@ -2871,6 +2889,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
             <Parameter Name="cTipo" Mode="In" Type="String" />
             <Parameter Name="biValorContador" Mode="InOut" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="paValidaMonedasSumatoriaDP">
+            <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+            <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="paValidaMonedasSumatoriaRP">
+            <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+            <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="paValidaMonedasSumatoriaVE">
+            <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />
+            <Parameter Name="iIdCotizacion" Mode="In" Type="Int32" />
+            <Parameter Name="iIdTipoItem" Mode="In" Type="Int32" />
+            <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -3862,6 +3898,9 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRoboParcialInspACoti" />
           <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
           <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
+          <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaDP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaDP" />
+          <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaRP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaRP" />
+          <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaVE" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaVE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

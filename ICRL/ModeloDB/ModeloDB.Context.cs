@@ -408,5 +408,56 @@ namespace ICRL.ModeloDB
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paIncrementaContador", cTipoParameter, biValorContador);
         }
+    
+        public virtual int paValidaMonedasSumatoriaDP(Nullable<int> iIdFlujo, Nullable<int> iIdCotizacion, Nullable<int> iIdTipoItem, ObjectParameter iValorProveedor)
+        {
+            var iIdFlujoParameter = iIdFlujo.HasValue ?
+                new ObjectParameter("iIdFlujo", iIdFlujo) :
+                new ObjectParameter("iIdFlujo", typeof(int));
+    
+            var iIdCotizacionParameter = iIdCotizacion.HasValue ?
+                new ObjectParameter("iIdCotizacion", iIdCotizacion) :
+                new ObjectParameter("iIdCotizacion", typeof(int));
+    
+            var iIdTipoItemParameter = iIdTipoItem.HasValue ?
+                new ObjectParameter("iIdTipoItem", iIdTipoItem) :
+                new ObjectParameter("iIdTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paValidaMonedasSumatoriaDP", iIdFlujoParameter, iIdCotizacionParameter, iIdTipoItemParameter, iValorProveedor);
+        }
+    
+        public virtual int paValidaMonedasSumatoriaRP(Nullable<int> iIdFlujo, Nullable<int> iIdCotizacion, Nullable<int> iIdTipoItem, ObjectParameter iValorProveedor)
+        {
+            var iIdFlujoParameter = iIdFlujo.HasValue ?
+                new ObjectParameter("iIdFlujo", iIdFlujo) :
+                new ObjectParameter("iIdFlujo", typeof(int));
+    
+            var iIdCotizacionParameter = iIdCotizacion.HasValue ?
+                new ObjectParameter("iIdCotizacion", iIdCotizacion) :
+                new ObjectParameter("iIdCotizacion", typeof(int));
+    
+            var iIdTipoItemParameter = iIdTipoItem.HasValue ?
+                new ObjectParameter("iIdTipoItem", iIdTipoItem) :
+                new ObjectParameter("iIdTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paValidaMonedasSumatoriaRP", iIdFlujoParameter, iIdCotizacionParameter, iIdTipoItemParameter, iValorProveedor);
+        }
+    
+        public virtual int paValidaMonedasSumatoriaVE(Nullable<int> iIdFlujo, Nullable<int> iIdCotizacion, Nullable<int> iIdTipoItem, ObjectParameter iValorProveedor)
+        {
+            var iIdFlujoParameter = iIdFlujo.HasValue ?
+                new ObjectParameter("iIdFlujo", iIdFlujo) :
+                new ObjectParameter("iIdFlujo", typeof(int));
+    
+            var iIdCotizacionParameter = iIdCotizacion.HasValue ?
+                new ObjectParameter("iIdCotizacion", iIdCotizacion) :
+                new ObjectParameter("iIdCotizacion", typeof(int));
+    
+            var iIdTipoItemParameter = iIdTipoItem.HasValue ?
+                new ObjectParameter("iIdTipoItem", iIdTipoItem) :
+                new ObjectParameter("iIdTipoItem", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paValidaMonedasSumatoriaVE", iIdFlujoParameter, iIdCotizacionParameter, iIdTipoItemParameter, iValorProveedor);
+        }
     }
 }
