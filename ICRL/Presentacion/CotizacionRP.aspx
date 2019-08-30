@@ -204,11 +204,11 @@
             </div>
         </div>
         <div>
-            <table class="basetable alt1">
+            <table class="basetable">
             </table>
         </div>
         <div>
-            <table class="basetable alt1">
+            <table class="basetable">
                 <tr>
                     <th>
                         <asp:Label ID="LabelReparaciones" runat="server" Text="Reparaciones"></asp:Label>
@@ -259,7 +259,7 @@
             </asp:GridView>
         </div>
         <div>
-            <table class="basetable alt1" style="width: 100%">
+            <table class="basetable" style="width: 100%">
                 <tr>
                     <td style="text-align: left">
                         <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
@@ -295,11 +295,11 @@
             </asp:GridView>
         </div>
         <div>
-            <table class="basetable alt2">
+            <table class="basetable">
             </table>
         </div>
         <div>
-            <table class="basetable alt2">
+            <table class="basetable">
                 <tr>
                     <th>
                         <asp:Label ID="LabelRepuestos" runat="server" Text="Repuestos"></asp:Label>
@@ -352,7 +352,7 @@
             </asp:GridView>
         </div>
         <div>
-            <table class="basetable alt2" style="width: 100%">
+            <table class="basetable" style="width: 100%">
                 <tr>
                     <td style="text-align: left">
                         <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click"></asp:Button>
@@ -745,7 +745,7 @@
                 <LocalReport ReportPath="Reportes\RepFormularioCotiDaniosPropios.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>
-            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" OnClick="ButtonCierraVerRep_Click" />
+            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte"  Visible="false" OnClick="ButtonCierraVerRep_Click" />
         </div>
     </div>
 </asp:Content>

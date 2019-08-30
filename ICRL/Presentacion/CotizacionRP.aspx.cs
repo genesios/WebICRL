@@ -72,6 +72,9 @@ namespace ICRL.Presentacion
           FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
         }
 
+        LabelMsjReparaciones.Text = string.Empty;
+        LabelMsjRepuestos.Text = string.Empty;
+
         if (Session["PopupABMReparacionesHabilitado"] != null)
         {
           int vPopup = -1;
@@ -1473,6 +1476,7 @@ namespace ICRL.Presentacion
         vIndex = Convert.ToInt32(e.CommandArgument);
         vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
         vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        ButtonCierraVerRep.Visible = true;
         PVerFormularioCotiRoboParcial(vNumeroOrden);
       }
 

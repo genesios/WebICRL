@@ -813,7 +813,7 @@
                 <LocalReport ReportPath="Reportes\RepFormularioCotiRCVehicular.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>
-            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" OnClick="ButtonCierraVerRep_Click" />
+            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte"  Visible="false" OnClick="ButtonCierraVerRep_Click" />
         </div>
     </div>
 </asp:Content>

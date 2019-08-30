@@ -526,7 +526,7 @@
                             </table>
                         </div>
                         <div>
-                            <asp:GridView ID="GridViewObjetos" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="False" DataKeyNames="secuencial" OnRowDataBound="GridViewObjetos_RowDataBound" OnSelectedIndexChanged="GridViewObjetos_SelectedIndexChanged" OnRowCommand="GridViewObjetos_RowCommand" Width="100%">
+                            <asp:GridView ID="GridViewObjetos" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="False" GridLines="None" DataKeyNames="secuencial" OnRowDataBound="GridViewObjetos_RowDataBound" OnSelectedIndexChanged="GridViewObjetos_SelectedIndexChanged" OnRowCommand="GridViewObjetos_RowCommand" Width="100%">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                     <asp:TemplateField>
@@ -1198,31 +1198,41 @@
                                             <td>
                                                 <div class="twenty">
                                                     <asp:Label ID="LabelItemRCV01" runat="server" Text="Item"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListItemRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
+                                                    <asp:DropDownList ID="DropDownListItemRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
+                                                </div>
+                                                <div class="twenty">
                                                     <asp:Label ID="LabelCompraRCV01" runat="server" Text="Compra"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListCompraRCV01" runat="server"></asp:DropDownList><br />
+                                                    <asp:DropDownList ID="DropDownListCompraRCV01" runat="server"></asp:DropDownList>
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:CheckBox ID="CheckBoxInstalacionRCV01" runat="server" />
-                                                    <asp:Label ID="LabelInstalacionRCV01" runat="server" Text="Instalacion"></asp:Label><br />
+                                                    <asp:Label ID="LabelInstalacionRCV01" runat="server" Text="Instalacion"></asp:Label>
+                                                </div>
+                                                <div class="twenty">
                                                     <asp:CheckBox ID="CheckBoxPinturaRCV01" runat="server" />
                                                     <asp:Label ID="LabelPinturaRCV01" runat="server" Text="Pintura"></asp:Label>
-
                                                 </div>
                                                 <div class="twenty">
                                                     <asp:CheckBox ID="CheckBoxMecanicoRCV01" runat="server" />
-                                                    <asp:Label ID="LabelMecanicoRCV01" runat="server" Text="Mecanico"></asp:Label><br />
-
+                                                    <asp:Label ID="LabelMecanicoRCV01" runat="server" Text="Mecanico"></asp:Label>
                                                 </div>
-                                                <div class="twenty">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="twentyfive">
                                                     <asp:Label ID="LabelChaperioRCV01" runat="server" Text="Chaperio"></asp:Label><br />
-                                                    <asp:DropDownList ID="DropDownListChaperioRCV01" runat="server"></asp:DropDownList><br />
+                                                    <asp:DropDownList ID="DropDownListChaperioRCV01" runat="server"></asp:DropDownList>
+                                                </div>
+                                                <div class="twentyfive">
                                                     <asp:Label ID="LabelReparacionPreviaRCV01" runat="server" Text="Reparacion Previa"></asp:Label><br />
                                                     <asp:DropDownList ID="DropDownListRepPreviaRCV01" runat="server"></asp:DropDownList>
                                                 </div>
-                                                <div class="twenty">
+                                                <div class="twentyfive">
                                                     <asp:Label ID="LabelObservacionesRCV01" runat="server" Text="Observaciones"></asp:Label><br />
-                                                    <asp:TextBox ID="TextBoxObservacionesRCV01" runat="server" MaxLength="100"></asp:TextBox><br />
+                                                    <asp:TextBox ID="TextBoxObservacionesRCV01" runat="server" MaxLength="100"></asp:TextBox>
+                                                </div>
+                                                <div class="twentyfive">
                                                     <asp:Label ID="LabelIditemRCV01" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxIdItemRCV01" runat="server" Visible="False"></asp:TextBox>
                                                     <asp:TextBox ID="TextBoxNroItemRCV01" runat="server" Visible="False"></asp:TextBox>

@@ -1696,6 +1696,7 @@ namespace ICRL.Presentacion
         vIndex = Convert.ToInt32(e.CommandArgument);
         vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
         vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        ButtonCierraVerRep.Visible = true;
         PVerFormularioCotiRCVehicular(vNumeroOrden);
       }
 
