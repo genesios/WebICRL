@@ -231,6 +231,7 @@ namespace ICRL.Presentacion
             vInspeccionICRL.fechaSiniestro = DateTime.Now;
             vInspeccionICRL.tipoInspeccion = (int)ICRL.BD.AccesoDatos.TipoInspeccion.DaniosPropios;
             vInspeccionICRL.correlativo = vCorrelativo;
+            vInspeccionICRL.tipoTaller = string.Empty;
 
             int vRespuesta = vAccesoDatos.FGrabaInspeccionICRL(vInspeccionICRL);
 

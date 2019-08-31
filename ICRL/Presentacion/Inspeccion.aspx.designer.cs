@@ -49,13 +49,13 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxNroFlujo;
         
         /// <summary>
-        /// Label1 control.
+        /// LabelNroReclamo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LabelNroReclamo;
         
         /// <summary>
         /// TextBoxNroReclamo control.
@@ -65,24 +65,6 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxNroReclamo;
-        
-        /// <summary>
-        /// TextBoxIdFlujo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIdFlujo;
-        
-        /// <summary>
-        /// TextBoxNroInspeccion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNroInspeccion;
         
         /// <summary>
         /// LabelNroInspeccion control.
@@ -103,6 +85,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxCorrelativo;
         
         /// <summary>
+        /// TextBoxIdFlujo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIdFlujo;
+        
+        /// <summary>
+        /// TextBoxNroInspeccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNroInspeccion;
+        
+        /// <summary>
         /// ButtonActualizaDesdeOnBase control.
         /// </summary>
         /// <remarks>
@@ -110,6 +110,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonActualizaDesdeOnBase;
+        
+        /// <summary>
+        /// ButtonFinalizarInspeccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinalizarInspeccion;
         
         /// <summary>
         /// LabelCoberturas control.

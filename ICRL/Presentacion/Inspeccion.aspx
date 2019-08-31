@@ -21,13 +21,38 @@
             padding: 0px;
             margin: 0px;
         }
-        :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select{ width: 95%; }
-    	.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover { color: inherit; }
-    	.btn-group.open .dropdown-toggle { box-shadow: none; -webkit-box-shadow: none; }
-    	.btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default { background-color: transparent; border-color: #d8d8d8; }
-    	.btn { padding: 5px; font-weight: 600; border-radius: 0; }
-    	.dropdown-menu { border-radius: 0; }
-    	.form-control { border-radius: 0; }
+
+        :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select {
+            width: 95%;
+        }
+
+        .bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+            color: inherit;
+        }
+
+        .btn-group.open .dropdown-toggle {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+
+        .btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default {
+            background-color: transparent;
+            border-color: #d8d8d8;
+        }
+
+        .btn {
+            padding: 5px;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        .dropdown-menu {
+            border-radius: 0;
+        }
+
+        .form-control {
+            border-radius: 0;
+        }
     </style>
 
 </asp:Content>
@@ -52,25 +77,32 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="twentyfive">
+                        <div class="twenty">
                             <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
                             <asp:TextBox ID="TextBoxNroFlujo" runat="server"></asp:TextBox>
                         </div>
-                        <div class="twentyfive">
-                            <asp:Label ID="Label1" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxNroReclamo" runat="server"></asp:TextBox><br />
-                            <asp:TextBox ID="TextBoxIdFlujo" runat="server" Visible="False"></asp:TextBox><br />
-                            <asp:TextBox ID="TextBoxNroInspeccion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
+                        <div class="twenty">
+                            <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxNroReclamo" runat="server"></asp:TextBox>
                         </div>
-                        <div class="twentyfive">
+                        <div class="twenty">
                             <asp:Label ID="LabelNroInspeccion" runat="server" Text="Nro. de Inspección"></asp:Label><br />
                             <asp:TextBox ID="TextBoxCorrelativo" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="twenty">
+                            <asp:TextBox ID="TextBoxIdFlujo" runat="server" Visible="False"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxNroInspeccion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" />
+                        <div class="fifty">
+                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" />
+                        </div>
+                        <div class="fifty">
+                            <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" />
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -91,7 +123,7 @@
                         </div>
                         <div class="twentyfive">
                             <asp:CheckBox ID="CheckBoxRCVehicular01" runat="server" OnCheckedChanged="CheckBoxRCVehicular01_CheckedChanged" AutoPostBack="True" />
-                            <asp:Label ID="LabelRCVehicular01" runat="server" Text="RC Vehicular 01"></asp:Label><br />
+                            <asp:Label ID="LabelRCVehicular01" runat="server" Text="RC Vehicular"></asp:Label><br />
                             <asp:CheckBox ID="CheckBoxPerdidaTotDanios" runat="server" OnCheckedChanged="CheckBoxPerdidaTotDanios_CheckedChanged" AutoPostBack="True" />
                             <asp:Label ID="LabelPerdidaTotDanios" runat="server" Text="Pérdida Total por Daños"></asp:Label>
                         </div>
@@ -837,7 +869,7 @@
                                             <asp:Label ID="LabelCompraRP" runat="server" Text="Compra"></asp:Label><br />
                                             <asp:DropDownList ID="DropDownListCompraRP" runat="server"></asp:DropDownList><br />
                                         </div>
-                                        
+
                                     </td>
                                 </tr>
                                 <tr>

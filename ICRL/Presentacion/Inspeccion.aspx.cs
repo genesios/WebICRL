@@ -3226,6 +3226,8 @@ namespace ICRL.Presentacion
         int vSecuencial = 0;
 
         vTextoSecuencial = e.Row.Cells[3].Text;
+        //vTextoSecuencial = e.Row.Cells[10].Text;  boton Finalizar
+        (e.Row.Cells[10].Controls[0] as Button).Enabled = false;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -4958,6 +4960,9 @@ namespace ICRL.Presentacion
       vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
     }
 
-    
+    protected void ButtonFinalizarInspeccion_Click(object sender, EventArgs e)
+    {
+
+    }
   }
 }
