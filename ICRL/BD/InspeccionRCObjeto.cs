@@ -13,5 +13,6 @@ namespace ICRL.BD
         public string docIdentidadObjeto { get; set; }
         public string telefonoObjeto { get; set; }
         public string observacionesObjeto { get; set; }
+        public int estado { get; set; }
     }
 }

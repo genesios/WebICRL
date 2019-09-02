@@ -21,5 +21,6 @@ namespace ICRL.BD
         public int kilometraje { get; set; }
         public bool importacionDirecta { get; set; }
         public string tipoTaller { get; set; }
+        public int estado { get; set; }
     }
 }

@@ -645,6 +645,7 @@
     <Property Name="idInspeccion" Type="Int32" Nullable="false" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="cambioAPerdidaTotal" Type="Boolean" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
   </EntityType>
   <EntityType Name="Inspeccion">
     <Key>
@@ -715,6 +716,7 @@
     <Property Name="docIdentidadObjeto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="telefonoObjeto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="observacionesObjeto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
   </EntityType>
   <EntityType Name="InspRCObjetoDetalle">
     <Key>
@@ -737,6 +739,7 @@
     <Property Name="docIdentidadPersona" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="telefonoPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="observacionesPersona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
   </EntityType>
   <EntityType Name="InspRCPersonaDetalle">
     <Key>
@@ -767,6 +770,7 @@
     <Property Name="kilometraje" Type="Int32" />
     <Property Name="importacionDirecta" Type="Boolean" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Int32" />
   </EntityType>
   <EntityType Name="InspRCVehicularDetalle">
     <Key>

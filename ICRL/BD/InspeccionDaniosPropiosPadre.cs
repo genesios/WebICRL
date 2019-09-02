@@ -11,5 +11,6 @@ namespace ICRL.BD
         public int idInspeccion { get; set; }
         public string tipoTaller { get; set; }
         public bool cambioAPerdidaTotal { get; set; }
+        public int estado { get; set; }
     }
 }

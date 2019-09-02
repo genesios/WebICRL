@@ -13,5 +13,6 @@ namespace ICRL.BD
         public string docIdentidadPersona { get; set; }
         public string telefonoPersona { get; set; }
         public string observacionesPersona { get; set; }
+        public int estado { get; set; }
     }
 }

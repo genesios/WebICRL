@@ -18,5 +18,6 @@ namespace ICRL.ModeloDB
         public int idInspeccion { get; set; }
         public string tipoTaller { get; set; }
         public bool cambioAPerdidaTotal { get; set; }
+        public Nullable<int> estado { get; set; }
     }
 }

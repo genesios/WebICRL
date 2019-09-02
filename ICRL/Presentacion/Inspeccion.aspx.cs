@@ -77,10 +77,43 @@ namespace ICRL.Presentacion
           ICRL.ModeloDB.Inspeccion vFilaInspeccion = new ICRL.ModeloDB.Inspeccion();
           vFilaInspeccion = vAccesoDatos.FTraeDatosBasicosInspeccion(vIdInspeccion);
           TabContainerCoberturas.ActiveTabIndex = (vFilaInspeccion.tipoCobertura) - 1;
+
           if ((int)AccesoDatos.TipoInspeccion.RoboParcial == vFilaInspeccion.tipoCobertura)
           {
             DropDownListTipoTallerInsp.Enabled = true;
             PanelDatosTaller.Visible = true;
+            if (1 == vFilaInspeccion.estado)
+            {
+              ButtonFinRoboP.Enabled = true;
+            }
+            else
+            {
+              ButtonFinRoboP.Enabled = false;
+            }
+          }
+
+          if ((int)AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios == vFilaInspeccion.tipoCobertura)
+          {
+            if (1 == vFilaInspeccion.estado)
+            {
+              ButtonFinPTDaniosP.Enabled = true;
+            }
+            else
+            {
+              ButtonFinPTDaniosP.Enabled = false;
+            }
+          }
+
+          if ((int)AccesoDatos.TipoInspeccion.PerdidaTotalRobo == vFilaInspeccion.tipoCobertura)
+          {
+            if (1 == vFilaInspeccion.estado)
+            {
+              ButtonFinPTRobo.Enabled = true;
+            }
+            else
+            {
+              ButtonFinPTRobo.Enabled = false;
+            }
           }
         }
 
@@ -563,7 +596,7 @@ namespace ICRL.Presentacion
                      idpp.secuencial,
                      idpp.tipoTaller,
                      idpp.cambioAPerdidaTotal,
-
+                     idpp.estado
                    };
 
         GridViewDaniosPropiosPadre.DataSource = vLst.ToList();
@@ -874,8 +907,22 @@ namespace ICRL.Presentacion
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
-        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[5].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[6].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[6].Controls[0] as Button).Enabled = false;
+        }
 
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
@@ -900,7 +947,7 @@ namespace ICRL.Presentacion
                        n.descripcion,
                        idp.compra,
                        idp.chaperio,
-                       idp.reparacionPrevia
+                       idp.mecanico
                      };
 
           gvDPDet.DataSource = vLst.ToList();
@@ -930,7 +977,7 @@ namespace ICRL.Presentacion
         vTextoTipoTaller = vInspeccionDPPadre.tipoTaller.Trim();
         DropDownListDPPTipoTaller.ClearSelection();
         DropDownListDPPTipoTaller.Items.FindByText(vTextoTipoTaller).Selected = true;
-        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[6].Controls[1] as CheckBox).Checked;
+        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[7].Controls[1] as CheckBox).Checked;
       }
       PBloqueaDPPadreEdicion(true);
     }
@@ -982,6 +1029,7 @@ namespace ICRL.Presentacion
       vInspeccionDaniosPropiosPadre.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspeccionDaniosPropiosPadre.tipoTaller = DropDownListDPPTipoTaller.SelectedItem.Text;
       vInspeccionDaniosPropiosPadre.cambioAPerdidaTotal = CheckBoxDPPCambioPerdidaTotal.Checked;
+      vInspeccionDaniosPropiosPadre.estado = 1;
 
       int vResultado = vAccesodatos.FGrabaInspDaniosPropiosPadreICRL(vInspeccionDaniosPropiosPadre);
 
@@ -1085,7 +1133,16 @@ namespace ICRL.Presentacion
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+        //cambiar estado de la cobertura para que no se pueda volver a ejecutar
+        BD.InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
+        vInspeccionDaniosPropiosPadre.idInspeccion = vidInspecccion;
+        vInspeccionDaniosPropiosPadre.secuencial = vSecuencial;
+        int vResultado = 0;
+        vResultado = vAccesoDatos.FDaniosPropioPadreCambiaEstado(vInspeccionDaniosPropiosPadre);
       }
+
+      int vResul = 0;
+      vResul = FlTraeDatosDaniosPropiosPadre(int.Parse(TextBoxNroInspeccion.Text));
     }
 
     #endregion
@@ -1348,6 +1405,7 @@ namespace ICRL.Presentacion
                      ob.docIdentidadObjeto,
                      ob.telefonoObjeto,
                      ob.observacionesObjeto,
+                     ob.estado
                    };
         GridViewObjetos.DataSource = vLst.ToList();
         GridViewObjetos.DataBind();
@@ -1461,16 +1519,38 @@ namespace ICRL.Presentacion
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaRCObjetoInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+        //cambiar estado de la cobertura para que no se pueda volver a ejecutar
+        BD.InspeccionRCObjeto vInspeccionRCObjeto = new InspeccionRCObjeto();
+        vInspeccionRCObjeto.idInspeccion = vidInspecccion;
+        vInspeccionRCObjeto.secuencial = vSecuencial;
+        int vResultado = 0;
+        vResultado = vAccesoDatos.FRCObjetoCambiaEstado(vInspeccionRCObjeto);
       }
+
+      int vResul = 0;
+      vResul = FlTraeDatosRCObjetos(int.Parse(TextBoxNroInspeccion.Text));
     }
 
     protected void GridViewObjetos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
-        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-        e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
+        //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[7].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[8].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[8].Controls[0] as Button).Enabled = false;
+        }
 
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
@@ -1512,6 +1592,7 @@ namespace ICRL.Presentacion
       vInspeccionRCObjetos.docIdentidadObjeto = TextBoxDocIdObjeto.Text;
       vInspeccionRCObjetos.observacionesObjeto = TextBoxObsObjeto.Text.ToUpper().Trim();
       vInspeccionRCObjetos.telefonoObjeto = TextBoxTelfObjeto.Text;
+      vInspeccionRCObjetos.estado = 1;
 
       int vResultado = vAccesodatos.FGrabaInspRCObjetosICRL(vInspeccionRCObjetos);
 
@@ -1822,16 +1903,39 @@ namespace ICRL.Presentacion
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaRCPersonaInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+
+        //cambiar estado de la cobertura para que no se pueda volver a ejecutar
+        BD.InspeccionRCPersona vInspeccionRCPersona = new InspeccionRCPersona();
+        vInspeccionRCPersona.idInspeccion = vidInspecccion;
+        vInspeccionRCPersona.secuencial = vSecuencial;
+        int vResultado = 0;
+        vResultado = vAccesoDatos.FRCPersonaCambiaEstado(vInspeccionRCPersona);
       }
+
+      int vResul = 0;
+      vResul = FlTraeDatosRCPersonas(int.Parse(TextBoxNroInspeccion.Text));
     }
 
     protected void GridViewPersonas_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
-        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-        e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
+        //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[7].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[8].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[8].Controls[0] as Button).Enabled = false;
+        }
 
         //generamos la consulta para cada fila de la grilla maestra persona
         string vTextoSecuencial = string.Empty;
@@ -1887,6 +1991,7 @@ namespace ICRL.Presentacion
       vInspeccionRCPersonas.docIdentidadPersona = TextBoxDocIdPersona.Text;
       vInspeccionRCPersonas.observacionesPersona = TextBoxObsPersona.Text.ToUpper().Trim();
       vInspeccionRCPersonas.telefonoPersona = TextBoxTelfPersona.Text;
+      vInspeccionRCPersonas.estado = 1;
 
       int vResultado = vAccesodatos.FGrabaInspRCPersonasICRL(vInspeccionRCPersonas);
 
@@ -2010,7 +2115,8 @@ namespace ICRL.Presentacion
                      per.nombrePersona,
                      per.docIdentidadPersona,
                      per.telefonoPersona,
-                     per.observacionesPersona
+                     per.observacionesPersona,
+                     per.estado
                    };
         GridViewPersonas.DataSource = vLst.ToList();
         GridViewPersonas.DataBind();
@@ -2296,9 +2402,9 @@ namespace ICRL.Presentacion
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
-        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-        e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
+        //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        //e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
       }
     }
 
@@ -3211,23 +3317,43 @@ namespace ICRL.Presentacion
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
         vAccesoDatos.fCopiaRCVehicularInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+        //cambiar estado de la cobertura para que no se pueda volver a ejecutar
+        BD.InspeccionRCVehicular vInspeccionRCVehicular = new InspeccionRCVehicular();
+        vInspeccionRCVehicular.idInspeccion = vidInspecccion;
+        vInspeccionRCVehicular.secuencial = vSecuencial;
+        int vResultado = 0;
+        vResultado = vAccesoDatos.FRCVehicularCambiaEstado(vInspeccionRCVehicular);
       }
+      int vResul = 0;
+      vResul = FlTraeDatosRCV01(int.Parse(TextBoxNroInspeccion.Text));
     }
 
     protected void GridViewRCV01_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
-        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[10].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+        }
 
         //generamos la consulta para cada fila de la grilla maestra persona
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
 
         vTextoSecuencial = e.Row.Cells[3].Text;
-        //vTextoSecuencial = e.Row.Cells[10].Text;  boton Finalizar
-        (e.Row.Cells[10].Controls[0] as Button).Enabled = false;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -3396,7 +3522,8 @@ namespace ICRL.Presentacion
                      ircv.placa,
                      ircv.color,
                      ircv.chasis,
-                     ircv.kilometraje
+                     ircv.kilometraje,
+                     ircv.estado
                    };
 
         GridViewRCV01.DataSource = vLst.ToList();
@@ -4516,6 +4643,9 @@ namespace ICRL.Presentacion
       //proceso que copia los datos de Inps a Coti
       AccesoDatos vAccesoDatos = new AccesoDatos();
       vAccesoDatos.fCopiaPTRoboInspACotizacion (vIdFlujo, vIdInspeccion);
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FPTRoboCambiaEstado(vIdInspeccion);
+      ButtonFinPTRobo.Enabled = false;
     }
 
     protected void ImgButtonExportPdfPTDP_Click(object sender, ImageClickEventArgs e)
@@ -4611,6 +4741,10 @@ namespace ICRL.Presentacion
       //proceso que copia los datos de Inps a Coti
       AccesoDatos vAccesoDatos = new AccesoDatos();
       vAccesoDatos.fCopiaPTDaniosPropiosInspACotizacion(vIdFlujo, vIdInspeccion);
+
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FPTDaniosPCambiaEstado(vIdInspeccion);
+      ButtonFinPTDaniosP.Enabled = false;
     }
 
     protected void ImgButtonExportPdfRoboP_Click(object sender, ImageClickEventArgs e)
@@ -4707,6 +4841,9 @@ namespace ICRL.Presentacion
       //proceso que copia los datos de Inps a Coti
       AccesoDatos vAccesoDatos = new AccesoDatos();
       vAccesoDatos.fCopiaRoboParcialInspACotizacion(vIdFlujo, vIdInspeccion);
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FRoboParcialICRLCambiaEstado(vIdInspeccion);
+      ButtonFinRoboP.Enabled = false;
     }
 
     protected void ImgButtonExportPdfDaniosP_Click(object sender, ImageClickEventArgs e)
@@ -4962,7 +5099,13 @@ namespace ICRL.Presentacion
 
     protected void ButtonFinalizarInspeccion_Click(object sender, EventArgs e)
     {
+      string vBandejaEntrada = "REC – INSPECCION - INSPECCION PENDIENTE DE ATENCION";
+      string vBandejaSalida = "REC – COTIZACION - INICIO";
+      string vNumeroFlujo = TextBoxNroFlujo.Text;
 
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vBandejaEntrada, vBandejaSalida);
     }
   }
 }

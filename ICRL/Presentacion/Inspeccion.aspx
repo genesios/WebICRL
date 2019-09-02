@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="Inspeccion.aspx.cs" Inherits="ICRL.Presentacion.Inspeccion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="Inspeccion.aspx.cs" Inherits="ICRL.Presentacion.Inspeccion" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -20,6 +20,10 @@
             display: none;
             padding: 0px;
             margin: 0px;
+        }
+
+        .columnaOculta {
+            display: none;
         }
 
         :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select {
@@ -315,7 +319,7 @@
                                         </div>
                                         <div class="twentyfive">
                                             <asp:CheckBox ID="CheckBoxDPPCambioPerdidaTotal" runat="server"></asp:CheckBox>
-                                            <asp:Label ID="LabelDPPCambioPerdidaTotal" runat="server" Text="Cambio Pérdida Total"></asp:Label>
+                                            <asp:Label ID="LabelDPPCambioPerdidaTotal" runat="server" Text="Daños Ocultos"></asp:Label>
                                         </div>
                                         <div class="twentyfive">
                                             <asp:Label ID="LabelDPPSecuencial" runat="server" Text="DPSecuencial" Visible="False"></asp:Label><br />
@@ -358,20 +362,33 @@
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
                                     <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
+                                    <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
-                                    <asp:TemplateField HeaderText="Cambio a Pérdida Total">
+                                    <asp:TemplateField HeaderText="Daños Ocultos">
                                         <ItemTemplate>
-                                            <asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>'></asp:CheckBox>
+                                            <asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>' Enabled="false"></asp:CheckBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%--<asp:TemplateField HeaderText="Cambio a Pérdida Total">--%>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <%--<asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>'></asp:CheckBox>--%>
+                                            <asp:TextBox runat="server" Text="" Visible="false"></asp:TextBox>
                                             <%# MyNewRowDetDP ( Eval("secuencial") ) %>
                                             <asp:GridView ID="gvDPDet" runat="server" CellPadding="4" ForeColor="#333333"
-                                                Width="100%" GridLines="Both"
+                                                Width="100%" GridLines="None"
                                                 AutoGenerateColumns="false">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
                                                     <asp:BoundField DataField="descripcion" HeaderText="Item" />
                                                     <asp:BoundField DataField="compra" HeaderText="Compra" />
                                                     <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
-                                                    <asp:BoundField DataField="reparacionPrevia" HeaderText="Rep.Previa" />
+                                                    <%--<asp:BoundField DataField="reparacionPrevia" HeaderText="Rep.Previa" />--%>
+                                                    <asp:TemplateField HeaderText="Mecánico">
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox runat="server" Checked='<%# Eval("mecanico") %>' Enabled="false"></asp:CheckBox>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
                                                 </Columns>
                                                 <EditRowStyle BackColor="#7C6F57" />
                                                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -393,7 +410,7 @@
                             <asp:Button runat="server" ID="ButtonOcultoParaPopupDaniosPropios" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupDaniosPropios" runat="server"
                                 PopupControlID="PanelModalPopupDaniosPropios" TargetControlID="ButtonOcultoParaPopupDaniosPropios" PopupDragHandleControlID="ModalPopupDragHandleDaniosPropios"
-                                RepositionMode="None" X="10" Y="10"
+                                RepositionMode="RepositionOnWindowScroll"
                                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupDaniosPropiosBehavior" DynamicServicePath="">
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupDaniosPropios" runat="server" CssClass="modalPopup">
@@ -574,6 +591,7 @@
                                     <asp:BoundField DataField="nombreObjeto" HeaderText="Responsable Objeto" />
                                     <asp:BoundField DataField="docIdentidadObjeto" HeaderText="Doc.Id. Resp." />
                                     <asp:BoundField DataField="telefonoObjeto" HeaderText="Teléfono Resp." />
+                                    <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
@@ -619,7 +637,7 @@
                             <asp:Button runat="server" ID="ButtonOcultoParaPopupRCObjetos" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupRCObjetos" runat="server"
                                 PopupControlID="PanelModalPopupRCObjetos" TargetControlID="ButtonOcultoParaPopupRCObjetos" PopupDragHandleControlID="ModalPopupDragHandleRCObjetos"
-                                RepositionMode="None" X="10" Y="10"
+                                RepositionMode="RepositionOnWindowScroll"
                                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupRCObjetosBehavior" DynamicServicePath="">
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupRCObjetos" runat="server" CssClass="modalPopup">
@@ -680,8 +698,6 @@
                                 <asp:Button ID="ButtonCancelPopRCObj" runat="server" Text="Cerrar" OnClick="ButtonCancelPopRCObj_Click" />
                             </asp:Panel>
                         </div>
-
-
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
                 <ajaxToolkit:TabPanel ID="TabPanelRCPersonas" TabIndex="3" runat="server" HeaderText="RCPersonas" Enabled="False" Visible="false">
@@ -745,6 +761,7 @@
                                     <asp:BoundField DataField="nombrePersona" HeaderText="Persona Afectada" />
                                     <asp:BoundField DataField="docIdentidadPersona" HeaderText="Doc.Id." />
                                     <asp:BoundField DataField="telefonoPersona" HeaderText="Teléfono" />
+                                    <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
@@ -790,7 +807,7 @@
                             <asp:Button runat="server" ID="ButtonOcultoParaPopupRCPersonas" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupRCPersonas" runat="server"
                                 PopupControlID="PanelModalPopupRCPersonas" TargetControlID="ButtonOcultoParaPopupRCPersonas" PopupDragHandleControlID="ModalPopupDragHandleRCPersonas"
-                                RepositionMode="None" X="10" Y="10"
+                                RepositionMode="RepositionOnWindowScroll"
                                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupRCPersonasBehavior" DynamicServicePath="">
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopupRCPersonas" runat="server" CssClass="modalPopup">
@@ -1161,20 +1178,25 @@
                                     <asp:BoundField DataField="color" HeaderText="Color" />
                                     <asp:BoundField DataField="anio" HeaderText="Año" />
                                     <asp:BoundField DataField="chasis" HeaderText="Chasis" />
+                                    <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
                                     <asp:TemplateField HeaderText="Placa">
                                         <ItemTemplate>
                                             <%# Eval("placa") %>
                                             <%# MyNewRowDet ( Eval("secuencial") ) %>
                                             <asp:GridView ID="gvRCVDet" runat="server" CellPadding="4" ForeColor="#333333"
-                                                Width="100%" GridLines="Both"
+                                                Width="100%" GridLines="None"
                                                 AutoGenerateColumns="false">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
                                                     <asp:BoundField DataField="descripcion" HeaderText="Item" />
                                                     <asp:BoundField DataField="compra" HeaderText="Compra" />
                                                     <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
-                                                    <asp:BoundField DataField="reparacionPrevia" HeaderText="Rep.Previa" />
+                                                    <asp:TemplateField HeaderText="Mecánico">
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox runat="server" Checked='<%# Eval("mecanico") %>' Enabled="false"></asp:CheckBox>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
                                                 </Columns>
                                                 <EditRowStyle BackColor="#7C6F57" />
                                                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -1207,7 +1229,7 @@
                             <asp:Button runat="server" ID="ButtonOcultoparaPopup" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupRCV01" runat="server"
                                 PopupControlID="PanelModalPopup" TargetControlID="ButtonOcultoparaPopup" PopupDragHandleControlID="ModalPopupDragHandle"
-                                RepositionMode="None" X="10" Y="10"
+                                RepositionMode="RepositionOnWindowScroll"
                                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupRCV01Behavior" DynamicServicePath="">
                             </ajaxToolkit:ModalPopupExtender>
                             <asp:Panel ID="PanelModalPopup" runat="server" CssClass="modalPopup">

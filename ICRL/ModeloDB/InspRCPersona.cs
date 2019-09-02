@@ -20,5 +20,6 @@ namespace ICRL.ModeloDB
         public string docIdentidadPersona { get; set; }
         public string telefonoPersona { get; set; }
         public string observacionesPersona { get; set; }
+        public Nullable<int> estado { get; set; }
     }
 }

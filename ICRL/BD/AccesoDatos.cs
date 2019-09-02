@@ -192,6 +192,29 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public int FCambiaEstadoOnBase(string pFlujoOnBase, string pBandejaOrigen, string pBandejaDestino)
+    {
+      int vResultado = 0;
+
+      /*** CONECTAR A WS ***/
+      OnBaseWS vServicioOnBase = new OnBaseWS();
+      /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
+      SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+      /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
+      ResultadoEntity vResultadoEntity = new ResultadoEntity();
+
+      /*** LLAMAR A LA FUNCIÓN DE IMPORTACIÓN ***/
+      vResultadoEntity = vServicioOnBase.AvanzarProceso(pFlujoOnBase, pBandejaOrigen, pBandejaDestino, vOrigen);
+
+      /*** SI EL RESULTADO ES CORRECTO, SE EXTRAE LA INFORMACIÓN DEL FLUJO ***/
+      if (vResultadoEntity.EsValido)
+      {
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public int FEnviaArchivoOnBase(string pFlujoOnBase, string pTipoDocumental, string pNomUsuario, byte[] pArrayBytesArchivo)
     {
       int vResultado = 0;
@@ -344,11 +367,11 @@ namespace ICRL.BD
             case "Fecha Incidente":
               try
               {
-                vFlujoICRL.fechaSiniestro = DateTime.ParseExact(vKeyword.valor.Substring(0,10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                vFlujoICRL.fechaSiniestro = DateTime.ParseExact(vKeyword.valor.Substring(0, 10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
               }
               catch (Exception)
               {
-                vFlujoICRL.fechaSiniestro = new DateTime(2000,1, 1, 0, 0, 0);
+                vFlujoICRL.fechaSiniestro = new DateTime(2000, 1, 1, 0, 0, 0);
               }
               break;
             default:
@@ -359,7 +382,7 @@ namespace ICRL.BD
 
         vFlujoICRL.estado = 1;
         vFlujoICRL.importacionDirecta = false;
-        
+
       }
 
       return vFlujoICRL;
@@ -927,6 +950,7 @@ namespace ICRL.BD
           vInspDaniosPropiosPadre.idInspeccion = pInspeccionDaniosPropiosPadre.idInspeccion;
           vInspDaniosPropiosPadre.tipoTaller = pInspeccionDaniosPropiosPadre.tipoTaller;
           vInspDaniosPropiosPadre.cambioAPerdidaTotal = pInspeccionDaniosPropiosPadre.cambioAPerdidaTotal;
+          vInspDaniosPropiosPadre.estado = pInspeccionDaniosPropiosPadre.estado;
 
           db.InspDaniosPropiosPadre.Add(vInspDaniosPropiosPadre);
           db.SaveChanges();
@@ -977,6 +1001,25 @@ namespace ICRL.BD
 
         vResultado = 1;
       }
+      return vResultado;
+    }
+
+    public int FDaniosPropioPadreCambiaEstado(InspeccionDaniosPropiosPadre pInspeccionDaniosPropiosPadre)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        InspDaniosPropiosPadre vTablaInspDaniosPropiosPadre = new InspDaniosPropiosPadre();
+
+        vTablaInspDaniosPropiosPadre = db.InspDaniosPropiosPadre.Find(pInspeccionDaniosPropiosPadre.secuencial, pInspeccionDaniosPropiosPadre.idInspeccion);
+
+        vTablaInspDaniosPropiosPadre.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+
       return vResultado;
     }
 
@@ -1298,6 +1341,26 @@ namespace ICRL.BD
     #endregion
 
     #region Inspeccion RC Objetos
+
+    public int FRCObjetoCambiaEstado(InspeccionRCObjeto pInspRCObjetos)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        InspRCObjeto vTablaInspRCobjetos = new InspRCObjeto();
+
+        vTablaInspRCobjetos = db.InspRCObjeto.Find(pInspRCObjetos.secuencial, pInspRCObjetos.idInspeccion);
+
+        vTablaInspRCobjetos.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public int FGrabaInspRCObjetosICRL(InspeccionRCObjeto pInspRCObjetos)
     {
       int vRespuesta = 0;
@@ -1312,6 +1375,7 @@ namespace ICRL.BD
           vInspRCObjetos.docIdentidadObjeto = pInspRCObjetos.docIdentidadObjeto;
           vInspRCObjetos.observacionesObjeto = pInspRCObjetos.observacionesObjeto;
           vInspRCObjetos.telefonoObjeto = pInspRCObjetos.telefonoObjeto;
+          vInspRCObjetos.estado = pInspRCObjetos.estado;
 
           db.InspRCObjeto.Add(vInspRCObjetos);
           db.SaveChanges();
@@ -1505,6 +1569,26 @@ namespace ICRL.BD
     #endregion
 
     #region Inspeccion RC Persona
+
+    public int FRCPersonaCambiaEstado(InspeccionRCPersona pInspRCPersonas)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        InspRCPersona vTablaInspRCPersonas = new InspRCPersona();
+
+        vTablaInspRCPersonas = db.InspRCPersona.Find(pInspRCPersonas.secuencial, pInspRCPersonas.idInspeccion);
+
+        vTablaInspRCPersonas.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public int FGrabaInspRCPersonasICRL(InspeccionRCPersona pInspRCPersonas)
     {
       int vRespuesta = 0;
@@ -1519,6 +1603,7 @@ namespace ICRL.BD
           vInspRCPersonas.docIdentidadPersona = pInspRCPersonas.docIdentidadPersona;
           vInspRCPersonas.observacionesPersona = pInspRCPersonas.observacionesPersona;
           vInspRCPersonas.telefonoPersona = pInspRCPersonas.telefonoPersona;
+          vInspRCPersonas.estado = pInspRCPersonas.estado;
 
           db.InspRCPersona.Add(vInspRCPersonas);
           db.SaveChanges();
@@ -1710,6 +1795,10 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    #endregion
+
+    #region Inspeccion Robo Parcial
+
     public int FGrabaInspRoboParcialICRL(InspeccionRoboParcial pInspRoboParcial)
     {
       int vRespuesta = 0;
@@ -1786,6 +1875,24 @@ namespace ICRL.BD
       return vResultado;
     }
 
+    public int FRoboParcialICRLCambiaEstado(int pIdInspeccion)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Inspeccion vTablaInspeccion = new Inspeccion();
+
+        vTablaInspeccion = db.Inspeccion.Find(pIdInspeccion);
+
+        vTablaInspeccion.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
     public bool FInspeccionTieneRPICRL(int pIdInspeccion)
     {
       bool vRespuesta = false;
@@ -1810,6 +1917,24 @@ namespace ICRL.BD
     #endregion
 
     #region Inspeccion Perdida Total Danios Propios
+
+    public int FPTDaniosPCambiaEstado(int pIdInspeccion)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Inspeccion vTablaInspeccion = new Inspeccion();
+
+        vTablaInspeccion = db.Inspeccion.Find(pIdInspeccion);
+
+        vTablaInspeccion.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
 
     public bool FInspeccionTienePTDPICRL(int pIdInspeccion)
     {
@@ -1918,6 +2043,24 @@ namespace ICRL.BD
 
     #region Inspeccion Perdida Total por Robo
 
+    public int FPTRoboCambiaEstado(int pIdInspeccion)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Inspeccion vTablaInspeccion = new Inspeccion();
+
+        vTablaInspeccion = db.Inspeccion.Find(pIdInspeccion);
+
+        vTablaInspeccion.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
     public bool FInspeccionTienePTROICRL(int pIdInspeccion)
     {
       bool vRespuesta = false;
@@ -2025,6 +2168,25 @@ namespace ICRL.BD
 
     #region RC Vehicular01
 
+    public int FRCVehicularCambiaEstado(InspeccionRCVehicular pInspeccionRCVehicular)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        InspRCVehicular vTablaInspRCVehicular = new InspRCVehicular();
+
+        vTablaInspRCVehicular = db.InspRCVehicular.Find(pInspeccionRCVehicular.secuencial, pInspeccionRCVehicular.idInspeccion);
+
+        vTablaInspRCVehicular.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public int FGrabaInspRCVehicularICRL(InspeccionRCVehicular pInspeccionRCVehicular)
     {
       int vRespuesta = 0;
@@ -2047,6 +2209,7 @@ namespace ICRL.BD
           vInspRCVehicular.kilometraje = pInspeccionRCVehicular.kilometraje;
           vInspRCVehicular.importacionDirecta = pInspeccionRCVehicular.importacionDirecta;
           vInspRCVehicular.tipoTaller = pInspeccionRCVehicular.tipoTaller;
+          vInspRCVehicular.estado = pInspeccionRCVehicular.estado;
 
           db.InspRCVehicular.Add(vInspRCVehicular);
           db.SaveChanges();
@@ -2397,7 +2560,7 @@ namespace ICRL.BD
           vCotizacion.estado = pCoti.estado;
           vCotizacion.tipoCobertura = pCoti.tipoCobertura;
           vCotizacion.correlativo = pCoti.correlativo;
-          
+
 
           db.Cotizacion.Add(vCotizacion);
           db.SaveChanges();

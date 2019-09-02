@@ -28,5 +28,6 @@ namespace ICRL.ModeloDB
         public Nullable<int> kilometraje { get; set; }
         public Nullable<bool> importacionDirecta { get; set; }
         public string tipoTaller { get; set; }
+        public Nullable<int> estado { get; set; }
     }
 }
