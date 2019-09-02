@@ -50,24 +50,40 @@
             margin: 0 auto;
         }*/
     </style>
+    <script runat="server">
+      void Page_Init(object sender, EventArgs e)
+      {
+          SetFocus(TextBox1);
+      }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="logincontainer">
             <table class="basetable">
-              <tr><th colspan="2">ACCESO SISTEMA</th></tr>
-              <tr><td>
-                <div>
-                  <asp:Label ID="Label2" runat="server" Text="Usuario" ></asp:Label><br />
-                  <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                </div>
-                <div>
-                  <asp:Label ID="Label5" runat="server" Text="Contraseña"></asp:Label><br />
-                  <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
-                </div>
-              </td></tr>
-              <tr><td style="text-align:center"><asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Ingresar" /></td></tr>
-              <tr><td style="text-align:center" class="errormessage"><asp:Label ID="Label4" runat="server"></asp:Label></td></tr>
+                <tr>
+                    <th colspan="2">ACCESO SISTEMA</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <asp:Label ID="Label2" runat="server" Text="Usuario"></asp:Label><br />
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </div>
+                        <div>
+                            <asp:Label ID="Label5" runat="server" Text="Contraseña"></asp:Label><br />
+                            <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Ingresar" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center" class="errormessage">
+                        <asp:Label ID="Label4" runat="server"></asp:Label></td>
+                </tr>
             </table>
         </div>
     </form>

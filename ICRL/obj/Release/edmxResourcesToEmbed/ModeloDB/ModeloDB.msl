@@ -618,6 +618,7 @@
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
           <ScalarProperty Name="cambioAPerdidaTotal" ColumnName="cambioAPerdidaTotal" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -690,6 +691,7 @@
           <ScalarProperty Name="docIdentidadObjeto" ColumnName="docIdentidadObjeto" />
           <ScalarProperty Name="telefonoObjeto" ColumnName="telefonoObjeto" />
           <ScalarProperty Name="observacionesObjeto" ColumnName="observacionesObjeto" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -712,6 +714,7 @@
           <ScalarProperty Name="docIdentidadPersona" ColumnName="docIdentidadPersona" />
           <ScalarProperty Name="telefonoPersona" ColumnName="telefonoPersona" />
           <ScalarProperty Name="observacionesPersona" ColumnName="observacionesPersona" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -742,6 +745,7 @@
           <ScalarProperty Name="kilometraje" ColumnName="kilometraje" />
           <ScalarProperty Name="importacionDirecta" ColumnName="importacionDirecta" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

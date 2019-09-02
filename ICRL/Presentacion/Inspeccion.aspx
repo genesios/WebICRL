@@ -15,6 +15,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
     <%--scripts adicionales para el combo box de items--%>
 
+    <script type="text/javascript">
+    function ConfirmarActualizarOnBase() {
+      var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
+      if (resultado) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  </script>
+
     <style type="text/css">
         .collapsed-row {
             display: none;
@@ -102,7 +114,7 @@
                 <tr>
                     <td>
                         <div class="fifty">
-                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" />
+                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" OnClientClick="return ConfirmarActualizarOnBase();"  />
                         </div>
                         <div class="fifty">
                             <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" />
