@@ -16,9 +16,20 @@ namespace ICRL.Presentacion
   public partial class GestionInspeccion : System.Web.UI.Page
   {
     public int gRespuestaSiNo = -1;
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
+      if (!VerificarPagina(false)) return;
       DateTime vFechaIni = DateTime.Now;
       DateTime vFechaFin = DateTime.Now;
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
@@ -245,6 +256,7 @@ namespace ICRL.Presentacion
     }
     protected void ButtonCreaInspeccion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       Label4.Text = string.Empty;
       TextBoxPlaca.Text = string.Empty;
       if (string.Empty == TextBoxNroFlujo.Text.ToUpper())
@@ -325,6 +337,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBuscarFlujo_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PBusquedaInspecciones();
     }
 
@@ -387,6 +400,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonFlujoInspeccion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       try
       {
         if (1 == flTraeDatosFlujo(TextBoxFlujo.Text))
@@ -404,6 +418,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonMaster_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //FlTraeInspeccionesPadre();
       PBusquedaInspecciones();
     }
@@ -476,6 +491,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewMaster_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -632,6 +648,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewgvInspecciones_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vFilaFlujo = string.Empty;
       int vIdFlujo = 0;
 
@@ -761,6 +778,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonTraeFlujoOnBase_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //int vResultado = 0;
       //var vAccesoDatos = new AccesoDatos();
       //var vFlujoICRL = new FlujoICRL();
@@ -799,7 +817,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportExcel_Click(object sender, ImageClickEventArgs e)
     {
-
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -871,6 +889,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //se realiza una búsqueda por prioridad
       //primero por flujo, después por placa y finalmente por fecha
       //validar los campos de busqueda
@@ -936,6 +955,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPopupSiNoSI_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       gRespuestaSiNo = 1;
       Session["PopupModalSiNo"] = 0;
       this.ModalPopupSiNo.Hide();
@@ -944,6 +964,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPopupSiNoNO_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       gRespuestaSiNo = 0;
       Session["PopupModalSiNo"] = 0;
       this.ModalPopupSiNo.Hide();

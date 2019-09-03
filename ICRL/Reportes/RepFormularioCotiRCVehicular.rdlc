@@ -822,7 +822,7 @@
             </Style>
           </Textbox>
           <Line Name="Line2">
-            <Top>10.65211cm</Top>
+            <Top>11.28711cm</Top>
             <Left>0.50395cm</Left>
             <Height>0cm</Height>
             <Width>18.54309cm</Width>
@@ -1917,7 +1917,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet2</DataSetName>
-            <Top>4.24843in</Top>
+            <Top>4.49843in</Top>
             <Left>0.1984in</Left>
             <Height>0.75in</Height>
             <Width>7.30543in</Width>
@@ -2167,7 +2167,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>5.0262in</Top>
+            <Top>5.2762in</Top>
             <Left>5.47231in</Left>
             <Height>1.29514in</Height>
             <Width>2.0708in</Width>
@@ -2743,6 +2743,68 @@
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Proveedor:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>10.61655cm</Top>
+            <Left>0.48461cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.1825cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="proveedor">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!proveedor.Value, "DataSet2")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>proveedor</rd:DefaultName>
+            <Top>4.16597in</Top>
+            <Left>1.1056in</Left>
+            <Height>0.25in</Height>
+            <Width>2.28665in</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>7.88417in</Height>
         <Style>

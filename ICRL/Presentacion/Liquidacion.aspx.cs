@@ -19,9 +19,21 @@ namespace ICRL.Presentacion
     int AjusteMas = 2;
     int AjusteMenos = -2;
 
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
+
     #region Eventos de Controles
     protected void Page_Load(object sender, EventArgs e)
     {
+      if (!VerificarPagina(false)) return;
       if (!IsPostBack)
       {
         RecuperarDatosFacturas();
@@ -34,12 +46,14 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       GridViewDatosFactura.EditIndex = -1;
       RecuperarDatosFacturas();
       LlenarMenuFacturas();
     }
     protected void GridViewDatosFactura_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
       long idFactura_ = string.IsNullOrWhiteSpace(idFactura) ? 0 : Convert.ToInt64(idFactura);
 
@@ -61,6 +75,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowEditing(object sender, GridViewEditEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       GridViewDatosFactura.EditIndex = e.NewEditIndex;
 
       RecuperarDatosFacturas();
@@ -68,6 +83,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
       string numero = ((TextBox)GridViewDatosFactura.Rows[e.RowIndex].FindControl("txbNumeroFacturaEditar")).Text;
       string fechaEmision = ((TextBox)GridViewDatosFactura.Rows[e.RowIndex].FindControl("txbEmisionFacturaEditar")).Text;
@@ -113,6 +129,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.CommandName.Equals("AddNew"))
       {
         string numero = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbNumeroFacturaNuevo")).Text;
@@ -154,6 +171,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         string idFactura = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "id_factura"));
@@ -167,6 +185,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosOrden_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.Footer)
       {
         Label lblTotalCotizacionBs = e.Row.FindControl("lblTotalCotizacionBs") as Label;
@@ -187,6 +206,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosLiquidacion_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.Footer)
       {
         Label lblTotalLiquidacionBs = e.Row.FindControl("lblTotalLiquidacionBs") as Label;
@@ -212,6 +232,7 @@ namespace ICRL.Presentacion
     }
     protected void btnGenerarLiquidacion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool operacionExitosa = true;
       List<LiquidacionICRL.TipoLiquidacion001> ordenesLiquidadas = new List<LiquidacionICRL.TipoLiquidacion001>();
 
@@ -286,6 +307,7 @@ namespace ICRL.Presentacion
     }
     protected void btnAjusteMenor_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       TipoCambio = double.Parse(txbTipoCambio.Text);
 
       double saldoLiquidacionBs_ = 0.0;
@@ -344,6 +366,7 @@ namespace ICRL.Presentacion
     }
     protected void btnGuardarLiquidacion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool operacionExitosa = true;
 
       foreach (GridViewRow row in GridViewDatosLiquidacion.Rows)

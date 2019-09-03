@@ -147,6 +147,18 @@
     <ReportSection>
       <Body>
         <ReportItems>
+          <Rectangle Name="Rectangle1">
+            <KeepTogether>true</KeepTogether>
+            <Top>3.03298in</Top>
+            <Left>0.18724in</Left>
+            <Height>2.80529in</Height>
+            <Width>7.32608in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
@@ -747,6 +759,7 @@
             <Left>0.51887cm</Left>
             <Height>0.93542cm</Height>
             <Width>18.54309cm</Width>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -780,7 +793,7 @@
             <Left>4.25662cm</Left>
             <Height>0.83813cm</Height>
             <Width>10.67562cm</Width>
-            <ZIndex>1</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -796,7 +809,7 @@
             <Left>0.49953cm</Left>
             <Height>0cm</Height>
             <Width>18.54309cm</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -830,7 +843,7 @@
             <Left>13.67578cm</Left>
             <Height>0.6cm</Height>
             <Width>4.65667cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -870,7 +883,7 @@
             <Left>14.4002cm</Left>
             <Height>0.6cm</Height>
             <Width>3.93225cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -886,7 +899,7 @@
             <Left>0.54074cm</Left>
             <Height>0cm</Height>
             <Width>18.54309cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -897,28 +910,28 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>5.9642cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.78534cm</Width>
+                  <Width>1.43138cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.9866cm</Width>
+                  <Width>1.31121cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.08883cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.46929cm</Width>
+                  <Width>1.04961cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.04308cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.27004cm</Width>
+                  <Width>1.51181cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.68823cm</Width>
+                  <Width>4.34427cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -993,72 +1006,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Inst</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox110">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Pint</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox110</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Textbox24">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1110,6 +1057,72 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox112</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Inst</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Pint</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1262,72 +1275,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="instalacion">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=IIf(Fields!instalacion.Value, "Si","No")</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>instalacion</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="pintura">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=IIf(Fields!pintura.Value, "Si","No")</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>pintura</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="chaperio1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1368,7 +1315,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!mecanico.Value, "Si","No")</Value>
+                                  <Value>=IIf(Fields!mecanico.Value, "Si","")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1379,6 +1326,72 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>mecanico1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="instalacion">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Fields!instalacion.Value, "Si","")</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>instalacion</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="pintura">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIF(Fields!pintura.Value,"Si","")</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>pintura</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1434,7 +1447,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!observaciones.Value</Value>
+                                  <Value>=RTrim(Fields!observaciones.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1579,8 +1592,8 @@
             <Top>6.47912cm</Top>
             <Left>0.54074cm</Left>
             <Height>0.96188cm</Height>
-            <Width>18.56955cm</Width>
-            <ZIndex>6</ZIndex>
+            <Width>18.48253cm</Width>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1608,7 +1621,7 @@
             <Left>0.49953cm</Left>
             <Height>0.6cm</Height>
             <Width>3.05562cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1640,7 +1653,7 @@
             <Left>0.5214cm</Left>
             <Height>0.6cm</Height>
             <Width>4.51083cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1656,7 +1669,7 @@
             <Left>0.48018cm</Left>
             <Height>0cm</Height>
             <Width>18.54309cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1684,7 +1697,7 @@
             <Left>0.48018cm</Left>
             <Height>0.6cm</Height>
             <Width>4.51083cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1718,7 +1731,7 @@
             <Left>0.49953cm</Left>
             <Height>0.6cm</Height>
             <Width>17.81357cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1773,7 +1786,7 @@
             <Left>0.47788cm</Left>
             <Height>0.6cm</Height>
             <Width>17.81357cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1829,7 +1842,7 @@
             <Left>0.48018cm</Left>
             <Height>0.6cm</Height>
             <Width>3.01986cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1884,7 +1897,7 @@
             <Left>3.50004cm</Left>
             <Height>0.6cm</Height>
             <Width>11.69229cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1939,7 +1952,7 @@
             <Left>15.19233cm</Left>
             <Height>0.6cm</Height>
             <Width>3.10143cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1994,7 +2007,7 @@
             <Left>0.48247cm</Left>
             <Height>0.6cm</Height>
             <Width>3.01756cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2049,7 +2062,7 @@
             <Left>3.50004cm</Left>
             <Height>0.6cm</Height>
             <Width>11.69229cm</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2104,7 +2117,7 @@
             <Left>15.19233cm</Left>
             <Height>0.6cm</Height>
             <Width>3.10372cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2159,7 +2172,7 @@
             <Left>0.47559cm</Left>
             <Height>0.6cm</Height>
             <Width>3.01986cm</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2214,7 +2227,7 @@
             <Left>3.49545cm</Left>
             <Height>0.6cm</Height>
             <Width>11.69229cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2269,7 +2282,7 @@
             <Left>15.18774cm</Left>
             <Height>0.6cm</Height>
             <Width>3.10371cm</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2324,7 +2337,7 @@
             <Left>0.47788cm</Left>
             <Height>0.6cm</Height>
             <Width>3.01756cm</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2379,7 +2392,7 @@
             <Left>3.49545cm</Left>
             <Height>0.6cm</Height>
             <Width>11.69229cm</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2434,7 +2447,7 @@
             <Left>15.18774cm</Left>
             <Height>0.6cm</Height>
             <Width>3.10601cm</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2489,7 +2502,7 @@
             <Left>0.47558cm</Left>
             <Height>0.6cm</Height>
             <Width>3.01756cm</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2544,7 +2557,7 @@
             <Left>3.49315cm</Left>
             <Height>0.6cm</Height>
             <Width>11.69229cm</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2599,7 +2612,7 @@
             <Left>15.18544cm</Left>
             <Height>0.6cm</Height>
             <Width>3.10601cm</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2653,7 +2666,7 @@
             <Left>3.44289cm</Left>
             <Height>0.6cm</Height>
             <Width>4.51083cm</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2687,7 +2700,7 @@
             <Left>11.28262cm</Left>
             <Height>0.6cm</Height>
             <Width>4.82833cm</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2703,7 +2716,7 @@
             <Left>2.35449cm</Left>
             <Height>0cm</Height>
             <Width>6.48229cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2716,7 +2729,7 @@
             <Left>10.4114cm</Left>
             <Height>0cm</Height>
             <Width>6.48229cm</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2732,7 +2745,7 @@
             <Left>0.22231in</Left>
             <Height>0.95833in</Height>
             <Width>1.16056in</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2740,7 +2753,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>6.04167in</Height>
+        <Height>6.28in</Height>
         <Style>
           <Border>
             <Style>Solid</Style>

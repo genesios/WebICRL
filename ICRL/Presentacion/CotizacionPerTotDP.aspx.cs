@@ -17,11 +17,21 @@ namespace ICRL.Presentacion
   {
     public DataTable dtBeneficiario = new DataTable();
     public DataTable dtReferencia;
-
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
       try
       {
+        if (!VerificarPagina(false)) return;
         int vIdFlujo = 0;
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
@@ -261,6 +271,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxPTDPTotPagado_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxPTDPTotPagado.Checked)
       {
         //el checkbox chequeado indica que no esta completamente pagado
@@ -425,6 +436,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPTDPDueniosaPagar_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
       int vIndice = 0;
 
@@ -453,6 +465,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPTDPDueniosaPagar_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -586,6 +599,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPTDPAgregar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vCantidadFilasGrid = 0;
       vCantidadFilasGrid = GridViewPTDPDueniosaPagar.Rows.Count;
 
@@ -615,6 +629,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPTDPGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
 
@@ -693,6 +708,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPTDPCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
 
@@ -744,6 +760,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPTDPReferencias_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
       int vIndice = 0;
 
@@ -765,6 +782,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPTDPReferencias_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -801,6 +819,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonReferAgregar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -831,6 +850,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonReferGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -892,6 +912,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonReferCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PHabilitarReferencias(false);
       PLimpiarReferencias();
       ButtonReferAgregar.Visible = true;
@@ -1019,6 +1040,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonActualizarPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PBloqueaDatosEspeciales(true);
       PBotonesDatosEspecialesPTDP(false);
 
@@ -1026,6 +1048,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -1075,6 +1098,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelarPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -1098,6 +1122,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGenerarOrden_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -1197,6 +1222,7 @@ namespace ICRL.Presentacion
     }
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIndex = 0;
       string vNumeroOrden = string.Empty;
       string vProveedor = string.Empty;
@@ -1600,6 +1626,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ReportViewerCoti.Visible = false;
       ButtonCierraVerRep.Visible = false;
     }

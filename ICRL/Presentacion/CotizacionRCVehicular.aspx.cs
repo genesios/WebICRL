@@ -15,10 +15,21 @@ namespace ICRL.Presentacion
 {
   public partial class CotizacionRCVehicular : System.Web.UI.Page
   {
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
       try
       {
+        if (!VerificarPagina(false)) return;
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
         if (Request.QueryString["nroCoti"] != null)
@@ -435,6 +446,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaAgregarItem_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       TextBoxRepaIdItem.Text = string.Empty;
       DropDownListRepaItem.Enabled = true;
       //PanelABMReparaciones.Enabled = true;
@@ -459,6 +471,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       LabelRepaRegistroItems.Text = "Items";
       BD.CotizacionICRL.TipoRCVehicular vTipoRCVehicular = new CotizacionICRL.TipoRCVehicular();
 
@@ -551,6 +564,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ButtonRepaGrabar.Enabled = false;
       ButtonRepaCancelar.Enabled = false;
       PLimpiarCamposRepa();
@@ -561,6 +575,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewReparaciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -589,6 +604,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewReparaciones_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       //Leer Registro de la grilla y cargar los valores a la ventana.
@@ -652,6 +668,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopReparaciones_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ButtonRepaGrabar.Enabled = false;
       ButtonRepaCancelar.Enabled = false;
       PLimpiarCamposRepa();
@@ -739,6 +756,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepuAgregarItem_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       TextBoxRepuIdItem.Text = string.Empty;
       DropDownListRepuItem.Enabled = true;
       //PanelABMRepuestos.Enabled = true;
@@ -763,6 +781,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepuGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       LabelRepuRegistroItems.Text = "Items";
       BD.CotizacionICRL.TipoRCVehicular vTipoRCVehicular = new CotizacionICRL.TipoRCVehicular();
 
@@ -855,6 +874,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepuCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //PanelABMRepuestos.Enabled = false;
       ButtonRepuGrabar.Enabled = false;
       ButtonRepuCancelar.Enabled = false;
@@ -866,6 +886,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRepuestos_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -895,6 +916,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRepuestos_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       //Leer Registro de la grilla y cargar los valores a la ventana.
@@ -948,6 +970,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRepuestos_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ButtonRepuGrabar.Enabled = false;
       ButtonRepuCancelar.Enabled = false;
       PLimpiarCamposRepu();
@@ -1025,6 +1048,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaGenerarResumen_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       short vTipoItem = 0;
@@ -1062,6 +1086,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       LabelSumaRegistroItems.Text = "Items - Sumatoria";
       CotizacionICRL.TipoRCVehicularSumatoria vTipoRCVehicular = new CotizacionICRL.TipoRCVehicularSumatoria();
 
@@ -1128,6 +1153,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonSumaCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //PanelABMReparaciones.Enabled = false;
       ButtonSumaGrabar.Enabled = false;
       ButtonSumaCancelar.Enabled = false;
@@ -1136,6 +1162,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopSumatorias_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = 0;
       //PLimpiaSeccionDaniosPropiosPadre();
       //PLimpiaSeccionDatosPropios();
@@ -1149,6 +1176,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewSumaReparaciones_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       short vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
@@ -1207,6 +1235,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepuGenerarResumen_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       short vTipoItem = 0;
@@ -1244,6 +1273,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewSumaRepuestos_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       short vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
@@ -1336,6 +1366,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRecepRepuestos_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       short vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
@@ -1361,12 +1392,14 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRecepRepuestos_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       Session["PopupRecepRepuHabilitado"] = 0;
       this.ModalPopupRecepRepuestos.Hide();
     }
 
     protected void ButtonRecepGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -1413,6 +1446,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRecepCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ButtonRepuGrabar.Enabled = false;
       ButtonRepuCancelar.Enabled = false;
       PLimpiarCamposRecep();
@@ -1570,6 +1604,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonVehActualizar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       LabelDatosVehicularMsj.Text = string.Empty;
       PModificarVehTer(true);
       ButtonVehActualizar.Visible = false;
@@ -1579,6 +1614,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonVehGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -1634,6 +1670,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonVehCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PModificarVehTer(false);
       ButtonVehActualizar.Visible = true;
       ButtonVehGrabar.Visible = false;
@@ -1672,6 +1709,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIndex = 0;
       string vNumeroOrden = string.Empty;
       string vProveedor = string.Empty;
@@ -1734,6 +1772,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepuGenerarOrdenes_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       short vTipoItem = 0;
@@ -1795,6 +1834,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonRepaGenerarOrdenes_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       short vTipoItem = 0;
@@ -2201,6 +2241,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ReportViewerCoti.Visible = false;
       ButtonCierraVerRep.Visible = false;
     }

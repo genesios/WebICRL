@@ -13,8 +13,19 @@ namespace ICRL.Presentacion
 {
   public partial class Inspeccion : System.Web.UI.Page
   {
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
+      if (!VerificarPagina(false)) return;
       try
       {
         int vIdInspeccion = 0;
@@ -693,6 +704,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxDaniosPropios_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxDaniosPropios.Checked)
       {
         TabPanelDaniosPropios.Enabled = true;
@@ -706,6 +718,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxRCObjetos_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxRCObjetos.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -738,6 +751,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxRCPersonas_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxRCPersonas.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -770,6 +784,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxRoboParcial_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxRoboParcial.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -802,6 +817,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxPerdidaTotDanios_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxPerdidaTotDanios.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -834,6 +850,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxPerdidaTotRobo_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxPerdidaTotRobo.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -866,6 +883,7 @@ namespace ICRL.Presentacion
 
     protected void CheckBoxRCVehicular01_CheckedChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (CheckBoxRCVehicular01.Checked)
       {
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -905,6 +923,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewDaniosPropiosPadre_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -959,6 +978,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewDaniosPropiosPadre_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       InspeccionDaniosPropiosPadre vInspeccionDPPadre = new InspeccionDaniosPropiosPadre();
 
@@ -1023,6 +1043,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoDPPadre_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
 
@@ -1043,6 +1064,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarDPPadre_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
 
@@ -1063,6 +1085,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarDPPadre_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
 
@@ -1081,6 +1104,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonDetalleDPPadre_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PBloqueaDPPadreEdicion(false);
       //PBloqueaPersonaDet(true);
       int vSecuencial = int.Parse(TextBoxDPPSecuencial.Text);
@@ -1097,6 +1121,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = 0;
       PLimpiaSeccionDaniosPropiosPadre();
       PLimpiaSeccionDatosPropios();
@@ -1109,6 +1134,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewDaniosPropiosPadre_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -1177,6 +1203,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewDaniosPropios_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -1231,6 +1258,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewDaniosPropios_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vSecuencial = 0;
       string vTextoTemporal = string.Empty;
       vSecuencial = int.Parse(TextBoxDPPSecuencial.Text);
@@ -1275,6 +1303,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
@@ -1299,6 +1328,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
@@ -1324,6 +1354,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionDaniosPropios vInspDaniosPropios = new InspeccionDaniosPropios();
 
@@ -1422,6 +1453,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewObjetos_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       InspeccionRCObjeto vInspeccionRCObjeto = new InspeccionRCObjeto();
       string vTextoTemporal = string.Empty;
@@ -1495,6 +1527,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewObjetos_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -1533,6 +1566,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewObjetos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -1584,6 +1618,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoObj_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjeto vInspeccionRCObjetos = new InspeccionRCObjeto();
 
@@ -1606,6 +1641,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarObj_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjeto vInspeccionRCObjetos = new InspeccionRCObjeto();
 
@@ -1628,6 +1664,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarObj_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjeto vInspeccionRCObjetos = new InspeccionRCObjeto();
 
@@ -1664,7 +1701,7 @@ namespace ICRL.Presentacion
       //PBloqueaObjetoDet(true);
       //PLimpiaSeccionRCObjetoDetalle();
       //FlTraeDatosRCObjetoDetalles(vSecuencial);
-
+      if (!VerificarPagina(true)) return;
       PBloqueaObjeto(false);
       PBloqueaObjetoDet(true);
       int vSecuencial = int.Parse(TextBoxObjIdSecuencial.Text);
@@ -1687,6 +1724,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRCObj_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = 0;
       PBloqueaObjeto(true);
       PLimpiaSeccionRCObjetos();
@@ -1748,6 +1786,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoObjDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjetoDet vInspeccionRCObjetoDetalle = new InspeccionRCObjetoDet();
 
@@ -1767,6 +1806,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarObjDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjetoDet vInspeccionRCObjetoDetalle = new InspeccionRCObjetoDet();
 
@@ -1786,6 +1826,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarObjDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCObjetoDet vInspeccionRCObjetoDetalle = new InspeccionRCObjetoDet();
 
@@ -1805,6 +1846,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewObjDetalle_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vObjIdSecuencial = 0;
       string vTextoTemporal = string.Empty;
 
@@ -1826,6 +1868,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewObjDetalle_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -1847,6 +1890,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPersonas_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       InspeccionRCPersona vInspeccionRCPersona = new InspeccionRCPersona();
       string vTextoTemporal = string.Empty;
@@ -1879,6 +1923,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPersonas_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -1918,6 +1963,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPersonas_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -1983,6 +2029,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoPer_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersona vInspeccionRCPersonas = new InspeccionRCPersona();
 
@@ -2005,6 +2052,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarPer_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersona vInspeccionRCPersonas = new InspeccionRCPersona();
 
@@ -2027,6 +2075,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarPer_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersona vInspeccionRCPersonas = new InspeccionRCPersona();
 
@@ -2045,6 +2094,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonDetallePer_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //int vSecuencial = int.Parse(TextBoxPersonaIdSecuencial.Text);
       //PBloqueaPersona(false);
       //PBloqueaPersonaDet(true);
@@ -2221,6 +2271,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vObjIdSecuencial = 0;
       string vTextoTemporal = string.Empty;
       vObjIdSecuencial = int.Parse(GridViewPerDetalle.SelectedRow.Cells[1].Text);
@@ -2241,6 +2292,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPerDetalle_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -2251,6 +2303,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoPerDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersonaDet vInspeccionRCPersonaDetalle = new InspeccionRCPersonaDet();
 
@@ -2270,6 +2323,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarPerDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersonaDet vInspeccionRCPersonaDetalle = new InspeccionRCPersonaDet();
 
@@ -2289,6 +2343,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarPerDet_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCPersonaDet vInspeccionRCPersonaDetalle = new InspeccionRCPersonaDet();
 
@@ -2318,6 +2373,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPopRCPer_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = 0;
       PBloqueaPersona(true);
       PLimpiaSeccionRCPersonas();
@@ -2356,6 +2412,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRoboParcial_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       DropDownListItemRP.Enabled = false;
       TextBoxIdItemRP.Text = string.Empty;
       string vTextoTemporal = string.Empty;
@@ -2400,6 +2457,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRoboParcial_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -2410,6 +2468,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoRP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRoboParcial vInspRoboParcial = new InspeccionRoboParcial();
 
@@ -2437,6 +2496,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarRP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRoboParcial vInspRoboParcial = new InspeccionRoboParcial();
 
@@ -2465,6 +2525,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarRP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRoboParcial vInspRoboParcial = new InspeccionRoboParcial();
 
@@ -2783,6 +2844,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTDaniosPropios vInspPerdidaTotalPTDP = new InspeccionPTDaniosPropios();
 
@@ -2809,6 +2871,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTDaniosPropios vInspPerdidaTotalPTDP = new InspeccionPTDaniosPropios();
 
@@ -2835,6 +2898,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarPTDP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTDaniosPropios vInspPerdidaTotalPTDP = new InspeccionPTDaniosPropios();
 
@@ -3046,6 +3110,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonNuevoPTRO_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTRobo vInspPerdidaTotalPTRO = new InspeccionPTRobo();
 
@@ -3072,6 +3137,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarPTRO_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTRobo vInspPerdidaTotalPTRO = new InspeccionPTRobo();
 
@@ -3099,6 +3165,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonBorrarPTRO_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionPTRobo vInspPerdidaTotalPTRO = new InspeccionPTRobo();
 
@@ -3234,6 +3301,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRCV01_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicular vInspeccionRCVehicular01 = new InspeccionRCVehicular();
       int vSecuencial = 0;
@@ -3293,6 +3361,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRCV01_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -3330,6 +3399,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRCV01_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         //e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -3388,6 +3458,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonMNuevoRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicular vInspRCVehicular01 = new InspeccionRCVehicular();
 
@@ -3431,6 +3502,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonMGrabarRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicular vInspRCVehicular01 = new InspeccionRCVehicular();
 
@@ -3474,6 +3546,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonMBorrarRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicular vInspRCVehicular01 = new InspeccionRCVehicular();
 
@@ -3492,6 +3565,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonMDetalleRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       PBloqueoRCVehicular01(true);
       PLimpiaSeccionRCVehicular01();
       int vSecuencial = int.Parse(TextBoxSecuencialRCV01.Text);
@@ -3660,6 +3734,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRCV01Det_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       DropDownListItemRCV01.Enabled = false;
       TextBoxIdItemRCV01.Text = string.Empty;
       string vTextoTemporal = string.Empty;
@@ -3701,6 +3776,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewRCV01Det_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -3714,6 +3790,7 @@ namespace ICRL.Presentacion
 
     protected void gvRCVDet_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vFilaFlujo = string.Empty;
       string vNroFlujo = string.Empty;
 
@@ -3893,6 +3970,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonDNuevoRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
       //DropDownListMarcaRCV01.SelectedItem.Text;
@@ -3919,6 +3997,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonDGrabarRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
 
@@ -3945,6 +4024,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonDBorrarRCV01_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
 
@@ -3964,6 +4044,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCancelPop_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = 0;
       PBloqueoRCVehicular01(true);
       PLimpiaSeccionRCVehicular01();
@@ -4321,7 +4402,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportPdf_Click(object sender, ImageClickEventArgs e)
     {
-
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -4552,6 +4633,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportPdfPTRO_Click(object sender, ImageClickEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -4635,6 +4717,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonFinPTRobo_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdInspeccion = 0;
       int vIdFlujo = 0;
       vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
@@ -4650,6 +4733,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportPdfPTDP_Click(object sender, ImageClickEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -4733,6 +4817,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonFinPTDaniosP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdInspeccion = 0;
       int vIdFlujo = 0;
       vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
@@ -4749,6 +4834,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportPdfRoboP_Click(object sender, ImageClickEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -4833,6 +4919,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonFinRoboP_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdInspeccion = 0;
       int vIdFlujo = 0;
       vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
@@ -4848,7 +4935,7 @@ namespace ICRL.Presentacion
 
     protected void ImgButtonExportPdfDaniosP_Click(object sender, ImageClickEventArgs e)
     {
-
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       LBCDesaEntities db = new LBCDesaEntities();
 
@@ -4938,6 +5025,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonActualizaDesdeOnBase_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResultado = 0;
       var vAccesoDatos = new AccesoDatos();
       var vFlujoICRL = new FlujoICRL();
@@ -4982,6 +5070,7 @@ namespace ICRL.Presentacion
 
     protected void TabContainerCoberturas_ActiveTabChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vIdInspeccion = 0;
 
@@ -5093,19 +5182,23 @@ namespace ICRL.Presentacion
 
     protected void ButtonGrabarDatosInspeccion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResul = FGrabaCambiosInspeccion();
       vResul = FlTraeDatosDaniosPropios(int.Parse(TextBoxNroInspeccion.Text));
     }
 
     protected void ButtonFinalizarInspeccion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
+      string vNombreUsuario = string.Empty;
+      vNombreUsuario = Session["IdUsr"].ToString();
       string vBandejaEntrada = "REC – INSPECCION - INSPECCION PENDIENTE DE ATENCION";
       string vBandejaSalida = "REC – COTIZACION - INICIO";
       string vNumeroFlujo = TextBoxNroFlujo.Text;
 
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vResultado = 0;
-      vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vBandejaEntrada, vBandejaSalida);
+      vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
     }
   }
 }

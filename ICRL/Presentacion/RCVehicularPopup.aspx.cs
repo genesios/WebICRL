@@ -9,32 +9,43 @@ using ICRL.BD;
 
 namespace ICRL.Presentacion
 {
-    public partial class RCVehicularPopup : System.Web.UI.Page
+  public partial class RCVehicularPopup : System.Web.UI.Page
+  {
+    private bool VerificarPagina(bool EsEvento)
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-                if (Session["PopSecuencial"] != null)
-                {
-                    TextBoxSecuencialPop.Text = Session["PopSecuencial"].ToString();
-                }
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
+    protected void Page_Load(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(false)) return;
+      if (!IsPostBack)
+      {
+          if (Session["PopSecuencial"] != null)
+          {
+              TextBoxSecuencialPop.Text = Session["PopSecuencial"].ToString();
+          }
 
-                if (Session["PopIdInspeccion"] != null)
-                {
-                    TextBoxIdInspeccionPop.Text = Session["PopIdInspeccion"].ToString();
-                }
+          if (Session["PopIdInspeccion"] != null)
+          {
+              TextBoxIdInspeccionPop.Text = Session["PopIdInspeccion"].ToString();
+          }
 
-                FlTraeNomenChaperio();
-                FlTraeNomenRepPrevia();
-                FlTraeNomenItemRCV01();
-                int vSecuencial = 3;
-                //vSecuencial = int.Parse(TextBoxSecuencialPop.Text);
-                FlTraeDatosRCVehicularDet(vSecuencial);
+          FlTraeNomenChaperio();
+          FlTraeNomenRepPrevia();
+          FlTraeNomenItemRCV01();
+          int vSecuencial = 3;
+          //vSecuencial = int.Parse(TextBoxSecuencialPop.Text);
+          FlTraeDatosRCVehicularDet(vSecuencial);
 
-            }
+      }
 
-        }
+    }
 
 
         #region RC Inspeccion Vehicular Detalle
@@ -55,109 +66,114 @@ namespace ICRL.Presentacion
             ButtonNuevoRCV01.Enabled = true;
         }
 
-        protected void GridViewRCV01Det_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownListItemRCV01.Enabled = false;
-            TextBoxIdItemRCV01.Text = string.Empty;
-            TextBoxIdItemRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[1].Text.Substring(0, 8);
-            string vTextoItemRCV01 = GridViewRCV01Det.SelectedRow.Cells[2].Text;
+    protected void GridViewRCV01Det_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      DropDownListItemRCV01.Enabled = false;
+      TextBoxIdItemRCV01.Text = string.Empty;
+      TextBoxIdItemRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[1].Text.Substring(0, 8);
+      string vTextoItemRCV01 = GridViewRCV01Det.SelectedRow.Cells[2].Text;
 
-            DropDownListItemRCV01.ClearSelection();
-            DropDownListItemRCV01.Items.FindByValue(TextBoxIdItemRCV01.Text).Selected = true;
+      DropDownListItemRCV01.ClearSelection();
+      DropDownListItemRCV01.Items.FindByValue(TextBoxIdItemRCV01.Text).Selected = true;
 
-            TextBoxCompraRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[3].Text;
-            CheckBoxInstalacionRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[4].Controls[0] as CheckBox).Checked;
-            CheckBoxPinturaRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[5].Controls[0] as CheckBox).Checked;
-            CheckBoxMecanicoRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[6].Controls[0] as CheckBox).Checked;
+      TextBoxCompraRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[3].Text;
+      CheckBoxInstalacionRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[4].Controls[0] as CheckBox).Checked;
+      CheckBoxPinturaRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[5].Controls[0] as CheckBox).Checked;
+      CheckBoxMecanicoRCV01.Checked = (GridViewRCV01Det.SelectedRow.Cells[6].Controls[0] as CheckBox).Checked;
 
-            string vTempoCadena = string.Empty;
-            vTempoCadena = GridViewRCV01Det.SelectedRow.Cells[7].Text.Trim();
-            DropDownListChaperioRCV01.ClearSelection();
-            DropDownListChaperioRCV01.Items.FindByText(vTempoCadena).Selected = true;
+      string vTempoCadena = string.Empty;
+      vTempoCadena = GridViewRCV01Det.SelectedRow.Cells[7].Text.Trim();
+      DropDownListChaperioRCV01.ClearSelection();
+      DropDownListChaperioRCV01.Items.FindByText(vTempoCadena).Selected = true;
 
-            vTempoCadena = string.Empty;
-            vTempoCadena = GridViewRCV01Det.SelectedRow.Cells[8].Text.Trim();
-            DropDownListRepPreviaRCV01.ClearSelection();
-            DropDownListRepPreviaRCV01.Items.FindByText(vTempoCadena).Selected = true;
-            TextBoxObservacionesRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[9].Text;
-            ButtonNuevoRCV01.Enabled = false;
-            ButtonGrabarRCV01.Enabled = true;
-            ButtonBorrarRCV01.Enabled = true;
-        }
+      vTempoCadena = string.Empty;
+      vTempoCadena = GridViewRCV01Det.SelectedRow.Cells[8].Text.Trim();
+      DropDownListRepPreviaRCV01.ClearSelection();
+      DropDownListRepPreviaRCV01.Items.FindByText(vTempoCadena).Selected = true;
+      TextBoxObservacionesRCV01.Text = GridViewRCV01Det.SelectedRow.Cells[9].Text;
+      ButtonNuevoRCV01.Enabled = false;
+      ButtonGrabarRCV01.Enabled = true;
+      ButtonBorrarRCV01.Enabled = true;
+    }
 
-        protected void GridViewRCV01Det_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-                e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-                e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
-            }
-        }
+    protected void GridViewRCV01Det_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      if (e.Row.RowType == DataControlRowType.DataRow)
+      {
+        e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
+        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        e.Row.ToolTip = "Haz clic en la primera columna para seleccionar la fila.";
+      }
+    }
 
-        protected void ButtonNuevoRCV01_Click(object sender, EventArgs e)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-            InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
+    protected void ButtonNuevoRCV01_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      AccesoDatos vAccesodatos = new AccesoDatos();
+      InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
 
-            vInspRCVDet.idItem = DropDownListItemRCV01.SelectedValue;
-            vInspRCVDet.compra = TextBoxCompraRCV01.Text;
-            vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
-            vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
-            vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
-            vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedValue;
-            vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedValue;
-            vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text; ;
+      vInspRCVDet.idItem = DropDownListItemRCV01.SelectedValue;
+      vInspRCVDet.compra = TextBoxCompraRCV01.Text;
+      vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
+      vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
+      vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
+      vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedValue;
+      vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedValue;
+      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text; ;
 
-            int vResultado = vAccesodatos.FGrabaInspRCV01DetICRL(vInspRCVDet);
+      int vResultado = vAccesodatos.FGrabaInspRCV01DetICRL(vInspRCVDet);
 
-            if (vResultado > 0)
-            {
-                int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
-                PLimpiaSeccionRCV01Det();
-            }
-        }
+      if (vResultado > 0)
+      {
+          int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
+          PLimpiaSeccionRCV01Det();
+      }
+    }
 
-        protected void ButtonGrabarRCV01_Click(object sender, EventArgs e)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-            InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
+    protected void ButtonGrabarRCV01_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      AccesoDatos vAccesodatos = new AccesoDatos();
+      InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
 
-            vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialPop.Text);
-            vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
-            vInspRCVDet.compra = TextBoxCompraRCV01.Text;
-            vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
-            vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
-            vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
-            vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedValue;
-            vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedValue;
-            vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text; ;
+      vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialPop.Text);
+      vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
+      vInspRCVDet.compra = TextBoxCompraRCV01.Text;
+      vInspRCVDet.instalacion = CheckBoxInstalacionRCV01.Checked;
+      vInspRCVDet.pintura = CheckBoxPinturaRCV01.Checked;
+      vInspRCVDet.mecanico = CheckBoxMecanicoRCV01.Checked;
+      vInspRCVDet.chaperio = DropDownListChaperioRCV01.SelectedValue;
+      vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedValue;
+      vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text; ;
 
-            int vResultado = vAccesodatos.FActualizaInspRCV01DetICRL(vInspRCVDet);
+      int vResultado = vAccesodatos.FActualizaInspRCV01DetICRL(vInspRCVDet);
 
-            if (vResultado > 0)
-            {
-                int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
-                PLimpiaSeccionRCV01Det();
-            }
-        }
+      if (vResultado > 0)
+      {
+          int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
+          PLimpiaSeccionRCV01Det();
+      }
+    }
 
-        protected void ButtonBorrarRCV01_Click(object sender, EventArgs e)
-        {
-            AccesoDatos vAccesodatos = new AccesoDatos();
-            InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
+    protected void ButtonBorrarRCV01_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      AccesoDatos vAccesodatos = new AccesoDatos();
+      InspeccionRCVehicularDet vInspRCVDet = new InspeccionRCVehicularDet();
 
-            vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialPop.Text);
-            vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
+      vInspRCVDet.secuencial = int.Parse(TextBoxSecuencialPop.Text);
+      vInspRCVDet.idItem = TextBoxIdItemRCV01.Text;
 
-            int vResultado = vAccesodatos.FBorrarInspRCV01DetICRL(vInspRCVDet);
+      int vResultado = vAccesodatos.FBorrarInspRCV01DetICRL(vInspRCVDet);
 
-            if (vResultado > 0)
-            {
-                int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
-                PLimpiaSeccionRCV01Det();
-            }
-        }
+      if (vResultado > 0)
+      {
+          int vResul = FlTraeDatosRCVehicularDet(int.Parse(TextBoxSecuencialPop.Text));
+          PLimpiaSeccionRCV01Det();
+      }
+    }
 
         private int FlTraeDatosRCVehicularDet(int pSecuencial)
         {
@@ -288,5 +304,5 @@ namespace ICRL.Presentacion
         #endregion
 
 
-    }
+  }
 }

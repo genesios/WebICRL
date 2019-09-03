@@ -15,10 +15,21 @@ namespace ICRL.Presentacion
 {
   public partial class CotizacionRCPer : System.Web.UI.Page
   {
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
       try
       {
+        if (!VerificarPagina(false)) return;
         int vIdFlujo = 0;
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
@@ -321,6 +332,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPerAgregar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       LabelDatosPersonaMsj.Text = string.Empty;
       //validamos si existe el dato de Persona
       int vIdFlujo = 0;
@@ -350,6 +362,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPerGrabar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
       long vIdItem = 0;
@@ -408,6 +421,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonPerCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       TextBoxPerIdItem.Text = string.Empty;
       PModificarPersona(false);
       ButtonPerAgregar.Visible = true;
@@ -437,6 +451,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPerDetalle_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vTextoTemporal = string.Empty;
 
       //Leer Registro de la grilla y cargar los valores a la ventana.
@@ -456,6 +471,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewPerDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -500,6 +516,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonGenerarOrden_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       bool vResultado = false;
       int vIdFlujo = 0;
       int vIdCotizacion = 0;
@@ -590,6 +607,7 @@ namespace ICRL.Presentacion
 
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vIndex = 0;
       string vNumeroOrden = string.Empty;
       string vProveedor = string.Empty;
@@ -858,6 +876,7 @@ namespace ICRL.Presentacion
 
     protected void ButtonCierraVerRep_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ReportViewerCoti.Visible = false;
       ButtonCierraVerRep.Visible = false;
     }

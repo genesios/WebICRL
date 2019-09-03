@@ -192,7 +192,7 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
-    public int FCambiaEstadoOnBase(string pFlujoOnBase, string pBandejaOrigen, string pBandejaDestino)
+    public int FCambiaEstadoOnBase(string pFlujoOnBase, string pNomUsuario, string pBandejaOrigen, string pBandejaDestino)
     {
       int vResultado = 0;
 
@@ -202,9 +202,15 @@ namespace ICRL.BD
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
+      /*** INSTANCIAR EL OBJETO DE ENVÍO COMO DocumentoOnBaseEntity ***/
+      var vDocumento = new DocumentoOnBaseEntity();
+      /*** CREAR OBJETO KeywordOnBaseEntity DE NOMBRE DE USUARIO PARA AÑADIR AL DOCUMENTO ***/
+      var keyUsuarioWS = new KeywordOnBaseEntity() { nombre = "LBC UserName WS", valor = pNomUsuario };
+      vDocumento.keywords = new KeywordOnBaseEntity[] { keyUsuarioWS };
 
       /*** LLAMAR A LA FUNCIÓN DE IMPORTACIÓN ***/
       vResultadoEntity = vServicioOnBase.AvanzarProceso(pFlujoOnBase, pBandejaOrigen, pBandejaDestino, vOrigen);
+
 
       /*** SI EL RESULTADO ES CORRECTO, SE EXTRAE LA INFORMACIÓN DEL FLUJO ***/
       if (vResultadoEntity.EsValido)
@@ -2609,6 +2615,24 @@ namespace ICRL.BD
         vRespuesta = 0;
       }
       return vRespuesta;
+    }
+
+    public int FCotizacionCambiaEstado(int pIdCotizacion)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Cotizacion vTablaCotizacion = new Cotizacion();
+
+        vTablaCotizacion = db.Cotizacion.Find(pIdCotizacion);
+
+        vTablaCotizacion.estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
     }
     #endregion
 

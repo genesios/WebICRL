@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="GestionInspeccion.aspx.cs" Inherits="ICRL.Presentacion.GestionInspeccion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="GestionInspeccion.aspx.cs" Inherits="ICRL.Presentacion.GestionInspeccion"  MaintainScrollPositionOnPostback="true"  %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 

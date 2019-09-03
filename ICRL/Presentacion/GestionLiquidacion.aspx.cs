@@ -13,8 +13,19 @@ namespace ICRL.Presentacion
 {
   public partial class GestionLiquidacion : System.Web.UI.Page
   {
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
+      if (!VerificarPagina(false)) return;
       if (!IsPostBack)
       {
         InicializarEstados();
@@ -25,6 +36,7 @@ namespace ICRL.Presentacion
     #region Eventos de Controles
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (Page.IsValid)
       {
         RecuperarDatosOrdenesPago();
@@ -42,12 +54,14 @@ namespace ICRL.Presentacion
     }
     protected void GridViewOrdenesPago_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       GridViewOrdenesPago.PageIndex = e.NewPageIndex;
 
       RecuperarDatosOrdenesPago();
     }
     protected void btnExportarResultados_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       try
       {
         #region Recuperar datos
@@ -151,10 +165,12 @@ namespace ICRL.Presentacion
     }
     protected void btnGenerarReporteExcel_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ObtenerReporte("xls");
     }
     protected void btnGenerarReportePdf_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       ObtenerReporte("pdf");
     }
     #endregion

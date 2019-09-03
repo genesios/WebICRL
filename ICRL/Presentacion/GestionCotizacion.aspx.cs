@@ -13,10 +13,21 @@ namespace IRCL.Presentacion
 {
   public partial class GestionCotizacion : System.Web.UI.Page
   {
+    private bool VerificarPagina(bool EsEvento)
+    {
+      bool blnRespuesta = true;
+      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
+      {
+        blnRespuesta = false;
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+      }
+      return blnRespuesta;
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
       DateTime vFechaIni = DateTime.Now;
       DateTime vFechaFin = DateTime.Now;
+      if (!VerificarPagina(false)) return;
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
         vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
@@ -43,12 +54,14 @@ namespace IRCL.Presentacion
 
     protected void ButtonBuscarFlujo_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       Label4.Text = string.Empty;
       PBusquedaCotizaciones();
     }
 
     protected void ButtonCreaCotizacion_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       Label4.Text = string.Empty;
       TextBoxPlaca.Text = string.Empty;
       if (string.Empty != TextBoxNroFlujo.Text)
@@ -66,6 +79,7 @@ namespace IRCL.Presentacion
 
     protected void GridViewMaster_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
@@ -218,6 +232,7 @@ namespace IRCL.Presentacion
 
     protected void GridViewMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       //se realiza una búsqueda por prioridad
       //primero por flujo, después por placa y finalmente por fecha
       //validar los campos de busqueda
@@ -288,6 +303,7 @@ namespace IRCL.Presentacion
 
     protected void GridViewgvInspecciones_SelectedIndexChanged(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       string vFilaFlujo = string.Empty;
       string vCobertura = string.Empty;
       int vIdFlujo = 0;
@@ -422,6 +438,7 @@ namespace IRCL.Presentacion
 
     protected void ButtonCoberturaCrear_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       int vResultado = 0;
       int vTipoCobertura = 0;
       string vIdCobertura = string.Empty;
@@ -445,6 +462,7 @@ namespace IRCL.Presentacion
 
     protected void ButtonCoberturaCancelar_Click(object sender, EventArgs e)
     {
+      if (!VerificarPagina(true)) return;
       Session["PopupModalCoberturas"] = 0;
       this.ModalPopupCoberturas.Hide();
     }
