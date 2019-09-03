@@ -92,6 +92,9 @@ namespace ICRL.Presentacion
           FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
         }
 
+        LabelMsjReparaciones.Text = string.Empty;
+        LabelMsjRepuestos.Text = string.Empty;
+
         if (Session["PopupABMReparacionesHabilitado"] != null)
         {
           int vPopup = -1;

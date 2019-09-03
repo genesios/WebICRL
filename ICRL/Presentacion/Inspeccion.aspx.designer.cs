@@ -1408,6 +1408,33 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxObjDetDescripcion;
         
         /// <summary>
+        /// LabelValidaCostoRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelValidaCostoRef;
+        
+        /// <summary>
+        /// ValidadorMonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorMonto;
+        
+        /// <summary>
+        /// RegExValidatorMonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorMonto;
+        
+        /// <summary>
         /// ButtonNuevoObjDet control.
         /// </summary>
         /// <remarks>

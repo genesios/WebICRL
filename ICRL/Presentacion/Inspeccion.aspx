@@ -16,16 +16,16 @@
     <%--scripts adicionales para el combo box de items--%>
 
     <script type="text/javascript">
-    function ConfirmarActualizarOnBase() {
-      var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
-      if (resultado) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-  </script>
+        function ConfirmarActualizarOnBase() {
+            var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 
     <style type="text/css">
         .collapsed-row {
@@ -95,15 +95,15 @@
                     <td>
                         <div class="twenty">
                             <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxNroFlujo" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxNroFlujo" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="twenty">
                             <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxNroReclamo" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="twenty">
                             <asp:Label ID="LabelNroInspeccion" runat="server" Text="Nro. de Inspección"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxCorrelativo" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="twenty">
                             <asp:TextBox ID="TextBoxIdFlujo" runat="server" Visible="False"></asp:TextBox>
@@ -114,7 +114,7 @@
                 <tr>
                     <td>
                         <div class="fifty">
-                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" OnClientClick="return ConfirmarActualizarOnBase();"  />
+                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" OnClientClick="return ConfirmarActualizarOnBase();" />
                         </div>
                         <div class="fifty">
                             <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" />
@@ -675,6 +675,15 @@
                                                 <div class="twentyfive">
                                                     <asp:Label ID="LabelObjDetDescrip" runat="server" Text="Descripción"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxObjDetDescripcion" runat="server"></asp:TextBox>
+                                                </div>
+                                                <div class="twentyfive">
+                                                    <asp:Label ID="LabelValidaCostoRef" runat="server" Text=""></asp:Label>
+                                                    <asp:RequiredFieldValidator ID="ValidadorMonto" runat="server" ErrorMessage="*" ControlToValidate="TextBoxObjDetCostoRef" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegExValidatorMonto"
+                                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                                        ControlToValidate="TextBoxObjDetCostoRef" CssClass="errormessage"
+                                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                                    </asp:RegularExpressionValidator>
                                                 </div>
                                             </td>
                                         </tr>

@@ -9,4 +9,3 @@ C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\bin\Debug\OnBaseProxy.pdb
 C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Debug\OnBaseProxy.csproj.CoreCompileInputs.cache
 C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Debug\OnBaseProxy.dll
 C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Debug\OnBaseProxy.pdb
-C:\Repo\Git\vs\gnesios\WebICRL\OnBaseProxy\obj\Debug\OnBaseProxy.csprojResolveAssemblyReference.cache
