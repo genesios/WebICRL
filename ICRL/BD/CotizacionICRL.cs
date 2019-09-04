@@ -3769,7 +3769,7 @@ namespace ICRL.BD
         sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Orden.id_flujo;
         sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Orden.id_cotizacion;
         sqlComando.Parameters.Add("@tipo_origen", System.Data.SqlDbType.SmallInt).Value = Orden.tipo_origen;
-        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 20).Value = Orden.numero_orden;
+        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 30).Value = Orden.numero_orden;
         sqlComando.Parameters.Add("@fecha_orden", System.Data.SqlDbType.DateTime).Value = Orden.fecha_orden;
         sqlComando.Parameters.Add("@descripcion", System.Data.SqlDbType.VarChar, 200).Value = Orden.descripcion;
         sqlComando.Parameters.Add("@monto_bs", System.Data.SqlDbType.Float).Value = Orden.monto_bs;
@@ -3859,7 +3859,7 @@ namespace ICRL.BD
         sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Orden.id_cotizacion;
         sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Orden.id_item;
         sqlComando.Parameters.Add("@tipo_origen", System.Data.SqlDbType.SmallInt).Value = Orden.tipo_origen;
-        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 20).Value = Orden.numero_orden;
+        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 30).Value = Orden.numero_orden;
         sqlComando.Parameters.Add("@fecha_orden", System.Data.SqlDbType.DateTime).Value = Orden.fecha_orden;
         sqlComando.Parameters.Add("@descripcion", System.Data.SqlDbType.VarChar, 200).Value = Orden.descripcion;
         sqlComando.Parameters.Add("@monto_bs", System.Data.SqlDbType.Float).Value = Orden.monto_bs;
@@ -3870,6 +3870,32 @@ namespace ICRL.BD
         blnRespuesta = true;
       }
       catch (Exception)
+      {
+        blnRespuesta = false;
+      }
+      finally
+      {
+        sqlConexion.Close();
+        sqlConexion.Dispose();
+      }
+      return blnRespuesta;
+    }
+    public static bool OrdenBorrar(int Flujo, int Cotizacion, long Item)
+    {
+      bool blnRespuesta = false;
+      string strComando = "DELETE FROM [dbo].[cotizacion_ordenes] WHERE id_flujo = @id_flujo AND id_cotizacion = @id_cotizacion AND id_item = @id_item";
+      SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+      try
+      {
+        sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = Flujo;
+        sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = Cotizacion;
+        sqlComando.Parameters.Add("@id_item", System.Data.SqlDbType.BigInt).Value = Item;
+        sqlConexion.Open();
+        sqlComando.ExecuteNonQuery();
+        blnRespuesta = true;
+      }
+      catch (Exception ex)
       {
         blnRespuesta = false;
       }

@@ -1487,6 +1487,9 @@ namespace ICRL.Presentacion
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      int vTipoItem = 0;
       int vIndex = 0;
       string vNumeroOrden = string.Empty;
       string vProveedor = string.Empty;
@@ -1527,9 +1530,7 @@ namespace ICRL.Presentacion
 
 
         //Grabar en la tabla
-        int vIdFlujo = 0;
-        int vIdCotizacion = 0;
-        int vTipoItem = 0;
+
 
         vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
@@ -1544,6 +1545,8 @@ namespace ICRL.Presentacion
 
         vResultado = vAccesoDatos.fActualizaLiquidacionRP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
         PSubeFormularioCotiRoboParcial(vNumeroOrden);
+        vResultado = vAccesoDatos.FCotizacionRoboParcialCambiaEstadoSumatoria(vIdFlujo, vIdCotizacion, (short)vTipoItem, vProveedor);
+        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, (short)vTipoItem);
       }
     }
 
@@ -1575,13 +1578,19 @@ namespace ICRL.Presentacion
           vSBNumeroOrden.Clear();
           vSBNumeroOrden.Append("OC-");
           vNumeroOrden = TextBoxNroFlujo.Text.Trim();
-          vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
           vSBNumeroOrden.Append(vNumeroOrden);
           vSBNumeroOrden.Append("-RP-");
+          vNumeroOrden = vIdCotizacion.ToString();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-");
           vNumeroOrden = vContador.ToString();
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
           vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          //inicializar el estado a 1
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
           vContador++;
         }
       }
@@ -1637,13 +1646,19 @@ namespace ICRL.Presentacion
           vSBNumeroOrden.Clear();
           vSBNumeroOrden.Append("OT-");
           vNumeroOrden = TextBoxNroFlujo.Text.Trim();
-          vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
           vSBNumeroOrden.Append(vNumeroOrden);
           vSBNumeroOrden.Append("-RP-");
+          vNumeroOrden = vIdCotizacion.ToString();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-");
           vNumeroOrden = vContador.ToString();
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
           vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          //inicializar el estado a 1
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
           vContador++;
         }
       }

@@ -2634,6 +2634,115 @@ namespace ICRL.BD
       }
       return vResultado;
     }
+
+    public int FCotizacionRoboParcialCambiaEstadoSumatoria(int pIdFlujo, int pIdCotizacion, short pIdTipoItem, string pProveedor)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_robo_parcial_sumatoria vTablacotizacion_robo_parcial_sumatoria = new cotizacion_robo_parcial_sumatoria();
+
+        vTablacotizacion_robo_parcial_sumatoria = db.cotizacion_robo_parcial_sumatoria.Find(pIdFlujo, pIdCotizacion, pIdTipoItem, pProveedor);
+
+        vTablacotizacion_robo_parcial_sumatoria.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    public int FCotizacionRCVehicularCambiaEstadoSumatoria(int pIdFlujo, int pIdCotizacion, short pIdTipoItem, string pProveedor)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_rc_vehicular_sumatoria vTablacotizacion_rc_vehicular_sumatoria = new cotizacion_rc_vehicular_sumatoria();
+
+        vTablacotizacion_rc_vehicular_sumatoria = db.cotizacion_rc_vehicular_sumatoria.Find(pIdFlujo, pIdCotizacion, pIdTipoItem, pProveedor);
+
+        vTablacotizacion_rc_vehicular_sumatoria.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    public int FCotizacionRCObjetosCambiaEstadoOrdenes(int pIdFlujo, int pIdCotizacion, long vIdItem)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_ordenes vTablacotizacion_rc_objetos_ordenes = new cotizacion_ordenes();
+
+        vTablacotizacion_rc_objetos_ordenes = db.cotizacion_ordenes.Find(pIdFlujo, pIdCotizacion, vIdItem);
+
+        vTablacotizacion_rc_objetos_ordenes.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    public int FCotizacionRCPersonasCambiaEstadoOrdenes(int pIdFlujo, int pIdCotizacion, long vIdItem)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_ordenes vTablacotizacion_rc_personas_ordenes = new cotizacion_ordenes();
+
+        vTablacotizacion_rc_personas_ordenes = db.cotizacion_ordenes.Find(pIdFlujo, pIdCotizacion, vIdItem);
+
+        vTablacotizacion_rc_personas_ordenes.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    public int FCotizacionPTDaniosPropiosCambiaEstadoOrdenes(int pIdFlujo, int pIdCotizacion, long vIdItem)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_ordenes vTablacotizacion_pt_daniospropios_ordenes = new cotizacion_ordenes();
+
+        vTablacotizacion_pt_daniospropios_ordenes = db.cotizacion_ordenes.Find(pIdFlujo, pIdCotizacion, vIdItem);
+
+        vTablacotizacion_pt_daniospropios_ordenes.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    public int FCotizacionPTRoboCambiaEstadoOrdenes(int pIdFlujo, int pIdCotizacion, long vIdItem)
+    {
+      int vResultado = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        cotizacion_ordenes vTablacotizacion_pt_daniospropios_ordenes = new cotizacion_ordenes();
+
+        vTablacotizacion_pt_daniospropios_ordenes = db.cotizacion_ordenes.Find(pIdFlujo, pIdCotizacion, vIdItem);
+
+        vTablacotizacion_pt_daniospropios_ordenes.id_estado = 2;
+        db.SaveChanges();
+
+        vResultado = 1;
+      }
+      return vResultado;
+    }
+
     #endregion
 
   }

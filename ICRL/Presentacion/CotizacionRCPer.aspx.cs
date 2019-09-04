@@ -532,9 +532,13 @@ namespace ICRL.Presentacion
       vSBNumeroOrden.Clear();
       vSBNumeroOrden.Append("OP-");
       vNumeroOrden = TextBoxNroFlujo.Text.Trim();
-      vNumeroOrden = vNumeroOrden.PadLeft(7, '0');
+      vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
       vSBNumeroOrden.Append(vNumeroOrden);
       vSBNumeroOrden.Append("-PE-");
+      vNumeroOrden = vIdCotizacion.ToString();
+      vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+      vSBNumeroOrden.Append(vNumeroOrden);
+      vSBNumeroOrden.Append("-");
       vNumeroOrden = vContador.ToString();
       vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
       vNumeroOrden = vSBNumeroOrden.ToString();
@@ -578,6 +582,19 @@ namespace ICRL.Presentacion
         }
       }
       vTipoOrden.monto_bs = vSumaGastos;
+
+      //ajuste ordenes
+      CotizacionICRL.TipoOrdenTraer vTipoOrdenTraer;
+      CotizacionICRL.TipoOrden vTipoOrdenAux = new CotizacionICRL.TipoOrden();
+      vTipoOrdenTraer = CotizacionICRL.OrdenTraer(vIdFlujo, vIdCotizacion);
+
+      if (vTipoOrdenTraer.Ordenes.Count > 0)
+      {
+        //si existe registro se borra
+        vTipoOrdenAux = vTipoOrdenTraer.Ordenes.FirstOrDefault();
+        vResultado = CotizacionICRL.OrdenBorrar(vTipoOrdenAux.id_flujo, vTipoOrdenAux.id_cotizacion, vTipoOrdenAux.id_item);
+      }
+
       vResultado = CotizacionICRL.OrdenRegistrar(vTipoOrden);
       if (vResultado)
       {
@@ -600,7 +617,8 @@ namespace ICRL.Presentacion
         Ordenes.numero_orden,
         Ordenes.id_estado,
         Ordenes.descripcion,
-        Ordenes.monto_bs
+        Ordenes.monto_bs,
+        Ordenes.id_item
       }).ToList();
       GridViewOrdenes.DataBind();
     }
@@ -645,17 +663,22 @@ namespace ICRL.Presentacion
         vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
         vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
 
+        string vIdItemAux = string.Empty;
+        vIdItemAux = GridViewOrdenes.Rows[vIndex].Cells[7].Text;
+        long vIdItem = 0;
+        vIdItem = long.Parse(vIdItemAux);
 
         //Grabar en la tabla
         int vIdFlujo = 0;
         int vIdCotizacion = 0;
-        int vTipoItem = 0;
-
+        
         vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
         vResultado = vAccesoDatos.fActualizaLiquidacionPE(vIdFlujo, vIdCotizacion, vNumeroOrden);
         PSubeFormularioCotiRCPersonas(vNumeroOrden);
+        vResultado = vAccesoDatos.FCotizacionRCPersonasCambiaEstadoOrdenes(vIdFlujo, vIdCotizacion, vIdItem);
+        pCargaOrdenes(vIdFlujo, vIdCotizacion);
       }
     }
 
@@ -882,5 +905,27 @@ namespace ICRL.Presentacion
     }
 
     #endregion
+
+    protected void GridViewOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+      //verificar esa rutina
+      if (!VerificarPagina(true)) return;
+      if (e.Row.RowType == DataControlRowType.DataRow)
+      {
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[1].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[6].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[6].Controls[0] as Button).Enabled = false;
+        }
+      }
+    }
   }
 }

@@ -454,7 +454,7 @@
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupReparaciones" BehaviorID="ModalPopupReparacionesBehavior"
                 TargetControlID="ButtonOcultoParaPopupReparaciones" PopupControlID="PanelModalPopupABMReparaciones"
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleReparaciones"
-                RepositionMode="None" X="10" Y="10">
+                RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMReparaciones" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleReparaciones" CssClass="modalPopupHeader">
@@ -498,6 +498,12 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelPrecioCotizadoRepa" runat="server" Text="Precio Cotizado"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaPrecioCotizado" runat="server" Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepaMonto" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepaPrecioCotizado" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorRepaMonto"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxRepaPrecioCotizado" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
@@ -506,6 +512,12 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaMontoDesc" runat="server" Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepaMontoDesc" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepaMontoDesc" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorRepaMontoDesc"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxRepaMontoDesc" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
@@ -545,7 +557,7 @@
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRepuestos" BehaviorID="ModalPopupRepuestosBehavior"
                 TargetControlID="ButtonOcultoParaPopupRepuestos" PopupControlID="PanelModalPopupABMRepuestos"
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleRepuestos"
-                RepositionMode="None" X="10" Y="10">
+                RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRepuestos" CssClass="modalPopupHeader">
@@ -585,6 +597,12 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelPrecioCotizadoRepu" runat="server" Text="Precio Cotizado"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepuPrecioCotizado" runat="server" Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepuMonto" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepuPrecioCotizado" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorRepuMonto"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxRepuPrecioCotizado" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
@@ -593,6 +611,12 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepuMontoDesc" runat="server" Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepuMontoDesc" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepuMontoDesc" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorRepuMontoDesc"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxRepuMontoDesc" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelRepuPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
@@ -631,7 +655,7 @@
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupSumatorias" BehaviorID="ModalPopupSumatoriasBehavior"
                 TargetControlID="ButtonOcultoParaPopupSumatorias" PopupControlID="PanelModalPopupABMSumatorias"
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleSumatorias"
-                RepositionMode="None" X="10" Y="10">
+                RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMSumatorias" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleSumatorias" CssClass="modalPopupHeader">
@@ -691,7 +715,7 @@
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRecepRepuestos" BehaviorID="ModalPopupRecepRepuestosBehavior"
                 TargetControlID="ButtonOcultoParaPopupRecepRepuestos" PopupControlID="PanelModalPopupRecepRepuestos"
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleRecepRepuestos"
-                RepositionMode="None" X="10" Y="10">
+                RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupRecepRepuestos" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleRecepRepuestos" CssClass="modalPopupHeader">

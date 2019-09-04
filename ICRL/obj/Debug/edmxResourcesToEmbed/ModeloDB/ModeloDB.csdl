@@ -277,7 +277,7 @@
     <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
     <Property Name="id_item" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tipo_origen" Type="Int16" />
-    <Property Name="numero_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="fecha_orden" Type="DateTime" Precision="3" />
     <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="monto_bs" Type="Double" />

@@ -281,7 +281,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="id_cotizacion" Type="int" Nullable="false" />
     <Property Name="id_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipo_origen" Type="smallint" />
-    <Property Name="numero_orden" Type="varchar" MaxLength="20" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="fecha_orden" Type="datetime" />
     <Property Name="descripcion" Type="varchar" MaxLength="200" />
     <Property Name="monto_bs" Type="float" />
