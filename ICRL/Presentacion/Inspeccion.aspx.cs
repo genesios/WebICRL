@@ -3468,6 +3468,7 @@ namespace ICRL.Presentacion
       vInspRCVehicular01.telefonoTercero = TextBoxTelfTerceroRCV01.Text;
       vInspRCVehicular01.marca = DropDownListMarcaRCV01.SelectedItem.Text;
       vInspRCVehicular01.modelo = TextBoxModeloRCV01.Text;
+      vInspRCVehicular01.estado = 1;
       int vTempo = 0;
       vInspRCVehicular01.anio = vTempo;
       if (int.TryParse(TextBoxAnioRCV01.Text, out vTempo))

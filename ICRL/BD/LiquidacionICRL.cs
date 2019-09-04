@@ -343,10 +343,10 @@ namespace ICRL.BD
           if (sqlDatos["fecha_recepcion"] != DBNull.Value) tdpFila.fecha_recepcion = Convert.ToDateTime(sqlDatos["fecha_recepcion"]);
           if (sqlDatos["inspeccion"] != DBNull.Value) tdpFila.inspeccion = Convert.ToBoolean(sqlDatos["inspeccion"]);
           if (sqlDatos["liquidacion"] != DBNull.Value) tdpFila.liquidacion = Convert.ToBoolean(sqlDatos["liquidacion"]);
-          if (sqlDatos["num_factura"] != DBNull.Value) tdpFila.numero_orden = Convert.ToString(sqlDatos["num_factura"]);
+          if (sqlDatos["num_factura"] != DBNull.Value) tdpFila.num_factura = Convert.ToString(sqlDatos["num_factura"]);
           if (sqlDatos["id_estado"] != DBNull.Value) tdpFila.id_estado = Convert.ToInt16(sqlDatos["id_estado"]);
           if (sqlDatos["fecha_liquidacion"] != DBNull.Value) tdpFila.fecha_liquidacion = Convert.ToDateTime(sqlDatos["fecha_liquidacion"]);
-          if (sqlDatos["fecha_orden"] != DBNull.Value) tdpFila.fecha_liquidacion = Convert.ToDateTime(sqlDatos["fecha_orden"]);
+          if (sqlDatos["fecha_orden"] != DBNull.Value) tdpFila.fecha_orden = Convert.ToDateTime(sqlDatos["fecha_orden"]);
           objRespuesta.Liquidaciones001.Add(tdpFila);
         }
         sqlDatos.Close();
@@ -593,6 +593,33 @@ namespace ICRL.BD
         sqlConexion.Close();
         sqlConexion.Dispose();
       }
+      return blnRespuesta;
+    }
+    public static bool ActualizarFlujo(int Flujo, short Estado)
+    {
+      bool blnRespuesta = false;
+      SqlConnection sqlConexion = new SqlConnection(CotizacionICRL.strCadenaConexion);
+      string strComando = "UPDATE [dbo].[Flujo] SET [estado] = @estado WHERE idflujo = @idFlujo";
+      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+      try
+      {
+        sqlComando.Parameters.Add("@idFlujo", System.Data.SqlDbType.Int).Value = Flujo;
+        sqlComando.Parameters.Add("@estado", System.Data.SqlDbType.Int).Value = Estado;
+        sqlConexion.Open();
+        sqlComando.ExecuteNonQuery();
+        sqlComando.Dispose();
+        blnRespuesta = true;
+      }
+      catch (Exception)
+      {
+        blnRespuesta = false;
+      }
+      finally
+      {
+        sqlConexion.Close();
+        sqlConexion.Dispose();
+      }
+
       return blnRespuesta;
     }
   }

@@ -2617,17 +2617,17 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
-    public int FCotizacionCambiaEstado(int pIdCotizacion)
+    public int FCotizacionDaniosPropiosCambiaEstadoSumatoria(int pIdFlujo, int pIdCotizacion, short pIdTipoItem, string pProveedor)
     {
       int vResultado = 0;
 
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
-        Cotizacion vTablaCotizacion = new Cotizacion();
+        cotizacion_danios_propios_sumatoria vTablacotizacion_danios_propios_sumatoria = new cotizacion_danios_propios_sumatoria();
 
-        vTablaCotizacion = db.Cotizacion.Find(pIdCotizacion);
+        vTablacotizacion_danios_propios_sumatoria = db.cotizacion_danios_propios_sumatoria.Find(pIdFlujo, pIdCotizacion, pIdTipoItem, pProveedor);
 
-        vTablaCotizacion.estado = 2;
+        vTablacotizacion_danios_propios_sumatoria.id_estado = 2;
         db.SaveChanges();
 
         vResultado = 1;

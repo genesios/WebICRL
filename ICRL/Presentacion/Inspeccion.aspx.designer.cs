@@ -1723,6 +1723,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxPerDetDescripcion;
         
         /// <summary>
+        /// ValidadorPerMonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorPerMonto;
+        
+        /// <summary>
+        /// RegExValidatorPerMonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorPerMonto;
+        
+        /// <summary>
         /// ButtonNuevoPerDet control.
         /// </summary>
         /// <remarks>

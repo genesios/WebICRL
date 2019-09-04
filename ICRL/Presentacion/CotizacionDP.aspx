@@ -419,7 +419,7 @@
         </div>
 
         <div>
-            <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand">
+            <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand" OnRowDataBound="GridViewOrdenes_RowDataBound">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -454,7 +454,7 @@
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupReparaciones" BehaviorID="ModalPopupReparacionesBehavior"
                 TargetControlID="ButtonOcultoParaPopupReparaciones" PopupControlID="PanelModalPopupABMReparaciones"
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleReparaciones"
-                RepositionMode="None" X="10" Y="10">
+                RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="PanelModalPopupABMReparaciones" runat="server" CssClass="modalPopup">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleReparaciones" CssClass="modalPopupHeader">

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="Liquidacion.aspx.cs" Inherits="ICRL.Presentacion.Liquidacion"  MaintainScrollPositionOnPostback="true" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
 </asp:Content>
@@ -86,12 +87,15 @@
             <asp:Label ID="lblNumeroFactura" runat="server" Text='<%# Eval("numero_factura") %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
+            <asp:Label ID="lblNumeroFacturaEditar" runat="server" Text='<%# Eval("numero_factura") %>' Visible="false"></asp:Label>
             <asp:TextBox ID="txbNumeroFacturaEditar" runat="server" Text='<%# Eval("numero_factura") %>' ValidationGroup="ValidacionEditarFactura"></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvNumeroFacturaEditar" runat="server" ControlToValidate="txbNumeroFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="revNumeroFacturaEditar" runat="server" ControlToValidate="txbNumeroFacturaEditar"
               ValidationExpression="^[0-9]*$" Text="* Solo números" Display="Dynamic" CssClass="errormessage"
               ValidationGroup="ValidacionEditarFactura"></asp:RegularExpressionValidator>
+            <asp:CompareValidator ID="comNumeroFacturaEditar" runat="server" ControlToValidate="txbNumeroFacturaEditar" ValueToCompare="0" Type="Integer" Operator="GreaterThan"
+              Text="* Valor inválido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:CompareValidator>
           </EditItemTemplate>
           <FooterTemplate>
             <asp:TextBox ID="txbNumeroFacturaNuevo" runat="server" Text=""></asp:TextBox><br />
@@ -100,6 +104,8 @@
             <asp:RegularExpressionValidator ID="revNumeroFacturaNuevo" runat="server" ControlToValidate="txbNumeroFacturaNuevo"
               ValidationExpression="^[0-9]*$" Text="* Solo números" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"
               CssClass="errormessage"></asp:RegularExpressionValidator>
+            <asp:CompareValidator ID="comNumeroFacturaNuevo" runat="server" ControlToValidate="txbNumeroFacturaNuevo" ValueToCompare="0" Type="Integer" Operator="GreaterThan"
+              Text="* Valor inválido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionNuevaFactura"></asp:CompareValidator>
           </FooterTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Fecha Emisión Factura">
@@ -108,19 +114,23 @@
               Text='<%# string.IsNullOrEmpty(Eval("fecha_emision").ToString()) ? Eval("fecha_emision") : Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
-            <asp:TextBox ID="txbEmisionFacturaEditar" runat="server" ValidationGroup="ValidacionEditarFactura" MaxLength="10" placeholder="dd/mm/aaaa"
+            <asp:TextBox ID="txbEmisionFacturaEditar" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa" ValidationGroup="ValidacionEditarFactura"
               Text='<%# string.IsNullOrEmpty(Eval("fecha_emision").ToString()) ? Eval("fecha_emision") : Convert.ToDateTime(Eval("fecha_emision").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEmisionFacturaEditar" runat="server" ControlToValidate="txbEmisionFacturaEditar" Text="* Fecha no válida"
               ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionEditarFactura"></asp:CustomValidator>
+            <ajaxToolkit:CalendarExtender ID="calEmisionFacturaEditar" runat="server" BehaviorID="calEmisionFacturaEditar" TargetControlID="txbEmisionFacturaEditar"
+              DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
           </EditItemTemplate>
           <FooterTemplate>
-            <asp:TextBox ID="txbEmisionFacturaNuevo" runat="server" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
+            <asp:TextBox ID="txbEmisionFacturaNuevo" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEmisionFacturaNuevo" runat="server" ControlToValidate="txbEmisionFacturaNuevo"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionNuevaFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEmisionFacturaNuevo" runat="server" ControlToValidate="txbEmisionFacturaNuevo" Text="* Fecha no válida"
               ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"></asp:CustomValidator>
+            <ajaxToolkit:CalendarExtender ID="calEmisionFacturaNuevo" runat="server" BehaviorID="calEmisionFacturaNuevo" TargetControlID="txbEmisionFacturaNuevo"
+              DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
           </FooterTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Fecha Recepción Factura">
@@ -129,19 +139,23 @@
               Text='<%# string.IsNullOrEmpty(Eval("fecha_entrega").ToString()) ? Eval("fecha_entrega") : Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:Label>
           </ItemTemplate>
           <EditItemTemplate>
-            <asp:TextBox ID="txbEntregaFacturaEditar" runat="server" MaxLength="10" ValidationGroup="ValidacionEditarFactura" placeholder="dd/mm/aaaa"
+            <asp:TextBox ID="txbEntregaFacturaEditar" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa" ValidationGroup="ValidacionEditarFactura"
               Text='<%# string.IsNullOrEmpty(Eval("fecha_entrega").ToString()) ? Eval("fecha_entrega") : Convert.ToDateTime(Eval("fecha_entrega").ToString()).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) %>'></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionEditarFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEntregaFacturaEditar" runat="server" ControlToValidate="txbEntregaFacturaEditar" Text="* Fecha no válida"
               ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionEditarFactura"></asp:CustomValidator>
+            <ajaxToolkit:CalendarExtender ID="calEntregaFacturaEditar" runat="server" BehaviorID="calEntregaFacturaEditar" TargetControlID="txbEntregaFacturaEditar"
+              DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
           </EditItemTemplate>
           <FooterTemplate>
-            <asp:TextBox ID="txbEntregaFacturaNuevo" runat="server" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
+            <asp:TextBox ID="txbEntregaFacturaNuevo" runat="server" AutoComplete="off" MaxLength="10" placeholder="dd/mm/aaaa"></asp:TextBox><br />
             <asp:RequiredFieldValidator ID="rfvEntregaFacturaNuevo" runat="server" ControlToValidate="txbEntregaFacturaNuevo"
               Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionNuevaFactura"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="cuvEntregaFacturaNuevo" runat="server" ControlToValidate="txbEntregaFacturaNuevo" Text="* Fecha no válida"
               ClientValidationFunction="ValidarFecha" CssClass="errormessage" Display="Dynamic" ValidationGroup="ValidacionNuevaFactura"></asp:CustomValidator>
+            <ajaxToolkit:CalendarExtender ID="calEntregaFacturaNuevo" runat="server" BehaviorID="calEntregaFacturaNuevo" TargetControlID="txbEntregaFacturaNuevo"
+              DaysModeTitleFormat="dd/MM/yyyy" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
           </FooterTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Monto Factura" ItemStyle-CssClass="price" HeaderStyle-CssClass="price">
@@ -225,7 +239,7 @@
           Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionTipoCambio"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="covTipoCambio" runat="server" ControlToValidate="txbTipoCambio" ValidationGroup="ValidacionTipoCambio"
           Type="Double" Operator="DataTypeCheck" Text="* Valor inválido" Display="Dynamic" CssClass="errormessage"></asp:CompareValidator><br />
-        <asp:TextBox ID="txbTipoCambio" runat="server" Text="6.96" MaxLength="5"></asp:TextBox>
+        <asp:TextBox ID="txbTipoCambio" runat="server" MaxLength="5" Text="6.96"></asp:TextBox>
       </div>
     </td></tr>
     <tr><td>
@@ -321,7 +335,7 @@
     </td></tr>
     <tr><td>
       <asp:Button ID="btnGenerarLiquidacion" runat="server" Text="Generar Liquidación" ValidationGroup="ValidacionTipoCambio" OnClick="btnGenerarLiquidacion_Click" />
-      <asp:Button ID="btnLiquidacionTotal" runat="server" Text="Liquidación Total" ValidationGroup="ValidacionTipoCambio" />
+      <asp:Button ID="btnLiquidacionTotal" runat="server" Text="Liquidación Total" ValidationGroup="ValidacionTipoCambio" OnClick="btnLiquidacionTotal_Click" />
     </td></tr>
   </table>
   

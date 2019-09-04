@@ -851,6 +851,14 @@
                                                     <asp:Label ID="LabelPerDetDescrip" runat="server" Text="Descripción"></asp:Label><br />
                                                     <asp:TextBox ID="TextBoxPerDetDescripcion" runat="server" Width="255px"></asp:TextBox>
                                                 </div>
+                                                <div class="twentyfive">
+                                                    <asp:RequiredFieldValidator ID="ValidadorPerMonto" runat="server" ErrorMessage="*" ControlToValidate="TextBoxPerDetMontoGasto" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegExValidatorPerMonto"
+                                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                                        ControlToValidate="TextBoxPerDetMontoGasto" CssClass="errormessage"
+                                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                                    </asp:RegularExpressionValidator>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>

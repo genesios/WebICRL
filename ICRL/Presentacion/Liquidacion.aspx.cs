@@ -11,6 +11,7 @@ namespace ICRL.Presentacion
   public partial class Liquidacion : System.Web.UI.Page
   {
     private int IdFlujo = 0;
+    private Int16 EstadoFlujo = 4;
     private double TotalCotizacionBs = 0.0;
     private double TotalCotizacionUs = 0.0;
     private double TotalLiquidacionBs = 0.0;
@@ -19,21 +20,9 @@ namespace ICRL.Presentacion
     int AjusteMas = 2;
     int AjusteMenos = -2;
 
-    private bool VerificarPagina(bool EsEvento)
-    {
-      bool blnRespuesta = true;
-      if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
-      {
-        blnRespuesta = false;
-        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
-      }
-      return blnRespuesta;
-    }
-
     #region Eventos de Controles
     protected void Page_Load(object sender, EventArgs e)
     {
-      if (!VerificarPagina(false)) return;
       if (!IsPostBack)
       {
         RecuperarDatosFacturas();
@@ -46,15 +35,14 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       GridViewDatosFactura.EditIndex = -1;
       RecuperarDatosFacturas();
       LlenarMenuFacturas();
     }
     protected void GridViewDatosFactura_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
+      string numeroFactura = ((Label)GridViewDatosFactura.Rows[e.RowIndex].FindControl("lblNumeroFactura")).Text;
       long idFactura_ = string.IsNullOrWhiteSpace(idFactura) ? 0 : Convert.ToInt64(idFactura);
 
       int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
@@ -62,8 +50,12 @@ namespace ICRL.Presentacion
 
       if (operacionExitosa)
       {
+        ActualizarAjusteMenor("0"); //cada vez que se elimina una factura, se actualiza el dato de ajuste
+        ActualizarDatosOrden(numeroFactura); //cada vez que se elimina una factura, se actualiza la orden asociada
         RecuperarDatosFacturas();
+        RecuperarDatosOrdenes();
         LlenarMenuFacturas();
+        RecuperarDatosLiquidacion();
 
         LabelMensaje.Visible = false;
       }
@@ -75,7 +67,6 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowEditing(object sender, GridViewEditEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       GridViewDatosFactura.EditIndex = e.NewEditIndex;
 
       RecuperarDatosFacturas();
@@ -83,7 +74,6 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       string idFactura = GridViewDatosFactura.DataKeys[e.RowIndex].Values["id_factura"].ToString();
       string numero = ((TextBox)GridViewDatosFactura.Rows[e.RowIndex].FindControl("txbNumeroFacturaEditar")).Text;
       string fechaEmision = ((TextBox)GridViewDatosFactura.Rows[e.RowIndex].FindControl("txbEmisionFacturaEditar")).Text;
@@ -115,9 +105,15 @@ namespace ICRL.Presentacion
 
       if (operacionExitosa)
       {
+        //string numeroViejo = e.OldValues[""]
+
         GridViewDatosFactura.EditIndex = -1;
+        ActualizarAjusteMenor("0"); //cada vez que se actualiza una factura se actualiza el dato de ajuste
+        ActualizarDatosOrden(((Label)GridViewDatosFactura.Rows[e.RowIndex].FindControl("lblNumeroFacturaEditar")).Text); //cada vez que se actualiza una factura, se actualiza la orden asociada
         RecuperarDatosFacturas();
+        RecuperarDatosOrdenes();
         LlenarMenuFacturas();
+        RecuperarDatosLiquidacion();
 
         LabelMensaje.Visible = false;
       }
@@ -129,13 +125,12 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       if (e.CommandName.Equals("AddNew"))
       {
-        string numero = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbNumeroFacturaNuevo")).Text;
-        string fechaEmision = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbEmisionFacturaNuevo")).Text;
-        string fechaEntrega = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbEntregaFacturaNuevo")).Text;
-        string monto = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbMontoFacturaNuevo")).Text;
+        string numero = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbNumeroFacturaNuevo")).Text.Trim();
+        string fechaEmision = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbEmisionFacturaNuevo")).Text.Trim();
+        string fechaEntrega = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbEntregaFacturaNuevo")).Text.Trim();
+        string monto = ((TextBox)GridViewDatosFactura.FooterRow.FindControl("txbMontoFacturaNuevo")).Text.Trim();
         string moneda = ((DropDownList)GridViewDatosFactura.FooterRow.FindControl("ddlMonedaFacturaNuevo")).SelectedItem.Value;
 
         long numero_ = Convert.ToInt64(numero);
@@ -158,6 +153,7 @@ namespace ICRL.Presentacion
         {
           RecuperarDatosFacturas();
           LlenarMenuFacturas();
+          RecuperarDatosLiquidacion();
 
           LabelMensaje.Visible = false;
           //txbTipoCambio.Enabled = true;
@@ -171,7 +167,6 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosFactura_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         string idFactura = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "id_factura"));
@@ -185,7 +180,6 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosOrden_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.Footer)
       {
         Label lblTotalCotizacionBs = e.Row.FindControl("lblTotalCotizacionBs") as Label;
@@ -206,7 +200,6 @@ namespace ICRL.Presentacion
     }
     protected void GridViewDatosLiquidacion_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       if (e.Row.RowType == DataControlRowType.Footer)
       {
         Label lblTotalLiquidacionBs = e.Row.FindControl("lblTotalLiquidacionBs") as Label;
@@ -232,7 +225,6 @@ namespace ICRL.Presentacion
     }
     protected void btnGenerarLiquidacion_Click(object sender, EventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       bool operacionExitosa = true;
       List<LiquidacionICRL.TipoLiquidacion001> ordenesLiquidadas = new List<LiquidacionICRL.TipoLiquidacion001>();
 
@@ -307,7 +299,6 @@ namespace ICRL.Presentacion
     }
     protected void btnAjusteMenor_Click(object sender, EventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       TipoCambio = double.Parse(txbTipoCambio.Text);
 
       double saldoLiquidacionBs_ = 0.0;
@@ -320,21 +311,6 @@ namespace ICRL.Presentacion
       if (saldoLiquidacionBs_ != 0 &&
         saldoLiquidacionBs_ >= AjusteMenos && saldoLiquidacionBs_ <= AjusteMas)
       {
-        /*foreach (GridViewRow row in GridViewDatosLiquidacion.Rows)
-        {
-          if (row.RowType == DataControlRowType.DataRow)
-          {
-            string idFactura = ((Label)row.FindControl("lblId")).Text;
-
-            if (string.IsNullOrWhiteSpace(idFactura))
-            {
-              Label lblLiquidacionBs = (Label)row.FindControl("lblLiquidacionBs");
-              lblLiquidacionBs.Text = saldoLiquidacionBs_.ToString("N");
-
-              break;
-            }
-          }
-        }*/
         GridViewRow row = GridViewDatosLiquidacion.Rows[GridViewDatosLiquidacion.Rows.Count - 1];
         string idFactura = ((Label)row.FindControl("lblId")).Text;
 
@@ -366,27 +342,26 @@ namespace ICRL.Presentacion
     }
     protected void btnGuardarLiquidacion_Click(object sender, EventArgs e)
     {
-      if (!VerificarPagina(true)) return;
       bool operacionExitosa = true;
 
       foreach (GridViewRow row in GridViewDatosLiquidacion.Rows)
       {
         if (row.RowType == DataControlRowType.DataRow)
         {
+          int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
           string idFactura = ((Label)row.FindControl("lblId")).Text;
+          string numero = ((Label)row.FindControl("lblNumero")).Text;
+          string fechaEmision = ((Label)row.FindControl("lblFechaEmision")).Text;
+          string fechaEntrega = ((Label)row.FindControl("lblFechaRecepcion")).Text;
+          string monto = ((Label)row.FindControl("lblLiquidacionBs")).Text;
+          string moneda = ((Label)row.FindControl("lblMoneda")).Text;
+          string observaciones = ((TextBox)row.FindControl("txbObservaciones")).Text;
+          bool asociada = true;
+          double tipo_cambio_ = 1.0;
+          double.TryParse(txbTipoCambio.Text, out tipo_cambio_);
 
           if (!string.IsNullOrWhiteSpace(idFactura))
-          {
-            string numero = ((Label)row.FindControl("lblNumero")).Text;
-            string fechaEmision = ((Label)row.FindControl("lblFechaEmision")).Text;
-            string fechaEntrega = ((Label)row.FindControl("lblFechaRecepcion")).Text;
-            string monto = ((Label)row.FindControl("lblLiquidacionBs")).Text;
-            string moneda = ((Label)row.FindControl("lblMoneda")).Text;
-            string observaciones = ((TextBox)row.FindControl("txbObservaciones")).Text;
-            bool asociada = true;
-            double tipo_cambio_ = 1.0;
-            double.TryParse(txbTipoCambio.Text, out tipo_cambio_);
-
+          {//actualizar facturas liquidadas
             long idFactura_ = Convert.ToInt64(idFactura);
             long numero_ = Convert.ToInt64(numero);
             DateTime fechaEmision_ = DateTime.ParseExact(fechaEmision, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
@@ -395,7 +370,6 @@ namespace ICRL.Presentacion
             Int16 moneda_ = Convert.ToInt16(moneda);
 
             LiquidacionICRL.TipoLiquidacion001Factura factura = new LiquidacionICRL.TipoLiquidacion001Factura();
-            int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
             factura.id_flujo = IdFlujo;
             factura.id_factura = idFactura_;
             factura.numero_factura = numero_;
@@ -412,6 +386,10 @@ namespace ICRL.Presentacion
             if (!operacionExitosa)
               break;
           }
+          else
+          {//actualizar ajuste menor
+            ActualizarAjusteMenor(monto);
+          }
         }
       }
 
@@ -426,6 +404,61 @@ namespace ICRL.Presentacion
       {
         btnGuardarLiquidacion.Enabled = true;
         LabelMensaje.Text = "Error al guardar la liquidación!";
+      }
+    }
+    protected void btnLiquidacionTotal_Click(object sender, EventArgs e)
+    {
+      int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
+      LiquidacionICRL.TipoTraerLiquidacion001 ordenes = LiquidacionICRL.TraerLiquidacion001(IdFlujo);
+      LiquidacionICRL.TipoTraerLiquidacion001Factura facturas = LiquidacionICRL.TraerLiquidacion001Factura(IdFlujo);
+
+      double totalCotizado = 0.0;
+      double totalFacturado = 0.0;
+
+      List<LiquidacionICRL.TipoLiquidacion001> ordenesActualizadas = new List<LiquidacionICRL.TipoLiquidacion001>();
+      foreach (LiquidacionICRL.TipoLiquidacion001 orden in ordenes.Liquidaciones001)
+      {
+        totalCotizado += orden.preciobs;
+
+        orden.id_estado = EstadoFlujo;
+        ordenesActualizadas.Add(orden);
+      }
+
+      foreach (LiquidacionICRL.TipoLiquidacion001Factura factura in facturas.Facturas)
+      {
+        if (factura.asociada)
+          totalFacturado += factura.monto;
+      }
+
+      if (totalCotizado == totalFacturado)
+      {
+        bool operacionExitosaFlujo = LiquidacionICRL.ActualizarFlujo(IdFlujo, EstadoFlujo);
+
+        foreach (LiquidacionICRL.TipoLiquidacion001 ordenActualizada in ordenesActualizadas)
+        {
+          bool operacionExitosaOrden = LiquidacionICRL.ModificarLiquidacion001(ordenActualizada);
+
+          if (!operacionExitosaOrden)
+            break;
+        }
+
+        if (operacionExitosaFlujo)
+        {
+          LabelMensaje.Visible = true;
+          LabelMensaje.Text = "LIQUIDACIÓN TOTAL realiza exitosamente!";
+
+          BloquearControlesLiquidacion(true);
+        }
+        else
+        {
+          LabelMensaje.Visible = true;
+          LabelMensaje.Text = "Error en el proceso de liquidación total!";
+        }
+      }
+      else
+      {
+        LabelMensaje.Visible = true;
+        LabelMensaje.Text = "Para proceder con la LIQUIDACIÓN TOTAL, los montos de TOTAL COTIZADO y TOTAL PAGADO deben ser iguales.";
       }
     }
     #endregion
@@ -454,8 +487,11 @@ namespace ICRL.Presentacion
         txbReclamo.Text = tipoFlujo.numeroReclamo;
         txbPoliza.Text = tipoFlujo.numeroPoliza;
         #endregion
+
+        BloquearControlesLiquidacion(false);
       }
     }
+
     protected string VerTextoMoneda(object valorMoneda)
     {
       string valor = valorMoneda.ToString();
@@ -479,8 +515,10 @@ namespace ICRL.Presentacion
       {
         try
         {
-          string numeroFactura = ((Label)row.FindControl("lblNumeroFactura")).Text;
-          listaFacturas.Add(numeroFactura);
+          string numeroFactura = ((Label)row.FindControl("lblNumeroFactura")).Text.Trim();
+
+          if (numeroFactura != "0")
+            listaFacturas.Add(numeroFactura);
         }
         catch { }
       }
@@ -526,6 +564,21 @@ namespace ICRL.Presentacion
           GridViewDatosFactura.DataSource = facturasDataset;
           GridViewDatosFactura.DataBind();
 
+          /**/
+          foreach (GridViewRow row in GridViewDatosFactura.Rows)
+          {
+            if (row.FindControl("lblNumeroFactura") == null)
+              continue;
+
+            string numeroFactura = ((Label)row.FindControl("lblNumeroFactura")).Text.Trim();
+            if (numeroFactura == "0")
+            {
+              row.Visible = false;
+              break;
+            }
+          }
+          /**/
+
           object tc = facturasDataset.Tables[0].Rows[0]["tipo_cambio"];
           string valorTC = "";
           if (tc != null)
@@ -545,7 +598,7 @@ namespace ICRL.Presentacion
       else
       {
         LabelMensaje.Visible = true;
-        LabelMensaje.Text = "Error en la recuperacion de los datos facturas!";
+        LabelMensaje.Text = "Error en la recuperación de los datos facturas!";
       }
     }
     protected void RecuperarDatosOrdenes()
@@ -613,59 +666,79 @@ namespace ICRL.Presentacion
       dt.Columns.Add("fechaemi");
       dt.Columns.Add("id");
 
+      GridViewRow rowAjuste = null;
       foreach (GridViewRow row in GridViewDatosFactura.Rows)
       {
-        if (row.RowType == DataControlRowType.DataRow)
+        /*if (row.RowType == DataControlRowType.DataRow)
+        {*/
+        string numeroFactura = ((Label)row.FindControl("lblNumeroFactura")).Text.Trim();
+
+        if (numeroFactura == "0")
         {
-          foreach (LiquidacionICRL.TipoLiquidacion001 ordenLiquidada in ordenesLiquidadas)
+          rowAjuste = row;
+          continue;
+        }
+
+        foreach (LiquidacionICRL.TipoLiquidacion001 ordenLiquidada in ordenesLiquidadas)
+        {
+          if (ordenLiquidada.liquidacion &&
+            numeroFactura == ordenLiquidada.num_factura.Trim() &&
+            !string.IsNullOrEmpty(numeroFactura))
           {
-            string numeroFactura = ((Label)row.FindControl("lblNumeroFactura")).Text.Trim();
+            string montoBs = ((Label)row.FindControl("lblMontoFactura")).Text.Trim();
+            string montoUs = "";
+            if (!string.IsNullOrWhiteSpace(montoBs) && montoBs != "&nbsp;")
+              montoUs = (Convert.ToDouble(montoBs) / TipoCambio).ToString("N");
+            string fechaRecepcion = ((Label)row.FindControl("lblEntregaFactura")).Text.Trim();
 
-            if (ordenLiquidada.liquidacion &&
-              numeroFactura == ordenLiquidada.num_factura.Trim() &&
-              !string.IsNullOrEmpty(numeroFactura))
-            {
-              string montoBs = ((Label)row.FindControl("lblMontoFactura")).Text.Trim();
-              string montoUs = "";
-              if (!string.IsNullOrWhiteSpace(montoBs) && montoBs != "&nbsp;")
-                montoUs = (Convert.ToDouble(montoBs) / TipoCambio).ToString("N");
-              string fechaRecepcion = ((Label)row.FindControl("lblEntregaFactura")).Text.Trim();
+            //string fechaLiquidacion = DateTime.Now.ToString("dd-MM-yyyy");
+            string observaciones = ((Label)row.FindControl("lblObservaciones")).Text.Trim();
+            string id = ((Label)row.FindControl("lblIdFactura")).Text;
+            string fechaEmision = ((Label)row.FindControl("lblEmisionFactura")).Text;
+            string moneda = ((Label)row.FindControl("lblIdMonedaFactura")).Text;
 
-              //string fechaLiquidacion = DateTime.Now.ToString("dd-MM-yyyy");
-              string observaciones = ((Label)row.FindControl("lblObservaciones")).Text.Trim();
-              string id = ((Label)row.FindControl("lblIdFactura")).Text;
-              string fechaEmision = ((Label)row.FindControl("lblEmisionFactura")).Text;
-              string moneda = ((Label)row.FindControl("lblIdMonedaFactura")).Text;
+            DataRow dr = dt.NewRow();
+            dr["orden"] = ordenLiquidada.numero_orden;
+            dr["preciobs"] = montoBs;
+            dr["precious"] = montoUs;
+            dr["fecharec"] = fechaRecepcion;
+            dr["numero"] = numeroFactura;
+            dr["observaciones"] = observaciones;
+            dr["id"] = id;
+            dr["fechaemi"] = fechaEmision;
+            dr["moneda"] = moneda;
 
-              DataRow dr = dt.NewRow();
-              dr["orden"] = ordenLiquidada.numero_orden;
-              dr["preciobs"] = montoBs;
-              dr["precious"] = montoUs;
-              dr["fecharec"] = fechaRecepcion;
-              dr["numero"] = numeroFactura;
-              dr["observaciones"] = observaciones;
-              dr["id"] = id;
-              dr["fechaemi"] = fechaEmision;
-              dr["moneda"] = moneda;
+            dt.Rows.Add(dr);
 
-              dt.Rows.Add(dr);
-
-              break;
-            }
+            break;
           }
         }
+        /*}*/
       }
 
       DataRow drAjuste = dt.NewRow();
       drAjuste["orden"] = "---AJUSTE---";
-      drAjuste["preciobs"] = "0";
-      drAjuste["precious"] = "0";
       drAjuste["fecharec"] = "";
       drAjuste["numero"] = "";
-      drAjuste["observaciones"] = "";
       drAjuste["id"] = "";
       drAjuste["fechaemi"] = "";
       drAjuste["moneda"] = "";
+      if (rowAjuste == null)
+      {
+        drAjuste["preciobs"] = "0";
+        drAjuste["precious"] = "0";
+        drAjuste["observaciones"] = "";
+      }
+      else
+      {
+        string montoBs = ((Label)rowAjuste.FindControl("lblMontoFactura")).Text.Trim();
+        string montoUs = "";
+        if (!string.IsNullOrWhiteSpace(montoBs) && montoBs != "&nbsp;")
+          montoUs = (Convert.ToDouble(montoBs) / TipoCambio).ToString("N");
+        drAjuste["preciobs"] = montoBs;
+        drAjuste["precious"] = montoUs;
+        drAjuste["observaciones"] = ((Label)rowAjuste.FindControl("lblObservaciones")).Text.Trim();
+      }
       dt.Rows.Add(drAjuste);
 
       GridViewDatosLiquidacion.DataSource = dt;
@@ -680,6 +753,82 @@ namespace ICRL.Presentacion
       {
         btnAjusteMenor.Enabled = false;
         btnGuardarLiquidacion.Enabled = false;
+      }
+    }
+    private void ActualizarAjusteMenor(string monto)
+    {
+      LiquidacionICRL.TipoTraerLiquidacion001Factura facturas = LiquidacionICRL.TraerLiquidacion001Factura(IdFlujo);
+      LiquidacionICRL.TipoLiquidacion001Factura registroAjusteMenor = facturas.Facturas.Find(x => x.numero_factura == 0);
+      double monto_ = Convert.ToDouble(monto);
+
+      if (registroAjusteMenor == null)
+      {//Se crea el registro de AJUSTE MENOR
+        registroAjusteMenor = new LiquidacionICRL.TipoLiquidacion001Factura();
+        registroAjusteMenor.id_flujo = IdFlujo;
+        registroAjusteMenor.monto = monto_;
+        registroAjusteMenor.observaciones = "(ajuste menor)";
+        registroAjusteMenor.asociada = true;
+        LiquidacionICRL.RegistrarLiquidacion001Factura(registroAjusteMenor);
+      }
+      else
+      {//Se actualiza el registro de AJUSTE MENOR
+        registroAjusteMenor.monto = monto_;
+        LiquidacionICRL.ActualizarLiquidacion001Factura(registroAjusteMenor);
+      }
+    }
+    private void ActualizarDatosOrden(string numeroFactura)
+    {
+      int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
+      LiquidacionICRL.TipoTraerLiquidacion001 ordenes = LiquidacionICRL.TraerLiquidacion001(IdFlujo);
+
+      foreach (LiquidacionICRL.TipoLiquidacion001 orden in ordenes.Liquidaciones001)
+      {
+        if (numeroFactura.Trim() == orden.num_factura.Trim())
+        {
+          LiquidacionICRL.TipoLiquidacion001 ordenModificada = orden;
+          ordenModificada.liquidacion = false;
+          ordenModificada.num_factura = "";
+          ordenModificada.fecha_liquidacion = new DateTime(2000, 1, 1);
+          LiquidacionICRL.ModificarLiquidacion001(ordenModificada);
+        }
+      }
+    }
+    private void BloquearControlesLiquidacion(bool verificado)
+    {
+      if (verificado)
+      {
+        GridViewDatosFactura.Enabled = false;
+        GridViewDatosOrden.Enabled = false;
+        GridViewDatosLiquidacion.Enabled = false;
+
+        btnGenerarLiquidacion.Enabled = false;
+        btnLiquidacionTotal.Enabled = false;
+        btnAjusteMenor.Enabled = false;
+        btnGuardarLiquidacion.Enabled = false;
+
+        txbTipoCambio.Enabled = false;
+      }
+      else
+      {
+        int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
+        LiquidacionICRL.TipoFlujo flujo = LiquidacionICRL.TipoFlujoTraer(IdFlujo);
+
+        if (flujo.estado == EstadoFlujo.ToString())
+        {
+          GridViewDatosFactura.Enabled = false;
+          GridViewDatosOrden.Enabled = false;
+          GridViewDatosLiquidacion.Enabled = false;
+
+          btnGenerarLiquidacion.Enabled = false;
+          btnLiquidacionTotal.Enabled = false;
+          btnAjusteMenor.Enabled = false;
+          btnGuardarLiquidacion.Enabled = false;
+
+          txbTipoCambio.Enabled = false;
+
+          LabelMensaje.Visible = true;
+          LabelMensaje.Text = "Este flujo tiene el estado 'Procesado Liquidación', por lo que no se permiten cambios.";
+        }
       }
     }
     #endregion

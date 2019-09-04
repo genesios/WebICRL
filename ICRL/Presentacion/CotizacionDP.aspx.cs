@@ -77,6 +77,7 @@ namespace ICRL.Presentacion
           FlTraeDatosDPReparacion(vIdCotizacion);
           FlTraeDatosDPRepuesto(vIdCotizacion);
           FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+          FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
 
           vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
           FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
@@ -1549,9 +1550,34 @@ namespace ICRL.Presentacion
       return vResultado;
     }
 
+    protected void GridViewOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+      //verificar esa rutina
+      if (!VerificarPagina(true)) return;
+      if (e.Row.RowType == DataControlRowType.DataRow)
+      {
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[1].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+        }
+      }
+    }
+
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      int vTipoItem = 0;
       int vIndex = 0;
       string vNumeroOrden = string.Empty;
       string vProveedor = string.Empty;
@@ -1592,9 +1618,7 @@ namespace ICRL.Presentacion
 
 
         //Grabar en la tabla
-        int vIdFlujo = 0;
-        int vIdCotizacion = 0;
-        int vTipoItem = 0;
+        
 
         vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
@@ -1609,6 +1633,8 @@ namespace ICRL.Presentacion
 
         vResultado = vAccesoDatos.fActualizaLiquidacionDP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
         PSubeFormularioCotiDaniosPropios(vNumeroOrden);
+        vResultado = vAccesoDatos.FCotizacionDaniosPropiosCambiaEstadoSumatoria(vIdFlujo, vIdCotizacion, (short) vTipoItem, vProveedor);
+        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, (short) vTipoItem);
       }
     }
 
@@ -1647,6 +1673,8 @@ namespace ICRL.Presentacion
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
           vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          //inicializar el estado a 1
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1; 
           vContador++;
         }
       }
@@ -1709,6 +1737,8 @@ namespace ICRL.Presentacion
           vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
           vNumeroOrden = vSBNumeroOrden.ToString();
           vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+          //inicializar el estado a 1
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
           vContador++;
         }
       }
@@ -2033,5 +2063,7 @@ namespace ICRL.Presentacion
       ReportViewerCoti.Visible = false;
       ButtonCierraVerRep.Visible = false;
     }
+
+    
   }
 }

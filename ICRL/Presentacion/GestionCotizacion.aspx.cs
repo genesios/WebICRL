@@ -446,17 +446,29 @@ namespace IRCL.Presentacion
       Label4.Text = string.Empty;
       vIdCobertura = DropDownListCoberturas.SelectedValue.ToString().Trim();
       vTipoCobertura = int.Parse(vIdCobertura);
-      vResultado = FCreaCotizacion(vTipoCobertura);
-      if (vResultado > 0)
+
+      int vResultadoFlujo = 0;
+      vResultadoFlujo = PTraeFlujoOnBase(TextBoxNroFlujo.Text.ToUpper());
+      if (1 == vResultadoFlujo)
       {
-        Label4.Text = "Cotización creada exitosamente";
+        vResultado = FCreaCotizacion(vTipoCobertura);
+        if (vResultado > 0)
+        {
+          Label4.Text = "Cotización creada exitosamente";
+        }
+        else
+        {
+          Label4.Text = "No se pudo crear la cotización";
+        }
+        Session["PopupModalCoberturas"] = 0;
+        this.ModalPopupCoberturas.Hide();
       }
       else
       {
-        Label4.Text = "No se pudo crear la cotización";
+        Label4.Text = "NO existe el Flujo " + TextBoxNroFlujo.Text.ToUpper() + " en OnBase, verifique";
       }
-      Session["PopupModalCoberturas"] = 0;
-      this.ModalPopupCoberturas.Hide();
+
+      
       PBusquedaCotizaciones();
     }
 
@@ -537,6 +549,50 @@ namespace IRCL.Presentacion
 
       vResultado = vAccesoDatos.FGrabaCotiFlujoICRL(vCotiFlujo);
 
+      return vResultado;
+    }
+
+    int PTraeFlujoOnBase(string pNroFlujo)
+    {
+      int vResultado = 0;
+      var vAccesoDatos = new AccesoDatos();
+      var vFlujoICRL = new FlujoICRL();
+      TextBoxPlaca.Text = string.Empty;
+
+      vResultado = vAccesoDatos.FValidaExisteFlujoOnBase(pNroFlujo);
+      if (1 == vResultado)
+      {
+        vFlujoICRL = vAccesoDatos.FTraeDatosFlujoOnBase(pNroFlujo);
+        //TextBoxPlaca.Text = vFlujoICRL.placaVehiculo;
+        int vRespuesta = vAccesoDatos.FValidaExisteFlujoICRL(pNroFlujo);
+        if (0 == vRespuesta)
+        {
+          int vGrabacion = vAccesoDatos.FGrabaFlujoICRL(vFlujoICRL);
+          if (0 == vGrabacion)
+          {
+            Label4.Text = "Error de Grabacion Flujo ICRL";
+          }
+        }
+        else
+        {
+          vFlujoICRL.idFlujo = vRespuesta;
+          //ajuste para no perder el contador
+          int vContador = 0;
+          vContador = vAccesoDatos.FTraeContadorFlujoICRL(TextBoxNroFlujo.Text);
+          vFlujoICRL.contador = vContador;
+          //fin ajuste
+          int vActualizacion = vAccesoDatos.FActualizaFlujoICRL(vFlujoICRL);
+          if (0 == vActualizacion)
+          {
+            Label4.Text = "Error de actualizacion Flujo ICRL";
+          }
+        }
+
+      }
+      else
+      {
+        TextBoxPlaca.Text = "Flujo No encontrado";
+      }
       return vResultado;
     }
 
