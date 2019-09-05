@@ -130,6 +130,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonActualizaDesdeOnBase;
         
         /// <summary>
+        /// LabelMsjGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMsjGeneral;
+        
+        /// <summary>
         /// PanelColapseDatosGen control.
         /// </summary>
         /// <remarks>
@@ -1462,6 +1471,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxSumaMontoDescProv;
         
         /// <summary>
+        /// ValidadorRepuMontoDescProv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorRepuMontoDescProv;
+        
+        /// <summary>
+        /// RegExValidatorMontoDescProv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorMontoDescProv;
+        
+        /// <summary>
         /// LabelSumaDeducible control.
         /// </summary>
         /// <remarks>
@@ -1478,6 +1505,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxSumaDeducible;
+        
+        /// <summary>
+        /// ValidadorRepuMontoDeducible control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorRepuMontoDeducible;
+        
+        /// <summary>
+        /// RegExValidatorMontoDeducible control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorMontoDeducible;
         
         /// <summary>
         /// LabelSumaMontoFinal control.

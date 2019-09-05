@@ -13,7 +13,7 @@ table.basetable {
   border-collapse: inherit;
   border-radius: 5px;
 }
-table.basetable.alt1 { border: 2px solid #E74C3C; }
+table.basetable.alt1 { border: 2px solid #962B00; }
 table.basetable.alt2 { border: 2px solid #3258AE; }
 table.basetable.alt3 { border: 2px solid #3E0A82; }
 table.basetable table {
@@ -26,7 +26,7 @@ table.basetable > tbody > tr > th {
   font-size: 1.1em;
   padding: 5px;
 }
-table.basetable.alt1 > tbody > tr > th { background-color: #E74C3C; }
+table.basetable.alt1 > tbody > tr > th { background-color: #962B00; }
 table.basetable.alt2 > tbody > tr > th { background-color: #3258AE; }
 table.basetable.alt3 > tbody > tr > th { background-color: #3E0A82; }
 table.basetable > tbody > tr > td {
@@ -61,7 +61,7 @@ input[type="submit"] {
   border-radius: 5px;
   text-transform: uppercase;
 }
-input[type="button"].alt1, input[type="submit"].alt1 { background-color: #E74C3C; }
+input[type="button"].alt1, input[type="submit"].alt1 { background-color: #962B00; }
 input[type="button"].alt2, input[type="submit"].alt2 { background-color: #3258AE; }
 input[type="button"].alt3, input[type="submit"].alt3 { background-color: #3E0A82; }
 input[type="button"]:active,
@@ -110,64 +110,41 @@ div.fifty, div.twentyfive, div.twenty, div.thirty {
 .price {
   text-align: right !important;
 }
+.gridpager {
+  background-color: #1c5e55;
+}
+.gridpager table {
+  margin: 0 auto;
+}
+.gridpager table tr td{
+  padding: 5px 1px;
+}
+.gridpager span, .gridpager a {
+  padding: 5px;
+  background-color: #23766b;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff !important;
+}
+.gridpager a {
+  background-color: transparent;
+}
+.gridpager a:hover {
+  background-color: #23766b;
+}
 #TreeViewMenu table tr td {
   padding: 0 !important;
 }
 #TreeViewMenu {
   background-color: #00a861;
 }
-#TreeViewMenu.alt1 { background-color: #E74C3C; }
+#TreeViewMenu.alt1 { background-color: #962B00; }
 #TreeViewMenu.alt2 { background-color: #3258AE; }
 #TreeViewMenu.alt3 { background-color: #3E0A82; }
 #TreeViewMenu a {
   color: #fff;
   font-weight: 600;
 }
-/*Grid styles*/
-.grid_header, .grid_footer, .grid_pager {
-  color: #fff;
-  background-color: #00683B;
-  font-weight: bold;
-}
-.grid_row, .grid_selected, .grid_edit { background-color: #e6fff4; }
-.grid_row a, .grid_selected a, .grid_edit a {
-  color: #48c08d;
-  text-decoration: underline;
-}
-.grid_selected {}
-.grid_pager {}
-.grid_pager table { margin: 0 auto; }
-.grid_pager table tr td { padding: 5px 1px; }
-.grid_pager span, .grid_pager a {
-  padding: 5px;
-  background-color: #48C08D;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff !important;
-}
-.grid_pager a { background-color: transparent; }
-.grid_pager a:hover { background-color: #48C08D; }
-
-.grid_header.alt1, .grid_footer.alt1, .grid_pager.alt1 { background-color: #471400; }
-.grid_row.alt1, .grid_selected.alt1, .grid_edit.alt1 { background-color: #ffede6; }
-.grid_row.alt1 a, .grid_selected.alt1 a, .grid_edit.alt1 a { color: #D76335; }
-.grid_pager.alt1 span, .grid_pager.alt1 a { background-color: #D76335; }
-.grid_pager.alt1 a { background-color: transparent; }
-.grid_pager.alt1 a:hover { background-color: #D76335; }
-
-.grid_header.alt2, .grid_footer.alt2, .grid_pager.alt2 { background-color: #0D2E7A; }
-.grid_row.alt2, .grid_selected.alt2, .grid_edit.alt2 { background-color: #e8eefd; }
-.grid_row.alt2 a, .grid_selected.alt2 a, .grid_edit.alt2 a { color: #7894D4; }
-.grid_pager.alt2 span, .grid_pager.alt2 a { background-color: #7894D4; }
-.grid_pager.alt2 a { background-color: transparent; }
-.grid_pager.alt2 a:hover { background-color: #7894D4; }
-
-.grid_header.alt3, .grid_footer.alt3, .grid_pager.alt3 { background-color: #22034C; }
-.grid_row.alt3, .grid_selected.alt3, .grid_edit.alt3 { background-color: #f1e7fd; }
-.grid_row.alt3 a, .grid_selected.alt3 a, .grid_edit.alt3 a { color: #6734AA; }
-.grid_pager.alt3 span, .grid_pager.alt3 a { background-color: #6734AA; }
-.grid_pager.alt3 a { background-color: transparent; }
-.grid_pager.alt3 a:hover { background-color: #6734AA; }
 
 
 /***Login Page***/
@@ -192,7 +169,7 @@ div.fifty, div.twentyfive, div.twenty, div.thirty {
   background-color: #00a861;
   color: #fff;
 }
-.collapseBar.alt1 { background-color: #E74C3C; }
+.collapseBar.alt1 { background-color: #962B00; }
 .collapseBar.alt2 { background-color: #3258AE; }
 .collapseBar.alt3 { background-color: #3E0A82; }
 .collapseBar span,
@@ -220,7 +197,7 @@ div.fifty, div.twentyfive, div.twenty, div.thirty {
   border: 2px solid #00a861;
   padding: 5px;
 }
-.PanelDatosGen.alt1 { border: 2px solid #E74C3C; }
+.PanelDatosGen.alt1 { border: 2px solid #962B00; }
 .PanelDatosGen.alt2 { border: 2px solid #3258AE; }
 .PanelDatosGen.alt3 { border: 2px solid #3E0A82; }
 

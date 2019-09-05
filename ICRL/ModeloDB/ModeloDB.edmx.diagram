@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4cf01b17c8ba49eebe67edad5efc1d54" Name="Diagram1">
+      <Diagram DiagramId="d513950664484202b429b078ab17df14" Name="Diagram1">
         <EntityTypeShape EntityType="LBCDesaModelo.Asegurado" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.Contador" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LBCDesaModelo.CotiDaniosPropios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />

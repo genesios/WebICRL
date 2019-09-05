@@ -544,24 +544,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxEmailsEnvio;
         
         /// <summary>
-        /// ValidadorCorreo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorCorreo;
-        
-        /// <summary>
-        /// RegExValidatorCorreos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorCorreos;
-        
-        /// <summary>
         /// LabelVehiculoAsegurado control.
         /// </summary>
         /// <remarks>
@@ -2137,6 +2119,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxCilindradaPTDP;
         
         /// <summary>
+        /// ValidadorCilindradaPTDP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorCilindradaPTDP;
+        
+        /// <summary>
+        /// RegExValidatorCilindradaPTDP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorCilindradaPTDP;
+        
+        /// <summary>
         /// LabelObservacionesPTDP control.
         /// </summary>
         /// <remarks>
@@ -2342,6 +2342,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCilindradaPTRO;
+        
+        /// <summary>
+        /// ValidadorCilindradaPTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorCilindradaPTRO;
+        
+        /// <summary>
+        /// RegExValidatorCilindradaPTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorCilindradaPTRO;
         
         /// <summary>
         /// LabelObservacionesPTRO control.
@@ -2641,6 +2659,33 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxAnioRCV01;
         
         /// <summary>
+        /// ValidadorAnioRCV01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorAnioRCV01;
+        
+        /// <summary>
+        /// RegExValidatorAnioRCV01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorAnioRCV01;
+        
+        /// <summary>
+        /// RangeValidatorAnioRCV01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorAnioRCV01;
+        
+        /// <summary>
         /// LabelNroChasisRCV01 control.
         /// </summary>
         /// <remarks>
@@ -2720,6 +2765,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxKilometrajeRCV01;
+        
+        /// <summary>
+        /// ValidadorKilometrajeRCV01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorKilometrajeRCV01;
+        
+        /// <summary>
+        /// RegExValidatorKilometrajeRCV01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorKilometrajeRCV01;
         
         /// <summary>
         /// LabelTipoTallerRCVeh control.

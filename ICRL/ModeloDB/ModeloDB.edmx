@@ -689,7 +689,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="direccion" Type="char" MaxLength="40" />
           <Property Name="zona" Type="char" MaxLength="40" />
           <Property Name="causaSiniestro" Type="varchar" MaxLength="100" />
-          <Property Name="descripcionSiniestro" Type="varchar" MaxLength="80" />
+          <Property Name="descripcionSiniestro" Type="varchar" MaxLength="100" />
           <Property Name="observacionesSiniestro" Type="varchar" MaxLength="100" />
           <Property Name="idInspector" Type="char" MaxLength="75" />
           <Property Name="nombreContacto" Type="varchar" MaxLength="75" />
@@ -2122,7 +2122,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="direccion" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
           <Property Name="zona" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
           <Property Name="causaSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="descripcionSiniestro" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="descripcionSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="observacionesSiniestro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idInspector" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
           <Property Name="nombreContacto" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />

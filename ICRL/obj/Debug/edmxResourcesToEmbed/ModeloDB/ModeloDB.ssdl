@@ -684,7 +684,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="direccion" Type="char" MaxLength="40" />
     <Property Name="zona" Type="char" MaxLength="40" />
     <Property Name="causaSiniestro" Type="varchar" MaxLength="100" />
-    <Property Name="descripcionSiniestro" Type="varchar" MaxLength="80" />
+    <Property Name="descripcionSiniestro" Type="varchar" MaxLength="100" />
     <Property Name="observacionesSiniestro" Type="varchar" MaxLength="100" />
     <Property Name="idInspector" Type="char" MaxLength="75" />
     <Property Name="nombreContacto" Type="varchar" MaxLength="75" />

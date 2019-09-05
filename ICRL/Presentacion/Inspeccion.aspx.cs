@@ -529,17 +529,48 @@ namespace ICRL.Presentacion
     {
       AccesoDatos vAccesodatos = new AccesoDatos();
       InspeccionICRL vInspeccionICRL = new InspeccionICRL();
-
+      string vCadenaAux = string.Empty;
       int vResultado = 0;
 
       vInspeccionICRL.idInspeccion = int.Parse(TextBoxNroInspeccion.Text);
-      vInspeccionICRL.sucursalAtencion = TextBoxSucAtencion.Text;
-      vInspeccionICRL.direccion = TextBoxDirecInspeccion.Text;
+      vCadenaAux = string.Empty;
+      vCadenaAux = TextBoxSucAtencion.Text;
+      if(vCadenaAux.Length > 25)
+      {
+        vInspeccionICRL.sucursalAtencion = vCadenaAux.Substring(0,25);
+      }
+      else
+      {
+        vInspeccionICRL.sucursalAtencion = vCadenaAux;
+      }
+
+      vCadenaAux = string.Empty;
+      vCadenaAux = TextBoxDirecInspeccion.Text;
+      if(vCadenaAux.Length > 40)
+      {
+        vInspeccionICRL.direccion = vCadenaAux.Substring(0,40);
+      }
+      else
+      {
+        vInspeccionICRL.direccion = vCadenaAux;
+      }
+      
       //vInspeccionICRL.zona = TextBoxZona.Text;
       vInspeccionICRL.zona = string.Empty;
       vInspeccionICRL.causaSiniestro = TextBoxCausaSiniestro.Text;
       vInspeccionICRL.descripcionSiniestro = TextBoxDescripSiniestro.Text;
-      vInspeccionICRL.observacionesInspec = TextBoxObservacionesInspec.Text;
+
+      vCadenaAux = string.Empty;
+      vCadenaAux = TextBoxObservacionesInspec.Text;
+      if(vCadenaAux.Length > 100)
+      {
+        vInspeccionICRL.observacionesInspec = vCadenaAux.Substring(0,100);
+      }
+      else
+      {
+        vInspeccionICRL.observacionesInspec = vCadenaAux;
+      }
+      
       vInspeccionICRL.idInspector = TextBoxNombreInspector.Text;
       vInspeccionICRL.nombreContacto = TextBoxNombreContacto.Text;
       vInspeccionICRL.telefonoContacto = TextBoxTelefContacto.Text;
@@ -3292,11 +3323,11 @@ namespace ICRL.Presentacion
       TextBoxTelfTerceroRCV01.Text = string.Empty;
       DropDownListMarcaRCV01.SelectedIndex = 0;
       TextBoxModeloRCV01.Text = string.Empty;
-      TextBoxAnioRCV01.Text = string.Empty;
+      TextBoxAnioRCV01.Text = "1980";
       TextBoxPlacaRCV01.Text = string.Empty;
       DropDownListColorRCV01.SelectedIndex = 0;
       TextBoxNroChasisRCV01.Text = string.Empty;
-      TextBoxKilometrajeRCV01.Text = string.Empty;
+      TextBoxKilometrajeRCV01.Text = "0";
     }
 
     protected void GridViewRCV01_SelectedIndexChanged(object sender, EventArgs e)

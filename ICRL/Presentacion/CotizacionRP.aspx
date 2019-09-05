@@ -30,7 +30,7 @@
                 <table class="basetable">
                     <tr>
                         <th>
-                            <asp:Label ID="LabelTituloCotizacion" runat="server" Text="Cotizacion"></asp:Label>
+                            <asp:Label ID="LabelTituloCotizacion" runat="server" Text="Cotización"></asp:Label>
                         </th>
                     </tr>
                     <tr>
@@ -41,13 +41,15 @@
                             </div>
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox><br />
-                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox><br />
-                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                             </div>
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False" ></asp:TextBox>
+                            </div>
+                            <div class="twentyfive">
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
                             </div>
@@ -56,6 +58,7 @@
                     <tr>
                         <td>
                             <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" />
+                            <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -202,254 +205,225 @@
                     </div>
                 </asp:Panel>
             </div>
-        </div>
+        </div><br />
         <div>
-            <table class="basetable">
-            </table>
-        </div>
-        <div>
-            <table class="basetable">
+            <table class="basetable alt2">
                 <tr>
                     <th>
                         <asp:Label ID="LabelReparaciones" runat="server" Text="Reparaciones"></asp:Label>
                         <asp:Label ID="LabelMsjReparaciones" runat="server" Text=""></asp:Label>
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        <asp:Button ID="ButtonRepaAgregarItem" runat="server" Text="Agregar" OnClick="ButtonRepaAgregarItem_Click" />
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-
-        <div>
-            <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%" >
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" ItemStyle-ForeColor="Red" />
-                    <asp:BoundField DataField="id_item" HeaderText="Id" />
-                    <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
-                    <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
-                    <asp:BoundField DataField="reparacion_previa" HeaderText="Reparación Previa" />
-                    <asp:TemplateField HeaderText="Mec.">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
-                    <asp:BoundField DataField="precio_cotizado" HeaderText="Precio Cotizado" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="id_tipo_descuento" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento" HeaderText="Monto Descuento" />
-                    <asp:BoundField DataField="precio_final" HeaderText="Precio Final" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
-                </Columns>
-            </asp:GridView>
-        </div>
-        <div>
-            <table class="basetable" style="width: 100%">
-                <tr>
-                    <td style="text-align: left">
-                        <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" />
-                    </td>
-                    <td style="text-align: right">
-                        <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepaGenerarOrdenes_Click"></asp:Button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" Width="100%" >
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
-                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
-                </Columns>
-            </asp:GridView>
-        </div>
-        <div>
-            <table class="basetable">
+                <tr><td>
+                  <asp:Button ID="ButtonRepaAgregarItem" runat="server" Text="Agregar" OnClick="ButtonRepaAgregarItem_Click" CssClass="alt2" />
+                </td></tr>
+                <tr><td>
+                  <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                    OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%" >
+                      <Columns>
+                          <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" />
+                          <asp:BoundField DataField="id_item" HeaderText="Id" />
+                          <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
+                          <asp:BoundField DataField="chaperio" HeaderText="Chaperío" />
+                          <asp:BoundField DataField="reparacion_previa" HeaderText="Reparación Previa" />
+                          <asp:TemplateField HeaderText="Mec.">
+                              <ItemTemplate>
+                                  <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("mecanico") %>'></asp:CheckBox>
+                              </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
+                          <asp:BoundField DataField="precio_cotizado" HeaderText="Precio Cotizado" DataFormatString="{0:N2}" />
+                          <asp:BoundField DataField="id_tipo_descuento" HeaderText="Descuento F/P" />
+                          <asp:BoundField DataField="descuento" HeaderText="Monto Descuento" />
+                          <asp:BoundField DataField="precio_final" HeaderText="Precio Final" DataFormatString="{0:N2}" />
+                          <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                          <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
+                      </Columns>
+                      <AlternatingRowStyle BackColor="White" />
+                      <RowStyle CssClass="grid_row alt2" />
+                      <SelectedRowStyle CssClass="grid_selected alt2" />
+                      <EditRowStyle CssClass="grid_edit alt2" />
+                      <HeaderStyle CssClass="grid_header alt2" />
+                      <FooterStyle CssClass="grid_footer alt2" />
+                      <PagerStyle CssClass="grid_pager alt2" />
+                  </asp:GridView>
+                </td></tr>
+                <tr><td>
+                  <table style="width:100%;font-size:inherit">
+                      <tr>
+                          <td style="text-align: left">
+                              <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" CssClass="alt2" />
+                          </td>
+                          <td style="text-align: right">
+                              <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepaGenerarOrdenes_Click" CssClass="alt2"></asp:Button>
+                          </td>
+                      </tr>
+                  </table>
+                </td></tr>
+                <tr><td>
+                  <asp:GridView ID="GridViewSumaReparaciones" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                    OnSelectedIndexChanged="GridViewSumaReparaciones_SelectedIndexChanged" Width="100%" >
+                      <Columns>
+                          <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                          <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                          <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                          <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                          <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                          <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                          <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
+                      </Columns>
+                      <AlternatingRowStyle BackColor="White" />
+                      <RowStyle CssClass="grid_row alt2" />
+                      <SelectedRowStyle CssClass="grid_selected alt2" />
+                      <EditRowStyle CssClass="grid_edit alt2" />
+                      <HeaderStyle CssClass="grid_header alt2" />
+                      <FooterStyle CssClass="grid_footer alt2" />
+                      <PagerStyle CssClass="grid_pager alt2" />
+                  </asp:GridView>
+                </td></tr>
             </table>
         </div>
         <div>
-            <table class="basetable">
+            <table class="basetable alt1">
                 <tr>
                     <th>
                         <asp:Label ID="LabelRepuestos" runat="server" Text="Repuestos"></asp:Label>
                         <asp:Label ID="LabelMsjRepuestos" runat="server" Text=""></asp:Label>
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        <asp:Button ID="ButtonRepuAgregarItem" runat="server" Text="Agregar" OnClick="ButtonRepuAgregarItem_Click" />
-                    </td>
-                </tr>
+                <tr><td>
+                  <asp:Button ID="ButtonRepuAgregarItem" runat="server" Text="Agregar" OnClick="ButtonRepuAgregarItem_Click" CssClass="alt1" />
+                </td></tr>
+              <tr><td>
+                <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                  OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%" >
+                    <Columns>
+                        <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" />
+                        <asp:BoundField DataField="id_item" HeaderText="Id" />
+                        <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
+                        <asp:TemplateField HeaderText="Pint.">
+                            <ItemTemplate>
+                                <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Inst.">
+                            <ItemTemplate>
+                                <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
+                        <asp:BoundField DataField="precio_cotizado" HeaderText="Precio Cotizado" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="id_tipo_descuento" HeaderText="Descuento F/P" />
+                        <asp:BoundField DataField="descuento" HeaderText="Monto Descuento" />
+                        <asp:BoundField DataField="precio_final" HeaderText="Precio Final" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                        <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
+                    </Columns>
+                    <AlternatingRowStyle BackColor="White" />
+                    <RowStyle CssClass="grid_row alt1" />
+                    <SelectedRowStyle CssClass="grid_selected alt1" />
+                    <EditRowStyle CssClass="grid_edit alt1" />
+                    <HeaderStyle CssClass="grid_header alt1" />
+                    <FooterStyle CssClass="grid_footer alt1" />
+                    <PagerStyle CssClass="grid_pager alt1" />
+                </asp:GridView>
+              </td></tr>
+              <tr><td>
+                <table style="width: 100%;font-size:inherit">
+                    <tr>
+                        <td style="text-align: left">
+                            <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" CssClass="alt1"></asp:Button>
+                        </td>
+                        <td style="text-align: right">
+                            <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepuGenerarOrdenes_Click" CssClass="alt1"></asp:Button>
+                        </td>
+                    </tr>
+                </table>
+              </td></tr>
+              <tr><td>
+                <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                  OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%" >
+                    <Columns>
+                        <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                        <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                        <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                        <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
+                    </Columns>
+                    <AlternatingRowStyle BackColor="White" />
+                    <RowStyle CssClass="grid_row alt1" />
+                    <SelectedRowStyle CssClass="grid_selected alt1" />
+                    <EditRowStyle CssClass="grid_edit alt1" />
+                    <HeaderStyle CssClass="grid_header alt1" />
+                    <FooterStyle CssClass="grid_footer alt1" />
+                    <PagerStyle CssClass="grid_pager alt1" />
+                </asp:GridView>
+              </td></tr>
+              <tr><td>
+                <asp:Button ID="ButtonRecepcionRepu" runat="server" Text="Recepción Repuestos" CssClass="alt1" />
+              </td></tr>
+              <tr><td>
+                <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                  OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%" >
+                    <Columns>
+                        <asp:BoundField DataField="id_item" HeaderText="Id" />
+                        <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
+                        <asp:TemplateField HeaderText="Recibido">
+                            <ItemTemplate>
+                                <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("recepcion") %>'></asp:CheckBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="dias_entrega" HeaderText="Días de Entrega" />
+                        <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
+                    </Columns>
+                    <AlternatingRowStyle BackColor="White" />
+                    <RowStyle CssClass="grid_row alt1" />
+                    <SelectedRowStyle CssClass="grid_selected alt1" />
+                    <EditRowStyle CssClass="grid_edit alt1" />
+                    <HeaderStyle CssClass="grid_header alt1" />
+                    <FooterStyle CssClass="grid_footer alt1" />
+                    <PagerStyle CssClass="grid_pager alt1" />
+                </asp:GridView>
+              </td></tr>
             </table>
         </div>
 
         <div>
-            <asp:GridView ID="GridViewRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%" >
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" ItemStyle-ForeColor="Red" />
-                    <asp:BoundField DataField="id_item" HeaderText="Id" />
-                    <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
-                    <asp:TemplateField HeaderText="Pint.">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("pintura") %>'></asp:CheckBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Inst.">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("instalacion") %>'></asp:CheckBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="id_moneda" HeaderText="Moneda" />
-                    <asp:BoundField DataField="precio_cotizado" HeaderText="Precio Cotizado" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="id_tipo_descuento" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento" HeaderText="Monto Descuento" />
-                    <asp:BoundField DataField="precio_final" HeaderText="Precio Final" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
-                </Columns>
-            </asp:GridView>
-        </div>
-        <div>
-            <table class="basetable" style="width: 100%">
-                <tr>
-                    <td style="text-align: left">
-                        <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click"></asp:Button>
-                    </td>
-                    <td style="text-align: right">
-                        <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepuGenerarOrdenes_Click"></asp:Button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%" >
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
-                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
-                </Columns>
-            </asp:GridView>
+          <table class="basetable alt3">
+            <tr><th>Órdenes Generadas</th></tr>
+            <tr><td>
+              <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false" 
+                DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand" Width="100%">
+                  <Columns>
+                      <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
+                      <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+                      <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                      <asp:BoundField DataField="moneda" HeaderText="Moneda" />
+                      <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
+                      <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
+                      <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
+                      <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
+                      <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                      <asp:ButtonField CommandName="Imprimir" ButtonType="Link" HeaderText="Opción" Text="Imp" />
+                      <asp:ButtonField CommandName="Ver" ButtonType="Link" HeaderText="Opción" Text="Ver" />
+                      <asp:ButtonField CommandName="SubirOnBase" ButtonType="Link" HeaderText="Opción" Text="On Base" />
+                  </Columns>
+                  <AlternatingRowStyle BackColor="White" />
+                  <RowStyle CssClass="grid_row alt3" />
+                  <SelectedRowStyle CssClass="grid_selected alt3" />
+                  <EditRowStyle CssClass="grid_edit alt3" />
+                  <HeaderStyle CssClass="grid_header alt3" />
+                  <FooterStyle CssClass="grid_footer alt3" />
+                  <PagerStyle CssClass="grid_pager alt3" />
+              </asp:GridView>
+            </td></tr>
+          </table>
         </div>
 
         <div>
-            <asp:Button ID="ButtonRecepcionRepu" runat="server" Text="Recepción Repuestos"  />
-        </div>
-        <div>
-            <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%" >
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:BoundField DataField="id_item" HeaderText="Id" />
-                    <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
-                    <asp:TemplateField HeaderText="Recibido">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("recepcion") %>'></asp:CheckBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="dias_entrega" HeaderText="Días de Entrega" />
-                    <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
-                </Columns>
-            </asp:GridView>
-        </div>
-
-    <div>
-            <asp:GridView ID="GridViewOrdenes" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false" DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand">
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-                <Columns>
-                    <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
-                    <asp:BoundField DataField="id_estado" HeaderText="Estado" />
-                    <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                    <asp:BoundField DataField="moneda" HeaderText="Moneda" />
-                    <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
-                    <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
-                    <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />
-                    <asp:ButtonField CommandName="Ver" ButtonType="Button" HeaderText="Opción" Text="Ver" />
-                    <asp:ButtonField CommandName="SubirOnBase" ButtonType="Button" HeaderText="Opción" Text="On Base" />
-                </Columns>
-            </asp:GridView>
-        </div>
-
-        <div>
-            <asp:Button runat="server" ID="ButtonOcultoParaPopupReparaciones" Style="display: none" />
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupReparaciones" Style="display: none" CssClass="alt2" />
 
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupReparaciones" BehaviorID="ModalPopupReparacionesBehavior"
                 TargetControlID="ButtonOcultoParaPopupReparaciones" PopupControlID="PanelModalPopupABMReparaciones"
@@ -461,7 +435,7 @@
                     ABM Reparaciones
                 </asp:Panel>
                 <div>
-                    <table class="basetable">
+                    <table class="basetable alt2">
                         <tr>
                             <td>
                                 <strong>
@@ -476,7 +450,7 @@
                                     <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
-                                    <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />
+                                    <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperío"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaChaperio" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="twentyfive">
@@ -485,7 +459,7 @@
                                 </div>
                                 <div class="twentyfive">
                                     <asp:CheckBox ID="CheckBoxRepaMecanico" runat="server" />
-                                    <asp:Label ID="LabelRepaMecanico" runat="server" Text="Mecanico"></asp:Label>
+                                    <asp:Label ID="LabelRepaMecanico" runat="server" Text="Mecánico"></asp:Label>
                                 </div>
                             </td>
                         </tr>
@@ -552,7 +526,7 @@
         </div>
 
         <div>
-            <asp:Button runat="server" ID="ButtonOcultoParaPopupRepuestos" Style="display: none" />
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupRepuestos" Style="display: none" CssClass="alt2" />
 
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRepuestos" BehaviorID="ModalPopupRepuestosBehavior"
                 TargetControlID="ButtonOcultoParaPopupRepuestos" PopupControlID="PanelModalPopupABMRepuestos"
@@ -564,7 +538,7 @@
                     ABM Repuestos
                 </asp:Panel>
                 <div>
-                    <table class="basetable">
+                    <table class="basetable alt2">
                         <tr>
                             <td>
                                 <strong>
@@ -584,7 +558,7 @@
                                 </div>
                                 <div class="twentyfive">
                                     <asp:CheckBox ID="CheckBoxRepuInstalacion" runat="server" />
-                                    <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalacion"></asp:Label>
+                                    <asp:Label ID="LabelRepuInstalacion" runat="server" Text="Instalación"></asp:Label>
                                 </div>
                             </td>
                         </tr>
@@ -650,7 +624,7 @@
         </div>
 
         <div>
-            <asp:Button runat="server" ID="ButtonOcultoParaPopupSumatorias" Style="display: none" />
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupSumatorias" Style="display: none" CssClass="alt2" />
 
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupSumatorias" BehaviorID="ModalPopupSumatoriasBehavior"
                 TargetControlID="ButtonOcultoParaPopupSumatorias" PopupControlID="PanelModalPopupABMSumatorias"
@@ -662,7 +636,7 @@
                     Editar Sumatorias
                 </asp:Panel>
                 <div>
-                    <table class="basetable">
+                    <table class="basetable alt2">
                         <tr>
                             <td>
                                 <strong>
@@ -686,10 +660,22 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaMontoDescProv" runat="server" Text="Monto Descuento"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaMontoDescProv" runat="server"  Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepuMontoDescProv" runat="server" ErrorMessage="*" ControlToValidate="TextBoxSumaMontoDescProv" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorMontoDescProv"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxSumaMontoDescProv" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaDeducible" runat="server" Text="FRANQUICIA / COA"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaDeducible" runat="server" Text="0" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="ValidadorRepuMontoDeducible" runat="server" ErrorMessage="*" ControlToValidate="TextBoxSumaDeducible" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegExValidatorMontoDeducible"
+                                        runat="server" ErrorMessage="Verifique el formato del  monto"
+                                        ControlToValidate="TextBoxSumaDeducible" CssClass="errormessage"
+                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
@@ -710,7 +696,7 @@
         </div>
 
         <div>
-            <asp:Button runat="server" ID="ButtonOcultoParaPopupRecepRepuestos" Style="display: none" />
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupRecepRepuestos" Style="display: none" CssClass="alt2" />
 
             <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupRecepRepuestos" BehaviorID="ModalPopupRecepRepuestosBehavior"
                 TargetControlID="ButtonOcultoParaPopupRecepRepuestos" PopupControlID="PanelModalPopupRecepRepuestos"
@@ -722,7 +708,7 @@
                     Recepción e Ingreso días Repuestos
                 </asp:Panel>
                 <div>
-                    <table class="basetable">
+                    <table class="basetable alt2">
                         <tr>
                             <td>
                                 <strong>
@@ -740,7 +726,7 @@
                                     <asp:Label ID="LabelRecepRecibido" runat="server" Text="Recibido"></asp:Label>
                                 </div>
                                 <div class="twentyfive">
-                                    <asp:Label ID="LabelPrecioRecepDiasEntrega" runat="server" Text="Dias de Entrega"></asp:Label><br />
+                                    <asp:Label ID="LabelPrecioRecepDiasEntrega" runat="server" Text="Días de Entrega"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRecepDiasEntrega" runat="server"  Text="0" ></asp:TextBox>
                                 </div>
                             </td>

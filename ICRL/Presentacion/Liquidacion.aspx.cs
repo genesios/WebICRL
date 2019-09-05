@@ -467,7 +467,7 @@ namespace ICRL.Presentacion
     private void ValidarFlujoCorrecto()
     {
       int.TryParse(Request.QueryString["idflujo"], out IdFlujo);
-      txbNroFlujo.Text = IdFlujo.ToString();
+      //txbNroFlujo.Text = IdFlujo.ToString();
 
       if (GridViewDatosOrden.Rows.Count == 0)
       {

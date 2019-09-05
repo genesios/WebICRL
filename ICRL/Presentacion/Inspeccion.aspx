@@ -195,7 +195,7 @@
                             </div>
                             <div class="fifty">
                                 <asp:Label ID="LabelObservacionesInspeccion" runat="server" Text="Observaciones Inspección"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxObservacionesInspec" runat="server" ReadOnly="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxObservacionesInspec" runat="server" ReadOnly="False" MaxLength="100"></asp:TextBox>
                             </div>
                         </td>
                     </tr>
@@ -231,23 +231,23 @@
                         <td>
                             <div class="fifty">
                                 <asp:Label ID="LabelNombreInspector" runat="server" Text="Nombre del Inspector"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxNombreInspector" runat="server"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxNombreInspector" runat="server" MaxLength="75"></asp:TextBox><br />
                                 <asp:Label ID="LabelCorreoInspector" runat="server" Text="Correo Electrónico"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxCorreoInspector" runat="server"></asp:TextBox><br />
                                 <asp:Label ID="LabelNombreContacto" runat="server" Text="Nombre del Contacto"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxNombreContacto" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNombreContacto" runat="server" MaxLength="75"></asp:TextBox>
                             </div>
                             <div class="fifty">
                                 <asp:Label ID="LabelTelefContacto" runat="server" Text="Teléfono Contacto"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxTelefContacto" runat="server"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxTelefContacto" runat="server" MaxLength="25"></asp:TextBox><br />
                                 <asp:Label ID="LabelEmailsEnvio" runat="server" Text="Emails de envío"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxEmailsEnvio" runat="server"></asp:TextBox><br />
-                                <asp:RequiredFieldValidator ID="ValidadorCorreo" runat="server" ErrorMessage="*" ControlToValidate="TextBoxEmailsEnvio" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="TextBoxEmailsEnvio" runat="server" MaxLength="80"></asp:TextBox><br />
+                                <%--<asp:RequiredFieldValidator ID="ValidadorCorreo" runat="server" ErrorMessage="*" ControlToValidate="TextBoxEmailsEnvio" CssClass="errormessage"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegExValidatorCorreos"
                                     runat="server" ErrorMessage="Verifique el formato de los correos electrónicos"
                                     ControlToValidate="TextBoxEmailsEnvio" CssClass="errormessage"
                                     ValidationExpression="^([\w+-.%]+@[\w.-]+\.[A-Za-z]{2,4})(;[\w+-.%]+@[\w.-]+\.[A-Za-z]{2,4})*$">
-                                </asp:RegularExpressionValidator>
+                                </asp:RegularExpressionValidator>--%>
                             </div>
                         </td>
                     </tr>
@@ -1039,6 +1039,12 @@
                                         <div class="twenty">
                                             <asp:Label ID="LabelCilindraPTDP" runat="server" Text="Cilindrada"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxCilindradaPTDP" runat="server"></asp:TextBox><br />
+                                            <asp:RequiredFieldValidator ID="ValidadorCilindradaPTDP" runat="server" ErrorMessage="Cilindrada no puede estar vacio" ControlToValidate="TextBoxCilindradaPTDP" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegExValidatorCilindradaPTDP"
+                                                runat="server" ErrorMessage="Cilindrada solo acepta numeros"
+                                                ControlToValidate="TextBoxCilindradaPTDP" CssClass="errormessage"
+                                                ValidationExpression="^[0-9]+$">
+                                            </asp:RegularExpressionValidator><br />
                                             <asp:Label ID="LabelObservacionesPTDP" runat="server" Text="Observaciones"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxObservacionesPTDP" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
@@ -1092,6 +1098,12 @@
                                         <div class="twenty">
                                             <asp:Label ID="LabelCilindraPTRO" runat="server" Text="Cilindrada"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server"></asp:TextBox><br />
+                                            <asp:RequiredFieldValidator ID="ValidadorCilindradaPTRO" runat="server" ErrorMessage="Cilindrada no puede estar vacio" ControlToValidate="TextBoxCilindradaPTRO" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegExValidatorCilindradaPTRO"
+                                                runat="server" ErrorMessage="Cilindrada solo acepta numeros"
+                                                ControlToValidate="TextBoxCilindradaPTRO" CssClass="errormessage"
+                                                ValidationExpression="^[0-9]+$">
+                                            </asp:RegularExpressionValidator><br />
                                             <asp:Label ID="LabelObservacionesPTRO" runat="server" Text="Observaciones"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
@@ -1158,7 +1170,15 @@
                                             <asp:Label ID="LabelModeloRCV01" runat="server" Text="Modelo:"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxModeloRCV01" runat="server"></asp:TextBox><br />
                                             <asp:Label ID="LabelAnioRCV01" runat="server" Text="Año:"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxAnioRCV01" runat="server"></asp:TextBox><br />
+                                            <asp:TextBox ID="TextBoxAnioRCV01" runat="server" Text="1980"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="ValidadorAnioRCV01" runat="server" ErrorMessage="El Año no puede estar vacio" ControlToValidate="TextBoxAnioRCV01" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegExValidatorAnioRCV01"
+                                                runat="server" ErrorMessage="El Año solo acepta numeros"
+                                                ControlToValidate="TextBoxAnioRCV01" CssClass="errormessage"
+                                                ValidationExpression="^[0-9]+$">
+                                            </asp:RegularExpressionValidator>
+                                            <asp:RangeValidator ID="RangeValidatorAnioRCV01" runat="server"
+                                                ErrorMessage="El Año debe ser mayor a 1970" ControlToValidate="TextBoxAnioRCV01" MaximumValue="2050" MinimumValue="1970" Type="Integer"></asp:RangeValidator><br />
                                             <asp:Label ID="LabelNroChasisRCV01" runat="server" Text="Número Chasis:"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxNroChasisRCV01" runat="server"></asp:TextBox><br />
                                             <asp:TextBox ID="TextBoxSecuencialRCV01" runat="server" Visible="False"></asp:TextBox>
@@ -1169,7 +1189,13 @@
                                             <asp:Label ID="LabelColorRCV01" runat="server" Text="Color:"></asp:Label><br />
                                             <asp:DropDownList ID="DropDownListColorRCV01" runat="server"></asp:DropDownList><br />
                                             <asp:Label ID="LabelKilometrajeRCV01" runat="server" Text="Kilometraje:"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxKilometrajeRCV01" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxKilometrajeRCV01" runat="server" Text="0"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="ValidadorKilometrajeRCV01" runat="server" ErrorMessage="Kilometraje no puede estar vacio" ControlToValidate="TextBoxKilometrajeRCV01" CssClass="errormessage"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegExValidatorKilometrajeRCV01"
+                                                runat="server" ErrorMessage="Kilometraje solo acepta numeros"
+                                                ControlToValidate="TextBoxKilometrajeRCV01" CssClass="errormessage"
+                                                ValidationExpression="^[0-9]+$">
+                                            </asp:RegularExpressionValidator>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelTipoTallerRCVeh" runat="server" Text="Tipo Taller"></asp:Label><br />

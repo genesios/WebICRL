@@ -274,6 +274,7 @@ namespace ICRL.BD
     public FlujoICRL FTraeDatosFlujoOnBase(string pNumFlujo)
     {
       vFlujoICRL = null;
+      string vCadenaAux = string.Empty;
 
       /*** CONECTAR A WS ***/
       OnBaseWS vServicioOnBase = new OnBaseWS();
@@ -302,16 +303,52 @@ namespace ICRL.BD
           switch (vKeyword.nombre)
           {
             case "Nombres/Razon Social":
-              vFlujoICRL.nombreAsegurado = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 75)
+              {
+                vFlujoICRL.nombreAsegurado = vCadenaAux.Substring(0, 75);
+              }
+              else
+              {
+                vFlujoICRL.nombreAsegurado = vCadenaAux;
+              }
               break;
             case "No. de Identificacion":
-              vFlujoICRL.docIdAsegurado = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 15)
+              {
+                vFlujoICRL.docIdAsegurado = vCadenaAux.Substring(0, 15);
+              }
+              else
+              {
+                vFlujoICRL.docIdAsegurado = vCadenaAux;
+              }
               break;
             case "Asegurado Telefono Celular":
-              vFlujoICRL.telefonoCelAsegurado = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 10)
+              {
+                vFlujoICRL.telefonoCelAsegurado = vCadenaAux.Substring(0, 10);
+              }
+              else
+              {
+                vFlujoICRL.telefonoCelAsegurado = vCadenaAux;
+              }
               break;
             case "No. de Poliza":
-              vFlujoICRL.numeroPoliza = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 10)
+              {
+                vFlujoICRL.numeroPoliza = vCadenaAux.Substring(0, 10);
+              }
+              else
+              {
+                vFlujoICRL.numeroPoliza = vCadenaAux;
+              }
               break;
             case "No. de Reclamo":
               try
@@ -324,22 +361,76 @@ namespace ICRL.BD
               }
               break;
             case "Causa Siniestro":
-              vFlujoICRL.causaSiniestro = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 100)
+              {
+                vFlujoICRL.causaSiniestro = vCadenaAux.Substring(0, 100);
+              }
+              else
+              {
+                vFlujoICRL.causaSiniestro = vCadenaAux;
+              }
               break;
             case "Marca":
-              vFlujoICRL.marcaVehiculo = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 15)
+              {
+                vFlujoICRL.marcaVehiculo = vCadenaAux.Substring(0, 15);
+              }
+              else
+              {
+                vFlujoICRL.marcaVehiculo = vCadenaAux;
+              }
               break;
             case "Modelo":
-              vFlujoICRL.modeloVehiculo = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 50)
+              {
+                vFlujoICRL.modeloVehiculo = vCadenaAux.Substring(0, 50);
+              }
+              else
+              {
+                vFlujoICRL.modeloVehiculo = vCadenaAux;
+              }
               break;
             case "Color":
-              vFlujoICRL.colorVehiculo = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 15)
+              {
+                vFlujoICRL.colorVehiculo = vCadenaAux.Substring(0, 15);
+              }
+              else
+              {
+                vFlujoICRL.colorVehiculo = vCadenaAux;
+              }
               break;
             case "No. de Placa":
-              vFlujoICRL.placaVehiculo = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 8)
+              {
+                vFlujoICRL.placaVehiculo = vCadenaAux.Substring(0, 8);
+              }
+              else
+              {
+                vFlujoICRL.placaVehiculo = vCadenaAux;
+              }
               break;
             case "No. de Chasis":
-              vFlujoICRL.chasisVehiculo = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 30)
+              {
+                vFlujoICRL.chasisVehiculo = vCadenaAux.Substring(0, 30);
+              }
+              else
+              {
+                vFlujoICRL.chasisVehiculo = vCadenaAux;
+              }
               break;
             case "Anio":
               try
@@ -362,13 +453,40 @@ namespace ICRL.BD
               }
               break;
             case "Descripcion1":
-              vFlujoICRL.descripcionSiniestro = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if(vCadenaAux.Length>100)
+              {
+                vFlujoICRL.descripcionSiniestro = vCadenaAux.Substring(0, 100);
+              }
+              else
+              {
+                vFlujoICRL.descripcionSiniestro = vCadenaAux;
+              }
               break;
             case "Direccion Inspeccion":
-              vFlujoICRL.direccionInspeccion = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 100)
+              {
+                vFlujoICRL.direccionInspeccion = vCadenaAux.Substring(0, 100);
+              }
+              else
+              {
+                vFlujoICRL.direccionInspeccion = vCadenaAux;
+              }
               break;
             case "Agencia Atencion":
-              vFlujoICRL.agenciaAtencion = vKeyword.valor;
+              vCadenaAux = string.Empty;
+              vCadenaAux = vKeyword.valor;
+              if (vCadenaAux.Length > 100)
+              {
+                vFlujoICRL.agenciaAtencion = vCadenaAux.Substring(0, 100);
+              }
+              else
+              {
+                vFlujoICRL.agenciaAtencion = vCadenaAux;
+              }
               break;
             case "Fecha Incidente":
               try
@@ -534,7 +652,7 @@ namespace ICRL.BD
           Flujo vTablaFlujo = new Flujo();
 
           vTablaFlujo.flujoOnBase = vFlujoTemporal;
-          vTablaFlujo.estado = 0;
+          vTablaFlujo.estado = 1;
           vTablaFlujo.numeroReclamo = 0;
           vTablaFlujo.numeroPoliza = string.Empty;
           vTablaFlujo.causaSiniestro = string.Empty;
@@ -549,10 +667,12 @@ namespace ICRL.BD
           vTablaFlujo.nombreAsegurado = string.Empty;
           vTablaFlujo.docIdAsegurado = string.Empty;
           vTablaFlujo.telefonocelAsegurado = string.Empty;
+          vTablaFlujo.causaSiniestro = string.Empty;
           vTablaFlujo.contador = 0;
           vTablaFlujo.descripcionSiniestro = string.Empty;
           vTablaFlujo.direccionInspeccion = string.Empty;
           vTablaFlujo.agenciaAtencion = string.Empty;
+          vTablaFlujo.fechaSiniestro = new DateTime(2000, 1, 1, 0, 0, 0);
 
           db.Flujo.Add(vTablaFlujo);
           db.SaveChanges();

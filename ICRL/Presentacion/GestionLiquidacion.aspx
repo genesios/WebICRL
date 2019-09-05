@@ -80,8 +80,7 @@
     <tr><th>Órdenes de Pago</th></tr>
     <tr><td>
       <asp:GridView ID="GridViewOrdenesPago" runat="server" AutoGenerateColumns="False" Width="100%" CellPadding="4"
-        ForeColor="#333333" GridLines="None" AllowPaging="true" PageSize="25" OnPageIndexChanging="GridViewOrdenesPago_PageIndexChanging">
-        <AlternatingRowStyle BackColor="White" />
+        GridLines="None" AllowPaging="true" PageSize="25" OnPageIndexChanging="GridViewOrdenesPago_PageIndexChanging">
         <Columns>
           <asp:BoundField DataField="numero_orden" HeaderText="Orden" />
           <asp:BoundField DataField="flujoOnBase" HeaderText="Flujo OnBase" />
@@ -107,16 +106,13 @@
           </asp:TemplateField>
           <asp:HyperLinkField DataNavigateUrlFields="idFlujo" DataNavigateUrlFormatString="~\Presentacion\Liquidacion.aspx?idflujo={0}" Text="Ver" />
         </Columns>
-        <EditRowStyle BackColor="#7C6F57" />
-        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <PagerStyle CssClass="gridpager" HorizontalAlign="Center" />
-        <RowStyle BackColor="#E3EAEB" />
-        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#F8FAFA" />
-        <SortedAscendingHeaderStyle BackColor="#246B61" />
-        <SortedDescendingCellStyle BackColor="#D4DFE1" />
-        <SortedDescendingHeaderStyle BackColor="#15524A" />
+        <AlternatingRowStyle BackColor="White" />
+        <RowStyle CssClass="grid_row" />
+        <SelectedRowStyle CssClass="grid_selected" />
+        <EditRowStyle CssClass="grid_edit" />
+        <HeaderStyle CssClass="grid_header" />
+        <FooterStyle CssClass="grid_footer" />
+        <PagerStyle CssClass="grid_pager" />
       </asp:GridView>
       <asp:Label ID="lblMensajeOrdenesPago" runat="server" Text="Ingrese valores en el formulario para recuperar la información solicitada."></asp:Label>
     </td></tr>
@@ -127,6 +123,5 @@
     </td></tr>
   </table>
 
-  <%--<asp:Button ID="btnExportarResultados" runat="server" Text="Exportar Resultados" Enabled="false" OnClick="btnExportarResultados_Click" />--%>
   <asp:Label ID="LabelMensaje" CssClass="LabelMensaje" runat="server" Text="" Visible="false"></asp:Label>
 </asp:Content>

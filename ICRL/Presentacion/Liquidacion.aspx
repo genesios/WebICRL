@@ -32,13 +32,13 @@
 
   <table class="basetable">
     <tr><th>Registro Liquidación</th></tr>
-    <tr><td>
+    <%--<tr><td>
       <div class="twentyfive">
         Nro. Flujo<br />
         <asp:TextBox ID="txbNroFlujo" runat="server" Enabled="false"></asp:TextBox>
       </div>
     </td></tr>
-    <tr><td><strong>Datos Generales</strong></td></tr>
+    <tr><td><strong>Datos Generales</strong></td></tr>--%>
     <tr><td>
       <div class="twentyfive">
         Cliente<br />
@@ -69,7 +69,6 @@
       OnRowUpdating="GridViewDatosFactura_RowUpdating"
       OnRowCommand="GridViewDatosFactura_RowCommand"
       OnRowDataBound="GridViewDatosFactura_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
-        <AlternatingRowStyle BackColor="White" />
       <Columns>
         <asp:TemplateField HeaderText="ID">
           <ItemTemplate>
@@ -216,16 +215,13 @@
           </FooterTemplate>
         </asp:TemplateField>
       </Columns>
-        <EditRowStyle BackColor="#e6fff4" />
-        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#E3EAEB" />
-        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#F8FAFA" />
-        <SortedAscendingHeaderStyle BackColor="#246B61" />
-        <SortedDescendingCellStyle BackColor="#D4DFE1" />
-        <SortedDescendingHeaderStyle BackColor="#15524A" />
+        <AlternatingRowStyle BackColor="White" />
+        <RowStyle CssClass="grid_row" />
+        <SelectedRowStyle CssClass="grid_selected" />
+        <EditRowStyle CssClass="grid_edit" />
+        <HeaderStyle CssClass="grid_header" />
+        <FooterStyle CssClass="grid_footer" />
+        <PagerStyle CssClass="grid_pager" />
     </asp:GridView>
     </td></tr>
   </table>
@@ -234,7 +230,7 @@
     <tr><th>Datos Cotización</th></tr>
     <tr><td>
       <div class="twentyfive">
-        Ingrese el "Tipo de Cambio" a usar:
+        Tipo de Cambio 
         <asp:RequiredFieldValidator ID="rfvTipoCambio" runat="server" ControlToValidate="txbTipoCambio"
           Text="* Requerido" Display="Dynamic" CssClass="errormessage" ValidationGroup="ValidacionTipoCambio"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="covTipoCambio" runat="server" ControlToValidate="txbTipoCambio" ValidationGroup="ValidacionTipoCambio"
@@ -244,8 +240,7 @@
     </td></tr>
     <tr><td>
       <asp:GridView ID="GridViewDatosOrden" runat="server" AutoGenerateColumns="False" ShowFooter="True" Width="100%"
-        OnRowDataBound="GridViewDatosOrden_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
-        <AlternatingRowStyle BackColor="White" />
+        OnRowDataBound="GridViewDatosOrden_RowDataBound" CellPadding="4" GridLines="None">
         <Columns>
           <asp:BoundField DataField="numero_orden" HeaderText="Orden" />
           <asp:BoundField DataField="proveedor" HeaderText="T/P/B" />
@@ -321,16 +316,13 @@
             </ItemTemplate>
           </asp:TemplateField>
         </Columns>
-        <EditRowStyle BackColor="#e6fff4" />
-        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#E3EAEB" />
-        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#F8FAFA" />
-        <SortedAscendingHeaderStyle BackColor="#246B61" />
-        <SortedDescendingCellStyle BackColor="#D4DFE1" />
-        <SortedDescendingHeaderStyle BackColor="#15524A" />
+        <AlternatingRowStyle BackColor="White" />
+        <RowStyle CssClass="grid_row" />
+        <SelectedRowStyle CssClass="grid_selected" />
+        <EditRowStyle CssClass="grid_edit" />
+        <HeaderStyle CssClass="grid_header" />
+        <FooterStyle CssClass="grid_footer" />
+        <PagerStyle CssClass="grid_pager" />
       </asp:GridView>
     </td></tr>
     <tr><td>
@@ -343,8 +335,7 @@
     <tr><th>Datos Liquidación</th></tr>
     <tr><td>
       <asp:GridView ID="GridViewDatosLiquidacion" runat="server" AutoGenerateColumns="False" ShowFooter="True" Width="100%"
-        OnRowDataBound="GridViewDatosLiquidacion_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
-      <AlternatingRowStyle BackColor="White" />
+        OnRowDataBound="GridViewDatosLiquidacion_RowDataBound" CellPadding="4" GridLines="None">
       <Columns>
         <asp:TemplateField HeaderText="Orden">
           <ItemTemplate>
@@ -395,16 +386,13 @@
           </ItemTemplate>
         </asp:TemplateField>
       </Columns>
-      <EditRowStyle BackColor="#e6fff4" />
-      <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-      <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-      <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-      <RowStyle BackColor="#E3EAEB" />
-      <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-      <SortedAscendingCellStyle BackColor="#F8FAFA" />
-      <SortedAscendingHeaderStyle BackColor="#246B61" />
-      <SortedDescendingCellStyle BackColor="#D4DFE1" />
-      <SortedDescendingHeaderStyle BackColor="#15524A" />
+      <AlternatingRowStyle BackColor="White" />
+      <RowStyle CssClass="grid_row" />
+      <SelectedRowStyle CssClass="grid_selected" />
+      <EditRowStyle CssClass="grid_edit" />
+      <HeaderStyle CssClass="grid_header" />
+      <FooterStyle CssClass="grid_footer" />
+      <PagerStyle CssClass="grid_pager" />
     </asp:GridView>
     </td></tr>
     <tr><td>
