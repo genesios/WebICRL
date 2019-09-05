@@ -211,7 +211,7 @@
                             </div>
                             <div class="twenty">
                                 <asp:Label ID="LabelCilindraPTRO" runat="server" Text="Cilindrada"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server" Text="0"></asp:TextBox><br />
                                 <asp:Label ID="LabelObservacionesPTRO" runat="server" Text="Observaciones"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server" MaxLength="100"></asp:TextBox>
                             </div>
@@ -269,7 +269,7 @@
                         </div>
                         <div class="fifty">
                             <asp:Label ID="LabelPTROMontoPago" runat="server" Text="Monto Pago en Bs.:"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxPTROMontoPago" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxPTROMontoPago" runat="server" Text="0.0"></asp:TextBox>
                             <asp:Label ID="LabelPTRODescripcion" runat="server" Text="Descripción:"></asp:Label><br />
                             <asp:TextBox ID="TextBoxPTRODescripcion" runat="server"></asp:TextBox>
                             <asp:TextBox ID="TextBoxPTROIndice" runat="server" Text="" Visible="false"></asp:TextBox>
@@ -333,7 +333,7 @@
                             <asp:Label ID="LabelReferDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
                             <asp:TextBox ID="TextBoxReferDescripcion" runat="server"></asp:TextBox>
                             <asp:Label ID="LabelReferMontoCoti" runat="server" Text="Monto Cotizado en Bs.:"></asp:Label><br />
-                            <asp:TextBox ID="TextBoxReferMontoCoti" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxReferMontoCoti" runat="server" Text="0.0"></asp:TextBox>
                             <asp:TextBox ID="TextBoxReferIndice" runat="server" Text="" Visible="false"></asp:TextBox>
                             <asp:TextBox ID="TextBoxReferIdItem" runat="server" Text="" Visible="false"></asp:TextBox>
                         </div>

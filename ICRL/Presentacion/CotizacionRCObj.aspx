@@ -225,7 +225,7 @@
                                 <asp:Label ID="LabelObjItem" runat="server" Text="Item:"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxObjItem" runat="server"></asp:TextBox><br />
                                 <asp:Label ID="LabelObjMontoItemRef" runat="server" Text="Costo Referencia Bs.:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxObjMontoItemRef" runat="server"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxObjMontoItemRef" runat="server" Text="0.0"></asp:TextBox><br />
                                 <asp:Label ID="LabelObjDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxObjDescripcion" runat="server"></asp:TextBox><br />
                             </div>

@@ -1711,6 +1711,28 @@ namespace ICRL.Presentacion
       return vResultado;
     }
 
+    protected void GridViewOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+      //verificar esa rutina
+      if (!VerificarPagina(true)) return;
+      if (e.Row.RowType == DataControlRowType.DataRow)
+      {
+        //verificar el estado del registro
+        string vEstadoCadena = string.Empty;
+        int vEstado = 0;
+        vEstadoCadena = e.Row.Cells[1].Text;
+        vEstado = int.Parse(vEstadoCadena);
+        if (1 == vEstado)
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+        }
+        else
+        {
+          (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+        }
+      }
+    }
+
     protected void GridViewOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;

@@ -225,7 +225,7 @@
                                 <asp:Label ID="LabelPerTipoGasto" runat="server" Text="Tipo Gasto:"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxPerTipoGasto" runat="server"></asp:TextBox><br />
                                 <asp:Label ID="LabelPerMontoGasto" runat="server" Text="Monto Gasto Bs.:"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxPerMontoGasto" runat="server"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxPerMontoGasto" runat="server" Text="0.0"></asp:TextBox><br />
                                 <asp:Label ID="LabelPerDescripcion" runat="server" Text="Descripción:"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxPerDescripcion" runat="server"></asp:TextBox><br />
                             </div>
