@@ -2072,6 +2072,9 @@ namespace ICRL.Presentacion
       ButtonCierraVerRep.Visible = false;
     }
 
-    
+    protected void ButtonFinalizarCotizacion_Click(object sender, EventArgs e)
+    {
+
+    }
   }
 }

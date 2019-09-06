@@ -175,9 +175,21 @@ namespace ICRL.BD
       int vRespuesta = 0;
 
       /*** CONECTAR A WS ***/
-      OnBaseWS vServicioOnBase = new OnBaseWS();
+      //OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
+      var vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO PARA GESPRO ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+
+
+      ///*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      //vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      //{
+      //  Usuario = "icrlUser",
+      //  Password = "icrlPruebas"
+      //};
+
+      
+
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
       /*** LLAMAR A LA FUNCIÓN DEL WS ***/
@@ -280,6 +292,17 @@ namespace ICRL.BD
       OnBaseWS vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+
+
+      ///*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      //vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      //{
+      //  Usuario = "icrlUser",
+      //  Password = "icrlPruebas"
+      //};
+
+
+
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
       /*** LLAMAR A LA FUNCIÓN DEL WS ***/

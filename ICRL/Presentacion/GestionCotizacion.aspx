@@ -142,10 +142,10 @@
             <asp:Button runat="server" ID="ButtonOcultoParaPopupCoberturas" Style="display: none" />
             <ajaxToolkit:ModalPopupExtender ID="ModalPopupCoberturas" runat="server"
                 PopupControlID="PanelModalPopupCoberturas" TargetControlID="ButtonOcultoParaPopupCoberturas" PopupDragHandleControlID="ModalPopupDragHandleCoberturas"
-                RepositionMode="None" X="10" Y="10"
+                RepositionMode="RepositionOnWindowScroll"
                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupCoberturasBehavior" DynamicServicePath="">
             </ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="PanelModalPopupCoberturas" runat="server" CssClass="modalPopup">
+            <asp:Panel ID="PanelModalPopupCoberturas" runat="server" CssClass="modalPopup" Width="200%">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleCoberturas" CssClass="modalPopupHeader">
                     Creación Cotizaciones
                 </asp:Panel>
@@ -153,15 +153,18 @@
                     <table class="basetable">
                         <tr>
                             <td>
-                                <div class="thirty">
+                                <div>
                                     <asp:Label ID="LabelCoberturas" runat="server" Text="Coberturas"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListCoberturas" runat="server"></asp:DropDownList><br />
+                                    <asp:DropDownList ID="DropDownListCoberturas" runat="server"></asp:DropDownList>
                                 </div>
-                                <div class="thirty">
-
-                                </div>
-                                <div class="thirty">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="fifty">
                                     <asp:Button ID="ButtonCoberturaCrear" runat="server" Text="Crear" OnClick="ButtonCoberturaCrear_Click" />
+                                </div>
+                                <div class="fifty">
                                     <asp:Button ID="ButtonCoberturaCancelar" runat="server" Text="Cancelar" OnClick="ButtonCoberturaCancelar_Click" />
                                 </div>
                             </td>

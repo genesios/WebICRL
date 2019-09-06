@@ -112,6 +112,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonActualizaDesdeOnBase;
         
         /// <summary>
+        /// ButtonFinalizarInspeccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinalizarInspeccion;
+        
+        /// <summary>
         /// LabelCoberturas control.
         /// </summary>
         /// <remarks>

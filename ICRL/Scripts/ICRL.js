@@ -11,3 +11,34 @@
     }
     return false;
 }
+
+function ConfirmarActualizarOnBase() {
+    var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
+    if (resultado) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+//ConfirmarFinalizarFlujoOnBase()
+function ConfirmarFinalizarFlujoOnBase() {
+    var resultado = confirm('¿Se Finalizará el Flujo , esta seguro ?');
+    if (resultado) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function ConfirmarFinalizarCotizacion() {
+    var resultado = confirm('¿Se Finalizará la cotización, esta seguro ?');
+    if (resultado) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

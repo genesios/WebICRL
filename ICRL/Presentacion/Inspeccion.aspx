@@ -37,7 +37,7 @@
         }
 
         function ConfirmarFinalizarInspeccion() {
-            var resultado = confirm('¿Se Finalizara la inspección, esta seguro ?');
+            var resultado = confirm('¿Se Finalizará la inspección, esta seguro ?');
             if (resultado) {
                 return true;
             }
@@ -137,7 +137,7 @@
                             <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" OnClientClick="return ConfirmarActualizarOnBase();" />
                         </div>
                         <div class="fifty">
-                            <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" OnClientClick="return ConfirmarFinalizarFlujoOnBase();/>
+                            <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Flujo Inspección" OnClick="ButtonFinalizarInspeccion_Click" OnClientClick="return ConfirmarFinalizarFlujoOnBase();" />
                         </div>
                     </td>
                 </tr>
