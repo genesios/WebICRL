@@ -24,6 +24,26 @@
             else {
                 return false;
             }
+        } 
+        //ConfirmarFinalizarFlujoOnBase()
+        function ConfirmarFinalizarFlujoOnBase() {
+            var resultado = confirm('¿Se Finalizará el Flujo , esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function ConfirmarFinalizarInspeccion() {
+            var resultado = confirm('¿Se Finalizara la inspección, esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     </script>
 
@@ -117,7 +137,7 @@
                             <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClick="ButtonActualizaDesdeOnBase_Click" OnClientClick="return ConfirmarActualizarOnBase();" />
                         </div>
                         <div class="fifty">
-                            <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" />
+                            <asp:Button ID="ButtonFinalizarInspeccion" runat="server" Text="Finalizar Inspección" OnClick="ButtonFinalizarInspeccion_Click" OnClientClick="return ConfirmarFinalizarFlujoOnBase();/>
                         </div>
                     </td>
                 </tr>
@@ -375,7 +395,7 @@
                                     <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
-                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink" />
                                     <asp:TemplateField HeaderText="Daños Ocultos">
                                         <ItemTemplate>
                                             <asp:CheckBox runat="server" Checked='<%# Eval("cambioAPerdidaTotal") %>' Enabled="false"></asp:CheckBox>
@@ -604,7 +624,7 @@
                                     <asp:BoundField DataField="docIdentidadObjeto" HeaderText="Doc.Id. Resp." />
                                     <asp:BoundField DataField="telefonoObjeto" HeaderText="Teléfono Resp." />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
-                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
                                             <%# Eval("observacionesObjeto") %>
@@ -783,7 +803,7 @@
                                     <asp:BoundField DataField="docIdentidadPersona" HeaderText="Doc.Id." />
                                     <asp:BoundField DataField="telefonoPersona" HeaderText="Teléfono" />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
-                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink"/>
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
                                             <%# Eval("observacionesPersona") %>
@@ -1008,7 +1028,7 @@
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfRoboP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfRoboP_Click" />
-                            <asp:Button ID="ButtonFinRoboP" runat="server" Text="Finalizar" OnClick="ButtonFinRoboP_Click" />
+                            <asp:Button ID="ButtonFinRoboP" runat="server" Text="Finalizar" OnClick="ButtonFinRoboP_Click" OnClientClick="return ConfirmarFinalizarInspeccion();" ></asp:Button>
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
@@ -1073,7 +1093,7 @@
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfPTDP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTDP_Click" />
-                            <asp:Button ID="ButtonFinPTDaniosP" runat="server" Text="Finalizar" OnClick="ButtonFinPTDaniosP_Click" />
+                            <asp:Button ID="ButtonFinPTDaniosP" runat="server" Text="Finalizar" OnClick="ButtonFinPTDaniosP_Click" OnClientClick="return ConfirmarFinalizarInspeccion();" />
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
@@ -1137,7 +1157,7 @@
                             </table>
                             <div>
                                 <asp:ImageButton ID="ImgButtonExportPdfPTRO" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTRO_Click" />
-                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click" />
+                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click" OnClientClick="return ConfirmarFinalizarInspeccion();"/>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -1234,7 +1254,7 @@
                                     <asp:BoundField DataField="anio" HeaderText="Año" />
                                     <asp:BoundField DataField="chasis" HeaderText="Chasis" />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
-                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Button" HeaderText="Opción" Text="Finalizar" />
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink" />
                                     <asp:TemplateField HeaderText="Placa">
                                         <ItemTemplate>
                                             <%# Eval("placa") %>

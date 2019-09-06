@@ -967,11 +967,13 @@ namespace ICRL.Presentacion
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[6].Controls[0] as Button).Enabled = true;
+          (e.Row.Cells[6].Controls[0] as LinkButton).Enabled = true;
+          //ConfirmarFinalizarInspeccion
+          (e.Row.Cells[6].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[6].Controls[0] as Button).Enabled = false;
+          (e.Row.Cells[6].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra
@@ -1610,11 +1612,13 @@ namespace ICRL.Presentacion
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[8].Controls[0] as Button).Enabled = true;
+          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = true;
+          //ConfirmarFinalizarInspeccion
+          (e.Row.Cells[8].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[8].Controls[0] as Button).Enabled = false;
+          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra
@@ -2007,11 +2011,13 @@ namespace ICRL.Presentacion
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[8].Controls[0] as Button).Enabled = true;
+          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = true;
+          //ConfirmarFinalizarInspeccion
+          (e.Row.Cells[8].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[8].Controls[0] as Button).Enabled = false;
+          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra persona
@@ -3443,11 +3449,13 @@ namespace ICRL.Presentacion
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = true;
+          //ConfirmarFinalizarInspeccion
+          (e.Row.Cells[11].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra persona

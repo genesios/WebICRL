@@ -663,6 +663,11 @@ namespace ICRL.Presentacion
       Session["NumFlujo"] = vIdFlujo;
 
       Response.Redirect("~/Presentacion/Inspeccion.aspx?nroInsp=" + vIdInspeccion.ToString());
+
+      //string vRutaUrl = string.Empty;
+      //vRutaUrl = "Inspeccion.aspx?nroInsp=" + vIdInspeccion.ToString();
+      //ScriptManager.RegisterStartupScript(this, this.GetType(), "Open", "window.open('" + vRutaUrl + "');", true);
+
     }
 
     protected int PBusquedaInspecciones()
