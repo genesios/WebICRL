@@ -2005,5 +2005,19 @@ namespace ICRL.Presentacion
       ReportViewerCoti.Visible = false;
       ButtonCierraVerRep.Visible = false;
     }
+
+    protected void ButtonFinalizarCotizacion_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      string vNombreUsuario = string.Empty;
+      vNombreUsuario = Session["IdUsr"].ToString();
+      string vBandejaEntrada = "REC – COTIZACION – PENDIENTE DE COTIZACION";
+      string vBandejaSalida = "REC – PRONUNCIAMIENTO - INICIO";
+      string vNumeroFlujo = TextBoxNroFlujo.Text;
+
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
+    }
   }
 }

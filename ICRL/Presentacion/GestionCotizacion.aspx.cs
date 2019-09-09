@@ -482,6 +482,7 @@ namespace IRCL.Presentacion
     public int FCreaCotizacion(int pTipoCobertura)
     {
       int vResultado = 0;
+      int vResultadoCotiFlujo = 0;
       int vIdFlujo = 0;
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vTipoCobertura = 0;
@@ -547,7 +548,12 @@ namespace IRCL.Presentacion
       vCotiFlujo.usuario_modificacion = vIdUsuario;
       vCotiFlujo.fechaModificacion = DateTime.Now;
 
-      vResultado = vAccesoDatos.FGrabaCotiFlujoICRL(vCotiFlujo);
+      //VAlidar si ya existe el registro FlujoCotizacion
+      vResultadoCotiFlujo = vAccesoDatos.FValidaExisteCotiFlujoICRL(vIdFlujo);
+      if (0 == vResultadoCotiFlujo)
+      {
+        vResultadoCotiFlujo = vAccesoDatos.FGrabaCotiFlujoICRL(vCotiFlujo);
+      }
 
       return vResultado;
     }

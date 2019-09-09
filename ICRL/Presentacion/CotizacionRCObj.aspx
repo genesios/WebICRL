@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRCObj.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRCObj"  MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SitioICRL.Master" AutoEventWireup="true" CodeBehind="CotizacionRCObj.aspx.cs" Inherits="ICRL.Presentacion.CotizacionRCObj" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -58,7 +58,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" />
+                            <div class="fifty">
+                                <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClientClick="return ConfirmarActualizarOnBase();" />
+                                <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
+                            </div>
+                            <div class="fifty">
+                                <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización"  OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -270,7 +276,7 @@
             <table class="basetable" style="width: 100%">
                 <tr>
                     <td style="text-align: right">
-                        <asp:Button ID="ButtonGenerarOrden" runat="server" Text="Generar Orden" OnClick="ButtonGenerarOrden_Click" ></asp:Button>
+                        <asp:Button ID="ButtonGenerarOrden" runat="server" Text="Generar Orden" OnClick="ButtonGenerarOrden_Click"></asp:Button>
                     </td>
                 </tr>
             </table>
@@ -296,7 +302,7 @@
                     <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />
                     <asp:ButtonField CommandName="Ver" ButtonType="Button" HeaderText="Opción" Text="Ver" />
                     <asp:ButtonField CommandName="SubirOnBase" ButtonType="Button" HeaderText="Opción" Text="On Base" />
-                    <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta"/>
+                    <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                 </Columns>
             </asp:GridView>
         </div>
@@ -305,7 +311,7 @@
                 <LocalReport ReportPath="Reportes\RepFormularioCotiRCObjetos.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>
-            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" OnClick="ButtonCierraVerRep_Click" />
+            <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" Visible="false" OnClick="ButtonCierraVerRep_Click" />
         </div>
     </div>
 </asp:Content>

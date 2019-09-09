@@ -130,6 +130,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonActualizaDesdeOnBase;
         
         /// <summary>
+        /// LabelMsjGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMsjGeneral;
+        
+        /// <summary>
+        /// ButtonFinalizarCotizacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFinalizarCotizacion;
+        
+        /// <summary>
         /// PanelColapseDatosGen control.
         /// </summary>
         /// <remarks>

@@ -2759,6 +2759,30 @@ namespace ICRL.BD
       }
       return vRespuesta;
     }
+    public int FValidaExisteCotiFlujoICRL(int pIdFlujo)
+    {
+      int vRespuesta = 0;
+
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          CotizacionFlujo vCotizacionFlujo = new CotizacionFlujo();
+
+          vCotizacionFlujo = db.CotizacionFlujo.Find(pIdFlujo);
+          if(null != vCotizacionFlujo)
+          {
+            vRespuesta = vCotizacionFlujo.idFlujo;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        vRespuesta = 0;
+      }
+
+      return vRespuesta;
+    }
 
     public int FCotizacionDaniosPropiosCambiaEstadoSumatoria(int pIdFlujo, int pIdCotizacion, short pIdTipoItem, string pProveedor)
     {

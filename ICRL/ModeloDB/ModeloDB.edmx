@@ -221,6 +221,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
           <Property Name="estado" Type="int" />
           <Property Name="tipoCobertura" Type="int" />
           <Property Name="correlativo" Type="int" />
+          <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="cotizacion_danios_propios">
           <Key>
@@ -1670,6 +1671,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
           <Property Name="estado" Type="Int32" />
           <Property Name="tipoCobertura" Type="Int32" />
           <Property Name="correlativo" Type="Int32" />
+          <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
           <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
           <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
@@ -3119,6 +3121,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
                 <ScalarProperty Name="correlativo" ColumnName="correlativo" />
+                <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
