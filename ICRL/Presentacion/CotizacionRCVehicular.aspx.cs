@@ -227,8 +227,8 @@ namespace ICRL.Presentacion
                        cf.telefonoContacto,
                        cf.correosDeEnvio,
                        c.correlativo,
-                       //cdp.tipoTaller,
-                       tipoTaller = "Taller Tipo B",
+                       c.tipoTaller,
+                       //tipoTaller = "Taller Tipo B",
                        u.nombreVisible,
                        u.correoElectronico,
                      };

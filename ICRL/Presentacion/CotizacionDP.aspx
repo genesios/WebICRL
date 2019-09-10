@@ -5,7 +5,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
-<%--    <script type="text/javascript">
+    <%--    <script type="text/javascript">
         function ConfirmarActualizarOnBase() {
             var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
             if (resultado) {
@@ -89,7 +89,7 @@
                                 <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
                             </div>
                             <div class="fifty">
-                                <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización"  OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
+                                <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización" OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
                             </div>
                         </td>
                     </tr>
@@ -813,6 +813,49 @@
                 </LocalReport>
             </rsweb:ReportViewer>
             <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" Visible="false" OnClick="ButtonCierraVerRep_Click" CssClass="alt2" />
+        </div>
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupBeneficiario" Style="display: none" CssClass="alt2" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupBeneficiario" BehaviorID="ModalPopupBeneficiarioBehavior"
+                TargetControlID="ButtonOcultoParaPopupBeneficiario" PopupControlID="PanelModalPopupBeneficiario"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleBeneficiario"
+                RepositionMode="RepositionOnWindowScroll">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupBeneficiario" runat="server" CssClass="modalPopup">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleBeneficiario" CssClass="modalPopupHeader">
+                    Caso Especial Orden de Pago Beneficiario
+                </asp:Panel>
+                <div>
+                    <table class="basetable alt2">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="Label1" runat="server" Text="Items - Sumatoria"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="fifty">
+                                    <asp:Label ID="LabelBeficiario" runat="server" Text="Beneficiario" Enabled="false"></asp:Label>
+                                </div>
+                                <div class="fifty">
+                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="25" Enabled="false"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="ValidadorBeneficiario" runat="server" ErrorMessage="El Beneficiario no puede estar vacío"
+                                        ControlToValidate="TextBoxBeneficiario" CssClass="errormessage"></asp:RequiredFieldValidator>--%>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonBenefCambiar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonBenefCambiar_Click" CssClass="alt2" />
+                                <asp:Button ID="ButtonBenefCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonBenefCancelar_Click" CssClass="alt2" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopBeneficiario" runat="server" Text="Cerrar" OnClick="ButtonCancelPopBeneficiario_Click" CssClass="alt2" />
+            </asp:Panel>
         </div>
     </div>
 </asp:Content>

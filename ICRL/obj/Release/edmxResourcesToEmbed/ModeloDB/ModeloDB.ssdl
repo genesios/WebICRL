@@ -216,6 +216,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="estado" Type="int" />
     <Property Name="tipoCobertura" Type="int" />
     <Property Name="correlativo" Type="int" />
+    <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
   </EntityType>
   <EntityType Name="cotizacion_danios_propios">
     <Key>

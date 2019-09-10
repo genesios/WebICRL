@@ -207,6 +207,7 @@
     <Property Name="estado" Type="Int32" />
     <Property Name="tipoCobertura" Type="Int32" />
     <Property Name="correlativo" Type="Int32" />
+    <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
     <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
     <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
