@@ -292,6 +292,7 @@
                                     <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" CssClass="alt2" />
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepaCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepaCambioBenef_Click" Visible="false" CssClass="alt2"></asp:Button>
                                     <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepaGenerarOrdenes_Click" CssClass="alt2"></asp:Button>
                                 </td>
                             </tr>
@@ -381,6 +382,7 @@
                                     <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" CssClass="alt1"></asp:Button>
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepuCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepuCambioBenef_Click" Visible="false" CssClass="alt1"></asp:Button>
                                     <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepuGenerarOrdenes_Click" CssClass="alt1"></asp:Button>
                                 </td>
                             </tr>
@@ -822,7 +824,7 @@
                 BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleBeneficiario"
                 RepositionMode="RepositionOnWindowScroll">
             </ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="PanelModalPopupBeneficiario" runat="server" CssClass="modalPopup">
+            <asp:Panel ID="PanelModalPopupBeneficiario" runat="server" CssClass="modalPopup" Width="100%">
                 <asp:Panel runat="server" ID="ModalPopupDragHandleBeneficiario" CssClass="modalPopupHeader">
                     Caso Especial Orden de Pago Beneficiario
                 </asp:Panel>
@@ -836,19 +838,24 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="fifty">
-                                    <asp:Label ID="LabelBeficiario" runat="server" Text="Beneficiario" Enabled="false"></asp:Label>
-                                </div>
-                                <div class="fifty">
-                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="25" Enabled="false"></asp:TextBox>
-                                    <%--<asp:RequiredFieldValidator ID="ValidadorBeneficiario" runat="server" ErrorMessage="El Beneficiario no puede estar vacío"
-                                        ControlToValidate="TextBoxBeneficiario" CssClass="errormessage"></asp:RequiredFieldValidator>--%>
+                                <div>
+                                    <asp:Label ID="LabelBeficiario" runat="server" Text="Beneficiario" ></asp:Label>
+                                    <asp:Label ID="LabelMsjBenef" runat="server" Text=""></asp:Label><br />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Button ID="ButtonBenefCambiar" runat="server" Text="Grabar" Enabled="False" OnClick="ButtonBenefCambiar_Click" CssClass="alt2" />
+                                <div>
+                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="25" ></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxBenefIndice" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxBenefTipoItem" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonBenefCambiar" runat="server" Text="Cambiar" Enabled="False" OnClick="ButtonBenefCambiar_Click" CssClass="alt2" />
                                 <asp:Button ID="ButtonBenefCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonBenefCancelar_Click" CssClass="alt2" />
                             </td>
                         </tr>

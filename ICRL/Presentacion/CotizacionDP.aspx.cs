@@ -15,7 +15,6 @@ namespace ICRL.Presentacion
 {
   public partial class CotizacionDP : System.Web.UI.Page
   {
-    string gNombreBeneficiario;
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -34,7 +33,6 @@ namespace ICRL.Presentacion
         if (!VerificarPagina(false)) return;
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
-        gNombreBeneficiario = string.Empty;
         if (Request.QueryString["nroCoti"] != null)
         {
           vIdCotizacion = int.Parse(Request.QueryString["nroCoti"]);
@@ -129,6 +127,16 @@ namespace ICRL.Presentacion
             this.ModalPopupRecepRepuestos.Show();
           else
             this.ModalPopupRecepRepuestos.Hide();
+        }
+
+        if (Session["PopupBeneficiario"] != null)
+        {
+          int vPopup = -1;
+          vPopup = int.Parse(Session["PopupBeneficiario"].ToString());
+          if (1 == vPopup)
+            this.ModalPopupBeneficiario.Show();
+          else
+            this.ModalPopupBeneficiario.Hide();
         }
 
       }
@@ -1561,16 +1569,28 @@ namespace ICRL.Presentacion
         //verificar el estado del registro
         string vEstadoCadena = string.Empty;
         int vEstado = 0;
-        vEstadoCadena = e.Row.Cells[1].Text;
+        vEstadoCadena = e.Row.Cells[1].Text.Trim();
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
           (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+          //validar si el Proveedor es Benficiario
+          string vNombreProveedor = string.Empty;
+          vNombreProveedor = e.Row.Cells[2].Text.Trim().ToUpper();
+          if ("BENEFICIARIO" == vNombreProveedor)
+          {
+            (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+          }
+          else
+          {
+            (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+          }
         }
         else
         {
           (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
         }
+
       }
     }
 
@@ -1612,31 +1632,45 @@ namespace ICRL.Presentacion
       {
         int vResultado = 0;
         string vTextoSecuencial = string.Empty;
-        
+
 
         vIndex = Convert.ToInt32(e.CommandArgument);
-        vNumeroOrden = (string) GridViewOrdenes.DataKeys[vIndex].Value;
+        vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
         vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
 
 
         //Grabar en la tabla
-        
+
 
         vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-        if ("OT" == vNumeroOrden.Substring(0,2))
+        if ("OT" == vNumeroOrden.Substring(0, 2))
         {
           vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
         }
         else
         {
-          vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+          if ("OC" == vNumeroOrden.Substring(0, 2))
+          {
+            vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+          }
+          else
+          {
+            if ("T" == vNumeroOrden.Substring(20, 1))
+            {
+              vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+            }
+            else
+            {
+              vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+            }
+          }
         }
 
         vResultado = vAccesoDatos.fActualizaLiquidacionDP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
         PSubeFormularioCotiDaniosPropios(vNumeroOrden);
-        vResultado = vAccesoDatos.FCotizacionDaniosPropiosCambiaEstadoSumatoria(vIdFlujo, vIdCotizacion, (short) vTipoItem, vProveedor);
-        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, (short) vTipoItem);
+        vResultado = vAccesoDatos.FCotizacionDaniosPropiosCambiaEstadoSumatoria(vIdFlujo, vIdCotizacion, (short)vTipoItem, vProveedor);
+        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, (short)vTipoItem);
       }
     }
 
@@ -1647,6 +1681,11 @@ namespace ICRL.Presentacion
       int vIdCotizacion = 0;
       short vTipoItem = 0;
       int vContador = 1;
+
+      ButtonRepuCambioBenef.Visible = false;
+
+      //verificar si existe un Beneficiario
+      int vIndiceBenef = FValidaRepuBeneficiario();
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
@@ -1708,41 +1747,7 @@ namespace ICRL.Presentacion
 
     }
 
-    int FValidaRepaBeneficiario()
-    {
-      int vResultado = -1;
-      int vIdFlujo = 0;
-      int vIdCotizacion = 0;
-      short vTipoItem = 0;
 
-      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
-
-      BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
-      vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
-      DataSet vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
-      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
-
-      if (vIndiceDataTable >= 0)
-      {
-        StringBuilder vSBNumeroOrden = new StringBuilder();
-        string vNumeroOrden = string.Empty;
-        //Buscar un registro de Beneficiario
-        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
-        {
-          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
-          if ("Beneficiario" == vProveedor)
-          {
-            vResultado = i;
-            Session["PopupBeneficiario"] = 1;
-            this.ModalPopupBeneficiario.Show();
-          }
-        }
-      }
-
-      return vResultado;
-    }
 
     protected void ButtonRepaGenerarOrdenes_Click(object sender, EventArgs e)
     {
@@ -1751,6 +1756,8 @@ namespace ICRL.Presentacion
       int vIdCotizacion = 0;
       short vTipoItem = 0;
       int vContador = 1;
+
+      ButtonRepaCambioBenef.Visible = false;
 
       //verificar si existe un Beneficiario
       int vIndiceBenef = FValidaRepaBeneficiario();
@@ -1831,7 +1838,7 @@ namespace ICRL.Presentacion
       string extension = "pdf";
       string fileName = "RepFormCotiDaniosPropios" + pNroOrden;
 
-      var vListaFlujo = from f in db.Flujo 
+      var vListaFlujo = from f in db.Flujo
                         join s in db.cotizacion_danios_propios_sumatoria on f.idFlujo equals s.id_flujo
                         where (s.numero_orden == pNroOrden)
                         select new
@@ -1891,7 +1898,24 @@ namespace ICRL.Presentacion
                                         };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenPagoCambio.rdlc";
+        }
+      }
+
+      //ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
@@ -1978,7 +2002,23 @@ namespace ICRL.Presentacion
                                         };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenPagoCambio.rdlc";
+        }
+      }
+
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
@@ -2016,8 +2056,16 @@ namespace ICRL.Presentacion
       }
       else
       {
-        vTipoDocumental = "RE - Orden de Compra";
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          vTipoDocumental = "RE - Orden de Compra";
+        }
+        else
+        {
+          vTipoDocumental = "RE - Orden de Indemnizacion";
+        }
       }
+
 
       vNombreUsuario = Session["IdUsr"].ToString();
 
@@ -2081,7 +2129,23 @@ namespace ICRL.Presentacion
                                         };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiDaniosPropios.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiOrdenPagoCambio.rdlc";
+        }
+      }
+
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
@@ -2097,7 +2161,7 @@ namespace ICRL.Presentacion
       //enviar el array de bytes a OnBase
       int vResultado = 0;
       vResultado = vAccesoDatos.FEnviaArchivoOnBase(vNumFlujo, vTipoDocumental, vNombreUsuario, vArrayBytes);
-      if(vResultado > 0)
+      if (vResultado > 0)
       {
         LabelMensaje.Text = "Documento subido exitosamente a OnBase";
       }
@@ -2128,11 +2192,167 @@ namespace ICRL.Presentacion
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
     }
 
+    #region CambioBeneficiario Orden Pago
+
+    private int FValidaRepaBeneficiario()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+      BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
+      vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Beneficiario
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          if ("Beneficiario" == vProveedor)
+          {
+            vResultado = i;
+            ButtonRepaCambioBenef.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
+    private int FValidaRepuBeneficiario()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+
+      BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
+      vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Beneficiario
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          if ("Beneficiario" == vProveedor)
+          {
+            vResultado = i;
+            ButtonRepuCambioBenef.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
     protected void ButtonBenefCambiar_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
-      ButtonBenefCambiar.Enabled = false;
-      ButtonBenefCancelar.Enabled = false;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+      int vIndiceBenef = -1;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = short.Parse(TextBoxBenefTipoItem.Text);
+      vIndiceBenef = int.Parse(TextBoxBenefIndice.Text);
+
+      if (string.Empty != TextBoxBeneficiario.Text)
+      {
+        //Cambiar el nombre del Beneficiario en la tabla de Sumatorias
+        BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
+        vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        DataSet vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+        int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          //Generar el nuevo numero de Orden como si fuera Orden de Pago
+          //generar numero de orden
+          StringBuilder vSBNumeroOrden = new StringBuilder();
+          string vNumeroOrden = string.Empty;
+          vSBNumeroOrden.Clear();
+          vSBNumeroOrden.Append("OP-");
+          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-DP-");
+          vNumeroOrden = vIdCotizacion.ToString();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-");
+          if ((short)CotizacionICRL.TipoItem.Reparacion == vTipoItem)
+          {
+            vSBNumeroOrden.Append("T1");
+          }
+          else
+          {
+            vSBNumeroOrden.Append("C1");
+          }
+          vNumeroOrden = vSBNumeroOrden.ToString();
+
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceBenef][9] = vNumeroOrden;
+          BD.CotizacionICRL.DaniosPropiosSumatoriaModificarTodos(vDatasetOrdenes);
+
+          //Actualizar el numero de orden en la tabla de Daños Propios
+          vAccesoDatos.fActualizaOrdenesCotiDP(vIdFlujo, vIdCotizacion, "Beneficiario", vTipoItem);
+
+          //Actualizar un registro de Beneficiario
+          vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+          vDatasetOrdenes = vTipoDaniosPropiosSumatoriaTraer.dsDaniosPropiosSumatoria;
+          vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+          if (vIndiceDataTable >= 0)
+          {
+            string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceBenef][3].ToString();
+            string vNombreBeneficiario = TextBoxBeneficiario.Text.ToUpper().Trim();
+            //if ("Beneficiario" == vProveedor)
+            //{
+            //  vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceBenef][3] = vNombreBeneficiario;
+            //}
+
+            BD.CotizacionICRL.DaniosPropiosSumatoriaModificarTodos(vDatasetOrdenes, vNombreBeneficiario);
+          }
+          if (1 == vTipoItem)
+          {
+            ButtonRepaCambioBenef.Visible = false;
+          }
+          else
+          {
+            ButtonRepuCambioBenef.Visible = false;
+          }
+          FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+          Session["PopupBeneficiario"] = 0;
+          this.ModalPopupBeneficiario.Hide();
+        }
+
+      }
+      else
+      {
+        //Si el nombre del Beneficiario esta vacio no se hace el cambio
+        LabelMsjBenef.Text = "El nombre del Beneficiario no puede estar vacío";
+
+      }
+
     }
 
     protected void ButtonBenefCancelar_Click(object sender, EventArgs e)
@@ -2148,5 +2368,47 @@ namespace ICRL.Presentacion
       Session["PopupBeneficiario"] = 0;
       this.ModalPopupBeneficiario.Hide();
     }
+
+    protected void ButtonRepaCambioBenef_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceBenef = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+
+      LabelMsjBenef.Text = string.Empty;
+
+      vIndiceBenef = FValidaRepaBeneficiario();
+      if (vIndiceBenef >= 0)
+      {
+        TextBoxBenefIndice.Text = vIndiceBenef.ToString();
+        TextBoxBenefTipoItem.Text = vTipoItem.ToString();
+        ButtonBenefCambiar.Enabled = true;
+        ButtonBenefCancelar.Enabled = true;
+        Session["PopupBeneficiario"] = 1;
+        this.ModalPopupBeneficiario.Show();
+      }
+    }
+
+    protected void ButtonRepuCambioBenef_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceBenef = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+
+      LabelMsjBenef.Text = string.Empty;
+
+      vIndiceBenef = FValidaRepuBeneficiario();
+      if (vIndiceBenef >= 0)
+      {
+        TextBoxBenefIndice.Text = vIndiceBenef.ToString();
+        TextBoxBenefTipoItem.Text = vTipoItem.ToString();
+        ButtonBenefCambiar.Enabled = true;
+        ButtonBenefCancelar.Enabled = true;
+        Session["PopupBeneficiario"] = 1;
+        this.ModalPopupBeneficiario.Show();
+      }
+    }
+
+    #endregion
   }
 }

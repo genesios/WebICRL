@@ -623,6 +623,44 @@ namespace ICRL.BD
       }
       return blnRespuesta;
     }
+    public static bool DaniosPropiosSumatoriaModificar(TipoDanioPropioSumatoria DaniosPropiosSumatoria,string ProveedorNuevo)
+    {
+      bool blnRespuesta = false;
+      string strComando = "UPDATE [dbo].[cotizacion_danios_propios_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden,[id_estado] = @id_estado " +
+        "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+      SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+      try
+      {
+        sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatoria.id_flujo;
+        sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = DaniosPropiosSumatoria.id_cotizacion;
+        sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = DaniosPropiosSumatoria.id_tipo_item;
+        sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = DaniosPropiosSumatoria.proveedor;
+
+        sqlComando.Parameters.Add("@proveedor_nuevo", System.Data.SqlDbType.VarChar, 150).Value = ProveedorNuevo;
+        sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.monto_orden;
+        sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = DaniosPropiosSumatoria.id_tipo_descuento_orden;
+        sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.descuento_proveedor;
+        sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.deducible;
+        sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = DaniosPropiosSumatoria.monto_final;
+        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 30).Value = DaniosPropiosSumatoria.numero_orden;
+        sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = DaniosPropiosSumatoria.id_estado;
+        sqlComando.Parameters.Add("@moneda_orden", System.Data.SqlDbType.VarChar, 20).Value = DaniosPropiosSumatoria.moneda_orden;
+        sqlConexion.Open();
+        sqlComando.ExecuteNonQuery();
+        blnRespuesta = true;
+      }
+      catch (Exception)
+      {
+        blnRespuesta = false;
+      }
+      finally
+      {
+        sqlConexion.Close();
+        sqlConexion.Dispose();
+      }
+      return blnRespuesta;
+    }
     public static void DaniosPropiosSumatoriaModificarTodos(System.Data.DataSet DaniosPropiosSumatoria)
     {
       TipoDanioPropioSumatoria tdpFila;
@@ -630,6 +668,23 @@ namespace ICRL.BD
       {
         tdpFila = TipoDanioPropioSumatoria.GenerarDesdeFila(DaniosPropiosSumatoria.Tables[0].Rows[i]);
         DaniosPropiosSumatoriaModificar(tdpFila);
+      }
+    }
+    public static void DaniosPropiosSumatoriaModificarTodos(System.Data.DataSet DaniosPropiosSumatoria,string ProveedorNuevo)
+    {
+      TipoDanioPropioSumatoria tdpFila;
+      for (int i = 0; i <= DaniosPropiosSumatoria.Tables[0].Rows.Count - 1; i++)
+      {
+        tdpFila = TipoDanioPropioSumatoria.GenerarDesdeFila(DaniosPropiosSumatoria.Tables[0].Rows[i]);
+        if (tdpFila.proveedor.Trim().ToUpper() == "BENEFICIARIO")
+        {
+          DaniosPropiosSumatoriaModificar(tdpFila, ProveedorNuevo);
+        }
+        else
+        {
+          DaniosPropiosSumatoriaModificar(tdpFila);
+        }
+        
       }
     }
     public static bool DaniosPropiosSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
@@ -1616,6 +1671,44 @@ namespace ICRL.BD
       }
       return blnRespuesta;
     }
+    public static bool RCVehicularSumatoriaModificar(TipoRCVehicularSumatoria RCvehicularSumatoria,string ProveedoNuevo)
+    {
+      bool blnRespuesta = false;
+      string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden, [id_estado] = @id_estado, [moneda_orden] = @moneda_orden " +
+        "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+      SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+      try
+      {
+        sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RCvehicularSumatoria.id_flujo;
+        sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RCvehicularSumatoria.id_cotizacion;
+        sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RCvehicularSumatoria.id_tipo_item;
+        sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RCvehicularSumatoria.proveedor;
+        
+        sqlComando.Parameters.Add("@proveedor_nuevo", System.Data.SqlDbType.VarChar, 150).Value = ProveedoNuevo;
+        sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.monto_orden;
+        sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RCvehicularSumatoria.id_tipo_descuento_orden;
+        sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.descuento_proveedor;
+        sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.deducible;
+        sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RCvehicularSumatoria.monto_final;
+        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 30).Value = RCvehicularSumatoria.numero_orden;
+        sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RCvehicularSumatoria.id_estado;
+        sqlComando.Parameters.Add("@moneda_orden", System.Data.SqlDbType.VarChar, 20).Value = RCvehicularSumatoria.moneda_orden;
+        sqlConexion.Open();
+        sqlComando.ExecuteNonQuery();
+        blnRespuesta = true;
+      }
+      catch (Exception)
+      {
+        blnRespuesta = false;
+      }
+      finally
+      {
+        sqlConexion.Close();
+        sqlConexion.Dispose();
+      }
+      return blnRespuesta;
+    }
     public static void RCVehicularSumatoriaModificarTodos(System.Data.DataSet RCVehicularSumatoria)
     {
       TipoRCVehicularSumatoria tdpFila;
@@ -1623,6 +1716,22 @@ namespace ICRL.BD
       {
         tdpFila = TipoRCVehicularSumatoria.GenerarDesdeFila(RCVehicularSumatoria.Tables[0].Rows[i]);
         RCVehicularSumatoriaModificar(tdpFila);
+      }
+    }
+    public static void RCVehicularSumatoriaModificarTodos(System.Data.DataSet RCVehicularSumatoria,string ProveedorNuevo)
+    {
+      TipoRCVehicularSumatoria tdpFila;
+      for (int i = 0; i <= RCVehicularSumatoria.Tables[0].Rows.Count - 1; i++)
+      {
+        tdpFila = TipoRCVehicularSumatoria.GenerarDesdeFila(RCVehicularSumatoria.Tables[0].Rows[i]);
+        if (tdpFila.proveedor.Trim().ToUpper() == "BENEFICIARIO")
+        {
+          RCVehicularSumatoriaModificar(tdpFila,ProveedorNuevo);
+        }
+        else
+        {
+          RCVehicularSumatoriaModificar(tdpFila);
+        }
       }
     }
     public static bool RCVehicularSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)
@@ -2417,6 +2526,45 @@ namespace ICRL.BD
       }
       return blnRespuesta;
     }
+    public static bool RoboParcialSumatoriaModificar(TipoRoboParcialSumatoria RoboParcialSumatoria,string ProveedorNuevo)
+    {
+      bool blnRespuesta = false;
+      string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final,[numero_orden] = @numero_orden,[id_estado]=@id_estado, [moneda_orden] = @moneda_orden " +
+        "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
+      SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
+      SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
+      try
+      {
+        sqlComando.Parameters.Add("@id_flujo", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_flujo;
+        sqlComando.Parameters.Add("@id_cotizacion", System.Data.SqlDbType.Int).Value = RoboParcialSumatoria.id_cotizacion;
+        sqlComando.Parameters.Add("@id_tipo_item", System.Data.SqlDbType.SmallInt).Value = RoboParcialSumatoria.id_tipo_item;
+        sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = RoboParcialSumatoria.proveedor;
+
+        sqlComando.Parameters.Add("@proveedor_nuevo", System.Data.SqlDbType.VarChar, 150).Value = ProveedorNuevo;
+        sqlComando.Parameters.Add("@monto_orden", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_orden;
+        sqlComando.Parameters.Add("@id_tipo_descuento_orden", System.Data.SqlDbType.VarChar, 10).Value = RoboParcialSumatoria.id_tipo_descuento_orden;
+        sqlComando.Parameters.Add("@descuento_proveedor", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.descuento_proveedor;
+        sqlComando.Parameters.Add("@deducible", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.deducible;
+        sqlComando.Parameters.Add("@monto_final", System.Data.SqlDbType.Float).Value = RoboParcialSumatoria.monto_final;
+        sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 30).Value = RoboParcialSumatoria.numero_orden;
+        sqlComando.Parameters.Add("@id_estado", System.Data.SqlDbType.SmallInt).Value = RoboParcialSumatoria.id_estado;
+        sqlComando.Parameters.Add("@moneda_orden", System.Data.SqlDbType.VarChar, 20).Value = RoboParcialSumatoria.moneda_orden;
+        sqlConexion.Open();
+        sqlComando.ExecuteNonQuery();
+        blnRespuesta = true;
+      }
+      catch (Exception)
+      {
+        blnRespuesta = false;
+      }
+      finally
+      {
+        sqlConexion.Close();
+        sqlConexion.Dispose();
+      }
+      return blnRespuesta;
+    }
+
     public static void RoboParcialSumatoriaModificarTodos(System.Data.DataSet RoboParcialSumatoria)
     {
       TipoRoboParcialSumatoria tdpFila;
@@ -2424,6 +2572,22 @@ namespace ICRL.BD
       {
         tdpFila = TipoRoboParcialSumatoria.GenerarDesdeFila(RoboParcialSumatoria.Tables[0].Rows[i]);
         RoboParcialSumatoriaModificar(tdpFila);
+      }
+    }
+    public static void RoboParcialSumatoriaModificarTodos(System.Data.DataSet RoboParcialSumatoria,string ProveedorNuevo)
+    {
+      TipoRoboParcialSumatoria tdpFila;
+      for (int i = 0; i <= RoboParcialSumatoria.Tables[0].Rows.Count - 1; i++)
+      {
+        tdpFila = TipoRoboParcialSumatoria.GenerarDesdeFila(RoboParcialSumatoria.Tables[0].Rows[i]);
+        if (tdpFila.proveedor.Trim().ToUpper() == "BENEFICIARIO")
+        {
+          RoboParcialSumatoriaModificar(tdpFila,ProveedorNuevo);
+        }
+        else
+        {
+          RoboParcialSumatoriaModificar(tdpFila);
+        }
       }
     }
     public static bool RoboParcialSumatoriaBorrar(int Flujo, int Cotizacion, short Tipo_Item)

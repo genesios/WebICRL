@@ -625,6 +625,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonRepaGenerarResumen;
         
         /// <summary>
+        /// ButtonRepaCambioBenef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRepaCambioBenef;
+        
+        /// <summary>
         /// ButtonRepaGenerarOrdenes control.
         /// </summary>
         /// <remarks>
@@ -686,6 +695,15 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonRepuGenerarResumen;
+        
+        /// <summary>
+        /// ButtonRepuCambioBenef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRepuCambioBenef;
         
         /// <summary>
         /// ButtonRepuGenerarOrdenes control.
@@ -1795,6 +1813,15 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Label LabelBeficiario;
         
         /// <summary>
+        /// LabelMsjBenef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMsjBenef;
+        
+        /// <summary>
         /// TextBoxBeneficiario control.
         /// </summary>
         /// <remarks>
@@ -1802,6 +1829,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxBeneficiario;
+        
+        /// <summary>
+        /// TextBoxBenefIndice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBenefIndice;
+        
+        /// <summary>
+        /// TextBoxBenefTipoItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBenefTipoItem;
         
         /// <summary>
         /// ButtonBenefCambiar control.

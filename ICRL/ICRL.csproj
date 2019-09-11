@@ -1004,6 +1004,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\RepFormularioCotiDaniosPropios.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenCompra.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenPagoCambio.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenTrabajo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiPTDaniosPropios.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiPTRobo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCObjetos.rdlc" />
