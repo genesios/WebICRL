@@ -135,6 +135,16 @@ namespace ICRL.Presentacion
             this.ModalPopupRecepRepuestos.Hide();
         }
 
+        if (Session["PopupBeneficiario"] != null)
+        {
+          int vPopup = -1;
+          vPopup = int.Parse(Session["PopupBeneficiario"].ToString());
+          if (1 == vPopup)
+            this.ModalPopupBeneficiario.Show();
+          else
+            this.ModalPopupBeneficiario.Hide();
+        }
+
       }
       catch (Exception ex)
       {
@@ -1695,7 +1705,7 @@ namespace ICRL.Presentacion
                      cvhs.numero_orden,
                      cvhs.id_estado,
                      cvhs.proveedor,
-                     moneda = "Bs.",
+                     cvhs.moneda_orden,
                      cvhs.monto_orden,
                      cvhs.id_tipo_descuento_orden,
                      cvhs.descuento_proveedor,
@@ -1725,6 +1735,17 @@ namespace ICRL.Presentacion
         if (1 == vEstado)
         {
           (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+          //validar si el Proveedor es Benficiario
+          string vNombreProveedor = string.Empty;
+          vNombreProveedor = e.Row.Cells[2].Text.Trim().ToUpper();
+          if ("BENEFICIARIO" == vNombreProveedor)
+          {
+            (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+          }
+          else
+          {
+            (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+          }
         }
         else
         {
@@ -1789,7 +1810,21 @@ namespace ICRL.Presentacion
         }
         else
         {
-          vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+          if ("OC" == vNumeroOrden.Substring(0, 2))
+          {
+            vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+          }
+          else
+          {
+            if ("T" == vNumeroOrden.Substring(20, 1))
+            {
+              vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+            }
+            else
+            {
+              vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+            }
+          }
         }
 
         vResultado = vAccesoDatos.fActualizaLiquidacionVE(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
@@ -1806,6 +1841,11 @@ namespace ICRL.Presentacion
       int vIdCotizacion = 0;
       short vTipoItem = 0;
       int vContador = 1;
+
+      ButtonRepuCambioBenef.Visible = false;
+
+      //verificar si existe un Beneficiario
+      int vIndiceBenef = FValidaRepuBeneficiario();
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
@@ -1874,6 +1914,11 @@ namespace ICRL.Presentacion
       int vIdCotizacion = 0;
       short vTipoItem = 0;
       int vContador = 1;
+
+      ButtonRepaCambioBenef.Visible = false;
+
+      //verificar si existe un Beneficiario
+      int vIndiceBenef = FValidaRepaBeneficiario();
 
       vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
       vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
@@ -2171,7 +2216,14 @@ namespace ICRL.Presentacion
       }
       else
       {
-        vTipoDocumental = "RE - Orden de Compra";
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          vTipoDocumental = "RE - Orden de Compra";
+        }
+        else
+        {
+          vTipoDocumental = "RE - Orden de Indemnizacion";
+        }
       }
 
       vNombreUsuario = Session["IdUsr"].ToString();
@@ -2301,5 +2353,219 @@ namespace ICRL.Presentacion
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
     }
 
+    #region CambioBeneficiario Orden Pago
+
+    private int FValidaRepaBeneficiario()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+      BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+      vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Beneficiario
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          if ("Beneficiario" == vProveedor)
+          {
+            vResultado = i;
+            ButtonRepaCambioBenef.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
+    private int FValidaRepuBeneficiario()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+
+      BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+      vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Beneficiario
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          if ("Beneficiario" == vProveedor)
+          {
+            vResultado = i;
+            ButtonRepuCambioBenef.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
+    protected void ButtonBenefCambiar_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+      int vIndiceBenef = -1;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = short.Parse(TextBoxBenefTipoItem.Text);
+      vIndiceBenef = int.Parse(TextBoxBenefIndice.Text);
+
+      if (string.Empty != TextBoxBeneficiario.Text)
+      {
+        //Cambiar el nombre del Beneficiario en la tabla de Sumatorias
+        BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
+        vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        DataSet vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+        int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          //Generar el nuevo numero de Orden como si fuera Orden de Pago
+          //generar numero de orden
+          StringBuilder vSBNumeroOrden = new StringBuilder();
+          string vNumeroOrden = string.Empty;
+          vSBNumeroOrden.Clear();
+          vSBNumeroOrden.Append("OP-");
+          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-VE-");
+          vNumeroOrden = vIdCotizacion.ToString();
+          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+          vSBNumeroOrden.Append(vNumeroOrden);
+          vSBNumeroOrden.Append("-");
+          if ((short)CotizacionICRL.TipoItem.Reparacion == vTipoItem)
+          {
+            vSBNumeroOrden.Append("T1");
+          }
+          else
+          {
+            vSBNumeroOrden.Append("C1");
+          }
+          vNumeroOrden = vSBNumeroOrden.ToString();
+
+          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceBenef][9] = vNumeroOrden;
+          BD.CotizacionICRL.RCVehicularSumatoriaModificarTodos(vDatasetOrdenes);
+
+          //Actualizar el numero de orden en la tabla de RCVehicular
+          vAccesoDatos.fActualizaOrdenesCotiVE(vIdFlujo, vIdCotizacion, "Beneficiario", vTipoItem);
+
+          //Actualizar un registro de Beneficiario
+          vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+          vDatasetOrdenes = vTipoRCVehicularSumatoriaTraer.dsRCVehicularSumatoria;
+          vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+          if (vIndiceDataTable >= 0)
+          {
+            string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceBenef][3].ToString();
+            string vNombreBeneficiario = TextBoxBeneficiario.Text.ToUpper().Trim();
+
+            BD.CotizacionICRL.RCVehicularSumatoriaModificarTodos(vDatasetOrdenes, vNombreBeneficiario);
+          }
+          if (1 == vTipoItem)
+          {
+            ButtonRepaCambioBenef.Visible = false;
+          }
+          else
+          {
+            ButtonRepuCambioBenef.Visible = false;
+          }
+          FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+          Session["PopupBeneficiario"] = 0;
+          this.ModalPopupBeneficiario.Hide();
+        }
+
+      }
+      else
+      {
+        //Si el nombre del Beneficiario esta vacio no se hace el cambio
+        LabelMsjBenef.Text = "El nombre del Beneficiario no puede estar vacío";
+
+      }
+
+    }
+
+    protected void ButtonBenefCancelar_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      ButtonBenefCambiar.Enabled = false;
+      ButtonBenefCancelar.Enabled = false;
+    }
+
+    protected void ButtonCancelPopBeneficiario_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      Session["PopupBeneficiario"] = 0;
+      this.ModalPopupBeneficiario.Hide();
+    }
+
+    protected void ButtonRepaCambioBenef_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceBenef = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+
+      LabelMsjBenef.Text = string.Empty;
+
+      vIndiceBenef = FValidaRepaBeneficiario();
+      if (vIndiceBenef >= 0)
+      {
+        TextBoxBenefIndice.Text = vIndiceBenef.ToString();
+        TextBoxBenefTipoItem.Text = vTipoItem.ToString();
+        ButtonBenefCambiar.Enabled = true;
+        ButtonBenefCancelar.Enabled = true;
+        Session["PopupBeneficiario"] = 1;
+        this.ModalPopupBeneficiario.Show();
+      }
+    }
+
+    protected void ButtonRepuCambioBenef_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceBenef = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+
+      LabelMsjBenef.Text = string.Empty;
+
+      vIndiceBenef = FValidaRepuBeneficiario();
+      if (vIndiceBenef >= 0)
+      {
+        TextBoxBenefIndice.Text = vIndiceBenef.ToString();
+        TextBoxBenefTipoItem.Text = vTipoItem.ToString();
+        ButtonBenefCambiar.Enabled = true;
+        ButtonBenefCancelar.Enabled = true;
+        Session["PopupBeneficiario"] = 1;
+        this.ModalPopupBeneficiario.Show();
+      }
+    }
+
+    #endregion
   }
 }

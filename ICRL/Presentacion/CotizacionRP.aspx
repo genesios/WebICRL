@@ -266,6 +266,7 @@
                                     <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" CssClass="alt2" />
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepaCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepaCambioBenef_Click" Visible="false" CssClass="alt2"></asp:Button>
                                     <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepaGenerarOrdenes_Click" CssClass="alt2"></asp:Button>
                                 </td>
                             </tr>
@@ -354,6 +355,7 @@
                                     <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" CssClass="alt1"></asp:Button>
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepuCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepuCambioBenef_Click" Visible="false" CssClass="alt1"></asp:Button>
                                     <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Ordenes" OnClick="ButtonRepuGenerarOrdenes_Click" CssClass="alt1"></asp:Button>
                                 </td>
                             </tr>
@@ -786,6 +788,54 @@
                 </LocalReport>
             </rsweb:ReportViewer>
             <asp:Button ID="ButtonCierraVerRep" runat="server" Text="Ocultar Reporte" Visible="false" OnClick="ButtonCierraVerRep_Click" />
+        </div>
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupBeneficiario" Style="display: none" CssClass="alt2" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupBeneficiario" BehaviorID="ModalPopupBeneficiarioBehavior"
+                TargetControlID="ButtonOcultoParaPopupBeneficiario" PopupControlID="PanelModalPopupBeneficiario"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleBeneficiario"
+                RepositionMode="RepositionOnWindowScroll">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupBeneficiario" runat="server" CssClass="modalPopup" Width="100%">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleBeneficiario" CssClass="modalPopupHeader">
+                    Caso Especial Orden de Pago Beneficiario
+                </asp:Panel>
+                <div>
+                    <table class="basetable alt2">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="Label1" runat="server" Text="Items - Sumatoria"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <asp:Label ID="LabelBeficiario" runat="server" Text="Beneficiario" ></asp:Label>
+                                    <asp:Label ID="LabelMsjBenef" runat="server" Text=""></asp:Label><br />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="25" ></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxBenefIndice" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxBenefTipoItem" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonBenefCambiar" runat="server" Text="Cambiar" Enabled="False" OnClick="ButtonBenefCambiar_Click" CssClass="alt2" />
+                                <asp:Button ID="ButtonBenefCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonBenefCancelar_Click" CssClass="alt2" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopBeneficiario" runat="server" Text="Cerrar" OnClick="ButtonCancelPopBeneficiario_Click" CssClass="alt2" />
+            </asp:Panel>
         </div>
     </div>
 </asp:Content>

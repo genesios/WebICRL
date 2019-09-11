@@ -1590,7 +1590,6 @@ namespace ICRL.Presentacion
         {
           (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
         }
-
       }
     }
 
