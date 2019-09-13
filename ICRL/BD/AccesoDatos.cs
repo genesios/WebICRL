@@ -2745,7 +2745,7 @@ namespace ICRL.BD
           vCotizacion.estado = pCoti.estado;
           vCotizacion.tipoCobertura = pCoti.tipoCobertura;
           vCotizacion.correlativo = pCoti.correlativo;
-
+          vCotizacion.tipoTaller = pCoti.tipoTaller;
 
           db.Cotizacion.Add(vCotizacion);
           db.SaveChanges();

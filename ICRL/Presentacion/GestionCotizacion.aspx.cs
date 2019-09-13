@@ -530,6 +530,7 @@ namespace IRCL.Presentacion
       vCoti.estado = 1;
       vCoti.tipoCobertura = vTipoCobertura;
       vCoti.correlativo = 1;
+      vCoti.tipoTaller = string.Empty;
 
       vResultado = vAccesoDatos.FGrabaCotiICRL(vCoti);
 
