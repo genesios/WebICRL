@@ -126,6 +126,10 @@
                             <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="twenty">
+                            <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
+                            <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
+                        </div>
+                        <div class="twenty">
                             <asp:TextBox ID="TextBoxIdFlujo" runat="server" Visible="False"></asp:TextBox>
                             <asp:TextBox ID="TextBoxNroInspeccion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                         </div>

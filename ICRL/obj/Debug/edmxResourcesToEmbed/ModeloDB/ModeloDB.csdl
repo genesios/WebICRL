@@ -1010,6 +1010,32 @@
     <Property Name="chasis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="taller" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="ItemPrecios">
+    <Key>
+      <PropertyRef Name="item" />
+      <PropertyRef Name="ciudad" />
+      <PropertyRef Name="tipo_taller" />
+      <PropertyRef Name="grado" />
+      <PropertyRef Name="precio_us" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="item" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo_taller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="grado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio_us" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RelacionItemPrecio">
+    <Key>
+      <PropertyRef Name="item" />
+      <PropertyRef Name="itemPrecio" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="item" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="itemPrecio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
   <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
     <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
     <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
@@ -1269,6 +1295,8 @@
     <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" />
     <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" />
     <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
+    <EntitySet Name="ItemPrecios" EntityType="Self.ItemPrecios" />
+    <EntitySet Name="RelacionItemPrecio" EntityType="Self.RelacionItemPrecio" />
     <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
       <End Role="Asegurado" EntitySet="Asegurado" />
       <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -1395,10 +1423,26 @@
       <Parameter Name="Proveedor" Mode="In" Type="String" />
       <Parameter Name="idTipoItem" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="paActualizaPrecioItem_DP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaPrecioItem_RP">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="paActualizaPrecioItem_VE">
+      <Parameter Name="idFlujo" Mode="In" Type="Int32" />
+      <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+    </FunctionImport>
     <FunctionImport Name="paCopiaDaniosPropiosInspACoti">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
       <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
     </FunctionImport>
     <FunctionImport Name="paCopiaPTDaniosPropiosInspACoti">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
@@ -1422,10 +1466,12 @@
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
       <Parameter Name="idSecuencial" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
     </FunctionImport>
     <FunctionImport Name="paCopiaRoboParcialInspACoti">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idInspeccion" Mode="In" Type="Int32" />
+      <Parameter Name="TipoCambio" Mode="In" Type="Double" />
     </FunctionImport>
     <FunctionImport Name="paIncFlujoContadorInsp">
       <Parameter Name="iIdFlujo" Mode="In" Type="Int32" />

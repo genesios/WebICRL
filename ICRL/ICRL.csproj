@@ -797,6 +797,9 @@
     <Compile Include="ModeloDB\InspRoboParcial.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\ItemPrecios.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\ItemTaller.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
@@ -834,6 +837,9 @@
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDB\Proveedor.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\RelacionItemPrecio.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDB\Rol.cs">

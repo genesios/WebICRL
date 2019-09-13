@@ -81,6 +81,8 @@ namespace ICRL.ModeloDB
         public virtual DbSet<CotiRCVehicular> CotiRCVehicular { get; set; }
         public virtual DbSet<CotiRoboParcial> CotiRoboParcial { get; set; }
         public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
+        public virtual DbSet<ItemPrecios> ItemPrecios { get; set; }
+        public virtual DbSet<RelacionItemPrecio> RelacionItemPrecio { get; set; }
     
         public virtual int paActualizaLiquidacion001_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
         {
@@ -284,7 +286,58 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaOrdenesCotizacion_VE", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
-        public virtual int paCopiaDaniosPropiosInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        public virtual int paActualizaPrecioItem_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, Nullable<double> tipoCambio)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaPrecioItem_DP", idFlujoParameter, idCotizacionParameter, tipoCambioParameter);
+        }
+    
+        public virtual int paActualizaPrecioItem_RP(Nullable<int> idFlujo, Nullable<int> idCotizacion, Nullable<double> tipoCambio)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaPrecioItem_RP", idFlujoParameter, idCotizacionParameter, tipoCambioParameter);
+        }
+    
+        public virtual int paActualizaPrecioItem_VE(Nullable<int> idFlujo, Nullable<int> idCotizacion, Nullable<double> tipoCambio)
+        {
+            var idFlujoParameter = idFlujo.HasValue ?
+                new ObjectParameter("idFlujo", idFlujo) :
+                new ObjectParameter("idFlujo", typeof(int));
+    
+            var idCotizacionParameter = idCotizacion.HasValue ?
+                new ObjectParameter("idCotizacion", idCotizacion) :
+                new ObjectParameter("idCotizacion", typeof(int));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaPrecioItem_VE", idFlujoParameter, idCotizacionParameter, tipoCambioParameter);
+        }
+    
+        public virtual int paCopiaDaniosPropiosInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial, Nullable<double> tipoCambio)
         {
             var idFlujoParameter = idFlujo.HasValue ?
                 new ObjectParameter("idFlujo", idFlujo) :
@@ -298,7 +351,11 @@ namespace ICRL.ModeloDB
                 new ObjectParameter("idSecuencial", idSecuencial) :
                 new ObjectParameter("idSecuencial", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaDaniosPropiosInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaDaniosPropiosInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter, tipoCambioParameter);
         }
     
         public virtual int paCopiaPTDaniosPropiosInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion)
@@ -361,7 +418,7 @@ namespace ICRL.ModeloDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCPersonaInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
         }
     
-        public virtual int paCopiaRCVehicularInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial)
+        public virtual int paCopiaRCVehicularInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<int> idSecuencial, Nullable<double> tipoCambio)
         {
             var idFlujoParameter = idFlujo.HasValue ?
                 new ObjectParameter("idFlujo", idFlujo) :
@@ -375,10 +432,14 @@ namespace ICRL.ModeloDB
                 new ObjectParameter("idSecuencial", idSecuencial) :
                 new ObjectParameter("idSecuencial", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCVehicularInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter);
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRCVehicularInspACoti", idFlujoParameter, idInspeccionParameter, idSecuencialParameter, tipoCambioParameter);
         }
     
-        public virtual int paCopiaRoboParcialInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion)
+        public virtual int paCopiaRoboParcialInspACoti(Nullable<int> idFlujo, Nullable<int> idInspeccion, Nullable<double> tipoCambio)
         {
             var idFlujoParameter = idFlujo.HasValue ?
                 new ObjectParameter("idFlujo", idFlujo) :
@@ -388,7 +449,11 @@ namespace ICRL.ModeloDB
                 new ObjectParameter("idInspeccion", idInspeccion) :
                 new ObjectParameter("idInspeccion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRoboParcialInspACoti", idFlujoParameter, idInspeccionParameter);
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paCopiaRoboParcialInspACoti", idFlujoParameter, idInspeccionParameter, tipoCambioParameter);
         }
     
         public virtual int paIncFlujoContadorInsp(Nullable<int> iIdFlujo, ObjectParameter iValorContador)

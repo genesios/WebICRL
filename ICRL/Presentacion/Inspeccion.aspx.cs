@@ -1191,7 +1191,14 @@ namespace ICRL.Presentacion
         AccesoDatos vAccesoDatos = new AccesoDatos();
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
-        vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+        //Obtener el Tipo de Cambio
+        float vTipoCambioConv = 0;
+        float vTipoCambio = 1;
+        if( float.TryParse(TextBoxTipoCambio.Text, out vTipoCambioConv))
+        {
+          vTipoCambio = vTipoCambioConv;
+        }
+        vAccesoDatos.fCopiaDaniosPropiosInspecACotizacion(vIdFlujo, vidInspecccion, vSecuencial, vTipoCambio);
         //cambiar estado de la cobertura para que no se pueda volver a ejecutar
         BD.InspeccionDaniosPropiosPadre vInspeccionDaniosPropiosPadre = new InspeccionDaniosPropiosPadre();
         vInspeccionDaniosPropiosPadre.idInspeccion = vidInspecccion;
@@ -3422,7 +3429,15 @@ namespace ICRL.Presentacion
         AccesoDatos vAccesoDatos = new AccesoDatos();
         int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
         int vidInspecccion = int.Parse(TextBoxNroInspeccion.Text);
-        vAccesoDatos.fCopiaRCVehicularInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial);
+
+        //Obtener el Tipo de Cambio
+        float vTipoCambioConv = 0;
+        float vTipoCambio = 1;
+        if (float.TryParse(TextBoxTipoCambio.Text, out vTipoCambioConv))
+        {
+          vTipoCambio = vTipoCambioConv;
+        }
+        vAccesoDatos.fCopiaRCVehicularInspACotizacion(vIdFlujo, vidInspecccion, vSecuencial, vTipoCambio);
         //cambiar estado de la cobertura para que no se pueda volver a ejecutar
         BD.InspeccionRCVehicular vInspeccionRCVehicular = new InspeccionRCVehicular();
         vInspeccionRCVehicular.idInspeccion = vidInspecccion;
@@ -4967,7 +4982,15 @@ namespace ICRL.Presentacion
 
       //proceso que copia los datos de Inps a Coti
       AccesoDatos vAccesoDatos = new AccesoDatos();
-      vAccesoDatos.fCopiaRoboParcialInspACotizacion(vIdFlujo, vIdInspeccion);
+
+      //Obtener el Tipo de Cambio
+      float vTipoCambioConv = 0;
+      float vTipoCambio = 1;
+      if (float.TryParse(TextBoxTipoCambio.Text, out vTipoCambioConv))
+      {
+        vTipoCambio = vTipoCambioConv;
+      }
+      vAccesoDatos.fCopiaRoboParcialInspACotizacion(vIdFlujo, vIdInspeccion, vTipoCambio);
       int vResultado = 0;
       vResultado = vAccesoDatos.FRoboParcialICRLCambiaEstado(vIdInspeccion);
       ButtonFinRoboP.Enabled = false;

@@ -1577,7 +1577,7 @@ namespace ICRL.Presentacion
           //validar si el Proveedor es Benficiario
           string vNombreProveedor = string.Empty;
           vNombreProveedor = e.Row.Cells[2].Text.Trim().ToUpper();
-          if ("BENEFICIARIO" == vNombreProveedor)
+          if ("BENEFICIARIO" == vNombreProveedor.ToUpper())
           {
             (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
           }
@@ -1651,7 +1651,7 @@ namespace ICRL.Presentacion
         {
           if ("OC" == vNumeroOrden.Substring(0, 2))
           {
-            vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+            vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
           }
           else
           {
@@ -2215,7 +2215,7 @@ namespace ICRL.Presentacion
         for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
         {
           string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
-          if ("Beneficiario" == vProveedor)
+          if ("BENEFICIARIO" == vProveedor.ToUpper())
           {
             vResultado = i;
             ButtonRepaCambioBenef.Visible = true;
@@ -2249,7 +2249,7 @@ namespace ICRL.Presentacion
         for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
         {
           string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
-          if ("Beneficiario" == vProveedor)
+          if ("BENEFICIARIO" == vProveedor.ToUpper())
           {
             vResultado = i;
             ButtonRepuCambioBenef.Visible = true;
@@ -2313,7 +2313,7 @@ namespace ICRL.Presentacion
           BD.CotizacionICRL.DaniosPropiosSumatoriaModificarTodos(vDatasetOrdenes);
 
           //Actualizar el numero de orden en la tabla de Daños Propios
-          vAccesoDatos.fActualizaOrdenesCotiDP(vIdFlujo, vIdCotizacion, "Beneficiario", vTipoItem);
+          vAccesoDatos.fActualizaOrdenesCotiDP(vIdFlujo, vIdCotizacion, "BENEFICIARIO", vTipoItem);
 
           //Actualizar un registro de Beneficiario
           vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);

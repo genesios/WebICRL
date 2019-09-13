@@ -85,6 +85,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxCorrelativo;
         
         /// <summary>
+        /// LabelTipoCambio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTipoCambio;
+        
+        /// <summary>
+        /// TextBoxTipoCambio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxTipoCambio;
+        
+        /// <summary>
         /// TextBoxIdFlujo control.
         /// </summary>
         /// <remarks>

@@ -831,6 +831,24 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="observaciones" Type="varchar" MaxLength="100" />
     <Property Name="nro_item" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.ItemPrecios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ItemPrecios">
+    <Key>
+      <PropertyRef Name="item" />
+      <PropertyRef Name="ciudad" />
+      <PropertyRef Name="tipo_taller" />
+      <PropertyRef Name="grado" />
+      <PropertyRef Name="precio_us" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="item" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo_taller" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="grado" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="precio_us" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ItemTaller">
     <Key>
       <PropertyRef Name="idItem" />
@@ -948,6 +966,18 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="idItem" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="secuencial" Type="int" />
     <Property Name="nombreProveedor" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RelacionItemPrecio">
+    <Key>
+      <PropertyRef Name="item" />
+      <PropertyRef Name="itemPrecio" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="item" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="itemPrecio" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -1189,7 +1219,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
   <Function Name="paActualizaLiquidacion001_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaLiquidacion001_OB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1205,7 +1235,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
   <Function Name="paActualizaLiquidacion001_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaLiquidacion001_TP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1223,31 +1253,47 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
   <Function Name="paActualizaLiquidacion001_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaOrdenesCotizacion_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaOrdenesCotizacion_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
   </Function>
   <Function Name="paActualizaOrdenesCotizacion_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idCotizacion" Type="int" Mode="In" />
-    <Parameter Name="Proveedor" Type="char" Mode="In" />
+    <Parameter Name="Proveedor" Type="varchar" Mode="In" />
     <Parameter Name="idTipoItem" Type="int" Mode="In" />
+  </Function>
+  <Function Name="paActualizaPrecioItem_DP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
+  </Function>
+  <Function Name="paActualizaPrecioItem_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
+  </Function>
+  <Function Name="paActualizaPrecioItem_VE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idFlujo" Type="int" Mode="In" />
+    <Parameter Name="idCotizacion" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
   </Function>
   <Function Name="paCopiaDaniosPropiosInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idInspeccion" Type="int" Mode="In" />
     <Parameter Name="idSecuencial" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
   </Function>
   <Function Name="paCopiaPTDaniosPropiosInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
@@ -1271,10 +1317,12 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idInspeccion" Type="int" Mode="In" />
     <Parameter Name="idSecuencial" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
   </Function>
   <Function Name="paCopiaRoboParcialInspACoti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idFlujo" Type="int" Mode="In" />
     <Parameter Name="idInspeccion" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="float" Mode="In" />
   </Function>
   <Function Name="paIncFlujoContadorInsp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iIdFlujo" Type="int" Mode="In" />
@@ -1384,6 +1432,23 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     [cotizacion_rc_vehicular_tercero].[chasis] AS [chasis], 
     [cotizacion_rc_vehicular_tercero].[taller] AS [taller]
     FROM [dbo].[cotizacion_rc_vehicular_tercero] AS [cotizacion_rc_vehicular_tercero]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ItemPrecios" EntityType="Self.ItemPrecios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ItemPrecios].[item] AS [item], 
+    [ItemPrecios].[ciudad] AS [ciudad], 
+    [ItemPrecios].[tipo_taller] AS [tipo_taller], 
+    [ItemPrecios].[grado] AS [grado], 
+    [ItemPrecios].[precio_us] AS [precio_us], 
+    [ItemPrecios].[estado] AS [estado]
+    FROM [dbo].[ItemPrecios] AS [ItemPrecios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RelacionItemPrecio" EntityType="Self.RelacionItemPrecio" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RelacionItemPrecio].[item] AS [item], 
+    [RelacionItemPrecio].[itemPrecio] AS [itemPrecio], 
+    [RelacionItemPrecio].[estado] AS [estado]
+    FROM [dbo].[RelacionItemPrecio] AS [RelacionItemPrecio]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
       <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />

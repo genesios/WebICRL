@@ -883,36 +883,36 @@ namespace ICRL.BD
       return vResultado;
     }
 
-    public int fCopiaDaniosPropiosInspecACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    public int fCopiaDaniosPropiosInspecACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial, double pTipoCambio)
     {
       int vResultado = 0;
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
-        db.paCopiaDaniosPropiosInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        db.paCopiaDaniosPropiosInspACoti(pIdFlujo, pIdCotizacion, pSecuencial, pTipoCambio);
         vResultado = 1;
       }
 
       return vResultado;
     }
 
-    public int fCopiaRoboParcialInspACotizacion(int pIdFlujo, int pIdCotizacion)
+    public int fCopiaRoboParcialInspACotizacion(int pIdFlujo, int pIdCotizacion, double pTipoCambio)
     {
       int vResultado = 0;
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
-        db.paCopiaRoboParcialInspACoti(pIdFlujo, pIdCotizacion);
+        db.paCopiaRoboParcialInspACoti(pIdFlujo, pIdCotizacion, pTipoCambio);
         vResultado = 1;
       }
 
       return vResultado;
     }
 
-    public int fCopiaRCVehicularInspACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial)
+    public int fCopiaRCVehicularInspACotizacion(int pIdFlujo, int pIdCotizacion, int pSecuencial, double pTipoCambio)
     {
       int vResultado = 0;
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
-        db.paCopiaRCVehicularInspACoti(pIdFlujo, pIdCotizacion, pSecuencial);
+        db.paCopiaRCVehicularInspACoti(pIdFlujo, pIdCotizacion, pSecuencial, pTipoCambio);
         vResultado = 1;
       }
 

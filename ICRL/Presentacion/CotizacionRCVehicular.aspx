@@ -498,7 +498,7 @@
                                 <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
                                 <asp:BoundField DataField="id_estado" HeaderText="Estado" />
                                 <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                                <asp:BoundField DataField="moneda" HeaderText="Moneda" />
+                                <asp:BoundField DataField="moneda_orden" HeaderText="Moneda" />
                                 <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="id_tipo_descuento_orden" HeaderText="Descuento F/P" />
                                 <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
