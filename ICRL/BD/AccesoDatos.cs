@@ -967,6 +967,42 @@ namespace ICRL.BD
       return vResultado;
     }
 
+    public int fActualizaPrecioItemDaniosPropios(int pIdFlujo, int pIdCotizacion, double pTipoCambio)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaPrecioItem_DP(pIdFlujo, pIdCotizacion, pTipoCambio);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaPrecioItemRoboParcial(int pIdFlujo, int pIdCotizacion, double pTipoCambio)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaPrecioItem_RP(pIdFlujo, pIdCotizacion, pTipoCambio);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
+    public int fActualizaPrecioItemRCVehicular(int pIdFlujo, int pIdCotizacion, double pTipoCambio)
+    {
+      int vResultado = 0;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        db.paActualizaPrecioItem_VE(pIdFlujo, pIdCotizacion, pTipoCambio);
+        vResultado = 1;
+      }
+
+      return vResultado;
+    }
+
     public string fObtieneFlujoTemp()
     {
       string vFlujoTemp = string.Empty;
@@ -2759,6 +2795,34 @@ namespace ICRL.BD
       }
       return vRespuesta;
     }
+
+    public int FActualizaTipoTallerCotizacion(int pIdCotizacion, string pTipoTaller)
+    {
+      int vRespuesta = 0;
+
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          Cotizacion vCotizacion = new Cotizacion();
+
+          vCotizacion = db.Cotizacion.Find(pIdCotizacion);
+          if (null != vCotizacion)
+          {
+            vCotizacion.tipoTaller = pTipoTaller;
+            db.SaveChanges();
+            vRespuesta = 1;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        vRespuesta = 0;
+      }
+
+      return vRespuesta;
+    }
+
     public int FValidaExisteCotiFlujoICRL(int pIdFlujo)
     {
       int vRespuesta = 0;

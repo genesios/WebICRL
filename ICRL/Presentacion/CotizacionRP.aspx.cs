@@ -2333,5 +2333,33 @@ namespace ICRL.Presentacion
 
     #endregion
 
+    //Actualizar los precios de los items
+    protected void ButtonActualizaTaller_Click(object sender, EventArgs e)
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      int vResultado = 0;
+      int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      //Actualiza el Tipo de Taller 
+      string vTipoTaller = string.Empty;
+      vTipoTaller = DropDownListTipoTallerCoti.SelectedItem.Text.Trim();
+      vResultado = vAccesoDatos.FActualizaTipoTallerCotizacion(vIdCotizacion, vTipoTaller);
+
+      if (1 == vResultado)
+      {
+        //Obtener el Tipo de Cambio
+        float vTipoCambioConv = 0;
+        float vTipoCambio = 1;
+        if (float.TryParse(TextBoxTipoCambio.Text, out vTipoCambioConv))
+        {
+          vTipoCambio = vTipoCambioConv;
+        }
+        vAccesoDatos.fActualizaPrecioItemRoboParcial(vIdFlujo, vIdCotizacion, vTipoCambio);
+      }
+      //Actualizar datos de las grillas Reparacion y Repuestos
+      FlTraeDatosDPReparacion(vIdCotizacion);
+      FlTraeDatosDPRepuesto(vIdCotizacion);
+    }
+
   }
 }

@@ -971,6 +971,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ItemPrecios">
+      <EntityTypeMapping TypeName="LBCDesaModelo.ItemPrecios">
+        <MappingFragment StoreEntitySet="ItemPrecios">
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="tipo_taller" ColumnName="tipo_taller" />
+          <ScalarProperty Name="grado" ColumnName="grado" />
+          <ScalarProperty Name="precio_us" ColumnName="precio_us" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RelacionItemPrecio">
+      <EntityTypeMapping TypeName="LBCDesaModelo.RelacionItemPrecio">
+        <MappingFragment StoreEntitySet="RelacionItemPrecio">
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="itemPrecio" ColumnName="itemPrecio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
@@ -981,6 +1002,9 @@
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
     <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_DP" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_RP" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_VE" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_VE" />
     <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaDaniosPropiosInspACoti" />
     <FunctionImportMapping FunctionImportName="paCopiaPTDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTDaniosPropiosInspACoti" />
     <FunctionImportMapping FunctionImportName="paCopiaPTRoboInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTRoboInspACoti" />

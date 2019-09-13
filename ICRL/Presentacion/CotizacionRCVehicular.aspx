@@ -207,6 +207,10 @@
                                     <asp:Label ID="LabelTipoTaller" runat="server" Text="Tipo Taller"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListTipoTallerCoti" runat="server" Enabled="true"></asp:DropDownList>
                                 </div>
+                                <div class="fifty">
+                                    <br />
+                                    <asp:Button ID="ButtonActualizaTaller" runat="server" Text="Actualizar Taller" OnClick="ButtonActualizaTaller_Click" />
+                                </div>
                             </td>
                         </tr>
                     </table>

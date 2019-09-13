@@ -17,5 +17,6 @@ namespace ICRL.BD
     public int estado { get; set; }
     public int tipoCobertura { get; set; }
     public int correlativo { get; set; }
+    public string tipoTaller { get; set; }
   }
 }

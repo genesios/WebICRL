@@ -933,13 +933,12 @@
                                     <td>
                                         <div class="fifty">
                                             <asp:Label ID="LabelItemRP" runat="server" Text="Item"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListItemRP" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList><br />
+                                            <asp:DropDownList ID="DropDownListItemRP" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                         </div>
                                         <div class="fifty">
                                             <asp:Label ID="LabelCompraRP" runat="server" Text="Compra"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListCompraRP" runat="server"></asp:DropDownList><br />
+                                            <asp:DropDownList ID="DropDownListCompraRP" runat="server"></asp:DropDownList>
                                         </div>
-
                                     </td>
                                 </tr>
                                 <tr>
