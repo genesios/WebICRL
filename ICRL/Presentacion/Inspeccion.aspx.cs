@@ -963,24 +963,24 @@ namespace ICRL.Presentacion
         //verificar el estado del registro
         string vEstadoCadena = string.Empty;
         int vEstado = 0;
-        vEstadoCadena = e.Row.Cells[5].Text;
+        vEstadoCadena = e.Row.Cells[6].Text;
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[6].Controls[0] as LinkButton).Enabled = true;
+          (e.Row.Cells[7].Controls[0] as LinkButton).Enabled = true;
           //ConfirmarFinalizarInspeccion
-          (e.Row.Cells[6].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
+          (e.Row.Cells[7].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[6].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[7].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
 
-        vTextoSecuencial = e.Row.Cells[3].Text;
+        vTextoSecuencial = e.Row.Cells[4].Text;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -1018,7 +1018,7 @@ namespace ICRL.Presentacion
       int vDPPadreSecuencial = 0;
       int vDPPadreIdInspeccion = 0;
 
-      vDPPadreSecuencial = int.Parse(GridViewDaniosPropiosPadre.SelectedRow.Cells[3].Text);
+      vDPPadreSecuencial = int.Parse(GridViewDaniosPropiosPadre.SelectedRow.Cells[4].Text);
       vDPPadreIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
 
       vInspeccionDPPadre = vAccesoDatos.FTraeInspDPPadreICRL(vDPPadreSecuencial, vDPPadreIdInspeccion);
@@ -1030,7 +1030,7 @@ namespace ICRL.Presentacion
         vTextoTipoTaller = vInspeccionDPPadre.tipoTaller.Trim();
         DropDownListDPPTipoTaller.ClearSelection();
         DropDownListDPPTipoTaller.Items.FindByText(vTextoTipoTaller).Selected = true;
-        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[7].Controls[1] as CheckBox).Checked;
+        CheckBoxDPPCambioPerdidaTotal.Checked = (GridViewDaniosPropiosPadre.SelectedRow.Cells[8].Controls[1] as CheckBox).Checked;
       }
       PBloqueaDPPadreEdicion(true);
     }
@@ -1168,6 +1168,24 @@ namespace ICRL.Presentacion
     protected void GridViewDaniosPropiosPadre_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
+
+      if (0 == e.CommandName.CompareTo("Detalle"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewDaniosPropiosPadre.DataKeys[vIndex].Value);
+        TextBoxDPPSecuencial.Text = vSecuencial.ToString();
+
+        PBloqueaDPPadreEdicion(false);
+        //PBloqueaPersonaDet(true);
+        FlTraeDatosDaniosPropios(vSecuencial);
+        Session["PopupDPHabilitado"] = 1;
+        this.ModalPopupDaniosPropios.Show();
+      }
+
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -1568,7 +1586,10 @@ namespace ICRL.Presentacion
     protected void GridViewObjetos_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
-      if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
+
+      
+
+        if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
         int vIndex = 0;
@@ -3351,7 +3372,7 @@ namespace ICRL.Presentacion
       int vSecuencial = 0;
       int vIdInspeccion = 0;
 
-      vSecuencial = int.Parse(GridViewRCV01.SelectedRow.Cells[3].Text);
+      vSecuencial = int.Parse(GridViewRCV01.SelectedRow.Cells[4].Text);
       vIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
       vInspeccionRCVehicular01 = vAccesodatos.FTraeInspRCVehicularICRL(vSecuencial, vIdInspeccion);
 
@@ -3406,6 +3427,23 @@ namespace ICRL.Presentacion
     protected void GridViewRCV01_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
+
+      if (0 == e.CommandName.CompareTo("Detalle"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewRCV01.DataKeys[vIndex].Value);
+        TextBoxSecuencialRCV01.Text = vSecuencial.ToString();
+
+        PBloqueoRCVehicular01(false);
+        FlTraeDatosRCV01(vSecuencial);
+        Session["PopupHabilitado"] = 1;
+        this.ModalPopupRCV01.Show();
+      }
+
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -3460,24 +3498,24 @@ namespace ICRL.Presentacion
         //verificar el estado del registro
         string vEstadoCadena = string.Empty;
         int vEstado = 0;
-        vEstadoCadena = e.Row.Cells[10].Text;
+        vEstadoCadena = e.Row.Cells[11].Text;
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = true;
+          (e.Row.Cells[12].Controls[0] as LinkButton).Enabled = true;
           //ConfirmarFinalizarInspeccion
-          (e.Row.Cells[11].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
+          (e.Row.Cells[12].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[12].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra persona
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
 
-        vTextoSecuencial = e.Row.Cells[3].Text;
+        vTextoSecuencial = e.Row.Cells[4].Text;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();

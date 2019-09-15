@@ -24,7 +24,7 @@
             else {
                 return false;
             }
-        } 
+        }
         //ConfirmarFinalizarFlujoOnBase()
         function ConfirmarFinalizarFlujoOnBase() {
             var resultado = confirm('¿Se Finalizará el Flujo , esta seguro ?');
@@ -88,6 +88,11 @@
 
         .form-control {
             border-radius: 0;
+        }
+
+        .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+            top: 100%;
+            bottom: auto;
         }
     </style>
 
@@ -395,6 +400,7 @@
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
+                                    <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
                                     <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
@@ -446,10 +452,10 @@
                             <asp:Button runat="server" ID="ButtonOcultoParaPopupDaniosPropios" Style="display: none" />
                             <ajaxToolkit:ModalPopupExtender ID="ModalPopupDaniosPropios" runat="server"
                                 PopupControlID="PanelModalPopupDaniosPropios" TargetControlID="ButtonOcultoParaPopupDaniosPropios" PopupDragHandleControlID="ModalPopupDragHandleDaniosPropios"
-                                RepositionMode="RepositionOnWindowScroll"
+                                RepositionMode="RepositionOnWindowResizeAndScroll"
                                 BackgroundCssClass="modalBackground" DropShadow="True" BehaviorID="ModalPopupDaniosPropiosBehavior" DynamicServicePath="">
                             </ajaxToolkit:ModalPopupExtender>
-                            <asp:Panel ID="PanelModalPopupDaniosPropios" runat="server" CssClass="modalPopup">
+                            <asp:Panel ID="PanelModalPopupDaniosPropios" runat="server" CssClass="modalPopup" Width="800" ScrollBars="Vertical">
                                 <asp:Panel runat="server" ID="ModalPopupDragHandleDaniosPropios" CssClass="modalPopupHeader">
                                     Detalle de Daños Propios
                                 </asp:Panel>
@@ -807,7 +813,7 @@
                                     <asp:BoundField DataField="docIdentidadPersona" HeaderText="Doc.Id." />
                                     <asp:BoundField DataField="telefonoPersona" HeaderText="Teléfono" />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
-                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink"/>
+                                    <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink" />
                                     <asp:TemplateField HeaderText="Observaciones">
                                         <ItemTemplate>
                                             <%# Eval("observacionesPersona") %>
@@ -1031,7 +1037,7 @@
                         </div>
                         <div>
                             <asp:ImageButton ID="ImgButtonExportPdfRoboP" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfRoboP_Click" />
-                            <asp:Button ID="ButtonFinRoboP" runat="server" Text="Finalizar" OnClick="ButtonFinRoboP_Click" OnClientClick="return ConfirmarFinalizarInspeccion();" ></asp:Button>
+                            <asp:Button ID="ButtonFinRoboP" runat="server" Text="Finalizar" OnClick="ButtonFinRoboP_Click" OnClientClick="return ConfirmarFinalizarInspeccion();"></asp:Button>
                         </div>
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
@@ -1160,7 +1166,7 @@
                             </table>
                             <div>
                                 <asp:ImageButton ID="ImgButtonExportPdfPTRO" runat="server" ImageUrl="~/img/ico_pdf.jpg" OnClick="ImgButtonExportPdfPTRO_Click" />
-                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click" OnClientClick="return ConfirmarFinalizarInspeccion();"/>
+                                <asp:Button ID="ButtonFinPTRobo" runat="server" Text="Finalizar" OnClick="ButtonFinPTRobo_Click" OnClientClick="return ConfirmarFinalizarInspeccion();" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -1248,6 +1254,7 @@
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
+                                    <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
                                     <asp:BoundField DataField="secuencial" HeaderText="Sec" />
                                     <asp:BoundField DataField="nombreTercero" HeaderText="Nombre Tercero" />
