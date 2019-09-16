@@ -13,6 +13,9 @@
             padding: 0px;
             margin: 0px;
         }
+        .columnaOculta {
+            display: none;
+        }
     </style>
     <script src="../Scripts/ICRL.js"></script>
 </asp:Content>
@@ -112,7 +115,7 @@
                 <asp:ButtonField Text="Clic ->" CommandName="Select" ItemStyle-Width="60">
                     <ItemStyle Width="60px"></ItemStyle>
                 </asp:ButtonField>
-                <asp:BoundField DataField="idFlujo" HeaderText="IdFlujo" />
+                <asp:BoundField DataField="idFlujo" HeaderText="IdFlujo" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                 <asp:BoundField DataField="flujoOnBase" HeaderText="Flujo" />
                 <asp:BoundField DataField="nombreAsegurado" HeaderText="Asegurado" />
                 <asp:BoundField DataField="numeroPoliza" HeaderText="Poliza" />
@@ -127,7 +130,7 @@
                             AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewgvInspecciones_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:BoundField DataField="idInspeccion" HeaderText="Inspeccion" />
+                                <asp:BoundField DataField="idInspeccion" HeaderText="Inspeccion" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="tipoCobertura" HeaderText="Cobertura" />
                                 <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Insp." DataFormatString="{0:dd-MM-yy}" />
                                 <asp:BoundField DataField="sucursalAtencion" HeaderText="Sucursal" />

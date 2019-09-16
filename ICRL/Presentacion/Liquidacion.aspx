@@ -32,27 +32,24 @@
 
   <table class="basetable">
     <tr><th>Registro Liquidación</th></tr>
-    <%--<tr><td>
-      <div class="twentyfive">
+    <tr><td>
+      <div class="twenty">
         Nro. Flujo<br />
         <asp:TextBox ID="txbNroFlujo" runat="server" Enabled="false"></asp:TextBox>
       </div>
-    </td></tr>
-    <tr><td><strong>Datos Generales</strong></td></tr>--%>
-    <tr><td>
-      <div class="twentyfive">
+      <div class="twenty">
         Cliente<br />
         <asp:TextBox ID="txbCliente" runat="server" Enabled="false"></asp:TextBox>
       </div>
-      <div class="twentyfive">
+      <div class="twenty">
         Teléfono<br />
         <asp:TextBox ID="txbTelefono" runat="server" Enabled="false"></asp:TextBox>
       </div>
-      <div class="twentyfive">
+      <div class="twenty">
         Nro. Reclamo<br />
         <asp:TextBox ID="txbReclamo" runat="server" Enabled="false"></asp:TextBox>
       </div>
-      <div class="twentyfive">
+      <div class="twenty">
         Póliza<br />
         <asp:TextBox ID="txbPoliza" runat="server" Enabled="false"></asp:TextBox>
       </div>

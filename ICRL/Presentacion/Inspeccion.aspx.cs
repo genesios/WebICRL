@@ -1519,7 +1519,7 @@ namespace ICRL.Presentacion
       int vObjIdSecuencial = 0;
       int vObjIdInspeccion = 0;
 
-      vObjIdSecuencial = int.Parse(GridViewObjetos.SelectedRow.Cells[3].Text);
+      vObjIdSecuencial = int.Parse(GridViewObjetos.SelectedRow.Cells[4].Text);
       vObjIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
 
       vInspeccionRCObjeto = vAccesoDatos.FTraeInspRCObjetoICRL(vObjIdSecuencial, vObjIdInspeccion);
@@ -1587,9 +1587,24 @@ namespace ICRL.Presentacion
     {
       if (!VerificarPagina(true)) return;
 
-      
+      if (0 == e.CommandName.CompareTo("Detalle"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
 
-        if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewObjetos.DataKeys[vIndex].Value);
+        TextBoxObjIdSecuencial.Text = vSecuencial.ToString();
+
+        PBloqueaObjeto(false);
+        PBloqueaObjetoDet(true);
+        FlTraeDatosRCObjetoDetalles(vSecuencial);
+        Session["PopupRCObjHabilitado"] = 1;
+        this.ModalPopupRCObjetos.Show();
+      }
+
+      if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
         int vIndex = 0;
@@ -1636,24 +1651,24 @@ namespace ICRL.Presentacion
         //verificar el estado del registro
         string vEstadoCadena = string.Empty;
         int vEstado = 0;
-        vEstadoCadena = e.Row.Cells[7].Text;
+        vEstadoCadena = e.Row.Cells[8].Text;
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = true;
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = true;
           //ConfirmarFinalizarInspeccion
-          (e.Row.Cells[8].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
+          (e.Row.Cells[9].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
 
-        vTextoSecuencial = e.Row.Cells[3].Text;
+        vTextoSecuencial = e.Row.Cells[4].Text;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();
@@ -1962,7 +1977,7 @@ namespace ICRL.Presentacion
       int vPerIdInspeccion = 0;
 
 
-      vPerIdSecuencial = int.Parse(GridViewPersonas.SelectedRow.Cells[3].Text);
+      vPerIdSecuencial = int.Parse(GridViewPersonas.SelectedRow.Cells[4].Text);
       vPerIdInspeccion = int.Parse(TextBoxNroInspeccion.Text);
 
       vInspeccionRCPersona = vAccesoDatos.FTraeInspRCPersonaICRL(vPerIdSecuencial, vPerIdInspeccion);
@@ -1987,6 +2002,24 @@ namespace ICRL.Presentacion
     protected void GridViewPersonas_RowCommand(object sender, GridViewCommandEventArgs e)
     {
       if (!VerificarPagina(true)) return;
+
+      if (0 == e.CommandName.CompareTo("Detalle"))
+      {
+        string vTextoSecuencial = string.Empty;
+        int vIndex = 0;
+        int vSecuencial = 0;
+
+        vIndex = Convert.ToInt32(e.CommandArgument);
+        vSecuencial = Convert.ToInt32(GridViewPersonas.DataKeys[vIndex].Value);
+        TextBoxPersonaIdSecuencial.Text = vSecuencial.ToString();
+
+        PBloqueaPersona(false);
+        PBloqueaPersonaDet(true);
+        FlTraeDatosRCPersonaDetalles(vSecuencial);
+        Session["PopupRCPerHabilitado"] = 1;
+        this.ModalPopupRCPersonas.Show();
+      }
+
       if (0 == e.CommandName.CompareTo("ImprimirFormularioInsp"))
       {
         string vTextoSecuencial = string.Empty;
@@ -2035,24 +2068,24 @@ namespace ICRL.Presentacion
         //verificar el estado del registro
         string vEstadoCadena = string.Empty;
         int vEstado = 0;
-        vEstadoCadena = e.Row.Cells[7].Text;
+        vEstadoCadena = e.Row.Cells[8].Text;
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = true;
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = true;
           //ConfirmarFinalizarInspeccion
-          (e.Row.Cells[8].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
+          (e.Row.Cells[9].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarInspeccion()");
         }
         else
         {
-          (e.Row.Cells[8].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
         }
 
         //generamos la consulta para cada fila de la grilla maestra persona
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
 
-        vTextoSecuencial = e.Row.Cells[3].Text;
+        vTextoSecuencial = e.Row.Cells[4].Text;
         vSecuencial = int.Parse(vTextoSecuencial);
 
         AccesoDatos vAccesoDatos = new AccesoDatos();

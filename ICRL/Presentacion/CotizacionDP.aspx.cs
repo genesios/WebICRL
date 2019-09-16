@@ -710,9 +710,11 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text.Trim();
+
       DropDownListRepaMoneda.ClearSelection();
       DropDownListRepaMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
+      //float vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[7].Text);
       TextBoxRepaPrecioCotizado.Text = GridViewReparaciones.SelectedRow.Cells[7].Text;
 
       vTextoTemporal = string.Empty;
@@ -722,8 +724,10 @@ namespace ICRL.Presentacion
       DropDownListRepaTipoDesc.ClearSelection();
       DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
+       //vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[9].Text);
       TextBoxRepaMontoDesc.Text = GridViewReparaciones.SelectedRow.Cells[9].Text;
 
+      //vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[10].Text);
       TextBoxRepaPrecioFinal.Text = GridViewReparaciones.SelectedRow.Cells[10].Text;
 
       vTextoTemporal = string.Empty;
@@ -1896,6 +1900,20 @@ namespace ICRL.Presentacion
                                           c.monto_final
                                         };
 
+      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+                                    join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                                    join u in db.Usuario on c.idUsuario equals u.idUsuario
+                                    where (cc.numero_orden == pNroOrden)
+                                    select new
+                                    {
+                                      cc.numero_orden,
+                                      c.idUsuario,
+                                      u.nombres,
+                                      u.apellidos,
+                                      u.codUsuario,
+                                      u.nombreVisible
+                                    };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
@@ -1918,11 +1936,13 @@ namespace ICRL.Presentacion
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+      ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotizacionUsuario);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
 
       ReportViewerCoti.LocalReport.Refresh();
       byte[] VArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
@@ -2000,6 +2020,20 @@ namespace ICRL.Presentacion
                                           c.monto_final
                                         };
 
+      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+                                    join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                                    join u in db.Usuario on c.idUsuario equals u.idUsuario
+                                    where (cc.numero_orden == pNroOrden)
+                                    select new
+                                    {
+                                      cc.numero_orden,
+                                      c.idUsuario,
+                                      u.nombres,
+                                      u.apellidos,
+                                      u.codUsuario,
+                                      u.nombreVisible
+                                    };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
@@ -2021,11 +2055,13 @@ namespace ICRL.Presentacion
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+      ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotizacionUsuario);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
 
       ReportViewerCoti.LocalReport.Refresh();
       ReportViewerCoti.ShowToolBar = false;
@@ -2127,6 +2163,20 @@ namespace ICRL.Presentacion
                                           c.monto_final
                                         };
 
+      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+                                    join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                                    join u in db.Usuario on c.idUsuario equals u.idUsuario
+                                    where (cc.numero_orden == pNroOrden)
+                                    select new
+                                    {
+                                      cc.numero_orden,
+                                      c.idUsuario,
+                                      u.nombres,
+                                      u.apellidos,
+                                      u.codUsuario,
+                                      u.nombreVisible
+                                    };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
@@ -2148,11 +2198,13 @@ namespace ICRL.Presentacion
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiDaniosPropios);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaDaniosPropios);
+      ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotizacionUsuario);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource2);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
 
       ReportViewerCoti.LocalReport.Refresh();
       byte[] vArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);

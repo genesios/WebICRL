@@ -293,6 +293,17 @@
     <Content Include="DS\CotizacionRCVehicularTercero.xss">
       <DependentUpon>CotizacionRCVehicularTercero.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\CotizacionUsuario.xsc">
+      <DependentUpon>CotizacionUsuario.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\CotizacionUsuario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CotizacionUsuario.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\CotizacionUsuario.xss">
+      <DependentUpon>CotizacionUsuario.xsd</DependentUpon>
+    </Content>
     <None Include="DS\DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -604,6 +615,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CotizacionRCVehicularTercero.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\CotizacionUsuario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CotizacionUsuario.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>

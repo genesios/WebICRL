@@ -16,7 +16,7 @@ namespace ICRL.Presentacion
     private double TotalCotizacionUs = 0.0;
     private double TotalLiquidacionBs = 0.0;
     private double TotalLiquidacionUs = 0.0;
-    double TipoCambio = 6.96;
+    double TipoCambio = 1;
     int AjusteMas = 2;
     int AjusteMenos = -2;
 
@@ -88,7 +88,7 @@ namespace ICRL.Presentacion
       double monto_ = Convert.ToDouble(monto);
       Int16 moneda_ = Convert.ToInt16(moneda);
 
-      double tipo_cambio_ = 6.96;
+      double tipo_cambio_ = 1.0;
       double.TryParse(txbTipoCambio.Text, out tipo_cambio_);
 
       LiquidacionICRL.TipoLiquidacion001Factura factura = new LiquidacionICRL.TipoLiquidacion001Factura();
@@ -357,7 +357,7 @@ namespace ICRL.Presentacion
           string moneda = ((Label)row.FindControl("lblMoneda")).Text;
           string observaciones = ((TextBox)row.FindControl("txbObservaciones")).Text;
           bool asociada = true;
-          double tipo_cambio_ = 6.96;
+          double tipo_cambio_ = 1.0;
           double.TryParse(txbTipoCambio.Text, out tipo_cambio_);
 
           if (!string.IsNullOrWhiteSpace(idFactura))
@@ -482,6 +482,7 @@ namespace ICRL.Presentacion
 
         #region Llenar campos de datos
         LiquidacionICRL.TipoFlujo tipoFlujo = LiquidacionICRL.TipoFlujoTraer(IdFlujo);
+        txbNroFlujo.Text = tipoFlujo.flujoOnBase;
         txbCliente.Text = tipoFlujo.nombreAsegurado;
         txbTelefono.Text = tipoFlujo.telefonocelAsegurado;
         txbReclamo.Text = tipoFlujo.numeroReclamo;

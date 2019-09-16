@@ -1201,24 +1201,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDocIdObjeto;
         
         /// <summary>
-        /// LabelObjItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelObjItem;
-        
-        /// <summary>
-        /// TextBoxObjIdSecuencial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxObjIdSecuencial;
-        
-        /// <summary>
         /// LabelObsObjeto control.
         /// </summary>
         /// <remarks>
@@ -1253,6 +1235,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxTelfObjeto;
+        
+        /// <summary>
+        /// LabelObjItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelObjItem;
+        
+        /// <summary>
+        /// TextBoxObjIdSecuencial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxObjIdSecuencial;
         
         /// <summary>
         /// ButtonNuevoObj control.
@@ -1534,24 +1534,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDocIdPersona;
         
         /// <summary>
-        /// LabelPersonaSecuencial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPersonaSecuencial;
-        
-        /// <summary>
-        /// TextBoxPersonaIdSecuencial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPersonaIdSecuencial;
-        
-        /// <summary>
         /// LabelObsPersona control.
         /// </summary>
         /// <remarks>
@@ -1586,6 +1568,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxTelfPersona;
+        
+        /// <summary>
+        /// LabelPersonaSecuencial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPersonaSecuencial;
+        
+        /// <summary>
+        /// TextBoxPersonaIdSecuencial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPersonaIdSecuencial;
         
         /// <summary>
         /// ButtonNuevoPer control.
@@ -2344,6 +2344,42 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxSeriePTRO;
         
         /// <summary>
+        /// LabelCajaPTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCajaPTRO;
+        
+        /// <summary>
+        /// DropDownListCajaPTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCajaPTRO;
+        
+        /// <summary>
+        /// LabelCombustiblePTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCombustiblePTRO;
+        
+        /// <summary>
+        /// DropDownListCombustiblePTRO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCombustiblePTRO;
+        
+        /// <summary>
         /// LabelCilindraPTRO control.
         /// </summary>
         /// <remarks>
@@ -2396,42 +2432,6 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxObservacionesPTRO;
-        
-        /// <summary>
-        /// LabelCajaPTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCajaPTRO;
-        
-        /// <summary>
-        /// DropDownListCajaPTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListCajaPTRO;
-        
-        /// <summary>
-        /// LabelCombustiblePTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCombustiblePTRO;
-        
-        /// <summary>
-        /// DropDownListCombustiblePTRO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListCombustiblePTRO;
         
         /// <summary>
         /// CheckBoxTechoSolarPTRO control.

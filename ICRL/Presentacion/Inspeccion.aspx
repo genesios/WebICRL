@@ -402,7 +402,7 @@
                                     </asp:ButtonField>
                                     <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
-                                    <asp:BoundField DataField="Secuencial" HeaderText="Sec" />
+                                    <asp:BoundField DataField="Secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:BoundField DataField="tipoTaller" HeaderText="Tipo de Taller" />
                                     <asp:BoundField DataField="estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:ButtonField CommandName="FinalizarInsp" ButtonType="Link" HeaderText="Opción" Text="Finalizar" ItemStyle-CssClass="buttonlink" />
@@ -538,7 +538,7 @@
                                             <asp:ButtonField Text="Editar" CommandName="Select">
                                                 <ItemStyle Width="60px" />
                                             </asp:ButtonField>
-                                            <asp:BoundField DataField="idItem" HeaderText="id" />
+                                            <asp:BoundField DataField="idItem" HeaderText="id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                             <asp:BoundField DataField="descripcion" HeaderText="Item" />
                                             <asp:BoundField DataField="compra" HeaderText="Compra" />
                                             <asp:TemplateField HeaderText="Inst.">
@@ -559,7 +559,7 @@
                                             <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                             <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
                                             <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
-                                            <asp:BoundField DataField="nro_item" HeaderText="Item" />
+                                            <asp:BoundField DataField="nro_item" HeaderText="Item" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>
@@ -580,29 +580,33 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="twentyfive">
+                                        <div class="fifty">
                                             <asp:Label ID="LabelNombreObjetos" runat="server" Text="Nombre(s) y Apellido(s)"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxNombresApObjeto" runat="server"></asp:TextBox>
                                         </div>
-                                        <div class="twentyfive">
+                                        <div class="fifty">
                                             <asp:Label ID="LabelDocIdObjetos" runat="server" Text="Documento Identidad"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxDocIdObjeto" runat="server"></asp:TextBox>
                                         </div>
-                                        <div class="twentyfive">
-                                            <asp:Label ID="LabelObjItem" runat="server" Text="ObjIdSecuencial" Visible="False"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObjIdSecuencial" runat="server" Visible="False"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="fifty">
+                                            <asp:Label ID="LabelObsObjeto" runat="server" Text="Observaciones"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxObsObjeto" runat="server" MaxLength="100"></asp:TextBox>
+                                        </div>
+                                        <div class="fifty">
+                                            <asp:Label ID="LabelTelfObjeto" runat="server" Text="Teléfono Contacto"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxTelfObjeto" runat="server"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="twentyfive">
-                                            <asp:Label ID="LabelObsObjeto" runat="server" Text="Observaciones"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxObsObjeto" runat="server" MaxLength="100"></asp:TextBox>
-                                        </div>
-                                        <div class="twentyfive">
-                                            <asp:Label ID="LabelTelfObjeto" runat="server" Text="Teléfono Contacto"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxTelfObjeto" runat="server"></asp:TextBox>
+                                            <asp:Label ID="LabelObjItem" runat="server" Text="ObjIdSecuencial" Visible="False"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxObjIdSecuencial" runat="server" Visible="False"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
@@ -628,8 +632,9 @@
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
+                                    <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
-                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" />
+                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:BoundField DataField="nombreObjeto" HeaderText="Responsable Objeto" />
                                     <asp:BoundField DataField="docIdentidadObjeto" HeaderText="Doc.Id. Resp." />
                                     <asp:BoundField DataField="telefonoObjeto" HeaderText="Teléfono Resp." />
@@ -644,7 +649,7 @@
                                                 AutoGenerateColumns="false">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
-                                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" />
+                                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                                     <asp:BoundField DataField="idItem" HeaderText="Item" />
                                                     <asp:BoundField DataField="costoReferencial" HeaderText="Costo Ref." DataFormatString="{0:C2}" />
                                                     <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
@@ -727,12 +732,16 @@
                                     </table>
                                 </div>
                                 <div>
-                                    <asp:GridView ID="GridViewObjDetalle" runat="server" CellPadding="4" ForeColor="#333333" OnRowDataBound="GridViewObjDetalle_RowDataBound" OnSelectedIndexChanged="GridViewObjDetalle_SelectedIndexChanged" GridLines="None" Width="100%">
+                                    <asp:GridView ID="GridViewObjDetalle" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="false" OnRowDataBound="GridViewObjDetalle_RowDataBound" OnSelectedIndexChanged="GridViewObjDetalle_SelectedIndexChanged" GridLines="None" Width="100%">
                                         <AlternatingRowStyle BackColor="White" />
                                         <Columns>
                                             <asp:ButtonField Text="Clic ->" CommandName="Select">
                                                 <ItemStyle Width="60px" />
                                             </asp:ButtonField>
+                                            <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
+                                            <asp:BoundField DataField="idItem" HeaderText="Item" />
+                                            <asp:BoundField DataField="costoReferencial" HeaderText="Costo Ref." DataFormatString="{0:C2}" />
+                                            <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
                                         </Columns>
                                         <EditRowStyle BackColor="#7C6F57" />
                                         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -763,25 +772,30 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="twenty">
+                                        <div class="twentyfive">
                                             <asp:Label ID="LabelNombrePersonas" runat="server" Text="Nombre(s) y Apellido(s)"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxNombresApPersona" runat="server"></asp:TextBox>
                                         </div>
-                                        <div class="twenty">
+                                        <div class="twentyfive">
                                             <asp:Label ID="LabelDocIdPersonas" runat="server" Text="Documento Identidad"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxDocIdPersona" runat="server"></asp:TextBox>
                                         </div>
-                                        <div class="twenty">
-                                            <asp:Label ID="LabelPersonaSecuencial" runat="server" Text="Persona IdSecuencial" Visible="False"></asp:Label><br />
-                                            <asp:TextBox ID="TextBoxPersonaIdSecuencial" runat="server" Visible="False"></asp:TextBox>
-                                        </div>
-                                        <div class="twenty">
+                                        
+                                        <div class="twentyfive">
                                             <asp:Label ID="LabelObsPersona" runat="server" Text="Observaciones"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxObsPersona" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
-                                        <div class="twenty">
+                                        <div class="twentyfive">
                                             <asp:Label ID="LabelTelfPersona" runat="server" Text="Teléfono Contacto"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxTelfPersona" runat="server"></asp:TextBox>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="twenty">
+                                            <asp:Label ID="LabelPersonaSecuencial" runat="server" Text="Persona IdSecuencial" Visible="False"></asp:Label><br />
+                                            <asp:TextBox ID="TextBoxPersonaIdSecuencial" runat="server" Visible="False"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
@@ -807,8 +821,9 @@
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
+                                    <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
-                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" />
+                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:BoundField DataField="nombrePersona" HeaderText="Persona Afectada" />
                                     <asp:BoundField DataField="docIdentidadPersona" HeaderText="Doc.Id." />
                                     <asp:BoundField DataField="telefonoPersona" HeaderText="Teléfono" />
@@ -823,7 +838,7 @@
                                                 AutoGenerateColumns="false">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
-                                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" />
+                                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                                     <asp:BoundField DataField="tipo" HeaderText="Tipo" />
                                                     <asp:BoundField DataField="montoGasto" HeaderText="Monto Gasto" DataFormatString="{0:C2}" />
                                                     <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
@@ -901,12 +916,16 @@
                                     </table>
                                 </div>
                                 <div>
-                                    <asp:GridView ID="GridViewPerDetalle" runat="server" CellPadding="4" ForeColor="#333333" OnRowDataBound="GridViewPerDetalle_RowDataBound" OnSelectedIndexChanged="GridViewPerDetalle_SelectedIndexChanged" GridLines="None" Width="100%">
+                                    <asp:GridView ID="GridViewPerDetalle" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="false" OnRowDataBound="GridViewPerDetalle_RowDataBound" OnSelectedIndexChanged="GridViewPerDetalle_SelectedIndexChanged" GridLines="None" Width="100%">
                                         <AlternatingRowStyle BackColor="White" />
                                         <Columns>
                                             <asp:ButtonField Text="Clic -->" CommandName="Select">
                                                 <ItemStyle Width="60px" />
                                             </asp:ButtonField>
+                                            <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
+                                            <asp:BoundField DataField="tipo" HeaderText="Tipo" />
+                                            <asp:BoundField DataField="montoGasto" HeaderText="Monto Gasto" DataFormatString="{0:C2}" />
+                                            <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
                                         </Columns>
                                         <EditRowStyle BackColor="#7C6F57" />
                                         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -1010,7 +1029,7 @@
                                     <asp:ButtonField Text="Editar" CommandName="Select">
                                         <ItemStyle Width="60px" />
                                     </asp:ButtonField>
-                                    <asp:BoundField DataField="idItem" HeaderText="id" />
+                                    <asp:BoundField DataField="idItem" HeaderText="id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:BoundField DataField="descripcion" HeaderText="Item" />
                                     <asp:BoundField DataField="compra" HeaderText="Compra" />
                                     <asp:TemplateField HeaderText="Inst.">
@@ -1031,7 +1050,7 @@
                                     <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                     <asp:BoundField DataField="reparacionprevia" HeaderText="Reparación Previa" />
                                     <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
-                                    <asp:BoundField DataField="nro_item" HeaderText="Item" />
+                                    <asp:BoundField DataField="nro_item" HeaderText="Item" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -1125,6 +1144,12 @@
                                             <asp:TextBox ID="TextBoxSeriePTRO" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="twenty">
+                                            <asp:Label ID="LabelCajaPTRO" runat="server" Text="Caja"></asp:Label><br />
+                                            <asp:DropDownList ID="DropDownListCajaPTRO" runat="server"></asp:DropDownList><br />
+                                            <asp:Label ID="LabelCombustiblePTRO" runat="server" Text="Combustible"></asp:Label><br />
+                                            <asp:DropDownList ID="DropDownListCombustiblePTRO" runat="server"></asp:DropDownList><br />
+                                        </div>
+                                        <div class="twenty">
                                             <asp:Label ID="LabelCilindraPTRO" runat="server" Text="Cilindrada"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxCilindradaPTRO" runat="server"></asp:TextBox><br />
                                             <asp:RequiredFieldValidator ID="ValidadorCilindradaPTRO" runat="server" ErrorMessage="Cilindrada no puede estar vacio" ControlToValidate="TextBoxCilindradaPTRO" CssClass="errormessage"></asp:RequiredFieldValidator>
@@ -1136,12 +1161,7 @@
                                             <asp:Label ID="LabelObservacionesPTRO" runat="server" Text="Observaciones"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxObservacionesPTRO" runat="server" MaxLength="100"></asp:TextBox>
                                         </div>
-                                        <div class="twenty">
-                                            <asp:Label ID="LabelCajaPTRO" runat="server" Text="Caja"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListCajaPTRO" runat="server"></asp:DropDownList><br />
-                                            <asp:Label ID="LabelCombustiblePTRO" runat="server" Text="Combustible"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListCombustiblePTRO" runat="server"></asp:DropDownList><br />
-                                        </div>
+                                        
                                         <div class="twenty">
                                             <asp:CheckBox ID="CheckBoxTechoSolarPTRO" runat="server" />
                                             <asp:Label ID="LabelTechoSolarPTRO" runat="server" Text="Techo Solar"></asp:Label><br />
@@ -1193,7 +1213,7 @@
                                             <asp:Label ID="LabelTelfTerceroRCV01" runat="server" Text="Telf. Tercero"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxTelfTerceroRCV01" runat="server"></asp:TextBox><br />
                                             <asp:Label ID="LabelMarcaRCV01" runat="server" Text="Marca:"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListMarcaRCV01" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="DropDownListMarcaRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
                                         </div>
                                         <div class="twenty">
                                             <asp:Label ID="LabelModeloRCV01" runat="server" Text="Modelo:"></asp:Label><br />
@@ -1216,7 +1236,7 @@
                                             <asp:Label ID="LabelPlacaRCV01" runat="server" Text="Placa:"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxPlacaRCV01" runat="server"></asp:TextBox><br />
                                             <asp:Label ID="LabelColorRCV01" runat="server" Text="Color:"></asp:Label><br />
-                                            <asp:DropDownList ID="DropDownListColorRCV01" runat="server"></asp:DropDownList><br />
+                                            <asp:DropDownList ID="DropDownListColorRCV01" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList><br />
                                             <asp:Label ID="LabelKilometrajeRCV01" runat="server" Text="Kilometraje:"></asp:Label><br />
                                             <asp:TextBox ID="TextBoxKilometrajeRCV01" runat="server" Text="0"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="ValidadorKilometrajeRCV01" runat="server" ErrorMessage="Kilometraje no puede estar vacio" ControlToValidate="TextBoxKilometrajeRCV01" CssClass="errormessage"></asp:RequiredFieldValidator>
@@ -1256,7 +1276,7 @@
                                     </asp:ButtonField>
                                     <asp:ButtonField CommandName="Detalle" ButtonType="Link" HeaderText="Opción" Text="Detalle" ItemStyle-CssClass="buttonlink" />
                                     <asp:ButtonField CommandName="ImprimirFormularioInsp" ButtonType="Button" HeaderText="Opción" Text="Imp.Form" />
-                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" />
+                                    <asp:BoundField DataField="secuencial" HeaderText="Sec" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                     <asp:BoundField DataField="nombreTercero" HeaderText="Nombre Tercero" />
                                     <asp:BoundField DataField="marca" HeaderText="Marca" />
                                     <asp:BoundField DataField="modelo" HeaderText="Modelo" />
