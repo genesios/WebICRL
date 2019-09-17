@@ -175,20 +175,20 @@ namespace ICRL.BD
       int vRespuesta = 0;
 
       /*** CONECTAR A WS ***/
-      //OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
-      var vServicioOnBase = new OnBaseWS();
+      OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
+      //var vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO PARA GESPRO ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
 
 
-      ///*** ESTABLECER USUARIO AUTENTICACIÓN ***/
-      //vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
-      //{
-      //  Usuario = "icrlUser",
-      //  Password = "icrlPruebas"
-      //};
+      /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      {
+        Usuario = "icrlUser",
+        Password = "icrlPruebas"
+      };
 
-      
+
 
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
@@ -209,9 +209,18 @@ namespace ICRL.BD
       int vResultado = 0;
 
       /*** CONECTAR A WS ***/
-      OnBaseWS vServicioOnBase = new OnBaseWS();
+      OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
+      //OnBaseWS vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+
+      /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      {
+        Usuario = "icrlUser",
+        Password = "icrlPruebas"
+      };
+
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
       /*** INSTANCIAR EL OBJETO DE ENVÍO COMO DocumentoOnBaseEntity ***/
@@ -242,9 +251,17 @@ namespace ICRL.BD
       vArchivoBase64[0] = Convert.ToBase64String(pArrayBytesArchivo);
 
       /*** CONECTAR A WS ***/
-      OnBaseWS vServicioOnBase = new OnBaseWS();
+      OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
+      //OnBaseWS vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
+
+      /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      {
+        Usuario = "icrlUser",
+        Password = "icrlPruebas"
+      };
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
       /*** INSTANCIAR EL OBJETO DE ENVÍO COMO DocumentoOnBaseEntity ***/
@@ -289,17 +306,18 @@ namespace ICRL.BD
       string vCadenaAux = string.Empty;
 
       /*** CONECTAR A WS ***/
-      OnBaseWS vServicioOnBase = new OnBaseWS();
+      OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
+      //OnBaseWS vServicioOnBase = new OnBaseWS();
       /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO ICRL ***/
       SistemaOrigen vOrigen = SistemaOrigen.ICRL;
 
 
-      ///*** ESTABLECER USUARIO AUTENTICACIÓN ***/
-      //vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
-      //{
-      //  Usuario = "icrlUser",
-      //  Password = "icrlPruebas"
-      //};
+      /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
+      vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
+      {
+        Usuario = "icrlUser",
+        Password = "icrlPruebas"
+      };
 
 
 

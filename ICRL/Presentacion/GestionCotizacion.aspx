@@ -11,6 +11,9 @@
             padding: 0px;
             margin: 0px;
         }
+        .columnaOculta {
+            display: none;
+        }
     </style>
     <script type="text/javascript">
         function ToggleGridPanel(btn, row) {
@@ -80,23 +83,23 @@
                 <asp:ButtonField Text="Clic ->" CommandName="Select" ItemStyle-Width="60">
                     <ItemStyle Width="60px"></ItemStyle>
                 </asp:ButtonField>
-                <asp:BoundField DataField="idFlujo" HeaderText="IdFlujo" />
+                <asp:BoundField DataField="idFlujo" HeaderText="IdFlujo" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                 <asp:BoundField DataField="flujoOnBase" HeaderText="Flujo" />
                 <asp:BoundField DataField="nombreAsegurado" HeaderText="Asegurado" />
                 <asp:BoundField DataField="numeroPoliza" HeaderText="Poliza" />
                 <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
-                <asp:BoundField DataField="fechaSiniestro" HeaderText="Fecha Siniestro" />
+                <asp:BoundField DataField="fechaSiniestro" HeaderText="Fecha Siniestro" DataFormatString="{0:dd-MM-yy}" />
                 <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate>
                         <%# Eval("descEstado") %>
                         <%# MyNewRowCot ( Eval("idFlujo") ) %>
                         <asp:GridView ID="gvInspecciones" runat="server" CellPadding="4" ForeColor="#333333"
-                            Width="80%"
+                            Width="100%"
                             GridLines="None"
                             AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewgvInspecciones_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:BoundField DataField="idCotizacion" HeaderText="Id.Cot." />
+                                <asp:BoundField DataField="idCotizacion" HeaderText="Id.Cot." ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="tipoCobertura" HeaderText="Cobertura" />
                                 <asp:BoundField DataField="secuencialOrden" HeaderText="Orden" />
                                 <asp:BoundField DataField="nombreProveedor" HeaderText="Proveedor" />

@@ -91,15 +91,7 @@
                 <asp:Label ID="LabelInspecciones" runat="server" Text="Inspecciones"></asp:Label>
             </th>
         </tr>
-        <tr>
-            <td>
-                <div>
-                    <asp:TextBox ID="TextBoxFlujo" runat="server" Enabled="False" Visible="False"></asp:TextBox>
-                    <asp:Button ID="ButtonFlujoInspeccion" runat="server" Text="Flujo -&gt; Inspección" OnClick="ButtonFlujoInspeccion_Click" Enabled="False" Visible="False" />
-                    
-                </div>
-            </td>
-        </tr>
+
     </table>
     <div>
         <%--<input type="button" id="btnalgo1" value="hola mudo de windows open" onclick="window.open('inspeccion.aspx?nroInsp=90');" />--%>

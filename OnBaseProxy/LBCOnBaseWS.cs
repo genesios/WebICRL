@@ -24,8 +24,10 @@ namespace LbcOnBaseWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.6.1055.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="OnBaseWSSoap", Namespace="http://tempuri.org/")]
-    public partial class OnBaseWS : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="OnBaseWSAuthSoap", Namespace="http://tempuri.org/")]
+    public partial class OnBaseWSAuth : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private UsuarioAuth usuarioAuthValueField;
         
         private System.Threading.SendOrPostCallback ObtenerInformacionSolicitudOnBaseOperationCompleted;
         
@@ -34,8 +36,17 @@ namespace LbcOnBaseWS {
         private System.Threading.SendOrPostCallback AvanzarProcesoOperationCompleted;
         
         /// <remarks/>
-        public OnBaseWS() {
-            this.Url = "http://desanilus.lbc.bo/Nilus/WsOnbase/OnBaseWS.asmx";
+        public OnBaseWSAuth() {
+            this.Url = "http://desanilus.lbc.bo/Nilus/WsOnbase/OnBaseWSAuth.asmx";
+        }
+        
+        public UsuarioAuth UsuarioAuthValue {
+            get {
+                return this.usuarioAuthValueField;
+            }
+            set {
+                this.usuarioAuthValueField = value;
+            }
         }
         
         /// <remarks/>
@@ -48,6 +59,7 @@ namespace LbcOnBaseWS {
         public event AvanzarProcesoCompletedEventHandler AvanzarProcesoCompleted;
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("UsuarioAuthValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ObtenerInformacionSolicitudOnBase", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ResultadoEntity ObtenerInformacionSolicitudOnBase(string NumeroSolicitud, SistemaOrigen SistemaOrigen) {
             object[] results = this.Invoke("ObtenerInformacionSolicitudOnBase", new object[] {
@@ -92,6 +104,7 @@ namespace LbcOnBaseWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("UsuarioAuthValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ImportarDocumento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ResultadoEntity ImportarDocumento(DocumentoOnBaseEntity documento, string[] archivosBase64, SistemaOrigen SistemaOrigen) {
             object[] results = this.Invoke("ImportarDocumento", new object[] {
@@ -139,6 +152,7 @@ namespace LbcOnBaseWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("UsuarioAuthValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AvanzarProceso", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ResultadoEntity AvanzarProceso(string NumeroSolicitud, string origen, string destino, SistemaOrigen SistemaOrigen) {
             object[] results = this.Invoke("AvanzarProceso", new object[] {
@@ -197,153 +211,46 @@ namespace LbcOnBaseWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public enum SistemaOrigen {
-        
-        /// <remarks/>
-        Concesionarias,
-        
-        /// <remarks/>
-        Desgravamen,
-        
-        /// <remarks/>
-        Siscar,
-        
-        /// <remarks/>
-        Multifamiliar,
-        
-        /// <remarks/>
-        Gcp,
-        
-        /// <remarks/>
-        WSGcp,
-        
-        /// <remarks/>
-        Cumulos,
-        
-        /// <remarks/>
-        ListaAntiLavado,
-        
-        /// <remarks/>
-        BdWholesale,
-        
-        /// <remarks/>
-        PaginaWeb,
-        
-        /// <remarks/>
-        Horus,
-        
-        /// <remarks/>
-        Bse,
-        
-        /// <remarks/>
-        Bga,
-        
-        /// <remarks/>
-        AdmPagosSiniestros,
-        
-        /// <remarks/>
-        CartasVencimiento,
-        
-        /// <remarks/>
-        Helios,
-        
-        /// <remarks/>
-        DebitoAutomatico,
-        
-        /// <remarks/>
-        CobranzaMovil,
-        
-        /// <remarks/>
-        WholesaleSiscar,
-        
-        /// <remarks/>
-        BnbLeasing,
-        
-        /// <remarks/>
-        Sintesis,
-        
-        /// <remarks/>
-        TarificadorEF,
-        
-        /// <remarks/>
-        OnBase,
-        
-        /// <remarks/>
-        WinService,
-        
-        /// <remarks/>
-        BancoGanadero,
-        
-        /// <remarks/>
-        BancoGanaderoMasivo,
-        
-        /// <remarks/>
-        CarreraAgentes,
-        
-        /// <remarks/>
-        ICRL,
-        
-        /// <remarks/>
-        MicrosegurosBancoSol,
-        
-        /// <remarks/>
-        PagoFranquicias,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.6.1055.0")]
-    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class ResultadoEntity {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://tempuri.org/", IsNullable=false)]
+    public partial class UsuarioAuth : System.Web.Services.Protocols.SoapHeader {
         
-        private bool esValidoField;
+        private string usuarioField;
         
-        private string mensajeField;
+        private string passwordField;
         
-        private object datosAdicionalesField;
-        
-        private MensajeEntity[] listaMensajesField;
+        private System.Xml.XmlAttribute[] anyAttrField;
         
         /// <remarks/>
-        public bool EsValido {
+        public string Usuario {
             get {
-                return this.esValidoField;
+                return this.usuarioField;
             }
             set {
-                this.esValidoField = value;
+                this.usuarioField = value;
             }
         }
         
         /// <remarks/>
-        public string Mensaje {
+        public string Password {
             get {
-                return this.mensajeField;
+                return this.passwordField;
             }
             set {
-                this.mensajeField = value;
+                this.passwordField = value;
             }
         }
         
         /// <remarks/>
-        public object DatosAdicionales {
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr {
             get {
-                return this.datosAdicionalesField;
+                return this.anyAttrField;
             }
             set {
-                this.datosAdicionalesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public MensajeEntity[] ListaMensajes {
-            get {
-                return this.listaMensajesField;
-            }
-            set {
-                this.listaMensajesField = value;
+                this.anyAttrField = value;
             }
         }
     }
@@ -596,6 +503,160 @@ namespace LbcOnBaseWS {
         
         /// <remarks/>
         Exito,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ResultadoEntity {
+        
+        private bool esValidoField;
+        
+        private string mensajeField;
+        
+        private object datosAdicionalesField;
+        
+        private MensajeEntity[] listaMensajesField;
+        
+        /// <remarks/>
+        public bool EsValido {
+            get {
+                return this.esValidoField;
+            }
+            set {
+                this.esValidoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mensaje {
+            get {
+                return this.mensajeField;
+            }
+            set {
+                this.mensajeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public object DatosAdicionales {
+            get {
+                return this.datosAdicionalesField;
+            }
+            set {
+                this.datosAdicionalesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MensajeEntity[] ListaMensajes {
+            get {
+                return this.listaMensajesField;
+            }
+            set {
+                this.listaMensajesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public enum SistemaOrigen {
+        
+        /// <remarks/>
+        Concesionarias,
+        
+        /// <remarks/>
+        Desgravamen,
+        
+        /// <remarks/>
+        Siscar,
+        
+        /// <remarks/>
+        Multifamiliar,
+        
+        /// <remarks/>
+        Gcp,
+        
+        /// <remarks/>
+        WSGcp,
+        
+        /// <remarks/>
+        Cumulos,
+        
+        /// <remarks/>
+        ListaAntiLavado,
+        
+        /// <remarks/>
+        BdWholesale,
+        
+        /// <remarks/>
+        PaginaWeb,
+        
+        /// <remarks/>
+        Horus,
+        
+        /// <remarks/>
+        Bse,
+        
+        /// <remarks/>
+        Bga,
+        
+        /// <remarks/>
+        AdmPagosSiniestros,
+        
+        /// <remarks/>
+        CartasVencimiento,
+        
+        /// <remarks/>
+        Helios,
+        
+        /// <remarks/>
+        DebitoAutomatico,
+        
+        /// <remarks/>
+        CobranzaMovil,
+        
+        /// <remarks/>
+        WholesaleSiscar,
+        
+        /// <remarks/>
+        BnbLeasing,
+        
+        /// <remarks/>
+        Sintesis,
+        
+        /// <remarks/>
+        TarificadorEF,
+        
+        /// <remarks/>
+        OnBase,
+        
+        /// <remarks/>
+        WinService,
+        
+        /// <remarks/>
+        BancoGanadero,
+        
+        /// <remarks/>
+        BancoGanaderoMasivo,
+        
+        /// <remarks/>
+        CarreraAgentes,
+        
+        /// <remarks/>
+        ICRL,
+        
+        /// <remarks/>
+        MicrosegurosBancoSol,
+        
+        /// <remarks/>
+        PagoFranquicias,
     }
     
     /// <remarks/>

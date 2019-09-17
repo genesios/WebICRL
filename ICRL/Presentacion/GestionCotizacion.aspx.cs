@@ -13,6 +13,8 @@ namespace IRCL.Presentacion
 {
   public partial class GestionCotizacion : System.Web.UI.Page
   {
+    public string vColorFilaGrid = "#E3EAEB";
+
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -83,7 +85,16 @@ namespace IRCL.Presentacion
       if (e.Row.RowType == DataControlRowType.DataRow)
       {
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        //e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
+        e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='"+ vColorFilaGrid + "';";
+        if ( "#E3EAEB" == vColorFilaGrid )
+        {
+          vColorFilaGrid = "white";
+        }
+        else
+        {
+          vColorFilaGrid = "#E3EAEB";
+        }
 
         DateTime vFechaIni = DateTime.ParseExact(TextBoxFechaIni.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;

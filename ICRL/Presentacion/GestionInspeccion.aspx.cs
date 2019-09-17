@@ -97,33 +97,6 @@ namespace ICRL.Presentacion
     }
 
 
-    private int flTraeDatosFlujo(string pNumFlujo)
-    {
-      int vResultado = 0;
-
-      /*** CONECTAR A WS ***/
-      var servicioOnBase = new OnBaseWS();
-      /*** ESTABLECER LA APLICACIÓN ORIGEN POR DEFECTO PARA GESPRO ***/
-      var origen = SistemaOrigen.ICRL;
-      /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
-      ResultadoEntity resultado = new ResultadoEntity();
-      /*** LLAMAR A LA FUNCIÓN DEL WS ***/
-      resultado = servicioOnBase.ObtenerInformacionSolicitudOnBase(pNumFlujo, origen);
-
-      /*** SI EL RESULTADO ES CORRECTO, SE EXTRAE LA INFORMACIÓN DEL FLUJO ***/
-      if (resultado.EsValido)
-      {
-        // MOSTRAR DATOS EN LA APLICACIÓN DE PRUEBA
-        Session["NumFlujo"] = TextBoxFlujo.Text;
-        vResultado = 1;
-      }
-      else
-      {
-        Label4.Text = resultado.Mensaje;
-      }
-
-      return (vResultado);
-    }
 
     //private int FlTraeInspecciones()
     //{
@@ -398,23 +371,6 @@ namespace ICRL.Presentacion
     //    }
     //}
 
-    protected void ButtonFlujoInspeccion_Click(object sender, EventArgs e)
-    {
-      if (!VerificarPagina(true)) return;
-      try
-      {
-        if (1 == flTraeDatosFlujo(TextBoxFlujo.Text))
-        {
-          Response.Redirect("~/Presentacion/Inspeccion.aspx");
-        }
-      }
-      catch (Exception ex)
-      {
-
-        Label4.Text = string.Empty;
-        Label4.Text = ex.Message;
-      }
-    }
 
     protected void ButtonMaster_Click(object sender, EventArgs e)
     {
