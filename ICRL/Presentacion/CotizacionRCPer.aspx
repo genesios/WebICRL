@@ -38,21 +38,23 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="thirty">
+                            <div class="twentyfive">
                                 <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxNroFlujo" runat="server" Enabled="false"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxNroFlujo" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="thirty">
+                            <div class="twentyfive">
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
-                                <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox><br />
-                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox><br />
-                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox><br />
+                                <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="thirty">
+                            <div class="twentyfive">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False"></asp:TextBox><br />
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
+                            </div>
+                            <div class="twentyfive">
+                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                             </div>
                         </td>
                     </tr>
@@ -262,7 +264,7 @@
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
                 <Columns>
                     <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" ItemStyle-ForeColor="Red" />
-                    <asp:BoundField DataField="id_item" HeaderText="Id" />
+                    <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                     <asp:BoundField DataField="nombre_apellido" HeaderText="Nombre(s) y Apellido(s)" />
                     <asp:BoundField DataField="numero_documento" HeaderText="Documento Id" />
                     <asp:BoundField DataField="tipo_gasto" HeaderText="Tipo Gasto" />
@@ -296,7 +298,7 @@
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
                 <Columns>
                     <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
-                    <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+                    <asp:BoundField DataField="id_estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                     <asp:BoundField DataField="descripcion" HeaderText="Proveedor" />
                     <asp:BoundField DataField="monto_bs" HeaderText="Monto Orden" DataFormatString="{0:N2}" />
                     <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />

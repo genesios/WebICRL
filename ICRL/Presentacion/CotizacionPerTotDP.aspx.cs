@@ -1691,6 +1691,9 @@ namespace ICRL.Presentacion
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vResultado = 0;
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
+
+      int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vAccesoDatos.FCambiaEstadoFlujoCotiLiq(vIdFlujo);
     }
 
   }

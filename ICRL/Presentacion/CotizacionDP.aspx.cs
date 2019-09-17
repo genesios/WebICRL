@@ -724,7 +724,7 @@ namespace ICRL.Presentacion
       DropDownListRepaTipoDesc.ClearSelection();
       DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
-       vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[9].Text);
+      vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[9].Text);
       TextBoxRepaMontoDesc.Text = vMontoTemp.ToString();
 
       vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[10].Text);
@@ -2248,6 +2248,9 @@ namespace ICRL.Presentacion
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vResultado = 0;
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
+
+      int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vAccesoDatos.FCambiaEstadoFlujoCotiLiq(vIdFlujo);
     }
 
     #region CambioBeneficiario Orden Pago

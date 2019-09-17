@@ -5333,6 +5333,7 @@ namespace ICRL.Presentacion
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vResultado = 0;
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
+      
     }
   }
 }

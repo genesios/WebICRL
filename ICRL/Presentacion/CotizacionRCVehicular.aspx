@@ -11,6 +11,10 @@
             padding: 0px;
             margin: 0px;
         }
+
+        .columnaOculta {
+            display: none;
+        }
     </style>
     <script src="../Scripts/ICRL.js"></script>
 </asp:Content>
@@ -47,8 +51,6 @@
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox>
-                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
-                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                             </div>
                             <div class="twentyfive">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
@@ -57,18 +59,18 @@
                             <div class="twentyfive">
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="fifty">
-                                <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase"  OnClientClick="return ConfirmarActualizarOnBase();" />
-                                <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
-                            </div>
-                            <div class="fifty">
-                                <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización"  OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
-                            </div>
+                        <td style="text-align: left">
+                            <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClientClick="return ConfirmarActualizarOnBase();" />
+                            <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
+                        </td>
+                        <td style="text-align: right">
+                            <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización" OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
                         </td>
                     </tr>
                 </table>
@@ -302,8 +304,8 @@
                         <asp:GridView ID="GridViewReparaciones" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false"
                             OnSelectedIndexChanged="GridViewReparaciones_SelectedIndexChanged" OnRowDeleting="GridViewReparaciones_RowDeleting" Width="100%">
                             <Columns>
-                                <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" />
-                                <asp:BoundField DataField="id_item" HeaderText="Id" />
+                                <asp:ButtonField Text="Eliminar" CommandName="Delete" ItemStyle-Width="50" />
+                                <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
                                 <asp:BoundField DataField="chaperio" HeaderText="Chaperio" />
                                 <asp:BoundField DataField="reparacion_previa" HeaderText="Reparación Previa" />
@@ -356,6 +358,7 @@
                                 <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                                <asp:BoundField DataField="moneda_orden" HeaderText="Moneda " />
                                 <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
@@ -389,7 +392,7 @@
                             OnSelectedIndexChanged="GridViewRepuestos_SelectedIndexChanged" OnRowDeleting="GridViewRepuestos_RowDeleting" Width="100%">
                             <Columns>
                                 <asp:ButtonField Text="Borrar" CommandName="Delete" ItemStyle-Width="50" />
-                                <asp:BoundField DataField="id_item" HeaderText="Id" />
+                                <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
                                 <asp:TemplateField HeaderText="Pint.">
                                     <ItemTemplate>
@@ -445,6 +448,7 @@
                                 <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
+                                <asp:BoundField DataField="moneda_orden" HeaderText="Moneda Orden" />
                                 <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
@@ -467,7 +471,7 @@
                         <asp:GridView ID="GridViewRecepRepuestos" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false"
                             OnSelectedIndexChanged="GridViewRecepRepuestos_SelectedIndexChanged" Width="100%">
                             <Columns>
-                                <asp:BoundField DataField="id_item" HeaderText="Id" />
+                                <asp:BoundField DataField="id_item" HeaderText="Id" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="item_descripcion" HeaderText="Item" />
                                 <asp:TemplateField HeaderText="Recibido">
                                     <ItemTemplate>
@@ -500,7 +504,7 @@
                             DataKeyNames="numero_orden" OnRowCommand="GridViewOrdenes_RowCommand" OnRowDataBound="GridViewOrdenes_RowDataBound" Width="100%">
                             <Columns>
                                 <asp:BoundField DataField="numero_orden" HeaderText="Número Orden" />
-                                <asp:BoundField DataField="id_estado" HeaderText="Estado" />
+                                <asp:BoundField DataField="id_estado" HeaderText="Estado" ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta" />
                                 <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
                                 <asp:BoundField DataField="moneda_orden" HeaderText="Moneda" />
                                 <asp:BoundField DataField="monto_orden" HeaderText="Monto Orden" DataFormatString="{0:N2}" />

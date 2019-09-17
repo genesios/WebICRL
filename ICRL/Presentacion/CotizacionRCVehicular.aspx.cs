@@ -651,10 +651,12 @@ namespace ICRL.Presentacion
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[6].Text;
+
       DropDownListRepaMoneda.ClearSelection();
       DropDownListRepaMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
-      TextBoxRepaPrecioCotizado.Text = GridViewReparaciones.SelectedRow.Cells[7].Text;
+      float vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[7].Text);
+      TextBoxRepaPrecioCotizado.Text = vMontoTemp.ToString();
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[8].Text.Trim();
@@ -663,9 +665,11 @@ namespace ICRL.Presentacion
       DropDownListRepaTipoDesc.ClearSelection();
       DropDownListRepaTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
-      TextBoxRepaMontoDesc.Text = GridViewReparaciones.SelectedRow.Cells[9].Text;
+      vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[9].Text);
+      TextBoxRepaMontoDesc.Text = vMontoTemp.ToString();
 
-      TextBoxRepaPrecioFinal.Text = GridViewReparaciones.SelectedRow.Cells[10].Text;
+      vMontoTemp = float.Parse(GridViewReparaciones.SelectedRow.Cells[10].Text);
+      TextBoxRepaPrecioFinal.Text = vMontoTemp.ToString();
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewReparaciones.SelectedRow.Cells[11].Text.Trim();
@@ -956,7 +960,8 @@ namespace ICRL.Presentacion
       DropDownListRepuMoneda.ClearSelection();
       DropDownListRepuMoneda.Items.FindByText(vTextoTemporal).Selected = true;
 
-      TextBoxRepuPrecioCotizado.Text = GridViewRepuestos.SelectedRow.Cells[6].Text;
+      float vMontoTemp = float.Parse(GridViewRepuestos.SelectedRow.Cells[6].Text);
+      TextBoxRepuPrecioCotizado.Text = vMontoTemp.ToString();
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[7].Text.Trim();
@@ -965,9 +970,11 @@ namespace ICRL.Presentacion
       DropDownListRepuTipoDesc.ClearSelection();
       DropDownListRepuTipoDesc.Items.FindByText(vTextoTemporal).Selected = true;
 
-      TextBoxRepuMontoDesc.Text = GridViewRepuestos.SelectedRow.Cells[8].Text;
+      vMontoTemp = float.Parse(GridViewRepuestos.SelectedRow.Cells[8].Text);
+      TextBoxRepuMontoDesc.Text = vMontoTemp.ToString();
 
-      TextBoxRepuPrecioFinal.Text = GridViewRepuestos.SelectedRow.Cells[9].Text;
+      vMontoTemp = float.Parse(GridViewRepuestos.SelectedRow.Cells[9].Text);
+      TextBoxRepuPrecioFinal.Text = vMontoTemp.ToString();
 
       vTextoTemporal = string.Empty;
       vTextoTemporal = GridViewRepuestos.SelectedRow.Cells[10].Text.Trim();
@@ -1053,7 +1060,8 @@ namespace ICRL.Presentacion
         RCVehicularesSumatoria.id_tipo_descuento_orden,
         RCVehicularesSumatoria.descuento_proveedor,
         RCVehicularesSumatoria.deducible,
-        RCVehicularesSumatoria.monto_final
+        RCVehicularesSumatoria.monto_final,
+        RCVehicularesSumatoria.moneda_orden
       }).ToList();
       GridViewSumaReparaciones.DataBind();
 
@@ -1140,6 +1148,8 @@ namespace ICRL.Presentacion
         //PanelABMReparaciones.Enabled = false;
         ButtonSumaGrabar.Enabled = false;
         ButtonSumaCancelar.Enabled = false;
+        Session["PopupABMSumasHabilitado"] = 0;
+        this.ModalPopupSumatorias.Hide();
       }
       else
       {
@@ -1172,6 +1182,8 @@ namespace ICRL.Presentacion
       ButtonSumaGrabar.Enabled = false;
       ButtonSumaCancelar.Enabled = false;
       //PLimpiarCamposRepa();
+      Session["PopupABMSumasHabilitado"] = 0;
+      this.ModalPopupSumatorias.Hide();
     }
 
     protected void ButtonCancelPopSumatorias_Click(object sender, EventArgs e)
@@ -1240,7 +1252,8 @@ namespace ICRL.Presentacion
         RCVehicularesSumatoria.id_tipo_descuento_orden,
         RCVehicularesSumatoria.descuento_proveedor,
         RCVehicularesSumatoria.deducible,
-        RCVehicularesSumatoria.monto_final
+        RCVehicularesSumatoria.monto_final,
+        RCVehicularesSumatoria.moneda_orden
       }).ToList();
       GridViewSumaRepuestos.DataBind();
 
@@ -2070,7 +2083,7 @@ namespace ICRL.Presentacion
                                            t.chasis
                                          };
 
-      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+      var vListaCotizacionUsuario = from cc in db.cotizacion_rc_vehicular
                                     join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
                                     join u in db.Usuario on c.idUsuario equals u.idUsuario
                                     where (cc.numero_orden == pNroOrden)
@@ -2191,7 +2204,7 @@ namespace ICRL.Presentacion
                                            t.chasis
                                          };
 
-      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+      var vListaCotizacionUsuario = from cc in db.cotizacion_rc_vehicular
                                     join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
                                     join u in db.Usuario on c.idUsuario equals u.idUsuario
                                     where (cc.numero_orden == pNroOrden)
@@ -2335,7 +2348,7 @@ namespace ICRL.Presentacion
                                            t.chasis
                                          };
 
-      var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
+      var vListaCotizacionUsuario = from cc in db.cotizacion_rc_vehicular
                                     join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
                                     join u in db.Usuario on c.idUsuario equals u.idUsuario
                                     where (cc.numero_orden == pNroOrden)
@@ -2399,6 +2412,9 @@ namespace ICRL.Presentacion
       AccesoDatos vAccesoDatos = new AccesoDatos();
       int vResultado = 0;
       vResultado = vAccesoDatos.FCambiaEstadoOnBase(vNumeroFlujo, vNombreUsuario, vBandejaEntrada, vBandejaSalida);
+
+      int vIdFlujo = int.Parse(TextBoxIdFlujo.Text);
+      vAccesoDatos.FCambiaEstadoFlujoCotiLiq(vIdFlujo);
     }
 
     #region CambioBeneficiario Orden Pago

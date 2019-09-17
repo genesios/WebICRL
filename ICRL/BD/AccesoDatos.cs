@@ -641,6 +641,44 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public int FCambiaEstadoFlujoInspCoti(int pFlujo)
+    {
+      int vRespuesta = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Flujo vTablaFlujo = new Flujo();
+
+        vTablaFlujo = db.Flujo.Find(pFlujo);
+        vTablaFlujo.estado = 2;
+        db.Entry(vTablaFlujo).State = System.Data.Entity.EntityState.Modified;
+        db.SaveChanges();
+
+        vRespuesta = 1;
+      }
+
+        return vRespuesta;
+    }
+
+    public int FCambiaEstadoFlujoCotiLiq(int pFlujo)
+    {
+      int vRespuesta = 0;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Flujo vTablaFlujo = new Flujo();
+
+        vTablaFlujo = db.Flujo.Find(pFlujo);
+        vTablaFlujo.estado = 3;
+        db.Entry(vTablaFlujo).State = System.Data.Entity.EntityState.Modified;
+        db.SaveChanges();
+
+        vRespuesta = 1;
+      }
+
+      return vRespuesta;
+    }
+
     public int FActualizaFlujoICRL(FlujoICRL pFlujo)
     {
       int vRespuesta = 0;
