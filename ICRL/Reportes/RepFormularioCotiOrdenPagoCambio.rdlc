@@ -1929,7 +1929,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=First(Fields!id_tipo_descuento_orden.Value, "DataSet3")</Value>
+                        <Value>=IIf(First(Fields!id_tipo_descuento_orden.Value, "DataSet3")="Porcentaje", Str(Sum(Fields!descuento_proveedor.Value, "DataSet3"))+" %",First(Fields!id_tipo_descuento_orden.Value, "DataSet3"))</Value>
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontSize>8pt</FontSize>
@@ -1960,7 +1960,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Sum(Fields!descuento_proveedor.Value, "DataSet3")</Value>
+                        <Value>=IIf(First(Fields!id_tipo_descuento_orden.Value, "DataSet3")="Porcentaje", Sum(Fields!monto_orden.Value, "DataSet3")*(Sum(Fields!descuento_proveedor.Value, "DataSet3")/100),Sum(Fields!descuento_proveedor.Value, "DataSet3"))</Value>
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontSize>8pt</FontSize>

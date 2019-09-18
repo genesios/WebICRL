@@ -1720,7 +1720,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!rembolso.Value</Value>
+                                  <Value>=IIf(Fields!rembolso.Value, "Si","")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1857,7 +1857,7 @@
             <Top>3.43018in</Top>
             <Left>0.22993in</Left>
             <Height>0.5in</Height>
-            <Width>7.26716in</Width>
+            <Width>7.26717in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>

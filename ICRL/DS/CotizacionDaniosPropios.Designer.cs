@@ -1470,8 +1470,7 @@ namespace ICRL.DS.CotizacionDaniosPropiosTableAdapters {
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT        f.nombreAsegurado, f.telefonocelAsegurado, 'DAÑOS PROPIOS' AS cobertura, f.fechaSiniestro, f.flujoOnBase, f.numeroReclamo, f.numeroPoliza, f.marcaVehiculo, 
-                         f.modeloVehiculo, f.anioVehiculo, f.placaVehiculo, f.chasisVehiculo, c.numero_orden, c.proveedor, c.item_descripcion, c.id_moneda, c.precio_final, 
-                         c.tipo_cambio
+                         f.modeloVehiculo, f.anioVehiculo, f.placaVehiculo, f.chasisVehiculo, c.numero_orden, c.proveedor, c.item_descripcion, c.id_moneda, c.precio_final, c.tipo_cambio
 FROM            cotizacion_danios_propios AS c INNER JOIN
                          Flujo AS f ON c.id_flujo = f.idFlujo";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;

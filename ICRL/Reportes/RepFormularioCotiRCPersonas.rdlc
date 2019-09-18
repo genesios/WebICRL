@@ -1720,7 +1720,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!rembolso.Value</Value>
+                                  <Value>=IIf(Fields!rembolso.Value, "Si","")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
