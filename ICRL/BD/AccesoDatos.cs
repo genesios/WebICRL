@@ -6,6 +6,8 @@ using ICRL.ModeloDB;
 using LbcOnBaseWS;
 using LbcConsultaUsuarioSistema;
 using System.Globalization;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace ICRL.BD
 {
@@ -174,6 +176,10 @@ namespace ICRL.BD
     {
       int vRespuesta = 0;
 
+      NameValueCollection vDatosSegurosConfig = new NameValueCollection();
+      var vObjetoSeccion = ConfigurationManager.GetSection("DatosSeguros");
+      vDatosSegurosConfig = (NameValueCollection)(vObjetoSeccion);
+
       /*** CONECTAR A WS ***/
       OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
       //var vServicioOnBase = new OnBaseWS();
@@ -184,8 +190,8 @@ namespace ICRL.BD
       /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
       vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
       {
-        Usuario = "icrlUser",
-        Password = "icrlPruebas"
+        Usuario = vDatosSegurosConfig["datosUsr"],
+        Password = vDatosSegurosConfig["datosCon"]
       };
 
 
@@ -208,6 +214,10 @@ namespace ICRL.BD
     {
       int vResultado = 0;
 
+      NameValueCollection vDatosSegurosConfig = new NameValueCollection();
+      var vObjetoSeccion = ConfigurationManager.GetSection("DatosSeguros");
+      vDatosSegurosConfig = (NameValueCollection)(vObjetoSeccion);
+
       /*** CONECTAR A WS ***/
       OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
       //OnBaseWS vServicioOnBase = new OnBaseWS();
@@ -217,8 +227,8 @@ namespace ICRL.BD
       /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
       vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
       {
-        Usuario = "icrlUser",
-        Password = "icrlPruebas"
+        Usuario = vDatosSegurosConfig["datosUsr"],
+        Password = vDatosSegurosConfig["datosCon"]
       };
 
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
@@ -245,6 +255,11 @@ namespace ICRL.BD
     public int FEnviaArchivoOnBase(string pFlujoOnBase, string pTipoDocumental, string pNomUsuario, byte[] pArrayBytesArchivo)
     {
       int vResultado = 0;
+
+      NameValueCollection vDatosSegurosConfig = new NameValueCollection();
+      var vObjetoSeccion = ConfigurationManager.GetSection("DatosSeguros");
+      vDatosSegurosConfig = (NameValueCollection)(vObjetoSeccion);
+
       //solo se enviara un archivo a la vez
       string[] vArchivoBase64 = new string[1];
 
@@ -259,8 +274,8 @@ namespace ICRL.BD
       /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
       vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
       {
-        Usuario = "icrlUser",
-        Password = "icrlPruebas"
+        Usuario = vDatosSegurosConfig["datosUsr"],
+        Password = vDatosSegurosConfig["datosCon"]
       };
       /*** INSTANCIAR EL RESULTADO COMO ResultadoEntity ***/
       ResultadoEntity vResultadoEntity = new ResultadoEntity();
@@ -304,6 +319,10 @@ namespace ICRL.BD
     {
       vFlujoICRL = null;
       string vCadenaAux = string.Empty;
+      
+      NameValueCollection vDatosSegurosConfig = new NameValueCollection();
+      var vObjetoSeccion = ConfigurationManager.GetSection("DatosSeguros");
+      vDatosSegurosConfig = (NameValueCollection)(vObjetoSeccion);
 
       /*** CONECTAR A WS ***/
       OnBaseWSAuth vServicioOnBase = new OnBaseWSAuth();
@@ -315,8 +334,9 @@ namespace ICRL.BD
       /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
       vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
       {
-        Usuario = "icrlUser",
-        Password = "icrlPruebas"
+        
+        Usuario = vDatosSegurosConfig["datosUsr"],
+        Password = vDatosSegurosConfig["datosCon"]
       };
 
 
