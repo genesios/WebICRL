@@ -305,3 +305,5 @@ C:\Repo\Git\vs\gnesios\WebICRL\ICRL\obj\Release\RdlCompile.compiled
 C:\Repo\Git\vs\gnesios\WebICRL\ICRL\obj\Release\ICRL.csproj.CoreCompileInputs.cache
 C:\Repo\Git\vs\gnesios\WebICRL\ICRL\obj\Release\ICRL.dll
 C:\Repo\Git\vs\gnesios\WebICRL\ICRL\obj\Release\ICRL.pdb
+C:\Repo\Git\vs\gnesios\WebICRL\ICRL\bin\ArgosProxy.dll.config
+C:\Repo\Git\vs\gnesios\WebICRL\ICRL\bin\OnBaseProxy.dll.config

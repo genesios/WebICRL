@@ -10,3 +10,4 @@ C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Release\ArgosProxy.csprojResolveAs
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Release\ArgosProxy.csproj.CoreCompileInputs.cache
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Release\ArgosProxy.dll
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Release\ArgosProxy.pdb
+C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\bin\Release\ArgosProxy.dll.config

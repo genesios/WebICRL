@@ -1777,6 +1777,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1940,9 +1941,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>id_tipo_descuento_orden</rd:DefaultName>
-                <Top>0.38889in</Top>
+                <Top>0.44444in</Top>
+                <Left>2.03848cm</Left>
                 <Height>0.25in</Height>
-                <Width>1in</Width>
+                <Width>0.42708in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1964,6 +1966,7 @@
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontSize>8pt</FontSize>
+                          <Format>#,0.00;(#,0.00)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -1974,7 +1977,7 @@
                 </Paragraphs>
                 <rd:DefaultName>descuento_proveedor</rd:DefaultName>
                 <Top>0.38889in</Top>
-                <Left>1.01389in</Left>
+                <Left>1.25741in</Left>
                 <Height>0.25in</Height>
                 <Width>1in</Width>
                 <ZIndex>1</ZIndex>
@@ -2009,7 +2012,7 @@
                 </Paragraphs>
                 <rd:DefaultName>deducible</rd:DefaultName>
                 <Top>0.68056in</Top>
-                <Left>1.01389in</Left>
+                <Left>1.25741in</Left>
                 <Height>0.25in</Height>
                 <Width>1in</Width>
                 <ZIndex>2</ZIndex>
@@ -2034,6 +2037,7 @@
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontSize>8pt</FontSize>
+                          <Format>#,0.00;(#,0.00)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2044,7 +2048,7 @@
                 </Paragraphs>
                 <rd:DefaultName>monto_final</rd:DefaultName>
                 <Top>0.95833in</Top>
-                <Left>1.01389in</Left>
+                <Left>1.25741in</Left>
                 <Height>0.25in</Height>
                 <Width>1in</Width>
                 <ZIndex>3</ZIndex>
@@ -2077,7 +2081,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox11</rd:DefaultName>
                 <Top>0.95833in</Top>
-                <Left>0.03152in</Left>
+                <Left>0.27504in</Left>
                 <Height>0.25in</Height>
                 <Width>0.96848in</Width>
                 <ZIndex>4</ZIndex>
@@ -2109,9 +2113,9 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox11</rd:DefaultName>
-                <Top>0.69444in</Top>
-                <Left>0.01763in</Left>
-                <Height>0.25in</Height>
+                <Top>0.72222in</Top>
+                <Left>0.26115in</Left>
+                <Height>0.22222in</Height>
                 <Width>0.96848in</Width>
                 <ZIndex>5</ZIndex>
                 <Style>
@@ -2142,10 +2146,9 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox11</rd:DefaultName>
-                <Top>0.04167in</Top>
-                <Left>0.03152in</Left>
+                <Top>0.38889in</Top>
                 <Height>0.30555in</Height>
-                <Width>0.96848in</Width>
+                <Width>0.76088in</Width>
                 <ZIndex>6</ZIndex>
                 <Style>
                   <Border>
@@ -2160,9 +2163,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>4.44319in</Top>
-            <Left>5.50383in</Left>
+            <Left>5.26031in</Left>
             <Height>1.29514in</Height>
-            <Width>2.0708in</Width>
+            <Width>2.31432in</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>

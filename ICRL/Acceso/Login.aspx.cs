@@ -23,6 +23,7 @@ namespace ICRL.Acceso
       {
         string uid = TextBox1.Text;
         string pass = TextBox2.Text;
+        string vUrlPagina = string.Empty;
 
         int vResultado = 0;
         var vAccesoDatos = new AccesoDatos();
@@ -65,9 +66,42 @@ namespace ICRL.Acceso
                 else
                   Session["SucursalUsr"] = "SucursalArgos";
                 //se accede al sistema
-                Response.Redirect("~/Presentacion/GestionInspeccion.aspx");
+                //se carga la lista de Roles a una variable de Sesión
+                if (vUsuarioICRL.roles != null)
+                {
+                  Session["RolesUsr"] = vUsuarioICRL.roles;
+                  foreach (var vRol in (string[])Session["RolesUsr"])
+                  {
+                    if ("ICRLInspeccion" == vRol.Substring(0,14))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionInspeccion.aspx";
+                      break;
+                    }
+                    if ("ICRLCotizacion" == vRol.Substring(0, 14))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionCotizacion.aspx";
+                      break;
+                    }
+                    if ("ICRLLiquidacion" == vRol.Substring(0, 15))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionLiquidacion.aspx";
+                      break;
+                    }
+                  }
+                  Response.Redirect(vUrlPagina,false);
 
+                }
+                else
+                {
+                  Label4.Text = "El usuario, no tiene roles para el sistema ICRL";
+                }
+                
               }
+            }
+            else
+            {
+              //no se pudo recuperar los datos del usuario desde el ICRL
+              Label4.Text = "NO se puede recuperar los datos de ICRL, para el usuario";
             }
           }
           else
@@ -87,8 +121,34 @@ namespace ICRL.Acceso
                 Session["CorreoUsr"] = vUsuarioICRL.correoElectronico;
                 Session["SucursalUsr"] = vUsuarioICRL.codSucursal;
                 //se accede al sistema
-                Response.Redirect("~/Presentacion/GestionInspeccion.aspx");
-
+                //se carga la lista de Roles a una variable de Sesión
+                if (vUsuarioICRL.roles != null)
+                {
+                  Session["RolesUsr"] = vUsuarioICRL.roles;
+                  foreach (var vRol in (string[])Session["RolesUsr"])
+                  {
+                    if ("ICRLInspeccion" == vRol.Substring(0, 14))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionInspeccion.aspx";
+                      break;
+                    }
+                    if ("ICRLCotizacion" == vRol.Substring(0, 14))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionCotizacion.aspx";
+                      break;
+                    }
+                    if ("ICRLLiquidacion" == vRol.Substring(0, 15))
+                    {
+                      vUrlPagina = "~/Presentacion/GestionLiquidacion.aspx";
+                      break;
+                    }
+                  }
+                  Response.Redirect(vUrlPagina, false);
+                }
+                else
+                {
+                  Label4.Text = "El usuario, no tiene roles para el sistema ICRL";
+                }
               }
             }
           }

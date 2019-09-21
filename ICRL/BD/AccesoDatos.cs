@@ -77,6 +77,24 @@ namespace ICRL.BD
           vUsuarioICRL.codSucursal = vClienteResultado.Sucursal;
           vUsuarioICRL.correoElectronico = vClienteResultado.Correo;
           vUsuarioICRL.estado = 0;
+          /* ajuste roles*/
+          int vCantidadRoles = vClienteResultado.Roles.Length;
+          if (vCantidadRoles > 0)
+          {
+            //existe por lo menos un rol
+            vUsuarioICRL.roles = new string[vCantidadRoles];
+            int vContador = 0;
+            foreach (var vRol in vClienteResultado.Roles)
+            {
+              vUsuarioICRL.roles[vContador++] = vRol.CodigoRol;
+            }
+          }
+          else
+          {
+            //no existe roles asociados Mostrar mensaje de error
+        
+          }
+          /*fin ajuste Roles*/
         }
       }
       catch (Exception ex)
@@ -126,7 +144,7 @@ namespace ICRL.BD
           vTablaUsuario.nombreVisible = pUsuario.nombreVisible;
           vTablaUsuario.codSucursal = pUsuario.codSucursal;
           vTablaUsuario.correoElectronico = pUsuario.correoElectronico;
-          vTablaUsuario.estado = 0;
+          vTablaUsuario.estado = 1;
           vTablaUsuario.usuarioCreacion = pCodUsuario;
           vTablaUsuario.fechaCreacion = DateTime.Now;
 

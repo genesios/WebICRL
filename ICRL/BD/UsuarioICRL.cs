@@ -17,5 +17,6 @@ namespace ICRL.BD
         public int estado { get; set; }
         public string usuarioCreacion { get; set; }
         public DateTime fechaCreacion { get; set; }
+        public string[] roles { get; set; }
     }
 }
