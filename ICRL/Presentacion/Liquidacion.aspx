@@ -324,7 +324,6 @@
     </td></tr>
     <tr><td>
       <asp:Button ID="btnGenerarLiquidacion" runat="server" Text="Generar Liquidación" ValidationGroup="ValidacionTipoCambio" OnClick="btnGenerarLiquidacion_Click" />
-      <asp:Button ID="btnLiquidacionTotal" runat="server" Text="Liquidación Total" ValidationGroup="ValidacionTipoCambio" OnClick="btnLiquidacionTotal_Click" />
     </td></tr>
   </table>
   
@@ -393,8 +392,17 @@
     </asp:GridView>
     </td></tr>
     <tr><td>
-      <asp:Button ID="btnAjusteMenor" runat="server" Text="Ajuste Menor" Enabled="false" OnClick="btnAjusteMenor_Click" />
-      <asp:Button ID="btnGuardarLiquidacion" runat="server" Text="Guardar Liquidación" Enabled="false" OnClick="btnGuardarLiquidacion_Click" />
+      <table style="width:100%;font-size:inherit">
+        <tr>
+          <td>
+            <asp:Button ID="btnAjusteMenor" runat="server" Text="Ajuste Menor" Enabled="false" OnClick="btnAjusteMenor_Click" />
+            <asp:Button ID="btnGuardarLiquidacion" runat="server" Text="Guardar Liquidación" Enabled="false" OnClick="btnGuardarLiquidacion_Click" />
+          </td>
+          <td style="text-align:right">
+            <asp:Button ID="btnLiquidacionTotal" runat="server" Text="Liquidación Total" Enabled="false" ValidationGroup="ValidacionTipoCambio" OnClick="btnLiquidacionTotal_Click" />
+          </td>
+        </tr>
+      </table>
     </td></tr>
   </table>
 

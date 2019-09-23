@@ -457,6 +457,7 @@
       <LastGenOutput>ModeloDB.cs</LastGenOutput>
     </Content>
     <Content Include="Presentacion\Cotizacion.aspx" />
+    <Content Include="Presentacion\CotizacionAnalista.aspx" />
     <Content Include="Presentacion\CotizacionDP.aspx" />
     <Content Include="Presentacion\CotizacionPerTotDP.aspx" />
     <Content Include="Presentacion\CotizacionPerTotRobo.aspx" />
@@ -873,6 +874,13 @@
     </Compile>
     <Compile Include="Presentacion\Cotizacion.aspx.designer.cs">
       <DependentUpon>Cotizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionAnalista.aspx.cs">
+      <DependentUpon>CotizacionAnalista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CotizacionAnalista.aspx.designer.cs">
+      <DependentUpon>CotizacionAnalista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\CotizacionDP.aspx.cs">
       <DependentUpon>CotizacionDP.aspx</DependentUpon>

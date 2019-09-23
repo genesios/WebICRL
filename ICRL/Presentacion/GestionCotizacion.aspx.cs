@@ -14,6 +14,7 @@ namespace IRCL.Presentacion
   public partial class GestionCotizacion : System.Web.UI.Page
   {
     public string vColorFilaGrid = "#E3EAEB";
+    public bool bSoloAuditor = false;
 
     private bool VerificarPagina(bool EsEvento)
     {
@@ -30,6 +31,31 @@ namespace IRCL.Presentacion
       DateTime vFechaIni = DateTime.Now;
       DateTime vFechaFin = DateTime.Now;
       if (!VerificarPagina(false)) return;
+
+      bool vAcceso = false;
+      vAcceso = FValidaRol("ICRLCotizacionAdministrador", (string[])(Session["RolesUsr"]));
+      if (!vAcceso)
+      {
+        vAcceso = FValidaRol("ICRLCotizacionUsuario", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLCotizacionAuditor", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            Response.Redirect("../Acceso/Login.aspx", false);
+          }
+          else
+          {
+            bSoloAuditor = true;
+          }
+        }
+      }
+
+      if (bSoloAuditor)
+      {
+        ButtonCreaInspeccion.Enabled = false;
+      }
+
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
         vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
@@ -52,6 +78,22 @@ namespace IRCL.Presentacion
         PBusquedaCotizaciones();
         FlTraeNomenCoberturas();
       }
+    }
+
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
     }
 
     protected void ButtonBuscarFlujo_Click(object sender, EventArgs e)

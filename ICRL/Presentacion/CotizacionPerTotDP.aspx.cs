@@ -17,6 +17,7 @@ namespace ICRL.Presentacion
   {
     public DataTable dtBeneficiario = new DataTable();
     public DataTable dtReferencia;
+    public bool bSoloAuditor = false;
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -32,6 +33,36 @@ namespace ICRL.Presentacion
       try
       {
         if (!VerificarPagina(false)) return;
+
+        bool vAcceso = false;
+        vAcceso = FValidaRol("ICRLCotizacionAdministrador", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLCotizacionUsuario", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            vAcceso = FValidaRol("ICRLCotizacionAuditor", (string[])(Session["RolesUsr"]));
+            if (!vAcceso)
+            {
+              Response.Redirect("../Acceso/Login.aspx", false);
+            }
+            else
+            {
+              bSoloAuditor = true;
+            }
+          }
+        }
+
+        if (bSoloAuditor)
+        {
+          ButtonActualizaDesdeOnBase.Enabled = false;
+          ButtonFinalizarCotizacion.Enabled = false;
+          ButtonActualizarPTDP.Enabled = false;
+          ButtonPTDPAgregar.Enabled = false;
+          ButtonReferAgregar.Enabled = false;
+          ButtonGenerarOrden.Enabled = false;
+        }
+
         int vIdFlujo = 0;
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
@@ -84,6 +115,22 @@ namespace ICRL.Presentacion
         }
         Session["MsjEstado"] = ex.Message;
       }
+    }
+
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
     }
 
     #region Principal formulario

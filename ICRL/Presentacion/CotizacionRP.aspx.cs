@@ -15,6 +15,7 @@ namespace ICRL.Presentacion
 {
   public partial class CotizacionRP : System.Web.UI.Page
   {
+    public bool bSoloAuditor = false;
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -30,6 +31,47 @@ namespace ICRL.Presentacion
       try
       {
         if (!VerificarPagina(false)) return;
+
+        bool vAcceso = false;
+        vAcceso = FValidaRol("ICRLCotizacionAdministrador", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLCotizacionUsuario", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            vAcceso = FValidaRol("ICRLCotizacionAuditor", (string[])(Session["RolesUsr"]));
+            if (!vAcceso)
+            {
+              Response.Redirect("../Acceso/Login.aspx", false);
+            }
+            else
+            {
+              bSoloAuditor = true;
+            }
+          }
+        }
+
+        if (bSoloAuditor)
+        {
+          ButtonActualizaDesdeOnBase.Enabled = false;
+          ButtonFinalizarCotizacion.Enabled = false;
+          ButtonActualizaTaller.Enabled = false;
+          ButtonRepaAgregarItem.Enabled = false;
+          ButtonRepaGenerarResumen.Enabled = false;
+          ButtonRepaCambioBenef.Enabled = false;
+          ButtonRepaGenerarOrdenes.Enabled = false;
+          ButtonRepuAgregarItem.Enabled = false;
+          ButtonRepuGenerarResumen.Enabled = false;
+          ButtonRepuCambioBenef.Enabled = false;
+          ButtonRepuGenerarOrdenes.Enabled = false;
+          ButtonRecepcionRepu.Enabled = false;
+          ButtonRepaGrabar.Enabled = false;
+          ButtonRepuGrabar.Enabled = false;
+          ButtonSumaGrabar.Enabled = false;
+          ButtonRecepGrabar.Enabled = false;
+          ButtonBenefCambiar.Enabled = false;
+        }
+
         int vIdCotizacion = 0;
         string vlNumFlujo = string.Empty;
         if (Request.QueryString["nroCoti"] != null)
@@ -145,6 +187,22 @@ namespace ICRL.Presentacion
         }
         Session["MsjEstado"] = ex.Message;
       }
+    }
+
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
     }
 
     #region Principal formulario

@@ -16,13 +16,14 @@ namespace ICRL.Presentacion
   public partial class GestionInspeccion : System.Web.UI.Page
   {
     public int gRespuestaSiNo = -1;
+    public bool bSoloAuditor = false;
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
       if (Session["NomUsr"] == null || string.IsNullOrWhiteSpace(Convert.ToString(Session["NomUsr"])))
       {
         blnRespuesta = false;
-        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx");
+        if (!EsEvento) Response.Redirect("../Acceso/Login.aspx", false);
       }
       return blnRespuesta;
     }
@@ -30,6 +31,31 @@ namespace ICRL.Presentacion
     protected void Page_Load(object sender, EventArgs e)
     {
       if (!VerificarPagina(false)) return;
+
+      bool vAcceso = false;
+      vAcceso = FValidaRol("ICRLInspeccionAdministrador", (string[])(Session["RolesUsr"]));
+      if (!vAcceso)
+      {
+        vAcceso = FValidaRol("ICRLInspeccionUsuario", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLInspeccionAuditor", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            Response.Redirect("../Acceso/Login.aspx", false);
+          }
+          else
+          {
+            bSoloAuditor = true;
+          }
+        }
+      }
+
+      if(bSoloAuditor)
+      {
+        ButtonCreaInspeccion.Enabled = false;
+      }
+
       DateTime vFechaIni = DateTime.Now;
       DateTime vFechaFin = DateTime.Now;
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
@@ -96,6 +122,21 @@ namespace ICRL.Presentacion
 
     }
 
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
+    }
 
 
     //private int FlTraeInspecciones()
@@ -230,6 +271,17 @@ namespace ICRL.Presentacion
     protected void ButtonCreaInspeccion_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
+      //bool vAcceso = false;
+      //vAcceso = FValidaRol("ICRLInspeccionAdministrador", (string[])(Session["RolesUsr"]));
+      //if (!vAcceso)
+      //{
+      //  vAcceso = FValidaRol("ICRLInspeccionUsuario", (string[])(Session["RolesUsr"]));
+      //  if (!vAcceso)
+      //  {
+      //    return;
+      //  }
+      //};
+
       Label4.Text = string.Empty;
       TextBoxPlaca.Text = string.Empty;
       if (string.Empty == TextBoxNroFlujo.Text.ToUpper())
@@ -311,6 +363,8 @@ namespace ICRL.Presentacion
     protected void ButtonBuscarFlujo_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
+      if (FValidaRol("ICRLInspeccionUsuario", (string[])(Session["RolesUsr"]))) return;
+      if (FValidaRol("ICRLInspeccionAdministrador", (string[])(Session["RolesUsr"]))) return;
       PBusquedaInspecciones();
     }
 

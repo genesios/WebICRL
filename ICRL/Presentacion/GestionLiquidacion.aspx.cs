@@ -13,6 +13,7 @@ namespace ICRL.Presentacion
 {
   public partial class GestionLiquidacion : System.Web.UI.Page
   {
+    public bool bSoloAuditor = false;
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -26,11 +27,47 @@ namespace ICRL.Presentacion
     protected void Page_Load(object sender, EventArgs e)
     {
       if (!VerificarPagina(false)) return;
+
+      bool vAcceso = false;
+      vAcceso = FValidaRol("ICRLLiquidacionAdministrador", (string[])(Session["RolesUsr"]));
+      if (!vAcceso)
+      {
+        vAcceso = FValidaRol("ICRLLiquidacionUsuario", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLLiquidacionAuditor", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            Response.Redirect("../Acceso/Login.aspx", false);
+          }
+          else
+          {
+            bSoloAuditor = true;
+          }
+        }
+      }
+
       if (!IsPostBack)
       {
         InicializarEstados();
         InicializarRangosFechaBusqueda();
       }
+    }
+
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
     }
 
     #region Eventos de Controles

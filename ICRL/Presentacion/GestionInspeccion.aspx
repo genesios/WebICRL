@@ -94,7 +94,7 @@
 
     </table>
     <div>
-        <%--<input type="button" id="btnalgo1" value="hola mudo de windows open" onclick="window.open('inspeccion.aspx?nroInsp=90');" />--%>
+        <%--<input type="button" id="btnalgo1" value="hola mundo de windows open" onclick="window.open('inspeccion.aspx?nroInsp=90');" />--%>
         <asp:GridView ID="GridViewMaster" runat="server" CellPadding="4" ForeColor="#333333"
             GridLines="None" Width="100%" AutoGenerateColumns="false" OnRowDataBound="GridViewMaster_RowDataBound" AllowPaging="True" OnPageIndexChanging="GridViewMaster_PageIndexChanging" PageSize="8">
             <AlternatingRowStyle BackColor="White" />

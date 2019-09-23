@@ -13,6 +13,8 @@ namespace ICRL.Presentacion
 {
   public partial class Inspeccion : System.Web.UI.Page
   {
+    public bool bSoloAuditor = false;
+
     private bool VerificarPagina(bool EsEvento)
     {
       bool blnRespuesta = true;
@@ -26,6 +28,50 @@ namespace ICRL.Presentacion
     protected void Page_Load(object sender, EventArgs e)
     {
       if (!VerificarPagina(false)) return;
+
+      bool vAcceso = false;
+      vAcceso = FValidaRol("ICRLInspeccionAdministrador", (string[])(Session["RolesUsr"]));
+      if (!vAcceso)
+      {
+        vAcceso = FValidaRol("ICRLInspeccionUsuario", (string[])(Session["RolesUsr"]));
+        if (!vAcceso)
+        {
+          vAcceso = FValidaRol("ICRLInspeccionAuditor", (string[])(Session["RolesUsr"]));
+          if (!vAcceso)
+          {
+            Response.Redirect("../Acceso/Login.aspx", false);
+          }
+          else
+          {
+            bSoloAuditor = true;
+          }
+        }
+      }
+
+      if (bSoloAuditor)
+      {
+        ButtonActualizaDesdeOnBase.Enabled = false;
+        ButtonFinalizarInspeccion.Enabled = false;
+        ButtonNuevoDPPadre.Enabled = false;
+        ButtonGrabarDatosInspeccion.Enabled = false;
+        ButtonNuevoObj.Enabled = false;
+        ButtonNuevoObjDet.Enabled = false;
+        ButtonNuevoPer.Enabled = false;
+        ButtonNuevoPerDet.Enabled = false;
+        ButtonNuevoRP.Enabled = false;
+        ButtonFinRoboP.Enabled = false;
+        ButtonNuevoPTDP.Enabled = false;
+        ButtonGrabarPTDP.Enabled = false;
+        ButtonBorrarPTDP.Enabled = false;
+        ButtonFinPTDaniosP.Enabled = false;
+        ButtonNuevoPTRO.Enabled = false;
+        ButtonGrabarPTRO.Enabled = false;
+        ButtonBorrarPTRO.Enabled = false;
+        ButtonFinPTRobo.Enabled = false;
+        ButtonMNuevoRCV01.Enabled = false;
+
+      }
+
       try
       {
         int vIdInspeccion = 0;
@@ -182,6 +228,22 @@ namespace ICRL.Presentacion
         }
         Session["MsjEstado"] = ex.Message;
       }
+    }
+
+    public bool FValidaRol(string pRolaValidar, string[] pRoles)
+    {
+      bool vResultado = false;
+
+      foreach (var vItem in pRoles)
+      {
+        if (vItem == pRolaValidar)
+        {
+          vResultado = true;
+          break;
+        }
+      }
+
+      return vResultado;
     }
 
     #region ValidaCoberturasFlujo
@@ -976,6 +1038,12 @@ namespace ICRL.Presentacion
           (e.Row.Cells[7].Controls[0] as LinkButton).Enabled = false;
         }
 
+        if(bSoloAuditor)
+        {
+          (e.Row.Cells[7].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[2].Controls[0] as LinkButton).Enabled = false;
+        }
+
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
@@ -1664,6 +1732,12 @@ namespace ICRL.Presentacion
           (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
         }
 
+        if(bSoloAuditor)
+        {
+          (e.Row.Cells[2].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
+        }
+
         //generamos la consulta para cada fila de la grilla maestra
         string vTextoSecuencial = string.Empty;
         int vSecuencial = 0;
@@ -2078,6 +2152,12 @@ namespace ICRL.Presentacion
         }
         else
         {
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
+        }
+
+        if(bSoloAuditor)
+        {
+          (e.Row.Cells[2].Controls[0] as LinkButton).Enabled = false;
           (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
         }
 
@@ -3541,6 +3621,12 @@ namespace ICRL.Presentacion
         }
         else
         {
+          (e.Row.Cells[12].Controls[0] as LinkButton).Enabled = false;
+        }
+
+        if(bSoloAuditor)
+        {
+          (e.Row.Cells[2].Controls[0] as LinkButton).Enabled = false;
           (e.Row.Cells[12].Controls[0] as LinkButton).Enabled = false;
         }
 
