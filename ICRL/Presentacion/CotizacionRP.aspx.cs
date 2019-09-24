@@ -937,6 +937,7 @@ namespace ICRL.Presentacion
       int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
 
       FlTraeDatosDPRepuesto(vIdCotizacion);
+      FlTraeDatosRecepRepu(vIdCotizacion);
 
     }
 
@@ -980,6 +981,7 @@ namespace ICRL.Presentacion
       }
 
       FlTraeDatosDPRepuesto(vIdCotizacion);
+      FlTraeDatosRecepRepu(vIdCotizacion);
     }
 
     protected void GridViewRepuestos_SelectedIndexChanged(object sender, EventArgs e)
@@ -2491,6 +2493,7 @@ namespace ICRL.Presentacion
       //Actualizar datos de las grillas Reparacion y Repuestos
       FlTraeDatosDPReparacion(vIdCotizacion);
       FlTraeDatosDPRepuesto(vIdCotizacion);
+      FlTraeDatosRecepRepu(vIdCotizacion);
     }
 
   }

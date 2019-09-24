@@ -54,8 +54,10 @@ namespace ICRL.Presentacion
 
       if (bSoloAuditor)
       {
-        ButtonCreaInspeccion.Enabled = false;
+        //////////ButtonCreaInspeccion.Enabled = false;
       }
+
+      Label4.Text = string.Empty;
 
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
@@ -77,7 +79,7 @@ namespace ICRL.Presentacion
       if (!IsPostBack)
       {
         PBusquedaCotizaciones();
-        FlTraeNomenCoberturas();
+        //////////FlTraeNomenCoberturas();
       }
     }
 
@@ -104,23 +106,23 @@ namespace ICRL.Presentacion
       PBusquedaCotizaciones();
     }
 
-    protected void ButtonCreaCotizacion_Click(object sender, EventArgs e)
-    {
-      if (!VerificarPagina(true)) return;
-      Label4.Text = string.Empty;
-      TextBoxPlaca.Text = string.Empty;
-      if (string.Empty != TextBoxNroFlujo.Text)
-      {
-        //mostrar el Popup de selección
-        Session["PopupModalCoberturas"] = 1;
-        this.ModalPopupCoberturas.Show();
-      }
-      else
-      {
-        //mostrar mensaje de error
-        Label4.Text = "NO se puede crear una cotización sin flujo Onbase asociado";
-      }
-    }
+    ////////protected void ButtonCreaCotizacion_Click(object sender, EventArgs e)
+    ////////{
+    ////////  if (!VerificarPagina(true)) return;
+    ////////  Label4.Text = string.Empty;
+    ////////  TextBoxPlaca.Text = string.Empty;
+    ////////  if (string.Empty != TextBoxNroFlujo.Text)
+    ////////  {
+    ////////    //mostrar el Popup de selección
+    ////////    Session["PopupModalCoberturas"] = 1;
+    ////////    this.ModalPopupCoberturas.Show();
+    ////////  }
+    ////////  else
+    ////////  {
+    ////////    //mostrar mensaje de error
+    ////////    Label4.Text = "NO se puede crear una cotización sin flujo Onbase asociado";
+    ////////  }
+    ////////}
 
     protected void GridViewMaster_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -359,46 +361,25 @@ namespace ICRL.Presentacion
     {
       if (!VerificarPagina(true)) return;
       string vFilaFlujo = string.Empty;
-      string vCobertura = string.Empty;
       int vIdFlujo = 0;
+      int vIdTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
 
       var gvInspecciones = (GridView)sender;
       vFilaFlujo = gvInspecciones.SelectedRow.Cells[0].Text;
-      vCobertura = gvInspecciones.SelectedRow.Cells[1].Text;
-      vCobertura = vCobertura.Replace("&#241;", "ñ");
-
 
       int vIdCotizacion = int.Parse(vFilaFlujo);
       AccesoDatos vAccesoDatos = new AccesoDatos();
       vIdFlujo = vAccesoDatos.FTraeIdFlujoCotizacion(vIdCotizacion);
 
-      Session["NumFlujo"] = vIdFlujo;
-
-      switch (vCobertura)
+      int vResultado = 0;
+      vResultado = vAccesoDatos.FCotizacionDaniosPropiosCambiaFechaEfectiva(vIdFlujo, vIdCotizacion, vIdTipoItem);
+      if (vResultado > 0)
       {
-        case "Daños Propios":
-          Response.Redirect("~/Presentacion/CotizacionDP.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "RC Objetos":
-          Response.Redirect("~/Presentacion/CotizacionRCObj.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "RC Personas":
-          Response.Redirect("~/Presentacion/CotizacionRCPer.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "Robo Parcial":
-          Response.Redirect("~/Presentacion/CotizacionRP.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "RC Vehicular":
-          Response.Redirect("~/Presentacion/CotizacionRCVehicular.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "PT Robo":
-          Response.Redirect("~/Presentacion/CotizacionPerTotRobo.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        case "PT Danios Propios":
-          Response.Redirect("~/Presentacion/CotizacionPerTotDP.aspx?nroCoti=" + vIdCotizacion.ToString());
-          break;
-        default:
-          break;
+        Label4.Text = "Registro Enviado exitosamente";
+      }
+      else
+      {
+        Label4.Text = "Registro no pudo ser Enviado exitosamente";
       }
 
     }
@@ -475,143 +456,143 @@ namespace ICRL.Presentacion
 
     #region Creacion Cotizacion
 
-    private int FlTraeNomenCoberturas()
-    {
-      int vResultado = 0;
-      string vCategoria = "Coberturas";
-      int vOrdenCodigo = 2;
-      AccesoDatos vAccesoDatos = new AccesoDatos();
+    ////////private int FlTraeNomenCoberturas()
+    ////////{
+    ////////  int vResultado = 0;
+    ////////  string vCategoria = "Coberturas";
+    ////////  int vOrdenCodigo = 2;
+    ////////  AccesoDatos vAccesoDatos = new AccesoDatos();
 
-      DropDownListCoberturas.DataValueField = "codigo";
-      DropDownListCoberturas.DataTextField = "descripcion";
-      DropDownListCoberturas.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
-      DropDownListCoberturas.DataBind();
+    ////////  DropDownListCoberturas.DataValueField = "codigo";
+    ////////  DropDownListCoberturas.DataTextField = "descripcion";
+    ////////  DropDownListCoberturas.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+    ////////  DropDownListCoberturas.DataBind();
 
-      return vResultado;
-    }
+    ////////  return vResultado;
+    ////////}
 
-    protected void ButtonCoberturaCrear_Click(object sender, EventArgs e)
-    {
-      if (!VerificarPagina(true)) return;
-      int vResultado = 0;
-      int vTipoCobertura = 0;
-      string vIdCobertura = string.Empty;
+    ////////protected void ButtonCoberturaCrear_Click(object sender, EventArgs e)
+    ////////{
+    ////////  if (!VerificarPagina(true)) return;
+    ////////  int vResultado = 0;
+    ////////  int vTipoCobertura = 0;
+    ////////  string vIdCobertura = string.Empty;
 
-      Label4.Text = string.Empty;
-      vIdCobertura = DropDownListCoberturas.SelectedValue.ToString().Trim();
-      vTipoCobertura = int.Parse(vIdCobertura);
+    ////////  Label4.Text = string.Empty;
+    ////////  vIdCobertura = DropDownListCoberturas.SelectedValue.ToString().Trim();
+    ////////  vTipoCobertura = int.Parse(vIdCobertura);
 
-      int vResultadoFlujo = 0;
-      vResultadoFlujo = PTraeFlujoOnBase(TextBoxNroFlujo.Text.ToUpper());
-      if (1 == vResultadoFlujo)
-      {
-        vResultado = FCreaCotizacion(vTipoCobertura);
-        if (vResultado > 0)
-        {
-          Label4.Text = "Cotización creada exitosamente";
-        }
-        else
-        {
-          Label4.Text = "No se pudo crear la cotización";
-        }
-        Session["PopupModalCoberturas"] = 0;
-        this.ModalPopupCoberturas.Hide();
-      }
-      else
-      {
-        Label4.Text = "NO existe el Flujo " + TextBoxNroFlujo.Text.ToUpper() + " en OnBase, verifique";
-      }
+    ////////  int vResultadoFlujo = 0;
+    ////////  vResultadoFlujo = PTraeFlujoOnBase(TextBoxNroFlujo.Text.ToUpper());
+    ////////  if (1 == vResultadoFlujo)
+    ////////  {
+    ////////    vResultado = FCreaCotizacion(vTipoCobertura);
+    ////////    if (vResultado > 0)
+    ////////    {
+    ////////      Label4.Text = "Cotización creada exitosamente";
+    ////////    }
+    ////////    else
+    ////////    {
+    ////////      Label4.Text = "No se pudo crear la cotización";
+    ////////    }
+    ////////    Session["PopupModalCoberturas"] = 0;
+    ////////    this.ModalPopupCoberturas.Hide();
+    ////////  }
+    ////////  else
+    ////////  {
+    ////////    Label4.Text = "NO existe el Flujo " + TextBoxNroFlujo.Text.ToUpper() + " en OnBase, verifique";
+    ////////  }
 
 
-      PBusquedaCotizaciones();
-    }
+    ////////  PBusquedaCotizaciones();
+    ////////}
 
-    protected void ButtonCoberturaCancelar_Click(object sender, EventArgs e)
-    {
-      if (!VerificarPagina(true)) return;
-      Session["PopupModalCoberturas"] = 0;
-      this.ModalPopupCoberturas.Hide();
-    }
+    ////////protected void ButtonCoberturaCancelar_Click(object sender, EventArgs e)
+    ////////{
+    ////////  if (!VerificarPagina(true)) return;
+    ////////  Session["PopupModalCoberturas"] = 0;
+    ////////  this.ModalPopupCoberturas.Hide();
+    ////////}
 
-    public int FCreaCotizacion(int pTipoCobertura)
-    {
-      int vResultado = 0;
-      int vResultadoCotiFlujo = 0;
-      int vIdFlujo = 0;
-      AccesoDatos vAccesoDatos = new AccesoDatos();
-      int vTipoCobertura = 0;
-      string vCodUsuario = Session["IdUsr"].ToString();
+    //////public int FCreaCotizacion(int pTipoCobertura)
+    //////{
+    //////  int vResultado = 0;
+    //////  int vResultadoCotiFlujo = 0;
+    //////  int vIdFlujo = 0;
+    //////  AccesoDatos vAccesoDatos = new AccesoDatos();
+    //////  int vTipoCobertura = 0;
+    //////  string vCodUsuario = Session["IdUsr"].ToString();
 
-      int vIdUsuario = vAccesoDatos.FValidaExisteUsuarioICRL(vCodUsuario);
+    //////  int vIdUsuario = vAccesoDatos.FValidaExisteUsuarioICRL(vCodUsuario);
 
-      vIdFlujo = vAccesoDatos.FValidaExisteFlujoICRL(TextBoxNroFlujo.Text);
+    //////  vIdFlujo = vAccesoDatos.FValidaExisteFlujoICRL(TextBoxNroFlujo.Text);
 
-      switch (pTipoCobertura)
-      {
-        case 1:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.DaniosPropios;
-          break;
-        case 2:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCObjetos;
-          break;
-        case 3:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCPersonas;
-          break;
-        case 4:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RoboParcial;
-          break;
-        case 5:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios;
-          break;
-        case 6:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.PerdidaTotalRobo;
-          break;
-        case 7:
-          vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCVEhicular;
-          break;
-        default:
-          Label4.Text = "Error en la selección de Cobertura";
-          break;
-      }
+    //////  switch (pTipoCobertura)
+    //////  {
+    //////    case 1:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.DaniosPropios;
+    //////      break;
+    //////    case 2:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCObjetos;
+    //////      break;
+    //////    case 3:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCPersonas;
+    //////      break;
+    //////    case 4:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RoboParcial;
+    //////      break;
+    //////    case 5:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.PerdidaTotalDaniosPropios;
+    //////      break;
+    //////    case 6:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.PerdidaTotalRobo;
+    //////      break;
+    //////    case 7:
+    //////      vTipoCobertura = (int)AccesoDatos.TipoInspeccion.RCVEhicular;
+    //////      break;
+    //////    default:
+    //////      Label4.Text = "Error en la selección de Cobertura";
+    //////      break;
+    //////  }
 
-      Coti vCoti = new Coti();
-      vCoti.idUsuario = vIdUsuario;
-      vCoti.idFlujo = vIdFlujo;
-      vCoti.fechaCreacion = DateTime.Today;
-      vCoti.inspector = Session["NomUsr"].ToString();
-      vCoti.sucursal = string.Empty;
-      vCoti.idInspeccion = 0;
-      vCoti.estado = 1;
-      vCoti.tipoCobertura = vTipoCobertura;
-      vCoti.correlativo = 1;
-      vCoti.tipoTaller = string.Empty;
+    //////  Coti vCoti = new Coti();
+    //////  vCoti.idUsuario = vIdUsuario;
+    //////  vCoti.idFlujo = vIdFlujo;
+    //////  vCoti.fechaCreacion = DateTime.Today;
+    //////  vCoti.inspector = Session["NomUsr"].ToString();
+    //////  vCoti.sucursal = string.Empty;
+    //////  vCoti.idInspeccion = 0;
+    //////  vCoti.estado = 1;
+    //////  vCoti.tipoCobertura = vTipoCobertura;
+    //////  vCoti.correlativo = 1;
+    //////  vCoti.tipoTaller = string.Empty;
 
-      vResultado = vAccesoDatos.FGrabaCotiICRL(vCoti);
+    //////  vResultado = vAccesoDatos.FGrabaCotiICRL(vCoti);
 
-      CotiFlujo vCotiFlujo = new CotiFlujo();
-      vCotiFlujo.idFlujo = vIdFlujo;
-      vCotiFlujo.idUsuario = vIdUsuario;
-      vCotiFlujo.fechaCreacion = DateTime.Today;
-      vCotiFlujo.observacionesSiniestro = string.Empty;
-      vCotiFlujo.inspector = Session["NomUsr"].ToString();
-      vCotiFlujo.nombreContacto = string.Empty;
-      vCotiFlujo.telefonoContacto = string.Empty;
-      vCotiFlujo.correosDeEnvio = string.Empty;
-      vCotiFlujo.estado = 1;
-      vCotiFlujo.fechaSiniestro = DateTime.Today;
-      vCotiFlujo.correlativo = 1;
-      vCotiFlujo.usuario_modificacion = vIdUsuario;
-      vCotiFlujo.fechaModificacion = DateTime.Now;
+    //////  CotiFlujo vCotiFlujo = new CotiFlujo();
+    //////  vCotiFlujo.idFlujo = vIdFlujo;
+    //////  vCotiFlujo.idUsuario = vIdUsuario;
+    //////  vCotiFlujo.fechaCreacion = DateTime.Today;
+    //////  vCotiFlujo.observacionesSiniestro = string.Empty;
+    //////  vCotiFlujo.inspector = Session["NomUsr"].ToString();
+    //////  vCotiFlujo.nombreContacto = string.Empty;
+    //////  vCotiFlujo.telefonoContacto = string.Empty;
+    //////  vCotiFlujo.correosDeEnvio = string.Empty;
+    //////  vCotiFlujo.estado = 1;
+    //////  vCotiFlujo.fechaSiniestro = DateTime.Today;
+    //////  vCotiFlujo.correlativo = 1;
+    //////  vCotiFlujo.usuario_modificacion = vIdUsuario;
+    //////  vCotiFlujo.fechaModificacion = DateTime.Now;
 
-      //VAlidar si ya existe el registro FlujoCotizacion
-      vResultadoCotiFlujo = vAccesoDatos.FValidaExisteCotiFlujoICRL(vIdFlujo);
-      if (0 == vResultadoCotiFlujo)
-      {
-        vResultadoCotiFlujo = vAccesoDatos.FGrabaCotiFlujoICRL(vCotiFlujo);
-      }
+    //////  //VAlidar si ya existe el registro FlujoCotizacion
+    //////  vResultadoCotiFlujo = vAccesoDatos.FValidaExisteCotiFlujoICRL(vIdFlujo);
+    //////  if (0 == vResultadoCotiFlujo)
+    //////  {
+    //////    vResultadoCotiFlujo = vAccesoDatos.FGrabaCotiFlujoICRL(vCotiFlujo);
+    //////  }
 
-      return vResultado;
-    }
+    //////  return vResultado;
+    //////}
 
     int PTraeFlujoOnBase(string pNroFlujo)
     {

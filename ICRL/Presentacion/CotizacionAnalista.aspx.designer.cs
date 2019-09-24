@@ -121,15 +121,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.Button ButtonBuscarFlujo;
         
         /// <summary>
-        /// ButtonCreaInspeccion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCreaInspeccion;
-        
-        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -200,23 +191,5 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListCoberturas;
-        
-        /// <summary>
-        /// ButtonCoberturaCrear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCoberturaCrear;
-        
-        /// <summary>
-        /// ButtonCoberturaCancelar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCoberturaCancelar;
     }
 }

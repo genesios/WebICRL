@@ -786,7 +786,8 @@ namespace ICRL.Presentacion
       }
       else
       {
-        TextBoxPlaca.Text = "Flujo No encontrado";
+        //no se encontro el flujo
+        Label4.Text = "No se encontro el nro. de flujo en OnBase";
       }
       return vResultado;
     }

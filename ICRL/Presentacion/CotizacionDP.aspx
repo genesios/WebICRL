@@ -46,8 +46,51 @@
         .columnaOculta {
             display: none;
         }
+        :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select {
+            width: 95%;
+        }
+
+        .bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+            color: inherit;
+        }
+
+        .btn-group.open .dropdown-toggle {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+
+        .btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default {
+            background-color: transparent;
+            border-color: #d8d8d8;
+        }
+
+        .btn {
+            padding: 5px;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        .dropdown-menu {
+            border-radius: 0;
+        }
+
+        .form-control {
+            border-radius: 0;
+        }
+
+        .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+            top: 100%;
+            bottom: auto;
+        }
     </style>
     <script src="../Scripts/ICRL.js" type="text/javascript">></script>
+    <%--scripts adicionales para el combo box de items--%>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+    <%--scripts adicionales para el combo box de items--%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
@@ -513,8 +556,8 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server"></asp:DropDownList>
-                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
+                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
+                                    
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />
@@ -571,12 +614,13 @@
 
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepaProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepaProveedor" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepaProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
                                 </div>
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
                                     <asp:TextBox ID="TextBoxRepaFlagEd" runat="server" Visible="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -616,7 +660,7 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
                                     <asp:TextBox ID="TextBoxRepuItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
@@ -669,7 +713,7 @@
                             <td>
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
                                 </div>
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />

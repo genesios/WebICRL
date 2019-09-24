@@ -64,7 +64,7 @@
             <tr>
                 <td>
                     <asp:Button ID="ButtonBuscarFlujo" runat="server" Text="Buscar" OnClick="ButtonBuscarFlujo_Click" />
-                    <asp:Button ID="ButtonCreaInspeccion" runat="server" Text="Crear Cotización" OnClick="ButtonCreaCotizacion_Click" Visible="false"/>
+                    <%--<asp:Button ID="ButtonCreaInspeccion" runat="server" Text="Crear Cotización" OnClick="ButtonCreaCotizacion_Click" Visible="false"/>--%>
                     <asp:Label ID="Label4" runat="server" Text=""></asp:Label>
                 </td>
             </tr>
@@ -107,7 +107,7 @@
                                 <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Insp." DataFormatString="{0:dd-MM-yy}" />
                                 <asp:BoundField DataField="sumaCosto" HeaderText="Costo USD" />
                                 <asp:BoundField DataField="descEstado" HeaderText="Estado" />
-                                <asp:ButtonField Text="Enviar" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
+                                <asp:ButtonField Text="Enviar" ButtonType="Link" HeaderText="Opción" CommandName="Select" ItemStyle-CssClass="buttonlink" />
                             </Columns>
                             <EditRowStyle BackColor="#7C6F57" />
                             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -164,12 +164,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="fifty">
+                                <%--<div class="fifty">
                                     <asp:Button ID="ButtonCoberturaCrear" runat="server" Text="Crear" OnClick="ButtonCoberturaCrear_Click" />
                                 </div>
                                 <div class="fifty">
                                     <asp:Button ID="ButtonCoberturaCancelar" runat="server" Text="Cancelar" OnClick="ButtonCoberturaCancelar_Click" />
-                                </div>
+                                </div>--%>
                             </td>
                         </tr>
                     </table>

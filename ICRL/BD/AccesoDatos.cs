@@ -2942,6 +2942,37 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public int FCotizacionDaniosPropiosCambiaFechaEfectiva(int pIdFlujo, int pIdCotizacion, int pIdTipoItem)
+    {
+      int vResultado = 0;
+
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          //seleccionar los registros
+          var vAuxiliar = db.cotizacion_danios_propios.Where(dp => (dp.id_flujo == pIdFlujo) && (dp.id_cotizacion == pIdCotizacion) && (dp.id_tipo_item == pIdTipoItem));
+
+          //actualizar los registros
+          foreach (var fila in vAuxiliar)
+          {
+            fila.fecha_envio_efectivo = DateTime.Today;
+          }
+
+          //grabar los cambios
+          db.SaveChanges();
+          vResultado = 1;
+          
+        }
+      }
+      catch (Exception ex)
+      {
+        vResultado = 0;
+      }
+
+      return vResultado;
+    }
+
     public int FCotizacionDaniosPropiosCambiaEstadoSumatoria(int pIdFlujo, int pIdCotizacion, short pIdTipoItem, string pProveedor)
     {
       int vResultado = 0;
