@@ -37,19 +37,25 @@
             </Scripts>
         </asp:ScriptManager>
         <table class="basetable">
-          <tr><td>
-            <asp:Label ID="LabelUsuario" runat="server" Text="Usr: "></asp:Label>
-            <strong><asp:Label ID="Usuario" runat="server" Text=""></asp:Label></strong>
-            |
+            <tr>
+                <td>
+                    <asp:Label ID="LabelUsuario" runat="server" Text="Usr: "></asp:Label>
+                    <strong>
+                        <asp:Label ID="Usuario" runat="server" Text=""></asp:Label></strong>
+                    |
             <asp:Label ID="LabelNombre" runat="server" Text="Nombre: "></asp:Label>
-            <strong><asp:Label ID="Nombre" runat="server" Text=""></asp:Label></strong>
-            |
+                    <strong>
+                        <asp:Label ID="Nombre" runat="server" Text=""></asp:Label></strong>
+                    |
             <asp:Label ID="LabelSucursal" runat="server" Text="Sucursal: "></asp:Label>
-            <strong><asp:Label ID="Sucursal" runat="server" Text=""></asp:Label></strong>
-            |
+                    <strong>
+                        <asp:Label ID="Sucursal" runat="server" Text=""></asp:Label></strong>
+                    |
             <asp:Label ID="LabelCorreoElectronico" runat="server" Text="Correo Electrónico: "></asp:Label>
-            <strong><asp:Label ID="CorreoElectronico" runat="server" Text=""></asp:Label></strong>
-          </td></tr>
+                    <strong>
+                        <asp:Label ID="CorreoElectronico" runat="server" Text=""></asp:Label></strong>
+                </td>
+            </tr>
         </table>
         <div>
             <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -61,7 +67,7 @@
                     <asp:TreeView ID="TreeViewMenu"
                         runat="server" ImageSet="Arrows">
                         <HoverNodeStyle Font-Underline="True" />
-                        <Nodes>
+                        <%--<Nodes>
                             <asp:TreeNode Value="Inicio"
                                 NavigateUrl="~/Presentacion/Inicio.aspx"
                                 Text="Inicio"
@@ -81,12 +87,12 @@
                                 </asp:TreeNode>
                                 <asp:TreeNode Value="Liquidaciones" Text="Liquidaciones">
                                     <asp:TreeNode Value="GestionLiquidacion"
-                                      NavigateUrl="~/Presentacion/GestionLiquidacion.aspx"
-                                      Text="Gestión de Liquidaciones"></asp:TreeNode>
+                                        NavigateUrl="~/Presentacion/GestionLiquidacion.aspx"
+                                        Text="Gestión de Liquidaciones"></asp:TreeNode>
                                 </asp:TreeNode>
                             </asp:TreeNode>
-                        </Nodes>
-                        <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" HorizontalPadding="1px" NodeSpacing="0px" VerticalPadding="0px" BorderStyle="None"/>
+                        </Nodes>--%>
+                        <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" HorizontalPadding="1px" NodeSpacing="0px" VerticalPadding="0px" BorderStyle="None" />
                         <ParentNodeStyle Font-Bold="False" />
                         <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="1px" VerticalPadding="0px" />
                     </asp:TreeView>

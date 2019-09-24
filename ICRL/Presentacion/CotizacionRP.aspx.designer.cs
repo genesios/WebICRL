@@ -994,24 +994,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorRepaMontoDesc;
         
         /// <summary>
-        /// LabelRepaPrecioFinal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRepaPrecioFinal;
-        
-        /// <summary>
-        /// TextBoxRepaPrecioFinal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRepaPrecioFinal;
-        
-        /// <summary>
         /// LabelRepaProveedor control.
         /// </summary>
         /// <remarks>
@@ -1028,6 +1010,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListRepaProveedor;
+        
+        /// <summary>
+        /// LabelRepaPrecioFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRepaPrecioFinal;
+        
+        /// <summary>
+        /// TextBoxRepaPrecioFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxRepaPrecioFinal;
         
         /// <summary>
         /// LabelRepaIdItem control.

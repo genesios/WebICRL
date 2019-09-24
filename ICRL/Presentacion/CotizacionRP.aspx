@@ -5,6 +5,16 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
+    <script src="../Scripts/ICRL.js"></script>
+
+    <%--scripts adicionales para el combo box de items--%>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+    <%--scripts adicionales para el combo box de items--%>
+
     <style type="text/css">
         .collapsed-row {
             display: none;
@@ -52,14 +62,7 @@
             bottom: auto;
         }
     </style>
-    <script src="../Scripts/ICRL.js"></script>
-    <%--scripts adicionales para el combo box de items--%>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
-    <%--scripts adicionales para el combo box de items--%>
+    
 
 
 </asp:Content>
@@ -548,11 +551,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="twenty">
+                                <div class="twentyfive">
                                     <asp:Label ID="LabelRepaMoneda" runat="server" Text="Moneda"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaMoneda" runat="server"></asp:DropDownList>
                                 </div>
-                                <div class="twenty">
+                                <div class="twentyfive">
                                     <asp:Label ID="LabelPrecioCotizadoRepa" runat="server" Text="Precio Cotizado"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaPrecioCotizado" runat="server" Text="0"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidadorRepaMonto" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepaPrecioCotizado" CssClass="errormessage"></asp:RequiredFieldValidator>
@@ -562,11 +565,11 @@
                                         ValidationExpression="^[0-9]*\.?[0-9]*$">
                                     </asp:RegularExpressionValidator>
                                 </div>
-                                <div class="twenty">
+                                <div class="twentyfive">
                                     <asp:Label ID="LabelRepaTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaTipoDesc" runat="server"></asp:DropDownList>
                                 </div>
-                                <div class="twenty">
+                                <div class="twentyfive">
                                     <asp:Label ID="LabelRepaMontoDesc" runat="server" Text="Monto Descuento"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaMontoDesc" runat="server" Text="0"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidadorRepaMontoDesc" runat="server" ErrorMessage="*" ControlToValidate="TextBoxRepaMontoDesc" CssClass="errormessage"></asp:RequiredFieldValidator>
@@ -576,20 +579,19 @@
                                         ValidationExpression="^[0-9]*\.?[0-9]*$">
                                     </asp:RegularExpressionValidator>
                                 </div>
-                                <div class="twenty">
-                                    <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Text="0" Enabled="false"></asp:TextBox>
-                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                <div class="fifty">
+                                <div class="thirty">
                                     <asp:Label ID="LabelRepaProveedor" runat="server" Text="Proveedores"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListRepaProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
                                 </div>
-                                <div class="fifty">
+                                <div class="thirty">
+                                    <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final" Visible="false" ></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Text="0" Enabled="false" Visible="false" ></asp:TextBox>
+                                </div>
+                                <div class="thirty">
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
                                     <asp:TextBox ID="TextBoxRepaFlagEd" runat="server" Visible="false"></asp:TextBox>

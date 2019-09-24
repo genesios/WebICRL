@@ -7,31 +7,129 @@ using System.Web.UI.WebControls;
 
 namespace IRCL
 {
-    public partial class SitioICRL : System.Web.UI.MasterPage
+  public partial class SitioICRL : System.Web.UI.MasterPage
+  {
+    protected void Page_Load(object sender, EventArgs e)
     {
-        protected void Page_Load(object sender, EventArgs e)
+      if (Session["IdUsr"] != null)
+      {
+        Usuario.Text = Session["IdUsr"].ToString();
+      }
+
+      if (Session["NomUsr"] != null)
+      {
+        Nombre.Text = Session["NomUsr"].ToString();
+      }
+
+      if (Session["CorreoUsr"] != null)
+      {
+        CorreoElectronico.Text = Session["CorreoUsr"].ToString();
+      }
+
+      if (Session["SucursalUsr"] != null)
+      {
+        Sucursal.Text = Session["SucursalUsr"].ToString();
+      }
+
+      if (!IsPostBack)
+      {
+        TreeNode vNodoNuevo;
+        TreeNode vSubNodoNuevo;
+        bool vRolInspeccion = false;
+        bool vRolCotizacion = false;
+        bool vRolLiquidacion = false;
+
+        //nodo Inicio
+        vNodoNuevo = new TreeNode
         {
-            if (Session["IdUsr"] != null)
+          Value = "Inicio",
+          Text = "Inicio",
+          NavigateUrl = "~/Presentacion/Inicio.aspx"
+        };
+
+        TreeViewMenu.Nodes.Add(vNodoNuevo);
+
+        if (null != Session["RolesUsr"])
+        {
+          foreach (var vRol in (string[])Session["RolesUsr"])
+          {
+            if (("ICRLInspeccion" == vRol.Substring(0, 14)) && (!vRolInspeccion))
             {
-                Usuario.Text = Session["IdUsr"].ToString();
+              //nodo Inspecciones
+              vNodoNuevo = new TreeNode
+              {
+                Value = "Inspecciones",
+                Text = "Inspecciones",
+              };
+
+              TreeViewMenu.Nodes.Add(vNodoNuevo);
+              //cargar los subnodos
+              vSubNodoNuevo = new TreeNode
+              {
+                Value = "GestionInspeccion",
+                Text = "Gestión de Inspecciones",
+                NavigateUrl = "~/Presentacion/GestionInspeccion.aspx"
+              };
+
+              vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
+              vRolInspeccion = true;
             }
 
-            if (Session["NomUsr"] != null)
+            if (("ICRLCotizacion" == vRol.Substring(0, 14)) && (!vRolCotizacion))
             {
-                Nombre.Text = Session["NomUsr"].ToString();
+              //nodo Cotizaciones
+              vNodoNuevo = new TreeNode
+              {
+                Value = "Cotizaciones",
+                Text = "Cotizaciones",
+              };
+
+              TreeViewMenu.Nodes.Add(vNodoNuevo);
+              //cargar los subnodos
+              vSubNodoNuevo = new TreeNode
+              {
+                Value = "GestionCotizacion",
+                Text = "Gestión de de Cotizaciones",
+                NavigateUrl = "~/Presentacion/GestionCotizacion.aspx"
+              };
+
+              vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
+              vSubNodoNuevo = new TreeNode
+              {
+                Value = "CotizacionAnalista",
+                Text = "Cotización Analista",
+                NavigateUrl = "~/Presentacion/CotizacionAnalista.aspx"
+              };
+
+              vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
+              vRolCotizacion = true;
             }
 
-            if (Session["CorreoUsr"] != null)
+            if (("ICRLLiquidacion" == vRol.Substring(0, 15)) && (!vRolLiquidacion))
             {
-                CorreoElectronico.Text = Session["CorreoUsr"].ToString();
-            }
+              //nodo Liquidaciones
+              vNodoNuevo = new TreeNode
+              {
+                Value = "Liquidaciones",
+                Text = "Liquidaciones",
+                //NavigateUrl = "~/Presentacion/Inicio.asp"
+              };
 
-            if (Session["SucursalUsr"] != null)
-            {
-                Sucursal.Text = Session["SucursalUsr"].ToString();
-            }
-            
+              TreeViewMenu.Nodes.Add(vNodoNuevo);
+              //cargar los subnodos
+              vSubNodoNuevo = new TreeNode
+              {
+                Value = "GestionLiquidacion",
+                Text = "Gestión de Liquidaciones",
+                NavigateUrl = "~/Presentacion/GestionLiquidacion.aspx"
+              };
 
+              vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
+              vRolLiquidacion = true;
+            }
+          }
         }
+      }
     }
+  }
 }

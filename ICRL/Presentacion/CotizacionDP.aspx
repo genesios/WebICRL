@@ -5,6 +5,15 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Contenidohead" runat="server">
+    <script src="../Scripts/ICRL.js" type="text/javascript">></script>
+
+    <%--scripts adicionales para el combo box de items--%>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+    <%--scripts adicionales para el combo box de items--%>
     <%--    <script type="text/javascript">
         function ConfirmarActualizarOnBase() {
             var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
@@ -36,6 +45,7 @@
             }
         }
     </script>--%>
+
     <style type="text/css">
         .collapsed-row {
             display: none;
@@ -46,6 +56,7 @@
         .columnaOculta {
             display: none;
         }
+
         :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select {
             width: 95%;
         }
@@ -83,14 +94,7 @@
             bottom: auto;
         }
     </style>
-    <script src="../Scripts/ICRL.js" type="text/javascript">></script>
-    <%--scripts adicionales para el combo box de items--%>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
-    <%--scripts adicionales para el combo box de items--%>
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContenidoPaginas" runat="server">
