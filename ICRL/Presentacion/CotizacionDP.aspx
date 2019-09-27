@@ -519,9 +519,9 @@
                                 <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
-                                <asp:ButtonField CommandName="Imprimir" ButtonType="Button" HeaderText="Opción" Text="Imp" />
-                                <asp:ButtonField CommandName="Ver" ButtonType="Button" HeaderText="Opción" Text="Ver" />
-                                <asp:ButtonField CommandName="SubirOnBase" ButtonType="Button" HeaderText="Opción" Text="On Base" />
+                                <asp:ButtonField CommandName="Imprimir" ButtonType="Link" HeaderText="Opción" Text="Imp" ItemStyle-CssClass="buttonlink"  />
+                                <asp:ButtonField CommandName="Ver" ButtonType="Link" HeaderText="Opción" Text="Ver" ItemStyle-CssClass="buttonlink"  />
+                                <asp:ButtonField CommandName="SubirOnBase" ButtonType="Link" HeaderText="Opción" Text="On Base" ItemStyle-CssClass="buttonlink"  />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
                             <RowStyle CssClass="grid_row alt3" />
