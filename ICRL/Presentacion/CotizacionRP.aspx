@@ -14,7 +14,37 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
     <%--scripts adicionales para el combo box de items--%>
+    <script type="text/javascript">
+        function ConfirmarActualizarOnBase() {
+            var resultado = confirm('¿Se actualizará los datos desde OnBase, esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        //ConfirmarFinalizarFlujoOnBase()
+        function ConfirmarFinalizarFlujoOnBase() {
+            var resultado = confirm('¿Se Finalizará el Flujo , esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
+        function ConfirmarFinalizarCotizacion() {
+            var resultado = confirm('¿Se Finalizará la cotización, esta seguro ?');
+            if (resultado) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
     <style type="text/css">
         .collapsed-row {
             display: none;
@@ -25,6 +55,7 @@
         .columnaOculta {
             display: none;
         }
+
         :not([class*=col-]):not(.input-group-btn):not([class*=form-control]).bootstrap-select {
             width: 95%;
         }
@@ -62,7 +93,7 @@
             bottom: auto;
         }
     </style>
-    
+
 
 
 </asp:Content>
@@ -110,7 +141,7 @@
                             <asp:Button ID="ButtonActualizaDesdeOnBase" runat="server" Text="Actualizar desde OnBase" OnClientClick="return ConfirmarActualizarOnBase();" />
                             <asp:Label ID="LabelMsjGeneral" runat="server" Text=""></asp:Label>
                         </td>
-                        <td  style="text-align: right">
+                        <td style="text-align: right">
                             <asp:Button ID="ButtonFinalizarCotizacion" runat="server" Text="Finalizar Flujo Cotización" OnClientClick="return ConfirmarFinalizarFlujoOnBase();" OnClick="ButtonFinalizarCotizacion_Click" />
                         </td>
                     </tr>
@@ -491,9 +522,9 @@
                                 <asp:BoundField DataField="descuento_proveedor" HeaderText="Descuento" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
-                                <asp:ButtonField CommandName="Imprimir" ButtonType="Link" HeaderText="Opción" Text="Imp"  ItemStyle-CssClass="buttonlink"  />
-                                <asp:ButtonField CommandName="Ver" ButtonType="Link" HeaderText="Opción" Text="Ver"  ItemStyle-CssClass="buttonlink"  />
-                                <asp:ButtonField CommandName="SubirOnBase" ButtonType="Link" HeaderText="Opción" Text="On Base"  ItemStyle-CssClass="buttonlink"  />
+                                <asp:ButtonField CommandName="Imprimir" ButtonType="Link" HeaderText="Opción" Text="Imp" ItemStyle-CssClass="buttonlink" />
+                                <asp:ButtonField CommandName="Ver" ButtonType="Link" HeaderText="Opción" Text="Ver" ItemStyle-CssClass="buttonlink" />
+                                <asp:ButtonField CommandName="SubirOnBase" ButtonType="Link" HeaderText="Opción" Text="On Base" ItemStyle-CssClass="buttonlink" />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
                             <RowStyle CssClass="grid_row alt3" />
@@ -532,7 +563,7 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                     <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
@@ -585,11 +616,11 @@
                             <td>
                                 <div class="thirty">
                                     <asp:Label ID="LabelRepaProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepaProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepaProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                 </div>
                                 <div class="thirty">
-                                    <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final" Visible="false" ></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Text="0" Enabled="false" Visible="false" ></asp:TextBox>
+                                    <asp:Label ID="LabelRepaPrecioFinal" runat="server" Text="Precio Final" Visible="false"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxRepaPrecioFinal" runat="server" Text="0" Enabled="false" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="thirty">
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
@@ -634,7 +665,7 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                     <asp:TextBox ID="TextBoxRepuItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
@@ -687,7 +718,7 @@
                             <td>
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuProveedor" runat="server" Text="Proveedores"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepuProveedor" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
                                 </div>
                                 <div class="fifty">
                                     <asp:Label ID="LabelRepuIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />

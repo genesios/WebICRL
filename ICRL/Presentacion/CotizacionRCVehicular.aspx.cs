@@ -1825,22 +1825,39 @@ namespace ICRL.Presentacion
         vEstado = int.Parse(vEstadoCadena);
         if (1 == vEstado)
         {
-          (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
-          //validar si el Proveedor es Benficiario
+          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = true;
+          //validar si el Proveedor es Beneficiario
           string vNombreProveedor = string.Empty;
           vNombreProveedor = e.Row.Cells[2].Text.Trim().ToUpper();
+          vNombreProveedor = vNombreProveedor.Replace("&NBSP;", string.Empty);
           if ("BENEFICIARIO" == vNombreProveedor.ToUpper())
           {
-            (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+            (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
+          }
+          else if (string.Empty == vNombreProveedor.ToUpper())
+          {
+            (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
           }
           else
           {
-            (e.Row.Cells[11].Controls[0] as Button).Enabled = true;
+            (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = true;
+            //ConfirmarFinalizarCotizacion
+            (e.Row.Cells[11].Controls[0] as LinkButton).Attributes.Add("OnClick", "javascript:return ConfirmarFinalizarCotizacion()");
           }
         }
         else
         {
-          (e.Row.Cells[11].Controls[0] as Button).Enabled = false;
+          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
+        }
+        //validar que el campo nro_orden no este vacio, en ese caso deshabilitar los botones
+        string vNroOrden = string.Empty;
+        vNroOrden = e.Row.Cells[0].Text.Trim().ToUpper();
+        vNroOrden = vNroOrden.Replace("&NBSP;", string.Empty);
+        if (string.Empty == vNroOrden)
+        {
+          (e.Row.Cells[9].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[10].Controls[0] as LinkButton).Enabled = false;
+          (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
         }
       }
     }
