@@ -1041,7 +1041,10 @@
     <EmbeddedResource Include="Reportes\RepFormularioCotiPTRobo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCObjetos.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCPersonas.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehCompra.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehicular.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehPago.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehTrabajo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRoboParcial.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInsp.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInspDaniosPropios.rdlc" />

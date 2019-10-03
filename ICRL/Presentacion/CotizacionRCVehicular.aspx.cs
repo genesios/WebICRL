@@ -2193,7 +2193,23 @@ namespace ICRL.Presentacion
                                     };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehicular.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+        }
+      }
+
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCVehicular);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
@@ -2314,7 +2330,23 @@ namespace ICRL.Presentacion
                                     };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehicular.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+        }
+      }
+      
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCVehicular);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
@@ -2458,12 +2490,28 @@ namespace ICRL.Presentacion
                                     };
 
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-      ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehicular.rdlc";
+
+      if ("OT" == pNroOrden.Substring(0, 2))
+      {
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+      }
+      else
+      {
+        if ("OC" == pNroOrden.Substring(0, 2))
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+        }
+        else
+        {
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+        }
+      }
+
       ReportDataSource datasource1 = new ReportDataSource("DataSet1", vListaFlujo);
       ReportDataSource datasource2 = new ReportDataSource("DataSet2", vListaCotiRCVehicular);
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
       ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotiRCVehicularTercero.Distinct().ToList());
-      ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaCotiSumaRCVehicular);
+      ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaCotizacionUsuario);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);

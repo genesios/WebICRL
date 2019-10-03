@@ -1641,7 +1641,7 @@ namespace ICRL.Presentacion
 
       return vResultado;
     }
-
+    
     protected void GridViewOrdenes_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       //verificar esa rutina
