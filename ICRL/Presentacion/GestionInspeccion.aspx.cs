@@ -363,8 +363,6 @@ namespace ICRL.Presentacion
     protected void ButtonBuscarFlujo_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
-      if (FValidaRol("ICRLInspeccionUsuario", (string[])(Session["RolesUsr"]))) return;
-      if (FValidaRol("ICRLInspeccionAdministrador", (string[])(Session["RolesUsr"]))) return;
       PBusquedaInspecciones();
     }
 
@@ -725,9 +723,11 @@ namespace ICRL.Presentacion
         var vLst = from i in db.Inspeccion
                    join u in db.Usuario on i.idUsuario equals u.idUsuario
                    join f in db.Flujo on i.idFlujo equals f.idFlujo
+                   //join n in db.Nomenclador on f.estado equals new {codi = Convert.ToInt32(n.codigo) }
                    where (vNroFlujo == null || f.flujoOnBase == vNroFlujo)
                    && (vPlaca == null || f.placaVehiculo == vPlaca)
                    && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                   //&& (n.categoriaNomenclador == "Estados")
                    orderby f.flujoOnBase
                    select new
                    {

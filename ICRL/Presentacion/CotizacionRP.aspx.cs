@@ -178,6 +178,16 @@ namespace ICRL.Presentacion
             this.ModalPopupBeneficiario.Hide();
         }
 
+        if (Session["PopupTallerGen"] != null)
+        {
+          int vPopup = -1;
+          vPopup = int.Parse(Session["PopupTallerGen"].ToString());
+          if (1 == vPopup)
+            this.ModalPopupTallerGen.Show();
+          else
+            this.ModalPopupTallerGen.Hide();
+        }
+
       }
       catch (Exception ex)
       {
@@ -1141,6 +1151,7 @@ namespace ICRL.Presentacion
       if (string.Empty != vProveedor)
       {
         LabelMsjReparaciones.Text = "No se puede procesar, El proveedor " + vProveedor + " tiene registros de ambas monedas, revise por favor";
+        ButtonRepaGenerarOrdenes.Enabled = false;
       }
       else
       {
@@ -1149,6 +1160,7 @@ namespace ICRL.Presentacion
         if (vResultado)
         {
           LabelMsjReparaciones.Text = "Reparaciones sumarizadas exitosamente";
+          ButtonRepaGenerarOrdenes.Enabled = true;
         }
         else
         {
@@ -1338,6 +1350,7 @@ namespace ICRL.Presentacion
       if (string.Empty != vProveedor)
       {
         LabelMsjRepuestos.Text = "No se puede procesar, El proveedor " + vProveedor + " tiene registros de ambas monedas, revise por favor";
+        ButtonRepuGenerarOrdenes.Enabled = false;
       }
       else
       {
@@ -1346,6 +1359,7 @@ namespace ICRL.Presentacion
         if (vResultado)
         {
           LabelMsjRepuestos.Text = "Repuestos sumarizados exitosamente";
+          ButtonRepuGenerarOrdenes.Enabled = true;
         }
         else
         {
@@ -1593,7 +1607,12 @@ namespace ICRL.Presentacion
           string vNombreProveedor = string.Empty;
           vNombreProveedor = e.Row.Cells[2].Text.Trim().ToUpper();
           vNombreProveedor = vNombreProveedor.Replace("&NBSP;", string.Empty);
+          vNombreProveedor = vNombreProveedor.Replace("&#209;", "Ñ");
           if ("BENEFICIARIO" == vNombreProveedor.ToUpper())
+          {
+            (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
+          }
+          else if ("TGENERICO" == vNombreProveedor.ToUpper())
           {
             (e.Row.Cells[11].Controls[0] as LinkButton).Enabled = false;
           }
@@ -1668,6 +1687,7 @@ namespace ICRL.Presentacion
         vIndex = Convert.ToInt32(e.CommandArgument);
         vNumeroOrden = (string)GridViewOrdenes.DataKeys[vIndex].Value;
         vProveedor = GridViewOrdenes.Rows[vIndex].Cells[2].Text;
+        vProveedor = vProveedor.Replace("&#209;", "Ñ");
 
 
         //Grabar en la tabla
@@ -1714,68 +1734,86 @@ namespace ICRL.Presentacion
       int vContador = 1;
 
       ButtonRepuCambioBenef.Visible = false;
+      ButtonRepuCambioTallerGen.Visible = false;
 
       //verificar si existe un Beneficiario
       int vIndiceBenef = FValidaRepuBeneficiario();
 
-      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+      //verificar si existe un TallerGenerico
+      int vIndiceTallerGen = FValidaRepuTallerGen();
 
-      BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
-      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
-      DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
-      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
-
-      if (vIndiceDataTable >= 0)
+      if ((vIndiceBenef >= 0) && (vIndiceTallerGen >= 0))
       {
-        StringBuilder vSBNumeroOrden = new StringBuilder();
-        string vNumeroOrden = string.Empty;
-        //Completar el campo numero_orden por cada registro del dataset.
-        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
-        {
-          vNumeroOrden = string.Empty;
-          vSBNumeroOrden.Clear();
-          vSBNumeroOrden.Append("OC-");
-          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
-          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
-          vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-RP-");
-          vNumeroOrden = vIdCotizacion.ToString();
-          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
-          vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-");
-          vNumeroOrden = vContador.ToString();
-          vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
-          vNumeroOrden = vSBNumeroOrden.ToString();
-          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
-          //inicializar el estado a 1
-          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
-          vContador++;
-        }
+        LabelMsjRepuestos.Text = "NO se puede tener registros BENEFICIARIO y TGENERICO al mismo tiempo, revise por favor";
+        ButtonRepuGenerarOrdenes.Enabled = false;
+        ButtonRepuCambioBenef.Enabled = false;
+        ButtonRepuCambioTallerGen.Enabled = false;
       }
-
-      BD.CotizacionICRL.RoboParcialSumatoriaModificarTodos(vDatasetOrdenes);
-
-      //actualizamos el detalle de las ordenes generadas
-      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
-      vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
-      vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
-
-      if (vIndiceDataTable >= 0)
+      else
       {
-        AccesoDatos vAccesoDatos = new AccesoDatos();
-        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        ButtonRepuGenerarOrdenes.Enabled = true;
+        ButtonRepuCambioBenef.Enabled = true;
+        ButtonRepuCambioTallerGen.Enabled = true;
+
+        vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+        vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+        vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+
+        BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+        vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+        int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
         {
-          string vProveedor = string.Empty;
-          vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
-          vAccesoDatos.fActualizaOrdenesCotiRP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
-          vContador++;
+          StringBuilder vSBNumeroOrden = new StringBuilder();
+          string vNumeroOrden = string.Empty;
+          //Completar el campo numero_orden por cada registro del dataset.
+          for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+          {
+            vNumeroOrden = string.Empty;
+            vSBNumeroOrden.Clear();
+            vSBNumeroOrden.Append("OC-");
+            vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+            vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+            vSBNumeroOrden.Append(vNumeroOrden);
+            vSBNumeroOrden.Append("-RP-");
+            vNumeroOrden = vIdCotizacion.ToString();
+            vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+            vSBNumeroOrden.Append(vNumeroOrden);
+            vSBNumeroOrden.Append("-");
+            vNumeroOrden = vContador.ToString();
+            vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+            vNumeroOrden = vSBNumeroOrden.ToString();
+            vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+            //inicializar el estado a 1
+            vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
+            vContador++;
+          }
         }
+
+        BD.CotizacionICRL.RoboParcialSumatoriaModificarTodos(vDatasetOrdenes);
+
+        //actualizamos el detalle de las ordenes generadas
+        vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+        vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          AccesoDatos vAccesoDatos = new AccesoDatos();
+          for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+          {
+            string vProveedor = string.Empty;
+            vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+            vProveedor = vProveedor.Replace("&#209;", "Ñ");
+            vAccesoDatos.fActualizaOrdenesCotiRP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+            vContador++;
+          }
+        }
+
+        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
       }
-
-      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
-
     }
 
     protected void ButtonRepaGenerarOrdenes_Click(object sender, EventArgs e)
@@ -1787,67 +1825,86 @@ namespace ICRL.Presentacion
       int vContador = 1;
 
       ButtonRepaCambioBenef.Visible = false;
+      ButtonRepaCambioTallerGen.Visible = false;
 
       //verificar si existe un Beneficiario
       int vIndiceBenef = FValidaRepaBeneficiario();
 
-      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
-      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+      //verificar si existe un TallerGenerico
+      int vIndiceTallerGen = FValidaRepaTallerGen();
 
-      BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
-      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
-      DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
-      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
-
-      if (vIndiceDataTable >= 0)
+      if ((vIndiceBenef >= 0) && (vIndiceTallerGen >= 0))
       {
-        StringBuilder vSBNumeroOrden = new StringBuilder();
-        string vNumeroOrden = string.Empty;
-        //Completar el campo numero_orden por cada registro del dataset.
-        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
-        {
-          vNumeroOrden = string.Empty;
-          vSBNumeroOrden.Clear();
-          vSBNumeroOrden.Append("OT-");
-          vNumeroOrden = TextBoxNroFlujo.Text.Trim();
-          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
-          vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-RP-");
-          vNumeroOrden = vIdCotizacion.ToString();
-          vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
-          vSBNumeroOrden.Append(vNumeroOrden);
-          vSBNumeroOrden.Append("-");
-          vNumeroOrden = vContador.ToString();
-          vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
-          vNumeroOrden = vSBNumeroOrden.ToString();
-          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
-          //inicializar el estado a 1
-          vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
-          vContador++;
-        }
+        LabelMsjReparaciones.Text = "NO se puede tener registros BENEFICIARIO y TGENERICO al mismo tiempo, revise por favor";
+        ButtonRepaGenerarOrdenes.Enabled = false;
+        ButtonRepaCambioBenef.Enabled = false;
+        ButtonRepaCambioTallerGen.Enabled = false;
       }
-
-      BD.CotizacionICRL.RoboParcialSumatoriaModificarTodos(vDatasetOrdenes);
-
-      //actualizamos el detalle de las ordenes generadas
-      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
-      vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
-      vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
-
-      if (vIndiceDataTable >= 0)
+      else
       {
-        AccesoDatos vAccesoDatos = new AccesoDatos();
-        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
-        {
-          string vProveedor = string.Empty;
-          vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
-          vAccesoDatos.fActualizaOrdenesCotiRP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
-          vContador++;
-        }
-      }
+        ButtonRepaGenerarOrdenes.Enabled = true;
+        ButtonRepaCambioBenef.Enabled = true;
+        ButtonRepaCambioTallerGen.Enabled = true;
 
-      FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+        vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+        vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+        vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+        BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+        vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+        int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          StringBuilder vSBNumeroOrden = new StringBuilder();
+          string vNumeroOrden = string.Empty;
+          //Completar el campo numero_orden por cada registro del dataset.
+          for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+          {
+            vNumeroOrden = string.Empty;
+            vSBNumeroOrden.Clear();
+            vSBNumeroOrden.Append("OT-");
+            vNumeroOrden = TextBoxNroFlujo.Text.Trim();
+            vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+            vSBNumeroOrden.Append(vNumeroOrden);
+            vSBNumeroOrden.Append("-RP-");
+            vNumeroOrden = vIdCotizacion.ToString();
+            vNumeroOrden = vNumeroOrden.PadLeft(6, '0');
+            vSBNumeroOrden.Append(vNumeroOrden);
+            vSBNumeroOrden.Append("-");
+            vNumeroOrden = vContador.ToString();
+            vSBNumeroOrden.Append(vNumeroOrden.PadLeft(2, '0'));
+            vNumeroOrden = vSBNumeroOrden.ToString();
+            vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][9] = vNumeroOrden;
+            //inicializar el estado a 1
+            vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][10] = 1;
+            vContador++;
+          }
+        }
+
+        BD.CotizacionICRL.RoboParcialSumatoriaModificarTodos(vDatasetOrdenes);
+
+        //actualizamos el detalle de las ordenes generadas
+        vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+        vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          AccesoDatos vAccesoDatos = new AccesoDatos();
+          for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+          {
+            string vProveedor = string.Empty;
+            vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+            vProveedor = vProveedor.Replace("&#209;", "Ñ");
+            vAccesoDatos.fActualizaOrdenesCotiRP(vIdFlujo, vIdCotizacion, vProveedor, vTipoItem);
+            vContador++;
+          }
+        }
+
+        FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+      }
 
     }
 
@@ -2479,6 +2536,194 @@ namespace ICRL.Presentacion
         ButtonBenefCancelar.Enabled = true;
         Session["PopupBeneficiario"] = 1;
         this.ModalPopupBeneficiario.Show();
+      }
+    }
+
+    #endregion
+
+    #region TallerGenerico
+
+    private int FValidaRepaTallerGen()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Reparacion;
+
+      BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Taller Generico
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vTaller = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          vTaller = vTaller.Replace("&#209;", "Ñ");
+          if ("TGENERICO" == vTaller.ToUpper())
+          {
+            vResultado = i;
+            ButtonRepaCambioTallerGen.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
+    private int FValidaRepuTallerGen()
+    {
+      int vResultado = -1;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = (short)CotizacionICRL.TipoItem.Repuesto;
+
+      BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+      vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+      DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+
+      int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+      if (vIndiceDataTable >= 0)
+      {
+        //Buscar un registro de Taller Generico
+        for (int i = 0; i < vDatasetOrdenes.Tables[vIndiceDataTable].Rows.Count; i++)
+        {
+          string vTaller = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[i][3].ToString();
+          vTaller = vTaller.Replace("&#209;", "Ñ");
+          if ("TGENERICO" == vTaller.ToUpper())
+          {
+            vResultado = i;
+            ButtonRepuCambioTallerGen.Visible = true;
+            break;
+          }
+        }
+      }
+
+      return vResultado;
+    }
+
+    protected void ButtonTallerGenCambiar_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIdFlujo = 0;
+      int vIdCotizacion = 0;
+      short vTipoItem = 0;
+      int vIndiceTallerGen = -1;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      vIdFlujo = int.Parse(TextBoxIdFlujo.Text); ;
+      vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoItem = short.Parse(TextBoxTallerGenTipoItem.Text);
+      vIndiceTallerGen = int.Parse(TextBoxTallerGenIndice.Text);
+
+      if (string.Empty != TextBoxTallerGen.Text)
+      {
+        //Cambiar el nombre del Taller Genérico en la tabla de Sumatorias
+        BD.CotizacionICRL.TipoRoboParcialSumatoriaTraer vTipoRoboParcialSumatoriaTraer;
+        vTipoRoboParcialSumatoriaTraer = CotizacionICRL.RoboParcialSumatoriaTraer(vIdFlujo, vIdCotizacion, vTipoItem);
+        DataSet vDatasetOrdenes = vTipoRoboParcialSumatoriaTraer.dsRoboParcialSumatoria;
+        int vIndiceDataTable = vDatasetOrdenes.Tables.Count - 1;
+
+        if (vIndiceDataTable >= 0)
+        {
+          //Actualizar el registro de TallerGen
+
+          string vProveedor = vDatasetOrdenes.Tables[vIndiceDataTable].Rows[vIndiceTallerGen][3].ToString();
+          string vNombreTallerGen = TextBoxTallerGen.Text.ToUpper().Trim();
+          vNombreTallerGen = vNombreTallerGen.Replace("&#209;", "Ñ");
+
+          BD.CotizacionICRL.RoboParcialSumatoriaModificarTodos(vDatasetOrdenes, vNombreTallerGen);
+
+          if (1 == vTipoItem)
+          {
+            ButtonRepaCambioTallerGen.Visible = false;
+          }
+          else
+          {
+            ButtonRepuCambioTallerGen.Visible = false;
+          }
+          FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Reparacion);
+          FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Repuesto);
+          FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+
+          Session["PopupTallerGen"] = 0;
+          this.ModalPopupTallerGen.Hide();
+        }
+      }
+      else
+      {
+        //Si el nombre del Taller esta vacio no se hace el cambio
+        LabelMsjTallerGen.Text = "El nombre del Taller no puede estar vacío";
+      }
+    }
+
+    protected void ButtonTallerGenCancelar_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      ButtonTallerGenCambiar.Enabled = false;
+      ButtonTallerGenCancelar.Enabled = false;
+    }
+
+    protected void ButtonCancelPopTallerGen_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      Session["PopupTallerGen"] = 0;
+      this.ModalPopupTallerGen.Hide();
+    }
+
+    protected void ButtonRepaCambioTallerGen_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceTallerGen = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Reparacion;
+
+      LabelMsjTallerGen.Text = string.Empty;
+
+      vIndiceTallerGen = FValidaRepaTallerGen();
+      if (vIndiceTallerGen >= 0)
+      {
+        TextBoxTallerGenIndice.Text = vIndiceTallerGen.ToString();
+        TextBoxTallerGenTipoItem.Text = vTipoItem.ToString();
+        ButtonTallerGenCambiar.Enabled = true;
+        ButtonTallerGenCancelar.Enabled = true;
+        Session["PopupTallerGen"] = 1;
+        this.ModalPopupTallerGen.Show();
+      }
+    }
+
+    protected void ButtonRepuCambioTallerGen_Click(object sender, EventArgs e)
+    {
+      if (!VerificarPagina(true)) return;
+      int vIndiceTallerGen = -1;
+      int vTipoItem = (int)CotizacionICRL.TipoItem.Repuesto;
+
+      LabelMsjTallerGen.Text = string.Empty;
+
+      vIndiceTallerGen = FValidaRepuTallerGen();
+      if (vIndiceTallerGen >= 0)
+      {
+        TextBoxTallerGenIndice.Text = vIndiceTallerGen.ToString();
+        TextBoxTallerGenTipoItem.Text = vTipoItem.ToString();
+        ButtonTallerGenCambiar.Enabled = true;
+        ButtonTallerGenCancelar.Enabled = true;
+        Session["PopupTallerGen"] = 1;
+        this.ModalPopupTallerGen.Show();
       }
     }
 

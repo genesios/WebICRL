@@ -532,6 +532,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>dd/MM/yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1671,6 +1672,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2213,7 +2215,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!proveedor.Value, "DataSet2")</Value>
+                    <Value>=First(Fields!proveedor.Value, "DataSet3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2224,7 +2226,7 @@
             <Top>3.34684in</Top>
             <Left>1.22992in</Left>
             <Height>0.25in</Height>
-            <Width>1in</Width>
+            <Width>5.26002in</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>

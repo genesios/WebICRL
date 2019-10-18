@@ -112,12 +112,13 @@
                 <asp:BoundField DataField="nombreAsegurado" HeaderText="Asegurado" />
                 <asp:BoundField DataField="numeroPoliza" HeaderText="Poliza" />
                 <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
+               <%-- <asp:BoundField DataField="estado_desc" HeaderText="Estado"  ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta"  />--%>
                 <asp:TemplateField HeaderText="Doc.Identidad">
                     <ItemTemplate>
                         <%# Eval("docIdAsegurado") %>
                         <%# MyNewRow ( Eval("idFlujo") ) %>
                         <asp:GridView ID="gvInspecciones" runat="server" CellPadding="4" ForeColor="#333333"
-                            Width="80%"
+                            Width="100%"
                             GridLines="None"
                             AutoGenerateColumns="false" OnSelectedIndexChanged="GridViewgvInspecciones_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />

@@ -347,6 +347,7 @@
                                     <asp:Button ID="ButtonRepaGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepaGenerarResumen_Click" CssClass="alt2" />
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepaCambioTallerGen" runat="server" Text="Cambio Taller Genérico" OnClick="ButtonRepaCambioTallerGen_Click" Visible="false" CssClass="alt2"></asp:Button>
                                     <asp:Button ID="ButtonRepaCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepaCambioBenef_Click" Visible="false" CssClass="alt2"></asp:Button>
                                     <asp:Button ID="ButtonRepaGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepaGenerarOrdenes_Click" CssClass="alt2"></asp:Button>
                                 </td>
@@ -437,6 +438,7 @@
                                     <asp:Button ID="ButtonRepuGenerarResumen" runat="server" Text="Generar Resumen" OnClick="ButtonRepuGenerarResumen_Click" CssClass="alt1"></asp:Button>
                                 </td>
                                 <td style="text-align: right">
+                                    <asp:Button ID="ButtonRepuCambioTallerGen" runat="server" Text="Cambio Taller Genérico" OnClick="ButtonRepuCambioTallerGen_Click" Visible="false" CssClass="alt1"></asp:Button>
                                     <asp:Button ID="ButtonRepuCambioBenef" runat="server" Text="Pago a Beneficiario" OnClick="ButtonRepuCambioBenef_Click" Visible="false" CssClass="alt1"></asp:Button>
                                     <asp:Button ID="ButtonRepuGenerarOrdenes" runat="server" Text="Generar Órdenes" OnClick="ButtonRepuGenerarOrdenes_Click" CssClass="alt1"></asp:Button>
                                 </td>
@@ -903,7 +905,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="25"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxBeneficiario" runat="server" Text="" MaxLength="50"></asp:TextBox>
                                     <asp:TextBox ID="TextBoxBenefIndice" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
                                     <asp:TextBox ID="TextBoxBenefTipoItem" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
                                 </div>
@@ -918,6 +920,55 @@
                     </table>
                 </div>
                 <asp:Button ID="ButtonCancelPopBeneficiario" runat="server" Text="Cerrar" OnClick="ButtonCancelPopBeneficiario_Click" CssClass="alt2" />
+            </asp:Panel>
+        </div>
+
+        <div>
+            <asp:Button runat="server" ID="ButtonOcultoParaPopupTallerGen" Style="display: none" CssClass="alt2" />
+
+            <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupTallerGen" BehaviorID="ModalPopupTallerGenBehavior"
+                TargetControlID="ButtonOcultoParaPopupTallerGen" PopupControlID="PanelModalPopupTallerGen"
+                BackgroundCssClass="modalBackground" DropShadow="True" PopupDragHandleControlID="ModalPopupDragHandleTallerGen"
+                RepositionMode="RepositionOnWindowScroll">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="PanelModalPopupTallerGen" runat="server" CssClass="modalPopup" Width="100%">
+                <asp:Panel runat="server" ID="ModalPopupDragHandleTallerGen" CssClass="modalPopupHeader">
+                    Caso Especial Cambio Nombre Taller Genérico
+                </asp:Panel>
+                <div>
+                    <table class="basetable alt2">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <asp:Label ID="Label2" runat="server" Text="Items - Sumatoria"></asp:Label></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <asp:Label ID="LabelNombreTaller" runat="server" Text="Nombre Taller"></asp:Label>
+                                    <asp:Label ID="LabelMsjTallerGen" runat="server" Text=""></asp:Label><br />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <asp:TextBox ID="TextBoxTallerGen" runat="server" Text="" MaxLength="25"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxTallerGenIndice" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxTallerGenTipoItem" runat="server" Text="" Visible="false" Enabled="false"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonTallerGenCambiar" runat="server" Text="Cambiar" Enabled="False" OnClick="ButtonTallerGenCambiar_Click" CssClass="alt2" />
+                                <asp:Button ID="ButtonTallerGenCancelar" runat="server" Text="Cancelar" Enabled="False" OnClick="ButtonTallerGenCancelar_Click" CssClass="alt2" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <asp:Button ID="ButtonCancelPopTallerGen" runat="server" Text="Cerrar" OnClick="ButtonCancelPopTallerGen_Click" CssClass="alt2" />
             </asp:Panel>
         </div>
     </div>

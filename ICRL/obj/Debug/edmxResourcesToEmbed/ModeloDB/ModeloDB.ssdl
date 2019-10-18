@@ -998,7 +998,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     <Property Name="nombres" Type="char" MaxLength="50" />
     <Property Name="nombreVisible" Type="char" MaxLength="75" />
     <Property Name="codSucursal" Type="char" MaxLength="25" />
-    <Property Name="correoElectronico" Type="char" MaxLength="25" />
+    <Property Name="correoElectronico" Type="char" MaxLength="50" />
     <Property Name="estado" Type="int" />
     <Property Name="usuarioCreacion" Type="char" MaxLength="20" />
     <Property Name="fechaCreacion" Type="datetime" />

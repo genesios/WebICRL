@@ -680,6 +680,10 @@ namespace ICRL.BD
         {
           DaniosPropiosSumatoriaModificar(tdpFila, ProveedorNuevo);
         }
+        else if (tdpFila.proveedor.Trim().ToUpper() == "TGENERICO")
+        {
+          DaniosPropiosSumatoriaModificar(tdpFila, ProveedorNuevo);
+        }
         else
         {
           DaniosPropiosSumatoriaModificar(tdpFila);
@@ -1728,6 +1732,10 @@ namespace ICRL.BD
         {
           RCVehicularSumatoriaModificar(tdpFila,ProveedorNuevo);
         }
+        else if (tdpFila.proveedor.Trim().ToUpper() == "TGENERICO")
+        {
+          RCVehicularSumatoriaModificar(tdpFila, ProveedorNuevo);
+        }
         else
         {
           RCVehicularSumatoriaModificar(tdpFila);
@@ -2583,6 +2591,10 @@ namespace ICRL.BD
         if (tdpFila.proveedor.Trim().ToUpper() == "BENEFICIARIO")
         {
           RoboParcialSumatoriaModificar(tdpFila,ProveedorNuevo);
+        }
+        else if (tdpFila.proveedor.Trim().ToUpper() == "TGENERICO")
+        {
+          RoboParcialSumatoriaModificar(tdpFila, ProveedorNuevo);
         }
         else
         {
