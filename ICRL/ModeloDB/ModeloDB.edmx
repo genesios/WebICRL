@@ -897,7 +897,7 @@ warning 6002: The table/view 'LBCDesa.dbo.ItemPrecios' does not have a primary k
           <Property Name="numero_orden" Type="varchar" MaxLength="50" />
           <Property Name="fecha_orden" Type="datetime" />
           <Property Name="proveedor" Type="varchar" MaxLength="150" />
-          <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
           <Property Name="preciobs" Type="float" />
           <Property Name="precious" Type="float" />
           <Property Name="fecha_recepcion" Type="datetime" />
@@ -2383,7 +2383,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha_orden" Type="DateTime" Precision="3" />
           <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="preciobs" Type="Double" />
           <Property Name="precious" Type="Double" />
           <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />

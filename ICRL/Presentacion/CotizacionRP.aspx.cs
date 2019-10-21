@@ -1945,8 +1945,8 @@ namespace ICRL.Presentacion
       var vListaCotiRoboParcial = from c in db.cotizacion_robo_parcial
                                     join f in db.Flujo on c.id_flujo equals f.idFlujo
                                     where (c.numero_orden == pNroOrden)
-                                    orderby c.item_descripcion
-                                    select new
+                                    orderby c.id_item
+                                  select new
                                     {
                                       f.nombreAsegurado,
                                       f.telefonocelAsegurado,
@@ -2064,7 +2064,7 @@ namespace ICRL.Presentacion
       var vListaCotiRoboParcial = from c in db.cotizacion_robo_parcial
                                   join f in db.Flujo on c.id_flujo equals f.idFlujo
                                   where (c.numero_orden == pNroOrden)
-                                  orderby c.item_descripcion
+                                  orderby c.id_item
                                   select new
                                   {
                                     f.nombreAsegurado,
@@ -2206,7 +2206,7 @@ namespace ICRL.Presentacion
       var vListaCotiRoboParcial = from c in db.cotizacion_robo_parcial
                                   join f in db.Flujo on c.id_flujo equals f.idFlujo
                                   where (c.numero_orden == pNroOrden)
-                                  orderby c.item_descripcion
+                                  orderby c.id_item
                                   select new
                                   {
                                     f.nombreAsegurado,

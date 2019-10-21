@@ -854,7 +854,7 @@
     <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="fecha_orden" Type="DateTime" Precision="3" />
     <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="item_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="preciobs" Type="Double" />
     <Property Name="precious" Type="Double" />
     <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
@@ -951,7 +951,7 @@
     <Property Name="nombres" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
     <Property Name="nombreVisible" Type="String" MaxLength="75" FixedLength="true" Unicode="false" />
     <Property Name="codSucursal" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="correoElectronico" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="correoElectronico" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
     <Property Name="estado" Type="Int32" />
     <Property Name="usuarioCreacion" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="fechaCreacion" Type="DateTime" Precision="3" />

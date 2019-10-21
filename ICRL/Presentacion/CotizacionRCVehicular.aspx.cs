@@ -2181,7 +2181,7 @@ namespace ICRL.Presentacion
       var vListaCotiRCVehicular = from c in db.cotizacion_rc_vehicular
                                   join f in db.Flujo on c.id_flujo equals f.idFlujo
                                   where (c.numero_orden == pNroOrden)
-                                  orderby c.item_descripcion
+                                  orderby c.id_item
                                   select new
                                   {
                                     f.nombreAsegurado,
@@ -2318,7 +2318,7 @@ namespace ICRL.Presentacion
       var vListaCotiRCVehicular = from c in db.cotizacion_rc_vehicular
                                   join f in db.Flujo on c.id_flujo equals f.idFlujo
                                   where (c.numero_orden == pNroOrden)
-                                  orderby c.item_descripcion
+                                  orderby c.id_item
                                   select new
                                   {
                                     f.nombreAsegurado,
@@ -2478,7 +2478,7 @@ namespace ICRL.Presentacion
       var vListaCotiRCVehicular = from c in db.cotizacion_rc_vehicular
                                   join f in db.Flujo on c.id_flujo equals f.idFlujo
                                   where (c.numero_orden == pNroOrden)
-                                  orderby c.item_descripcion
+                                  orderby c.id_item
                                   select new
                                   {
                                     f.nombreAsegurado,

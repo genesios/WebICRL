@@ -595,7 +595,7 @@
                                     <asp:RegularExpressionValidator ID="RegExValidatorRepaMonto"
                                         runat="server" ErrorMessage="Verifique el formato del  monto"
                                         ControlToValidate="TextBoxRepaPrecioCotizado" CssClass="errormessage"
-                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                        ValidationExpression="^-?[0-9]*\.?[0-9]*$">
                                     </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twentyfive">
@@ -693,7 +693,7 @@
                                     <asp:RegularExpressionValidator ID="RegExValidatorRepuMonto"
                                         runat="server" ErrorMessage="Verifique el formato del  monto"
                                         ControlToValidate="TextBoxRepuPrecioCotizado" CssClass="errormessage"
-                                        ValidationExpression="^[0-9]*\.?[0-9]*$">
+                                        ValidationExpression="^-?[0-9]*\.?[0-9]*$">
                                     </asp:RegularExpressionValidator>
                                 </div>
                                 <div class="twenty">

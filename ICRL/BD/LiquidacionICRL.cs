@@ -281,7 +281,7 @@ namespace ICRL.BD
         sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = Liquidacion.numero_orden;
         sqlComando.Parameters.Add("@fecha_orden", System.Data.SqlDbType.DateTime).Value = Liquidacion.fecha_orden;
         sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = Liquidacion.proveedor;
-        sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 50).Value = Liquidacion.item_descripcion;
+        sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 150).Value = Liquidacion.item_descripcion;
         sqlComando.Parameters.Add("@preciobs", System.Data.SqlDbType.Float).Value = Liquidacion.preciobs;
         sqlComando.Parameters.Add("@precious", System.Data.SqlDbType.Float).Value = Liquidacion.precious;
         sqlComando.Parameters.Add("@fecha_recepcion", System.Data.SqlDbType.DateTime).Value = Liquidacion.fecha_recepcion;
@@ -395,7 +395,7 @@ namespace ICRL.BD
         sqlComando.Parameters.Add("@numero_orden", System.Data.SqlDbType.VarChar, 50).Value = Liquidacion.numero_orden;
         sqlComando.Parameters.Add("@fecha_orden", System.Data.SqlDbType.DateTime).Value = Liquidacion.fecha_orden;
         sqlComando.Parameters.Add("@proveedor", System.Data.SqlDbType.VarChar, 150).Value = Liquidacion.proveedor;
-        sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 50).Value = Liquidacion.item_descripcion;
+        sqlComando.Parameters.Add("@item_descripcion", System.Data.SqlDbType.VarChar, 150).Value = Liquidacion.item_descripcion;
         sqlComando.Parameters.Add("@preciobs", System.Data.SqlDbType.Float).Value = Liquidacion.preciobs;
         sqlComando.Parameters.Add("@precious", System.Data.SqlDbType.Float).Value = Liquidacion.precious;
         sqlComando.Parameters.Add("@fecha_recepcion", System.Data.SqlDbType.DateTime).Value = Liquidacion.fecha_recepcion;

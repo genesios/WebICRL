@@ -1443,6 +1443,17 @@ namespace ICRL.Presentacion
       vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
       vInspDaniosPropios.observaciones = TextBoxObservaciones.Text.ToUpper().Trim();
 
+      //validacion de selección
+      if( (string.Empty == vInspDaniosPropios.chaperio) && (!vInspDaniosPropios.mecanico) && (string.Empty == vInspDaniosPropios.compra) )
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
+
       int vResultado = vAccesodatos.FGrabaInspDaniosPropiosICRL(vInspDaniosPropios);
 
       if (vResultado > 0)
@@ -1468,6 +1479,17 @@ namespace ICRL.Presentacion
       vInspDaniosPropios.reparacionPrevia = DropDownListRepPrevia.SelectedItem.Text;
       vInspDaniosPropios.observaciones = TextBoxObservaciones.Text.ToUpper().Trim();
       vInspDaniosPropios.nro_item = long.Parse(TextBoxNroItem.Text);
+
+      //validacion de selección
+      if ((string.Empty == vInspDaniosPropios.chaperio) && (!vInspDaniosPropios.mecanico) && (string.Empty == vInspDaniosPropios.compra))
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
 
       int vResultado = vAccesodatos.FActualizaInspDaniosPropiosICRL(vInspDaniosPropios);
 
@@ -2663,6 +2685,17 @@ namespace ICRL.Presentacion
       //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
       vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text.ToUpper().Trim();
 
+      //validacion de selección
+      if ((string.Empty == vInspRoboParcial.chaperio) && (!vInspRoboParcial.mecanico) && (string.Empty == vInspRoboParcial.compra))
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
+
       int vResultado = vAccesodatos.FGrabaInspRoboParcialICRL(vInspRoboParcial);
 
       if (vResultado > 0)
@@ -2691,6 +2724,17 @@ namespace ICRL.Presentacion
       //vInspRoboParcial.reparacionPrevia = TextBoxRepPreviaRP.Text;
       vInspRoboParcial.observaciones = TextBoxObservacionesRP.Text.ToUpper().Trim();
       vInspRoboParcial.nro_item = long.Parse(TextBoxNroItemRP.Text);
+
+      //validacion de selección
+      if ((string.Empty == vInspRoboParcial.chaperio) && (!vInspRoboParcial.mecanico) && (string.Empty == vInspRoboParcial.compra))
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
 
       int vResultado = vAccesodatos.FActualizaInspRoboParcialICRL(vInspRoboParcial);
 
@@ -4198,6 +4242,17 @@ namespace ICRL.Presentacion
       vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedItem.Text.Trim();
       vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text.ToUpper().Trim();
 
+      //validacion de selección
+      if ((string.Empty == vInspRCVDet.chaperio) && (!vInspRCVDet.mecanico) && (string.Empty == vInspRCVDet.compra))
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
+
       int vResultado = vAccesodatos.FGrabaInspRCV01DetICRL(vInspRCVDet);
 
       if (vResultado > 0)
@@ -4224,6 +4279,17 @@ namespace ICRL.Presentacion
       vInspRCVDet.reparacionPrevia = DropDownListRepPreviaRCV01.SelectedItem.Text.Trim();
       vInspRCVDet.observaciones = TextBoxObservacionesRCV01.Text.ToUpper().Trim();
       vInspRCVDet.nro_item = long.Parse(TextBoxNroItemRCV01.Text);
+
+      //validacion de selección
+      if ((string.Empty == vInspRCVDet.chaperio) && (!vInspRCVDet.mecanico) && (string.Empty == vInspRCVDet.compra))
+      {
+        LabelMensaje.Text = "Debe Seleccionar por lo menos una Opcion Chaperio ó Mecánico ó Compra";
+        return;
+      }
+      else
+      {
+        LabelMensaje.Text = string.Empty;
+      }
 
       int vResultado = vAccesodatos.FActualizaInspRCV01DetICRL(vInspRCVDet);
 

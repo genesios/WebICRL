@@ -1727,7 +1727,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2777,7 +2777,7 @@
             <Top>4.16597in</Top>
             <Left>1.2306in</Left>
             <Height>0.25in</Height>
-            <Width>3.03665in</Width>
+            <Width>5.24171in</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>

@@ -2016,7 +2016,7 @@ namespace ICRL.Presentacion
       var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
                                     join f in db.Flujo on c.id_flujo equals f.idFlujo
                                     where (c.numero_orden == pNroOrden)
-                                    orderby c.item_descripcion
+                                    orderby c.id_item
                                     select new
                                     {
                                       f.nombreAsegurado,
@@ -2136,7 +2136,7 @@ namespace ICRL.Presentacion
       var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
                                     join f in db.Flujo on c.id_flujo equals f.idFlujo
                                     where (c.numero_orden == pNroOrden)
-                                    orderby c.item_descripcion
+                                    orderby c.id_item
                                     select new
                                     {
                                       f.nombreAsegurado,
@@ -2279,7 +2279,7 @@ namespace ICRL.Presentacion
       var vListaCotiDaniosPropios = from c in db.cotizacion_danios_propios
                                     join f in db.Flujo on c.id_flujo equals f.idFlujo
                                     where (c.numero_orden == pNroOrden)
-                                    orderby c.item_descripcion
+                                    orderby c.id_item
                                     select new
                                     {
                                       f.nombreAsegurado,

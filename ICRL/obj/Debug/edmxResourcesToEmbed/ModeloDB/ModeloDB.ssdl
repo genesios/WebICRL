@@ -892,7 +892,7 @@ warning 6002: The table/view 'LBCDesa.dbo.ItemPrecios' does not have a primary k
     <Property Name="numero_orden" Type="varchar" MaxLength="50" />
     <Property Name="fecha_orden" Type="datetime" />
     <Property Name="proveedor" Type="varchar" MaxLength="150" />
-    <Property Name="item_descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
     <Property Name="preciobs" Type="float" />
     <Property Name="precious" Type="float" />
     <Property Name="fecha_recepcion" Type="datetime" />
