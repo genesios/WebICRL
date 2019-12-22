@@ -562,8 +562,8 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
-
+                                    <asp:DropDownList ID="DropDownListRepaItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" AutoPostBack="True" OnSelectedIndexChanged="DropDownListRepaItem_SelectedIndexChanged" ></asp:DropDownList>
+                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepaChaperio" runat="server" Text="Chaperio"></asp:Label><br />
@@ -626,7 +626,6 @@
                                     <asp:Label ID="LabelRepaIdItem" runat="server" Text="IdItem" Visible="False"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxRepaIdItem" runat="server" Enable="false" Visible="False"></asp:TextBox>
                                     <asp:TextBox ID="TextBoxRepaFlagEd" runat="server" Visible="false"></asp:TextBox>
-                                    <asp:TextBox ID="TextBoxRepaItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>
@@ -666,7 +665,7 @@
                             <td>
                                 <div class="twentyfive">
                                     <asp:Label ID="LabelRepuItem" runat="server" Text="Item"></asp:Label><br />
-                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownListRepuItem" runat="server" class="selectpicker" data-live-search-style="begins" data-live-search="true" AutoPostBack="True" OnSelectedIndexChanged="DropDownListRepuItem_SelectedIndexChanged" ></asp:DropDownList>
                                     <asp:TextBox ID="TextBoxRepuItem" runat="server" Visible="false"></asp:TextBox>
                                 </div>
                                 <div class="twentyfive">

@@ -527,6 +527,21 @@ namespace ICRL.Presentacion
       DropDownListRepaProveedor.SelectedIndex = 0;
     }
 
+    protected void PLimpiarCamposRepaAgregar()
+    {
+      DropDownListRepaItem.SelectedIndex = 0;
+      DropDownListRepaChaperio.SelectedIndex = 0;
+      DropDownListRepaRepPrevia.SelectedIndex = 0;
+      CheckBoxRepaMecanico.Checked = false;
+      //DropDownListRepaMoneda.SelectedIndex = 0;
+      TextBoxRepaPrecioCotizado.Text = "0";
+      DropDownListRepaTipoDesc.SelectedIndex = 0;
+      TextBoxRepaMontoDesc.Text = "0";
+      TextBoxRepaPrecioFinal.Text = "0";
+      TextBoxRepaItem.Text = string.Empty;
+      //DropDownListRepaProveedor.SelectedIndex = 0;
+    }
+
     protected void ButtonRepaAgregarItem_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
@@ -567,6 +582,11 @@ namespace ICRL.Presentacion
       if ("A" == TextBoxRepaFlagEd.Text)
       {
         vTipoRCVehicular.item_descripcion = DropDownListRepaItem.SelectedItem.Text.Trim();
+
+        if (("OTRO (S)" == vTipoRCVehicular.item_descripcion) && (!string.IsNullOrWhiteSpace(TextBoxRepaItem.Text)))
+        {
+          vTipoRCVehicular.item_descripcion = TextBoxRepaItem.Text.ToUpper();
+        }
       }
       else
       {
@@ -626,7 +646,7 @@ namespace ICRL.Presentacion
         if (vResultado)
         {
           LabelRepaRegistroItems.Text = "Registro añadido exitosamente";
-          PLimpiarCamposRepa();
+          PLimpiarCamposRepaAgregar();
 
           ButtonRepaGrabar.Enabled = true;
           ButtonRepaCancelar.Enabled = true;
@@ -841,6 +861,20 @@ namespace ICRL.Presentacion
       DropDownListRepuProveedor.SelectedIndex = 0;
     }
 
+    protected void PLimpiarCamposRepuAgregar()
+    {
+      DropDownListRepuItem.SelectedIndex = 0;
+      CheckBoxRepuPintura.Checked = false;
+      CheckBoxRepuInstalacion.Checked = false;
+      //DropDownListRepuMoneda.SelectedIndex = 0;
+      TextBoxRepuPrecioCotizado.Text = "0";
+      DropDownListRepuTipoDesc.SelectedIndex = 0;
+      TextBoxRepuMontoDesc.Text = "0";
+      TextBoxRepuPrecioFinal.Text = "0";
+      TextBoxRepuItem.Text = string.Empty;
+      //DropDownListRepuProveedor.SelectedIndex = 0;
+    }
+
     protected void ButtonRepuAgregarItem_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
@@ -881,6 +915,11 @@ namespace ICRL.Presentacion
       if ("A" == TextBoxRepuFlagEd.Text)
       {
         vTipoRCVehicular.item_descripcion = DropDownListRepuItem.SelectedItem.Text.Trim();
+
+        if (("OTRO (S)" == vTipoRCVehicular.item_descripcion) && (!string.IsNullOrWhiteSpace(TextBoxRepuItem.Text)))
+        {
+          vTipoRCVehicular.item_descripcion = TextBoxRepuItem.Text.ToUpper();
+        }
       }
       else
       {
@@ -940,7 +979,7 @@ namespace ICRL.Presentacion
         if (vResultado)
         {
           LabelRepuRegistroItems.Text = "Registro añadido exitosamente";
-          PLimpiarCamposRepu();
+          PLimpiarCamposRepuAgregar();
           //PanelABMRepuestos.Enabled = false;
           ButtonRepuGrabar.Enabled = true;
           ButtonRepuCancelar.Enabled = true;
@@ -3044,6 +3083,26 @@ namespace ICRL.Presentacion
       FlTraeDatosDPReparacion(vIdCotizacion);
       FlTraeDatosDPRepuesto(vIdCotizacion);
       FlTraeDatosRecepRepu(vIdCotizacion);
+    }
+
+    protected void DropDownListRepaItem_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      string vItemSelecconado = string.Empty;
+      vItemSelecconado = DropDownListRepaItem.SelectedItem.Text.Trim();
+      if ("OTRO (S)" == vItemSelecconado.ToUpper())
+      {
+        TextBoxRepaItem.Visible = true;
+      }
+    }
+
+    protected void DropDownListRepuItem_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      string vItemSelecconado = string.Empty;
+      vItemSelecconado = DropDownListRepuItem.SelectedItem.Text.Trim();
+      if ("OTRO (S)" == vItemSelecconado.ToUpper())
+      {
+        TextBoxRepuItem.Visible = true;
+      }
     }
 
   }

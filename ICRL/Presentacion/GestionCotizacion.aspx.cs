@@ -59,13 +59,14 @@ namespace IRCL.Presentacion
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
         vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+        vFechaIni = vFechaIni.AddMonths(-5);
         TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
         TextBoxFechaIni.Text = vFechaIni.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
       }
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(30);
+        vFechaFin = vFechaIni.AddDays(180);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
         TextBoxFechaFin.Text = vFechaFin.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
       }
@@ -304,6 +305,7 @@ namespace IRCL.Presentacion
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
         vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+        vFechaIni = vFechaIni.AddMonths(-5);
         TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
       }
       else
@@ -313,7 +315,7 @@ namespace IRCL.Presentacion
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(30);
+        vFechaFin = vFechaIni.AddDays(180);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
       }
       else
@@ -425,6 +427,7 @@ namespace IRCL.Presentacion
       if (null == TextBoxFechaIni_CalendarExtender.SelectedDate)
       {
         vFechaIni = new DateTime(vFechaIni.Year, vFechaIni.Month, 1, 0, 0, 0);
+        vFechaIni = vFechaIni.AddMonths(-5);
         TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
       }
       else
@@ -434,7 +437,7 @@ namespace IRCL.Presentacion
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(30);
+        vFechaFin = vFechaIni.AddDays(180);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
       }
       else

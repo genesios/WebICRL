@@ -219,12 +219,14 @@ namespace ICRL.Presentacion
 
       if (string.IsNullOrWhiteSpace(txbFechaDesde.Text))
       {
+        hoy = hoy.AddMonths(-5);
         txbFechaDesde.Text = hoy.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
       }
 
       if (string.IsNullOrWhiteSpace(txbFechaHasta.Text))
       {
-        txbFechaHasta.Text = hoy.AddMonths(1).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        hoy = hoy.AddMonths(6);
+        txbFechaHasta.Text = hoy.AddDays(-1).ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
       }
     }
     private void RecuperarDatosOrdenesPago()

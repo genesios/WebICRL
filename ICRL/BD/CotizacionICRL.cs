@@ -1641,7 +1641,7 @@ namespace ICRL.BD
     public static bool RCVehicularSumatoriaModificar(TipoRCVehicularSumatoria RCvehicularSumatoria)
     {
       bool blnRespuesta = false;
-      string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden, [id_estado] = @id_estado, [moneda_orden] = @moneda_orden " +
+      string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden, [id_estado] = @id_estado " +
         "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
@@ -1678,7 +1678,7 @@ namespace ICRL.BD
     public static bool RCVehicularSumatoriaModificar(TipoRCVehicularSumatoria RCvehicularSumatoria,string ProveedoNuevo)
     {
       bool blnRespuesta = false;
-      string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden, [id_estado] = @id_estado, [moneda_orden] = @moneda_orden " +
+      string strComando = "UPDATE [dbo].[cotizacion_rc_vehicular_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final, [numero_orden] = @numero_orden, [id_estado] = @id_estado " +
         "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
@@ -2500,7 +2500,7 @@ namespace ICRL.BD
     public static bool RoboParcialSumatoriaModificar(TipoRoboParcialSumatoria RoboParcialSumatoria)
     {
       bool blnRespuesta = false;
-      string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final,[numero_orden] = @numero_orden,[id_estado]=@id_estado, [moneda_orden] = @moneda_orden " +
+      string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final,[numero_orden] = @numero_orden,[id_estado]=@id_estado " +
         "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
@@ -2537,7 +2537,7 @@ namespace ICRL.BD
     public static bool RoboParcialSumatoriaModificar(TipoRoboParcialSumatoria RoboParcialSumatoria,string ProveedorNuevo)
     {
       bool blnRespuesta = false;
-      string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final,[numero_orden] = @numero_orden,[id_estado]=@id_estado, [moneda_orden] = @moneda_orden " +
+      string strComando = "UPDATE [dbo].[cotizacion_robo_parcial_sumatoria] SET [proveedor] = @proveedor_nuevo, [monto_orden] = @monto_orden,[id_tipo_descuento_orden] = @id_tipo_descuento_orden,[descuento_proveedor] = @descuento_proveedor,[deducible] = @deducible, [monto_final] = @monto_final,[numero_orden] = @numero_orden,[id_estado]=@id_estado " +
         "WHERE [id_flujo] = @id_flujo AND [id_cotizacion] = @id_cotizacion AND [id_tipo_item] = @id_tipo_item AND [proveedor] = @proveedor";
       SqlConnection sqlConexion = new SqlConnection(strCadenaConexion);
       SqlCommand sqlComando = new SqlCommand(strComando, sqlConexion);
