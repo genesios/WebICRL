@@ -217,6 +217,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="tipoCobertura" Type="int" />
     <Property Name="correlativo" Type="int" />
     <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
+    <Property Name="TextoNroCotizacion" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="cotizacion_danios_propios">
     <Key>
@@ -988,6 +989,48 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     <Property Name="descripcionRol" Type="varchar" MaxLength="100" />
     <Property Name="estado" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.TEMPOLIQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TEMPOLIQ">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+    <Property Name="id_item" Type="bigint" Nullable="false" />
+    <Property Name="existe" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.TEMPOLIQ001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TEMPOLIQ001">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+    <Property Name="id_item" Type="bigint" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_orden" Type="datetime" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="preciobs" Type="float" />
+    <Property Name="precious" Type="float" />
+    <Property Name="fecha_recepcion" Type="datetime" />
+    <Property Name="inspeccion" Type="bit" />
+    <Property Name="liquidacion" Type="bit" />
+    <Property Name="num_factura" Type="varchar" MaxLength="20" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="fecha_liquidacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="idUsuario" />
@@ -1003,6 +1046,16 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     <Property Name="usuarioCreacion" Type="char" MaxLength="20" />
     <Property Name="fechaCreacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="UsuarioFirma">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="estado" Type="int" />
+    <Property Name="usuarioCreacion" Type="int" />
+    <Property Name="fechaCreacion" Type="datetime" />
+    <Property Name="firmaSello" Type="image" />
+  </EntityType>
   <EntityType Name="UsuarioRol">
     <Key>
       <PropertyRef Name="codigoRol" />
@@ -1011,6 +1064,33 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     <Property Name="codigoRol" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="fechaAsignacion" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.WLIQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="WLIQ">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="int" Nullable="false" />
+    <Property Name="id_cotizacion" Type="int" Nullable="false" />
+    <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+    <Property Name="id_item" Type="bigint" Nullable="false" />
+    <Property Name="id_tipo_item" Type="smallint" />
+    <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_orden" Type="datetime" />
+    <Property Name="proveedor" Type="varchar" MaxLength="150" />
+    <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="preciobs" Type="float" />
+    <Property Name="precious" Type="float" />
+    <Property Name="fecha_recepcion" Type="datetime" />
+    <Property Name="inspeccion" Type="bit" />
+    <Property Name="liquidacion" Type="bit" />
+    <Property Name="num_factura" Type="varchar" MaxLength="20" />
+    <Property Name="id_estado" Type="smallint" />
+    <Property Name="fecha_liquidacion" Type="datetime" />
   </EntityType>
   <Association Name="FK_COTIPERD_ASSOCIATI_COTIPERD">
     <End Role="CotiPerdidaTotal" Type="Self.CotiPerdidaTotal" Multiplicity="1" />
@@ -1401,6 +1481,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuarioFirma" EntityType="Self.UsuarioFirma" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -1449,6 +1530,57 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     [RelacionItemPrecio].[itemPrecio] AS [itemPrecio], 
     [RelacionItemPrecio].[estado] AS [estado]
     FROM [dbo].[RelacionItemPrecio] AS [RelacionItemPrecio]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TEMPOLIQ" EntityType="Self.TEMPOLIQ" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TEMPOLIQ].[id_flujo] AS [id_flujo], 
+    [TEMPOLIQ].[id_cotizacion] AS [id_cotizacion], 
+    [TEMPOLIQ].[tipo_origen] AS [tipo_origen], 
+    [TEMPOLIQ].[id_item] AS [id_item], 
+    [TEMPOLIQ].[existe] AS [existe]
+    FROM [dbo].[TEMPOLIQ] AS [TEMPOLIQ]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TEMPOLIQ001" EntityType="Self.TEMPOLIQ001" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TEMPOLIQ001].[id_flujo] AS [id_flujo], 
+    [TEMPOLIQ001].[id_cotizacion] AS [id_cotizacion], 
+    [TEMPOLIQ001].[tipo_origen] AS [tipo_origen], 
+    [TEMPOLIQ001].[id_item] AS [id_item], 
+    [TEMPOLIQ001].[id_tipo_item] AS [id_tipo_item], 
+    [TEMPOLIQ001].[numero_orden] AS [numero_orden], 
+    [TEMPOLIQ001].[fecha_orden] AS [fecha_orden], 
+    [TEMPOLIQ001].[proveedor] AS [proveedor], 
+    [TEMPOLIQ001].[item_descripcion] AS [item_descripcion], 
+    [TEMPOLIQ001].[preciobs] AS [preciobs], 
+    [TEMPOLIQ001].[precious] AS [precious], 
+    [TEMPOLIQ001].[fecha_recepcion] AS [fecha_recepcion], 
+    [TEMPOLIQ001].[inspeccion] AS [inspeccion], 
+    [TEMPOLIQ001].[liquidacion] AS [liquidacion], 
+    [TEMPOLIQ001].[num_factura] AS [num_factura], 
+    [TEMPOLIQ001].[id_estado] AS [id_estado], 
+    [TEMPOLIQ001].[fecha_liquidacion] AS [fecha_liquidacion]
+    FROM [dbo].[TEMPOLIQ001] AS [TEMPOLIQ001]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="WLIQ" EntityType="Self.WLIQ" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [WLIQ].[id_flujo] AS [id_flujo], 
+    [WLIQ].[id_cotizacion] AS [id_cotizacion], 
+    [WLIQ].[tipo_origen] AS [tipo_origen], 
+    [WLIQ].[id_item] AS [id_item], 
+    [WLIQ].[id_tipo_item] AS [id_tipo_item], 
+    [WLIQ].[numero_orden] AS [numero_orden], 
+    [WLIQ].[fecha_orden] AS [fecha_orden], 
+    [WLIQ].[proveedor] AS [proveedor], 
+    [WLIQ].[item_descripcion] AS [item_descripcion], 
+    [WLIQ].[preciobs] AS [preciobs], 
+    [WLIQ].[precious] AS [precious], 
+    [WLIQ].[fecha_recepcion] AS [fecha_recepcion], 
+    [WLIQ].[inspeccion] AS [inspeccion], 
+    [WLIQ].[liquidacion] AS [liquidacion], 
+    [WLIQ].[num_factura] AS [num_factura], 
+    [WLIQ].[id_estado] AS [id_estado], 
+    [WLIQ].[fecha_liquidacion] AS [fecha_liquidacion]
+    FROM [dbo].[WLIQ] AS [WLIQ]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
       <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />

@@ -208,6 +208,7 @@
     <Property Name="tipoCobertura" Type="Int32" />
     <Property Name="correlativo" Type="Int32" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="TextoNroCotizacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
     <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
     <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
@@ -961,6 +962,16 @@
     <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="Liquidacion" />
     <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="UsuarioRol" />
   </EntityType>
+  <EntityType Name="UsuarioFirma">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="usuarioCreacion" Type="Int32" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="firmaSello" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="UsuarioRol">
     <Key>
       <PropertyRef Name="codigoRol" />
@@ -1035,6 +1046,69 @@
     <Property Name="item" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="itemPrecio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TEMPOLIQ">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" />
+    <Property Name="existe" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TEMPOLIQ001">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="preciobs" Type="Double" />
+    <Property Name="precious" Type="Double" />
+    <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+    <Property Name="inspeccion" Type="Boolean" />
+    <Property Name="liquidacion" Type="Boolean" />
+    <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="WLIQ">
+    <Key>
+      <PropertyRef Name="id_flujo" />
+      <PropertyRef Name="id_cotizacion" />
+      <PropertyRef Name="tipo_origen" />
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_flujo" Type="Int32" Nullable="false" />
+    <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+    <Property Name="id_item" Type="Int64" Nullable="false" />
+    <Property Name="id_tipo_item" Type="Int16" />
+    <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+    <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="preciobs" Type="Double" />
+    <Property Name="precious" Type="Double" />
+    <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+    <Property Name="inspeccion" Type="Boolean" />
+    <Property Name="liquidacion" Type="Boolean" />
+    <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int16" />
+    <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
     <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
@@ -1291,12 +1365,16 @@
     <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
     <EntitySet Name="Rol" EntityType="Self.Rol" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="UsuarioFirma" EntityType="Self.UsuarioFirma" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
     <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" />
     <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" />
     <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
     <EntitySet Name="ItemPrecios" EntityType="Self.ItemPrecios" />
     <EntitySet Name="RelacionItemPrecio" EntityType="Self.RelacionItemPrecio" />
+    <EntitySet Name="TEMPOLIQ" EntityType="Self.TEMPOLIQ" />
+    <EntitySet Name="TEMPOLIQ001" EntityType="Self.TEMPOLIQ001" />
+    <EntitySet Name="WLIQ" EntityType="Self.WLIQ" />
     <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
       <End Role="Asegurado" EntitySet="Asegurado" />
       <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -1365,7 +1443,7 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
-    <FunctionImport Name="paActualizaLiquidacion001_DP">
+    <FunctionImport Name="paActualizaLiquidacion001_DP" ReturnType="Collection(LBCDesaModelo.paActualizaLiquidacion001_DP_Result)">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
       <Parameter Name="Proveedor" Mode="In" Type="String" />
@@ -1500,4 +1578,23 @@
       <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
     </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="paActualizaLiquidacion001_DP_Result">
+    <Property Type="Int32" Name="id_flujo" Nullable="false" />
+    <Property Type="Int32" Name="id_cotizacion" Nullable="false" />
+    <Property Type="Int16" Name="tipo_origen" Nullable="false" />
+    <Property Type="Int64" Name="id_item" Nullable="false" />
+    <Property Type="Int16" Name="id_tipo_item" Nullable="true" />
+    <Property Type="String" Name="numero_orden" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_orden" Nullable="true" Precision="23" />
+    <Property Type="String" Name="proveedor" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="item_descripcion" Nullable="true" MaxLength="150" />
+    <Property Type="Double" Name="preciobs" Nullable="true" />
+    <Property Type="Double" Name="precious" Nullable="true" />
+    <Property Type="DateTime" Name="fecha_recepcion" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="inspeccion" Nullable="true" />
+    <Property Type="Boolean" Name="liquidacion" Nullable="true" />
+    <Property Type="String" Name="num_factura" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="id_estado" Nullable="true" />
+    <Property Type="DateTime" Name="fecha_liquidacion" Nullable="true" Precision="23" />
+  </ComplexType>
 </Schema>

@@ -7,7 +7,7 @@ C:\Repo\Git\vs\gnesios\LBC\ArgosProxy\obj\Debug\ArgosProxy.pdb
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\bin\Debug\ArgosProxy.dll.config
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\bin\Debug\ArgosProxy.dll
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\bin\Debug\ArgosProxy.pdb
-C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Debug\ArgosProxy.csprojResolveAssemblyReference.cache
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Debug\ArgosProxy.csproj.CoreCompileInputs.cache
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Debug\ArgosProxy.dll
 C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Debug\ArgosProxy.pdb
+C:\Repo\Git\vs\gnesios\WebICRL\ArgosProxy\obj\Debug\ArgosProxy.csprojResolveAssemblyReference.cache

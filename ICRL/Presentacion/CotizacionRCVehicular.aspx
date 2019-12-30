@@ -121,23 +121,27 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="twentyfive">
+                            <div class="twenty">
                                 <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroFlujo" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="twentyfive">
+                            <div class="twenty">
                                 <asp:Label ID="LabelNroReclamo" runat="server" Text="Nro. de Reclamo"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxNroReclamo" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                            <div class="twentyfive">
+                            <div class="twenty">
                                 <asp:Label ID="LabelNroCotizacion" runat="server" Text="Nro. de Cotización"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxCorrelativo" runat="server" Enabled="False"></asp:TextBox>
                             </div>
-                            <div class="twentyfive">
+                            <div class="twenty">
                                 <asp:Label ID="LabelTipoCambio" runat="server" Text="Tipo de Cambio"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTipoCambio" runat="server" Text="6.96"></asp:TextBox>
                                 <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
                                 <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
+                            </div>
+                            <div class="twenty">
+                                <asp:Label ID="LabelNroCotizacionProveedor" runat="server" Text="Cotización Proveedor"></asp:Label>
+                                <asp:TextBox ID="TextBoxNroCotizacionProveedor" runat="server" Text=""></asp:TextBox>
                             </div>
                         </td>
                     </tr>

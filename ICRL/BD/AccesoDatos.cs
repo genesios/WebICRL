@@ -92,7 +92,7 @@ namespace ICRL.BD
           else
           {
             //no existe roles asociados Mostrar mensaje de error
-        
+
           }
           /*fin ajuste Roles*/
         }
@@ -186,6 +186,30 @@ namespace ICRL.BD
       }
 
       return vResultado;
+    }
+
+    public UsuarioICRL FTraeUsuarioICRL(int pIdUsuario)
+    {
+      UsuarioICRL vUsuarioICRL = null;
+
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        Usuario vTablaUsuario = new Usuario();
+
+        vTablaUsuario = db.Usuario.Find(pIdUsuario);
+        vUsuarioICRL = new UsuarioICRL();
+
+        vUsuarioICRL.idUsuario = vTablaUsuario.idUsuario;
+        vUsuarioICRL.codUsuario = vTablaUsuario.codUsuario;
+        vUsuarioICRL.apellidos = vTablaUsuario.apellidos;
+        vUsuarioICRL.nombres = vTablaUsuario.nombres;
+        vUsuarioICRL.nombreVisible = vTablaUsuario.nombreVisible;
+        vUsuarioICRL.codSucursal = vTablaUsuario.codSucursal;
+        vUsuarioICRL.correoElectronico = vTablaUsuario.correoElectronico;
+
+      }
+
+      return vUsuarioICRL;
     }
     #endregion
 
@@ -337,7 +361,7 @@ namespace ICRL.BD
     {
       vFlujoICRL = null;
       string vCadenaAux = string.Empty;
-      
+
       NameValueCollection vDatosSegurosConfig = new NameValueCollection();
       var vObjetoSeccion = ConfigurationManager.GetSection("DatosSeguros");
       vDatosSegurosConfig = (NameValueCollection)(vObjetoSeccion);
@@ -352,7 +376,7 @@ namespace ICRL.BD
       /*** ESTABLECER USUARIO AUTENTICACIÓN ***/
       vServicioOnBase.UsuarioAuthValue = new UsuarioAuth()
       {
-        
+
         Usuario = vDatosSegurosConfig["datosUsr"],
         Password = vDatosSegurosConfig["datosCon"]
       };
@@ -534,7 +558,7 @@ namespace ICRL.BD
             case "Descripcion1":
               vCadenaAux = string.Empty;
               vCadenaAux = vKeyword.valor;
-              if(vCadenaAux.Length>100)
+              if (vCadenaAux.Length > 100)
               {
                 vFlujoICRL.descripcionSiniestro = vCadenaAux.Substring(0, 100);
               }
@@ -695,7 +719,7 @@ namespace ICRL.BD
         vRespuesta = 1;
       }
 
-        return vRespuesta;
+      return vRespuesta;
     }
 
     public int FCambiaEstadoFlujoCotiLiq(int pFlujo)
@@ -2840,6 +2864,7 @@ namespace ICRL.BD
           vCotizacion.tipoCobertura = pCoti.tipoCobertura;
           vCotizacion.correlativo = pCoti.correlativo;
           vCotizacion.tipoTaller = pCoti.tipoTaller;
+          vCotizacion.TextoNroCotizacion = pCoti.TextoNroCotizacion;
 
           db.Cotizacion.Add(vCotizacion);
           db.SaveChanges();
@@ -2917,6 +2942,33 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
+    public int FActualizaTextoNumeroCotizacion(int pIdCotizacion, string pTextoNroCotizacion)
+    {
+      int vRespuesta = 0;
+
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          Cotizacion vCotizacion = new Cotizacion();
+
+          vCotizacion = db.Cotizacion.Find(pIdCotizacion);
+          if (null != vCotizacion)
+          {
+            vCotizacion.TextoNroCotizacion = pTextoNroCotizacion;
+            db.SaveChanges();
+            vRespuesta = 1;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        vRespuesta = 0;
+      }
+
+      return vRespuesta;
+    }
+
     public int FValidaExisteCotiFlujoICRL(int pIdFlujo)
     {
       int vRespuesta = 0;
@@ -2928,7 +2980,7 @@ namespace ICRL.BD
           CotizacionFlujo vCotizacionFlujo = new CotizacionFlujo();
 
           vCotizacionFlujo = db.CotizacionFlujo.Find(pIdFlujo);
-          if(null != vCotizacionFlujo)
+          if (null != vCotizacionFlujo)
           {
             vRespuesta = vCotizacionFlujo.idFlujo;
           }
@@ -2962,7 +3014,7 @@ namespace ICRL.BD
           //grabar los cambios
           db.SaveChanges();
           vResultado = 1;
-          
+
         }
       }
       catch (Exception ex)
@@ -3095,6 +3147,75 @@ namespace ICRL.BD
         db.SaveChanges();
 
         vResultado = 1;
+      }
+      return vResultado;
+    }
+
+    #endregion
+
+    #region FirmaSello
+
+    public ManteFirma FTraeFirmaSelloUsuario (int pIdUsuario)
+    {
+      ManteFirma vManteFirma = null;
+      using (LBCDesaEntities db = new LBCDesaEntities())
+      {
+        UsuarioFirma vFirmaSelloUsuario = new UsuarioFirma();
+
+        vFirmaSelloUsuario = db.UsuarioFirma.Find(pIdUsuario);
+
+        if (vFirmaSelloUsuario != null)
+        {
+          vManteFirma = new ManteFirma();
+
+          vManteFirma.idUsuario = vFirmaSelloUsuario.idUsuario;
+          vManteFirma.estado = Convert.ToInt32(vFirmaSelloUsuario.estado);
+          vManteFirma.usuarioCreacion = Convert.ToInt32(vFirmaSelloUsuario.usuarioCreacion);
+          vManteFirma.fechaCreacion = Convert.ToDateTime(vFirmaSelloUsuario.fechaCreacion);
+          vManteFirma.firmaSello = vFirmaSelloUsuario.firmaSello;
+        }
+
+      }
+
+      return vManteFirma;
+    }
+
+    public int FUsuarioFirmaGrabaRegistro(ManteFirma pManteFirma)
+    {
+      int vResultado = 0;
+
+      try
+      {
+        using (LBCDesaEntities db = new LBCDesaEntities())
+        {
+          UsuarioFirma vUsuarioFirma = new UsuarioFirma();
+
+          vUsuarioFirma = db.UsuarioFirma.Find(pManteFirma.idUsuario);
+          if (vUsuarioFirma != null)
+          {
+            vUsuarioFirma.firmaSello = pManteFirma.firmaSello;
+          }
+          else
+          {
+            vUsuarioFirma.idUsuario = pManteFirma.idUsuario;
+            vUsuarioFirma.estado = pManteFirma.estado;
+
+            vUsuarioFirma.usuarioCreacion = pManteFirma.usuarioCreacion;
+            vUsuarioFirma.fechaCreacion = pManteFirma.fechaCreacion;
+            vUsuarioFirma.firmaSello = pManteFirma.firmaSello;
+
+            db.UsuarioFirma.Add(vUsuarioFirma);
+          }
+                    
+          db.SaveChanges();
+
+          vResultado = 1;
+        }
+      }
+      catch (Exception ex)
+      {
+        ex.Message.ToString();
+        vResultado = 0;
       }
       return vResultado;
     }

@@ -252,7 +252,8 @@ namespace ICRL.Presentacion
                        cf.telefonoContacto,
                        c.correlativo,
                        u.nombreVisible,
-                       u.correoElectronico
+                       u.correoElectronico,
+                       c.TextoNroCotizacion
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -266,6 +267,7 @@ namespace ICRL.Presentacion
             TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro;
             TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
             TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
+            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
           }
 
         }
@@ -310,6 +312,7 @@ namespace ICRL.Presentacion
                        //tipoTaller = "Taller Tipo B",
                        u.nombreVisible,
                        u.correoElectronico,
+                       c.TextoNroCotizacion
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -336,6 +339,7 @@ namespace ICRL.Presentacion
             TextBoxNroChasis.Text = vFilaTabla.chasisVehiculo;
             TextBoxAnio.Text = vFilaTabla.anioVehiculo.ToString();
             TextBoxValorAsegurado.Text = vFilaTabla.valorAsegurado.ToString();
+            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
 
             string vTempoCadena = string.Empty;
             vTempoCadena = vFilaTabla.tipoTaller.Trim();
@@ -1216,6 +1220,7 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
@@ -1414,6 +1419,7 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void GridViewSumaRepuestos_SelectedIndexChanged(object sender, EventArgs e)
@@ -2287,21 +2293,34 @@ namespace ICRL.Presentacion
                                       u.nombreVisible
                                     };
 
+      var vListaUsuarioFirma = from cc in db.cotizacion_rc_vehicular
+                               join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                               join uf in db.UsuarioFirma on c.idUsuario equals uf.idUsuario
+                               where (cc.numero_orden == pNroOrden)
+                               select new
+                               {
+                                 uf.idUsuario,
+                                 uf.estado,
+                                 uf.usuarioCreacion,
+                                 uf.fechaCreacion,
+                                 uf.firmaSello
+                               };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
       {
-        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajoFirma.rdlc";
       }
       else
       {
         if ("OC" == pNroOrden.Substring(0, 2))
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompraFirma.rdlc";
         }
         else
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPagoFirma.rdlc";
         }
       }
 
@@ -2310,6 +2329,7 @@ namespace ICRL.Presentacion
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
       ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotiRCVehicularTercero.Distinct().ToList());
       ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaCotizacionUsuario);
+      ReportDataSource datasource6 = new ReportDataSource("DataSet6", vListaCotizacionUsuario);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
@@ -2317,6 +2337,7 @@ namespace ICRL.Presentacion
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource5);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource6);
 
       ReportViewerCoti.LocalReport.Refresh();
       byte[] VArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
@@ -2424,21 +2445,34 @@ namespace ICRL.Presentacion
                                       u.nombreVisible
                                     };
 
+      var vListaUsuarioFirma = from cc in db.cotizacion_rc_vehicular
+                               join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                               join uf in db.UsuarioFirma on c.idUsuario equals uf.idUsuario
+                               where (cc.numero_orden == pNroOrden)
+                               select new
+                               {
+                                 uf.idUsuario,
+                                 uf.estado,
+                                 uf.usuarioCreacion,
+                                 uf.fechaCreacion,
+                                 uf.firmaSello
+                               };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
       {
-        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajoFirma.rdlc";
       }
       else
       {
         if ("OC" == pNroOrden.Substring(0, 2))
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompraFirma.rdlc";
         }
         else
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPagoFirma.rdlc";
         }
       }
       
@@ -2447,6 +2481,7 @@ namespace ICRL.Presentacion
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
       ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotiRCVehicularTercero.Distinct().ToList());
       ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaCotizacionUsuario);
+      ReportDataSource datasource6 = new ReportDataSource("DataSet6", vListaUsuarioFirma);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
@@ -2454,6 +2489,7 @@ namespace ICRL.Presentacion
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource5);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource6);
 
       ReportViewerCoti.LocalReport.Refresh();
       ReportViewerCoti.ShowToolBar = false;
@@ -2584,21 +2620,34 @@ namespace ICRL.Presentacion
                                       u.nombreVisible
                                     };
 
+      var vListaUsuarioFirma = from cc in db.cotizacion_rc_vehicular
+                               join c in db.Cotizacion on cc.id_cotizacion equals c.idCotizacion
+                               join uf in db.UsuarioFirma on c.idUsuario equals uf.idUsuario
+                               where (cc.numero_orden == pNroOrden)
+                               select new
+                               {
+                                 uf.idUsuario,
+                                 uf.estado,
+                                 uf.usuarioCreacion,
+                                 uf.fechaCreacion,
+                                 uf.firmaSello
+                               };
+
       ReportViewerCoti.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
 
       if ("OT" == pNroOrden.Substring(0, 2))
       {
-        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajo.rdlc";
+        ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehTrabajoFirma.rdlc";
       }
       else
       {
         if ("OC" == pNroOrden.Substring(0, 2))
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompra.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehCompraFirma.rdlc";
         }
         else
         {
-          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPago.rdlc";
+          ReportViewerCoti.LocalReport.ReportPath = "Reportes\\RepFormularioCotiRCVehPagoFirma.rdlc";
         }
       }
 
@@ -2607,6 +2656,7 @@ namespace ICRL.Presentacion
       ReportDataSource datasource3 = new ReportDataSource("DataSet3", vListaCotiSumaRCVehicular);
       ReportDataSource datasource4 = new ReportDataSource("DataSet4", vListaCotiRCVehicularTercero.Distinct().ToList());
       ReportDataSource datasource5 = new ReportDataSource("DataSet5", vListaCotizacionUsuario);
+      ReportDataSource datasource6 = new ReportDataSource("DataSet6", vListaUsuarioFirma);
 
       ReportViewerCoti.LocalReport.DataSources.Clear();
       ReportViewerCoti.LocalReport.DataSources.Add(datasource1);
@@ -2614,6 +2664,7 @@ namespace ICRL.Presentacion
       ReportViewerCoti.LocalReport.DataSources.Add(datasource3);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource4);
       ReportViewerCoti.LocalReport.DataSources.Add(datasource5);
+      ReportViewerCoti.LocalReport.DataSources.Add(datasource6);
 
       ReportViewerCoti.LocalReport.Refresh();
       byte[] vArrayBytes = ReportViewerCoti.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
@@ -3083,6 +3134,29 @@ namespace ICRL.Presentacion
       FlTraeDatosDPReparacion(vIdCotizacion);
       FlTraeDatosDPRepuesto(vIdCotizacion);
       FlTraeDatosRecepRepu(vIdCotizacion);
+    }
+
+    //Actualizar el texto número de cotización del Proveedor
+    void ActualizarTextoNroCotizacionProveedor()
+    {
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+      int vResultado = 0;
+      int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      //Actualiza el Texto Nro Cotizacion Proveedor
+      string vTextoNroCotizacion = string.Empty;
+      vTextoNroCotizacion = TextBoxNroCotizacionProveedor.Text.ToUpper().Trim();
+      vResultado = vAccesoDatos.FActualizaTextoNumeroCotizacion(vIdCotizacion, vTextoNroCotizacion);
+
+      if (vResultado != 1)
+      {
+        //El nro de cotización NO se actualizo exitosamente
+        LabelMensaje.Text = "Número Cotización Proveedor no se pudo actualizar en cotización";
+      }
+      else
+      {
+        //El nro de cotización se actualizo exitosamente
+        LabelMensaje.Text = "";
+      }
     }
 
     protected void DropDownListRepaItem_SelectedIndexChanged(object sender, EventArgs e)

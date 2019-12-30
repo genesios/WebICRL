@@ -199,6 +199,7 @@
           <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
           <ScalarProperty Name="correlativo" ColumnName="correlativo" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+          <ScalarProperty Name="TextoNroCotizacion" ColumnName="TextoNroCotizacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -925,6 +926,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioFirma">
+      <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioFirma">
+        <MappingFragment StoreEntitySet="UsuarioFirma">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuarioCreacion" ColumnName="usuarioCreacion" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="firmaSello" ColumnName="firmaSello" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UsuarioRol">
       <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioRol">
         <MappingFragment StoreEntitySet="UsuarioRol">
@@ -992,7 +1004,86 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+    <EntitySetMapping Name="TEMPOLIQ">
+      <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ">
+        <MappingFragment StoreEntitySet="TEMPOLIQ">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="existe" ColumnName="existe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TEMPOLIQ001">
+      <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ001">
+        <MappingFragment StoreEntitySet="TEMPOLIQ001">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+          <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+          <ScalarProperty Name="precious" ColumnName="precious" />
+          <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+          <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+          <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+          <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WLIQ">
+      <EntityTypeMapping TypeName="LBCDesaModelo.WLIQ">
+        <MappingFragment StoreEntitySet="WLIQ">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+          <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+          <ScalarProperty Name="precious" ColumnName="precious" />
+          <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+          <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+          <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+          <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LBCDesaModelo.paActualizaLiquidacion001_DP_Result">
+          <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+          <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+          <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+          <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+          <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+          <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+          <ScalarProperty Name="precious" ColumnName="precious" />
+          <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+          <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+          <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+          <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
     <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />

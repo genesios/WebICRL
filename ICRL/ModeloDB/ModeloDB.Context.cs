@@ -77,14 +77,18 @@ namespace ICRL.ModeloDB
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<UsuarioFirma> UsuarioFirma { get; set; }
         public virtual DbSet<UsuarioRol> UsuarioRol { get; set; }
         public virtual DbSet<CotiRCVehicular> CotiRCVehicular { get; set; }
         public virtual DbSet<CotiRoboParcial> CotiRoboParcial { get; set; }
         public virtual DbSet<cotizacion_rc_vehicular_tercero> cotizacion_rc_vehicular_tercero { get; set; }
         public virtual DbSet<ItemPrecios> ItemPrecios { get; set; }
         public virtual DbSet<RelacionItemPrecio> RelacionItemPrecio { get; set; }
+        public virtual DbSet<TEMPOLIQ> TEMPOLIQ { get; set; }
+        public virtual DbSet<TEMPOLIQ001> TEMPOLIQ001 { get; set; }
+        public virtual DbSet<WLIQ> WLIQ { get; set; }
     
-        public virtual int paActualizaLiquidacion001_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
+        public virtual ObjectResult<paActualizaLiquidacion001_DP_Result> paActualizaLiquidacion001_DP(Nullable<int> idFlujo, Nullable<int> idCotizacion, string proveedor, Nullable<int> idTipoItem)
         {
             var idFlujoParameter = idFlujo.HasValue ?
                 new ObjectParameter("idFlujo", idFlujo) :
@@ -102,7 +106,7 @@ namespace ICRL.ModeloDB
                 new ObjectParameter("idTipoItem", idTipoItem) :
                 new ObjectParameter("idTipoItem", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("paActualizaLiquidacion001_DP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<paActualizaLiquidacion001_DP_Result>("paActualizaLiquidacion001_DP", idFlujoParameter, idCotizacionParameter, proveedorParameter, idTipoItemParameter);
         }
     
         public virtual int paActualizaLiquidacion001_OB(Nullable<int> idFlujo, Nullable<int> idCotizacion, string numeroOrden)

@@ -102,6 +102,14 @@ namespace IRCL
               };
 
               vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
+              vSubNodoNuevo = new TreeNode
+              {
+                Value = "MantenimientoFirma",
+                Text = "Actualización de Firma y Sello",
+                NavigateUrl = "~/Presentacion/MantenimientoFirma.aspx"
+              };
+
+              vNodoNuevo.ChildNodes.Add(vSubNodoNuevo);
               vRolCotizacion = true;
             }
 

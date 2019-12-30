@@ -222,6 +222,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
           <Property Name="tipoCobertura" Type="int" />
           <Property Name="correlativo" Type="int" />
           <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
+          <Property Name="TextoNroCotizacion" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="cotizacion_danios_propios">
           <Key>
@@ -993,6 +994,48 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="descripcionRol" Type="varchar" MaxLength="100" />
           <Property Name="estado" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.TEMPOLIQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TEMPOLIQ">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+          <Property Name="id_item" Type="bigint" Nullable="false" />
+          <Property Name="existe" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.TEMPOLIQ001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TEMPOLIQ001">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+          <Property Name="id_item" Type="bigint" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_orden" Type="datetime" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" />
+          <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="preciobs" Type="float" />
+          <Property Name="precious" Type="float" />
+          <Property Name="fecha_recepcion" Type="datetime" />
+          <Property Name="inspeccion" Type="bit" />
+          <Property Name="liquidacion" Type="bit" />
+          <Property Name="num_factura" Type="varchar" MaxLength="20" />
+          <Property Name="id_estado" Type="smallint" />
+          <Property Name="fecha_liquidacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -1008,6 +1051,16 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="usuarioCreacion" Type="char" MaxLength="20" />
           <Property Name="fechaCreacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="UsuarioFirma">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" />
+          <Property Name="usuarioCreacion" Type="int" />
+          <Property Name="fechaCreacion" Type="datetime" />
+          <Property Name="firmaSello" Type="image" />
+        </EntityType>
         <EntityType Name="UsuarioRol">
           <Key>
             <PropertyRef Name="codigoRol" />
@@ -1016,6 +1069,33 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="codigoRol" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="fechaAsignacion" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LBCDesa.dbo.WLIQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WLIQ">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="int" Nullable="false" />
+          <Property Name="id_cotizacion" Type="int" Nullable="false" />
+          <Property Name="tipo_origen" Type="smallint" Nullable="false" />
+          <Property Name="id_item" Type="bigint" Nullable="false" />
+          <Property Name="id_tipo_item" Type="smallint" />
+          <Property Name="numero_orden" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_orden" Type="datetime" />
+          <Property Name="proveedor" Type="varchar" MaxLength="150" />
+          <Property Name="item_descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="preciobs" Type="float" />
+          <Property Name="precious" Type="float" />
+          <Property Name="fecha_recepcion" Type="datetime" />
+          <Property Name="inspeccion" Type="bit" />
+          <Property Name="liquidacion" Type="bit" />
+          <Property Name="num_factura" Type="varchar" MaxLength="20" />
+          <Property Name="id_estado" Type="smallint" />
+          <Property Name="fecha_liquidacion" Type="datetime" />
         </EntityType>
         <Association Name="FK_COTIPERD_ASSOCIATI_COTIPERD">
           <End Role="CotiPerdidaTotal" Type="Self.CotiPerdidaTotal" Multiplicity="1" />
@@ -1406,6 +1486,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioFirma" EntityType="Self.UsuarioFirma" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1454,6 +1535,57 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
     [RelacionItemPrecio].[itemPrecio] AS [itemPrecio], 
     [RelacionItemPrecio].[estado] AS [estado]
     FROM [dbo].[RelacionItemPrecio] AS [RelacionItemPrecio]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TEMPOLIQ" EntityType="Self.TEMPOLIQ" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TEMPOLIQ].[id_flujo] AS [id_flujo], 
+    [TEMPOLIQ].[id_cotizacion] AS [id_cotizacion], 
+    [TEMPOLIQ].[tipo_origen] AS [tipo_origen], 
+    [TEMPOLIQ].[id_item] AS [id_item], 
+    [TEMPOLIQ].[existe] AS [existe]
+    FROM [dbo].[TEMPOLIQ] AS [TEMPOLIQ]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TEMPOLIQ001" EntityType="Self.TEMPOLIQ001" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TEMPOLIQ001].[id_flujo] AS [id_flujo], 
+    [TEMPOLIQ001].[id_cotizacion] AS [id_cotizacion], 
+    [TEMPOLIQ001].[tipo_origen] AS [tipo_origen], 
+    [TEMPOLIQ001].[id_item] AS [id_item], 
+    [TEMPOLIQ001].[id_tipo_item] AS [id_tipo_item], 
+    [TEMPOLIQ001].[numero_orden] AS [numero_orden], 
+    [TEMPOLIQ001].[fecha_orden] AS [fecha_orden], 
+    [TEMPOLIQ001].[proveedor] AS [proveedor], 
+    [TEMPOLIQ001].[item_descripcion] AS [item_descripcion], 
+    [TEMPOLIQ001].[preciobs] AS [preciobs], 
+    [TEMPOLIQ001].[precious] AS [precious], 
+    [TEMPOLIQ001].[fecha_recepcion] AS [fecha_recepcion], 
+    [TEMPOLIQ001].[inspeccion] AS [inspeccion], 
+    [TEMPOLIQ001].[liquidacion] AS [liquidacion], 
+    [TEMPOLIQ001].[num_factura] AS [num_factura], 
+    [TEMPOLIQ001].[id_estado] AS [id_estado], 
+    [TEMPOLIQ001].[fecha_liquidacion] AS [fecha_liquidacion]
+    FROM [dbo].[TEMPOLIQ001] AS [TEMPOLIQ001]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WLIQ" EntityType="Self.WLIQ" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WLIQ].[id_flujo] AS [id_flujo], 
+    [WLIQ].[id_cotizacion] AS [id_cotizacion], 
+    [WLIQ].[tipo_origen] AS [tipo_origen], 
+    [WLIQ].[id_item] AS [id_item], 
+    [WLIQ].[id_tipo_item] AS [id_tipo_item], 
+    [WLIQ].[numero_orden] AS [numero_orden], 
+    [WLIQ].[fecha_orden] AS [fecha_orden], 
+    [WLIQ].[proveedor] AS [proveedor], 
+    [WLIQ].[item_descripcion] AS [item_descripcion], 
+    [WLIQ].[preciobs] AS [preciobs], 
+    [WLIQ].[precious] AS [precious], 
+    [WLIQ].[fecha_recepcion] AS [fecha_recepcion], 
+    [WLIQ].[inspeccion] AS [inspeccion], 
+    [WLIQ].[liquidacion] AS [liquidacion], 
+    [WLIQ].[num_factura] AS [num_factura], 
+    [WLIQ].[id_estado] AS [id_estado], 
+    [WLIQ].[fecha_liquidacion] AS [fecha_liquidacion]
+    FROM [dbo].[WLIQ] AS [WLIQ]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_COTIPERD_ASSOCIATI_COTIPERD" Association="Self.FK_COTIPERD_ASSOCIATI_COTIPERD">
             <End Role="CotiPerdidaTotal" EntitySet="CotiPerdidaTotal" />
@@ -1737,6 +1869,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="tipoCobertura" Type="Int32" />
           <Property Name="correlativo" Type="Int32" />
           <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TextoNroCotizacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
           <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
           <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
@@ -2490,6 +2623,16 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LIQUIDAC_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="Liquidacion" />
           <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_USUARIOR_ASSOCIATI_USUARIO" FromRole="Usuario" ToRole="UsuarioRol" />
         </EntityType>
+        <EntityType Name="UsuarioFirma">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="usuarioCreacion" Type="Int32" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="firmaSello" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="UsuarioRol">
           <Key>
             <PropertyRef Name="codigoRol" />
@@ -2564,6 +2707,69 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <Property Name="item" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemPrecio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEMPOLIQ">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" />
+          <Property Name="existe" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TEMPOLIQ001">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" />
+          <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="preciobs" Type="Double" />
+          <Property Name="precious" Type="Double" />
+          <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+          <Property Name="inspeccion" Type="Boolean" />
+          <Property Name="liquidacion" Type="Boolean" />
+          <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
+          <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WLIQ">
+          <Key>
+            <PropertyRef Name="id_flujo" />
+            <PropertyRef Name="id_cotizacion" />
+            <PropertyRef Name="tipo_origen" />
+            <PropertyRef Name="id_item" />
+          </Key>
+          <Property Name="id_flujo" Type="Int32" Nullable="false" />
+          <Property Name="id_cotizacion" Type="Int32" Nullable="false" />
+          <Property Name="tipo_origen" Type="Int16" Nullable="false" />
+          <Property Name="id_item" Type="Int64" Nullable="false" />
+          <Property Name="id_tipo_item" Type="Int16" />
+          <Property Name="numero_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+          <Property Name="proveedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="item_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="preciobs" Type="Double" />
+          <Property Name="precious" Type="Double" />
+          <Property Name="fecha_recepcion" Type="DateTime" Precision="3" />
+          <Property Name="inspeccion" Type="Boolean" />
+          <Property Name="liquidacion" Type="Boolean" />
+          <Property Name="num_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int16" />
+          <Property Name="fecha_liquidacion" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
           <End Role="Asegurado" Type="Self.Asegurado" Multiplicity="1" />
@@ -2820,12 +3026,16 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="UsuarioFirma" EntityType="Self.UsuarioFirma" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
           <EntitySet Name="CotiRCVehicular" EntityType="Self.CotiRCVehicular" />
           <EntitySet Name="CotiRoboParcial" EntityType="Self.CotiRoboParcial" />
           <EntitySet Name="cotizacion_rc_vehicular_tercero" EntityType="Self.cotizacion_rc_vehicular_tercero" />
           <EntitySet Name="ItemPrecios" EntityType="Self.ItemPrecios" />
           <EntitySet Name="RelacionItemPrecio" EntityType="Self.RelacionItemPrecio" />
+          <EntitySet Name="TEMPOLIQ" EntityType="Self.TEMPOLIQ" />
+          <EntitySet Name="TEMPOLIQ001" EntityType="Self.TEMPOLIQ001" />
+          <EntitySet Name="WLIQ" EntityType="Self.WLIQ" />
           <AssociationSet Name="FK_LIQUIDAC_ASSOCIATI_ASEGURAD" Association="Self.FK_LIQUIDAC_ASSOCIATI_ASEGURAD">
             <End Role="Asegurado" EntitySet="Asegurado" />
             <End Role="Liquidacion" EntitySet="Liquidacion" />
@@ -2894,7 +3104,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioRol" EntitySet="UsuarioRol" />
           </AssociationSet>
-          <FunctionImport Name="paActualizaLiquidacion001_DP">
+          <FunctionImport Name="paActualizaLiquidacion001_DP" ReturnType="Collection(LBCDesaModelo.paActualizaLiquidacion001_DP_Result)">
             <Parameter Name="idFlujo" Mode="In" Type="Int32" />
             <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
             <Parameter Name="Proveedor" Mode="In" Type="String" />
@@ -3029,6 +3239,25 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
             <Parameter Name="iValorProveedor" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="paActualizaLiquidacion001_DP_Result">
+          <Property Type="Int32" Name="id_flujo" Nullable="false" />
+          <Property Type="Int32" Name="id_cotizacion" Nullable="false" />
+          <Property Type="Int16" Name="tipo_origen" Nullable="false" />
+          <Property Type="Int64" Name="id_item" Nullable="false" />
+          <Property Type="Int16" Name="id_tipo_item" Nullable="true" />
+          <Property Type="String" Name="numero_orden" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_orden" Nullable="true" Precision="23" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="item_descripcion" Nullable="true" MaxLength="150" />
+          <Property Type="Double" Name="preciobs" Nullable="true" />
+          <Property Type="Double" Name="precious" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_recepcion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="inspeccion" Nullable="true" />
+          <Property Type="Boolean" Name="liquidacion" Nullable="true" />
+          <Property Type="String" Name="num_factura" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="id_estado" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_liquidacion" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3233,6 +3462,7 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
                 <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
                 <ScalarProperty Name="correlativo" ColumnName="correlativo" />
                 <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
+                <ScalarProperty Name="TextoNroCotizacion" ColumnName="TextoNroCotizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3959,6 +4189,17 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioFirma">
+            <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioFirma">
+              <MappingFragment StoreEntitySet="UsuarioFirma">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="usuarioCreacion" ColumnName="usuarioCreacion" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="firmaSello" ColumnName="firmaSello" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UsuarioRol">
             <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioRol">
               <MappingFragment StoreEntitySet="UsuarioRol">
@@ -4026,7 +4267,86 @@ warning 6002: The table/view 'LBCDesa.dbo.RelacionItemPrecio' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP" />
+          <EntitySetMapping Name="TEMPOLIQ">
+            <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ">
+              <MappingFragment StoreEntitySet="TEMPOLIQ">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="existe" ColumnName="existe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPOLIQ001">
+            <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ001">
+              <MappingFragment StoreEntitySet="TEMPOLIQ001">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+                <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+                <ScalarProperty Name="precious" ColumnName="precious" />
+                <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+                <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+                <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WLIQ">
+            <EntityTypeMapping TypeName="LBCDesaModelo.WLIQ">
+              <MappingFragment StoreEntitySet="WLIQ">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+                <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+                <ScalarProperty Name="precious" ColumnName="precious" />
+                <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+                <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+                <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBCDesaModelo.paActualizaLiquidacion001_DP_Result">
+                <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
+                <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
+                <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_tipo_item" ColumnName="id_tipo_item" />
+                <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="item_descripcion" ColumnName="item_descripcion" />
+                <ScalarProperty Name="preciobs" ColumnName="preciobs" />
+                <ScalarProperty Name="precious" ColumnName="precious" />
+                <ScalarProperty Name="fecha_recepcion" ColumnName="fecha_recepcion" />
+                <ScalarProperty Name="inspeccion" ColumnName="inspeccion" />
+                <ScalarProperty Name="liquidacion" ColumnName="liquidacion" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="fecha_liquidacion" ColumnName="fecha_liquidacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
           <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />

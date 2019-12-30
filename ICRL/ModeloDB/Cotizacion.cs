@@ -34,6 +34,7 @@ namespace ICRL.ModeloDB
         public Nullable<int> tipoCobertura { get; set; }
         public Nullable<int> correlativo { get; set; }
         public string tipoTaller { get; set; }
+        public string TextoNroCotizacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CotiPerdidaTotal> CotiPerdidaTotal { get; set; }

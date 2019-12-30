@@ -425,6 +425,17 @@
     <Content Include="DS\InspeccionRoboParcial.xss">
       <DependentUpon>InspeccionRoboParcial.xsd</DependentUpon>
     </Content>
+    <Content Include="DS\UsuarioFirmaSello.xsc">
+      <DependentUpon>UsuarioFirmaSello.xsd</DependentUpon>
+    </Content>
+    <None Include="DS\UsuarioFirmaSello.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UsuarioFirmaSello.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS\UsuarioFirmaSello.xss">
+      <DependentUpon>UsuarioFirmaSello.xsd</DependentUpon>
+    </Content>
     <None Include="LBCDesaDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>LBCDesaDataSet.Designer.cs</LastGenOutput>
@@ -471,6 +482,7 @@
     <Content Include="Presentacion\Inicio.aspx" />
     <Content Include="Presentacion\Inspeccion.aspx" />
     <Content Include="Presentacion\Liquidacion.aspx" />
+    <Content Include="Presentacion\MantenimientoFirma.aspx" />
     <Content Include="Presentacion\RCVehicularPopup.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -562,6 +574,7 @@
     <Compile Include="BD\InspeccionRoboParcial.cs" />
     <Compile Include="BD\LiquidacionICRL.cs" />
     <Compile Include="BD\ListaNomenclador.cs" />
+    <Compile Include="BD\ManteFirma.cs" />
     <Compile Include="BD\UsuarioICRL.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -676,6 +689,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InspeccionRoboParcial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS\UsuarioFirmaSello.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuarioFirmaSello.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -853,6 +871,9 @@
     <Compile Include="ModeloDB\Nomenclador.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\paActualizaLiquidacion001_DP_Result.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\Proveedor.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
@@ -862,10 +883,22 @@
     <Compile Include="ModeloDB\Rol.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\TEMPOLIQ.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\TEMPOLIQ001.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\Usuario.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDB\UsuarioFirma.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDB\UsuarioRol.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDB\WLIQ.cs">
       <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Cotizacion.aspx.cs">
@@ -973,6 +1006,13 @@
     <Compile Include="Presentacion\Liquidacion.aspx.designer.cs">
       <DependentUpon>Liquidacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\MantenimientoFirma.aspx.cs">
+      <DependentUpon>MantenimientoFirma.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\MantenimientoFirma.aspx.designer.cs">
+      <DependentUpon>MantenimientoFirma.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\RCVehicularPopup.aspx.cs">
       <DependentUpon>RCVehicularPopup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1035,16 +1075,22 @@
   <ItemGroup>
     <EmbeddedResource Include="Reportes\RepFormularioCotiDaniosPropios.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenCompra.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenCompraFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenPagoCambio.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenPagoCambioFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenTrabajo.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiOrdenTrabajoFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiPTDaniosPropios.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiPTRobo.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCObjetos.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCPersonas.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehCompra.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehCompraFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehicular.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehPago.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehPagoFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehTrabajo.rdlc" />
+    <EmbeddedResource Include="Reportes\RepFormularioCotiRCVehTrabajoFirma.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioCotiRoboParcial.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInsp.rdlc" />
     <EmbeddedResource Include="Reportes\RepFormularioInspDaniosPropios.rdlc" />
