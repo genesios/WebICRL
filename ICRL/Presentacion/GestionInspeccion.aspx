@@ -36,7 +36,9 @@
                 <td>
                     <div class="twentyfive">
                         <asp:Label ID="LabelNroFlujo" runat="server" Text="Nro. de Flujo"></asp:Label><br />
-                        <asp:TextBox ID="TextBoxNroFlujo" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxNroFlujo" runat="server"></asp:TextBox><br />
+                        <asp:Label ID="LabelListaEstados" runat="server" Text="Estados"></asp:Label><br />
+                        <asp:DropDownList ID="DropDownListEstados" runat="server"></asp:DropDownList>
                     </div>
                     <div class="twentyfive">
                         <asp:Label ID="LabelPlaca" runat="server" Text="Placa"></asp:Label><br />
@@ -50,6 +52,9 @@
                         <asp:Label ID="LabelHasta" runat="server" Text="hasta"></asp:Label><br />
                         <asp:TextBox ID="TextBoxFechaFin" runat="server" AutoComplete="off"></asp:TextBox>
                         <ajaxToolkit:CalendarExtender ID="TextBoxFechaFin_CalendarExtender" runat="server" BehaviorID="TextBoxFechaFin_CalendarExtender" DaysModeTitleFormat="dd/MM/yyyy" TargetControlID="TextBoxFechaFin" TodaysDateFormat="dd/MM/yyyy" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
+                    </div>
+                    <div>
+                        
                     </div>
                 </td>
             </tr>
@@ -113,6 +118,7 @@
                 <asp:BoundField DataField="numeroPoliza" HeaderText="Poliza" />
                 <asp:BoundField DataField="placaVehiculo" HeaderText="Placa" />
                <%-- <asp:BoundField DataField="estado_desc" HeaderText="Estado"  ItemStyle-CssClass="columnaOculta" HeaderStyle-CssClass="columnaOculta"  />--%>
+               <%--  <asp:BoundField DataField="estado_desc" HeaderText="Estado"  />--%>
                 <asp:TemplateField HeaderText="Doc.Identidad">
                     <ItemTemplate>
                         <%# Eval("docIdAsegurado") %>
@@ -129,6 +135,7 @@
                                 <asp:BoundField DataField="sucursalAtencion" HeaderText="Sucursal" />
                                 <asp:BoundField DataField="idInspector" HeaderText="Inspector" />
                                 <asp:BoundField DataField="nombreContacto" HeaderText="Tercero" />
+                                <asp:BoundField DataField="estado" HeaderText="Estado" />
                                 <asp:ButtonField Text="Ver/Modif" CommandName="Select" ItemStyle-Width="50" ItemStyle-ForeColor="Blue" />
                             </Columns>
                             <EditRowStyle BackColor="#7C6F57" />

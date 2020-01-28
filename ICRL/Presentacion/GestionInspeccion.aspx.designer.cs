@@ -40,6 +40,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxNroFlujo;
         
         /// <summary>
+        /// LabelListaEstados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelListaEstados;
+        
+        /// <summary>
+        /// DropDownListEstados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstados;
+        
+        /// <summary>
         /// LabelPlaca control.
         /// </summary>
         /// <remarks>

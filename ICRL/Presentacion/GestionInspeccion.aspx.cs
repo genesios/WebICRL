@@ -68,7 +68,8 @@ namespace ICRL.Presentacion
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(180);
+        vFechaFin = vFechaIni.AddMonths(6);
+        vFechaFin = vFechaFin.AddDays(-1);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
         TextBoxFechaFin.Text = vFechaFin.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
       }
@@ -83,6 +84,9 @@ namespace ICRL.Presentacion
 
       if (!IsPostBack)
       {
+        //Llenar Combo Estados
+        FlTraeNomenEstados();
+
         PBusquedaInspecciones();
 
         //int vIdFlujo = 2;
@@ -108,6 +112,7 @@ namespace ICRL.Presentacion
         ////////ReportViewer1.LocalReport.DataSources.Clear();
         ////////ReportViewer1.LocalReport.DataSources.Add(datasource);
       }
+
 
       if (Session["PopupModalSiNo"] != null)
       {
@@ -448,6 +453,7 @@ namespace ICRL.Presentacion
                      f.nombreAsegurado,
                      f.numeroPoliza,
                      f.placaVehiculo,
+                     estado_desc = f.estado.ToString(), 
                      f.docIdAsegurado
                    };
 
@@ -505,7 +511,9 @@ namespace ICRL.Presentacion
         e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
         e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
 
-
+        //Actualiza el filtro de Estados
+        int vEstadoFiltro = 0; /*1 Inspeccion, 2 Cotizacion 3 Liquidacion*/
+        vEstadoFiltro = int.Parse(DropDownListEstados.SelectedValue.ToString());
 
         DateTime vFechaIni = DateTime.ParseExact(TextBoxFechaIni.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         TextBoxFechaIni_CalendarExtender.SelectedDate = vFechaIni;
@@ -547,6 +555,7 @@ namespace ICRL.Presentacion
                       join idpp in db.InspDaniosPropiosPadre on i.idInspeccion equals idpp.idInspeccion
                       where (i.idFlujo == vIdInspeccion)
                       && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                      && (i.estado.Value == vEstadoFiltro)
                       orderby i.idInspeccion
                       select new
                       {
@@ -556,11 +565,13 @@ namespace ICRL.Presentacion
                         i.sucursalAtencion,
                         i.idInspector,
                         nombreContacto = i.nombreContacto + idpp.secuencial,
+                        estado = i.estado.Value
                       }).Union
                      (from i in db.Inspeccion
                       join ircobj in db.InspRCObjeto on i.idInspeccion equals ircobj.idInspeccion
                       where (i.idFlujo == vIdInspeccion)
                       && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                      && (i.estado.Value == vEstadoFiltro)
                       orderby i.idInspeccion
                       select new
                       {
@@ -569,12 +580,14 @@ namespace ICRL.Presentacion
                         i.fechaCreacion,
                         i.sucursalAtencion,
                         i.idInspector,
-                        nombreContacto = ircobj.nombreObjeto
+                        nombreContacto = ircobj.nombreObjeto,
+                        estado = i.estado.Value
                       }).Union
                       (from i in db.Inspeccion
                        join ircper in db.InspRCPersona on i.idInspeccion equals ircper.idInspeccion
                        where (i.idFlujo == vIdInspeccion)
                        && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                       && (i.estado.Value == vEstadoFiltro)
                        orderby i.idInspeccion
                        select new
                        {
@@ -583,12 +596,14 @@ namespace ICRL.Presentacion
                          i.fechaCreacion,
                          i.sucursalAtencion,
                          i.idInspector,
-                         nombreContacto = ircper.nombrePersona
+                         nombreContacto = ircper.nombrePersona,
+                         estado = i.estado.Value
                        }).Union
                        (from i in db.Inspeccion
                         join ircveh in db.InspRCVehicular on i.idInspeccion equals ircveh.idInspeccion
                         where (i.idFlujo == vIdInspeccion)
                         && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                        && (i.estado.Value == vEstadoFiltro)
                         orderby i.idInspeccion
                         select new
                         {
@@ -597,12 +612,14 @@ namespace ICRL.Presentacion
                           i.fechaCreacion,
                           i.sucursalAtencion,
                           i.idInspector,
-                          nombreContacto = ircveh.nombreTercero
+                          nombreContacto = ircveh.nombreTercero,
+                          estado = i.estado.Value
                         }).Union
                         (from i in db.Inspeccion
                          join irp in db.InspRoboParcial on i.idInspeccion equals irp.idInspeccion
                          where (i.idFlujo == vIdInspeccion)
                          && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                         && (i.estado.Value == vEstadoFiltro)
                          orderby i.idInspeccion
                          select new
                          {
@@ -611,12 +628,14 @@ namespace ICRL.Presentacion
                            i.fechaCreacion,
                            i.sucursalAtencion,
                            i.idInspector,
-                           i.nombreContacto
+                           i.nombreContacto,
+                           estado = i.estado.Value
                          }).Union
                          (from i in db.Inspeccion
                           join iptdp in db.InspPerdidaTotalDanios on i.idInspeccion equals iptdp.idInspeccion
                           where (i.idFlujo == vIdInspeccion)
                           && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                          && (i.estado.Value == vEstadoFiltro)
                           orderby i.idInspeccion
                           select new
                           {
@@ -625,12 +644,14 @@ namespace ICRL.Presentacion
                             i.fechaCreacion,
                             i.sucursalAtencion,
                             i.idInspector,
-                            i.nombreContacto
+                            i.nombreContacto,
+                            estado = i.estado.Value
                           }).Union
                           (from i in db.Inspeccion
                            join iptrob in db.InspPerdidaTotalRobo on i.idInspeccion equals iptrob.idInspeccion
                            where (i.idFlujo == vIdInspeccion)
                            && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
+                           && (i.estado.Value == vEstadoFiltro)
                            orderby i.idInspeccion
                            select new
                            {
@@ -639,7 +660,8 @@ namespace ICRL.Presentacion
                              i.fechaCreacion,
                              i.sucursalAtencion,
                              i.idInspector,
-                             i.nombreContacto
+                             i.nombreContacto,
+                             estado = i.estado.Value
                            })
                      ;
           gvInspecciones.DataSource = vLst.ToList();
@@ -684,11 +706,16 @@ namespace ICRL.Presentacion
       //primero por flujo, después por placa y finalmente por fecha
       //validar los campos de busqueda
       int vResul = 1;
+
       DateTime vFechaIni = DateTime.Now;
       DateTime vFechaFin = DateTime.Now;
 
       string vNroFlujo = null;
       string vPlaca = null;
+
+      //Actualiza el filtro de Estados
+      int vEstadoFiltro = 0; /*1 Inspeccion, 2 Cotizacion 3 Liquidacion*/
+      vEstadoFiltro = int.Parse(DropDownListEstados.SelectedValue.ToString());
 
       if (TextBoxNroFlujo.Text != string.Empty)
         vNroFlujo = TextBoxNroFlujo.Text.ToUpper();
@@ -709,7 +736,8 @@ namespace ICRL.Presentacion
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(180);
+        vFechaFin = vFechaIni.AddMonths(6);
+        vFechaFin = vFechaFin.AddDays(-1);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
       }
       else
@@ -723,11 +751,12 @@ namespace ICRL.Presentacion
         var vLst = from i in db.Inspeccion
                    join u in db.Usuario on i.idUsuario equals u.idUsuario
                    join f in db.Flujo on i.idFlujo equals f.idFlujo
-                   //join n in db.Nomenclador on f.estado equals new {codi = Convert.ToInt32(n.codigo) }
+                   join n in db.Nomenclador on f.estado.ToString() equals n.codigo
                    where (vNroFlujo == null || f.flujoOnBase == vNroFlujo)
                    && (vPlaca == null || f.placaVehiculo == vPlaca)
+                   && (i.estado.Value == vEstadoFiltro)
                    && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
-                   //&& (n.categoriaNomenclador == "Estados")
+                   && (n.categoriaNomenclador == "Estados")
                    orderby f.flujoOnBase
                    select new
                    {
@@ -736,6 +765,7 @@ namespace ICRL.Presentacion
                      f.nombreAsegurado,
                      f.numeroPoliza,
                      f.placaVehiculo,
+                     //estado_desc = n.descripcion, en el flujo no mostrar estado todavia
                      f.docIdAsegurado
                    };
 
@@ -859,10 +889,15 @@ namespace ICRL.Presentacion
       vFechaFin = DateTime.ParseExact(TextBoxFechaFin.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
       vFechaFin = vFechaFin.AddDays(1);
 
+      //Actualiza el filtro de Estados
+      int vEstadoFiltro = 0; /*1 Inspeccion, 2 Cotizacion 3 Liquidacion*/
+      vEstadoFiltro = int.Parse(DropDownListEstados.SelectedValue.ToString());
+
       var vListaInsp = from i in db.Inspeccion
                        join f in db.Flujo on i.idFlujo equals f.idFlujo
                        where (vNroFlujo == null || f.flujoOnBase == vNroFlujo)
                        && (vPlaca == null || f.placaVehiculo == vPlaca)
+                       && (i.estado.Value == vEstadoFiltro)
                        && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
                        orderby i.idInspeccion
                        select new
@@ -935,7 +970,8 @@ namespace ICRL.Presentacion
 
       if (null == TextBoxFechaFin_CalendarExtender.SelectedDate)
       {
-        vFechaFin = vFechaIni.AddDays(180);
+        vFechaFin = vFechaIni.AddMonths(6);
+        vFechaFin = vFechaFin.AddDays(-1);
         TextBoxFechaFin_CalendarExtender.SelectedDate = vFechaFin;
       }
       else
@@ -944,6 +980,11 @@ namespace ICRL.Presentacion
       }
 
       vFechaFin = vFechaFin.AddDays(1);
+
+      //Actualiza el filtro de Estados
+      int vEstadoFiltro = 0; /*1 Inspeccion, 2 Cotizacion 3 Liquidacion*/
+      vEstadoFiltro = int.Parse(DropDownListEstados.SelectedValue.ToString());
+
       using (LBCDesaEntities db = new LBCDesaEntities())
       {
         var vLst = from i in db.Inspeccion
@@ -951,6 +992,7 @@ namespace ICRL.Presentacion
                    join f in db.Flujo on i.idFlujo equals f.idFlujo
                    where (vNroFlujo == null || f.flujoOnBase == vNroFlujo)
                    && (vPlaca == null || f.placaVehiculo == vPlaca)
+                   && (i.estado.Value == vEstadoFiltro)
                    && (i.fechaCreacion >= vFechaIni && i.fechaCreacion <= vFechaFin)
                    orderby f.flujoOnBase
                    select new
@@ -984,6 +1026,21 @@ namespace ICRL.Presentacion
       gRespuestaSiNo = 0;
       Session["PopupModalSiNo"] = 0;
       this.ModalPopupSiNo.Hide();
+    }
+
+    private int FlTraeNomenEstados()
+    {
+      int vResultado = 0;
+      string vCategoria = "Estados";
+      int vOrdenCodigo = 1;
+      AccesoDatos vAccesoDatos = new AccesoDatos();
+
+      DropDownListEstados.DataValueField = "codigo";
+      DropDownListEstados.DataTextField = "descripcion";
+      DropDownListEstados.DataSource = vAccesoDatos.FlTraeNomenGenerico(vCategoria, vOrdenCodigo);
+      DropDownListEstados.DataBind();
+
+      return vResultado;
     }
 
   }
