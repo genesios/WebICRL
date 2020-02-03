@@ -15,6 +15,7 @@ namespace ICRL.BD
   {
     public string vSistema = "EXT101";
     public string vMensajeClase = string.Empty;
+    public string vMensajeError = string.Empty;
     public enum TipoInspeccion
     {
       DaniosPropios = 1,
@@ -3197,6 +3198,7 @@ namespace ICRL.BD
           }
           else
           {
+            vUsuarioFirma = new UsuarioFirma();
             vUsuarioFirma.idUsuario = pManteFirma.idUsuario;
             vUsuarioFirma.estado = pManteFirma.estado;
 
@@ -3214,7 +3216,7 @@ namespace ICRL.BD
       }
       catch (Exception ex)
       {
-        ex.Message.ToString();
+        vMensajeError =  ex.ToString();
         vResultado = 0;
       }
       return vResultado;

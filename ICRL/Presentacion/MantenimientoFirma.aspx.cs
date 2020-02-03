@@ -40,29 +40,47 @@ namespace ICRL.Presentacion
       AccesoDatos vAccesodatos = new AccesoDatos();
       string vRutaArchivo = string.Empty;
       int vResultado = 0;
-
-      vRutaArchivo = FileUploadImagen.FileName;
-      if (vRutaArchivo.Length == 0)
+      try
       {
-        lblMensaje.Text = "La ruta del Archivo esta vacía";
+
+
+        vRutaArchivo = FileUploadImagen.FileName;
+        if (vRutaArchivo.Length == 0)
+        {
+          lblMensaje.Text = "La ruta del Archivo esta vacía";
+        }
+        else
+        {
+          byte[] vbytesArchivo;
+
+          vbytesArchivo = FileUploadImagen.FileBytes;
+
+          ManteFirma vManteFirma = new ManteFirma();
+          vManteFirma.idUsuario = int.Parse(LabelIdUsuario.Text);
+          string vIdUsuarioAux = string.Empty;
+          vIdUsuarioAux = Session["IdUsr"].ToString();
+          vManteFirma.usuarioCreacion = vAccesodatos.FValidaExisteUsuarioICRL(vIdUsuarioAux);
+          vManteFirma.fechaCreacion = DateTime.Now;
+          vManteFirma.estado = 1;
+          vManteFirma.firmaSello = vbytesArchivo;
+
+          vResultado = vAccesodatos.FUsuarioFirmaGrabaRegistro(vManteFirma);
+          //vResultado = 1;
+          if ( 1 == vResultado)
+          {
+            MuestraFirmaSello(vManteFirma.idUsuario);
+          }
+          else
+          {
+            lblMensaje.Text = lblMensaje.Text + " " + "ERROR al grabar en la base de datos";
+            lblMensaje.Text = lblMensaje.Text + " "+ vAccesodatos.vMensajeError;
+          }
+        }
       }
-      else
+      catch (Exception ex)
       {
-        byte[] vbytesArchivo;
-
-        vbytesArchivo = FileUploadImagen.FileBytes;
-        ManteFirma vManteFirma = new ManteFirma();
-        vManteFirma.idUsuario = int.Parse(LabelIdUsuario.Text);
-        string vIdUsuarioAux = string.Empty;
-        vIdUsuarioAux = Session["IdUsr"].ToString();
-        vManteFirma.usuarioCreacion = vAccesodatos.FValidaExisteUsuarioICRL(vIdUsuarioAux);
-        vManteFirma.fechaCreacion = DateTime.Now;
-        vManteFirma.estado = 1;
-        vManteFirma.firmaSello = vbytesArchivo;
-        vResultado = vAccesodatos.FUsuarioFirmaGrabaRegistro(vManteFirma);
-        vResultado = 1;
-
-        MuestraFirmaSello(vManteFirma.idUsuario);
+        lblMensaje.Text = ex.Message.ToUpper();
+        throw;
       }
     }
 
