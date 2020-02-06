@@ -134,10 +134,6 @@
                                 <asp:TextBox ID="TextBoxIdFlujo" runat="server" Enabled="false" Visible="False"></asp:TextBox>
                                 <asp:TextBox ID="TextBoxNroCotizacion" runat="server" Enabled="False" Visible="False"></asp:TextBox>
                             </div>
-                            <div class="twenty">
-                                <asp:Label ID="LabelNroCotizacionProveedor" runat="server" Text="Cotización Proveedor"></asp:Label>
-                                <asp:TextBox ID="TextBoxNroCotizacionProveedor" runat="server" Text=""></asp:TextBox>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -373,6 +369,8 @@
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="moneda_orden" HeaderText="Moneda " />
+                                <%--ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor--%>
+                                <asp:BoundField DataField="cotizacion_proveedor" HeaderText="Cotización Prov. " />
                                 <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
@@ -452,7 +450,7 @@
                         </table>
                     </td>
                 </tr>
-                <tr>
+                <tr> 
                     <td>
                         <asp:GridView ID="GridViewSumaRepuestos" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false"
                             OnSelectedIndexChanged="GridViewSumaRepuestos_SelectedIndexChanged" Width="100%">
@@ -464,6 +462,8 @@
                                 <asp:BoundField DataField="deducible" HeaderText="FRA/COA" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="monto_final" HeaderText="Monto Final" DataFormatString="{0:N2}" />
                                 <asp:BoundField DataField="moneda_orden" HeaderText="Moneda Orden" />
+                                <%--ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor--%>
+                                <asp:BoundField DataField="cotizacion_proveedor" HeaderText="Cotización Prov. " />
                                 <asp:ButtonField Text="Editar" CommandName="Select" ItemStyle-Width="50" />
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
@@ -770,10 +770,15 @@
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaProveedor" runat="server" Text="Proveedores"></asp:Label><br />
                                     <asp:DropDownList ID="DropDownListSumaProveedor" runat="server" Enabled="False"></asp:DropDownList>
+                                    <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Enabled="false"></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaMontoOrden" runat="server" Text="Monto Orden"></asp:Label><br />
                                     <asp:TextBox ID="TextBoxSumaMontoOrden" runat="server" Enabled="False"></asp:TextBox>
+                                    <%--ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor--%>
+                                    <asp:Label ID="LabelCotizacionProveedor" runat="server" Text="Cotización Proveedor"></asp:Label><br />
+                                    <asp:TextBox ID="TextBoxCotizacionProveedor" runat="server" Text=""></asp:TextBox>
                                 </div>
                                 <div class="twenty">
                                     <asp:Label ID="LabelSumaTipoDesc" runat="server" Text="Tipo Descuento"></asp:Label><br />
@@ -798,10 +803,6 @@
                                         ControlToValidate="TextBoxSumaDeducible" CssClass="errormessage"
                                         ValidationExpression="^[0-9]*\.?[0-9]*$">
                                     </asp:RegularExpressionValidator>
-                                </div>
-                                <div class="twenty">
-                                    <asp:Label ID="LabelSumaMontoFinal" runat="server" Text="Monto Final"></asp:Label><br />
-                                    <asp:TextBox ID="TextBoxSumaMontoFinal" runat="server" Enabled="false"></asp:TextBox>
                                 </div>
                             </td>
                         </tr>

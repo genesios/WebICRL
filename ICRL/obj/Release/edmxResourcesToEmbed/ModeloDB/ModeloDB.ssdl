@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="LBCDesaModelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="LBCDesaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Asegurado">
     <Key>
       <PropertyRef Name="idAsegurado" />
@@ -217,7 +217,6 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="tipoCobertura" Type="int" />
     <Property Name="correlativo" Type="int" />
     <Property Name="tipoTaller" Type="varchar" MaxLength="25" />
-    <Property Name="TextoNroCotizacion" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="cotizacion_danios_propios">
     <Key>
@@ -272,6 +271,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
     <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
+    <Property Name="cotizacion_proveedor" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="cotizacion_ordenes">
     <Key>
@@ -513,6 +513,7 @@ warning 6002: The table/view 'LBCDesa.dbo.CotiRoboParcial' does not have a prima
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
     <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
+    <Property Name="cotizacion_proveedor" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -589,6 +590,7 @@ warning 6002: The table/view 'LBCDesa.dbo.cotizacion_rc_vehicular_tercero' does 
     <Property Name="numero_orden" Type="varchar" MaxLength="30" />
     <Property Name="id_estado" Type="smallint" />
     <Property Name="moneda_orden" Type="varchar" MaxLength="20" />
+    <Property Name="cotizacion_proveedor" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -1430,7 +1432,7 @@ warning 6002: The table/view 'LBCDesa.dbo.WLIQ' does not have a primary key defi
     <Parameter Name="iIdTipoItem" Type="int" Mode="In" />
     <Parameter Name="iValorProveedor" Type="varchar" Mode="InOut" />
   </Function>
-  <EntityContainer Name="LBCDesaModeloStoreContainer">
+  <EntityContainer Name="LBCDesaModelStoreContainer">
     <EntitySet Name="Asegurado" EntityType="Self.Asegurado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contador" EntityType="Self.Contador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CotiDaniosPropios" EntityType="Self.CotiDaniosPropios" Schema="dbo" store:Type="Tables" />

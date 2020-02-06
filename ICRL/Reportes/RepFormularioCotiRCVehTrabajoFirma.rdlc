@@ -252,6 +252,10 @@
           <DataField>id_tipo_item</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
+        <Field Name="cotizacion_proveedor">
+          <DataField>cotizacion_proveedor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>CotizacionDaniosPropiosSuma</rd:DataSetName>
@@ -2889,7 +2893,7 @@
             <Top>4.16597in</Top>
             <Left>1.1056in</Left>
             <Height>0.25in</Height>
-            <Width>2.28665in</Width>
+            <Width>4.35895in</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -2983,6 +2987,68 @@
               </Border>
             </Style>
           </Image>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cotización:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>10.61655cm</Top>
+            <Left>14.05635cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.08447cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="proveedor2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!cotizacion_proveedor.Value, "DataSet3")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>proveedor</rd:DefaultName>
+            <Top>4.16597in</Top>
+            <Left>6.39632in</Left>
+            <Height>0.25in</Height>
+            <Width>1.10751in</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>7.88417in</Height>
         <Style>

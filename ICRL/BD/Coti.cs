@@ -18,6 +18,5 @@ namespace ICRL.BD
     public int tipoCobertura { get; set; }
     public int correlativo { get; set; }
     public string tipoTaller { get; set; }
-    public string TextoNroCotizacion { get; set; }
   }
 }

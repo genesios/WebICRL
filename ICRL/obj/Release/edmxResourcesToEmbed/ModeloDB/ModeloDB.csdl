@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="LBCDesaModelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="LBCDesaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Asegurado">
     <Key>
       <PropertyRef Name="idAsegurado" />
@@ -208,7 +208,6 @@
     <Property Name="tipoCobertura" Type="Int32" />
     <Property Name="correlativo" Type="Int32" />
     <Property Name="tipoTaller" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="TextoNroCotizacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CotiPerdidaTotal" Relationship="Self.FK_COTIPERD_PTOTALTIE_COTIZACI" FromRole="Cotizacion" ToRole="CotiPerdidaTotal" />
     <NavigationProperty Name="CotiRCObjeto" Relationship="Self.FK_COTIRCOB_RCOBJETOT_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCObjeto" />
     <NavigationProperty Name="CotiRCPersona" Relationship="Self.FK_COTIRCPE_RCPERSONA_COTIZACI" FromRole="Cotizacion" ToRole="CotiRCPersona" />
@@ -268,6 +267,7 @@
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
     <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cotizacion_proveedor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="cotizacion_ordenes">
     <Key>
@@ -509,6 +509,7 @@
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
     <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cotizacion_proveedor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="cotizacion_robo_parcial">
     <Key>
@@ -563,6 +564,7 @@
     <Property Name="numero_orden" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="id_estado" Type="Int16" />
     <Property Name="moneda_orden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cotizacion_proveedor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="CotizacionFlujo">
     <Key>
@@ -1443,7 +1445,7 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
-    <FunctionImport Name="paActualizaLiquidacion001_DP" ReturnType="Collection(LBCDesaModelo.paActualizaLiquidacion001_DP_Result)">
+    <FunctionImport Name="paActualizaLiquidacion001_DP" ReturnType="Collection(LBCDesaModel.paActualizaLiquidacion001_DP_Result)">
       <Parameter Name="idFlujo" Mode="In" Type="Int32" />
       <Parameter Name="idCotizacion" Mode="In" Type="Int32" />
       <Parameter Name="Proveedor" Mode="In" Type="String" />

@@ -244,8 +244,7 @@ namespace ICRL.Presentacion
                        cf.telefonoContacto,
                        c.correlativo,
                        u.nombreVisible,
-                       u.correoElectronico,
-                       c.TextoNroCotizacion
+                       u.correoElectronico
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -259,7 +258,6 @@ namespace ICRL.Presentacion
             TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro;
             TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
             TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
-            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
           }
 
         }
@@ -303,8 +301,7 @@ namespace ICRL.Presentacion
                        c.tipoTaller,
                        //tipoTaller = "Taller Tipo B",
                        u.nombreVisible,
-                       u.correoElectronico,
-                       c.TextoNroCotizacion
+                       u.correoElectronico
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -331,7 +328,6 @@ namespace ICRL.Presentacion
             TextBoxNroChasis.Text = vFilaTabla.chasisVehiculo;
             TextBoxAnio.Text = vFilaTabla.anioVehiculo.ToString();
             TextBoxValorAsegurado.Text = vFilaTabla.valorAsegurado.ToString();
-            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
 
             string vTempoCadena = string.Empty;
             vTempoCadena = vFilaTabla.tipoTaller.Trim();
@@ -1226,6 +1222,8 @@ namespace ICRL.Presentacion
       BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
       vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       GridViewSumaReparaciones.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
       {
         DaniosPropiosSumatoria.proveedor,
@@ -1234,7 +1232,8 @@ namespace ICRL.Presentacion
         DaniosPropiosSumatoria.descuento_proveedor,
         DaniosPropiosSumatoria.deducible,
         DaniosPropiosSumatoria.monto_final,
-        DaniosPropiosSumatoria.moneda_orden
+        DaniosPropiosSumatoria.moneda_orden,
+        DaniosPropiosSumatoria.cotizacion_proveedor
       }).ToList();
       GridViewSumaReparaciones.DataBind();
 
@@ -1279,7 +1278,6 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
-      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
@@ -1313,6 +1311,9 @@ namespace ICRL.Presentacion
           vTipoDanioPropioSumatoria.monto_final = vTipoDanioPropioSumatoria.monto_orden;
           break;
       }
+
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      vTipoDanioPropioSumatoria.cotizacion_proveedor = TextBoxCotizacionProveedor.Text.ToUpper().Trim();
 
       bool vResultado = false;
 
@@ -1414,6 +1415,9 @@ namespace ICRL.Presentacion
 
       TextBoxSumaMontoFinal.Text = GridViewSumaReparaciones.SelectedRow.Cells[5].Text;
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      TextBoxCotizacionProveedor.Text = GridViewSumaReparaciones.SelectedRow.Cells[7].Text;
+
       Session["PopupABMSumasHabilitado"] = 1;
       this.ModalPopupSumatorias.Show();
     }
@@ -1425,6 +1429,8 @@ namespace ICRL.Presentacion
       BD.CotizacionICRL.TipoDaniosPropiosSumatoriaTraer vTipoDaniosPropiosSumatoriaTraer;
       vTipoDaniosPropiosSumatoriaTraer = CotizacionICRL.DaniosPropiosSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       GridViewSumaRepuestos.DataSource = vTipoDaniosPropiosSumatoriaTraer.DaniosPropiosSumatoria.Select(DaniosPropiosSumatoria => new
       {
         DaniosPropiosSumatoria.proveedor,
@@ -1433,7 +1439,8 @@ namespace ICRL.Presentacion
         DaniosPropiosSumatoria.descuento_proveedor,
         DaniosPropiosSumatoria.deducible,
         DaniosPropiosSumatoria.monto_final,
-        DaniosPropiosSumatoria.moneda_orden
+        DaniosPropiosSumatoria.moneda_orden,
+        DaniosPropiosSumatoria.cotizacion_proveedor
       }).ToList();
       GridViewSumaRepuestos.DataBind();
 
@@ -1478,7 +1485,6 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
-      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void GridViewSumaRepuestos_SelectedIndexChanged(object sender, EventArgs e)
@@ -1518,6 +1524,9 @@ namespace ICRL.Presentacion
       TextBoxSumaDeducible.Text = GridViewSumaRepuestos.SelectedRow.Cells[4].Text;
 
       TextBoxSumaMontoFinal.Text = GridViewSumaRepuestos.SelectedRow.Cells[5].Text;
+
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      TextBoxCotizacionProveedor.Text = GridViewSumaRepuestos.SelectedRow.Cells[7].Text;
 
       Session["PopupABMSumasHabilitado"] = 1;
       this.ModalPopupSumatorias.Show();
@@ -2084,6 +2093,8 @@ namespace ICRL.Presentacion
                                       c.tipo_cambio
                                     };
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
                                         where (c.numero_orden == pNroOrden)
                                         select new
@@ -2095,7 +2106,8 @@ namespace ICRL.Presentacion
                                           c.id_tipo_descuento_orden,
                                           c.descuento_proveedor,
                                           c.deducible,
-                                          c.monto_final
+                                          c.monto_final,
+                                          c.cotizacion_proveedor
                                         };
 
       var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
@@ -2218,6 +2230,7 @@ namespace ICRL.Presentacion
                                       c.precio_final,
                                       c.tipo_cambio
                                     };
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
 
       var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
                                         where (c.numero_orden == pNroOrden)
@@ -2230,7 +2243,8 @@ namespace ICRL.Presentacion
                                           c.id_tipo_descuento_orden,
                                           c.descuento_proveedor,
                                           c.deducible,
-                                          c.monto_final
+                                          c.monto_final,
+                                          c.cotizacion_proveedor
                                         };
 
       var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
@@ -2378,6 +2392,8 @@ namespace ICRL.Presentacion
                                       c.tipo_cambio
                                     };
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       var vListaCotiSumaDaniosPropios = from c in db.cotizacion_danios_propios_sumatoria
                                         where (c.numero_orden == pNroOrden)
                                         select new
@@ -2389,7 +2405,8 @@ namespace ICRL.Presentacion
                                           c.id_tipo_descuento_orden,
                                           c.descuento_proveedor,
                                           c.deducible,
-                                          c.monto_final
+                                          c.monto_final,
+                                          c.cotizacion_proveedor
                                         };
 
       var vListaCotizacionUsuario = from cc in db.cotizacion_danios_propios
@@ -2641,6 +2658,12 @@ namespace ICRL.Presentacion
             ButtonRepuCambioBenef.Visible = false;
           }
           FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Reparacion);
+          FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Repuesto);
+          FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+
           Session["PopupBeneficiario"] = 0;
           this.ModalPopupBeneficiario.Hide();
         }
@@ -2927,28 +2950,6 @@ namespace ICRL.Presentacion
       FlTraeDatosRecepRepu(vIdCotizacion);
     }
 
-    //Actualizar el texto número de cotización del Proveedor
-    void ActualizarTextoNroCotizacionProveedor()
-    {
-      AccesoDatos vAccesoDatos = new AccesoDatos();
-      int vResultado = 0;
-      int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      //Actualiza el Texto Nro Cotizacion Proveedor
-      string vTextoNroCotizacion = string.Empty;
-      vTextoNroCotizacion = TextBoxNroCotizacionProveedor.Text.ToUpper().Trim();
-      vResultado = vAccesoDatos.FActualizaTextoNumeroCotizacion(vIdCotizacion, vTextoNroCotizacion);
-
-      if (vResultado != 1)
-      {
-        //El nro de cotización NO se actualizo exitosamente
-        LabelMensaje.Text = "Número Cotización Proveedor no se pudo actualizar en cotización";
-      }
-      else
-      {
-        //El nro de cotización se actualizo exitosamente
-        LabelMensaje.Text = "";
-      }
-    }
 
     protected void DropDownListRepaItem_SelectedIndexChanged(object sender, EventArgs e)
     {

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="LBCDesaModeloStoreContainer" CdmEntityContainer="LBCDesaEntities">
+  <EntityContainerMapping StorageEntityContainer="LBCDesaModelStoreContainer" CdmEntityContainer="LBCDesaEntities">
     <EntitySetMapping Name="Asegurado">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Asegurado">
+      <EntityTypeMapping TypeName="LBCDesaModel.Asegurado">
         <MappingFragment StoreEntitySet="Asegurado">
           <ScalarProperty Name="idAsegurado" ColumnName="idAsegurado" />
           <ScalarProperty Name="nombreAsegurado" ColumnName="nombreAsegurado" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contador">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Contador">
+      <EntityTypeMapping TypeName="LBCDesaModel.Contador">
         <MappingFragment StoreEntitySet="Contador">
           <ScalarProperty Name="tipoContador" ColumnName="tipoContador" />
           <ScalarProperty Name="valorContador" ColumnName="valorContador" />
@@ -22,7 +22,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiDaniosPropios">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiDaniosPropios">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiDaniosPropios">
         <MappingFragment StoreEntitySet="CotiDaniosPropios">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -31,7 +31,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiPerdidaTotal">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotal">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiPerdidaTotal">
         <MappingFragment StoreEntitySet="CotiPerdidaTotal">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -51,7 +51,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiPerdidaTotalDuenio">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotalDuenio">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiPerdidaTotalDuenio">
         <MappingFragment StoreEntitySet="CotiPerdidaTotalDuenio">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="nombresDuenio" ColumnName="nombresDuenio" />
@@ -65,7 +65,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiPerdidaTotalReferencia">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiPerdidaTotalReferencia">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiPerdidaTotalReferencia">
         <MappingFragment StoreEntitySet="CotiPerdidaTotalReferencia">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
@@ -77,7 +77,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRCObjeto">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCObjeto">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRCObjeto">
         <MappingFragment StoreEntitySet="CotiRCObjeto">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -94,7 +94,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRCObjetoDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCObjetoDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRCObjetoDetalle">
         <MappingFragment StoreEntitySet="CotiRCObjetoDetalle">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idItem" ColumnName="idItem" />
@@ -105,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRCPersona">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCPersona">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRCPersona">
         <MappingFragment StoreEntitySet="CotiRCPersona">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -121,7 +121,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRCPersonaDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCPersonaDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRCPersonaDetalle">
         <MappingFragment StoreEntitySet="CotiRCPersonaDetalle">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
@@ -132,7 +132,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiReparacion">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacion">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiReparacion">
         <MappingFragment StoreEntitySet="CotiReparacion">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -149,7 +149,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiReparacionRepuesto">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiReparacionRepuesto">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiReparacionRepuesto">
         <MappingFragment StoreEntitySet="CotiReparacionRepuesto">
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="idOrden" ColumnName="idOrden" />
@@ -166,7 +166,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRepuesto">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRepuesto">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRepuesto">
         <MappingFragment StoreEntitySet="CotiRepuesto">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -186,7 +186,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cotizacion">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Cotizacion">
+      <EntityTypeMapping TypeName="LBCDesaModel.Cotizacion">
         <MappingFragment StoreEntitySet="Cotizacion">
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -199,12 +199,11 @@
           <ScalarProperty Name="tipoCobertura" ColumnName="tipoCobertura" />
           <ScalarProperty Name="correlativo" ColumnName="correlativo" />
           <ScalarProperty Name="tipoTaller" ColumnName="tipoTaller" />
-          <ScalarProperty Name="TextoNroCotizacion" ColumnName="TextoNroCotizacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_danios_propios">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_danios_propios">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_danios_propios">
         <MappingFragment StoreEntitySet="cotizacion_danios_propios">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -237,7 +236,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_danios_propios_sumatoria">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_danios_propios_sumatoria">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_danios_propios_sumatoria">
         <MappingFragment StoreEntitySet="cotizacion_danios_propios_sumatoria">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -251,11 +250,12 @@
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
           <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
+          <ScalarProperty Name="cotizacion_proveedor" ColumnName="cotizacion_proveedor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_ordenes">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_ordenes">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_ordenes">
         <MappingFragment StoreEntitySet="cotizacion_ordenes">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -271,7 +271,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_perdida_total_propio">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_perdida_total_propio">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_perdida_total_propio">
         <MappingFragment StoreEntitySet="cotizacion_perdida_total_propio">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -335,7 +335,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_perdida_total_robo">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_perdida_total_robo">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_perdida_total_robo">
         <MappingFragment StoreEntitySet="cotizacion_perdida_total_robo">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -399,7 +399,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_rc_objetos">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_objetos">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_rc_objetos">
         <MappingFragment StoreEntitySet="cotizacion_rc_objetos">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -418,7 +418,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_rc_personas">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_personas">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_rc_personas">
         <MappingFragment StoreEntitySet="cotizacion_rc_personas">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -437,7 +437,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_rc_vehicular">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_rc_vehicular">
         <MappingFragment StoreEntitySet="cotizacion_rc_vehicular">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -470,7 +470,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_rc_vehicular_sumatoria">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_sumatoria">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_rc_vehicular_sumatoria">
         <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_sumatoria">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -484,11 +484,12 @@
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
           <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
+          <ScalarProperty Name="cotizacion_proveedor" ColumnName="cotizacion_proveedor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_robo_parcial">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_robo_parcial">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_robo_parcial">
         <MappingFragment StoreEntitySet="cotizacion_robo_parcial">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -521,7 +522,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_robo_parcial_sumatoria">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_robo_parcial_sumatoria">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_robo_parcial_sumatoria">
         <MappingFragment StoreEntitySet="cotizacion_robo_parcial_sumatoria">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -535,11 +536,12 @@
           <ScalarProperty Name="numero_orden" ColumnName="numero_orden" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
           <ScalarProperty Name="moneda_orden" ColumnName="moneda_orden" />
+          <ScalarProperty Name="cotizacion_proveedor" ColumnName="cotizacion_proveedor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotizacionFlujo">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotizacionFlujo">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotizacionFlujo">
         <MappingFragment StoreEntitySet="CotizacionFlujo">
           <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -558,7 +560,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EstadoSesion">
-      <EntityTypeMapping TypeName="LBCDesaModelo.EstadoSesion">
+      <EntityTypeMapping TypeName="LBCDesaModel.EstadoSesion">
         <MappingFragment StoreEntitySet="EstadoSesion">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -570,7 +572,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Flujo">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Flujo">
+      <EntityTypeMapping TypeName="LBCDesaModel.Flujo">
         <MappingFragment StoreEntitySet="Flujo">
           <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
           <ScalarProperty Name="flujoOnBase" ColumnName="flujoOnBase" />
@@ -598,7 +600,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspDaniosPropios">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropios">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspDaniosPropios">
         <MappingFragment StoreEntitySet="InspDaniosPropios">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
@@ -614,7 +616,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspDaniosPropiosPadre">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspDaniosPropiosPadre">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspDaniosPropiosPadre">
         <MappingFragment StoreEntitySet="InspDaniosPropiosPadre">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
@@ -625,7 +627,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Inspeccion">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Inspeccion">
+      <EntityTypeMapping TypeName="LBCDesaModel.Inspeccion">
         <MappingFragment StoreEntitySet="Inspeccion">
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
           <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
@@ -651,7 +653,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspPerdidaTotalDanios">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspPerdidaTotalDanios">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspPerdidaTotalDanios">
         <MappingFragment StoreEntitySet="InspPerdidaTotalDanios">
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
           <ScalarProperty Name="version" ColumnName="version" />
@@ -668,7 +670,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspPerdidaTotalRobo">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspPerdidaTotalRobo">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspPerdidaTotalRobo">
         <MappingFragment StoreEntitySet="InspPerdidaTotalRobo">
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
           <ScalarProperty Name="version" ColumnName="version" />
@@ -685,7 +687,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCObjeto">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCObjeto">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCObjeto">
         <MappingFragment StoreEntitySet="InspRCObjeto">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
@@ -698,7 +700,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCObjetoDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCObjetoDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCObjetoDetalle">
         <MappingFragment StoreEntitySet="InspRCObjetoDetalle">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
@@ -708,7 +710,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCPersona">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCPersona">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCPersona">
         <MappingFragment StoreEntitySet="InspRCPersona">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
@@ -721,7 +723,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCPersonaDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCPersonaDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCPersonaDetalle">
         <MappingFragment StoreEntitySet="InspRCPersonaDetalle">
           <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
@@ -731,7 +733,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCVehicular">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCVehicular">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCVehicular">
         <MappingFragment StoreEntitySet="InspRCVehicular">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
@@ -752,7 +754,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRCVehicularDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRCVehicularDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRCVehicularDetalle">
         <MappingFragment StoreEntitySet="InspRCVehicularDetalle">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
@@ -768,7 +770,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspRoboParcial">
-      <EntityTypeMapping TypeName="LBCDesaModelo.InspRoboParcial">
+      <EntityTypeMapping TypeName="LBCDesaModel.InspRoboParcial">
         <MappingFragment StoreEntitySet="InspRoboParcial">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="idInspeccion" ColumnName="idInspeccion" />
@@ -784,7 +786,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ItemTaller">
-      <EntityTypeMapping TypeName="LBCDesaModelo.ItemTaller">
+      <EntityTypeMapping TypeName="LBCDesaModel.ItemTaller">
         <MappingFragment StoreEntitySet="ItemTaller">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="ciudad" ColumnName="ciudad" />
@@ -798,7 +800,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Liquidacion">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Liquidacion">
+      <EntityTypeMapping TypeName="LBCDesaModel.Liquidacion">
         <MappingFragment StoreEntitySet="Liquidacion">
           <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
           <ScalarProperty Name="idFlujo" ColumnName="idFlujo" />
@@ -811,7 +813,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="liquidacion001">
-      <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001">
+      <EntityTypeMapping TypeName="LBCDesaModel.liquidacion001">
         <MappingFragment StoreEntitySet="liquidacion001">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -834,7 +836,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="liquidacion001_factura">
-      <EntityTypeMapping TypeName="LBCDesaModelo.liquidacion001_factura">
+      <EntityTypeMapping TypeName="LBCDesaModel.liquidacion001_factura">
         <MappingFragment StoreEntitySet="liquidacion001_factura">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_factura" ColumnName="id_factura" />
@@ -850,7 +852,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LiquidacionDetalle">
-      <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionDetalle">
+      <EntityTypeMapping TypeName="LBCDesaModel.LiquidacionDetalle">
         <MappingFragment StoreEntitySet="LiquidacionDetalle">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
@@ -866,7 +868,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LiquidacionFacturas">
-      <EntityTypeMapping TypeName="LBCDesaModelo.LiquidacionFacturas">
+      <EntityTypeMapping TypeName="LBCDesaModel.LiquidacionFacturas">
         <MappingFragment StoreEntitySet="LiquidacionFacturas">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idLiquidacion" ColumnName="idLiquidacion" />
@@ -881,7 +883,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Nomenclador">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Nomenclador">
+      <EntityTypeMapping TypeName="LBCDesaModel.Nomenclador">
         <MappingFragment StoreEntitySet="Nomenclador">
           <ScalarProperty Name="lista" ColumnName="lista" />
           <ScalarProperty Name="categoriaNomenclador" ColumnName="categoriaNomenclador" />
@@ -892,7 +894,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Proveedor">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Proveedor">
+      <EntityTypeMapping TypeName="LBCDesaModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">
           <ScalarProperty Name="idItem" ColumnName="idItem" />
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
@@ -901,7 +903,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Rol">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Rol">
+      <EntityTypeMapping TypeName="LBCDesaModel.Rol">
         <MappingFragment StoreEntitySet="Rol">
           <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
           <ScalarProperty Name="tipoAcceso" ColumnName="tipoAcceso" />
@@ -911,7 +913,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="LBCDesaModelo.Usuario">
+      <EntityTypeMapping TypeName="LBCDesaModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
@@ -927,7 +929,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UsuarioFirma">
-      <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioFirma">
+      <EntityTypeMapping TypeName="LBCDesaModel.UsuarioFirma">
         <MappingFragment StoreEntitySet="UsuarioFirma">
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="estado" ColumnName="estado" />
@@ -938,7 +940,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UsuarioRol">
-      <EntityTypeMapping TypeName="LBCDesaModelo.UsuarioRol">
+      <EntityTypeMapping TypeName="LBCDesaModel.UsuarioRol">
         <MappingFragment StoreEntitySet="UsuarioRol">
           <ScalarProperty Name="codigoRol" ColumnName="codigoRol" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -947,7 +949,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRCVehicular">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRCVehicular">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRCVehicular">
         <MappingFragment StoreEntitySet="CotiRCVehicular">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -956,7 +958,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CotiRoboParcial">
-      <EntityTypeMapping TypeName="LBCDesaModelo.CotiRoboParcial">
+      <EntityTypeMapping TypeName="LBCDesaModel.CotiRoboParcial">
         <MappingFragment StoreEntitySet="CotiRoboParcial">
           <ScalarProperty Name="secuencial" ColumnName="secuencial" />
           <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
@@ -965,7 +967,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cotizacion_rc_vehicular_tercero">
-      <EntityTypeMapping TypeName="LBCDesaModelo.cotizacion_rc_vehicular_tercero">
+      <EntityTypeMapping TypeName="LBCDesaModel.cotizacion_rc_vehicular_tercero">
         <MappingFragment StoreEntitySet="cotizacion_rc_vehicular_tercero">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -984,7 +986,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ItemPrecios">
-      <EntityTypeMapping TypeName="LBCDesaModelo.ItemPrecios">
+      <EntityTypeMapping TypeName="LBCDesaModel.ItemPrecios">
         <MappingFragment StoreEntitySet="ItemPrecios">
           <ScalarProperty Name="item" ColumnName="item" />
           <ScalarProperty Name="ciudad" ColumnName="ciudad" />
@@ -996,7 +998,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RelacionItemPrecio">
-      <EntityTypeMapping TypeName="LBCDesaModelo.RelacionItemPrecio">
+      <EntityTypeMapping TypeName="LBCDesaModel.RelacionItemPrecio">
         <MappingFragment StoreEntitySet="RelacionItemPrecio">
           <ScalarProperty Name="item" ColumnName="item" />
           <ScalarProperty Name="itemPrecio" ColumnName="itemPrecio" />
@@ -1005,7 +1007,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TEMPOLIQ">
-      <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ">
+      <EntityTypeMapping TypeName="LBCDesaModel.TEMPOLIQ">
         <MappingFragment StoreEntitySet="TEMPOLIQ">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -1016,7 +1018,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TEMPOLIQ001">
-      <EntityTypeMapping TypeName="LBCDesaModelo.TEMPOLIQ001">
+      <EntityTypeMapping TypeName="LBCDesaModel.TEMPOLIQ001">
         <MappingFragment StoreEntitySet="TEMPOLIQ001">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -1039,7 +1041,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WLIQ">
-      <EntityTypeMapping TypeName="LBCDesaModelo.WLIQ">
+      <EntityTypeMapping TypeName="LBCDesaModel.WLIQ">
         <MappingFragment StoreEntitySet="WLIQ">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
@@ -1061,9 +1063,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_DP">
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_DP" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_DP">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="LBCDesaModelo.paActualizaLiquidacion001_DP_Result">
+        <ComplexTypeMapping TypeName="LBCDesaModel.paActualizaLiquidacion001_DP_Result">
           <ScalarProperty Name="id_flujo" ColumnName="id_flujo" />
           <ScalarProperty Name="id_cotizacion" ColumnName="id_cotizacion" />
           <ScalarProperty Name="tipo_origen" ColumnName="tipo_origen" />
@@ -1084,29 +1086,29 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_OB" />
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_PE" />
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_RP" />
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TP" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TP" />
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TR" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_TR" />
-    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModelo.Store.paActualizaLiquidacion001_VE" />
-    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_DP" />
-    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_RP" />
-    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModelo.Store.paActualizaOrdenesCotizacion_VE" />
-    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_DP" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_DP" />
-    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_RP" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_RP" />
-    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_VE" FunctionName="LBCDesaModelo.Store.paActualizaPrecioItem_VE" />
-    <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaDaniosPropiosInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaPTDaniosPropiosInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTDaniosPropiosInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaPTRoboInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaPTRoboInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaRCObjetoInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCObjetoInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaRCPersonaInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCPersonaInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaRCVehicularInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRCVehicularInspACoti" />
-    <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModelo.Store.paCopiaRoboParcialInspACoti" />
-    <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModelo.Store.paIncFlujoContadorInsp" />
-    <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModelo.Store.paIncrementaContador" />
-    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaDP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaDP" />
-    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaRP" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaRP" />
-    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaVE" FunctionName="LBCDesaModelo.Store.paValidaMonedasSumatoriaVE" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_OB" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_OB" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_PE" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_PE" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_RP" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TP" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_TP" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_TR" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_TR" />
+    <FunctionImportMapping FunctionImportName="paActualizaLiquidacion001_VE" FunctionName="LBCDesaModel.Store.paActualizaLiquidacion001_VE" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_DP" FunctionName="LBCDesaModel.Store.paActualizaOrdenesCotizacion_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_RP" FunctionName="LBCDesaModel.Store.paActualizaOrdenesCotizacion_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaOrdenesCotizacion_VE" FunctionName="LBCDesaModel.Store.paActualizaOrdenesCotizacion_VE" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_DP" FunctionName="LBCDesaModel.Store.paActualizaPrecioItem_DP" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_RP" FunctionName="LBCDesaModel.Store.paActualizaPrecioItem_RP" />
+    <FunctionImportMapping FunctionImportName="paActualizaPrecioItem_VE" FunctionName="LBCDesaModel.Store.paActualizaPrecioItem_VE" />
+    <FunctionImportMapping FunctionImportName="paCopiaDaniosPropiosInspACoti" FunctionName="LBCDesaModel.Store.paCopiaDaniosPropiosInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaPTDaniosPropiosInspACoti" FunctionName="LBCDesaModel.Store.paCopiaPTDaniosPropiosInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaPTRoboInspACoti" FunctionName="LBCDesaModel.Store.paCopiaPTRoboInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCObjetoInspACoti" FunctionName="LBCDesaModel.Store.paCopiaRCObjetoInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCPersonaInspACoti" FunctionName="LBCDesaModel.Store.paCopiaRCPersonaInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRCVehicularInspACoti" FunctionName="LBCDesaModel.Store.paCopiaRCVehicularInspACoti" />
+    <FunctionImportMapping FunctionImportName="paCopiaRoboParcialInspACoti" FunctionName="LBCDesaModel.Store.paCopiaRoboParcialInspACoti" />
+    <FunctionImportMapping FunctionImportName="paIncFlujoContadorInsp" FunctionName="LBCDesaModel.Store.paIncFlujoContadorInsp" />
+    <FunctionImportMapping FunctionImportName="paIncrementaContador" FunctionName="LBCDesaModel.Store.paIncrementaContador" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaDP" FunctionName="LBCDesaModel.Store.paValidaMonedasSumatoriaDP" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaRP" FunctionName="LBCDesaModel.Store.paValidaMonedasSumatoriaRP" />
+    <FunctionImportMapping FunctionImportName="paValidaMonedasSumatoriaVE" FunctionName="LBCDesaModel.Store.paValidaMonedasSumatoriaVE" />
   </EntityContainerMapping>
 </Mapping>

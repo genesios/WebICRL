@@ -121,24 +121,6 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox TextBoxNroCotizacion;
         
         /// <summary>
-        /// LabelNroCotizacionProveedor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelNroCotizacionProveedor;
-        
-        /// <summary>
-        /// TextBoxNroCotizacionProveedor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNroCotizacionProveedor;
-        
-        /// <summary>
         /// ButtonActualizaDesdeOnBase control.
         /// </summary>
         /// <remarks>
@@ -1489,6 +1471,24 @@ namespace ICRL.Presentacion {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListSumaProveedor;
         
         /// <summary>
+        /// LabelSumaMontoFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSumaMontoFinal;
+        
+        /// <summary>
+        /// TextBoxSumaMontoFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSumaMontoFinal;
+        
+        /// <summary>
         /// LabelSumaMontoOrden control.
         /// </summary>
         /// <remarks>
@@ -1505,6 +1505,24 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxSumaMontoOrden;
+        
+        /// <summary>
+        /// LabelCotizacionProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCotizacionProveedor;
+        
+        /// <summary>
+        /// TextBoxCotizacionProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxCotizacionProveedor;
         
         /// <summary>
         /// LabelSumaTipoDesc control.
@@ -1595,24 +1613,6 @@ namespace ICRL.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValidatorMontoDeducible;
-        
-        /// <summary>
-        /// LabelSumaMontoFinal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelSumaMontoFinal;
-        
-        /// <summary>
-        /// TextBoxSumaMontoFinal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSumaMontoFinal;
         
         /// <summary>
         /// ButtonSumaGrabar control.

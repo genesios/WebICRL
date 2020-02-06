@@ -2865,7 +2865,6 @@ namespace ICRL.BD
           vCotizacion.tipoCobertura = pCoti.tipoCobertura;
           vCotizacion.correlativo = pCoti.correlativo;
           vCotizacion.tipoTaller = pCoti.tipoTaller;
-          vCotizacion.TextoNroCotizacion = pCoti.TextoNroCotizacion;
 
           db.Cotizacion.Add(vCotizacion);
           db.SaveChanges();
@@ -2943,32 +2942,33 @@ namespace ICRL.BD
       return vRespuesta;
     }
 
-    public int FActualizaTextoNumeroCotizacion(int pIdCotizacion, string pTextoNroCotizacion)
-    {
-      int vRespuesta = 0;
+    //Borrar esta referencia 20200204 wari
+    //public int FActualizaTextoNumeroCotizacion(int pIdCotizacion, string pTextoNroCotizacion)
+    //{
+    //  int vRespuesta = 0;
 
-      try
-      {
-        using (LBCDesaEntities db = new LBCDesaEntities())
-        {
-          Cotizacion vCotizacion = new Cotizacion();
+    //  try
+    //  {
+    //    using (LBCDesaEntities db = new LBCDesaEntities())
+    //    {
+    //      Cotizacion vCotizacion = new Cotizacion();
 
-          vCotizacion = db.Cotizacion.Find(pIdCotizacion);
-          if (null != vCotizacion)
-          {
-            vCotizacion.TextoNroCotizacion = pTextoNroCotizacion;
-            db.SaveChanges();
-            vRespuesta = 1;
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        vRespuesta = 0;
-      }
+    //      vCotizacion = db.Cotizacion.Find(pIdCotizacion);
+    //      if (null != vCotizacion)
+    //      {
+    //        vCotizacion.TextoNroCotizacion = pTextoNroCotizacion;
+    //        db.SaveChanges();
+    //        vRespuesta = 1;
+    //      }
+    //    }
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    vRespuesta = 0;
+    //  }
 
-      return vRespuesta;
-    }
+    //  return vRespuesta;
+    //}
 
     public int FValidaExisteCotiFlujoICRL(int pIdFlujo)
     {

@@ -301,6 +301,8 @@ namespace ICRL.DS {
             
             private global::System.Data.DataColumn columnid_tipo_item;
             
+            private global::System.Data.DataColumn columncotizacion_proveedor;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public cotizacion_danios_propios_sumatoriaDataTable() {
@@ -424,6 +426,14 @@ namespace ICRL.DS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn cotizacion_proveedorColumn {
+                get {
+                    return this.columncotizacion_proveedor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace ICRL.DS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public cotizacion_danios_propios_sumatoriaRow Addcotizacion_danios_propios_sumatoriaRow(string numero_orden, string proveedor, string moneda_orden, double monto_orden, string id_tipo_descuento_orden, double descuento_proveedor, double deducible, double monto_final, int id_cotizacion, int id_flujo, short id_tipo_item) {
+            public cotizacion_danios_propios_sumatoriaRow Addcotizacion_danios_propios_sumatoriaRow(string numero_orden, string proveedor, string moneda_orden, double monto_orden, string id_tipo_descuento_orden, double descuento_proveedor, double deducible, double monto_final, int id_cotizacion, int id_flujo, short id_tipo_item, string cotizacion_proveedor) {
                 cotizacion_danios_propios_sumatoriaRow rowcotizacion_danios_propios_sumatoriaRow = ((cotizacion_danios_propios_sumatoriaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         numero_orden,
@@ -472,7 +482,8 @@ namespace ICRL.DS {
                         monto_final,
                         id_cotizacion,
                         id_flujo,
-                        id_tipo_item};
+                        id_tipo_item,
+                        cotizacion_proveedor};
                 rowcotizacion_danios_propios_sumatoriaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowcotizacion_danios_propios_sumatoriaRow);
                 return rowcotizacion_danios_propios_sumatoriaRow;
@@ -516,6 +527,7 @@ namespace ICRL.DS {
                 this.columnid_cotizacion = base.Columns["id_cotizacion"];
                 this.columnid_flujo = base.Columns["id_flujo"];
                 this.columnid_tipo_item = base.Columns["id_tipo_item"];
+                this.columncotizacion_proveedor = base.Columns["cotizacion_proveedor"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -543,6 +555,8 @@ namespace ICRL.DS {
                 base.Columns.Add(this.columnid_flujo);
                 this.columnid_tipo_item = new global::System.Data.DataColumn("id_tipo_item", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_tipo_item);
+                this.columncotizacion_proveedor = new global::System.Data.DataColumn("cotizacion_proveedor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncotizacion_proveedor);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnproveedor,
                                 this.columnid_cotizacion,
@@ -556,6 +570,8 @@ namespace ICRL.DS {
                 this.columnid_cotizacion.AllowDBNull = false;
                 this.columnid_flujo.AllowDBNull = false;
                 this.columnid_tipo_item.AllowDBNull = false;
+                this.columncotizacion_proveedor.AllowDBNull = false;
+                this.columncotizacion_proveedor.MaxLength = 25;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -861,6 +877,17 @@ namespace ICRL.DS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string cotizacion_proveedor {
+                get {
+                    return ((string)(this[this.tablecotizacion_danios_propios_sumatoria.cotizacion_proveedorColumn]));
+                }
+                set {
+                    this[this.tablecotizacion_danios_propios_sumatoria.cotizacion_proveedorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Isnumero_ordenNull() {
                 return this.IsNull(this.tablecotizacion_danios_propios_sumatoria.numero_ordenColumn);
             }
@@ -1114,6 +1141,7 @@ namespace ICRL.DS.CotizacionDaniosPropiosSumaTableAdapters {
             tableMapping.ColumnMappings.Add("id_cotizacion", "id_cotizacion");
             tableMapping.ColumnMappings.Add("id_flujo", "id_flujo");
             tableMapping.ColumnMappings.Add("id_tipo_item", "id_tipo_item");
+            tableMapping.ColumnMappings.Add("cotizacion_proveedor", "cotizacion_proveedor");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -1127,7 +1155,7 @@ namespace ICRL.DS.CotizacionDaniosPropiosSumaTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id_tipo_item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_tipo_item", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [cotizacion_danios_propios_sumatoria] ([numero_orden], [proveedor], [moneda_orden], [monto_orden], [id_tipo_descuento_orden], [descuento_proveedor], [deducible], [monto_final], [id_cotizacion], [id_flujo], [id_tipo_item]) VALUES (@numero_orden, @proveedor, @moneda_orden, @monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @id_cotizacion, @id_flujo, @id_tipo_item)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [cotizacion_danios_propios_sumatoria] ([numero_orden], [proveedor], [moneda_orden], [monto_orden], [id_tipo_descuento_orden], [descuento_proveedor], [deducible], [monto_final], [id_cotizacion], [id_flujo], [id_tipo_item], [cotizacion_proveedor]) VALUES (@numero_orden, @proveedor, @moneda_orden, @monto_orden, @id_tipo_descuento_orden, @descuento_proveedor, @deducible, @monto_final, @id_cotizacion, @id_flujo, @id_tipo_item, @cotizacion_proveedor)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@numero_orden", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "numero_orden", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@proveedor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "proveedor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1140,9 +1168,10 @@ namespace ICRL.DS.CotizacionDaniosPropiosSumaTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_cotizacion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_cotizacion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_flujo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_flujo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_tipo_item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_tipo_item", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cotizacion_proveedor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cotizacion_proveedor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [cotizacion_danios_propios_sumatoria] SET [numero_orden] = @numero_orden, [proveedor] = @proveedor, [moneda_orden] = @moneda_orden, [monto_orden] = @monto_orden, [id_tipo_descuento_orden] = @id_tipo_descuento_orden, [descuento_proveedor] = @descuento_proveedor, [deducible] = @deducible, [monto_final] = @monto_final, [id_cotizacion] = @id_cotizacion, [id_flujo] = @id_flujo, [id_tipo_item] = @id_tipo_item WHERE (([proveedor] = @Original_proveedor) AND ([id_cotizacion] = @Original_id_cotizacion) AND ([id_flujo] = @Original_id_flujo) AND ([id_tipo_item] = @Original_id_tipo_item))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [cotizacion_danios_propios_sumatoria] SET [numero_orden] = @numero_orden, [proveedor] = @proveedor, [moneda_orden] = @moneda_orden, [monto_orden] = @monto_orden, [id_tipo_descuento_orden] = @id_tipo_descuento_orden, [descuento_proveedor] = @descuento_proveedor, [deducible] = @deducible, [monto_final] = @monto_final, [id_cotizacion] = @id_cotizacion, [id_flujo] = @id_flujo, [id_tipo_item] = @id_tipo_item, [cotizacion_proveedor] = @cotizacion_proveedor WHERE (([proveedor] = @Original_proveedor) AND ([id_cotizacion] = @Original_id_cotizacion) AND ([id_flujo] = @Original_id_flujo) AND ([id_tipo_item] = @Original_id_tipo_item))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@numero_orden", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "numero_orden", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@proveedor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "proveedor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1155,6 +1184,7 @@ namespace ICRL.DS.CotizacionDaniosPropiosSumaTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_cotizacion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_cotizacion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_flujo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_flujo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_tipo_item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_tipo_item", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cotizacion_proveedor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cotizacion_proveedor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_proveedor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "proveedor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id_cotizacion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_cotizacion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id_flujo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_flujo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1174,9 +1204,9 @@ namespace ICRL.DS.CotizacionDaniosPropiosSumaTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT numero_orden, proveedor, moneda_orden, monto_orden, id_tipo_descuento_orde" +
-                "n, descuento_proveedor, deducible, monto_final, id_cotizacion, id_flujo, id_tipo" +
-                "_item FROM cotizacion_danios_propios_sumatoria AS c";
+            this._commandCollection[0].CommandText = @"SELECT        numero_orden, proveedor, moneda_orden, monto_orden, id_tipo_descuento_orden, descuento_proveedor, deducible, monto_final, id_cotizacion, id_flujo, 
+                         id_tipo_item, cotizacion_proveedor
+FROM            cotizacion_danios_propios_sumatoria AS c";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

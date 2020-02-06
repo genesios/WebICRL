@@ -252,8 +252,7 @@ namespace ICRL.Presentacion
                        cf.telefonoContacto,
                        c.correlativo,
                        u.nombreVisible,
-                       u.correoElectronico,
-                       c.TextoNroCotizacion
+                       u.correoElectronico
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -267,7 +266,8 @@ namespace ICRL.Presentacion
             TextBoxObservacionesInspec.Text = vFilaTabla.observacionesSiniestro;
             TextBoxNombreInspector.Text = vFilaTabla.nombreVisible;
             TextBoxCorreoInspector.Text = vFilaTabla.correoElectronico;
-            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
+            //Borrar referencia al campo TextBoxNroCotizacion 20200204 wari
+            //TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
           }
 
         }
@@ -311,8 +311,7 @@ namespace ICRL.Presentacion
                        c.tipoTaller,
                        //tipoTaller = "Taller Tipo B",
                        u.nombreVisible,
-                       u.correoElectronico,
-                       c.TextoNroCotizacion
+                       u.correoElectronico
                      };
           var vFilaTabla = vLst.FirstOrDefault();
 
@@ -339,7 +338,6 @@ namespace ICRL.Presentacion
             TextBoxNroChasis.Text = vFilaTabla.chasisVehiculo;
             TextBoxAnio.Text = vFilaTabla.anioVehiculo.ToString();
             TextBoxValorAsegurado.Text = vFilaTabla.valorAsegurado.ToString();
-            TextBoxNroCotizacionProveedor.Text = vFilaTabla.TextoNroCotizacion;
 
             string vTempoCadena = string.Empty;
             vTempoCadena = vFilaTabla.tipoTaller.Trim();
@@ -1167,6 +1165,8 @@ namespace ICRL.Presentacion
       BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoVehicularSumatoriaTraer;
       vTipoVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       GridViewSumaReparaciones.DataSource = vTipoVehicularSumatoriaTraer.RCVehicularesSumatoria.Select(RCVehicularesSumatoria => new
       {
         RCVehicularesSumatoria.proveedor,
@@ -1175,7 +1175,8 @@ namespace ICRL.Presentacion
         RCVehicularesSumatoria.descuento_proveedor,
         RCVehicularesSumatoria.deducible,
         RCVehicularesSumatoria.monto_final,
-        RCVehicularesSumatoria.moneda_orden
+        RCVehicularesSumatoria.moneda_orden,
+        RCVehicularesSumatoria.cotizacion_proveedor
       }).ToList();
       GridViewSumaReparaciones.DataBind();
 
@@ -1220,44 +1221,46 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
-      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void ButtonSumaGrabar_Click(object sender, EventArgs e)
     {
       if (!VerificarPagina(true)) return;
       LabelSumaRegistroItems.Text = "Items - Sumatoria";
-      CotizacionICRL.TipoRCVehicularSumatoria vTipoRCVehicular = new CotizacionICRL.TipoRCVehicularSumatoria();
+      CotizacionICRL.TipoRCVehicularSumatoria vTipoRCVehicularSumatoria = new CotizacionICRL.TipoRCVehicularSumatoria();
 
       //Completar los elementos del objeto y grabar el registro.
-      vTipoRCVehicular.id_flujo = int.Parse(TextBoxIdFlujo.Text);
-      vTipoRCVehicular.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
+      vTipoRCVehicularSumatoria.id_flujo = int.Parse(TextBoxIdFlujo.Text);
+      vTipoRCVehicularSumatoria.id_cotizacion = int.Parse(TextBoxNroCotizacion.Text);
       short vTipoItem = 0;
       vTipoItem = short.Parse(Session["TipoItem"].ToString());
 
-      vTipoRCVehicular.id_tipo_item = vTipoItem;
+      vTipoRCVehicularSumatoria.id_tipo_item = vTipoItem;
 
-      vTipoRCVehicular.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
-      vTipoRCVehicular.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
-      vTipoRCVehicular.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
-      vTipoRCVehicular.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
-      vTipoRCVehicular.deducible = double.Parse(TextBoxSumaDeducible.Text);
-      switch (vTipoRCVehicular.id_tipo_descuento_orden)
+      vTipoRCVehicularSumatoria.proveedor = DropDownListSumaProveedor.SelectedItem.Text.Trim();
+      vTipoRCVehicularSumatoria.monto_orden = double.Parse(TextBoxSumaMontoOrden.Text);
+      vTipoRCVehicularSumatoria.id_tipo_descuento_orden = DropDownListSumaTipoDesc.SelectedItem.Text.Trim();
+      vTipoRCVehicularSumatoria.descuento_proveedor = double.Parse(TextBoxSumaMontoDescProv.Text);
+      vTipoRCVehicularSumatoria.deducible = double.Parse(TextBoxSumaDeducible.Text);
+      switch (vTipoRCVehicularSumatoria.id_tipo_descuento_orden)
       {
         case "Fijo":
-          vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden - vTipoRCVehicular.descuento_proveedor;
+          vTipoRCVehicularSumatoria.monto_final = vTipoRCVehicularSumatoria.monto_orden - vTipoRCVehicularSumatoria.descuento_proveedor;
           break;
         case "Porcentaje":
-          vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden - (vTipoRCVehicular.monto_orden * (vTipoRCVehicular.descuento_proveedor / 100));
+          vTipoRCVehicularSumatoria.monto_final = vTipoRCVehicularSumatoria.monto_orden - (vTipoRCVehicularSumatoria.monto_orden * (vTipoRCVehicularSumatoria.descuento_proveedor / 100));
           break;
         default:
-          vTipoRCVehicular.monto_final = vTipoRCVehicular.monto_orden;
+          vTipoRCVehicularSumatoria.monto_final = vTipoRCVehicularSumatoria.monto_orden;
           break;
       }
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      vTipoRCVehicularSumatoria.cotizacion_proveedor = TextBoxCotizacionProveedor.Text.ToUpper().Trim();
+
       bool vResultado = false;
 
-      vResultado = BD.CotizacionICRL.RCVehicularSumatoriaModificar(vTipoRCVehicular);
+      vResultado = BD.CotizacionICRL.RCVehicularSumatoriaModificar(vTipoRCVehicularSumatoria);
       if (vResultado)
       {
         LabelSumaRegistroItems.Text = "Registro modificado exitosamente";
@@ -1355,6 +1358,9 @@ namespace ICRL.Presentacion
 
       TextBoxSumaMontoFinal.Text = GridViewSumaReparaciones.SelectedRow.Cells[5].Text;
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      TextBoxCotizacionProveedor.Text = GridViewSumaReparaciones.SelectedRow.Cells[7].Text;
+
       Session["PopupABMSumasHabilitado"] = 1;
       this.ModalPopupSumatorias.Show();
     }
@@ -1366,6 +1372,8 @@ namespace ICRL.Presentacion
       BD.CotizacionICRL.TipoRCVehicularSumatoriaTraer vTipoRCVehicularSumatoriaTraer;
       vTipoRCVehicularSumatoriaTraer = CotizacionICRL.RCVehicularSumatoriaTraer(pIdFlujo, pIdCotizacion, pTipoItem);
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       GridViewSumaRepuestos.DataSource = vTipoRCVehicularSumatoriaTraer.RCVehicularesSumatoria.Select(RCVehicularesSumatoria => new
       {
         RCVehicularesSumatoria.proveedor,
@@ -1374,7 +1382,8 @@ namespace ICRL.Presentacion
         RCVehicularesSumatoria.descuento_proveedor,
         RCVehicularesSumatoria.deducible,
         RCVehicularesSumatoria.monto_final,
-        RCVehicularesSumatoria.moneda_orden
+        RCVehicularesSumatoria.moneda_orden,
+        RCVehicularesSumatoria.cotizacion_proveedor
       }).ToList();
       GridViewSumaRepuestos.DataBind();
 
@@ -1419,7 +1428,6 @@ namespace ICRL.Presentacion
         }
       }
       FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
-      ActualizarTextoNroCotizacionProveedor();
     }
 
     protected void GridViewSumaRepuestos_SelectedIndexChanged(object sender, EventArgs e)
@@ -1459,6 +1467,9 @@ namespace ICRL.Presentacion
       TextBoxSumaDeducible.Text = GridViewSumaRepuestos.SelectedRow.Cells[4].Text;
 
       TextBoxSumaMontoFinal.Text = GridViewSumaRepuestos.SelectedRow.Cells[5].Text;
+
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+      TextBoxCotizacionProveedor.Text = GridViewSumaRepuestos.SelectedRow.Cells[7].Text;
 
       Session["PopupABMSumasHabilitado"] = 1;
       this.ModalPopupSumatorias.Show();
@@ -2249,6 +2260,8 @@ namespace ICRL.Presentacion
                                     c.tipo_cambio
                                   };
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       var vListaCotiSumaRCVehicular = from c in db.cotizacion_rc_vehicular_sumatoria
                                       where (c.numero_orden == pNroOrden)
                                       select new
@@ -2260,7 +2273,8 @@ namespace ICRL.Presentacion
                                         c.id_tipo_descuento_orden,
                                         c.descuento_proveedor,
                                         c.deducible,
-                                        c.monto_final
+                                        c.monto_final,
+                                        c.cotizacion_proveedor
                                       };
 
       var vListaCotiRCVehicularTercero = from c in db.cotizacion_rc_vehicular
@@ -2401,6 +2415,8 @@ namespace ICRL.Presentacion
                                     c.tipo_cambio
                                   };
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       var vListaCotiSumaRCVehicular = from c in db.cotizacion_rc_vehicular_sumatoria
                                       where (c.numero_orden == pNroOrden)
                                       select new
@@ -2412,7 +2428,8 @@ namespace ICRL.Presentacion
                                         c.id_tipo_descuento_orden,
                                         c.descuento_proveedor,
                                         c.deducible,
-                                        c.monto_final
+                                        c.monto_final,
+                                        c.cotizacion_proveedor
                                       };
 
       var vListaCotiRCVehicularTercero = from c in db.cotizacion_rc_vehicular
@@ -2576,6 +2593,8 @@ namespace ICRL.Presentacion
                                     c.tipo_cambio
                                   };
 
+      //ajustes 2020/02/02 wap se añade el campo cotizacion_proveedor
+
       var vListaCotiSumaRCVehicular = from c in db.cotizacion_rc_vehicular_sumatoria
                                       where (c.numero_orden == pNroOrden)
                                       select new
@@ -2587,7 +2606,8 @@ namespace ICRL.Presentacion
                                         c.id_tipo_descuento_orden,
                                         c.descuento_proveedor,
                                         c.deducible,
-                                        c.monto_final
+                                        c.monto_final,
+                                        c.cotizacion_proveedor
                                       };
 
       var vListaCotiRCVehicularTercero = from c in db.cotizacion_rc_vehicular
@@ -2851,6 +2871,12 @@ namespace ICRL.Presentacion
             ButtonRepuCambioBenef.Visible = false;
           }
           FLlenarGrillaOrdenes(vIdFlujo, vIdCotizacion, vTipoItem);
+
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Reparacion);
+          FlTraeDatosSumatoriaReparaciones(vIdFlujo, vIdCotizacion, vTipoItem);
+          vTipoItem = (short)(CotizacionICRL.TipoItem.Repuesto);
+          FlTraeDatosSumatoriaRepuestos(vIdFlujo, vIdCotizacion, vTipoItem);
+
           Session["PopupBeneficiario"] = 0;
           this.ModalPopupBeneficiario.Hide();
         }
@@ -3136,28 +3162,6 @@ namespace ICRL.Presentacion
       FlTraeDatosRecepRepu(vIdCotizacion);
     }
 
-    //Actualizar el texto número de cotización del Proveedor
-    void ActualizarTextoNroCotizacionProveedor()
-    {
-      AccesoDatos vAccesoDatos = new AccesoDatos();
-      int vResultado = 0;
-      int vIdCotizacion = int.Parse(TextBoxNroCotizacion.Text);
-      //Actualiza el Texto Nro Cotizacion Proveedor
-      string vTextoNroCotizacion = string.Empty;
-      vTextoNroCotizacion = TextBoxNroCotizacionProveedor.Text.ToUpper().Trim();
-      vResultado = vAccesoDatos.FActualizaTextoNumeroCotizacion(vIdCotizacion, vTextoNroCotizacion);
-
-      if (vResultado != 1)
-      {
-        //El nro de cotización NO se actualizo exitosamente
-        LabelMensaje.Text = "Número Cotización Proveedor no se pudo actualizar en cotización";
-      }
-      else
-      {
-        //El nro de cotización se actualizo exitosamente
-        LabelMensaje.Text = "";
-      }
-    }
 
     protected void DropDownListRepaItem_SelectedIndexChanged(object sender, EventArgs e)
     {
